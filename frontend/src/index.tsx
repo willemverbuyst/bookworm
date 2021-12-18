@@ -6,13 +6,16 @@ import App from './App';
 import { createOvermind } from 'overmind';
 import { Provider } from 'overmind-react';
 import { config } from './overmind';
+import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
 
 const overmind = createOvermind(config);
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider value={overmind}>
-      <App />
+      <ScopedCssBaseline>
+        <App />
+      </ScopedCssBaseline>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
