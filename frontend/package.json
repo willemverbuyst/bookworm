@@ -11,7 +11,9 @@
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@types/react-router-dom": "^5.3.2",
+    "concurrently": "^6.5.0",
     "overmind": "^28.0.1",
+    "overmind-devtools": "^29.0.1",
     "overmind-react": "^29.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -22,6 +24,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "concurrently \"overmind-devtools\" \"someBuildTool\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
