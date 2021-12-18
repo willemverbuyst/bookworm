@@ -1,11 +1,31 @@
-import * as React from 'react';
+import { ReactElement } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { useActions, useAppState } from '../overmind';
 
-export default function ButtonAppBar() {
+const ButtonAppBar: React.FC = (): ReactElement => {
+  const { isLoggedIn } = useAppState();
+  const { loginUser, logoutUser } = useActions();
+
+  const displayButton = () => {
+    if (isLoggedIn) {
+      return (
+        <Button color="inherit" onClick={logoutUser}>
+          Log out
+        </Button>
+      );
+    } else {
+      return (
+        <Button color="inherit" onClick={loginUser}>
+          Login
+        </Button>
+      );
+    }
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -18,9 +38,11 @@ export default function ButtonAppBar() {
           >
             BOOKWORM
           </Typography>
-          <Button color="inherit">Login</Button>
+          {displayButton()}
         </Toolbar>
       </AppBar>
     </Box>
   );
-}
+};
+
+export default ButtonAppBar;
