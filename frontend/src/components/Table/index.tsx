@@ -14,7 +14,7 @@ const Table: React.FC = (): ReactElement => {
   const rows: GridRowsProp = allBooks;
 
   const columns: GridColDef[] = [
-    { field: 'title', headerName: 'title', width: 600 },
+    { field: 'title', headerName: 'title', width: 450 },
     { field: 'author', headerName: 'author', width: 250 },
     { field: 'year', headerName: 'year', width: 150 },
     { field: 'read', headerName: 'read', width: 150 },
@@ -22,14 +22,17 @@ const Table: React.FC = (): ReactElement => {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-      <div style={{ height: 300, width: 1150 }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          components={{
-            Toolbar: GridToolbar,
-          }}
-        />
+      <div style={{ display: 'flex', height: '100%' }}>
+        <div style={{ height: 350, width: 1005 }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            components={{
+              Toolbar: GridToolbar,
+            }}
+            sx={{ border: 'none' }}
+          />
+        </div>
       </div>
     </Box>
   );
