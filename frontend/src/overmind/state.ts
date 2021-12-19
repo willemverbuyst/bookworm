@@ -7,6 +7,7 @@ export const state: State = {
     {
       id: '1',
       title: 'Animal Farm',
+      language: 'EN',
       author: 'George Orwell',
       read: true,
       year: 2011,
@@ -14,6 +15,7 @@ export const state: State = {
     {
       id: '2',
       title: 'Schuld en boete',
+      language: 'NL',
       author: ' Fjodor Dostojevski',
       read: true,
       year: 2021,

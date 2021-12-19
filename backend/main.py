@@ -4,8 +4,6 @@ from routers.root import root_router
 from routers.books.main import book_router
 
 
-
-
 origins = [
     "http://0.0.0.0:3000",
     "http://localhost:3000"

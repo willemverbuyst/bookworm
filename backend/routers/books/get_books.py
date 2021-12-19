@@ -13,9 +13,10 @@ def get_books():
             book = {
                 "id": uuid.uuid4(),
                 "title": row[0],
-                "author": row[1],
-                "year": row[2],
-                "read": row[3]
+                "language": row[1],
+                "author": row[2],
+                "year": row[3],
+                "read": row[4]
                 }
             books.append(book)
         

@@ -15,6 +15,7 @@ const Table: React.FC = (): ReactElement => {
 
   const columns: GridColDef[] = [
     { field: 'title', headerName: 'title', width: 450 },
+    { field: 'language', headerName: 'language', width: 100 },
     { field: 'author', headerName: 'author', width: 250 },
     { field: 'year', headerName: 'year', width: 150 },
     { field: 'read', headerName: 'read', width: 150 },
@@ -23,7 +24,7 @@ const Table: React.FC = (): ReactElement => {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
       <div style={{ display: 'flex', height: '100%' }}>
-        <div style={{ height: 350, width: 1005 }}>
+        <div style={{ height: 350, width: 1105 }}>
           <DataGrid
             rows={rows}
             columns={columns}
