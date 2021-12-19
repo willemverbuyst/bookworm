@@ -4,10 +4,7 @@ from routers.root import root_router
 from routers.books.main import book_router
 
 
-origins = [
-    "http://0.0.0.0:3000",
-    "http://localhost:3000"
-]
+origins = ["http://0.0.0.0:3000", "http://localhost:3000"]
 
 app = FastAPI()
 
@@ -21,4 +18,3 @@ app.add_middleware(
 
 app.include_router(root_router)
 app.include_router(book_router)
-

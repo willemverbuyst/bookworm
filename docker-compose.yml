@@ -9,16 +9,27 @@ services:
     stdin_open: true
     ports:
       - 8000:8000
+    depends_on:
+      - database
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
   frontend:
     build:
       context: './frontend'
       dockerfile: 'Dockerfile'
     ports:
-      - '3000:3000'
+      - 3000:3000
     volumes:
       - './frontend/src:/scripts/src'
     stdin_open: true
     tty: true
     depends_on:
       - backend
+      - database
+  database:
+    image: 'postgres:13'
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=dbuser
+      - POSTGRES_PASSWORD=admin2021
+      - POSTGRES_DB=bookworm

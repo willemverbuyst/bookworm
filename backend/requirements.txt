@@ -1,4 +1,4 @@
 fastapi
 uvicorn
 black
-starlette
+psycopg2

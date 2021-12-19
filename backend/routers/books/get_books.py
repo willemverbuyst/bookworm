@@ -5,9 +5,10 @@ from error.main import raise_exception
 
 get_books_router = APIRouter()
 
+
 def get_books():
     books = []
-    with open('dummy_data/books.csv') as csv_file:
+    with open("dummy_data/books.csv") as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=",")
         for row in csv_reader:
             book = {
@@ -16,10 +17,10 @@ def get_books():
                 "language": row[1],
                 "author": row[2],
                 "year": int(row[3]),
-                "read": bool(row[4])
-                }
+                "read": bool(row[4]),
+            }
             books.append(book)
-        
+
     return books
 
 
