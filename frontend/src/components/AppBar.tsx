@@ -38,6 +38,7 @@ const ButtonAppBar: React.FC = (): ReactElement => {
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
+            onClick={logOut}
           >
             BOOKWORM
           </Typography>

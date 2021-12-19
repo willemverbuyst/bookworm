@@ -37,6 +37,7 @@ const Login: React.FC = () => {
             name="email"
             control={control}
             rules={{ required: true }}
+            defaultValue=""
             render={({ field }) => (
               <TextField
                 {...field}
@@ -52,6 +53,7 @@ const Login: React.FC = () => {
             name="password"
             control={control}
             rules={{ required: true }}
+            defaultValue=""
             render={({ field }) => (
               <TextField
                 {...field}
