@@ -10,6 +10,7 @@ import { useAppState } from '../../overmind';
 
 const Table: React.FC = (): ReactElement => {
   const { allBooks } = useAppState();
+  const [pageSize, setPageSize] = React.useState(10);
 
   const rows: GridRowsProp = allBooks;
 
@@ -24,7 +25,7 @@ const Table: React.FC = (): ReactElement => {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
       <div style={{ display: 'flex', height: '100%' }}>
-        <div style={{ height: 350, width: 1105 }}>
+        <div style={{ height: 700, width: 1110 }}>
           <DataGrid
             rows={rows}
             columns={columns}
@@ -32,6 +33,10 @@ const Table: React.FC = (): ReactElement => {
               Toolbar: GridToolbar,
             }}
             sx={{ border: 'none' }}
+            pageSize={pageSize}
+            onPageSizeChange={(newPage) => setPageSize(newPage)}
+            rowsPerPageOptions={[10, 15, 20, 25]}
+            pagination
           />
         </div>
       </div>

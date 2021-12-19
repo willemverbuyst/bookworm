@@ -10,6 +10,5 @@ export const logoutUser = ({ state }: Context) => {
 
 export const fetchAllBooks = async ({ effects, state }: Context) => {
   const allBooks = await effects.api.getAllBooks();
-  console.log(allBooks);
-  // state.books = allBooks;
+  state.books = allBooks;
 };

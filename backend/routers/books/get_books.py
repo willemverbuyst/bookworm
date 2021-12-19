@@ -15,8 +15,8 @@ def get_books():
                 "title": row[0],
                 "language": row[1],
                 "author": row[2],
-                "year": row[3],
-                "read": row[4]
+                "year": int(row[3]),
+                "read": bool(row[4])
                 }
             books.append(book)
         
