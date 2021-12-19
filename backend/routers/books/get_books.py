@@ -10,7 +10,7 @@ def get_books():
     with open('dummy_data/books.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=",")
         for row in csv_reader:
-            book ={
+            book = {
                 "id": uuid.uuid4(),
                 "title": row[0],
                 "author": row[1],

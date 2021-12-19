@@ -1,10 +1,11 @@
+import axios from 'axios';
 import { Book } from '../models/Book';
 
 export const api = {
-  getUser: async (): Promise<Book[]> => {
-    // todo
-    const response = await fetch('/books');
+  getAllBooks: async (): Promise<Book[]> => {
+    const response = await axios.get(`http://backend:8000/books`);
+    console.log(response);
 
-    return response.json();
+    return response.data;
   },
 };

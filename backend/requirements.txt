@@ -1,5 +1,4 @@
 fastapi
 uvicorn
-pymongo
-pymongo[srv]
 black
+starlette
