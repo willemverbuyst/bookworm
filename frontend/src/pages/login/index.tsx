@@ -2,6 +2,8 @@ import React from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { Box, Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
+import { useActions } from '../../overmind';
+import { useNavigate } from 'react-router-dom';
 
 type Inputs = {
   email: string;
@@ -9,9 +11,15 @@ type Inputs = {
 };
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
   const { control, handleSubmit } = useForm<Inputs>();
+  const { loginUser } = useActions();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    loginUser();
+    navigate('/books');
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

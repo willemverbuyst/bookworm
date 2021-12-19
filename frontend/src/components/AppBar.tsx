@@ -5,24 +5,27 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useActions, useAppState } from '../overmind';
+import { useNavigate } from 'react-router-dom';
 
 const ButtonAppBar: React.FC = (): ReactElement => {
+  const navigate = useNavigate();
   const { isLoggedIn } = useAppState();
-  const { loginUser, logoutUser } = useActions();
+  const { logoutUser } = useActions();
 
-  const displayButton = () => {
+  const logOut = () => {
+    logoutUser();
+    navigate('/');
+  };
+
+  const displayButton = (): ReactElement | null => {
     if (isLoggedIn) {
       return (
-        <Button color="inherit" onClick={logoutUser}>
+        <Button color="inherit" onClick={logOut}>
           Log out
         </Button>
       );
     } else {
-      return (
-        <Button color="inherit" onClick={loginUser}>
-          Login
-        </Button>
-      );
+      return null;
     }
   };
 
