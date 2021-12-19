@@ -1,12 +1,31 @@
 from fastapi import APIRouter
+import csv
+import uuid
+from error.main import raise_exception
 
 get_books_router = APIRouter()
+
+def get_books():
+    books = []
+    with open('dummy_data/books.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=",")
+        for row in csv_reader:
+            book ={
+                "id": uuid.uuid4(),
+                "title": row[0],
+                "author": row[1],
+                "year": row[2],
+                "read": row[3]
+                }
+            books.append(book)
+        
+    return books
 
 
 @get_books_router.get("/books")
 def get_all_books():
     try:
-        all_books = ["book1", "book2"]
+        all_books = get_books()
         result = len(all_books)
 
         return {
