@@ -9,18 +9,18 @@ file_name="$(dirname -- "$0")/books_copy.csv"
 cat $file_name > tmp.csv
 
 # New file name
-new_file="bookworm.sql"
+new_file="books.sql"
 
-# Name of table in backticks
-table="\`book\`"
+# Name of table
+table="book"
 
 # COLUMN NAMES
-# Replace pipe with backtick comma backtick 
+# Replace pipe with comma
 # Delete quotes and newline
-columns=$(head --lines=1 tmp.csv | sed 's/|/`,`/g' | tr -d "\"\r\n")
+columns=$(head --lines=1 tmp.csv | sed 's/|/,/g' | tr -d "\"\r\n")
 
-# Add first and last backtick
-columns="\`$columns\`"
+# Add column for id
+columns="$columns"
 
 # VALUES
 # Loop through lines in temp csv, last line needs terminating linefeed!
@@ -31,6 +31,8 @@ values=$(echo $l | sed 's/|/,/g' | tr -d "\r\n")
 
 echo "INSERT INTO $table($columns) VALUES ($values);"
 done > $new_file
+
+sed -i "s/\"/'/g" $new_file
 
 # Remove temp file
 rm tmp.csv
