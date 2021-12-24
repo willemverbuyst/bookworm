@@ -1,4 +1,4 @@
-"title"|"languange"|"author"|"year"|"read"
+"book_title"|"book_language"|"book_author"|"book_year"|"book_read"
 "I Am Charlotte Simons"|"EN"|"Tom Wolfe"|2015|1
 "A God In Ruins"|"EN"|"Leon Uris"|2015|1
 "Afrikaanse nachten"|"NL"|"Kiki Gallmann"|2015|1
@@ -6,6 +6,6 @@
 "Native Tongue"|"EN"|"Carl Hiaasen"|2015|1
 "The Beach"|"EN"|"Alex Garland"|2015|1
 "Ik, Zlatan"|"NL"|"Zlatan Ibrohamovic & David Lagerorantz"|2016|1
-"Life of Pi"|"EN"|"Yann Martel"|2016|1
+"Life of Pi"|"EN "|"Yann Martel"|2016|1
 "Mocro maffia"|"NL"|"Wouter Laumans & Marijn Schrijver"|2016|1
-"The Heart Of Justice"|"EN"|"William J. Coughlin"|2016|1
+"The Heart Of Justice"|"EN "|"William J. Coughlin"|2016|1
