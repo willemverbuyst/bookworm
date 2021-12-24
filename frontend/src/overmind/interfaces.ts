@@ -1,7 +1,7 @@
-import { Book } from '../models/Book';
+import { Book, BookApi } from '../models/Book';
 
 export interface State {
   isLoggedIn: boolean;
-  books: Book[];
+  booksApi: BookApi[];
   allBooks: Book[];
 }

@@ -15,6 +15,7 @@ const Table: React.FC = (): ReactElement => {
   const rows: GridRowsProp = allBooks;
 
   const columns: GridColDef[] = [
+    // { field: 'id', headerName: 'id', width: 450 },
     { field: 'title', headerName: 'title', width: 450 },
     { field: 'language', headerName: 'language', width: 100 },
     { field: 'author', headerName: 'author', width: 250 },

@@ -3,6 +3,11 @@ import { State } from './interfaces';
 
 export const state: State = {
   isLoggedIn: false,
-  books: [],
-  allBooks: derived((state: State) => Object.values(state.books)),
+  booksApi: [],
+  allBooks: derived((state: State) =>
+    Object.values(state.booksApi).map((book) => ({
+      ...book,
+      read: book.read === 1 ? true : false,
+    }))
+  ),
 };
