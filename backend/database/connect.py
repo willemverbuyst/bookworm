@@ -1,4 +1,10 @@
 import psycopg2
+import os
+
+dirname = os.path.dirname(__file__)
+create_table_sql = os.path.join(dirname, './create_table.sql')
+books_sql = os.path.join(dirname, './books.sql')
+
 
 conn = psycopg2.connect(
     database="postgres",
@@ -6,35 +12,65 @@ conn = psycopg2.connect(
     password="admin2021",
     host="database",
     port="5432",
-)
-
-command1 = """
-CREATE TABLE IF NOT EXISTS book (
-  book_id INT NOT NULL,
-  book_title VARCHAR(250) NOT NULL,
-  book_language VARCHAR(250) NOT NULL,
-  book_author VARCHAR(250) NOT NULL,
-  book_year INT NOT NULL,
-  book_read BOOL NOT NULL,
-  PRIMARY KEY (book_id)
-);
-"""
-
-command2 = """
-INSERT INTO book VALUES(1,'Alleen maar nette mensen','NL','Robert Vuijsje',2020,true)
-"""
-
-command3 = """
-SELECT COUNT(*) FROM book
-"""
+) 
 
 cursor = conn.cursor()
 
-cursor.execute(command1)
-cursor.execute(command2)
-cursor.execute(command3)
+command3 = """
+SELECT * FROM book
+"""
 
-data = cursor.fetchone()
-print(data)
 
-conn.close()
+def executeScriptsFromFile(filename):
+    with open(create_table_sql, 'r') as sqlFile:
+        lines = sqlFile.read().splitlines()
+
+        for command in lines:
+            try:
+                cursor.execute(command)
+            except psycopg2.OperationalError as e:
+                print("Command skipped: ", e)
+
+
+
+def get_books_from_db():
+    conn = psycopg2.connect(
+    database="postgres",
+    user="dbuser",
+    password="admin2021",
+    host="database",
+    port="5432",
+) 
+
+    cursor = conn.cursor()
+    
+    print("enter")
+
+    with open(create_table_sql, 'r') as sqlFile:
+        lines = sqlFile.read().splitlines()
+
+        for command in lines:
+            try:
+                cursor.execute(command)
+            except psycopg2.OperationalError as e:
+                print("Command skipped: ", e)
+
+    with open(books_sql, 'r') as sqlFile:
+        lines = sqlFile.read().splitlines()
+
+        for command in lines:
+            try:
+                cursor.execute(command)
+            except psycopg2.OperationalError as e:
+                print("Command skipped: ", e)
+
+
+    cursor.execute(command3)
+
+    data = cursor.fetchall()
+    conn.close()
+
+    
+    return data
+
+
