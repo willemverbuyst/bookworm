@@ -9,7 +9,7 @@ file_name="$(dirname -- "$0")/books_copy.csv"
 cat $file_name > tmp.csv
 
 # New file name
-new_file="books.sql"
+new_file="sql/books.sql"
 
 # Name of table
 table="book"
