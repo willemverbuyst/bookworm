@@ -1,9 +1,10 @@
 import psycopg2
 import os
-from database.helpers.sql_helpers import executeScriptsFromFile
-from database.helpers.format_data import format_books
+from helpers.sql_helpers import executeScriptsFromFile
 
 dirname = os.path.dirname(__file__)
+create_table_sql = os.path.join(dirname, "./sql/create_table.sql")
+insert_books_sql = os.path.join(dirname, "./dummy_data/insert_books.sql")
 select_all_sql = os.path.join(dirname, "./sql/select_all.sql")
 
 
@@ -18,11 +19,11 @@ def get_books_from_db():
 
     cursor = conn.cursor()
 
-    executeScriptsFromFile(select_all_sql, cursor)
+    executeScriptsFromFile(create_table_sql, cursor)
+    executeScriptsFromFile(insert_books_sql, cursor)
 
-    data = cursor.fetchall()
+    conn.commit()
     conn.close()
 
-    books_formatted = format_books(data)
 
-    return books_formatted
+get_books_from_db()

@@ -1,3 +1,3 @@
 */node_modules
 **/__pycache__
-/backend/dummy_data/books.csv
+**/dummy_data
