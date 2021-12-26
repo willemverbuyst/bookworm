@@ -2,40 +2,22 @@
 
 # Based on: https://github.com/pavanchhatpar/csv-to-sql-converter
 
-# # from scripts navigate to bash directory
-# cd database/bash
+FILE_NAME="$(cd ../ && pwd)/dummy_data/books.csv"
 
-# Get file, in same directory
-file_name="$(cd ../ && pwd)/dummy_data/books.csv"
+cat $FILE_NAME > tmp.csv
 
-# Create temp file
-cat $file_name > tmp.csv
+NEW_FILE="$(cd ../ && pwd)/sql/insert_books.sql"
 
-# New file name
-new_file="$(cd ../ && pwd)/dummy_data/insert_books.sql"
+TABLE="book"
 
-# Name of table
-table="book"
+COLUMNS="$(head --lines=1 tmp.csv | sed "s/|/,/g" | tr -d "\"\r\n")"
 
-# COLUMN NAMES
-# Replace pipe with comma
-# Delete quotes and newline
-columns=$(head --lines=1 tmp.csv | sed 's/|/,/g' | tr -d "\"\r\n")
-
-# Add column for id
-columns="$columns"
-
-# VALUES
-# Loop through lines in temp csv, last line needs terminating linefeed!
-# Replace pipe with comma
-# Delete newline
 tail --lines=+2 tmp.csv | while read l ; do
-values=$(echo $l | sed 's/|/,/g' | tr -d "\r\n")
+VALUES=$(echo $l | sed "s/|/,/g" | sed "s/'/''/g" | tr -d "\r\n")
 
-echo "INSERT INTO $table($columns) VALUES ($values);"
-done > $new_file
+echo "INSERT INTO $TABLE($COLUMNS) VALUES ($VALUES);"
+done > $NEW_FILE
 
-sed -i "s/\"/'/g" $new_file
+sed -i "s/\"/'/g" $NEW_FILE
 
-# Remove temp file
 rm tmp.csv

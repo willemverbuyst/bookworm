@@ -4,7 +4,7 @@ from helpers.sql_helpers import executeScriptsFromFile
 
 dirname = os.path.dirname(__file__)
 create_table_sql = os.path.join(dirname, "./sql/create_table.sql")
-insert_books_sql = os.path.join(dirname, "./dummy_data/insert_books.sql")
+insert_books_sql = os.path.join(dirname, "./sql/insert_books.sql")
 select_all_sql = os.path.join(dirname, "./sql/select_all.sql")
 
 
