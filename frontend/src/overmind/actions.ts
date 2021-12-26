@@ -34,3 +34,8 @@ export const onInitializeOvermind = ({ state }: Context) => {
     state.isLoggedIn = true;
   }
 };
+
+export const fetchAllBooks = async ({ state, effects }: Context) => {
+  const allBooks = await effects.api.getAllBooks();
+  state.booksApi = allBooks;
+};

@@ -1,16 +1,23 @@
 import { Box } from '@mui/material';
 import React, { ReactElement, useEffect } from 'react';
 import TableWithBooks from '../../components/Table';
-import { useAppState } from '../../overmind';
+import { useAppState, useActions } from '../../overmind';
 import { useNavigate } from 'react-router-dom';
 
 const Books: React.FC = (): ReactElement => {
   const navigate = useNavigate();
   const { allBooks, isLoggedIn } = useAppState();
+  const { fetchAllBooks } = useActions();
 
   useEffect(() => {
     if (!isLoggedIn) {
       navigate('/');
+    }
+  });
+
+  useEffect(() => {
+    if (!allBooks) {
+      fetchAllBooks();
     }
   });
 
