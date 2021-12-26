@@ -29,5 +29,6 @@ do
   YEAR=${YEARS[$YEARS_INDEX]}
 
   READ=$(($RANDOM%2)) 
+  
   echo "\"${TITLE_PART1^} ${TITLE_PART2^}\"|\"${LANGUAGE}\"|\"${AUTHOR_FIRSTNAME^}. ${AUTHOR_LASTNAME^}\"|${YEAR}|${READ}" >> $NEW_FILE
 done
