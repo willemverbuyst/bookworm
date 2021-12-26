@@ -3,14 +3,14 @@
 # script to generate csv file with dummy data
 # run script outside docker container
 
-NEW_FILE="books.csv"
+NEW_FILE="./backend/database/dummy_data/books.csv"
 touch $NEW_FILE
 
 echo "\"book_title\"|\"book_language\"|\"book_author\"|\"book_year\"|\"book_read\"" > $NEW_FILE
 
 WORDS=/usr/share/dict/words
 
-for i in {1..113}
+for i in {1..53}
 do
   TITLE_PART1=$(shuf -n1 "$WORDS")
   TITLE_PART2=$(shuf -n1 "$WORDS")
