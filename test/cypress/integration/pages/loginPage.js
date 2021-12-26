@@ -11,6 +11,18 @@ class LoginPage {
     return 'button[type="submit"]';
   }
 
+  getErrorMessage() {
+    return 'User with this email and password not found!';
+  }
+
+  getTitle() {
+    return '.title';
+  }
+
+  checkTitleIsVisible() {
+    cy.get(this.getTitle()).should('contain', 'Login');
+  }
+
   enterEmail(email) {
     cy.get(this.getEmail()).type(email);
   }
@@ -21,6 +33,10 @@ class LoginPage {
 
   clickLoginButton() {
     cy.get(this.getLoginButton()).click();
+  }
+
+  displayErrorMessage() {
+    cy.contains(this.getErrorMessage());
   }
 }
 
