@@ -9,8 +9,8 @@ const Root: React.FC = (): ReactElement => {
 
   return (
     <>
-      <h1>Home</h1>
-      <Button onClick={gotoLogin}>Go to login page</Button>
+      <h1 className="title">Home</h1>
+      <Button onClick={gotoLogin}>go to login page</Button>
     </>
   );
 };

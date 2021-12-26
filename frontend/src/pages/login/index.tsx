@@ -26,11 +26,13 @@ const Login: React.FC = () => {
     loginUser(data);
   };
 
-  const displayErrorMessage = () => <p>{appErrors.loginForm}</p>;
+  const displayErrorMessage = () => (
+    <p className="error">{appErrors.loginForm}</p>
+  );
 
   return (
     <>
-      <h1>Login</h1>
+      <h1 className="title">Login</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box
           sx={{

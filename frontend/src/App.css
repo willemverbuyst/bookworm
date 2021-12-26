@@ -1,3 +1,11 @@
 .App {
   text-align: center;
 }
+
+.title {
+  font-style: italic;
+}
+
+.error {
+  color: red;
+}

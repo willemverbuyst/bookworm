@@ -21,7 +21,7 @@ const ButtonAppBar: React.FC = (): ReactElement => {
     if (isLoggedIn) {
       return (
         <Button color="inherit" onClick={logOut}>
-          Log out
+          log out
         </Button>
       );
     } else {

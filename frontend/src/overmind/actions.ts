@@ -9,7 +9,7 @@ export const loginUser = async (
   { effects, state }: Context,
   { email, password }: LoginCredentials
 ) => {
-  if (email === 'a@a.com' && password === 'a') {
+  if (email === 'a@a.io' && password === 'a') {
     state.isLoggedIn = true;
     state.userName = 'a';
     state.appErrors.loginForm = '';

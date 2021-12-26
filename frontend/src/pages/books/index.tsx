@@ -16,7 +16,7 @@ const Books: React.FC = (): ReactElement => {
 
   return (
     <Box>
-      <h1>Books</h1>
+      <h1 className="title">Books</h1>
       {allBooks ? <TableWithBooks books={allBooks} /> : <p>No books</p>}
     </Box>
   );
