@@ -1,0 +1,184 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-12-26T17:09:34.531Z",
+    "end": "2021-12-26T17:09:49.988Z",
+    "duration": 5430,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "af281f57-ee72-4e34-93e5-09b1b45bf2f5",
+      "title": "",
+      "fullFile": "cypress/integration/bookworm/TC01_Login.spec.js",
+      "file": "cypress/integration/bookworm/TC01_Login.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "12a6cf18-1017-4235-853a-663881f4ca83",
+          "title": "Login",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Login - Valid Credentials",
+              "fullTitle": "Login Login - Valid Credentials",
+              "timedOut": null,
+              "duration": 2063,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.bookwormLogin(this.data.email, this.data.password);\nbooksPage.checkTitleIsVisible();\nappBar.clickLogOutButton();\nhomePage.checkTitleIsVisible();",
+              "err": {},
+              "uuid": "ff4b47e9-1af2-47d0-9c3d-cd729915cd29",
+              "parentUUID": "12a6cf18-1017-4235-853a-663881f4ca83",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login - Invalid Credentials",
+              "fullTitle": "Login Login - Invalid Credentials",
+              "timedOut": null,
+              "duration": 1003,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.bookwormLogin(this.data.email, this.data.wrongPassword);\nloginPage.displayErrorMessage();",
+              "err": {},
+              "uuid": "25038fce-208a-426d-b5e6-b960d398fb52",
+              "parentUUID": "12a6cf18-1017-4235-853a-663881f4ca83",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ff4b47e9-1af2-47d0-9c3d-cd729915cd29",
+            "25038fce-208a-426d-b5e6-b960d398fb52"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3066,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "63b1748a-e0b6-457b-a8f0-48531bfcb534",
+      "title": "",
+      "fullFile": "cypress/integration/bookworm/TC02_404.spec.js",
+      "file": "cypress/integration/bookworm/TC02_404.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6b53c435-7d9a-46de-ae1a-db073a18b18d",
+          "title": "Login",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Page not found",
+              "fullTitle": "Login Page not found",
+              "timedOut": null,
+              "duration": 2364,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.bookwormLogin(this.data.email, this.data.password);\nbooksPage.checkTitleIsVisible();\npageNotFoundPage.visitUnknownUrl();\npageNotFoundPage.checkTitleIsVisible();",
+              "err": {},
+              "uuid": "725db025-03e7-47c6-91ae-7461f25ff414",
+              "parentUUID": "6b53c435-7d9a-46de-ae1a-db073a18b18d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "725db025-03e7-47c6-91ae-7461f25ff414"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2364,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.0.1"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.0.1"
+    }
+  }
+}
