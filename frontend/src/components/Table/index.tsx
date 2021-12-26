@@ -6,13 +6,15 @@ import {
   GridToolbar,
 } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
-import { useAppState } from '../../overmind';
+import { Book } from '../../models/Book';
 
-const Table: React.FC = (): ReactElement => {
-  const { allBooks } = useAppState();
+interface IProps {
+  books: Book[];
+}
+
+const TableWithBooks: React.FC<IProps> = ({ books }: IProps): ReactElement => {
   const [pageSize, setPageSize] = React.useState(10);
-
-  const rows: GridRowsProp = allBooks;
+  const rows: GridRowsProp = books;
 
   const columns: GridColDef[] = [
     // { field: 'id', headerName: 'id', width: 450 },
@@ -45,4 +47,4 @@ const Table: React.FC = (): ReactElement => {
   );
 };
 
-export default Table;
+export default TableWithBooks;
