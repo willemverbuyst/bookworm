@@ -4,12 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "open": "cypress open"
+    "open": "cypress open",
+    "scripts": "cypress run",
+    "clean:reports": "rm -R -f cypress/reports && mkdir cypress/reports && mkdir cypress/reports/mochareports",
+    "pre-test": "npm run clean:reports",
+    "combinde-reports": "mochawesome-merge ./cypress/reports/mocha/*.json > cypress/reports/mochareports/report.json",
+    "generate-report": "merge cypress/reports/mochareports/report.json -f report -o cypress/reports/mochareports",
+    "post-test": "npm run combine-reports && npm run generate-report",
+    "test": "npm run scripts || npm run post-test"
   },
   "keywords": [],
   "author": "Willem Verbuyst",
   "license": "ISC",
   "dependencies": {
     "cypress": "^9.2.0"
+  },
+  "devDependencies": {
+    "cypress-multi-reporters": "^1.5.0",
+    "mocha": "^9.1.3",
+    "mochawesome": "^7.0.1",
+    "mochawesome-merge": "^4.2.1",
+    "mochawesome-report-generator": "^6.0.1"
   }
 }
