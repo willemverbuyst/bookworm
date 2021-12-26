@@ -3,11 +3,15 @@ import { State } from './interfaces';
 
 export const state: State = {
   isLoggedIn: false,
-  booksApi: [],
+  userName: '',
+  booksApi: null,
   allBooks: derived((state: State) =>
-    Object.values(state.booksApi).map((book) => ({
-      ...book,
-      read: book.read === 1 ? true : false,
-    }))
+    state.booksApi
+      ? Object.values(state.booksApi).map((book) => ({
+          ...book,
+          read: book.read === 1 ? true : false,
+        }))
+      : null
   ),
+  appErrors: { loginForm: '' },
 };

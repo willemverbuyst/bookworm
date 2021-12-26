@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { Box, Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { useActions } from '../../overmind';
+import { useAppState, useActions } from '../../overmind';
 import { useNavigate } from 'react-router-dom';
 
 type Inputs = {
@@ -14,11 +14,19 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const { control, handleSubmit } = useForm<Inputs>();
   const { loginUser } = useActions();
+  const { isLoggedIn, appErrors } = useAppState();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/books');
+    }
+  });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     loginUser(data);
-    navigate('/books');
   };
+
+  const displayErrorMessage = () => <p>{appErrors.loginForm}</p>;
 
   return (
     <>
@@ -72,6 +80,7 @@ const Login: React.FC = () => {
           </Box>
         </Box>
       </form>
+      {appErrors.loginForm ? displayErrorMessage() : null}
     </>
   );
 };

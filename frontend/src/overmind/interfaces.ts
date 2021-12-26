@@ -2,6 +2,8 @@ import { Book, BookApi } from '../models/Book';
 
 export interface State {
   isLoggedIn: boolean;
-  booksApi: BookApi[];
-  allBooks: Book[];
+  userName: string;
+  booksApi: BookApi[] | null;
+  allBooks: Book[] | null;
+  appErrors: { loginForm: string };
 }

@@ -11,9 +11,13 @@ export const loginUser = async (
 ) => {
   if (email === 'a@a.com' && password === 'a') {
     state.isLoggedIn = true;
+    state.userName = 'a';
+    state.appErrors.loginForm = '';
     localStorage.setItem('token', 'access_token');
     const allBooks = await effects.api.getAllBooks();
     state.booksApi = allBooks;
+  } else {
+    state.appErrors.loginForm = 'User with this email and password not found!';
   }
 };
 
