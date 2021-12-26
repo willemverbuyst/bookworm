@@ -2,7 +2,7 @@ from fastapi import APIRouter
 import csv
 import uuid
 from error.main import raise_exception
-from database.connect import get_books_from_db
+from database.books import get_books_from_db
 
 get_books_router = APIRouter()
 

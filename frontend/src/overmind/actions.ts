@@ -1,10 +1,20 @@
 import { Context } from '.';
 
-export const loginUser = async ({ effects, state }: Context) => {
-  state.isLoggedIn = true;
-  localStorage.setItem('token', 'access_token');
-  const allBooks = await effects.api.getAllBooks();
-  state.booksApi = allBooks;
+interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+export const loginUser = async (
+  { effects, state }: Context,
+  { email, password }: LoginCredentials
+) => {
+  if (email === 'a@a.com' && password === 'a') {
+    state.isLoggedIn = true;
+    localStorage.setItem('token', 'access_token');
+    const allBooks = await effects.api.getAllBooks();
+    state.booksApi = allBooks;
+  }
 };
 
 export const logoutUser = ({ state }: Context) => {

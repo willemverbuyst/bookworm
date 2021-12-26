@@ -16,61 +16,63 @@ const Login: React.FC = () => {
   const { loginUser } = useActions();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
-    loginUser();
+    loginUser(data);
     navigate('/books');
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          overflow: 'hidden',
-          margin: 'auto',
-        }}
-      >
-        <Box sx={{ marginTop: 3 }}>
-          <Controller
-            name="email"
-            control={control}
-            rules={{ required: true }}
-            defaultValue=""
-            render={({ field }) => (
-              <TextField
-                {...field}
-                id="outlined-required"
-                label="email"
-                type="email"
-              />
-            )}
-          />
+    <>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            overflow: 'hidden',
+            margin: 'auto',
+          }}
+        >
+          <Box sx={{ marginTop: 3 }}>
+            <Controller
+              name="email"
+              control={control}
+              rules={{ required: true }}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="outlined-required"
+                  label="email"
+                  type="email"
+                />
+              )}
+            />
+          </Box>
+          <Box sx={{ marginTop: 3 }}>
+            <Controller
+              name="password"
+              control={control}
+              rules={{ required: true }}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="outlined-required"
+                  label="password"
+                  type="password"
+                />
+              )}
+            />
+          </Box>
+          <Box sx={{ marginTop: 3 }}>
+            <Button type="submit" variant="contained">
+              LOG IN
+            </Button>
+          </Box>
         </Box>
-        <Box sx={{ marginTop: 3 }}>
-          <Controller
-            name="password"
-            control={control}
-            rules={{ required: true }}
-            defaultValue=""
-            render={({ field }) => (
-              <TextField
-                {...field}
-                id="outlined-required"
-                label="password"
-                type="password"
-              />
-            )}
-          />
-        </Box>
-        <Box sx={{ marginTop: 3 }}>
-          <Button type="submit" variant="contained">
-            LOG IN
-          </Button>
-        </Box>
-      </Box>
-    </form>
+      </form>
+    </>
   );
 };
 
