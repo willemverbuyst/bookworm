@@ -10,6 +10,12 @@ start containers
 
 #
 
+stop containers
+
+`docker-compose down`
+
+#
+
 seed database
 
 `docker-compose run backend bash`
@@ -25,6 +31,13 @@ format python
 `docker-compose run backend bash`
 
 `black .`
+
+#
+
+stop terminal
+
+in terminal `exit`
+or `docker-compose stop`
 
 #
 
