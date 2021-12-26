@@ -3,16 +3,16 @@ class LoginPage {
     return 'input[type="email"]';
   }
 
-  getPassword() {
-    return 'input[type="password"]';
+  getErrorMessage() {
+    return 'User with this email and password not found!';
   }
 
   getLoginButton() {
     return 'button[type="submit"]';
   }
 
-  getErrorMessage() {
-    return 'User with this email and password not found!';
+  getPassword() {
+    return 'input[type="password"]';
   }
 
   getTitle() {
@@ -23,20 +23,20 @@ class LoginPage {
     cy.get(this.getTitle()).should('contain', 'Login');
   }
 
-  enterEmail(email) {
-    cy.get(this.getEmail()).type(email);
-  }
-
-  enterPassword(password) {
-    cy.get(this.getPassword()).type(password);
-  }
-
   clickLoginButton() {
     cy.get(this.getLoginButton()).click();
   }
 
   displayErrorMessage() {
     cy.contains(this.getErrorMessage());
+  }
+
+  enterEmail(email) {
+    cy.get(this.getEmail()).type(email);
+  }
+
+  enterPassword(password) {
+    cy.get(this.getPassword()).type(password);
   }
 }
 

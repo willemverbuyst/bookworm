@@ -8,11 +8,10 @@ describe('Login', function () {
     cy.fixture('bookworm').as('data');
   });
 
+  const booksPage = new BooksPage();
   const pageNotFoundPage = new PageNotFoundPage();
 
   it('Page not found', function () {
-    const booksPage = new BooksPage();
-
     cy.bookwormLogin(this.data.email, this.data.password);
     booksPage.checkTitleIsVisible();
     pageNotFoundPage.visitUnknownUrl();
