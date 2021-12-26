@@ -11,6 +11,7 @@ start containers
 #
 
 seed database
+
 `docker-compose run backend bash`
 
 `cd database\bash`
@@ -20,6 +21,7 @@ seed database
 #
 
 format python
+
 `docker-compose run backend bash`
 
 `black .`
