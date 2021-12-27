@@ -12,3 +12,14 @@ def format_books(book_data):
         books.append(book)
 
     return books
+
+
+def format_user(user_data):
+    user = {
+        "id": user_data[0],
+        "username": user_data[1],
+        "email": user_data[2],
+    }
+
+    return user
+
