@@ -9,23 +9,22 @@ export const loginUser = async (
   { effects, state }: Context,
   { email, password }: LoginCredentials
 ) => {
-  if (email === 'a@a.io' && password === 'a') {
+  const user = await effects.api.getUser(email, password);
+  if (user.status === 'success') {
     state.isLoggedIn = true;
-    state.userName = 'a';
+    state.user = user.data;
     state.appErrors.loginForm = '';
     localStorage.setItem('token', 'access_token');
-    const allBooks = await effects.api.getAllBooks();
-    state.booksApi = allBooks;
   } else {
-    state.appErrors.loginForm = 'User with this email and password not found!';
+    state.appErrors.loginForm = user.message;
   }
 };
 
 export const logoutUser = ({ state }: Context) => {
   state.isLoggedIn = false;
   localStorage.removeItem('token');
-
-  state.booksApi = [];
+  state.user = null;
+  state.booksApi = null;
 };
 
 export const onInitializeOvermind = ({ state }: Context) => {
