@@ -15,7 +15,6 @@ def get_user_from_db(email, password):
     cursor.execute("SELECT * FROM user_account WHERE user_account_email=%s AND user_account_password=%s",(email,password,))
 
     data = cursor.fetchone()
-    print("DATA ", data)
     conn.close()
 
     if (data):
