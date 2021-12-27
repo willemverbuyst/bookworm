@@ -8,10 +8,14 @@ export interface Book {
 }
 
 export interface BookApi {
-  id: string;
-  title: string;
-  language: string;
-  author: string;
-  year: number;
-  read: number;
+  status: string;
+  data: {
+    id: string;
+    title: string;
+    language: string;
+    author: string;
+    year: number;
+    read: number;
+  }[];
+  message: string;
 }
