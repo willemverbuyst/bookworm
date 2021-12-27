@@ -1,13 +1,13 @@
 # What is this?
 
-A project to connect and try out some techinques in a docker environment.
+A project to connect and try out some techniques in a docker environment.
 
 ## Frontend
 
 - TypeScript
 - React
 - Overmind
-- Mui
+- MUI
 - UseFormHook
 
 ## Backend
@@ -28,7 +28,7 @@ A project to connect and try out some techinques in a docker environment.
 # What is this not?
 
 Focussed on effeciency.
-Parts are hardcoded and some of the set up contrived.
+Parts are hardcoded and some of the setup is pretty contrived.
 
 # Commands
 
