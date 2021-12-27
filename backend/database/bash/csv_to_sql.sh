@@ -6,7 +6,7 @@ FILE_NAME="$(cd ../ && pwd)/dummy_data/books.csv"
 
 cat $FILE_NAME > tmp.csv
 
-NEW_FILE="$(cd ../ && pwd)/sql/insert_books.sql"
+NEW_FILE="$(cd ../ && pwd)/sql/book/insert_books.sql"
 
 TABLE="book"
 
@@ -15,7 +15,7 @@ COLUMNS="$(head --lines=1 tmp.csv | sed "s/|/,/g" | tr -d "\"\r\n")"
 tail --lines=+2 tmp.csv | while read l ; do
 VALUES=$(echo $l | sed "s/|/,/g" | sed "s/'/''/g" | tr -d "\r\n")
 
-echo "INSERT INTO $TABLE($COLUMNS) VALUES ($VALUES);"
+echo "INSERT INTO $TABLE ($COLUMNS) VALUES ($VALUES);"
 done > $NEW_FILE
 
 sed -i "s/\"/'/g" $NEW_FILE
