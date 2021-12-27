@@ -14,7 +14,7 @@ def get_all_books():
         result = len(books)
 
         return {
-            "status": "succes",
+            "status": "success",
             "result": result,
             "data": books,
             "message": "all books have been fetched",

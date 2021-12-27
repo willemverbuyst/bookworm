@@ -1,1 +1,0 @@
-SELECT * FROM user_account WHERE user_account_email='ping@pong.io';

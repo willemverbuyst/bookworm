@@ -13,7 +13,7 @@ def get_specific_user():
         user = get_user_from_db()
         
         return {
-            "status": "succes",
+            "status": "success",
             "data": user,
             "message": "User found.",
         }
