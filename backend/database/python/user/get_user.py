@@ -1,13 +1,7 @@
 import psycopg2
-import os
-from database.python.helpers.sql_helpers import executeScriptsFromFile
 from database.python.helpers.format_data import format_user
 
-dirname = os.path.dirname(__file__)
-select_user_sql = os.path.join(dirname, "../../sql/user/select_user.sql")
-
-
-def get_user_from_db():
+def get_user_from_db(email, password):
     conn = psycopg2.connect(
         database="postgres",
         user="dbuser",
@@ -18,13 +12,16 @@ def get_user_from_db():
 
     cursor = conn.cursor()
 
-    executeScriptsFromFile(select_user_sql, cursor)
+    cursor.execute("SELECT * FROM user_account WHERE user_account_email=%s AND user_account_password=%s",(email,password,))
 
     data = cursor.fetchone()
+    print("DATA ", data)
     conn.close()
 
-    print(data)
+    if (data):
+        return format_user(data)
+    else:
+        return None
 
-    user_formatted = format_user(data)
 
-    return user_formatted
+    
