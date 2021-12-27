@@ -50,6 +50,18 @@ start containers without logs
 
 #
 
+see logs for service
+
+`docker-compose logs <NAME OF SERVICE>`
+
+#
+
+start specific service
+
+`docker-compose up <NAME OF SERVICE>`
+
+#
+
 stop containers
 
 `docker-compose down`
