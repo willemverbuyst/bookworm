@@ -2,13 +2,13 @@
 
 # Based on: https://github.com/pavanchhatpar/csv-to-sql-converter
 
-FILE_NAME="$(cd ../ && pwd)/dummy_data/books.csv"
+FILE_NAME="$(cd ../ && pwd)/dummy_data/$1"
 
 cat $FILE_NAME > tmp.csv
 
-NEW_FILE="$(cd ../ && pwd)/sql/book/insert_books.sql"
+NEW_FILE="$(cd ../ && pwd)/sql/book/$2"
 
-TABLE="book"
+TABLE=$3
 
 COLUMNS="$(head --lines=1 tmp.csv | sed "s/|/,/g" | tr -d "\"\r\n")"
 
