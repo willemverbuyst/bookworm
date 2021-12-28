@@ -9,13 +9,12 @@ describe('BooksPage', function () {
 
 	const booksPage = new BooksPage()
 
-	it('Get all books with mock', function () {
+	it('Get all books from api', function () {
 		cy.bookwormLogin(this.data.email, this.data.password)
-		cy.intercept('GET', '**/books', { fixture: 'books.json' })
 		booksPage.checkUrl()
 		booksPage.checkTitleIsVisible()
-		cy.xpath("//div[normalize-space()='Fake Book 1']").should('be.visible')
-		cy.xpath("//div[normalize-space()='Fake Book 2']").should('be.visible')
-		cy.xpath("//div[normalize-space()='Fake Book 3']").should('not.exist')
+		cy.reload()
+		booksPage.checkUrl()
+		booksPage.checkTitleIsVisible()
 	})
 })
