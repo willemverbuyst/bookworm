@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe('GET /books', function () {
-	it('should fetch all books', function () {
+	it('should fetch all books from api', function () {
 		cy.request('GET', 'http://localhost:8000/books').then(response => {
 			expect(response.status).equal(200)
 			expect(response.body.message).equal('all books have been fetched')

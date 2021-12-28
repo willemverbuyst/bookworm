@@ -15,7 +15,7 @@ describe('Login', function () {
 	const homePage = new HomePage()
 	const loginPage = new LoginPage()
 
-	it('Login - Valid Credentials', function () {
+	it('should login successfully with valid credentials', function () {
 		cy.bookwormLogin(this.data.email, this.data.password)
 		booksPage.checkUrl()
 		booksPage.checkTitleIsVisible()
@@ -23,7 +23,7 @@ describe('Login', function () {
 		homePage.checkTitleIsVisible()
 	})
 
-	it('Login - Invalid Credentials', function () {
+	it('should display error message with invalid credentials', function () {
 		cy.bookwormLogin(this.data.email, this.data.wrongPassword)
 		loginPage.displayErrorMessage()
 	})

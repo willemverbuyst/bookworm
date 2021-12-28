@@ -2,14 +2,14 @@
 
 import BooksPage from '../pages/booksPage'
 
-describe('BooksPage', function () {
+describe('BooksPage with mock', function () {
 	beforeEach(function () {
 		cy.fixture('bookworm').as('data')
 	})
 
 	const booksPage = new BooksPage()
 
-	it('Get all books with mock', function () {
+	it('should display books', function () {
 		cy.bookwormLogin(this.data.email, this.data.password)
 		cy.intercept('GET', '**/books', { fixture: 'books.json' })
 		booksPage.checkUrl()

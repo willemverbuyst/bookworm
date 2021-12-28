@@ -3,7 +3,7 @@
 import BooksPage from '../pages/booksPage'
 import HomePage from '../pages/homePage'
 
-describe('Login', function () {
+describe('Remove token from local storage', function () {
 	beforeEach(function () {
 		cy.fixture('bookworm').as('data')
 	})
@@ -11,7 +11,7 @@ describe('Login', function () {
 	const booksPage = new BooksPage()
 	const homePage = new HomePage()
 
-	it('Login - Valid Credentials', function () {
+	it('should go to home after reload', function () {
 		cy.bookwormLogin(this.data.email, this.data.password)
 		booksPage.checkUrl()
 		booksPage.checkTitleIsVisible()

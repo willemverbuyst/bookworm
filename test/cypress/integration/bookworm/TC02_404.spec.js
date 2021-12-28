@@ -3,7 +3,7 @@
 import BooksPage from '../pages/booksPage'
 import PageNotFoundPage from '../pages/pageNotFoundPage'
 
-describe('Login', function () {
+describe('Page not found', function () {
 	beforeEach(function () {
 		cy.fixture('bookworm').as('data')
 	})
@@ -11,7 +11,7 @@ describe('Login', function () {
 	const booksPage = new BooksPage()
 	const pageNotFoundPage = new PageNotFoundPage()
 
-	it('Page not found', function () {
+	it('should display 404', function () {
 		cy.bookwormLogin(this.data.email, this.data.password)
 		booksPage.checkUrl()
 		booksPage.checkTitleIsVisible()

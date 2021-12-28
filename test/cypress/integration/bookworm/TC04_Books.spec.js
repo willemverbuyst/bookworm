@@ -2,14 +2,14 @@
 
 import BooksPage from '../pages/booksPage'
 
-describe('BooksPage', function () {
+describe('BooksPage with api', function () {
 	beforeEach(function () {
 		cy.fixture('bookworm').as('data')
 	})
 
 	const booksPage = new BooksPage()
 
-	it('Get all books from api', function () {
+	it('should display books', function () {
 		cy.bookwormLogin(this.data.email, this.data.password)
 		booksPage.checkUrl()
 		booksPage.checkTitleIsVisible()
