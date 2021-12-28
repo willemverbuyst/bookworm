@@ -30,6 +30,8 @@ const ButtonAppBar: React.FC = (): ReactElement => {
 			</Button>
 		)
 
+	const pages = ['home', 'books', 'authors', 'feedback']
+
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position="static">
@@ -38,11 +40,22 @@ const ButtonAppBar: React.FC = (): ReactElement => {
 						variant="h6"
 						noWrap
 						component="div"
-						sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
-						onClick={logOut}
+						sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
 					>
 						BOOKWORM
 					</Typography>
+					<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+						{pages.map(page => (
+							<Button
+								key={page}
+								onClick={() => console.log('clicl')}
+								sx={{ my: 2, color: 'white', display: 'block' }}
+							>
+								{page}
+							</Button>
+						))}
+					</Box>
+
 					{displayButton()}
 				</Toolbar>
 			</AppBar>
