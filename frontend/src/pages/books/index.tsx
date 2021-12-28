@@ -4,6 +4,7 @@ import TableWithBooks from '../../components/Table'
 import { useAppState, useActions } from '../../overmind'
 import { useNavigate } from 'react-router-dom'
 import BasicTabs from '../../components/BasicTabs'
+import BookPieChart from '../../components/PieChart'
 
 const Books: React.FC = (): ReactElement => {
 	const navigate = useNavigate()
@@ -34,7 +35,7 @@ const Books: React.FC = (): ReactElement => {
 				statistics={
 					<Box>
 						<h1 className="title">Books</h1>
-						<p>some charts</p>
+						<BookPieChart />
 					</Box>
 				}
 			/>
