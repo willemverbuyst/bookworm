@@ -36,10 +36,12 @@ class LoginPage {
 	}
 
 	enterEmail(email) {
+		cy.get(this.getEmail()).clear()
 		cy.get(this.getEmail()).type(email)
 	}
 
 	enterPassword(password) {
+		cy.get(this.getPassword()).clear()
 		cy.get(this.getPassword()).type(password)
 	}
 }
