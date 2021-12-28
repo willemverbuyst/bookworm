@@ -6,6 +6,7 @@ Cypress.Commands.add('bookwormLogin', function (email, password) {
 	const loginPage = new LoginPage()
 
 	cy.visit('/')
+	cy.title().should('contain', 'Bookworm')
 	home.checkTitleIsVisible()
 	home.clickOnGotoLoginLink()
 	loginPage.checkUrl()
