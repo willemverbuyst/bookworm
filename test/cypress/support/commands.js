@@ -1,15 +1,16 @@
-import HomePage from '../integration/pages/homePage';
-import LoginPage from '../integration/pages/loginPage';
+import HomePage from '../integration/pages/homePage'
+import LoginPage from '../integration/pages/loginPage'
 
 Cypress.Commands.add('bookwormLogin', function (email, password) {
-  const home = new HomePage();
-  const loginPage = new LoginPage();
+	const home = new HomePage()
+	const loginPage = new LoginPage()
 
-  cy.visit('/');
-  home.checkTitleIsVisible();
-  home.clickOnGotoLoginLink();
-  loginPage.checkTitleIsVisible();
-  loginPage.enterEmail(email);
-  loginPage.enterPassword(password);
-  loginPage.clickLoginButton();
-});
+	cy.visit('/')
+	home.checkTitleIsVisible()
+	home.clickOnGotoLoginLink()
+	loginPage.checkUrl()
+	loginPage.checkTitleIsVisible()
+	loginPage.enterEmail(email)
+	loginPage.enterPassword(password)
+	loginPage.clickLoginButton()
+})

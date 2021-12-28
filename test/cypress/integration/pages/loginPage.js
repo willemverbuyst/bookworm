@@ -1,43 +1,47 @@
 class LoginPage {
-  getEmail() {
-    return 'input[type="email"]';
-  }
+	getEmail() {
+		return 'input[type="email"]'
+	}
 
-  getErrorMessage() {
-    return 'User with this email and password not found!';
-  }
+	getErrorMessage() {
+		return 'User with this email and password not found!'
+	}
 
-  getLoginButton() {
-    return 'button[type="submit"]';
-  }
+	getLoginButton() {
+		return 'button[type="submit"]'
+	}
 
-  getPassword() {
-    return 'input[type="password"]';
-  }
+	getPassword() {
+		return 'input[type="password"]'
+	}
 
-  getTitle() {
-    return '.title';
-  }
+	getTitle() {
+		return '.title'
+	}
 
-  checkTitleIsVisible() {
-    cy.get(this.getTitle()).should('contain', 'Login');
-  }
+	checkTitleIsVisible() {
+		cy.get(this.getTitle()).should('contain', 'Login')
+	}
 
-  clickLoginButton() {
-    cy.get(this.getLoginButton()).click();
-  }
+	checkUrl() {
+		cy.url().should('include', '/login')
+	}
 
-  displayErrorMessage() {
-    cy.contains(this.getErrorMessage());
-  }
+	clickLoginButton() {
+		cy.get(this.getLoginButton()).click()
+	}
 
-  enterEmail(email) {
-    cy.get(this.getEmail()).type(email);
-  }
+	displayErrorMessage() {
+		cy.contains(this.getErrorMessage())
+	}
 
-  enterPassword(password) {
-    cy.get(this.getPassword()).type(password);
-  }
+	enterEmail(email) {
+		cy.get(this.getEmail()).type(email)
+	}
+
+	enterPassword(password) {
+		cy.get(this.getPassword()).type(password)
+	}
 }
 
-export default LoginPage;
+export default LoginPage

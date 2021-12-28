@@ -1,19 +1,19 @@
 class HomePage {
-  getGotoLoginLink() {
-    return 'go to login page';
-  }
+	getGotoLoginLink() {
+		return 'go to login page'
+	}
 
-  getTitle() {
-    return '.title';
-  }
+	getTitle() {
+		return '.title'
+	}
 
-  clickOnGotoLoginLink() {
-    cy.contains(this.getGotoLoginLink()).click();
-  }
+	checkTitleIsVisible() {
+		cy.get(this.getTitle()).should('contain', 'Home')
+	}
 
-  checkTitleIsVisible() {
-    cy.get(this.getTitle()).should('contain', 'Home');
-  }
+	clickOnGotoLoginLink() {
+		cy.contains(this.getGotoLoginLink()).click()
+	}
 }
 
-export default HomePage;
+export default HomePage
