@@ -30,7 +30,9 @@ const ButtonAppBar: React.FC = (): ReactElement => {
 			</Button>
 		)
 
-	const pages = ['home', 'books', 'authors', 'feedback']
+	const pages = ['books', 'authors', 'feedback']
+
+	const goto = (page: string) => navigate(`/${page}`)
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
@@ -48,7 +50,7 @@ const ButtonAppBar: React.FC = (): ReactElement => {
 						{pages.map(page => (
 							<Button
 								key={page}
-								onClick={() => console.log('clicl')}
+								onClick={() => goto(page)}
 								sx={{ my: 2, color: 'white', display: 'block' }}
 							>
 								{page}
