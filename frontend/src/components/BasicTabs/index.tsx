@@ -1,46 +1,22 @@
-import * as React from 'react'
+import React, { ReactElement } from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
-import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
+import TabPanel from './TabPanel'
+import { a11yProps } from './helpers'
 
-interface TabPanelProps {
-	children?: React.ReactNode
-	index: number
-	value: number
+interface IProps {
+	overview: ReactElement
+	statistics: ReactElement
 }
 
-function TabPanel(props: TabPanelProps) {
-	const { children, value, index, ...other } = props
-
-	return (
-		<div
-			role="tabpanel"
-			hidden={value !== index}
-			id={`simple-tabpanel-${index}`}
-			aria-labelledby={`simple-tab-${index}`}
-			{...other}
-		>
-			{value === index && (
-				<Box sx={{ p: 3 }}>
-					<Typography>{children}</Typography>
-				</Box>
-			)}
-		</div>
-	)
-}
-
-function a11yProps(index: number) {
-	return {
-		id: `simple-tab-${index}`,
-		'aria-controls': `simple-tabpanel-${index}`,
-	}
-}
-
-export default function BasicTabs({ overview, statistics }: any) {
+const BasicTabs: React.FC<IProps> = ({
+	overview,
+	statistics,
+}: IProps): ReactElement => {
 	const [value, setValue] = React.useState(0)
 
-	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+	const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue)
 	}
 
@@ -65,3 +41,5 @@ export default function BasicTabs({ overview, statistics }: any) {
 		</Box>
 	)
 }
+
+export default BasicTabs
