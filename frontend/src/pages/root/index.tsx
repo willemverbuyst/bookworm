@@ -1,18 +1,7 @@
-import { Button } from '@mui/material';
-import { ReactElement } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { ReactElement } from 'react'
 
 const Root: React.FC = (): ReactElement => {
-  const navigate = useNavigate();
+	return <h1 className="title">Home</h1>
+}
 
-  const gotoLogin = () => navigate('/login');
-
-  return (
-    <>
-      <h1 className="title">Home</h1>
-      <Button onClick={gotoLogin}>go to login page</Button>
-    </>
-  );
-};
-
-export default Root;
+export default Root
