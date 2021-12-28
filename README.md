@@ -25,6 +25,10 @@ A project to connect and try out some techniques in a docker environment.
 
 - Cypress
 
+## Documentation for API
+
+Swagger docs at localhost:8000/docs
+
 # What is this not?
 
 Focussed on effeciency.
@@ -32,7 +36,7 @@ Parts are hardcoded and some of the setup is pretty contrived.
 
 # Commands
 
-build and start
+(re)build and start
 
 `docker-compose up --build`
 
@@ -98,16 +102,14 @@ run cypress test
 
 `cd test`
 
-`npm run open`
+`npm run cy:open`
 
-#
-
-api - swagger docs
-
-`localhost:8000/docs`
+`npm run cy:run`
 
 #
 
 create csv with dummy data
 
-`bash dummy_data.csv`
+`bash dummy_authors.sh`
+
+`bash dummy_books.sh`
