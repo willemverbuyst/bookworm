@@ -2,15 +2,12 @@ import { Box } from '@mui/material'
 import React, { ReactElement, useEffect } from 'react'
 import TableForOverview from '../../components/Table'
 import { useAppState, useActions } from '../../overmind'
-import { useNavigate } from 'react-router-dom'
 import BasicTabs from '../../components/BasicTabs'
 import BookPieChart from '../../components/PieChart'
 
 const Books: React.FC = (): ReactElement => {
-	const navigate = useNavigate()
-	const { allBooks, isLoggedIn } = useAppState()
-	const { fetchAllBooks, getBooksGroupedByLanuage } = useActions()
-	const booksGroupedByLanguage = getBooksGroupedByLanuage()
+	const { allBooks, booksGroupedByLanguage, isLoggedIn } = useAppState()
+	const { fetchAllBooks } = useActions()
 	const columns = [
 		{ field: 'title', headerName: 'title', width: 450 },
 		{ field: 'language', headerName: 'language', width: 100 },
@@ -20,19 +17,13 @@ const Books: React.FC = (): ReactElement => {
 	]
 	const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
-	useEffect(() => {
-		if (!isLoggedIn) {
-			navigate('/')
-		}
-	})
+	// useEffect(() => {
+	// 	if (isLoggedIn) {
+	// 		fetchAllBooks()
+	// 	}
+	// })
 
-	useEffect(() => {
-		if (!allBooks) {
-			fetchAllBooks()
-		}
-	})
-
-	return (
+	return isLoggedIn ? (
 		<>
 			<BasicTabs
 				overview={
@@ -62,6 +53,8 @@ const Books: React.FC = (): ReactElement => {
 				}
 			/>
 		</>
+	) : (
+		<p>You are not logged in!</p>
 	)
 }
 

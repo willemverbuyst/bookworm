@@ -23,5 +23,29 @@ export const state: State = {
 			  ].sort((book1, book2) => ('' + book1.title).localeCompare(book2.title))
 			: null
 	),
+	booksGroupedByLanguage: derived((state: State) =>
+		state.booksApi && state.booksApi.data
+			? Object.entries(
+					[...state.booksApi.data].reduce(
+						(rv: { [key: string]: number }, book) => {
+							rv[book.language] = rv[book.language] + 1 || 1
+							return rv
+						},
+						{}
+					)
+			  ).map(([key, value]) => ({
+					language: key,
+					number: value,
+			  }))
+			: null
+	),
+	authorForStatistics: derived((state: State) =>
+		state.authorsApi && state.authorsApi.data
+			? [...state.authorsApi.data].map(author => ({
+					name: author.name,
+					books_written: author.books_written,
+			  }))
+			: null
+	),
 	appErrors: { loginForm: '' },
 }

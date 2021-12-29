@@ -1,36 +1,26 @@
 import { Box } from '@mui/material'
 import React, { ReactElement, useEffect } from 'react'
 import { useAppState, useActions } from '../../overmind'
-import { useNavigate } from 'react-router-dom'
 import BasicTabs from '../../components/BasicTabs'
 import TableForOverview from '../../components/Table'
 import BarChartForStatistics from '../../components/Charts/BarChart'
 
 const Authors: React.FC = (): ReactElement => {
-	const navigate = useNavigate()
-	const { allAuthors, isLoggedIn } = useAppState()
-	const { fetchAllAuthors, getAuthorsForStatistics } = useActions()
+	const { allAuthors, authorForStatistics, isLoggedIn } = useAppState()
+	const { fetchAllAuthors } = useActions()
 
-	useEffect(() => {
-		if (!isLoggedIn) {
-			navigate('/')
-		}
-	})
-
-	useEffect(() => {
-		if (!allAuthors) {
-			fetchAllAuthors()
-		}
-	})
-
-	const data = getAuthorsForStatistics()
+	// useEffect(() => {
+	// 	if (isLoggedIn) {
+	// 		fetchAllAuthors()
+	// 	}
+	// })
 
 	const columns = [
 		{ field: 'name', headerName: 'name', width: 450 },
 		{ field: 'books_written', headerName: 'books written', width: 150 },
 	]
 
-	return (
+	return isLoggedIn ? (
 		<>
 			<BasicTabs
 				overview={
@@ -46,8 +36,11 @@ const Authors: React.FC = (): ReactElement => {
 				statistics={
 					<Box>
 						<h1 className="title">Authors</h1>
-						{data ? (
-							<BarChartForStatistics data={data} dataKey="books_written" />
+						{authorForStatistics ? (
+							<BarChartForStatistics
+								data={authorForStatistics}
+								dataKey="books_written"
+							/>
 						) : (
 							<p>No Authors</p>
 						)}
@@ -55,6 +48,8 @@ const Authors: React.FC = (): ReactElement => {
 				}
 			/>
 		</>
+	) : (
+		<p>You are not logged in!</p>
 	)
 }
 

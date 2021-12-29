@@ -8,6 +8,8 @@ export interface State {
 	authorsApi: AuthorApi | null
 	booksApi: BookApi | null
 	allAuthors: Author[] | null
+	authorForStatistics: any
 	allBooks: Book[] | null
+	booksGroupedByLanguage: { language: string; number: number }[] | null
 	appErrors: { loginForm: string }
 }

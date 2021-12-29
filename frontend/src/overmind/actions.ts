@@ -47,26 +47,6 @@ export const fetchAllAuthors = async ({ state, effects }: Context) => {
 	state.authorsApi = allBooks
 }
 
-export const getBooksGroupedByLanuage = ({
-	state,
-}: Context): { language: string; number: number }[] | null => {
-	const books = state.allBooks
-	if (books) {
-		const reducedBooks = [...books].reduce(
-			(rv: { [key: string]: number }, book) => {
-				rv[book.language] = rv[book.language] + 1 || 1
-				return rv
-			},
-			{}
-		)
-		return Object.entries(reducedBooks).map(([key, value]) => ({
-			language: key,
-			number: value,
-		}))
-	}
-	return null
-}
-
 export const getAuthorsForStatistics = ({ state }: Context) => {
 	const authors = state.allAuthors
 	if (authors) {
