@@ -1,16 +1,23 @@
 import { Box } from '@mui/material'
 import React, { ReactElement, useEffect } from 'react'
-import { useAppState } from '../../overmind'
+import { useAppState, useActions } from '../../overmind'
 import { useNavigate } from 'react-router-dom'
 import BasicTabs from '../../components/BasicTabs'
 
 const Authors: React.FC = (): ReactElement => {
 	const navigate = useNavigate()
-	const { isLoggedIn } = useAppState()
+	const { allAuthors, isLoggedIn } = useAppState()
+	const { fetchAllAuthors } = useActions()
 
 	useEffect(() => {
 		if (!isLoggedIn) {
 			navigate('/')
+		}
+	})
+
+	useEffect(() => {
+		if (!allAuthors) {
+			fetchAllAuthors()
 		}
 	})
 

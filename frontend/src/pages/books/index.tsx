@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import React, { ReactElement, useEffect } from 'react'
-import TableWithBooks from '../../components/Table'
+import TableForOverview from '../../components/Table'
 import { useAppState, useActions } from '../../overmind'
 import { useNavigate } from 'react-router-dom'
 import BasicTabs from '../../components/BasicTabs'
@@ -23,13 +23,25 @@ const Books: React.FC = (): ReactElement => {
 		}
 	})
 
+	const columns = [
+		{ field: 'title', headerName: 'title', width: 450 },
+		{ field: 'language', headerName: 'language', width: 100 },
+		{ field: 'author', headerName: 'author', width: 250 },
+		{ field: 'year', headerName: 'year', width: 150 },
+		{ field: 'read', headerName: 'read', width: 150 },
+	]
+
 	return (
 		<>
 			<BasicTabs
 				overview={
 					<Box>
 						<h1 className="title">Books</h1>
-						{allBooks ? <TableWithBooks books={allBooks} /> : <p>No books</p>}
+						{allBooks ? (
+							<TableForOverview rows={allBooks} columns={columns} />
+						) : (
+							<p>No books</p>
+						)}
 					</Box>
 				}
 				statistics={
