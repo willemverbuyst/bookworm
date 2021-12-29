@@ -1,19 +1,27 @@
 import { Box } from '@mui/material'
-import React, { ReactElement, useEffect } from 'react'
-import { useAppState, useActions } from '../../overmind'
+import React, { ReactElement } from 'react'
+import { useAppState } from '../../overmind'
 import BasicTabs from '../../components/BasicTabs'
 import TableForOverview from '../../components/Table'
 import BarChartForStatistics from '../../components/Charts/BarChart'
 
 const Authors: React.FC = (): ReactElement => {
-	const { allAuthors, authorForStatistics, isLoggedIn } = useAppState()
-	const { fetchAllAuthors } = useActions()
+	const { authorsApi, isLoggedIn } = useAppState()
 
-	// useEffect(() => {
-	// 	if (isLoggedIn) {
-	// 		fetchAllAuthors()
-	// 	}
-	// })
+	const allAuthors = authorsApi
+		? Object.values([...authorsApi.data])
+				.map(author => ({ ...author }))
+				.sort((author1, author2) =>
+					('' + author1.name).localeCompare(author2.name)
+				)
+		: null
+
+	const authorForStatistics = authorsApi
+		? [...authorsApi.data].map(author => ({
+				name: author.name,
+				books_written: author.books_written,
+		  }))
+		: null
 
 	const columns = [
 		{ field: 'name', headerName: 'name', width: 450 },

@@ -6,7 +6,7 @@ interface LoginCredentials {
 }
 
 export const loginUser = async (
-	{ effects, state }: Context,
+	{ actions, effects, state }: Context,
 	{ email, password }: LoginCredentials
 ) => {
 	const user = await effects.api.getUser(email, password)
@@ -15,6 +15,8 @@ export const loginUser = async (
 		state.user = user.data
 		state.appErrors.loginForm = ''
 		localStorage.setItem('token', 'access_token')
+		actions.fetchAllAuthors()
+		actions.fetchAllBooks()
 	} else {
 		state.appErrors.loginForm = user.message
 	}
@@ -25,9 +27,7 @@ export const logoutUser = ({ state }: Context) => {
 	state.isLoggedIn = false
 	state.user = null
 	state.authorsApi = null
-	state.allAuthors = null
 	state.booksApi = null
-	state.allBooks = null
 }
 
 export const onInitializeOvermind = ({ state }: Context) => {
@@ -45,16 +45,4 @@ export const fetchAllBooks = async ({ state, effects }: Context) => {
 export const fetchAllAuthors = async ({ state, effects }: Context) => {
 	const allBooks = await effects.api.getAllAuthors()
 	state.authorsApi = allBooks
-}
-
-export const getAuthorsForStatistics = ({ state }: Context) => {
-	const authors = state.allAuthors
-	if (authors) {
-		return [...authors].map(author => ({
-			name: author.name,
-			books_written: author.books_written,
-		}))
-	} else {
-		return null
-	}
 }

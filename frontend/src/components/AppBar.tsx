@@ -14,7 +14,6 @@ const ButtonAppBar: React.FC = (): ReactElement => {
 
 	const logOut = () => {
 		logoutUser()
-		navigate('/')
 	}
 
 	const gotoLogin = () => navigate('/login')

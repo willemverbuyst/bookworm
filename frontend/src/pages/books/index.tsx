@@ -1,13 +1,12 @@
 import { Box } from '@mui/material'
-import React, { ReactElement, useEffect } from 'react'
+import React, { ReactElement } from 'react'
 import TableForOverview from '../../components/Table'
-import { useAppState, useActions } from '../../overmind'
+import { useAppState } from '../../overmind'
 import BasicTabs from '../../components/BasicTabs'
 import BookPieChart from '../../components/PieChart'
 
 const Books: React.FC = (): ReactElement => {
-	const { allBooks, booksGroupedByLanguage, isLoggedIn } = useAppState()
-	const { fetchAllBooks } = useActions()
+	const { booksApi, isLoggedIn } = useAppState()
 	const columns = [
 		{ field: 'title', headerName: 'title', width: 450 },
 		{ field: 'language', headerName: 'language', width: 100 },
@@ -17,11 +16,26 @@ const Books: React.FC = (): ReactElement => {
 	]
 	const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
-	// useEffect(() => {
-	// 	if (isLoggedIn) {
-	// 		fetchAllBooks()
-	// 	}
-	// })
+	const allBooks = booksApi
+		? Object.values([...booksApi.data])
+				.map(book => ({
+					...book,
+					read: book.read === 1 ? true : false,
+				}))
+				.sort((book1, book2) => ('' + book1.title).localeCompare(book2.title))
+		: null
+
+	const booksGroupedByLanguage = booksApi
+		? Object.entries(
+				[...booksApi.data].reduce((rv: { [key: string]: number }, book) => {
+					rv[book.language] = rv[book.language] + 1 || 1
+					return rv
+				}, {})
+		  ).map(([key, value]) => ({
+				language: key,
+				number: value,
+		  }))
+		: null
 
 	return isLoggedIn ? (
 		<>

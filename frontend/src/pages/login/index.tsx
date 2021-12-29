@@ -1,14 +1,9 @@
 import React, { useEffect } from 'react'
-import {
-	useForm,
-	Controller,
-	SubmitHandler,
-	appendErrors,
-} from 'react-hook-form'
+import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import { Box, Button } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { useAppState, useActions } from '../../overmind'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 type Inputs = {
 	email: string
@@ -21,11 +16,11 @@ const Login: React.FC = () => {
 	const { loginUser } = useActions()
 	const { isLoggedIn, appErrors } = useAppState()
 
-	// useEffect(() => {
-	// 	if (isLoggedIn) {
-	// 		navigate('/books')
-	// 	}
-	// })
+	useEffect(() => {
+		if (isLoggedIn) {
+			navigate('/books')
+		}
+	})
 
 	const onSubmit: SubmitHandler<Inputs> = async data => {
 		await loginUser(data)
