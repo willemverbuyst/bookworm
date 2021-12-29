@@ -4,7 +4,7 @@ from database.python.helpers.sql_helpers import executeScriptsFromFile
 from database.python.helpers.format_data import format_authors
 
 dirname = os.path.dirname(__file__)
-select_all_authors_sql = os.path.join(dirname, "../../sql/book/select_all_authors.sql")
+select_all_authors_sql = os.path.join(dirname, "../../sql/author/select_all_authors.sql")
 
 
 def get_authors_from_db():

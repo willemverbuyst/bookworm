@@ -6,7 +6,7 @@ FILE_NAME="$(cd ../ && pwd)/dummy_data/$1"
 
 cat $FILE_NAME > tmp.csv
 
-NEW_FILE="$(cd ../ && pwd)/sql/book/$2"
+NEW_FILE="$(cd ../ && pwd)/sql/$2"
 
 TABLE=$3
 
