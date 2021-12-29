@@ -9,7 +9,16 @@ import BookPieChart from '../../components/PieChart'
 const Books: React.FC = (): ReactElement => {
 	const navigate = useNavigate()
 	const { allBooks, isLoggedIn } = useAppState()
-	const { fetchAllBooks } = useActions()
+	const { fetchAllBooks, getBooksGroupedByLanuage } = useActions()
+	const booksGroupedByLanguage = getBooksGroupedByLanuage()
+	const columns = [
+		{ field: 'title', headerName: 'title', width: 450 },
+		{ field: 'language', headerName: 'language', width: 100 },
+		{ field: 'author', headerName: 'author', width: 250 },
+		{ field: 'year', headerName: 'year', width: 150 },
+		{ field: 'read', headerName: 'read', width: 150 },
+	]
+	const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
 	useEffect(() => {
 		if (!isLoggedIn) {
@@ -22,14 +31,6 @@ const Books: React.FC = (): ReactElement => {
 			fetchAllBooks()
 		}
 	})
-
-	const columns = [
-		{ field: 'title', headerName: 'title', width: 450 },
-		{ field: 'language', headerName: 'language', width: 100 },
-		{ field: 'author', headerName: 'author', width: 250 },
-		{ field: 'year', headerName: 'year', width: 150 },
-		{ field: 'read', headerName: 'read', width: 150 },
-	]
 
 	return (
 		<>
@@ -47,7 +48,14 @@ const Books: React.FC = (): ReactElement => {
 				statistics={
 					<Box>
 						<h1 className="title">Books</h1>
-						<BookPieChart />
+						{booksGroupedByLanguage ? (
+							<BookPieChart
+								colors={colors}
+								data={booksGroupedByLanguage}
+								dataKey="number"
+								nameKey="language"
+							/>
+						) : null}
 					</Box>
 				}
 			/>
