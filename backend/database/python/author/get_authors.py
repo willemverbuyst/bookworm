@@ -7,7 +7,7 @@ dirname = os.path.dirname(__file__)
 select_all_authors_sql = os.path.join(dirname, "../../sql/book/select_all_authors.sql")
 
 
-def get_books_from_db():
+def get_authors_from_db():
     conn = psycopg2.connect(
         database="postgres",
         user="dbuser",
