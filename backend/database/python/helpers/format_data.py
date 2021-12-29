@@ -1,3 +1,15 @@
+def format_authors(author_data):
+    authors = []
+    for row in author_data:
+        author = {
+            "id": row[0],
+            "author_name": row[1],
+            "author_books_written": row[2],
+        }
+        authors.append(author)
+
+    return authors
+
 def format_books(book_data):
     books = []
     for row in book_data:
