@@ -55,7 +55,9 @@ const Books: React.FC = (): ReactElement => {
 								dataKey="number"
 								nameKey="language"
 							/>
-						) : null}
+						) : (
+							<p>No books</p>
+						)}
 					</Box>
 				}
 			/>

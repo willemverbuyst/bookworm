@@ -46,7 +46,11 @@ const Authors: React.FC = (): ReactElement => {
 				statistics={
 					<Box>
 						<h1 className="title">Authors</h1>
-						{data ? <BarChartForStatistics data={data} /> : <p>No Authors</p>}
+						{data ? (
+							<BarChartForStatistics data={data} dataKey="books_written" />
+						) : (
+							<p>No Authors</p>
+						)}
 					</Box>
 				}
 			/>

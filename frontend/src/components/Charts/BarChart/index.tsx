@@ -4,9 +4,10 @@ import { Bar, BarChart } from 'recharts'
 
 interface IProps {
 	data: Array<{ [key: string]: string | number }>
+	dataKey: string
 }
 
-const BarChartForStatistics = ({ data }: IProps) => {
+const BarChartForStatistics = ({ data, dataKey }: IProps) => {
 	return data ? (
 		<>
 			<Typography>Written books by authors</Typography>
@@ -18,7 +19,7 @@ const BarChartForStatistics = ({ data }: IProps) => {
 				}}
 			>
 				<BarChart width={600} height={400} data={data}>
-					<Bar dataKey="books_written" fill="#FFBB28"></Bar>
+					<Bar dataKey={dataKey} fill="#FFBB28"></Bar>
 				</BarChart>
 			</Box>
 		</>
