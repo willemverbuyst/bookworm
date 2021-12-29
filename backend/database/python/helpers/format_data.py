@@ -3,8 +3,8 @@ def format_authors(author_data):
     for row in author_data:
         author = {
             "id": row[0],
-            "author_name": row[1],
-            "author_books_written": row[2],
+            "name": row[1],
+            "books_written": row[2],
         }
         authors.append(author)
 

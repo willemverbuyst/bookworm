@@ -21,10 +21,13 @@ export const loginUser = async (
 }
 
 export const logoutUser = ({ state }: Context) => {
-	state.isLoggedIn = false
 	localStorage.removeItem('token')
+	state.isLoggedIn = false
 	state.user = null
+	state.authorsApi = null
+	state.allAuthors = null
 	state.booksApi = null
+	state.allBooks = null
 }
 
 export const onInitializeOvermind = ({ state }: Context) => {
@@ -37,6 +40,11 @@ export const onInitializeOvermind = ({ state }: Context) => {
 export const fetchAllBooks = async ({ state, effects }: Context) => {
 	const allBooks = await effects.api.getAllBooks()
 	state.booksApi = allBooks
+}
+
+export const fetchAllAuthors = async ({ state, effects }: Context) => {
+	const allBooks = await effects.api.getAllAuthors()
+	state.authorsApi = allBooks
 }
 
 export const getBooksGroupedByLanuage = ({

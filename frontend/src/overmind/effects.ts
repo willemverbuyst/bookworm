@@ -1,18 +1,24 @@
-import axios from 'axios';
-import { BookApi } from '../models/Book';
-import { UserApi } from '../models/User';
+import axios from 'axios'
+import { AuthorApi } from '../models/Author'
+import { BookApi } from '../models/Book'
+import { UserApi } from '../models/User'
 
 export const api = {
-  getAllBooks: async (): Promise<BookApi> => {
-    const response = await axios.get(`http://0.0.0.0:8000/books`);
-    return response.data;
-  },
+	getAllAuthors: async (): Promise<AuthorApi> => {
+		const response = await axios.get(`http://0.0.0.0:8000/authors`)
+		return response.data
+	},
 
-  getUser: async (email: string, password: string): Promise<UserApi> => {
-    const response = await axios.post(`http://0.0.0.0:8000/login`, {
-      email,
-      password,
-    });
-    return response.data;
-  },
-};
+	getAllBooks: async (): Promise<BookApi> => {
+		const response = await axios.get(`http://0.0.0.0:8000/books`)
+		return response.data
+	},
+
+	getUser: async (email: string, password: string): Promise<UserApi> => {
+		const response = await axios.post(`http://0.0.0.0:8000/login`, {
+			email,
+			password,
+		})
+		return response.data
+	},
+}
