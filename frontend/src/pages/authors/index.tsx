@@ -4,11 +4,12 @@ import { useAppState, useActions } from '../../overmind'
 import { useNavigate } from 'react-router-dom'
 import BasicTabs from '../../components/BasicTabs'
 import TableForOverview from '../../components/Table'
+import BarChartForStatistics from '../../components/Charts/BarChart'
 
 const Authors: React.FC = (): ReactElement => {
 	const navigate = useNavigate()
 	const { allAuthors, isLoggedIn } = useAppState()
-	const { fetchAllAuthors } = useActions()
+	const { fetchAllAuthors, getAuthorsForStatistics } = useActions()
 
 	useEffect(() => {
 		if (!isLoggedIn) {
@@ -21,6 +22,8 @@ const Authors: React.FC = (): ReactElement => {
 			fetchAllAuthors()
 		}
 	})
+
+	const data = getAuthorsForStatistics()
 
 	const columns = [
 		{ field: 'name', headerName: 'name', width: 450 },
@@ -36,14 +39,14 @@ const Authors: React.FC = (): ReactElement => {
 						{allAuthors ? (
 							<TableForOverview rows={allAuthors} columns={columns} />
 						) : (
-							<p>No books</p>
+							<p>No Authors</p>
 						)}
 					</Box>
 				}
 				statistics={
 					<Box>
 						<h1 className="title">Authors</h1>
-						<p>some charts</p>
+						{data ? <BarChartForStatistics data={data} /> : <p>No Authors</p>}
 					</Box>
 				}
 			/>

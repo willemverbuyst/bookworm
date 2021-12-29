@@ -66,3 +66,15 @@ export const getBooksGroupedByLanuage = ({
 	}
 	return null
 }
+
+export const getAuthorsForStatistics = ({ state }: Context) => {
+	const authors = state.allAuthors
+	if (authors) {
+		return [...authors].map(author => ({
+			name: author.name,
+			books_written: author.books_written,
+		}))
+	} else {
+		return null
+	}
+}
