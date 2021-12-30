@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import { Box, Button } from '@mui/material'
 import TextField from '@mui/material/TextField'
@@ -14,16 +14,13 @@ const Login: React.FC = () => {
 	const navigate = useNavigate()
 	const { control, handleSubmit } = useForm<Inputs>()
 	const { loginUser } = useActions()
-	const { isLoggedIn, appErrors } = useAppState()
-
-	useEffect(() => {
-		if (isLoggedIn) {
-			navigate('/books')
-		}
-	})
+	const { appErrors } = useAppState()
 
 	const onSubmit: SubmitHandler<Inputs> = async data => {
 		await loginUser(data)
+		if (!appErrors.loginForm) {
+			navigate('/books')
+		}
 	}
 
 	const displayErrorMessage = () => (

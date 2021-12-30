@@ -1,12 +1,19 @@
 import { Box } from '@mui/material'
-import React, { ReactElement } from 'react'
-import { useAppState } from '../../overmind'
+import React, { ReactElement, useEffect } from 'react'
+import { useActions, useAppState } from '../../overmind'
 import BasicTabs from '../../components/BasicTabs'
 import TableForOverview from '../../components/Table'
 import BarChartForStatistics from '../../components/Charts/BarChart'
 
 const Authors: React.FC = (): ReactElement => {
-	const { authorsApi, isLoggedIn } = useAppState()
+	const { authorsApi } = useAppState()
+	const { fetchAllAuthors } = useActions()
+
+	useEffect(() => {
+		if (!authorsApi) {
+			fetchAllAuthors()
+		}
+	})
 
 	const allAuthors = authorsApi
 		? Object.values([...authorsApi.data])
@@ -28,7 +35,7 @@ const Authors: React.FC = (): ReactElement => {
 		{ field: 'books_written', headerName: 'books written', width: 150 },
 	]
 
-	return isLoggedIn ? (
+	return (
 		<>
 			<BasicTabs
 				overview={
@@ -56,8 +63,6 @@ const Authors: React.FC = (): ReactElement => {
 				}
 			/>
 		</>
-	) : (
-		<p>You are not logged in!</p>
 	)
 }
 

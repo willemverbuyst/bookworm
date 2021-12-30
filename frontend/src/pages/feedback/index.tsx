@@ -1,14 +1,7 @@
 import React, { ReactElement } from 'react'
-import { useAppState } from '../../overmind'
 
 const Feedback: React.FC = (): ReactElement => {
-	const { isLoggedIn } = useAppState()
-
-	return isLoggedIn ? (
-		<h1 className="title">Feedback</h1>
-	) : (
-		<p>You are not logged in!</p>
-	)
+	return <h1 className="title">Feedback</h1>
 }
 
 export default Feedback

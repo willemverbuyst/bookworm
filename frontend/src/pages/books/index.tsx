@@ -1,12 +1,19 @@
 import { Box } from '@mui/material'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useEffect } from 'react'
 import TableForOverview from '../../components/Table'
-import { useAppState } from '../../overmind'
+import { useActions, useAppState } from '../../overmind'
 import BasicTabs from '../../components/BasicTabs'
 import BookPieChart from '../../components/PieChart'
 
 const Books: React.FC = (): ReactElement => {
-	const { booksApi, isLoggedIn } = useAppState()
+	const { booksApi } = useAppState()
+	const { fetchAllBooks } = useActions()
+
+	useEffect(() => {
+		if (!booksApi) {
+			fetchAllBooks()
+		}
+	})
 	const columns = [
 		{ field: 'title', headerName: 'title', width: 450 },
 		{ field: 'language', headerName: 'language', width: 100 },
@@ -37,7 +44,7 @@ const Books: React.FC = (): ReactElement => {
 		  }))
 		: null
 
-	return isLoggedIn ? (
+	return (
 		<>
 			<BasicTabs
 				overview={
@@ -67,8 +74,6 @@ const Books: React.FC = (): ReactElement => {
 				}
 			/>
 		</>
-	) : (
-		<p>You are not logged in!</p>
 	)
 }
 
