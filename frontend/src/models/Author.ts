@@ -1,7 +1,7 @@
 export interface Author {
 	id: string
 	name: string
-	books_written: string
+	books_written: number
 }
 
 export interface AuthorApi {
