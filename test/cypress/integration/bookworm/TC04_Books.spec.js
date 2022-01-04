@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 
+import AppBar from '../components/appBar'
 import BooksPage from '../pages/booksPage'
 
 describe('BooksPage with api', function () {
@@ -7,6 +8,7 @@ describe('BooksPage with api', function () {
 		cy.fixture('bookworm').as('data')
 	})
 
+	const appBar = new AppBar()
 	const booksPage = new BooksPage()
 
 	it('should display books', function () {
@@ -15,6 +17,8 @@ describe('BooksPage with api', function () {
 		booksPage.checkTitleIsVisible()
 		cy.reload()
 		booksPage.checkUrl()
+		booksPage.checkTitleIsVisible()
+		appBar.clickLogOutButton()
 		booksPage.checkTitleIsVisible()
 	})
 })

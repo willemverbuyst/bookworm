@@ -3,6 +3,10 @@ class BooksPage {
 		return '.title'
 	}
 
+	getNoBooks() {
+		return 'No books'
+	}
+
 	checkTitleIsVisible() {
 		cy.get(this.getTitle()).should('contain', 'Books')
 	}

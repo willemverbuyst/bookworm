@@ -2,7 +2,6 @@
 
 import AppBar from '../components/appBar'
 import BooksPage from '../pages/booksPage'
-import HomePage from '../pages/homePage'
 import LoginPage from '../pages/loginPage'
 
 describe('Login', function () {
@@ -12,7 +11,6 @@ describe('Login', function () {
 
 	const appBar = new AppBar()
 	const booksPage = new BooksPage()
-	const homePage = new HomePage()
 	const loginPage = new LoginPage()
 
 	it('should login successfully with valid credentials', function () {
@@ -20,7 +18,7 @@ describe('Login', function () {
 		booksPage.checkUrl()
 		booksPage.checkTitleIsVisible()
 		appBar.clickLogOutButton()
-		homePage.checkTitleIsVisible()
+		booksPage.checkTitleIsVisible()
 	})
 
 	it('should display error message with invalid credentials', function () {

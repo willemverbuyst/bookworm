@@ -1,11 +1,19 @@
 class AppBar {
-  getLogOutButton() {
-    return 'log out';
-  }
+	getLogInButton() {
+		return 'log in'
+	}
 
-  clickLogOutButton() {
-    cy.contains(this.getLogOutButton()).click();
-  }
+	getLogOutButton() {
+		return 'log out'
+	}
+
+	clickLogInButton() {
+		cy.contains(this.getLogInButton()).click()
+	}
+
+	clickLogOutButton() {
+		cy.contains(this.getLogOutButton()).click()
+	}
 }
 
-export default AppBar;
+export default AppBar
