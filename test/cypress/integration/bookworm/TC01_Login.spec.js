@@ -18,7 +18,7 @@ describe('Login', function () {
 		booksPage.checkUrl()
 		booksPage.checkTitleIsVisible()
 		appBar.clickLogOutButton()
-		booksPage.checkTitleIsVisible()
+		booksPage.checkYouAreNotLoggedIn()
 	})
 
 	it('should display error message with invalid credentials', function () {

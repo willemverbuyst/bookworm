@@ -20,6 +20,6 @@ describe('BooksPage with mock', function () {
 		cy.xpath("//div[normalize-space()='Fake Book 2']").should('be.visible')
 		cy.xpath("//div[normalize-space()='Fake Book 3']").should('not.exist')
 		appBar.clickLogOutButton()
-		booksPage.checkTitleIsVisible()
+		booksPage.checkYouAreNotLoggedIn()
 	})
 })

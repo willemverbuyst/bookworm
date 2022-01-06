@@ -23,6 +23,6 @@ describe('Page not found', function () {
 		pageNotFoundPage.checkTitleIsVisible()
 		cy.visit('/books')
 		booksPage.checkUrl()
-		booksPage.checkTitleIsVisible()
+		booksPage.checkYouAreNotLoggedIn()
 	})
 })

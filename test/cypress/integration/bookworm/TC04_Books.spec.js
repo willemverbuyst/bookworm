@@ -19,6 +19,6 @@ describe('BooksPage with api', function () {
 		booksPage.checkUrl()
 		booksPage.checkTitleIsVisible()
 		appBar.clickLogOutButton()
-		booksPage.checkTitleIsVisible()
+		booksPage.checkYouAreNotLoggedIn()
 	})
 })

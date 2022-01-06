@@ -8,16 +8,16 @@ describe('Remove token from local storage', function () {
 		cy.fixture('bookworm').as('data')
 	})
 
-	const appBar = new AppBar()
 	const booksPage = new BooksPage()
 
-	it('should go to home after reload', function () {
+	it('should show you are not logged in', function () {
 		cy.bookwormLogin(this.data.email, this.data.password)
 		booksPage.checkUrl()
 		booksPage.checkTitleIsVisible()
 		cy.clearLocalStorage('token')
+		cy.wait(1000)
 		cy.reload()
 		cy.wait(1000)
-		booksPage.checkTitleIsVisible()
+		booksPage.checkYouAreNotLoggedIn()
 	})
 })
