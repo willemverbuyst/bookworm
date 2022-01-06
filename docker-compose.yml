@@ -11,6 +11,8 @@ services:
       - 8000:8000
     depends_on:
       - database
+    networks:
+      - bookworm-net
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
   frontend:
     build:
@@ -25,6 +27,8 @@ services:
     depends_on:
       - backend
       - database
+    networks:
+      - bookworm-net
   database:
     image: 'postgres:13'
     ports:
@@ -33,3 +37,8 @@ services:
       - POSTGRES_USER=dbuser
       - POSTGRES_PASSWORD=admin2021
       - POSTGRES_DB=bookworm
+    networks:
+      - bookworm-net
+networks:
+  bookworm-net:
+    driver: bridge
