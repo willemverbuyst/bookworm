@@ -15,14 +15,10 @@ const Authors: React.FC = (): ReactElement => {
 	]
 
 	useEffect(() => {
-		let abortController = new AbortController()
-		if (!allAuthors && isLoggedIn) {
+		if ((!allAuthors || !authorForStatistics) && isLoggedIn) {
 			fetchAllAuthors()
 		}
-		return () => {
-			abortController.abort()
-		}
-	})
+	}, [allAuthors, authorForStatistics, isLoggedIn, fetchAllAuthors])
 
 	return isLoggedIn ? (
 		<BasicTabs

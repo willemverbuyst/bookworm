@@ -18,14 +18,10 @@ const Books: React.FC = (): ReactElement => {
 	const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
 	useEffect(() => {
-		let abortController = new AbortController()
-		if (!allBooks && isLoggedIn) {
+		if ((!allBooks || !booksGroupedByLanguage) && isLoggedIn) {
 			fetchAllBooks()
 		}
-		return () => {
-			abortController.abort()
-		}
-	})
+	}, [allBooks, booksGroupedByLanguage, isLoggedIn, fetchAllBooks])
 
 	return isLoggedIn ? (
 		<BasicTabs

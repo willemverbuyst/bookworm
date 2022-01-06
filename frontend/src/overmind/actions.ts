@@ -21,11 +21,11 @@ export const loginUser = async (
 }
 
 export const logoutUser = ({ state }: Context) => {
+	state.authorsApi = null
+	state.booksApi = null
 	localStorage.removeItem('token')
 	state.isLoggedIn = false
 	state.user = null
-	state.authorsApi = null
-	state.booksApi = null
 }
 
 export const onInitializeOvermind = ({ state }: Context) => {

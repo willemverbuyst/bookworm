@@ -14,9 +14,7 @@ const ButtonAppBar: React.FC = (): ReactElement => {
 	const gotoLogin = () => navigate('/login')
 	const pages = ['books', 'authors', 'feedback']
 	const goto = (page: string) => navigate(`/${page}`)
-	const logOut = () => {
-		logoutUser()
-	}
+	const logOut = () => logoutUser()
 
 	const displayButton = (): ReactElement =>
 		isLoggedIn ? (
