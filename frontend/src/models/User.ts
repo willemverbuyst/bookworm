@@ -1,11 +1,11 @@
 export interface User {
-  id: string;
-  userName: string;
-  email: string;
+	id: string
+	user_name: string
+	email: string
 }
 
 export interface UserApi {
-  status: string;
-  data: User;
-  message: string;
+	status: string
+	data: User
+	message: string
 }

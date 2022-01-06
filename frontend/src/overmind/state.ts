@@ -2,8 +2,8 @@ import { derived } from 'overmind'
 import { State } from './interfaces'
 
 export const state: State = {
-	isLoggedIn: false,
 	user: null,
+	isLoggedIn: false,
 	authorsApi: null,
 	allAuthors: derived((state: State) =>
 		state.authorsApi

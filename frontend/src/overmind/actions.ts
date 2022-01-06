@@ -6,7 +6,7 @@ interface LoginCredentials {
 }
 
 export const loginUser = async (
-	{ actions, effects, state }: Context,
+	{ effects, state }: Context,
 	{ email, password }: LoginCredentials
 ) => {
 	const user = await effects.api.getUser(email, password)
@@ -15,8 +15,6 @@ export const loginUser = async (
 		state.user = user.data
 		state.appErrors.loginForm = ''
 		localStorage.setItem('token', 'access_token')
-		await actions.fetchAllBooks()
-		await actions.fetchAllAuthors()
 	} else {
 		state.appErrors.loginForm = user.message
 	}
@@ -26,8 +24,6 @@ export const logoutUser = ({ state }: Context) => {
 	localStorage.removeItem('token')
 	state.isLoggedIn = false
 	state.user = null
-	state.authorsApi = null
-	state.booksApi = null
 }
 
 export const onInitializeOvermind = ({ state }: Context) => {
