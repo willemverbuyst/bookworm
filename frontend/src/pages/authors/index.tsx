@@ -1,11 +1,12 @@
 import { Box } from '@mui/material'
-import React, { ReactElement } from 'react'
-import { useAppState } from '../../overmind'
+import React, { ReactElement, useEffect } from 'react'
+import { useActions, useAppState } from '../../overmind'
 import BasicTabs from '../../components/BasicTabs'
 import TableForOverview from '../../components/Table'
 import BarChartForStatistics from '../../components/Charts/BarChart'
 
 const Authors: React.FC = (): ReactElement => {
+	const { fetchAllAuthors } = useActions()
 	const { allAuthors, authorForStatistics, isLoggedIn } = useAppState()
 
 	const columns = [
@@ -13,34 +14,44 @@ const Authors: React.FC = (): ReactElement => {
 		{ field: 'books_written', headerName: 'books written', width: 150 },
 	]
 
-	return (
-		<>
-			<BasicTabs
-				overview={
-					<Box>
-						<h1 className="title">Authors</h1>
-						{allAuthors && isLoggedIn ? (
-							<TableForOverview rows={allAuthors} columns={columns} />
-						) : (
-							<p>No Authors</p>
-						)}
-					</Box>
-				}
-				statistics={
-					<Box>
-						<h1 className="title">Authors</h1>
-						{authorForStatistics && isLoggedIn ? (
-							<BarChartForStatistics
-								data={authorForStatistics}
-								dataKey="books_written"
-							/>
-						) : (
-							<p>No Authors</p>
-						)}
-					</Box>
-				}
-			/>
-		</>
+	useEffect(() => {
+		let abortController = new AbortController()
+		if (!allAuthors && isLoggedIn) {
+			fetchAllAuthors()
+		}
+		return () => {
+			abortController.abort()
+		}
+	})
+
+	return isLoggedIn ? (
+		<BasicTabs
+			overview={
+				<Box>
+					<h1 className="title">Authors</h1>
+					{allAuthors ? (
+						<TableForOverview rows={allAuthors} columns={columns} />
+					) : (
+						<p>No Authors</p>
+					)}
+				</Box>
+			}
+			statistics={
+				<Box>
+					<h1 className="title">Authors</h1>
+					{authorForStatistics ? (
+						<BarChartForStatistics
+							data={authorForStatistics}
+							dataKey="books_written"
+						/>
+					) : (
+						<p>No Authors</p>
+					)}
+				</Box>
+			}
+		/>
+	) : (
+		<p>you are not logged in</p>
 	)
 }
 

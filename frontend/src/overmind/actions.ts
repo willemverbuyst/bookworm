@@ -24,6 +24,8 @@ export const logoutUser = ({ state }: Context) => {
 	localStorage.removeItem('token')
 	state.isLoggedIn = false
 	state.user = null
+	state.authorsApi = null
+	state.booksApi = null
 }
 
 export const onInitializeOvermind = ({ state }: Context) => {
