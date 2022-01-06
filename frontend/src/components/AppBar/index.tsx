@@ -4,19 +4,19 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import { useActions, useAppState } from '../overmind'
 import { useNavigate } from 'react-router-dom'
+import { useAppState, useActions } from '../../overmind'
 
 const ButtonAppBar: React.FC = (): ReactElement => {
 	const navigate = useNavigate()
 	const { isLoggedIn } = useAppState()
 	const { logoutUser } = useActions()
-
+	const gotoLogin = () => navigate('/login')
+	const pages = ['books', 'authors', 'feedback']
+	const goto = (page: string) => navigate(`/${page}`)
 	const logOut = () => {
 		logoutUser()
 	}
-
-	const gotoLogin = () => navigate('/login')
 
 	const displayButton = (): ReactElement =>
 		isLoggedIn ? (
@@ -28,10 +28,6 @@ const ButtonAppBar: React.FC = (): ReactElement => {
 				log in
 			</Button>
 		)
-
-	const pages = ['books', 'authors', 'feedback']
-
-	const goto = (page: string) => navigate(`/${page}`)
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
@@ -56,7 +52,6 @@ const ButtonAppBar: React.FC = (): ReactElement => {
 							</Button>
 						))}
 					</Box>
-
 					{displayButton()}
 				</Toolbar>
 			</AppBar>
