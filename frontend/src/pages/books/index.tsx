@@ -4,13 +4,8 @@ import TableForOverview from '../../components/Table'
 import { useActions, useAppState } from '../../overmind'
 import BasicTabs from '../../components/BasicTabs'
 import BookPieChart from '../../components/PieChart'
-import {
-	IonContent,
-	IonPage,
-	IonText,
-	IonTitle,
-	IonToolbar,
-} from '@ionic/react'
+import { IonContent, IonPage, IonText } from '@ionic/react'
+import ToolBar from '../../components/ToolBar'
 
 const Books: React.FC = (): ReactElement => {
 	const { fetchAllBooks } = useActions()
@@ -32,9 +27,7 @@ const Books: React.FC = (): ReactElement => {
 
 	return (
 		<IonPage>
-			<IonToolbar>
-				<IonTitle>Books</IonTitle>
-			</IonToolbar>
+			<ToolBar title="Books" />
 			<IonContent>
 				{isLoggedIn ? (
 					<BasicTabs

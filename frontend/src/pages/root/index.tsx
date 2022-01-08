@@ -1,18 +1,11 @@
-import {
-	IonContent,
-	IonPage,
-	IonText,
-	IonTitle,
-	IonToolbar,
-} from '@ionic/react'
+import { IonContent, IonPage, IonText } from '@ionic/react'
 import { ReactElement } from 'react'
+import ToolBar from '../../components/ToolBar'
 
 const Root: React.FC = (): ReactElement => {
 	return (
 		<IonPage>
-			<IonToolbar>
-				<IonTitle>Home</IonTitle>
-			</IonToolbar>
+			<ToolBar title="Home" />
 			<IonContent>
 				<IonText>
 					<h4>Welcome!</h4>

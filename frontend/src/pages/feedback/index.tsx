@@ -1,11 +1,6 @@
-import {
-	IonContent,
-	IonPage,
-	IonText,
-	IonTitle,
-	IonToolbar,
-} from '@ionic/react'
+import { IonContent, IonPage, IonText } from '@ionic/react'
 import React, { ReactElement } from 'react'
+import ToolBar from '../../components/ToolBar'
 import { useAppState } from '../../overmind'
 
 const Feedback: React.FC = (): ReactElement => {
@@ -13,9 +8,7 @@ const Feedback: React.FC = (): ReactElement => {
 
 	return (
 		<IonPage>
-			<IonToolbar>
-				<IonTitle>Feedback</IonTitle>
-			</IonToolbar>
+			<ToolBar title="Feedback" />
 			<IonContent>
 				{isLoggedIn ? (
 					<></>

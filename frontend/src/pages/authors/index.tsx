@@ -4,13 +4,8 @@ import { useActions, useAppState } from '../../overmind'
 import BasicTabs from '../../components/BasicTabs'
 import TableForOverview from '../../components/Table'
 import BarChartForStatistics from '../../components/Charts/BarChart'
-import {
-	IonPage,
-	IonToolbar,
-	IonTitle,
-	IonContent,
-	IonText,
-} from '@ionic/react'
+import { IonPage, IonContent, IonText } from '@ionic/react'
+import ToolBar from '../../components/ToolBar'
 
 const Authors: React.FC = (): ReactElement => {
 	const { fetchAllAuthors } = useActions()
@@ -29,9 +24,7 @@ const Authors: React.FC = (): ReactElement => {
 
 	return (
 		<IonPage>
-			<IonToolbar>
-				<IonTitle>Authors</IonTitle>
-			</IonToolbar>
+			<ToolBar title="Authors" />
 			<IonContent>
 				{isLoggedIn ? (
 					<BasicTabs
