@@ -1,19 +1,27 @@
 class PageNotFoundPage {
-  getTitle() {
-    return '.title';
-  }
+	getText() {
+		return 'ion-text'
+	}
 
-  getUnknownUrl() {
-    return '/unknown';
-  }
+	getTitle() {
+		return 'ion-title'
+	}
 
-  checkTitleIsVisible() {
-    cy.get(this.getTitle()).should('contain', '404');
-  }
+	getUnknownUrl() {
+		return '/unknown'
+	}
 
-  visitUnknownUrl() {
-    cy.visit(this.getUnknownUrl());
-  }
+	checkText() {
+		cy.get(this.getText()).should('contain', 'page not found')
+	}
+
+	checkTitleIsVisible() {
+		cy.get(this.getTitle()).should('contain', '404')
+	}
+
+	visitUnknownUrl() {
+		cy.visit(this.getUnknownUrl())
+	}
 }
 
-export default PageNotFoundPage;
+export default PageNotFoundPage
