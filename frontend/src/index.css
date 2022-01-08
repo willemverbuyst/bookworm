@@ -15,4 +15,5 @@ code {
 ion-toolbar {
 	--background: #000047;
 	--color: #fff;
+	--padding-end: 10px;
 }

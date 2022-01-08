@@ -4,7 +4,7 @@ import { Box, Button } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { useAppState, useActions } from '../../overmind'
 import { IonContent, IonPage, IonTitle, IonToolbar } from '@ionic/react'
-// import { useNavigate } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 type Inputs = {
 	email: string
@@ -12,7 +12,7 @@ type Inputs = {
 }
 
 const Login: React.FC = () => {
-	// const navigate = useNavigate()
+	const history = useHistory()
 	const { control, handleSubmit } = useForm<Inputs>()
 	const { loginUser } = useActions()
 	const { appErrors } = useAppState()
@@ -20,7 +20,7 @@ const Login: React.FC = () => {
 	const onSubmit: SubmitHandler<Inputs> = async data => {
 		await loginUser(data)
 		if (!appErrors.loginForm) {
-			// navigate('/books')
+			history.push('/books')
 		}
 	}
 

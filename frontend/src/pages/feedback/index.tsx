@@ -11,7 +11,9 @@ const Feedback: React.FC = (): ReactElement => {
 			<ToolBar title="Feedback" />
 			<IonContent>
 				{isLoggedIn ? (
-					<></>
+					<IonText>
+						<h4>Give some feedback</h4>
+					</IonText>
 				) : (
 					<IonText>
 						<h4>you are not logged in</h4>

@@ -30,7 +30,6 @@ const Authors: React.FC = (): ReactElement => {
 					<BasicTabs
 						overview={
 							<Box>
-								<h1 className="title">Authors</h1>
 								{allAuthors ? (
 									<TableForOverview rows={allAuthors} columns={columns} />
 								) : (
@@ -40,7 +39,6 @@ const Authors: React.FC = (): ReactElement => {
 						}
 						statistics={
 							<Box>
-								<h1 className="title">Authors</h1>
 								{authorForStatistics ? (
 									<BarChartForStatistics
 										data={authorForStatistics}
