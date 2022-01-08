@@ -1,30 +1,49 @@
-import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React from 'react'
+import {
+	IonApp,
+	IonLabel,
+	IonRouterOutlet,
+	IonTabBar,
+	IonTabButton,
+	IonTabs,
+	setupIonicReact,
+} from '@ionic/react'
+import { IonReactRouter } from '@ionic/react-router'
+import { Route } from 'react-router-dom'
 import Authors from './pages/authors'
 import Books from './pages/books'
-import Feedback from './pages/feedback'
 import Login from './pages/login'
 import Root from './pages/root'
-import PageNotFound from './pages/pageNotFound'
-import AppBar from './components/AppBar'
-import { ReactElement } from 'react'
+import '@ionic/react/css/ionic.bundle.css'
+import Feedback from './pages/feedback'
 
-const App: React.FC = (): ReactElement => {
-	return (
-		<div className="App">
-			<BrowserRouter>
-				<AppBar />
-				<Routes>
-					<Route path="/" element={<Root />} />
-					<Route path="/authors" element={<Authors />} />
-					<Route path="/books" element={<Books />} />
-					<Route path="/feedback" element={<Feedback />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="*" element={<PageNotFound />} />
-				</Routes>
-			</BrowserRouter>
-		</div>
-	)
-}
+setupIonicReact({})
+
+const App: React.FC = () => (
+	<IonApp>
+		<IonReactRouter>
+			<IonTabs>
+				<IonRouterOutlet>
+					<Route path="/home" component={Root} />
+					<Route path="/login" component={Login} />
+					<Route path="/books" component={Books} />
+					<Route path="/authors" component={Authors} />
+					<Route path="/feedback" component={Feedback} />
+				</IonRouterOutlet>
+				<IonTabBar slot="bottom">
+					<IonTabButton tab="books" href="/books">
+						<IonLabel>Books</IonLabel>
+					</IonTabButton>
+					<IonTabButton tab="authors" href="/authors">
+						<IonLabel>Authors</IonLabel>
+					</IonTabButton>
+					<IonTabButton tab="feedback" href="/feedback">
+						<IonLabel>Feedback</IonLabel>
+					</IonTabButton>
+				</IonTabBar>
+			</IonTabs>
+		</IonReactRouter>
+	</IonApp>
+)
 
 export default App
