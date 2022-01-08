@@ -1,7 +1,14 @@
+import { IonPage, IonTitle, IonToolbar } from '@ionic/react'
 import { ReactElement } from 'react'
 
 const Root: React.FC = (): ReactElement => {
-	return <h1 className="title">Home</h1>
+	return (
+		<IonPage>
+			<IonToolbar>
+				<IonTitle>Home</IonTitle>
+			</IonToolbar>
+		</IonPage>
+	)
 }
 
 export default Root
