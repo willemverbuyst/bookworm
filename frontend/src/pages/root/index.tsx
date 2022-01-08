@@ -1,4 +1,10 @@
-import { IonPage, IonTitle, IonToolbar } from '@ionic/react'
+import {
+	IonContent,
+	IonPage,
+	IonText,
+	IonTitle,
+	IonToolbar,
+} from '@ionic/react'
 import { ReactElement } from 'react'
 
 const Root: React.FC = (): ReactElement => {
@@ -7,6 +13,11 @@ const Root: React.FC = (): ReactElement => {
 			<IonToolbar>
 				<IonTitle>Home</IonTitle>
 			</IonToolbar>
+			<IonContent>
+				<IonText>
+					<h4>Welcome!</h4>
+				</IonText>
+			</IonContent>
 		</IonPage>
 	)
 }

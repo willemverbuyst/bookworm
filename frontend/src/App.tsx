@@ -9,7 +9,7 @@ import {
 	setupIonicReact,
 } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
-import { Route } from 'react-router-dom'
+import { Redirect, Route } from 'react-router-dom'
 import Authors from './pages/authors'
 import Books from './pages/books'
 import Login from './pages/login'
@@ -24,13 +24,17 @@ const App: React.FC = () => (
 		<IonReactRouter>
 			<IonTabs>
 				<IonRouterOutlet>
-					<Route path="/home" component={Root} />
-					<Route path="/login" component={Login} />
-					<Route path="/books" component={Books} />
-					<Route path="/authors" component={Authors} />
-					<Route path="/feedback" component={Feedback} />
+					<Route path="/home" component={Root} exact={true} />
+					<Route path="/login" component={Login} exact={true} />
+					<Route path="/books" component={Books} exact={true} />
+					<Route path="/authors" component={Authors} exact={true} />
+					<Route path="/feedback" component={Feedback} exact={true} />
+					<Redirect exact from="/" to="/home" />
 				</IonRouterOutlet>
 				<IonTabBar slot="bottom">
+					<IonTabButton tab="home" href="/home">
+						<IonLabel>Home</IonLabel>
+					</IonTabButton>
 					<IonTabButton tab="books" href="/books">
 						<IonLabel>Books</IonLabel>
 					</IonTabButton>
