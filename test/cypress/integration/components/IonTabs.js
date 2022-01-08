@@ -11,6 +11,10 @@ class IonTabs {
 		return '#tab-button-feedback'
 	}
 
+	getHomeTab() {
+		return '#tab-button-home'
+	}
+
 	clickAuthorsTab() {
 		cy.get(this.getAuthorsTab()).click()
 	}
@@ -21,6 +25,10 @@ class IonTabs {
 
 	clickFeedbackTab() {
 		cy.get(this.getFeedbackTab()).click()
+	}
+
+	clickHomeTab() {
+		cy.get(this.getHomeTab()).click()
 	}
 }
 
