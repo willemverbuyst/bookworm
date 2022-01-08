@@ -3,7 +3,7 @@ import React, { ReactElement, useEffect } from 'react'
 import TableForOverview from '../../components/Table'
 import { useActions, useAppState } from '../../overmind'
 import BasicTabs from '../../components/BasicTabs'
-import BookPieChart from '../../components/PieChart'
+import BookPieChart from '../../components/Charts/PieChart'
 import { IonContent, IonPage, IonText } from '@ionic/react'
 import ToolBar from '../../components/ToolBar'
 
