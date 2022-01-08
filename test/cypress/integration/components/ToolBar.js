@@ -8,11 +8,11 @@ class ToolBar {
 	}
 
 	clickLogInButton() {
-		cy.contains(this.getLogInButton()).click()
+		cy.get('ion-button').contains(this.getLogInButton()).click()
 	}
 
 	clickLogOutButton() {
-		cy.contains(this.getLogOutButton()).click()
+		cy.get('ion-button').contains(this.getLogOutButton()).click()
 	}
 }
 

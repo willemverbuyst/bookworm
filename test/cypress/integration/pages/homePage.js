@@ -1,4 +1,8 @@
 class HomePage {
+	getLoginLink() {
+		return 'Login'
+	}
+
 	getTitle() {
 		return 'ion-title'
 	}
@@ -17,6 +21,10 @@ class HomePage {
 
 	checkUrl() {
 		cy.url().should('include', '/home')
+	}
+
+	clickLoginLink() {
+		cy.get('a').contains(this.getLoginLink()).click()
 	}
 }
 

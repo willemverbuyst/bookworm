@@ -5,12 +5,12 @@ import LoginPage from '../integration/pages/loginPage'
 Cypress.Commands.add('bookwormLogin', function (email, password) {
 	const homePage = new HomePage()
 	const loginPage = new LoginPage()
-	const toolBar = new ToolBar()
+	const toolbar = new ToolBar()
 
 	cy.visit('/')
 	cy.clearLocalStorage('token')
 	homePage.checkTitleIsVisible()
-	toolBar.clickLogInButton()
+	toolbar.clickLogInButton()
 	loginPage.checkUrl()
 	loginPage.checkTitleIsVisible()
 	loginPage.enterEmail(email)
