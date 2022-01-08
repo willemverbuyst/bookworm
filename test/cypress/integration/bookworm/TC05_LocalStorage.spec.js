@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-import AppBar from '../components/appBar'
 import BooksPage from '../pages/booksPage'
 
 describe('Remove token from local storage', function () {
