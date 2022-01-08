@@ -13,19 +13,27 @@ describe('Using IonTabs', function () {
 	const feedbackPage = new FeedbackPage()
 	const homePage = new HomePage()
 
-	it('should navigate successfully', function () {
+	it('should navigate successfully to  the author page', function () {
 		cy.visit('/')
+
 		ionTabs.clickAuthorsTab()
 		authorsPage.checkUrl()
 		authorsPage.checkTitleIsVisible()
+		authorsPage.checkYouAreNotLoggedIn()
+
 		ionTabs.clickBooksTab()
 		booksPage.checkUrl()
 		booksPage.checkTitleIsVisible()
+		booksPage.checkYouAreNotLoggedIn()
+
 		ionTabs.clickFeedbackTab()
 		feedbackPage.checkUrl()
 		feedbackPage.checkTitleIsVisible()
+		feedbackPage.checkYouAreNotLoggedIn
+
 		ionTabs.clickHomeTab()
 		homePage.checkUrl()
 		homePage.checkTitleIsVisible()
+		homePage.checkWelcomeText()
 	})
 })
