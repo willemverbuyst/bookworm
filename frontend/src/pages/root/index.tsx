@@ -5,7 +5,7 @@ import ToolBar from '../../components/ToolBar'
 const Root: React.FC = (): ReactElement => {
 	return (
 		<IonPage>
-			<ToolBar title="Home" />
+			<ToolBar title="Home" showLoginBtn={true} />
 			<IonContent>
 				<IonText>
 					<h4>Welcome!</h4>

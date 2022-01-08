@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField'
 import { useAppState, useActions } from '../../overmind'
 import { IonContent, IonPage, IonTitle, IonToolbar } from '@ionic/react'
 import { useHistory } from 'react-router-dom'
+import ToolBar from '../../components/ToolBar'
 
 type Inputs = {
 	email: string
@@ -30,9 +31,7 @@ const Login: React.FC = () => {
 
 	return (
 		<IonPage>
-			<IonToolbar>
-				<IonTitle>Login</IonTitle>
-			</IonToolbar>
+			<ToolBar title="Login" showLoginBtn={false} />
 			<IonContent>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Box

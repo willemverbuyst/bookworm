@@ -5,9 +5,13 @@ import { useAppState, useActions } from '../../overmind'
 
 interface IProps {
 	title: string
+	showLoginBtn: boolean
 }
 
-const ToolBar: React.FC<IProps> = ({ title }: IProps): ReactElement => {
+const ToolBar: React.FC<IProps> = ({
+	title,
+	showLoginBtn,
+}: IProps): ReactElement => {
 	const history = useHistory()
 	const { isLoggedIn } = useAppState()
 	const { logoutUser } = useActions()
@@ -31,7 +35,7 @@ const ToolBar: React.FC<IProps> = ({ title }: IProps): ReactElement => {
 	return (
 		<IonToolbar>
 			<IonTitle>{title}</IonTitle>
-			{displayButton()}
+			{showLoginBtn ? displayButton() : null}
 		</IonToolbar>
 	)
 }

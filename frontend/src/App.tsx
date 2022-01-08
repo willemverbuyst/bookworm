@@ -25,12 +25,12 @@ const App: React.FC = () => (
 		<IonReactRouter>
 			<IonTabs>
 				<IonRouterOutlet>
-					<Redirect exact path="/" to="/home" />
 					<Route exact path="/home" component={Root} />
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/books" component={Books} />
 					<Route exact path="/authors" component={Authors} />
 					<Route exact path="/feedback" component={Feedback} />
+					<Redirect exact path="/" to="/home" />
 					<Route component={PageNotFound} />
 				</IonRouterOutlet>
 				<IonTabBar slot="bottom">

@@ -27,7 +27,7 @@ const Books: React.FC = (): ReactElement => {
 
 	return (
 		<IonPage>
-			<ToolBar title="Books" />
+			<ToolBar title="Books" showLoginBtn={true} />
 			<IonContent>
 				{isLoggedIn ? (
 					<BasicTabs

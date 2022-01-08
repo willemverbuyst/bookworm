@@ -24,7 +24,7 @@ const Authors: React.FC = (): ReactElement => {
 
 	return (
 		<IonPage>
-			<ToolBar title="Authors" />
+			<ToolBar title="Authors" showLoginBtn={true} />
 			<IonContent>
 				{isLoggedIn ? (
 					<BasicTabs
