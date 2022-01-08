@@ -13,7 +13,7 @@ describe('Using IonTabs', function () {
 	const feedbackPage = new FeedbackPage()
 	const homePage = new HomePage()
 
-	it('should navigate successfully to  the author page', function () {
+	it('should navigate successfully', function () {
 		cy.visit('/')
 
 		ionTabs.clickAuthorsTab()
