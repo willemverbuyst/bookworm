@@ -16,6 +16,7 @@ import Login from './pages/login'
 import Root from './pages/root'
 import '@ionic/react/css/ionic.bundle.css'
 import Feedback from './pages/feedback'
+import PageNotFound from './pages/pageNotFound'
 
 setupIonicReact({})
 
@@ -24,12 +25,13 @@ const App: React.FC = () => (
 		<IonReactRouter>
 			<IonTabs>
 				<IonRouterOutlet>
-					<Route path="/home" component={Root} exact={true} />
-					<Route path="/login" component={Login} exact={true} />
-					<Route path="/books" component={Books} exact={true} />
-					<Route path="/authors" component={Authors} exact={true} />
-					<Route path="/feedback" component={Feedback} exact={true} />
-					<Redirect exact from="/" to="/home" />
+					<Redirect exact path="/" to="/home" />
+					<Route exact path="/home" component={Root} />
+					<Route exact path="/login" component={Login} />
+					<Route exact path="/books" component={Books} />
+					<Route exact path="/authors" component={Authors} />
+					<Route exact path="/feedback" component={Feedback} />
+					<Route component={PageNotFound} />
 				</IonRouterOutlet>
 				<IonTabBar slot="bottom">
 					<IonTabButton tab="home" href="/home">
