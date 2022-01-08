@@ -3,7 +3,7 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import { Box, Button } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { useAppState, useActions } from '../../overmind'
-import { IonContent, IonPage, IonTitle, IonToolbar } from '@ionic/react'
+import { IonContent, IonPage } from '@ionic/react'
 import { useHistory } from 'react-router-dom'
 import ToolBar from '../../components/ToolBar'
 
@@ -21,7 +21,7 @@ const Login: React.FC = () => {
 	const onSubmit: SubmitHandler<Inputs> = async data => {
 		await loginUser(data)
 		if (!appErrors.loginForm) {
-			history.push('/books')
+			history.push('/home')
 		}
 	}
 

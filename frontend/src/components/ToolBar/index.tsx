@@ -16,25 +16,22 @@ const ToolBar: React.FC<IProps> = ({
 	const { isLoggedIn } = useAppState()
 	const { logoutUser } = useActions()
 	const gotoLogin = () => history.push('/login')
-	const logOut = () => {
-		logoutUser()
-		history.push('/home')
-	}
+	const logOut = () => logoutUser()
 
 	const displayButton = (): ReactElement =>
 		isLoggedIn ? (
-			<IonButton slot="end" onClick={logOut}>
-				log out
+			<IonButton fill="clear" slot="end" onClick={logOut}>
+				LOG OUT
 			</IonButton>
 		) : (
-			<IonButton slot="end" onClick={gotoLogin}>
-				log in
+			<IonButton fill="clear" slot="end" onClick={gotoLogin}>
+				LOG IN
 			</IonButton>
 		)
 
 	return (
 		<IonToolbar>
-			<IonTitle>{title}</IonTitle>
+			<IonTitle>BOOKWORM</IonTitle>
 			{showLoginBtn ? displayButton() : null}
 		</IonToolbar>
 	)
