@@ -12,7 +12,7 @@ class FeedbackPage {
 	}
 
 	checkTitleIsVisible() {
-		cy.get(this.getTitle()).should('contain', 'Feedback')
+		cy.get(this.getTitle()).should('contain', 'BOOKWORM Feedback')
 	}
 
 	checkUrl() {

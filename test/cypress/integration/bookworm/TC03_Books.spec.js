@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import AppBar from '../components/appBar'
+import AppBar from '../components/ToolBar'
 import BooksPage from '../pages/booksPage'
 
 describe('BooksPage with mock', function () {

@@ -1,10 +1,10 @@
-class AppBar {
+class ToolBar {
 	getLogInButton() {
-		return 'log in'
+		return 'LOG IN'
 	}
 
 	getLogOutButton() {
-		return 'log out'
+		return 'LOG OUT'
 	}
 
 	clickLogInButton() {
@@ -16,4 +16,4 @@ class AppBar {
 	}
 }
 
-export default AppBar
+export default ToolBar

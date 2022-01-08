@@ -16,7 +16,7 @@ class PageNotFoundPage {
 	}
 
 	checkTitleIsVisible() {
-		cy.get(this.getTitle()).should('contain', '404')
+		cy.get(this.getTitle()).should('contain', 'BOOKWORM 404')
 	}
 
 	visitUnknownUrl() {

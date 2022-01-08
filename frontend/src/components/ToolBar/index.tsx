@@ -31,7 +31,7 @@ const ToolBar: React.FC<IProps> = ({
 
 	return (
 		<IonToolbar>
-			<IonTitle>BOOKWORM</IonTitle>
+			<IonTitle>{`BOOKWORM ${title}`}</IonTitle>
 			{showLoginBtn ? displayButton() : null}
 		</IonToolbar>
 	)

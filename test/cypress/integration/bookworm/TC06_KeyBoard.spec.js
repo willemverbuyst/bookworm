@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import AppBar from '../components/appBar'
+import AppBar from '../components/ToolBar'
 import BooksPage from '../pages/booksPage'
 import HomePage from '../pages/homePage'
 import LoginPage from '../pages/loginPage'

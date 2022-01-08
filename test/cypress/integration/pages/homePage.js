@@ -8,7 +8,7 @@ class HomePage {
 	}
 
 	checkTitleIsVisible() {
-		cy.get(this.getTitle()).should('contain', 'Home')
+		cy.get(this.getTitle()).should('contain', 'BOOKWORM Home')
 	}
 
 	checkWelcomeText() {

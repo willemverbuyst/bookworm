@@ -12,7 +12,7 @@ class AuthorsPage {
 	}
 
 	checkTitleIsVisible() {
-		cy.get(this.getTitle()).should('contain', 'Authors')
+		cy.get(this.getTitle()).should('contain', 'BOOKWORM Authors')
 	}
 
 	checkUrl() {

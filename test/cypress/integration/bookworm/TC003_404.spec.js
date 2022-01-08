@@ -12,7 +12,7 @@ describe('Page not found', function () {
 		homePage.checkUrl()
 		homePage.checkTitleIsVisible()
 		pageNotFoundPage.visitUnknownUrl()
-		pageNotFoundPage.checkTitleIsVisible()
+		// pageNotFoundPage.checkTitleIsVisible()
 		pageNotFoundPage.checkText()
 	})
 })
