@@ -4,6 +4,13 @@ import { useActions, useAppState } from '../../overmind'
 import BasicTabs from '../../components/BasicTabs'
 import TableForOverview from '../../components/Table'
 import BarChartForStatistics from '../../components/Charts/BarChart'
+import {
+	IonPage,
+	IonToolbar,
+	IonTitle,
+	IonContent,
+	IonText,
+} from '@ionic/react'
 
 const Authors: React.FC = (): ReactElement => {
 	const { fetchAllAuthors } = useActions()
@@ -20,34 +27,45 @@ const Authors: React.FC = (): ReactElement => {
 		}
 	}, [allAuthors, authorForStatistics, isLoggedIn, fetchAllAuthors])
 
-	return isLoggedIn ? (
-		<BasicTabs
-			overview={
-				<Box>
-					<h1 className="title">Authors</h1>
-					{allAuthors ? (
-						<TableForOverview rows={allAuthors} columns={columns} />
-					) : (
-						<p>No Authors</p>
-					)}
-				</Box>
-			}
-			statistics={
-				<Box>
-					<h1 className="title">Authors</h1>
-					{authorForStatistics ? (
-						<BarChartForStatistics
-							data={authorForStatistics}
-							dataKey="books_written"
-						/>
-					) : (
-						<p>No Authors</p>
-					)}
-				</Box>
-			}
-		/>
-	) : (
-		<p>you are not logged in</p>
+	return (
+		<IonPage>
+			<IonToolbar>
+				<IonTitle>Authors</IonTitle>
+			</IonToolbar>
+			<IonContent>
+				{isLoggedIn ? (
+					<BasicTabs
+						overview={
+							<Box>
+								<h1 className="title">Authors</h1>
+								{allAuthors ? (
+									<TableForOverview rows={allAuthors} columns={columns} />
+								) : (
+									<p>No Authors</p>
+								)}
+							</Box>
+						}
+						statistics={
+							<Box>
+								<h1 className="title">Authors</h1>
+								{authorForStatistics ? (
+									<BarChartForStatistics
+										data={authorForStatistics}
+										dataKey="books_written"
+									/>
+								) : (
+									<p>No Authors</p>
+								)}
+							</Box>
+						}
+					/>
+				) : (
+					<IonText>
+						<h4>you are not logged in</h4>
+					</IonText>
+				)}
+			</IonContent>
+		</IonPage>
 	)
 }
 
