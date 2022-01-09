@@ -1,15 +1,18 @@
 {
-  "baseUrl": "http://localhost:3000",
-  "video": false,
-  "reporter": "cypress-multi-reporters",
-  "reporterOptions": {
-    "reporterEnabled": "mochawesome",
-    "mochawesomeReporterOptions": {
-      "reportDir": "cypress/reports/mocha",
-      "quite": true,
-      "overwrite": false,
-      "html": false,
-      "json": true
-    }
-  }
+	"baseUrl": "http://localhost:3000",
+	"video": false,
+	"defaultCommandTimeout": 5000,
+	"pageLoadTimeout": 10000,
+	"waitForAnimations": true,
+	"reporter": "cypress-multi-reporters",
+	"reporterOptions": {
+		"reporterEnabled": "mochawesome",
+		"mochawesomeReporterOptions": {
+			"reportDir": "cypress/reports/mocha",
+			"quite": true,
+			"overwrite": false,
+			"html": false,
+			"json": true
+		}
+	}
 }
