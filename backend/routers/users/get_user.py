@@ -11,7 +11,7 @@ get_user_router = APIRouter()
 def get_specific_user():
     try:
         user = get_user_from_db()
-        
+
         return {
             "status": "success",
             "data": user,

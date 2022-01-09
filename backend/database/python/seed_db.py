@@ -11,14 +11,20 @@ insert_authors_sql = os.path.join(dirname, "../sql/author/insert_authors.sql")
 insert_books_sql = os.path.join(dirname, "../sql/book/insert_books.sql")
 insert_users_sql = os.path.join(dirname, "../sql/user/insert_users.sql")
 
+DATABASE = os.environ.get("DATABASE")
+DATABASE_USER = os.environ.get("DATABASE_USER")
+DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
+DATABASE_HOST = os.environ.get("DATABASE_HOST")
+DATABASE_PORT = os.environ.get("DATABASE_PORT")
+
 
 def seed_db():
     conn = psycopg2.connect(
-        database="postgres",
-        user="dbuser",
-        password="admin2021",
-        host="database",
-        port="5432",
+        database=DATABASE,
+        user=DATABASE_USER,
+        password=DATABASE_PASSWORD,
+        host=DATABASE_HOST,
+        port=DATABASE_PORT,
     )
 
     cursor = conn.cursor()

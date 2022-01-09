@@ -10,6 +10,7 @@ def format_authors(author_data):
 
     return authors
 
+
 def format_books(book_data):
     books = []
     for row in book_data:
@@ -34,4 +35,3 @@ def format_user(user_data):
     }
 
     return user
-
