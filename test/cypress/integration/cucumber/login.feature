@@ -1,4 +1,4 @@
-Feature: Login to application
+Feature: Login
 
   As a valid user
   I want to log in to the application

@@ -1,4 +1,4 @@
-Feature: Navigate the application
+Feature: Navigation
 
   As a user
   I want to use the tabs at the bottom to navigate
