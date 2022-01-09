@@ -12,7 +12,10 @@ class ToolBar {
 	}
 
 	clickLogOutButton() {
-		cy.get('ion-button').contains(this.getLogOutButton()).click()
+		cy.get('ion-button').should(e => {
+			const [dom] = e.get()
+			dom.shadowRoot.querySelector('button').click()
+		})
 	}
 }
 

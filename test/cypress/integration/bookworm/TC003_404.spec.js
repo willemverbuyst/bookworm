@@ -8,7 +8,7 @@ describe('Page not found', function () {
 	const pageNotFoundPage = new PageNotFoundPage()
 
 	it('should display 404', function () {
-		cy.visit('/')
+		cy.visit('/home')
 		homePage.checkUrl()
 		homePage.checkTitleIsVisible()
 		pageNotFoundPage.visitUnknownUrl()
