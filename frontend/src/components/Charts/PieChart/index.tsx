@@ -19,7 +19,7 @@ const BookPieChart: React.FC<IProps> = ({
 	return (
 		<IonGrid>
 			<IonRow>
-				<IonCol className="align-text-center">
+				<IonCol className="ion-text-center">
 					<IonText>
 						<h3>Grouped by languages</h3>
 					</IonText>
