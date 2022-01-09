@@ -1,4 +1,11 @@
-import { IonContent, IonPage, IonText } from '@ionic/react'
+import {
+	IonCol,
+	IonContent,
+	IonGrid,
+	IonPage,
+	IonRow,
+	IonText,
+} from '@ionic/react'
 import { ReactElement } from 'react'
 import ToolBar from '../../components/ToolBar'
 
@@ -7,9 +14,15 @@ const PageNotFound: React.FC = (): ReactElement => {
 		<IonPage>
 			<ToolBar title="404" showLoginBtn={false} />
 			<IonContent>
-				<IonText>
-					<h4>page not found</h4>
-				</IonText>
+				<IonGrid>
+					<IonRow justify-content-center>
+						<IonCol class="ion-text-center">
+							<IonText>
+								<h4>page not found</h4>
+							</IonText>
+						</IonCol>
+					</IonRow>
+				</IonGrid>
 			</IonContent>
 		</IonPage>
 	)

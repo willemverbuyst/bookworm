@@ -4,7 +4,14 @@ import TableForOverview from '../../components/Table'
 import { useActions, useAppState } from '../../overmind'
 import BasicTabs from '../../components/BasicTabs'
 import BookPieChart from '../../components/Charts/PieChart'
-import { IonContent, IonPage, IonText } from '@ionic/react'
+import {
+	IonCol,
+	IonContent,
+	IonGrid,
+	IonPage,
+	IonRow,
+	IonText,
+} from '@ionic/react'
 import ToolBar from '../../components/ToolBar'
 
 const Books: React.FC = (): ReactElement => {
@@ -29,37 +36,43 @@ const Books: React.FC = (): ReactElement => {
 		<IonPage>
 			<ToolBar title="Books" showLoginBtn={true} />
 			<IonContent>
-				{isLoggedIn ? (
-					<BasicTabs
-						overview={
-							<Box>
-								{allBooks ? (
-									<TableForOverview rows={allBooks} columns={columns} />
-								) : (
-									<p>No books</p>
-								)}
-							</Box>
-						}
-						statistics={
-							<Box>
-								{booksGroupedByLanguage ? (
-									<BookPieChart
-										colors={colors}
-										data={booksGroupedByLanguage}
-										dataKey="number"
-										nameKey="language"
-									/>
-								) : (
-									<p>No books</p>
-								)}
-							</Box>
-						}
-					/>
-				) : (
-					<IonText>
-						<h4>you are not logged in</h4>
-					</IonText>
-				)}
+				<IonGrid>
+					{isLoggedIn ? (
+						<BasicTabs
+							overview={
+								<Box>
+									{allBooks ? (
+										<TableForOverview rows={allBooks} columns={columns} />
+									) : (
+										<p>No books</p>
+									)}
+								</Box>
+							}
+							statistics={
+								<Box>
+									{booksGroupedByLanguage ? (
+										<BookPieChart
+											colors={colors}
+											data={booksGroupedByLanguage}
+											dataKey="number"
+											nameKey="language"
+										/>
+									) : (
+										<p>No books</p>
+									)}
+								</Box>
+							}
+						/>
+					) : (
+						<IonRow justify-content-center>
+							<IonCol class="ion-text-center">
+								<IonText>
+									<h4>you are not logged in</h4>
+								</IonText>
+							</IonCol>
+						</IonRow>
+					)}
+				</IonGrid>
 			</IonContent>
 		</IonPage>
 	)

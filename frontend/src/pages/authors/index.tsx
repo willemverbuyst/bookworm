@@ -4,7 +4,14 @@ import { useActions, useAppState } from '../../overmind'
 import BasicTabs from '../../components/BasicTabs'
 import TableForOverview from '../../components/Table'
 import BarChartForStatistics from '../../components/Charts/BarChart'
-import { IonPage, IonContent, IonText } from '@ionic/react'
+import {
+	IonPage,
+	IonContent,
+	IonGrid,
+	IonText,
+	IonCol,
+	IonRow,
+} from '@ionic/react'
 import ToolBar from '../../components/ToolBar'
 
 const Authors: React.FC = (): ReactElement => {
@@ -26,35 +33,41 @@ const Authors: React.FC = (): ReactElement => {
 		<IonPage>
 			<ToolBar title="Authors" showLoginBtn={true} />
 			<IonContent>
-				{isLoggedIn ? (
-					<BasicTabs
-						overview={
-							<Box>
-								{allAuthors ? (
-									<TableForOverview rows={allAuthors} columns={columns} />
-								) : (
-									<p>No Authors</p>
-								)}
-							</Box>
-						}
-						statistics={
-							<Box>
-								{authorForStatistics ? (
-									<BarChartForStatistics
-										data={authorForStatistics}
-										dataKey="books_written"
-									/>
-								) : (
-									<p>No Authors</p>
-								)}
-							</Box>
-						}
-					/>
-				) : (
-					<IonText>
-						<h4>you are not logged in</h4>
-					</IonText>
-				)}
+				<IonGrid>
+					{isLoggedIn ? (
+						<BasicTabs
+							overview={
+								<Box>
+									{allAuthors ? (
+										<TableForOverview rows={allAuthors} columns={columns} />
+									) : (
+										<p>No Authors</p>
+									)}
+								</Box>
+							}
+							statistics={
+								<Box>
+									{authorForStatistics ? (
+										<BarChartForStatistics
+											data={authorForStatistics}
+											dataKey="books_written"
+										/>
+									) : (
+										<p>No Authors</p>
+									)}
+								</Box>
+							}
+						/>
+					) : (
+						<IonRow justify-content-center>
+							<IonCol class="ion-text-center">
+								<IonText>
+									<h4>you are not logged in</h4>
+								</IonText>
+							</IonCol>
+						</IonRow>
+					)}
+				</IonGrid>
 			</IonContent>
 		</IonPage>
 	)
