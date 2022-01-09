@@ -4,17 +4,27 @@ import IonTabs from '../components/IonTabs'
 import AuthorsPage from '../pages/authorsPage'
 
 describe('AuthorsPage with api', function () {
-	beforeEach(function () {
+	before(function () {
 		cy.fixture('bookworm').as('data')
 	})
 
+	before(function () {
+		cy.bookwormLogin(this.data.email, this.data.password)
+	})
+
 	const ionTabs = new IonTabs()
-	const auhtorsPage = new AuthorsPage()
+	const authorsPage = new AuthorsPage()
 
 	it('should display authors', function () {
-		cy.bookwormLogin(this.data.email, this.data.password)
 		ionTabs.clickAuthorsTab()
-		auhtorsPage.checkUrl()
-		auhtorsPage.checkTitleIsVisible()
+		authorsPage.checkUrl()
+		authorsPage.checkTitleIsVisible()
+	})
+
+	it('should have functional tabs', function () {
+		authorsPage.checkTabOverviewIsVisible()
+		authorsPage.checkTabStatisticsIsVisible()
+		authorsPage.clickTabStatitics()
+		authorsPage.clickTabOverview()
 	})
 })

@@ -1,4 +1,12 @@
 class AuthorsPage {
+	getTabOverview() {
+		return '#simple-tab-0'
+	}
+
+	getTabStatistics() {
+		return '#simple-tab-1'
+	}
+
 	getTitle() {
 		return 'ion-title'
 	}
@@ -11,6 +19,14 @@ class AuthorsPage {
 		return 'you are not logged in'
 	}
 
+	checkTabOverviewIsVisible() {
+		cy.get(this.getTabOverview()).should('be.visible')
+	}
+
+	checkTabStatisticsIsVisible() {
+		cy.get(this.getTabStatistics()).should('be.visible')
+	}
+
 	checkTitleIsVisible() {
 		cy.get(this.getTitle()).should('contain', 'BOOKWORM Authors')
 	}
@@ -21,6 +37,14 @@ class AuthorsPage {
 
 	checkYouAreNotLoggedIn() {
 		cy.contains(this.getYouAreNotLoggedIn())
+	}
+
+	clickTabOverview() {
+		cy.get(this.getTabOverview()).click()
+	}
+
+	clickTabStatitics() {
+		cy.get(this.getTabStatistics()).click()
 	}
 }
 
