@@ -9,6 +9,7 @@ A project to connect and try out some techniques in a docker environment.
 - Overmind
 - MUI
 - UseFormHook
+- Ionic
 
 ## Backend
 
