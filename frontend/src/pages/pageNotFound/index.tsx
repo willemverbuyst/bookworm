@@ -18,7 +18,7 @@ const PageNotFound: React.FC = (): ReactElement => {
 					<IonRow justify-content-center>
 						<IonCol class="ion-text-center">
 							<IonText>
-								<h4>page not found</h4>
+								<h3>page not found</h3>
 							</IonText>
 						</IonCol>
 					</IonRow>

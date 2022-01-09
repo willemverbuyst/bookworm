@@ -67,7 +67,7 @@ const Books: React.FC = (): ReactElement => {
 						<IonRow justify-content-center>
 							<IonCol class="ion-text-center">
 								<IonText>
-									<h4>you are not logged in</h4>
+									<h3>you are not logged in</h3>
 								</IonText>
 							</IonCol>
 						</IonRow>

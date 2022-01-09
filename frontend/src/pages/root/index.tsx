@@ -18,7 +18,7 @@ const Root: React.FC = (): ReactElement => {
 					<IonRow justify-content-center>
 						<IonCol class="ion-text-center">
 							<IonText>
-								<h4>Welcome!</h4>
+								<h3>Welcome!</h3>
 							</IonText>
 						</IonCol>
 					</IonRow>
