@@ -1,10 +1,10 @@
-class BooksPage {
+class AuthorsPage {
 	getTitle() {
 		return 'ion-title'
 	}
 
-	getNoBooks() {
-		return 'No books'
+	getNoAuthors() {
+		return 'No authors'
 	}
 
 	getYouAreNotLoggedIn() {
@@ -12,11 +12,11 @@ class BooksPage {
 	}
 
 	checkTitleIsVisible() {
-		cy.get(this.getTitle()).should('contain', 'BOOKWORM Books')
+		cy.get(this.getTitle()).should('contain', 'BOOKWORM Authors')
 	}
 
 	checkUrl() {
-		cy.url().should('include', '/books')
+		cy.url().should('include', '/authors')
 	}
 
 	checkYouAreNotLoggedIn() {
@@ -24,4 +24,4 @@ class BooksPage {
 	}
 }
 
-export default BooksPage
+export default AuthorsPage

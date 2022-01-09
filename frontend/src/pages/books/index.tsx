@@ -3,7 +3,9 @@ import React, { ReactElement, useEffect } from 'react'
 import TableForOverview from '../../components/Table'
 import { useActions, useAppState } from '../../overmind'
 import BasicTabs from '../../components/BasicTabs'
-import BookPieChart from '../../components/PieChart'
+import BookPieChart from '../../components/Charts/PieChart'
+import { IonContent, IonPage, IonText } from '@ionic/react'
+import ToolBar from '../../components/ToolBar'
 
 const Books: React.FC = (): ReactElement => {
 	const { fetchAllBooks } = useActions()
@@ -23,36 +25,43 @@ const Books: React.FC = (): ReactElement => {
 		}
 	}, [allBooks, booksGroupedByLanguage, isLoggedIn, fetchAllBooks])
 
-	return isLoggedIn ? (
-		<BasicTabs
-			overview={
-				<Box>
-					<h1 className="title">Books</h1>
-					{allBooks ? (
-						<TableForOverview rows={allBooks} columns={columns} />
-					) : (
-						<p>No books</p>
-					)}
-				</Box>
-			}
-			statistics={
-				<Box>
-					<h1 className="title">Books</h1>
-					{booksGroupedByLanguage ? (
-						<BookPieChart
-							colors={colors}
-							data={booksGroupedByLanguage}
-							dataKey="number"
-							nameKey="language"
-						/>
-					) : (
-						<p>No books</p>
-					)}
-				</Box>
-			}
-		/>
-	) : (
-		<p>you are not logged in</p>
+	return (
+		<IonPage>
+			<ToolBar title="Books" showLoginBtn={true} />
+			<IonContent>
+				{isLoggedIn ? (
+					<BasicTabs
+						overview={
+							<Box>
+								{allBooks ? (
+									<TableForOverview rows={allBooks} columns={columns} />
+								) : (
+									<p>No books</p>
+								)}
+							</Box>
+						}
+						statistics={
+							<Box>
+								{booksGroupedByLanguage ? (
+									<BookPieChart
+										colors={colors}
+										data={booksGroupedByLanguage}
+										dataKey="number"
+										nameKey="language"
+									/>
+								) : (
+									<p>No books</p>
+								)}
+							</Box>
+						}
+					/>
+				) : (
+					<IonText>
+						<h4>you are not logged in</h4>
+					</IonText>
+				)}
+			</IonContent>
+		</IonPage>
 	)
 }
 

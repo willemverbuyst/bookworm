@@ -16,11 +16,11 @@ class LoginPage {
 	}
 
 	getTitle() {
-		return '.title'
+		return 'ion-title'
 	}
 
 	checkTitleIsVisible() {
-		cy.get(this.getTitle()).should('contain', 'Login')
+		cy.get(this.getTitle()).should('contain', 'BOOKWORM Login')
 	}
 
 	checkUrl() {

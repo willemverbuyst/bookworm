@@ -1,17 +1,16 @@
-import AppBar from '../integration/components/appBar'
+import ToolBar from '../integration/components/ToolBar'
 import HomePage from '../integration/pages/homePage'
 import LoginPage from '../integration/pages/loginPage'
 
 Cypress.Commands.add('bookwormLogin', function (email, password) {
-	const appBar = new AppBar()
 	const homePage = new HomePage()
 	const loginPage = new LoginPage()
+	const toolbar = new ToolBar()
 
 	cy.visit('/')
 	cy.clearLocalStorage('token')
-	cy.title().should('contain', 'Bookworm')
 	homePage.checkTitleIsVisible()
-	appBar.clickLogInButton()
+	toolbar.clickLogInButton()
 	loginPage.checkUrl()
 	loginPage.checkTitleIsVisible()
 	loginPage.enterEmail(email)

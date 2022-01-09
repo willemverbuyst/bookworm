@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-import AppBar from '../components/appBar'
-import BooksPage from '../pages/booksPage'
+import ToolBar from '../components/ToolBar'
+import HomePage from '../pages/homePage'
 import LoginPage from '../pages/loginPage'
 
 describe('Login', function () {
@@ -9,16 +9,18 @@ describe('Login', function () {
 		cy.fixture('bookworm').as('data')
 	})
 
-	const appBar = new AppBar()
-	const booksPage = new BooksPage()
+	const homePage = new HomePage()
 	const loginPage = new LoginPage()
+	const toolBar = new ToolBar()
 
 	it('should login successfully with valid credentials', function () {
 		cy.bookwormLogin(this.data.email, this.data.password)
-		booksPage.checkUrl()
-		booksPage.checkTitleIsVisible()
-		appBar.clickLogOutButton()
-		booksPage.checkYouAreNotLoggedIn()
+		homePage.checkUrl()
+		homePage.checkTitleIsVisible()
+		toolBar.clickLogOutButton()
+		homePage.checkUrl()
+		homePage.checkTitleIsVisible()
+		homePage.checkWelcomeText()
 	})
 
 	it('should display error message with invalid credentials', function () {

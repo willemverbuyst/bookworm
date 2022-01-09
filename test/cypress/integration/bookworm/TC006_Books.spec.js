@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
-import AppBar from '../components/appBar'
+import IonTabs from '../components/IonTabs'
+import ToolBar from '../components/ToolBar'
 import BooksPage from '../pages/booksPage'
 
 describe('BooksPage with api', function () {
@@ -8,17 +9,19 @@ describe('BooksPage with api', function () {
 		cy.fixture('bookworm').as('data')
 	})
 
-	const appBar = new AppBar()
+	const ionTabs = new IonTabs()
 	const booksPage = new BooksPage()
+	const toolBar = new ToolBar()
 
 	it('should display books', function () {
 		cy.bookwormLogin(this.data.email, this.data.password)
+		ionTabs.clickBooksTab()
 		booksPage.checkUrl()
 		booksPage.checkTitleIsVisible()
 		cy.reload()
 		booksPage.checkUrl()
 		booksPage.checkTitleIsVisible()
-		appBar.clickLogOutButton()
+		toolBar.clickLogOutButton()
 		booksPage.checkYouAreNotLoggedIn()
 	})
 })

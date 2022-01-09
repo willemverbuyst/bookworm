@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import AppBar from '../components/appBar'
+import IonTabs from '../components/IonTabs'
 import BooksPage from '../pages/booksPage'
 
 describe('Remove token from local storage', function () {
@@ -9,9 +9,11 @@ describe('Remove token from local storage', function () {
 	})
 
 	const booksPage = new BooksPage()
+	const ionTabs = new IonTabs()
 
 	it('should show you are not logged in', function () {
 		cy.bookwormLogin(this.data.email, this.data.password)
+		ionTabs.clickBooksTab()
 		booksPage.checkUrl()
 		booksPage.checkTitleIsVisible()
 		cy.clearLocalStorage('token')
