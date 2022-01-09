@@ -14,5 +14,6 @@
 			"html": false,
 			"json": true
 		}
-	}
+	},
+	"testFiles": ["**/*.feature", "**/*.spec.js"]
 }
