@@ -35,10 +35,8 @@ services:
     image: 'postgres:13'
     ports:
       - 5432:5432
-    environment:
-      - POSTGRES_USER=dbuser
-      - POSTGRES_PASSWORD=admin2021
-      - POSTGRES_DB=bookworm
+    env_file:
+      - ./env/database.env
     networks:
       - bookworm-net
 networks:
