@@ -46,9 +46,9 @@ const BookPieChart: React.FC<IProps> = ({
 								fill="#0088FE"
 								label
 							>
-								{data.map((_entry, index) => (
+								{data.map((entry, index) => (
 									<Cell
-										key={`cell-${index}`}
+										key={`cell-${entry.text}`}
 										fill={colors[index % colors.length]}
 									/>
 								))}

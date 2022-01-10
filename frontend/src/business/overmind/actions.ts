@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { Context } from '.'
 
 interface LoginCredentials {

@@ -1,3 +1,4 @@
+import React, { ReactElement } from 'react'
 import {
 	IonCol,
 	IonContent,
@@ -6,7 +7,6 @@ import {
 	IonRow,
 	IonText,
 } from '@ionic/react'
-import { ReactElement } from 'react'
 import ToolBar from '../../components/ToolBar'
 import { useAppState } from '../../../business/overmind'
 
@@ -15,7 +15,7 @@ const Root: React.FC = (): ReactElement => {
 
 	return (
 		<IonPage>
-			<ToolBar title="Home" showLoginBtn={true} />
+			<ToolBar title="Home" showLoginBtn />
 			<IonContent>
 				<IonGrid>
 					{isLoggedIn ? (

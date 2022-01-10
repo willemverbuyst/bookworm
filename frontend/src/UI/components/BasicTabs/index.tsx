@@ -28,8 +28,16 @@ const BasicTabs: React.FC<IProps> = ({
 					onChange={handleChange}
 					aria-label="basic tabs example"
 				>
-					<Tab label="overview" {...a11yProps(0)} />
-					<Tab label="statistics" {...a11yProps(1)} />
+					<Tab
+						label="overview"
+						// eslint-disable-next-line react/jsx-props-no-spreading
+						{...a11yProps(0)}
+					/>
+					<Tab
+						label="statistics"
+						// eslint-disable-next-line react/jsx-props-no-spreading
+						{...a11yProps(1)}
+					/>
 				</Tabs>
 			</Box>
 			<TabPanel value={value} index={0}>

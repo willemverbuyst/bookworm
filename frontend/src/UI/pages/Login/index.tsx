@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import { Box, Button } from '@mui/material'
 import TextField from '@mui/material/TextField'
-import { useAppState, useActions } from '../../../business/overmind'
 import {
 	IonCol,
 	IonContent,
@@ -12,6 +11,7 @@ import {
 	IonText,
 } from '@ionic/react'
 import { useHistory } from 'react-router-dom'
+import { useAppState, useActions } from '../../../business/overmind'
 import ToolBar from '../../components/ToolBar'
 
 type Inputs = {
@@ -19,7 +19,7 @@ type Inputs = {
 	password: string
 }
 
-const Login: React.FC = () => {
+const Login: React.FC = (): ReactElement => {
 	const history = useHistory()
 	const { control, handleSubmit } = useForm<Inputs>()
 	const { loginUser } = useActions()
@@ -67,6 +67,7 @@ const Login: React.FC = () => {
 											defaultValue=""
 											render={({ field }) => (
 												<TextField
+													// eslint-disable-next-line react/jsx-props-no-spreading
 													{...field}
 													id="outlined-required"
 													label="email"
@@ -83,6 +84,7 @@ const Login: React.FC = () => {
 											defaultValue=""
 											render={({ field }) => (
 												<TextField
+													// eslint-disable-next-line react/jsx-props-no-spreading
 													{...field}
 													id="outlined-required"
 													label="password"

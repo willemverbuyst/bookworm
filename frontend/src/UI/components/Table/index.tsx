@@ -18,14 +18,14 @@ const TableForOverview: React.FC<IProps> = ({
 }: IProps): ReactElement => {
 	const [pageSize, setPageSize] = React.useState(10)
 
-	const width = columns.reduce((rv: number = 10, column): number => {
+	const width = columns.reduce((rv, column): number => {
 		return rv + (column.width ? column.width : 0)
 	}, 10)
 
 	return (
 		<Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
 			<div style={{ display: 'flex', height: '100%' }}>
-				<div style={{ height: 700, width: width }}>
+				<div style={{ height: 700, width }}>
 					<DataGrid
 						rows={rows}
 						columns={columns}

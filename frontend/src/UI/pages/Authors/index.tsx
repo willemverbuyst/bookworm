@@ -1,9 +1,5 @@
 import { Box } from '@mui/material'
 import React, { ReactElement, useEffect } from 'react'
-import { useActions, useAppState } from '../../../business/overmind'
-import BasicTabs from '../../components/BasicTabs'
-import TableForOverview from '../../components/Table'
-import BarChartForStatistics from '../../components/Charts/BarChart'
 import {
 	IonPage,
 	IonContent,
@@ -12,6 +8,10 @@ import {
 	IonCol,
 	IonRow,
 } from '@ionic/react'
+import { useActions, useAppState } from '../../../business/overmind'
+import BasicTabs from '../../components/BasicTabs'
+import TableForOverview from '../../components/Table'
+import BarChartForStatistics from '../../components/Charts/BarChart'
 import ToolBar from '../../components/ToolBar'
 
 const Authors: React.FC = (): ReactElement => {
@@ -31,7 +31,7 @@ const Authors: React.FC = (): ReactElement => {
 
 	return (
 		<IonPage>
-			<ToolBar title="Authors" showLoginBtn={true} />
+			<ToolBar title="Authors" showLoginBtn />
 			<IonContent>
 				<IonGrid>
 					{isLoggedIn ? (

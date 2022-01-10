@@ -15,7 +15,7 @@ const Feedback: React.FC = (): ReactElement => {
 
 	return (
 		<IonPage>
-			<ToolBar title="Feedback" showLoginBtn={true} />
+			<ToolBar title="Feedback" showLoginBtn />
 			<IonContent>
 				<IonGrid>
 					{isLoggedIn ? (

@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import App from './App'
 // import reportWebVitals from './reportWebVitals';
 import { createOvermind } from 'overmind'
 import { Provider } from 'overmind-react'
-import { config } from './business/overmind'
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline'
 import { ThemeProvider } from '@mui/material'
+import { config } from './business/overmind'
+import App from './App'
 import theme from './theme/colors'
 
 const overmind = createOvermind(config)

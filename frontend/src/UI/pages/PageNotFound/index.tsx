@@ -1,3 +1,4 @@
+import React, { ReactElement } from 'react'
 import {
 	IonCol,
 	IonContent,
@@ -6,7 +7,6 @@ import {
 	IonRow,
 	IonText,
 } from '@ionic/react'
-import { ReactElement } from 'react'
 import ToolBar from '../../components/ToolBar'
 
 const PageNotFound: React.FC = (): ReactElement => {

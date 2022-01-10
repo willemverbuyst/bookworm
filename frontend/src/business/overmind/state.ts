@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import { derived } from 'overmind'
 import { State } from './interfaces'
 
@@ -10,7 +11,7 @@ export const state: State = {
 			? Object.values([...state.authorsApi.data])
 					.map(author => ({ ...author }))
 					.sort((author1, author2) =>
-						('' + author1.name).localeCompare(author2.name)
+						`${author1.name}`.localeCompare(author2.name)
 					)
 			: null
 	),
@@ -28,9 +29,9 @@ export const state: State = {
 			? Object.values([...state.booksApi.data])
 					.map(book => ({
 						...book,
-						read: book.read === 1 ? true : false,
+						read: book.read === 1,
 					}))
-					.sort((book1, book2) => ('' + book1.title).localeCompare(book2.title))
+					.sort((book1, book2) => `${book1.title}`.localeCompare(book2.title))
 			: null
 	),
 	booksGroupedByLanguage: derived((state: State) =>
@@ -38,6 +39,7 @@ export const state: State = {
 			? Object.entries(
 					[...state.booksApi.data].reduce(
 						(rv: { [key: string]: number }, book) => {
+							// eslint-disable-next-line no-param-reassign
 							rv[book.language] = rv[book.language] + 1 || 1
 							return rv
 						},

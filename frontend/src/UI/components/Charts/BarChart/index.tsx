@@ -1,3 +1,4 @@
+import React from 'react'
 import { IonCol, IonGrid, IonRow, IonText } from '@ionic/react'
 import Box from '@mui/material/Box'
 import { Bar, BarChart } from 'recharts'
@@ -27,7 +28,7 @@ const BarChartForStatistics = ({ data, dataKey }: IProps) => {
 						}}
 					>
 						<BarChart width={600} height={400} data={data}>
-							<Bar dataKey={dataKey} fill="#FFBB28"></Bar>
+							<Bar dataKey={dataKey} fill="#FFBB28" />
 						</BarChart>
 					</Box>
 				</IonCol>
