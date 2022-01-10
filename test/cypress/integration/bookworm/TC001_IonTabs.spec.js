@@ -42,6 +42,6 @@ describe('Using IonTabs', function () {
 		ionTabs.clickHomeTab()
 		homePage.checkUrl()
 		homePage.checkTitleIsVisible()
-		homePage.checkWelcomeText()
+		homePage.checkYouAreNotLoggedIn()
 	})
 })

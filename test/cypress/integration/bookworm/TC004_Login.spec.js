@@ -20,7 +20,7 @@ describe('Login', function () {
 		toolBar.clickLogOutButton()
 		homePage.checkUrl()
 		homePage.checkTitleIsVisible()
-		homePage.checkWelcomeText()
+		homePage.checkYouAreNotLoggedIn()
 	})
 
 	it('should display error message with invalid credentials', function () {

@@ -11,16 +11,24 @@ class HomePage {
 		return 'ion-text'
 	}
 
+	getYouAreNotLoggedIn() {
+		return 'you are not logged in'
+	}
+
 	checkTitleIsVisible() {
 		cy.get(this.getTitle()).should('contain', 'BOOKWORM Home')
+	}
+
+	checkUrl() {
+		cy.url().should('include', '/home')
 	}
 
 	checkWelcomeText() {
 		cy.get(this.getWelcomeText()).should('contain', 'Welcome!')
 	}
 
-	checkUrl() {
-		cy.url().should('include', '/home')
+	checkYouAreNotLoggedIn() {
+		cy.contains(this.getYouAreNotLoggedIn())
 	}
 
 	clickLoginLink() {
