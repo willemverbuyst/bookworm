@@ -5,7 +5,7 @@ import App from './App'
 // import reportWebVitals from './reportWebVitals';
 import { createOvermind } from 'overmind'
 import { Provider } from 'overmind-react'
-import { config } from './overmind'
+import { config } from './business/overmind'
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline'
 import { ThemeProvider } from '@mui/material'
 import theme from './theme/colors'

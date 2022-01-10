@@ -10,13 +10,13 @@ import {
 } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
 import { Redirect, Route } from 'react-router-dom'
-import Authors from './pages/authors'
-import Books from './pages/books'
-import Login from './pages/login'
-import Root from './pages/root'
+import Authors from './UI/pages/Authors'
+import Books from './UI/pages/Books'
+import Feedback from './UI/pages/Feedback'
+import Login from './UI/pages/Login'
+import PageNotFound from './UI/pages/PageNotFound'
+import Root from './UI/pages/Root'
 import '@ionic/react/css/ionic.bundle.css'
-import Feedback from './pages/feedback'
-import PageNotFound from './pages/pageNotFound'
 
 setupIonicReact({})
 

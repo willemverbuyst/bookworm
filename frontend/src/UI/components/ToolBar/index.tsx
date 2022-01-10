@@ -1,7 +1,7 @@
 import { IonButton, IonTitle, IonToolbar } from '@ionic/react'
 import { ReactElement } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useAppState, useActions } from '../../overmind'
+import { useAppState, useActions } from '../../../business/overmind'
 
 interface IProps {
 	title: string

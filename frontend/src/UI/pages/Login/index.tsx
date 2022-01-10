@@ -2,7 +2,7 @@ import React from 'react'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import { Box, Button } from '@mui/material'
 import TextField from '@mui/material/TextField'
-import { useAppState, useActions } from '../../overmind'
+import { useAppState, useActions } from '../../../business/overmind'
 import {
 	IonCol,
 	IonContent,

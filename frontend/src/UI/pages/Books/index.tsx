@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import React, { ReactElement, useEffect } from 'react'
 import TableForOverview from '../../components/Table'
-import { useActions, useAppState } from '../../overmind'
+import { useActions, useAppState } from '../../../business/overmind'
 import BasicTabs from '../../components/BasicTabs'
 import BookPieChart from '../../components/Charts/PieChart'
 import {

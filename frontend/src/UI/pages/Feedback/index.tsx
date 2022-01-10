@@ -6,23 +6,23 @@ import {
 	IonRow,
 	IonText,
 } from '@ionic/react'
-import { ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import ToolBar from '../../components/ToolBar'
-import { useAppState } from '../../overmind'
+import { useAppState } from '../../../business/overmind'
 
-const Root: React.FC = (): ReactElement => {
+const Feedback: React.FC = (): ReactElement => {
 	const { isLoggedIn } = useAppState()
 
 	return (
 		<IonPage>
-			<ToolBar title="Home" showLoginBtn={true} />
+			<ToolBar title="Feedback" showLoginBtn={true} />
 			<IonContent>
 				<IonGrid>
 					{isLoggedIn ? (
-						<IonRow justify-content-center>
+						<IonRow>
 							<IonCol class="ion-text-center">
 								<IonText>
-									<h3>Welcome!</h3>
+									<h3>Give some feedback</h3>
 								</IonText>
 							</IonCol>
 						</IonRow>
@@ -41,4 +41,4 @@ const Root: React.FC = (): ReactElement => {
 	)
 }
 
-export default Root
+export default Feedback
