@@ -1,0 +1,116 @@
+# What is this?
+
+A project to connect and try out some techniques in a docker environment.
+
+## Frontend
+
+- TypeScript
+- React
+- Overmind
+- MUI
+- UseFormHook
+- Ionic
+
+## Backend
+
+- Python
+- Fastapi
+
+## Database
+
+- Postgres
+- SQL
+- Bash
+
+## Test
+
+- Cypress
+
+## Documentation for API
+
+Swagger docs at localhost:8000/docs
+
+# What is this not?
+
+Focussed on effeciency.
+Parts are hardcoded and some of the setup is pretty contrived.
+
+# Commands
+
+(re)build and start
+
+`docker-compose up --build`
+
+#
+
+start containers
+
+`docker-compose up`
+
+#
+
+start containers without logs
+
+`docker-compose up -d`
+
+#
+
+see logs for service
+
+`docker-compose logs <NAME OF SERVICE>`
+
+#
+
+start specific service
+
+`docker-compose up <NAME OF SERVICE>`
+
+#
+
+stop containers
+
+`docker-compose down`
+
+#
+
+seed database
+
+`docker-compose run backend bash`
+
+`cd database/bash`
+
+`bash set_up_db.sh`
+
+#
+
+format python
+
+`docker-compose run backend bash`
+
+`black .`
+
+#
+
+stop bash in terminal
+
+`exit`
+
+`docker-compose stop`
+
+#
+
+run cypress test
+
+`cd test`
+
+`npm run cy:open`
+
+`npm run cy:run`
+
+#
+
+create csv with dummy data
+
+`bash dummy_authors.sh`
+
+`bash dummy_books.sh`

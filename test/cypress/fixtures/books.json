@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "id": 1,
+      "title": "Fake Book 1",
+      "language": "EN",
+      "author": "B. Faker",
+      "year": 2000,
+      "read": false
+    },
+    {
+      "id": 2,
+      "title": "Fake Book 2",
+      "language": "ES",
+      "author": "F. Booker",
+      "year": 2001,
+      "read": true
+    }
+  ],
+  "message": "all books have been fetched"
+}
