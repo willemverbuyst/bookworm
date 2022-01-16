@@ -4,6 +4,8 @@ services:
     build:
       context: './backend'
       dockerfile: 'Dockerfile'
+    volumes:
+      - './backend:/scripts'
     stdin_open: true
     ports:
       - 8000:8000
@@ -13,19 +15,27 @@ services:
       - database
     networks:
       - bookworm-net
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
   frontend:
     build:
       context: './frontend'
       dockerfile: 'Dockerfile'
+      args:
+        - NODE_ENV=development
     ports:
       - 3000:3000
+    volumes:
+      - './frontend/src:/scripts/src'
     stdin_open: true
     tty: true
+    environment:
+      - NODE_ENV=development
     depends_on:
       - backend
       - database
     networks:
       - bookworm-net
+    command: npm run start
   database:
     image: 'postgres:13'
     ports:

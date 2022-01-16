@@ -47,6 +47,14 @@ start containers
 
 `docker-compose up`
 
+development
+
+`docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build`
+
+production
+
+`docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build`
+
 #
 
 start containers without logs
@@ -70,6 +78,10 @@ start specific service
 stop containers
 
 `docker-compose down`
+
+stop development container and remove volume
+
+`docker-compose -f docker-compose.yml -f docker-compose.dev.yml down -v`
 
 #
 
