@@ -47,19 +47,23 @@ start containers
 
 `docker-compose up`
 
+#
+
+start containers in detached mode
+
+`docker-compose up -d`
+
+#
+
 development
 
 `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build`
 
+#
+
 production
 
 `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build`
-
-#
-
-start containers without logs
-
-`docker-compose up -d`
 
 #
 
@@ -72,6 +76,12 @@ see logs for service
 start specific service
 
 `docker-compose up <NAME OF SERVICE>`
+
+#
+
+log into container
+
+`docker exec -it <NAME OF CONTAINER> bash`
 
 #
 
