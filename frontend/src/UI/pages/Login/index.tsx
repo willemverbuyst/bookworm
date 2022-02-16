@@ -4,6 +4,7 @@ import { Box, Button } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { useNavigate } from 'react-router-dom'
 import { useAppState, useActions } from '../../../business/overmind'
+import ToolBar from '../../components/ToolBar'
 
 type Inputs = {
 	email: string
@@ -36,7 +37,7 @@ const Login: React.FC = (): ReactElement => {
 
 	return (
 		<>
-			<h1>Bookworm login</h1>
+			<ToolBar />
 
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<Box
