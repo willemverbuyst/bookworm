@@ -4,14 +4,10 @@ import { useHistory } from 'react-router-dom'
 import { useAppState, useActions } from '../../../business/overmind'
 
 interface IProps {
-	title: string
 	showLoginBtn: boolean
 }
 
-const ToolBar: React.FC<IProps> = ({
-	title,
-	showLoginBtn,
-}: IProps): ReactElement => {
+const ToolBar: React.FC<IProps> = ({ showLoginBtn }: IProps): ReactElement => {
 	const history = useHistory()
 	const { isLoggedIn } = useAppState()
 	const { logoutUser } = useActions()
@@ -31,7 +27,7 @@ const ToolBar: React.FC<IProps> = ({
 
 	return (
 		<IonToolbar>
-			<IonTitle>{`BOOKWORM ${title}`}</IonTitle>
+			<IonTitle slot="start">BOOKWORM</IonTitle>
 			{showLoginBtn ? displayButton() : null}
 		</IonToolbar>
 	)

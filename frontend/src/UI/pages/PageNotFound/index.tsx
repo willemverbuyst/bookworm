@@ -12,7 +12,7 @@ import ToolBar from '../../components/ToolBar'
 const PageNotFound: React.FC = (): ReactElement => {
 	return (
 		<IonPage>
-			<ToolBar title="404" showLoginBtn={false} />
+			<ToolBar showLoginBtn />
 			<IonContent>
 				<IonGrid>
 					<IonRow justify-content-center>

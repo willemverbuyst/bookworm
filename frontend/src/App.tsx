@@ -1,6 +1,7 @@
 import React from 'react'
 import {
 	IonApp,
+	IonIcon,
 	IonLabel,
 	IonRouterOutlet,
 	IonTabBar,
@@ -8,6 +9,13 @@ import {
 	IonTabs,
 	setupIonicReact,
 } from '@ionic/react'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import {
+	bookOutline,
+	homeOutline,
+	megaphoneOutline,
+	pencilOutline,
+} from 'ionicons/icons'
 import { IonReactRouter } from '@ionic/react-router'
 import { Redirect, Route } from 'react-router-dom'
 import Authors from './UI/pages/Authors'
@@ -35,15 +43,19 @@ const App: React.FC = () => (
 				</IonRouterOutlet>
 				<IonTabBar slot="bottom">
 					<IonTabButton tab="home" href="/home">
+						<IonIcon icon={homeOutline} />
 						<IonLabel>Home</IonLabel>
 					</IonTabButton>
 					<IonTabButton tab="books" href="/books">
+						<IonIcon icon={bookOutline} />
 						<IonLabel>Books</IonLabel>
 					</IonTabButton>
 					<IonTabButton tab="authors" href="/authors">
+						<IonIcon icon={pencilOutline} />
 						<IonLabel>Authors</IonLabel>
 					</IonTabButton>
 					<IonTabButton tab="feedback" href="/feedback">
+						<IonIcon icon={megaphoneOutline} />
 						<IonLabel>Feedback</IonLabel>
 					</IonTabButton>
 				</IonTabBar>

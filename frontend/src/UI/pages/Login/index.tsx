@@ -44,7 +44,7 @@ const Login: React.FC = (): ReactElement => {
 
 	return (
 		<IonPage>
-			<ToolBar title="Login" showLoginBtn={false} />
+			<ToolBar showLoginBtn={false} />
 			<IonContent>
 				<IonGrid>
 					<IonRow>

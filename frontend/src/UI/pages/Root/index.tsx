@@ -15,7 +15,7 @@ const Root: React.FC = (): ReactElement => {
 
 	return (
 		<IonPage>
-			<ToolBar title="Home" showLoginBtn />
+			<ToolBar showLoginBtn />
 			<IonContent>
 				<IonGrid>
 					{isLoggedIn ? (

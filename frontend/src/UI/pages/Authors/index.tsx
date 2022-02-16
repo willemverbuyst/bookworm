@@ -31,7 +31,7 @@ const Authors: React.FC = (): ReactElement => {
 
 	return (
 		<IonPage>
-			<ToolBar title="Authors" showLoginBtn />
+			<ToolBar showLoginBtn />
 			<IonContent>
 				<IonGrid>
 					{isLoggedIn ? (
