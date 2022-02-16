@@ -12,7 +12,6 @@ import {
 } from '@ionic/react'
 import { useHistory } from 'react-router-dom'
 import { useAppState, useActions } from '../../../business/overmind'
-import ToolBar from '../../components/ToolBar'
 
 type Inputs = {
 	email: string
@@ -44,9 +43,15 @@ const Login: React.FC = (): ReactElement => {
 
 	return (
 		<IonPage>
-			<ToolBar showLoginBtn={false} />
 			<IonContent>
 				<IonGrid>
+					<IonRow>
+						<IonCol className="ion-text-center">
+							<IonText>
+								<h1>Bookworm login</h1>
+							</IonText>
+						</IonCol>
+					</IonRow>
 					<IonRow>
 						<IonCol>
 							<form onSubmit={handleSubmit(onSubmit)}>

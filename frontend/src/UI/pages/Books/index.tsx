@@ -34,7 +34,7 @@ const Books: React.FC = (): ReactElement => {
 
 	return (
 		<IonPage>
-			<ToolBar showLoginBtn />
+			<ToolBar />
 			<IonContent>
 				<IonGrid>
 					{isLoggedIn ? (
