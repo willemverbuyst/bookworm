@@ -6,6 +6,7 @@ import { createOvermind } from 'overmind'
 import { Provider } from 'overmind-react'
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline'
 import { ThemeProvider } from '@mui/material'
+import { BrowserRouter } from 'react-router-dom'
 import { config } from './business/overmind'
 import App from './App'
 import theme from './theme/colors'
@@ -17,11 +18,12 @@ ReactDOM.render(
 		<Provider value={overmind}>
 			<ScopedCssBaseline>
 				<ThemeProvider theme={theme}>
-					<App />
+					<BrowserRouter>
+						<App />
+					</BrowserRouter>
 				</ThemeProvider>
 			</ScopedCssBaseline>
 		</Provider>
-		,
 	</React.StrictMode>,
 	document.getElementById('root')
 )

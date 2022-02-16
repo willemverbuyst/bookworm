@@ -1,13 +1,5 @@
 import { Box } from '@mui/material'
 import React, { ReactElement, useEffect } from 'react'
-import {
-	IonPage,
-	IonContent,
-	IonGrid,
-	IonText,
-	IonCol,
-	IonRow,
-} from '@ionic/react'
 import { useActions, useAppState } from '../../../business/overmind'
 import BasicTabs from '../../components/BasicTabs'
 import TableForOverview from '../../components/Table'
@@ -30,46 +22,36 @@ const Authors: React.FC = (): ReactElement => {
 	}, [allAuthors, authorForStatistics, isLoggedIn, fetchAllAuthors])
 
 	return (
-		<IonPage>
+		<>
 			<ToolBar />
-			<IonContent>
-				<IonGrid>
-					{isLoggedIn ? (
-						<BasicTabs
-							overview={
-								<Box>
-									{allAuthors ? (
-										<TableForOverview rows={allAuthors} columns={columns} />
-									) : (
-										<p>No Authors</p>
-									)}
-								</Box>
-							}
-							statistics={
-								<Box>
-									{authorForStatistics ? (
-										<BarChartForStatistics
-											data={authorForStatistics}
-											dataKey="books_written"
-										/>
-									) : (
-										<p>No Authors</p>
-									)}
-								</Box>
-							}
-						/>
-					) : (
-						<IonRow justify-content-center>
-							<IonCol class="ion-text-center">
-								<IonText>
-									<h3>you are not logged in</h3>
-								</IonText>
-							</IonCol>
-						</IonRow>
-					)}
-				</IonGrid>
-			</IonContent>
-		</IonPage>
+			{isLoggedIn ? (
+				<BasicTabs
+					overview={
+						<Box>
+							{allAuthors ? (
+								<TableForOverview rows={allAuthors} columns={columns} />
+							) : (
+								<p>No Authors</p>
+							)}
+						</Box>
+					}
+					statistics={
+						<Box>
+							{authorForStatistics ? (
+								<BarChartForStatistics
+									data={authorForStatistics}
+									dataKey="books_written"
+								/>
+							) : (
+								<p>No Authors</p>
+							)}
+						</Box>
+					}
+				/>
+			) : (
+				<h3>you are not logged in</h3>
+			)}
+		</>
 	)
 }
 
