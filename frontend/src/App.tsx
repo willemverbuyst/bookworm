@@ -1,23 +1,13 @@
-import React, { useEffect } from 'react'
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
+import React from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Authors from './UI/pages/Authors'
 import Books from './UI/pages/Books'
 import Feedback from './UI/pages/Feedback'
 import Login from './UI/pages/Login'
 import PageNotFound from './UI/pages/PageNotFound'
 import Root from './UI/pages/Root'
-import { useAppState } from './business/overmind'
 
 const App: React.FC = () => {
-	const { isLoggedIn } = useAppState()
-	const navigate = useNavigate()
-
-	useEffect(() => {
-		if (!isLoggedIn) {
-			navigate('/login')
-		}
-	}, [isLoggedIn])
-
 	return (
 		<Routes>
 			<Route path="/" element={<Navigate replace to="/home" />} />
