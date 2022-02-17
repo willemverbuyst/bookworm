@@ -4,7 +4,7 @@ import { Box, Button } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { useNavigate } from 'react-router-dom'
 import { useAppState, useActions } from '../../../business/overmind'
-import ToolBar from '../../components/ToolBar'
+import ToolBar from '../../components/AppBar'
 
 type Inputs = {
 	email: string

@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { useAppState } from '../../../business/overmind'
-import ToolBar from '../../components/ToolBar'
+import ToolBar from '../../components/AppBar'
 
 const Feedback: React.FC = (): ReactElement => {
 	const { isLoggedIn } = useAppState()

@@ -4,7 +4,7 @@ import { useActions, useAppState } from '../../../business/overmind'
 import BasicTabs from '../../components/BasicTabs'
 import TableForOverview from '../../components/Table'
 import BarChartForStatistics from '../../components/Charts/BarChart'
-import ToolBar from '../../components/ToolBar'
+import ToolBar from '../../components/AppBar'
 
 const Authors: React.FC = (): ReactElement => {
 	const { fetchAllAuthors } = useActions()

@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import ToolBar from '../../components/ToolBar'
+import ToolBar from '../../components/AppBar'
 
 const PageNotFound: React.FC = (): ReactElement => {
 	return (

@@ -4,7 +4,7 @@ import TableForOverview from '../../components/Table'
 import { useActions, useAppState } from '../../../business/overmind'
 import BasicTabs from '../../components/BasicTabs'
 import BookPieChart from '../../components/Charts/PieChart'
-import ToolBar from '../../components/ToolBar'
+import ToolBar from '../../components/AppBar'
 
 const Books: React.FC = (): ReactElement => {
 	const { fetchAllBooks } = useActions()
