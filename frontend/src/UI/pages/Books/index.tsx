@@ -8,7 +8,7 @@ import ToolBar from '../../components/AppBar'
 
 const Books: React.FC = (): ReactElement => {
 	const { fetchAllBooks } = useActions()
-	const { allBooks, booksGroupedByLanguage, isLoggedIn } = useAppState()
+	const { allBooks, booksGroupedByLanguage } = useAppState()
 	const columns = [
 		{ field: 'title', headerName: 'title', width: 450 },
 		{ field: 'language', headerName: 'language', width: 100 },
@@ -19,10 +19,10 @@ const Books: React.FC = (): ReactElement => {
 	const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
 	useEffect(() => {
-		if ((!allBooks || !booksGroupedByLanguage) && isLoggedIn) {
+		if (!allBooks || !booksGroupedByLanguage) {
 			fetchAllBooks()
 		}
-	}, [allBooks, booksGroupedByLanguage, isLoggedIn, fetchAllBooks])
+	}, [allBooks, booksGroupedByLanguage, fetchAllBooks])
 
 	return (
 		<Box>
@@ -31,37 +31,31 @@ const Books: React.FC = (): ReactElement => {
 				<Typography variant="h1">Books</Typography>
 			</Box>
 			<Box>
-				{isLoggedIn ? (
-					<BasicTabs
-						overview={
-							<Box>
-								{allBooks ? (
-									<TableForOverview rows={allBooks} columns={columns} />
-								) : (
-									<p>No books</p>
-								)}
-							</Box>
-						}
-						statistics={
-							<Box>
-								{booksGroupedByLanguage ? (
-									<BookPieChart
-										colors={colors}
-										data={booksGroupedByLanguage}
-										dataKey="number"
-										nameKey="language"
-									/>
-								) : (
-									<p>No books</p>
-								)}
-							</Box>
-						}
-					/>
-				) : (
-					<Box sx={{ m: 5, textAlign: 'center' }}>
-						<Typography variant="h3">you are not logged in</Typography>
-					</Box>
-				)}
+				<BasicTabs
+					overview={
+						<Box>
+							{allBooks ? (
+								<TableForOverview rows={allBooks} columns={columns} />
+							) : (
+								<p>No books</p>
+							)}
+						</Box>
+					}
+					statistics={
+						<Box>
+							{booksGroupedByLanguage ? (
+								<BookPieChart
+									colors={colors}
+									data={booksGroupedByLanguage}
+									dataKey="number"
+									nameKey="language"
+								/>
+							) : (
+								<p>No books</p>
+							)}
+						</Box>
+					}
+				/>
 			</Box>
 		</Box>
 	)

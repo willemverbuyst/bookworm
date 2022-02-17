@@ -8,7 +8,7 @@ import ToolBar from '../../components/AppBar'
 
 const Authors: React.FC = (): ReactElement => {
 	const { fetchAllAuthors } = useActions()
-	const { allAuthors, authorForStatistics, isLoggedIn } = useAppState()
+	const { allAuthors, authorForStatistics } = useAppState()
 
 	const columns = [
 		{ field: 'name', headerName: 'name', width: 450 },
@@ -16,10 +16,10 @@ const Authors: React.FC = (): ReactElement => {
 	]
 
 	useEffect(() => {
-		if ((!allAuthors || !authorForStatistics) && isLoggedIn) {
+		if (!allAuthors || !authorForStatistics) {
 			fetchAllAuthors()
 		}
-	}, [allAuthors, authorForStatistics, isLoggedIn, fetchAllAuthors])
+	}, [allAuthors, authorForStatistics, fetchAllAuthors])
 
 	return (
 		<Box>
@@ -28,35 +28,29 @@ const Authors: React.FC = (): ReactElement => {
 				<Typography variant="h1">Authors</Typography>
 			</Box>
 			<Box>
-				{isLoggedIn ? (
-					<BasicTabs
-						overview={
-							<Box>
-								{allAuthors ? (
-									<TableForOverview rows={allAuthors} columns={columns} />
-								) : (
-									<p>No Authors</p>
-								)}
-							</Box>
-						}
-						statistics={
-							<Box>
-								{authorForStatistics ? (
-									<BarChartForStatistics
-										data={authorForStatistics}
-										dataKey="books_written"
-									/>
-								) : (
-									<p>No Authors</p>
-								)}
-							</Box>
-						}
-					/>
-				) : (
-					<Box sx={{ m: 5, textAlign: 'center' }}>
-						<Typography variant="h3">you are not logged in</Typography>
-					</Box>
-				)}
+				<BasicTabs
+					overview={
+						<Box>
+							{allAuthors ? (
+								<TableForOverview rows={allAuthors} columns={columns} />
+							) : (
+								<p>No Authors</p>
+							)}
+						</Box>
+					}
+					statistics={
+						<Box>
+							{authorForStatistics ? (
+								<BarChartForStatistics
+									data={authorForStatistics}
+									dataKey="books_written"
+								/>
+							) : (
+								<p>No Authors</p>
+							)}
+						</Box>
+					}
+				/>
 			</Box>
 		</Box>
 	)
