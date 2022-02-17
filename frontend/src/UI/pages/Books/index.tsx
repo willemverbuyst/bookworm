@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import React, { ReactElement, useEffect } from 'react'
 import TableForOverview from '../../components/Table'
 import { useActions, useAppState } from '../../../business/overmind'
@@ -25,38 +25,45 @@ const Books: React.FC = (): ReactElement => {
 	}, [allBooks, booksGroupedByLanguage, isLoggedIn, fetchAllBooks])
 
 	return (
-		<>
+		<Box>
 			<ToolBar />
-			{isLoggedIn ? (
-				<BasicTabs
-					overview={
-						<Box>
-							{allBooks ? (
-								<TableForOverview rows={allBooks} columns={columns} />
-							) : (
-								<p>No books</p>
-							)}
-						</Box>
-					}
-					statistics={
-						<Box>
-							{booksGroupedByLanguage ? (
-								<BookPieChart
-									colors={colors}
-									data={booksGroupedByLanguage}
-									dataKey="number"
-									nameKey="language"
-								/>
-							) : (
-								<p>No books</p>
-							)}
-						</Box>
-					}
-				/>
-			) : (
-				<h3>you are not logged in</h3>
-			)}
-		</>
+			<Box sx={{ m: 5, textAlign: 'center' }}>
+				<Typography variant="h1">Books</Typography>
+			</Box>
+			<Box>
+				{isLoggedIn ? (
+					<BasicTabs
+						overview={
+							<Box>
+								{allBooks ? (
+									<TableForOverview rows={allBooks} columns={columns} />
+								) : (
+									<p>No books</p>
+								)}
+							</Box>
+						}
+						statistics={
+							<Box>
+								{booksGroupedByLanguage ? (
+									<BookPieChart
+										colors={colors}
+										data={booksGroupedByLanguage}
+										dataKey="number"
+										nameKey="language"
+									/>
+								) : (
+									<p>No books</p>
+								)}
+							</Box>
+						}
+					/>
+				) : (
+					<Box sx={{ m: 5, textAlign: 'center' }}>
+						<Typography variant="h3">you are not logged in</Typography>
+					</Box>
+				)}
+			</Box>
+		</Box>
 	)
 }
 

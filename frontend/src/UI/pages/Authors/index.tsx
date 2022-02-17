@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import React, { ReactElement, useEffect } from 'react'
 import { useActions, useAppState } from '../../../business/overmind'
 import BasicTabs from '../../components/BasicTabs'
@@ -22,36 +22,43 @@ const Authors: React.FC = (): ReactElement => {
 	}, [allAuthors, authorForStatistics, isLoggedIn, fetchAllAuthors])
 
 	return (
-		<>
+		<Box>
 			<ToolBar />
-			{isLoggedIn ? (
-				<BasicTabs
-					overview={
-						<Box>
-							{allAuthors ? (
-								<TableForOverview rows={allAuthors} columns={columns} />
-							) : (
-								<p>No Authors</p>
-							)}
-						</Box>
-					}
-					statistics={
-						<Box>
-							{authorForStatistics ? (
-								<BarChartForStatistics
-									data={authorForStatistics}
-									dataKey="books_written"
-								/>
-							) : (
-								<p>No Authors</p>
-							)}
-						</Box>
-					}
-				/>
-			) : (
-				<h3>you are not logged in</h3>
-			)}
-		</>
+			<Box sx={{ m: 5, textAlign: 'center' }}>
+				<Typography variant="h1">Authors</Typography>
+			</Box>
+			<Box>
+				{isLoggedIn ? (
+					<BasicTabs
+						overview={
+							<Box>
+								{allAuthors ? (
+									<TableForOverview rows={allAuthors} columns={columns} />
+								) : (
+									<p>No Authors</p>
+								)}
+							</Box>
+						}
+						statistics={
+							<Box>
+								{authorForStatistics ? (
+									<BarChartForStatistics
+										data={authorForStatistics}
+										dataKey="books_written"
+									/>
+								) : (
+									<p>No Authors</p>
+								)}
+							</Box>
+						}
+					/>
+				) : (
+					<Box sx={{ m: 5, textAlign: 'center' }}>
+						<Typography variant="h3">you are not logged in</Typography>
+					</Box>
+				)}
+			</Box>
+		</Box>
 	)
 }
 

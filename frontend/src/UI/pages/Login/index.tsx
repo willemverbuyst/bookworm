@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect } from 'react'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
-import { Box, Button } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { useNavigate } from 'react-router-dom'
 import { useAppState, useActions } from '../../../business/overmind'
@@ -36,8 +36,11 @@ const Login: React.FC = (): ReactElement => {
 	)
 
 	return (
-		<>
+		<Box>
 			<ToolBar />
+			<Box sx={{ m: 5, textAlign: 'center' }}>
+				<Typography variant="h1">Login</Typography>
+			</Box>
 
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<Box
@@ -92,7 +95,7 @@ const Login: React.FC = (): ReactElement => {
 			</form>
 
 			{appErrors.loginForm ? displayErrorMessage() : null}
-		</>
+		</Box>
 	)
 }
 
