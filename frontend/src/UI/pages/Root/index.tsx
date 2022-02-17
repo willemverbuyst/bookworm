@@ -4,7 +4,7 @@ import React, { ReactElement } from 'react'
 const Root: React.FC = (): ReactElement => {
 	return (
 		<Box>
-			<Box sx={{ m: 5, textAlign: 'center' }}>
+			<Box sx={{ mt: 3, ml: 3 }}>
 				<Typography variant="h2">Home</Typography>
 			</Box>
 			<Box>

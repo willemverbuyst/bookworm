@@ -1,17 +1,23 @@
-import React from 'react'
-import Box from '@mui/material/Box'
+import { Box, Typography } from '@mui/material'
+import React, { ReactElement } from 'react'
 import { Bar, BarChart } from 'recharts'
 
 interface IProps {
 	data: Array<{ [key: string]: string | number }>
 	dataKey: string
+	title: string
 }
 
-const BarChartForStatistics = ({ data, dataKey }: IProps) => {
+const BarChartForStatistics: React.FC<IProps> = ({
+	data,
+	dataKey,
+	title,
+}: IProps): ReactElement | null => {
 	return data ? (
-		<>
-			<h3>Written books by authors</h3>
-
+		<Box>
+			<Box sx={{ textAlign: 'center', mb: 3 }}>
+				<Typography variant="overline">{title}</Typography>
+			</Box>
 			<Box
 				sx={{
 					display: 'flex',
@@ -23,7 +29,7 @@ const BarChartForStatistics = ({ data, dataKey }: IProps) => {
 					<Bar dataKey={dataKey} fill="#FFBB28" />
 				</BarChart>
 			</Box>
-		</>
+		</Box>
 	) : null
 }
 

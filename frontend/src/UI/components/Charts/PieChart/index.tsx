@@ -1,23 +1,27 @@
-import Box from '@mui/material/Box'
+import { Box, Typography } from '@mui/material'
 import React, { ReactElement } from 'react'
 import { Cell, Legend, Pie, PieChart } from 'recharts'
 
 interface IProps {
-	data: { [key: string]: string | number }[]
+	data: Array<{ [key: string]: string | number }>
 	colors: string[]
 	dataKey: string
 	nameKey: string
+	title: string
 }
 
-const BookPieChart: React.FC<IProps> = ({
+const PieChartForStatistics: React.FC<IProps> = ({
 	data,
 	colors,
 	dataKey,
 	nameKey,
-}: IProps): ReactElement => {
-	return (
-		<>
-			<h3>Grouped by languages</h3>
+	title,
+}: IProps): ReactElement | null => {
+	return data ? (
+		<Box>
+			<Box sx={{ textAlign: 'center', mb: 3 }}>
+				<Typography variant="overline">{title}</Typography>
+			</Box>
 
 			<Box
 				sx={{
@@ -47,8 +51,8 @@ const BookPieChart: React.FC<IProps> = ({
 					</Pie>
 				</PieChart>
 			</Box>
-		</>
-	)
+		</Box>
+	) : null
 }
 
-export default BookPieChart
+export default PieChartForStatistics
