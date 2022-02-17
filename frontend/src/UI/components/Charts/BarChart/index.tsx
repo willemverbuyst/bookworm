@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import React, { ReactElement } from 'react'
-import { Bar, BarChart } from 'recharts'
+import { Bar, BarChart, LabelList } from 'recharts'
 
 interface IProps {
 	data: Array<{ [key: string]: string | number }>
@@ -25,8 +25,15 @@ const BarChartForStatistics: React.FC<IProps> = ({
 					width: '100%',
 				}}
 			>
-				<BarChart width={600} height={400} data={data}>
-					<Bar dataKey={dataKey} fill="#FFBB28" />
+				<BarChart
+					width={600}
+					height={400}
+					data={data}
+					margin={{ top: 15, right: 30, left: 20, bottom: 5 }}
+				>
+					<Bar dataKey={dataKey} fill="#FFBB28">
+						<LabelList dataKey="books_written" position="top" fill="#FFBB28" />
+					</Bar>
 				</BarChart>
 			</Box>
 		</Box>
