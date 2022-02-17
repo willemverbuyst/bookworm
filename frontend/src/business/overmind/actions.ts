@@ -22,26 +22,18 @@ export const loginUser = async (
 }
 
 export const logoutUser = ({ state }: Context) => {
-	state.authorsApi = null
-	state.booksApi = null
 	localStorage.removeItem('token')
 	state.isLoggedIn = false
 	state.user = null
 }
 
-export const onInitializeOvermind = ({ state }: Context) => {
+export const onInitializeOvermind = async ({ state, effects }: Context) => {
+	const allBooks = await effects.api.getAllBooks()
+	state.booksApi = allBooks
+	const allAuthors = await effects.api.getAllAuthors()
+	state.authorsApi = allAuthors
 	const token = localStorage.getItem('token')
 	if (token) {
 		state.isLoggedIn = true
 	}
-}
-
-export const fetchAllBooks = async ({ state, effects }: Context) => {
-	const allBooks = await effects.api.getAllBooks()
-	state.booksApi = allBooks
-}
-
-export const fetchAllAuthors = async ({ state, effects }: Context) => {
-	const allBooks = await effects.api.getAllAuthors()
-	state.authorsApi = allBooks
 }

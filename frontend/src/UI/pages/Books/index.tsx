@@ -1,13 +1,11 @@
 import { Box, Typography } from '@mui/material'
-import React, { ReactElement, useEffect } from 'react'
+import React, { ReactElement } from 'react'
 import TableForOverview from '../../components/Table'
-import { useActions, useAppState } from '../../../business/overmind'
+import { useAppState } from '../../../business/overmind'
 import BasicTabs from '../../components/BasicTabs'
 import BookPieChart from '../../components/Charts/PieChart'
-import ToolBar from '../../components/AppBar'
 
 const Books: React.FC = (): ReactElement => {
-	const { fetchAllBooks } = useActions()
 	const { allBooks, booksGroupedByLanguage } = useAppState()
 	const columns = [
 		{ field: 'title', headerName: 'title', width: 450 },
@@ -18,17 +16,10 @@ const Books: React.FC = (): ReactElement => {
 	]
 	const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
-	useEffect(() => {
-		if (!allBooks || !booksGroupedByLanguage) {
-			fetchAllBooks()
-		}
-	}, [allBooks, booksGroupedByLanguage, fetchAllBooks])
-
 	return (
 		<Box>
-			<ToolBar />
 			<Box sx={{ m: 5, textAlign: 'center' }}>
-				<Typography variant="h1">Books</Typography>
+				<Typography variant="h2">Books</Typography>
 			</Box>
 			<Box>
 				<BasicTabs
