@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem'
 import { useNavigate } from 'react-router-dom'
 import { useActions, useAppState } from '../../../business/overmind'
 
-const pages = ['home', 'books', 'authors', 'feedback']
+const pages = ['home', 'books', 'authors', 'review']
 
 const ResponsiveAppBar = () => {
 	const navigate = useNavigate()
