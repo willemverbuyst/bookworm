@@ -15,8 +15,8 @@ const Root: React.FC = (): ReactElement => {
 								style={{ width: '100%' }}
 								component="img"
 								image="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-								title="Pancakes"
-								alt="Pancakes"
+								title="Row of books"
+								alt="Row of books"
 							/>
 							<div
 								style={{
