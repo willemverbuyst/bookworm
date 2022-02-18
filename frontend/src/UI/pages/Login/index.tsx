@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
-import { Box, Button, Container, Typography } from '@mui/material'
-import TextField from '@mui/material/TextField'
+import { Box, Button, Container, TextField, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useAppState, useActions } from '../../../business/overmind'
 import { isValidEmail } from '../../../business/validators/email'
