@@ -13,7 +13,12 @@ type Inputs = {
 
 const Login: React.FC = (): ReactElement => {
 	const navigate = useNavigate()
-	const { control, handleSubmit, register } = useForm<Inputs>()
+	const {
+		control,
+		formState: { errors },
+		handleSubmit,
+		register,
+	} = useForm<Inputs>()
 	const { loginUser } = useActions()
 
 	const { appErrors, isLoggedIn } = useAppState()
@@ -62,7 +67,7 @@ const Login: React.FC = (): ReactElement => {
 											{...field}
 											id="outlined-required"
 											label="email"
-											type="email"
+											type="text"
 											// eslint-disable-next-line react/jsx-props-no-spreading
 											{...register('email', {
 												validate: value => isValidEmail(value),
@@ -70,6 +75,9 @@ const Login: React.FC = (): ReactElement => {
 										/>
 									)}
 								/>
+								<Typography color="red" sx={{ mt: 1, textAlign: 'center' }}>
+									{errors.email && 'This is not a valid email buddy!'}
+								</Typography>
 							</Box>
 							<Box sx={{ marginTop: 3 }}>
 								<Controller
@@ -87,6 +95,9 @@ const Login: React.FC = (): ReactElement => {
 										/>
 									)}
 								/>
+								<Typography color="red" sx={{ mt: 1, textAlign: 'center' }}>
+									{errors.password && 'No password, no log in!'}
+								</Typography>
 							</Box>
 							<Box sx={{ marginTop: 3 }}>
 								<Button type="submit" variant="contained">
@@ -95,8 +106,9 @@ const Login: React.FC = (): ReactElement => {
 							</Box>
 						</Box>
 					</form>
-
-					{appErrors.loginForm ? displayErrorMessage() : null}
+					<Typography color="red" sx={{ mt: 1, textAlign: 'center' }}>
+						{appErrors.loginForm ? displayErrorMessage() : null}
+					</Typography>
 				</Box>
 			)}
 		</Container>
