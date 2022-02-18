@@ -4,6 +4,7 @@ import { Box, Button, Container, Typography } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { useNavigate } from 'react-router-dom'
 import { useAppState, useActions } from '../../../business/overmind'
+import { isValidEmail } from '../../../business/validators/email'
 
 type Inputs = {
 	email: string
@@ -12,7 +13,7 @@ type Inputs = {
 
 const Login: React.FC = (): ReactElement => {
 	const navigate = useNavigate()
-	const { control, handleSubmit } = useForm<Inputs>()
+	const { control, handleSubmit, register } = useForm<Inputs>()
 	const { loginUser } = useActions()
 
 	const { appErrors, isLoggedIn } = useAppState()
@@ -62,6 +63,10 @@ const Login: React.FC = (): ReactElement => {
 											id="outlined-required"
 											label="email"
 											type="email"
+											// eslint-disable-next-line react/jsx-props-no-spreading
+											{...register('email', {
+												validate: value => isValidEmail(value),
+											})}
 										/>
 									)}
 								/>
