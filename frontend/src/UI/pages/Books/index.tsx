@@ -49,7 +49,11 @@ const Books: React.FC = (): ReactElement => {
 				{showTable ? (
 					<Box>
 						{allBooks ? (
-							<TableForOverview rows={allBooks} columns={columns} />
+							<TableForOverview
+								rows={allBooks}
+								columns={columns}
+								title="overview of books"
+							/>
 						) : (
 							<p>No books</p>
 						)}

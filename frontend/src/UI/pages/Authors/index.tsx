@@ -45,7 +45,11 @@ const Authors: React.FC = (): ReactElement => {
 				{showTable ? (
 					<Box>
 						{allAuthors ? (
-							<TableForOverview rows={allAuthors} columns={columns} />
+							<TableForOverview
+								rows={allAuthors}
+								columns={columns}
+								title="overview of authors"
+							/>
 						) : (
 							<p>No Authors</p>
 						)}
