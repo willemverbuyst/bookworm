@@ -31,7 +31,7 @@ Swagger docs at localhost:8000/docs
 
 # What is this not?
 
-Focussed on effeciency.
+Focussed on efficiency.
 Parts are hardcoded and some of the setup is pretty contrived.
 
 # Commands
