@@ -1,10 +1,10 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Container, Typography } from '@mui/material'
 import React, { ReactElement } from 'react'
 
 const Root: React.FC = (): ReactElement => {
 	return (
-		<Box>
-			<Box sx={{ mt: 3, ml: 3 }}>
+		<Container>
+			<Box sx={{ mt: 3 }}>
 				<Typography variant="h2">Home</Typography>
 			</Box>
 			<Box>
@@ -12,7 +12,7 @@ const Root: React.FC = (): ReactElement => {
 					<Typography variant="h3">Welcome!</Typography>
 				</Box>
 			</Box>
-		</Box>
+		</Container>
 	)
 }
 

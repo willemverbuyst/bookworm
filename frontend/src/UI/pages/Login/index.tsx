@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Container, Typography } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { useNavigate } from 'react-router-dom'
 import { useAppState, useActions } from '../../../business/overmind'
@@ -29,8 +29,8 @@ const Login: React.FC = (): ReactElement => {
 	)
 
 	return (
-		<Box>
-			<Box sx={{ mt: 3, ml: 3 }}>
+		<Container>
+			<Box sx={{ mt: 3 }}>
 				<Typography variant="h2">Login</Typography>
 			</Box>
 			{isLoggedIn ? (
@@ -94,7 +94,7 @@ const Login: React.FC = (): ReactElement => {
 					{appErrors.loginForm ? displayErrorMessage() : null}
 				</Box>
 			)}
-		</Box>
+		</Container>
 	)
 }
 

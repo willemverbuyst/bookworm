@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Container, Typography } from '@mui/material'
 import React, { ReactElement } from 'react'
 import { useAppState } from '../../../business/overmind'
 
@@ -6,8 +6,8 @@ const Review: React.FC = (): ReactElement => {
 	const { isLoggedIn } = useAppState()
 
 	return (
-		<Box>
-			<Box sx={{ mt: 3, ml: 3 }}>
+		<Container>
+			<Box sx={{ mt: 3 }}>
 				<Typography variant="h2">Review</Typography>
 			</Box>
 			<Box>
@@ -15,7 +15,7 @@ const Review: React.FC = (): ReactElement => {
 					{isLoggedIn ? 'Add review' : 'you are not logged in'}
 				</Typography>
 			</Box>
-		</Box>
+		</Container>
 	)
 }
 

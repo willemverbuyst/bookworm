@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Typography } from '@mui/material'
+import { Box, Button, ButtonGroup, Container, Typography } from '@mui/material'
 import React, { ReactElement, useState } from 'react'
 import TableForOverview from '../../components/Table'
 import { useAppState } from '../../../business/overmind'
@@ -21,8 +21,8 @@ const Books: React.FC = (): ReactElement => {
 	const displayChart = () => setShowTable(false)
 
 	return (
-		<Box>
-			<Box sx={{ mt: 3, ml: 3 }}>
+		<Container>
+			<Box sx={{ mt: 3 }}>
 				<Typography variant="h2">Books</Typography>
 			</Box>
 			<Box>
@@ -74,7 +74,7 @@ const Books: React.FC = (): ReactElement => {
 					</Box>
 				)}
 			</Box>
-		</Box>
+		</Container>
 	)
 }
 
