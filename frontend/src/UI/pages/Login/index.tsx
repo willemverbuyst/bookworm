@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useEffect } from 'react'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import { Box, Button, Container, TextField, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
@@ -17,21 +17,21 @@ const Login: React.FC = (): ReactElement => {
 		formState: { errors },
 		handleSubmit,
 		register,
+		reset,
 	} = useForm<Inputs>()
 	const { loginUser } = useActions()
-
-	const { apiError, isLoggedIn } = useAppState()
+	const { isLoggedIn } = useAppState()
 
 	const onSubmit: SubmitHandler<Inputs> = async data => {
 		await loginUser(data)
-		if (!apiError.loginForm) {
-			navigate('/home')
-		}
+		reset()
 	}
 
-	const displayErrorMessage = () => (
-		<p className="error">{apiError.loginForm}</p>
-	)
+	useEffect(() => {
+		if (isLoggedIn) {
+			navigate('/home')
+		}
+	}, [isLoggedIn])
 
 	return (
 		<Container>
@@ -105,9 +105,6 @@ const Login: React.FC = (): ReactElement => {
 							</Box>
 						</Box>
 					</form>
-					<Typography color="red" sx={{ mt: 1, textAlign: 'center' }}>
-						{apiError.loginForm ? displayErrorMessage() : null}
-					</Typography>
 				</Box>
 			)}
 		</Container>

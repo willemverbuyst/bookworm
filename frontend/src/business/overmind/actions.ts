@@ -11,16 +11,15 @@ export const loginUser = async (
 	{ effects, state }: Context,
 	{ email, password }: LoginCredentials
 ) => {
+	state.apiResponse = { message: '', status: undefined }
 	const response = await effects.api.getUser(email, password)
 	if (response.status === 'success') {
+		state.apiResponse = { message: response.message, status: 'success' }
+		localStorage.setItem('token', 'access_token')
 		state.isLoggedIn = true
 		state.user = response.data
-		state.apiError.loginForm = ''
-		state.apiSuccess.loginForm = response.message
-		localStorage.setItem('token', 'access_token')
 	} else {
-		state.apiError.loginForm = response.message
-		state.apiSuccess.loginForm = ''
+		state.apiResponse = { message: response.message, status: 'error' }
 	}
 }
 
@@ -28,6 +27,7 @@ export const logoutUser = ({ state }: Context) => {
 	localStorage.removeItem('token')
 	state.isLoggedIn = false
 	state.user = null
+	state.apiResponse = { message: '', status: undefined }
 }
 
 export const onInitializeOvermind = async ({ state, effects }: Context) => {
@@ -52,10 +52,8 @@ export const postReview = async (
 		rating
 	)
 	if (response.status === 'success') {
-		state.apiError.reviewForm = ''
-		state.apiSuccess.reviewForm = response.message
+		state.apiResponse = { message: response.message, status: 'success' }
 	} else {
-		state.apiError.reviewForm = response.message
-		state.apiSuccess.reviewForm = ''
+		state.apiResponse = { message: response.message, status: 'error' }
 	}
 }

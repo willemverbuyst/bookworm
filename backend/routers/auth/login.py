@@ -26,7 +26,7 @@ def login_user(credentials: Credentials):
                     "email": user["email"],
                     "user_name": user["username"],
                 },
-                "message": "User found.",
+                "message": "Welcome back",
             }
         else:
             return {

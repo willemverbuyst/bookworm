@@ -1,3 +1,4 @@
+import { AlertColor } from '@mui/material'
 import { Author, AuthorApi } from '../models/Author'
 import { Book, BookApi } from '../models/Book'
 import { User } from '../models/User'
@@ -11,6 +12,5 @@ export interface State {
 	booksApi: BookApi | null
 	allBooks: Book[] | null
 	booksGroupedByLanguage: { language: string; number: number }[] | null
-	apiError: { loginForm: string; reviewForm: string }
-	apiSuccess: { loginForm: string; reviewForm: string }
+	apiResponse: { message: string; status: AlertColor | undefined }
 }

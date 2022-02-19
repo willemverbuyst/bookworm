@@ -3,7 +3,6 @@ import {
 	Box,
 	Button,
 	Container,
-	Input,
 	Rating,
 	TextField,
 	Typography,
@@ -19,7 +18,7 @@ type Inputs = {
 }
 
 const Review: React.FC = (): ReactElement => {
-	const { apiError, apiSuccess, isLoggedIn } = useAppState()
+	const { isLoggedIn } = useAppState()
 	const { postReview } = useActions()
 	const {
 		control,
@@ -30,11 +29,6 @@ const Review: React.FC = (): ReactElement => {
 
 	const onSubmit: SubmitHandler<Inputs> = async data => {
 		await postReview(data)
-		if (apiError.loginForm) {
-			console.log('ERROR: ', apiError.reviewForm)
-		} else {
-			console.log('ALL GOOD: ', apiSuccess.reviewForm)
-		}
 		reset()
 	}
 

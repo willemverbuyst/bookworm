@@ -6,6 +6,7 @@ import Authors from './UI/pages/Authors'
 import Books from './UI/pages/Books'
 import Review from './UI/pages/Review'
 import Login from './UI/pages/Login'
+import Message from './UI/components/Message'
 import PageNotFound from './UI/pages/PageNotFound'
 import Root from './UI/pages/Root'
 
@@ -22,6 +23,7 @@ const App: React.FC = () => {
 				<Route path="/review" element={<Review />} />
 				<Route path="*" element={<PageNotFound />} />
 			</Routes>
+			<Message />
 		</Box>
 	)
 }
