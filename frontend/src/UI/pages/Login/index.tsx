@@ -20,17 +20,17 @@ const Login: React.FC = (): ReactElement => {
 	} = useForm<Inputs>()
 	const { loginUser } = useActions()
 
-	const { appErrors, isLoggedIn } = useAppState()
+	const { apiError, isLoggedIn } = useAppState()
 
 	const onSubmit: SubmitHandler<Inputs> = async data => {
 		await loginUser(data)
-		if (!appErrors.loginForm) {
+		if (!apiError.loginForm) {
 			navigate('/home')
 		}
 	}
 
 	const displayErrorMessage = () => (
-		<p className="error">{appErrors.loginForm}</p>
+		<p className="error">{apiError.loginForm}</p>
 	)
 
 	return (
@@ -106,7 +106,7 @@ const Login: React.FC = (): ReactElement => {
 						</Box>
 					</form>
 					<Typography color="red" sx={{ mt: 1, textAlign: 'center' }}>
-						{appErrors.loginForm ? displayErrorMessage() : null}
+						{apiError.loginForm ? displayErrorMessage() : null}
 					</Typography>
 				</Box>
 			)}

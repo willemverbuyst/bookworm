@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { AuthorApi } from '../models/Author'
 import { BookApi } from '../models/Book'
+import { ReviewApi } from '../models/ReviewApi'
 import { UserApi } from '../models/User'
 
 export const api = {
@@ -18,6 +19,20 @@ export const api = {
 		const response = await axios.post(`http://localhost:8000/login`, {
 			email,
 			password,
+		})
+		return response.data
+	},
+	postReview: async (
+		author: string,
+		bookTitle: string,
+		review: string,
+		rating: number | null
+	): Promise<ReviewApi> => {
+		const response = await axios.post(`http://localhost:8000/reviews`, {
+			author,
+			book_title: bookTitle,
+			review,
+			rating,
 		})
 		return response.data
 	},

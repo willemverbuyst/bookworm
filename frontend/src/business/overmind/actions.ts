@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { Context } from '.'
+import { Review } from '../models/ReviewApi'
 
 interface LoginCredentials {
 	email: string
@@ -10,14 +11,16 @@ export const loginUser = async (
 	{ effects, state }: Context,
 	{ email, password }: LoginCredentials
 ) => {
-	const user = await effects.api.getUser(email, password)
-	if (user.status === 'success') {
+	const response = await effects.api.getUser(email, password)
+	if (response.status === 'success') {
 		state.isLoggedIn = true
-		state.user = user.data
-		state.appErrors.loginForm = ''
+		state.user = response.data
+		state.apiError.loginForm = ''
+		state.apiSuccess.loginForm = response.message
 		localStorage.setItem('token', 'access_token')
 	} else {
-		state.appErrors.loginForm = user.message
+		state.apiError.loginForm = response.message
+		state.apiSuccess.loginForm = ''
 	}
 }
 
@@ -35,5 +38,24 @@ export const onInitializeOvermind = async ({ state, effects }: Context) => {
 	const token = localStorage.getItem('token')
 	if (token) {
 		state.isLoggedIn = true
+	}
+}
+
+export const postReview = async (
+	{ state, effects }: Context,
+	{ author, bookTitle, review, rating }: Review
+) => {
+	const response = await effects.api.postReview(
+		author,
+		bookTitle,
+		review,
+		rating
+	)
+	if (response.status === 'success') {
+		state.apiError.reviewForm = ''
+		state.apiSuccess.reviewForm = response.message
+	} else {
+		state.apiError.reviewForm = response.message
+		state.apiSuccess.reviewForm = ''
 	}
 }

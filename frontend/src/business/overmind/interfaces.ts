@@ -11,5 +11,6 @@ export interface State {
 	booksApi: BookApi | null
 	allBooks: Book[] | null
 	booksGroupedByLanguage: { language: string; number: number }[] | null
-	appErrors: { loginForm: string }
+	apiError: { loginForm: string; reviewForm: string }
+	apiSuccess: { loginForm: string; reviewForm: string }
 }

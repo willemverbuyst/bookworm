@@ -51,5 +51,6 @@ export const state: State = {
 			  }))
 			: null
 	),
-	appErrors: { loginForm: '' },
+	apiError: { loginForm: '', reviewForm: '' },
+	apiSuccess: { loginForm: '', reviewForm: '' },
 }

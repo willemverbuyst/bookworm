@@ -7,7 +7,7 @@ class Review(BaseModel):
     author: str
     book_title: str
     review: str
-    rating: str
+    rating: int
 
 
 post_review_router = APIRouter()
@@ -17,7 +17,7 @@ post_review_router = APIRouter()
 def post_review(review: Review):
     try:
         return {
-            "Status": "succes",
+            "status": "success",
             "data": None,
             "message": "Review posted",
         }

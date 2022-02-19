@@ -3,30 +3,39 @@ import {
 	Box,
 	Button,
 	Container,
+	Input,
 	Rating,
 	TextField,
 	Typography,
 } from '@mui/material'
 import React, { ReactElement } from 'react'
-import { useAppState } from '../../../business/overmind'
+import { useActions, useAppState } from '../../../business/overmind'
 
 type Inputs = {
 	author: string
 	bookTitle: string
 	review: string
-	rating: number | null
+	rating: number
 }
 
 const Review: React.FC = (): ReactElement => {
-	const { isLoggedIn } = useAppState()
+	const { apiError, apiSuccess, isLoggedIn } = useAppState()
+	const { postReview } = useActions()
 	const {
 		control,
 		formState: { errors },
 		handleSubmit,
+		reset,
 	} = useForm<Inputs>()
 
 	const onSubmit: SubmitHandler<Inputs> = async data => {
-		console.log(data)
+		await postReview(data)
+		if (apiError.loginForm) {
+			console.log('ERROR: ', apiError.reviewForm)
+		} else {
+			console.log('ALL GOOD: ', apiSuccess.reviewForm)
+		}
+		reset()
 	}
 
 	return (
@@ -117,7 +126,7 @@ const Review: React.FC = (): ReactElement => {
 								<Controller
 									name="rating"
 									control={control}
-									defaultValue={null}
+									defaultValue={1}
 									render={({ field }) => (
 										<>
 											<Typography component="legend">Rating</Typography>
@@ -126,6 +135,11 @@ const Review: React.FC = (): ReactElement => {
 												{...field}
 												id="ratingInput"
 												name="rating"
+												onChange={e =>
+													field.onChange(
+														Number((e.target as HTMLInputElement).value)
+													)
+												}
 											/>
 										</>
 									)}
