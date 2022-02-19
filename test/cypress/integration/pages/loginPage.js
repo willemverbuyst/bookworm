@@ -1,48 +1,25 @@
-class LoginPage {
-	getEmail() {
-		return 'input[type="email"]'
-	}
+import Base from './base'
 
-	getErrorMessage() {
-		return 'User with this email and password not found!'
-	}
-
-	getLoginButton() {
-		return 'button[type="submit"]'
-	}
-
-	getPassword() {
-		return 'input[type="password"]'
-	}
-
-	getTitle() {
-		return 'ion-title'
-	}
-
-	checkTitleIsVisible() {
-		cy.get(this.getTitle()).should('contain', 'BOOKWORM Login')
-	}
-
-	checkUrl() {
-		cy.url().should('include', '/login')
+class LoginPage extends Base {
+	constructor() {
+		super('login', 'Login')
+		this.inputEmail = 'input[name="email"]'
+		this.inputPassword = 'input[name="password"]'
+		this.submitBtn = 'button[type="submit"]'
 	}
 
 	clickLoginButton() {
-		cy.get(this.getLoginButton()).click()
-	}
-
-	displayErrorMessage() {
-		cy.contains(this.getErrorMessage())
+		cy.get(this.submitBtn).click()
 	}
 
 	enterEmail(email) {
-		cy.get(this.getEmail()).clear()
-		cy.get(this.getEmail()).type(email)
+		cy.get(this.inputEmail).clear()
+		cy.get(this.inputEmail).type(email)
 	}
 
 	enterPassword(password) {
-		cy.get(this.getPassword()).clear()
-		cy.get(this.getPassword()).type(password)
+		cy.get(this.inputPassword).clear()
+		cy.get(this.inputPassword).type(password)
 	}
 }
 

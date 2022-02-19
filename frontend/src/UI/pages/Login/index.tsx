@@ -35,7 +35,7 @@ const Login: React.FC = (): ReactElement => {
 
 	return (
 		<Container>
-			<Box sx={{ mt: 3 }}>
+			<Box sx={{ mt: 3 }} id="title">
 				<Typography variant="h2">Login</Typography>
 			</Box>
 			{isLoggedIn ? (

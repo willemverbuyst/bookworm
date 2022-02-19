@@ -1,54 +1,26 @@
 /// <reference types="cypress" />
 
-import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps'
-import IonTabs from '../../components/IonTabs'
-import AuthorsPage from '../../pages/authorsPage'
-import BooksPage from '../../pages/booksPage'
-import FeedbackPage from '../../pages/feedbackPage'
-import HomePage from '../../pages/homePage'
+import { Given, When } from 'cypress-cucumber-preprocessor/steps'
+import AppBar from '../../components/AppBar'
 
-const ionTabs = new IonTabs()
-const authorsPage = new AuthorsPage()
-const booksPage = new BooksPage()
-const feedbackPage = new FeedbackPage()
-const homePage = new HomePage()
+const appBar = new AppBar()
 
 Given(/^I use the application$/, () => {
 	cy.visit('/')
 })
 
-When(/^I click on the Book tab$/, () => {
-	ionTabs.clickBooksTab()
+When(/^I click on the book link$/, () => {
+	appBar.clickLIinkBooks()
 })
 
-Then(/^I should see the book page$/, () => {
-	booksPage.checkUrl()
-	booksPage.checkTitleIsVisible()
+When(/^I click on the author link$/, () => {
+	appBar.clickLinkAuthors()
 })
 
-When(/^I click on the Author tab$/, () => {
-	ionTabs.clickAuthorsTab()
+When(/^I click on the review link$/, () => {
+	appBar.clickLinkReview()
 })
 
-Then(/^I should see the author page$/, () => {
-	authorsPage.checkUrl()
-	authorsPage.checkTitleIsVisible()
-})
-
-When(/^I click on the Feeback tab$/, () => {
-	ionTabs.clickFeedbackTab()
-})
-
-Then(/^I should see the feedback page$/, () => {
-	feedbackPage.checkTitleIsVisible()
-	feedbackPage.checkYouAreNotLoggedIn
-})
-
-When(/^I click on the Home tab$/, () => {
-	ionTabs.clickHomeTab()
-})
-
-Then(/^I should see the home page$/, () => {
-	homePage.checkUrl()
-	homePage.checkTitleIsVisible()
+When(/^I click on the home link$/, () => {
+	appBar.clickLinkHome()
 })

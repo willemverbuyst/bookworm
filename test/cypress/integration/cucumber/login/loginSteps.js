@@ -1,9 +1,9 @@
 import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps'
-import ToolBar from '../../components/ToolBar'
+import AppBar from '../../components/AppBar'
 import LoginPage from '../../pages/loginPage'
 
 const loginPage = new LoginPage()
-const toolbar = new ToolBar()
+const appBar = new AppBar()
 
 beforeEach(function () {
 	cy.fixture('bookworm').as('data')
@@ -11,7 +11,7 @@ beforeEach(function () {
 
 Given(/^I open the login page$/, function () {
 	cy.visit('/')
-	toolbar.clickLogInButton()
+	appBar.clickLogInButton()
 })
 
 When(/^I login with valid credentials$/, function () {
@@ -21,14 +21,10 @@ When(/^I login with valid credentials$/, function () {
 
 Given(/^I open the login page$/, function () {
 	cy.visit('/')
-	toolbar.clickLogInButton()
+	appBar.clickLogInButton()
 })
 
 When(/^I login with invalid credentials$/, function () {
 	cy.fixture('bookworm').as('data')
 	cy.bookwormLogin(this.data.email, this.data.wrongPassword)
-})
-
-Then(/^I should see an error message$/, function () {
-	loginPage.displayErrorMessage()
 })

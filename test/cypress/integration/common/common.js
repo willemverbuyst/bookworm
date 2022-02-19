@@ -5,9 +5,5 @@ defineStep('I see {string} in the url', url => {
 })
 
 defineStep('I see {string} as title', title => {
-	cy.get('ion-title').should('contain', title)
-})
-
-defineStep('I see {string} as message', message => {
-	cy.get('ion-text').should('contain', message)
+	cy.get('#title').should('contain', title)
 })

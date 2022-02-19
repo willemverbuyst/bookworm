@@ -1,26 +1,14 @@
-class PageNotFoundPage {
-	getText() {
-		return 'ion-text'
+import Base from './base'
+
+class PageNotFoundPage extends Base {
+	constructor() {
+		super('/', '404')
+		this.messageElement = 'h3'
+		this.messageText = 'page not found'
 	}
 
-	getTitle() {
-		return 'ion-title'
-	}
-
-	getUnknownUrl() {
-		return '/unknown'
-	}
-
-	checkText() {
-		cy.get(this.getText()).should('contain', 'page not found')
-	}
-
-	checkTitleIsVisible() {
-		cy.get(this.getTitle()).should('contain', 'BOOKWORM 404')
-	}
-
-	visitUnknownUrl() {
-		cy.visit(this.getUnknownUrl())
+	checkMessage() {
+		cy.get(this.messageElement).contains(this.messageText)
 	}
 }
 

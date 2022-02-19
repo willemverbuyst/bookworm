@@ -34,7 +34,7 @@ const Review: React.FC = (): ReactElement => {
 
 	return (
 		<Container>
-			<Box sx={{ mt: 3 }}>
+			<Box sx={{ mt: 3 }} id="title">
 				<Typography variant="h2">Review</Typography>
 			</Box>
 			{!isLoggedIn ? (

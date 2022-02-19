@@ -106,7 +106,8 @@ const ResponsiveAppBar = () => {
 					<Box>
 						{isLoggedIn ? (
 							<Button
-								key="login-btn"
+								id="logout-btn"
+								key="logout-btn"
 								onClick={handleLogout}
 								sx={{ my: 2, color: 'white', display: 'block' }}
 							>
@@ -114,6 +115,7 @@ const ResponsiveAppBar = () => {
 							</Button>
 						) : (
 							<Button
+								id="login-btn"
 								key="login-btn"
 								onClick={handleLogin}
 								sx={{ my: 2, color: 'white', display: 'block' }}

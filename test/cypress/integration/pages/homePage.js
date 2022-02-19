@@ -1,38 +1,15 @@
-class HomePage {
-	getLoginLink() {
-		return 'Login'
+import Base from './base'
+
+class HomePage extends Base {
+	constructor() {
+		super('/home', 'Home')
+		this.welcomeElement = '.welcome-message'
+		this.welcomeText =
+			'Welcome bookworm, have a look at our library and leave a book review.'
 	}
 
-	getTitle() {
-		return 'ion-title'
-	}
-
-	getWelcomeText() {
-		return 'ion-text'
-	}
-
-	getYouAreNotLoggedIn() {
-		return 'you are not logged in'
-	}
-
-	checkTitleIsVisible() {
-		cy.get(this.getTitle()).should('contain', 'BOOKWORM Home')
-	}
-
-	checkUrl() {
-		cy.url().should('include', '/home')
-	}
-
-	checkWelcomeText() {
-		cy.get(this.getWelcomeText()).should('contain', 'Welcome!')
-	}
-
-	checkYouAreNotLoggedIn() {
-		cy.contains(this.getYouAreNotLoggedIn())
-	}
-
-	clickLoginLink() {
-		cy.get('a').contains(this.getLoginLink()).click()
+	checkWelcomeMessage() {
+		cy.get(this.welcomeElement).contains(this.welcomeText)
 	}
 }
 

@@ -4,7 +4,7 @@ import React, { ReactElement } from 'react'
 const Root: React.FC = (): ReactElement => {
 	return (
 		<Container>
-			<Box sx={{ mt: 3 }}>
+			<Box sx={{ mt: 3 }} id="title">
 				<Typography variant="h2">Home</Typography>
 			</Box>
 			<Box>
@@ -29,10 +29,12 @@ const Root: React.FC = (): ReactElement => {
 									textAlign: 'center',
 								}}
 							>
-								<Typography sx={{ letterSpacing: 2 }}>
-									Welcome bookworm, have a look at our library and leave a book
-									review.
-								</Typography>
+								<Box id="welcome-message">
+									<Typography sx={{ letterSpacing: 2 }}>
+										Welcome bookworm, have a look at our library and leave a
+										book review.
+									</Typography>
+								</Box>
 							</div>
 						</div>
 					</Card>

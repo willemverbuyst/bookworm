@@ -7,10 +7,9 @@ Feature: Login
   Given I open the login page
   When I login with valid credentials
   Then I see "/home" in the url
-  And I see "BOOKWORM Home" as title
-  And I see "Welcome!" as message
+  And I see "Home" as title
+
 
   Scenario: Invalid login
   Given I open the login page
   When I login with invalid credentials
-  Then I should see an error message
