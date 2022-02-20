@@ -8,7 +8,21 @@ class CredentialsSchema(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "email": "Email of user for login",
-                "password": "Password for login" 
+                "email": "ping@pong.io",
+                "password": "test123" 
+            }
+        }
+
+class UserSchema(BaseModel):
+    user_name: str = Field(...)
+    email: EmailStr = Field(...)
+    password: str = Field(...)
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "user_name": "PingPongMan",
+                "email": "ping@pong.io",
+                "password": "test123"
             }
         }

@@ -1,10 +1,7 @@
-import uuid
-import csv
-from fastapi import APIRouter
-from pydantic import BaseModel
+from fastapi import APIRouter, Body
 from error.main import raise_exception
 from database.python.user.get_user import get_user_from_db
-from models.user import CredentialsSchema
+from models.user import CredentialsSchema, UserSchema
 from auth.auth_handler import signJWT
 
 
@@ -12,7 +9,7 @@ user_router = APIRouter()
 
 
 @user_router.post("/user/login", tags=["user"])
-def login_user(credentials: CredentialsSchema) -> dict:
+def login_user(credentials: CredentialsSchema = Body(...)) -> dict:
     try:
         user = get_user_from_db(credentials.email, credentials.password)
         if user:
@@ -23,6 +20,7 @@ def login_user(credentials: CredentialsSchema) -> dict:
                     "email": user["email"],
                     "user_name": user["username"],
                 },
+                "token": signJWT(user["email"]),
                 "message": "Welcome back",
             }
         else:
@@ -33,3 +31,9 @@ def login_user(credentials: CredentialsSchema) -> dict:
             }
     except:
         raise_exception(500, "Something went very wrong!")
+
+
+@user_router.post("/user/signup", tags=["user"])
+async def create_user(user: UserSchema = Body(...)):
+    
+    return signJWT(user.email)
