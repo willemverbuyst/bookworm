@@ -1,13 +1,12 @@
 from fastapi import APIRouter
-import csv
-import uuid
-from error.main import raise_exception
 from database.python.author.get_authors import get_authors_from_db
+from error.main import raise_exception
+from models.author import AuthorSchema
 
-get_authors_router = APIRouter()
+authors_router = APIRouter()
 
 
-@get_authors_router.get("/authors")
+@authors_router.get("/authors")
 def get_all_authors():
     try:
         authors = get_authors_from_db()
@@ -18,6 +17,19 @@ def get_all_authors():
             "result": result,
             "data": authors,
             "message": "all authors have been fetched",
+        }
+    except:
+        raise_exception(500, "Something went wrong!")
+
+
+@authors_router.post("/authors", tags=["authors"])
+def add_author(authors: AuthorSchema) -> dict:
+    try:
+
+        return {
+            "status": "success",
+            "data": author,
+            "message": "author added",
         }
     except:
         raise_exception(500, "Something went wrong!")

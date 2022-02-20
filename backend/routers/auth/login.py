@@ -15,7 +15,7 @@ login_router = APIRouter()
 
 
 @login_router.post("/login")
-def login_user(credentials: Credentials):
+def login_user(credentials: Credentials) -> dict:
     try:
         user = get_user_from_db(credentials.email, credentials.password)
         if user:

@@ -13,8 +13,8 @@ class Review(BaseModel):
 post_review_router = APIRouter()
 
 
-@post_review_router.post("/reviews")
-def post_review(review: Review):
+@post_review_router.post("/reviews", tags=["reviews"])
+def add_review(review: Review):
     try:
         return {
             "status": "success",

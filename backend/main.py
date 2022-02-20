@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers.root import root_router
+from routers.root.main import root_router
 from routers.auth.main import auth_router
-from routers.authors.main import author_router
+from routers.authors import authors_router
 from routers.books.main import book_router
 from routers.reviews.main import review_router
 from routers.users.main import user_router
@@ -22,7 +22,7 @@ app.add_middleware(
 
 app.include_router(root_router)
 app.include_router(auth_router)
-app.include_router(author_router)
+app.include_router(authors_router)
 app.include_router(book_router)
 app.include_router(review_router)
 app.include_router(user_router)

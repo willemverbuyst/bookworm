@@ -7,8 +7,8 @@ from database.python.user.get_user import get_user_from_db
 get_user_router = APIRouter()
 
 
-@get_user_router.get("/users")
-def get_specific_user():
+@get_user_router.get("/users/login", tags=["users"])
+def login():
     try:
         user = get_user_from_db()
 
@@ -19,3 +19,5 @@ def get_specific_user():
         }
     except:
         raise_exception(500, "Something went wrong!")
+
+
