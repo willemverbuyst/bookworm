@@ -8,7 +8,7 @@ review_router = APIRouter()
 
 
 @review_router.get("/reviews", tags=["reviews"])
-def get_all_review():
+def get_all_review() -> dict:
     data = []
     result = 0
     message = "Route not implemented"
@@ -25,7 +25,7 @@ def get_all_review():
         
 
 @review_router.post("/reviews", tags=["reviews"])
-def add_review(review: ReviewSchema):
+def add_review(review: ReviewSchema) -> dict:
     try:
         return {
             "status": "success",

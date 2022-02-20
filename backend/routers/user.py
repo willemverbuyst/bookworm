@@ -4,18 +4,14 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from error.main import raise_exception
 from database.python.user.get_user import get_user_from_db
+from models.user import CredentialsSchema
 
 
-class Credentials(BaseModel):
-    email: str
-    password: str
+user_router = APIRouter()
 
 
-login_router = APIRouter()
-
-
-@login_router.post("/login")
-def login_user(credentials: Credentials) -> dict:
+@user_router.post("/user/login", tags=["user"])
+def login_user(credentials: CredentialsSchema) -> dict:
     try:
         user = get_user_from_db(credentials.email, credentials.password)
         if user:

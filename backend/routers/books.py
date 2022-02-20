@@ -6,7 +6,7 @@ book_router = APIRouter()
 
 
 @book_router.get("/books", tags=["books"])
-def get_all_books():
+def get_all_books() -> dict:
     try:
         books = get_books_from_db()
         result = len(books)
