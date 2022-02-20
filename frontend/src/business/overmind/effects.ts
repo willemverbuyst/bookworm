@@ -4,19 +4,21 @@ import { BookApi } from '../models/Book'
 import { ReviewApi } from '../models/ReviewApi'
 import { UserApi } from '../models/User'
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+
 export const api = {
 	getAllAuthors: async (): Promise<AuthorApi> => {
-		const response = await axios.get(`http://localhost:8000/authors`)
+		const response = await axios.get(`${BACKEND_URL}/authors`)
 		return response.data
 	},
 
 	getAllBooks: async (): Promise<BookApi> => {
-		const response = await axios.get(`http://localhost:8000/books`)
+		const response = await axios.get(`${BACKEND_URL}/books`)
 		return response.data
 	},
 
 	getUser: async (email: string, password: string): Promise<UserApi> => {
-		const response = await axios.post(`http://localhost:8000/login`, {
+		const response = await axios.post(`${BACKEND_URL}/user/login`, {
 			email,
 			password,
 		})
@@ -28,7 +30,7 @@ export const api = {
 		review: string,
 		rating: number | null
 	): Promise<ReviewApi> => {
-		const response = await axios.post(`http://localhost:8000/reviews`, {
+		const response = await axios.post(`${BACKEND_URL}/reviews`, {
 			author,
 			book_title: bookTitle,
 			review,

@@ -28,8 +28,8 @@ services:
       - './frontend/src:/scripts/src'
     stdin_open: true
     tty: true
-    environment:
-      - NODE_ENV=development
+    env_file:
+      - ./env/frontend.env
     depends_on:
       - backend
       - database
