@@ -3,10 +3,10 @@ from database.python.author.get_authors import get_authors_from_db
 from error.main import raise_exception
 from models.author import AuthorSchema
 
-authors_router = APIRouter()
+author_router = APIRouter()
 
 
-@authors_router.get("/authors")
+@author_router.get("/authors")
 def get_all_authors():
     try:
         authors = get_authors_from_db()
@@ -22,7 +22,7 @@ def get_all_authors():
         raise_exception(500, "Something went wrong!")
 
 
-@authors_router.post("/authors", tags=["authors"])
+@author_router.post("/authors", tags=["authors"])
 def add_author(authors: AuthorSchema) -> dict:
     try:
 
