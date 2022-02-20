@@ -4,5 +4,5 @@ root_router = APIRouter()
 
 
 @root_router.get("/", tags=["root"])
-async def test_index():
+async def test_root():
     return {"ping": "pong"}

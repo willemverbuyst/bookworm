@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers.root.main import root_router
+from routers.root import root_router
 from routers.auth.main import auth_router
 from routers.authors import author_router
 from routers.books import book_router
