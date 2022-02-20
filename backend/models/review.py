@@ -14,6 +14,6 @@ class ReviewSchema(BaseModel):
                 "author": "Name of the author.",
                 "book_title": "Title of the book." ,
                 "review": "Review of the book.",
-                "Rating": "Rating between 0 and 5."
+                "rating": 5
             }
         }
