@@ -8,4 +8,5 @@ export interface UserApi {
 	status: string
 	data: User
 	message: string
+	token: { access_token: string }
 }

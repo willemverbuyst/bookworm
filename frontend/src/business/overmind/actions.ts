@@ -15,7 +15,9 @@ export const loginUser = async (
 	const response = await effects.api.getUser(email, password)
 	if (response.status === 'success') {
 		state.apiResponse = { message: response.message, status: 'success' }
-		localStorage.setItem('token', 'access_token')
+		const token = response.token.access_token
+		localStorage.setItem('token', token)
+		state.token = token
 		state.isLoggedIn = true
 		state.user = response.data
 	} else {
@@ -25,6 +27,7 @@ export const loginUser = async (
 
 export const logoutUser = ({ state }: Context) => {
 	localStorage.removeItem('token')
+	state.token = ''
 	state.isLoggedIn = false
 	state.user = null
 	state.apiResponse = { message: '', status: undefined }

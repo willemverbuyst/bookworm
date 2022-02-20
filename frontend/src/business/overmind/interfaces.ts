@@ -6,6 +6,7 @@ import { User } from '../models/User'
 export interface State {
 	isLoggedIn: boolean
 	user: User | null
+	token: string
 	authorsApi: AuthorApi | null
 	allAuthors: Author[] | null
 	authorForStatistics: { name: string; books_written: number }[] | null

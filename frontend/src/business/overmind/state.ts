@@ -4,6 +4,7 @@ import { State } from './interfaces'
 
 export const state: State = {
 	user: null,
+	token: '',
 	isLoggedIn: false,
 	authorsApi: null,
 	allAuthors: derived((state: State) =>
