@@ -28,14 +28,20 @@ export const api = {
 		author: string,
 		bookTitle: string,
 		review: string,
-		rating: number | null
+		rating: number | null,
+		token: string
 	): Promise<ReviewApi> => {
-		const response = await axios.post(`${BACKEND_URL}/reviews`, {
-			author,
-			book_title: bookTitle,
-			review,
-			rating,
-		})
+		const response = await axios.post(
+			`${BACKEND_URL}/reviews`,
+			{
+				author,
+				book_title: bookTitle,
+				review,
+				rating,
+			},
+			{ headers: { Authorization: `Bearer ${token}` } }
+		)
+		console.log('response', response)
 		return response.data
 	},
 }

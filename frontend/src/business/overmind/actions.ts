@@ -40,6 +40,7 @@ export const onInitializeOvermind = async ({ state, effects }: Context) => {
 	state.authorsApi = allAuthors
 	const token = localStorage.getItem('token')
 	if (token) {
+		state.token = token
 		state.isLoggedIn = true
 	}
 }
@@ -48,11 +49,13 @@ export const postReview = async (
 	{ state, effects }: Context,
 	{ author, bookTitle, review, rating }: Review
 ) => {
+	const { token } = state
 	const response = await effects.api.postReview(
 		author,
 		bookTitle,
 		review,
-		rating
+		rating,
+		token
 	)
 	if (response.status === 'success') {
 		state.apiResponse = { message: response.message, status: 'success' }
