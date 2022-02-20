@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from error.main import raise_exception
 from database.python.user.get_user import get_user_from_db
 from models.user import CredentialsSchema
+from auth.auth_handler import signJWT
 
 
 user_router = APIRouter()
