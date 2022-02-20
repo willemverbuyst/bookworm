@@ -1,8 +1,7 @@
-from fastapi import APIRouter
-from pydantic import BaseModel
+from fastapi import APIRouter, Depends
+from auth.auth_bearer import JWTBearer
 from error.main import raise_exception
 from models.review import ReviewSchema
-
 
 review_router = APIRouter()
 
@@ -24,7 +23,7 @@ def get_all_review() -> dict:
         raise_exception(500, "Something went very wrong!")
         
 
-@review_router.post("/reviews", tags=["reviews"])
+@review_router.post("/reviews", dependencies=[Depends(JWTBearer())], tags=["reviews"])
 def add_review(review: ReviewSchema) -> dict:
     try:
         return {
