@@ -4,7 +4,7 @@ from routers.root import root_router
 from routers.auth.main import auth_router
 from routers.authors import author_router
 from routers.books import book_router
-from routers.reviews.main import review_router
+from routers.reviews import review_router
 from routers.users.main import user_router
 
 

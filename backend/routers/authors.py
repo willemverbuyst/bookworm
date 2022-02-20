@@ -6,7 +6,7 @@ from models.author import AuthorSchema
 author_router = APIRouter()
 
 
-@author_router.get("/authors")
+@author_router.get("/authors", tags=["authors"])
 def get_all_authors():
     try:
         authors = get_authors_from_db()
@@ -25,11 +25,12 @@ def get_all_authors():
 @author_router.post("/authors", tags=["authors"])
 def add_author(authors: AuthorSchema) -> dict:
     try:
+        message =  "Route not implemented"
 
         return {
             "status": "success",
             "data": author,
-            "message": "author added",
+            "message": message,
         }
     except:
         raise_exception(500, "Something went wrong!")
