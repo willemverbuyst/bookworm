@@ -44,6 +44,19 @@ services:
       - ./env/database.env
     networks:
       - bookworm-net
+  test-runner:
+    image: 'cypress'
+    build:
+      context: './test'
+      dockerfile: Dockerfile
+    container_name: cypress
+    env_file:
+      - ./env/test.env
+    volumes:
+      - ./test/cypress:/scripts/cypress
+      - ./test/cypress.json:/scripts/cypress.json
+    networks:
+      - bookworm-net
 networks:
   bookworm-net:
     driver: bridge
