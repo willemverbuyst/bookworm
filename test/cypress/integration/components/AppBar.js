@@ -23,7 +23,7 @@ class AppBar {
 		cy.get(this.link).contains(this.linkAuthors).click()
 	}
 
-	clickLIinkBooks() {
+	clickLinkBooks() {
 		cy.get(this.link).contains(this.linkBooks).click()
 	}
 

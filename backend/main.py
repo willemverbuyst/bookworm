@@ -7,7 +7,7 @@ from routers.reviews import review_router
 from routers.user import user_router
 
 
-origins = ["http://0.0.0.0:3000", "http://localhost:3000"]
+origins = ["http://0.0.0.0:3000", "http://localhost:3000", "http://frontend:3000"]
 
 app = FastAPI()
 

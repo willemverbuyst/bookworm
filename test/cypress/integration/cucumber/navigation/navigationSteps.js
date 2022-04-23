@@ -10,7 +10,7 @@ Given(/^I use the application$/, () => {
 })
 
 When(/^I click on the book link$/, () => {
-	appBar.clickLIinkBooks()
+	appBar.clickLinkBooks()
 })
 
 When(/^I click on the author link$/, () => {
