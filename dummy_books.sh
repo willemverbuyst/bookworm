@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # script to generate csv file with dummy data
+# data is generated for: 
+# title, language, author, year and has been read or not
 # run script outside docker container
 
 NEW_FILE="./backend/database/dummy_data/books.csv"
@@ -32,3 +34,5 @@ do
   
   echo "\"${TITLE_PART1^} ${TITLE_PART2^}\"|\"${LANGUAGE}\"|\"${AUTHOR_FIRSTNAME^}. ${AUTHOR_LASTNAME^}\"|${YEAR}|${READ}" >> $NEW_FILE
 done
+
+exit 0
