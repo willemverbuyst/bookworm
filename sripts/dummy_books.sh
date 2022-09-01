@@ -2,7 +2,11 @@
 
 # script to generate csv file with dummy data
 # data is generated for: 
-# title, language, author, year and has been read or not
+# - title 
+# - language
+# - author
+# - year
+# - has been read or not
 # run script outside docker container
 
 NEW_FILE="./backend/database/dummy_data/books.csv"

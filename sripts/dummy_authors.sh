@@ -2,7 +2,8 @@
 
 # script to generate csv file with dummy data
 # data is generated for:
-# initials of firstname plus lastname and number of books written
+# - initials of firstname plus lastname
+# - number of books written
 # run script outside docker container
 
 NEW_FILE="./backend/database/dummy_data/authors.csv"
