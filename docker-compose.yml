@@ -4,11 +4,11 @@ services:
     build:
       context: './backend'
       dockerfile: 'Dockerfile'
+    container_name: bw_backend
     stdin_open: true
     ports:
       - 8000:8000
-    env_file:
-      - ./env/backend.env
+    profiles: ['backend-only']
     depends_on:
       - database
     networks:
@@ -17,8 +17,10 @@ services:
     build:
       context: './frontend'
       dockerfile: 'Dockerfile'
+    container_name: bw_frontend
     ports:
       - 3000:3000
+    profiles: ['frontend-only']
     stdin_open: true
     tty: true
     depends_on:
@@ -28,18 +30,17 @@ services:
       - bookworm-net
   database:
     image: 'postgres:13'
+    container_name: bw_database
     ports:
       - 5432:5432
-    env_file:
-      - ./env/database.env
+    profiles: ['backend-only']
     networks:
       - bookworm-net
   test-runner:
     image: 'cypress'
     build: ./test
-    container_name: cypress
-    env_file:
-      - ./env/test.env
+    container_name: bw_cypress
+    profiles: ['test-only']
     volumes:
       - ./test/cypress:/scripts/cypress
       - ./test/cypress.json:/scripts/cypress.json
