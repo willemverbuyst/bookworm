@@ -38,100 +38,112 @@ Parts are hardcoded and some of the setup is pretty contrived.
 
 (re)build and start
 
-`docker-compose up --build`
+> docker-compose up --build
 
 #
 
 start containers
 
-`docker-compose up`
+> docker-compose up
 
 #
 
 start containers in detached mode
 
-`docker-compose up -d`
+> docker-compose up -d
 
 #
 
 development
 
-`docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build`
-
-#
-
-production
-
-`docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build`
+> docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
 
 #
 
 see logs for service
 
-`docker-compose logs <NAME OF SERVICE>`
+> docker-compose logs <NAME OF SERVICE>
 
 #
 
 start specific service
 
-`docker-compose up <NAME OF SERVICE>`
+> docker-compose up <NAME OF SERVICE>
 
 #
 
 log into container
 
-`docker exec -it <NAME OF CONTAINER> bash`
+> docker exec -it <NAME OF CONTAINER> bash
 
 #
 
 stop containers
 
-`docker-compose down`
+> docker-compose down
 
 stop development container and remove volume
 
-`docker-compose -f docker-compose.yml -f docker-compose.dev.yml down -v`
+> docker-compose -f docker-compose.yml -f docker-compose.dev.yml down -v
 
 #
 
 seed database
 
-`docker-compose run backend bash`
+> docker-compose run backend bash
 
-`cd database/bash`
+> cd database/bash
 
-`bash set_up_db.sh`
+> bash set_up_db.sh
 
 #
 
 format python
 
-`docker-compose run backend bash`
+> docker-compose run backend bash
 
-`black .`
+> black .
 
 #
 
 stop bash in terminal
 
-`exit`
+> exit
 
-`docker-compose stop`
+> docker-compose stop
 
 #
 
 run cypress test
 
-`cd test`
+> cd test
 
-`npm run cy:open`
+> npm run cy:open
 
-`npm run cy:run`
+> npm run cy:run
 
 #
 
 create csv with dummy data
 
-`bash dummy_authors.sh`
+> bash dummy_authors.sh
 
-`bash dummy_books.sh`
+> bash dummy_books.sh
+
+#
+
+backend only
+
+> docker-compose --profile backend-only -f docker-compose.yml -f docker-compose.dev.yml up
+
+> docker exec -it <NAME OF CONTAINER> bash
+
+> cd database/bash
+
+> bash set_up_db.sh
+
+> cd ../python
+
+> python seed_db.py
+
+> exit
