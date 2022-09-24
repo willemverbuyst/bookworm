@@ -10,16 +10,18 @@ import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
 import { useNavigate } from 'react-router-dom'
-import { useActions, useAppState } from '../../../business/overmind'
+import { useKeycloak } from '@react-keycloak/web'
+// import { useActions, useAppState } from '../../../business/overmind'
 
 const pages = ['home', 'books', 'authors', 'review']
 
 const ResponsiveAppBar = () => {
 	const navigate = useNavigate()
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
+	const { keycloak } = useKeycloak()
 
-	const { logoutUser } = useActions()
-	const { isLoggedIn } = useAppState()
+	// const { logoutUser } = useActions()
+	// const { isLoggedIn } = useAppState()
 
 	const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorElNav(event.currentTarget)
@@ -30,9 +32,9 @@ const ResponsiveAppBar = () => {
 		navigate(`/${event.currentTarget.textContent}`)
 	}
 
-	const handleLogout = () => logoutUser()
+	// const handleLogout = () => logoutUser()
 
-	const handleLogin = () => navigate('/login')
+	// const handleLogin = () => navigate('/login')
 
 	return (
 		<AppBar position="static">
@@ -104,11 +106,11 @@ const ResponsiveAppBar = () => {
 					</Box>
 
 					<Box>
-						{isLoggedIn ? (
+						{keycloak.authenticated ? (
 							<Button
 								id="logout-btn"
 								key="logout-btn"
-								onClick={handleLogout}
+								onClick={() => keycloak.logout()}
 								sx={{ my: 2, color: 'white', display: 'block' }}
 							>
 								LOG OUT
@@ -117,7 +119,7 @@ const ResponsiveAppBar = () => {
 							<Button
 								id="login-btn"
 								key="login-btn"
-								onClick={handleLogin}
+								onClick={() => keycloak.login()}
 								sx={{ my: 2, color: 'white', display: 'block' }}
 							>
 								LOG IN
