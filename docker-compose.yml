@@ -8,7 +8,6 @@ services:
     stdin_open: true
     ports:
       - 8000:8000
-    profiles: ['backend-only']
     depends_on:
       - database
     networks:
@@ -20,7 +19,6 @@ services:
     container_name: bw_frontend
     ports:
       - 3000:3000
-    profiles: ['frontend-only']
     stdin_open: true
     tty: true
     depends_on:
@@ -33,7 +31,6 @@ services:
     container_name: bw_database
     ports:
       - 5432:5432
-    profiles: ['backend-only']
     networks:
       - bookworm-net
   test-runner:
@@ -46,6 +43,20 @@ services:
       - ./test/cypress.json:/scripts/cypress.json
     networks:
       - bookworm-net
+  keycloak:
+    image: quay.io/keycloak/keycloak:17.0.0
+    volumes:
+      - ./themes/sometheme/:/opt/keycloak/themes/sometheme/
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_PROXY: edge
+    entrypoint: ['/opt/keycloak/bin/kc.sh', 'start-dev']
+    ports:
+      - 8080:8080
+    networks:
+      - bookworm-net
+
 networks:
   bookworm-net:
     driver: bridge
