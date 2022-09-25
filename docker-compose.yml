@@ -45,6 +45,7 @@ services:
       - bookworm-net
   keycloak:
     image: quay.io/keycloak/keycloak:17.0.0
+    container_name: bw_keycloak
     volumes:
       - ./themes/sometheme/:/opt/keycloak/themes/sometheme/
     environment:

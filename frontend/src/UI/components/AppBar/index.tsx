@@ -97,7 +97,9 @@ const ResponsiveAppBar = () => {
 						{pages.map(page => (
 							<Button
 								key={page}
-								onClick={e => handleCloseNavMenu(e)}
+								onClick={(e: React.MouseEvent<HTMLElement, MouseEvent>) =>
+									handleCloseNavMenu(e)
+								}
 								sx={{ my: 2, color: 'white', display: 'block' }}
 							>
 								{page}
