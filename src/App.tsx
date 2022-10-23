@@ -1,9 +1,10 @@
 import './App.css';
+import SimpleForm from './Pages/SimpleForm';
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello world</h1>
+      <SimpleForm />
     </div>
   );
 }
