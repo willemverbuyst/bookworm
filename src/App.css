@@ -1,7 +1,5 @@
 form {
   display: flex;
   flex-direction: column;
-  background-color: #f3f3f0;
   padding: 2rem;
-  border-radius: 3px;
 }

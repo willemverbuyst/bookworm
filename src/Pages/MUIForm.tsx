@@ -11,13 +11,15 @@ import {
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 
 interface IFormInput {
-  firstName: string
-  age: number
+  firstName: string | null
+  age: number | null
   gender: string
 }
 
 export default function MuiForm() {
-  const { control, handleSubmit } = useForm<IFormInput>()
+  const { control, handleSubmit } = useForm<IFormInput>({
+    defaultValues: { firstName: '', age: 0, gender: 'other' },
+  })
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     console.log({ data })
@@ -28,7 +30,6 @@ export default function MuiForm() {
       <Controller
         name="firstName"
         control={control}
-        defaultValue=""
         render={({ field }) => (
           <TextField
             label="First Name"
@@ -47,7 +48,6 @@ export default function MuiForm() {
             <FormLabel id="gender-radio-buttons-group">Gender</FormLabel>
             <RadioGroup
               aria-labelledby="gender-radio-buttons-group"
-              defaultValue="other"
               name="radio-buttons-group"
             >
               <FormControlLabel
@@ -69,7 +69,6 @@ export default function MuiForm() {
       <Controller
         name="age"
         control={control}
-        defaultValue={18}
         render={({ field }) => (
           <TextField
             type="number"

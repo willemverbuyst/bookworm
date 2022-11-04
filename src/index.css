@@ -1,11 +1,4 @@
 :root {
-  --bg-color-1: #f3f3f0;
-  --bg-color-2: #d5ecb8;
-  --bg-color-3: #6f9f77;
-  --bg-color-4: #517957;
-  --bg-color-5: #d0a330;
-  --bg-color-6: #27343a;
-
   font-family: 'Nunito', sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -16,7 +9,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  color: var(--bg-color-1);
 }
 
 body {
@@ -27,11 +19,4 @@ body {
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
-  background-image: repeating-radial-gradient(
-      circle at 0 0,
-      transparent 0,
-      var(--bg-color-6) 10px
-    ),
-    repeating-linear-gradient(var(--bg-color-6), var(--bg-color-4));
-  text-align: center;
 }
