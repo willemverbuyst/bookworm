@@ -12,7 +12,7 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 
 interface IFormInput {
   firstName: string | null
-  age: number | null
+  age: number | string
   gender: string
 }
 
@@ -22,7 +22,7 @@ export default function MuiForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>({
-    defaultValues: { firstName: '', age: 0, gender: 'other' },
+    defaultValues: { firstName: '', age: '', gender: 'other' },
   })
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
@@ -80,14 +80,26 @@ export default function MuiForm() {
       <Controller
         name="age"
         control={control}
+        rules={{ min: 18, max: 99 }}
         render={({ field }) => (
           <TextField
             type="number"
-            inputProps={{ min: 18, max: 99 }}
             label="Age"
             variant="outlined"
             margin="normal"
             {...field}
+            error={
+              !!errors.age &&
+              (errors.age.type === 'min' || errors.age.type === 'max')
+            }
+            helperText={
+              errors.age &&
+              (errors.age.type === 'min'
+                ? 'minimum age is 18'
+                : errors.age.type === 'max'
+                ? 'maximum age is 99'
+                : '')
+            }
           />
         )}
       />
