@@ -17,7 +17,11 @@ interface IFormInput {
 }
 
 export default function MuiForm() {
-  const { control, handleSubmit } = useForm<IFormInput>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInput>({
     defaultValues: { firstName: '', age: 0, gender: 'other' },
   })
 
@@ -30,12 +34,19 @@ export default function MuiForm() {
       <Controller
         name="firstName"
         control={control}
+        rules={{ required: true }}
         render={({ field }) => (
           <TextField
             label="First Name"
             variant="outlined"
             margin="normal"
             {...field}
+            error={!!errors.firstName && errors.firstName.type === 'required'}
+            helperText={
+              errors.firstName &&
+              errors.firstName.type === 'required' &&
+              'first name is a required field'
+            }
           />
         )}
       />
