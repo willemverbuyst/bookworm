@@ -7,7 +7,7 @@
 		"@emotion/styled": "^11.6.0",
 		"@mui/icons-material": "^5.10.6",
 		"@mui/material": "^5.10.3",
-		"@mui/x-data-grid": "^5.2.1",
+		"@mui/x-data-grid": "^5.17.17",
 		"@react-keycloak/web": "^3.4.0",
 		"@testing-library/jest-dom": "^5.16.5",
 		"@testing-library/react": "^12.1.5",
