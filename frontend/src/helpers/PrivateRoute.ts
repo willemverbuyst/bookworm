@@ -1,9 +1,7 @@
-import { useKeycloak } from '@react-keycloak/web'
+import { useAppState } from '../business/overmind'
 
 const PrivateRoute = ({ children }: { children: JSX.Element }) => {
-	const { keycloak } = useKeycloak()
-
-	const isLoggedIn = keycloak.authenticated
+	const { isLoggedIn } = useAppState()
 
 	return isLoggedIn ? children : null
 }
