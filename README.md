@@ -132,11 +132,11 @@ create csv with dummy data
 
 #
 
-backend only
+Run project
 
-> docker-compose --profile backend-only -f docker-compose.yml -f docker-compose.dev.yml up
+> docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 
-> docker exec -it <NAME OF CONTAINER> bash
+> docker exec -it bw_backend bash
 
 > cd database/bash
 
