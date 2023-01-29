@@ -4,7 +4,6 @@ echo '1. Creating sql for books file from csv'
 bash csv_to_sql.sh "books.csv" "book/insert_books.sql" "book"
 
 echo '2. Creating sql for author file from csv'
-# authors.csv insert_authors.sql author
 bash csv_to_sql.sh "authors.csv" "author/insert_authors.sql" "author"
 
 echo '3. Inserting data into database'
