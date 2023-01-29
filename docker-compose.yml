@@ -5,6 +5,7 @@ services:
       context: './backend'
       dockerfile: 'Dockerfile'
     container_name: bw_backend
+    profiles: ['backend-only']
     stdin_open: true
     ports:
       - 8000:8000
@@ -12,23 +13,10 @@ services:
       - database
     networks:
       - bookworm-net
-  frontend:
-    build:
-      context: './frontend'
-      dockerfile: 'Dockerfile'
-    container_name: bw_frontend
-    ports:
-      - 3000:3000
-    stdin_open: true
-    tty: true
-    depends_on:
-      - backend
-      - database
-    networks:
-      - bookworm-net
   database:
     image: 'postgres:13'
     container_name: bw_database
+    profiles: ['backend-only']
     ports:
       - 5432:5432
     networks:
@@ -43,18 +31,19 @@ services:
       - ./test/cypress.json:/scripts/cypress.json
     networks:
       - bookworm-net
-  keycloak:
-    image: quay.io/keycloak/keycloak:17.0.0
-    container_name: bw_keycloak
-    volumes:
-      - ./themes/sometheme/:/opt/keycloak/themes/sometheme/
-    environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-      KC_PROXY: edge
-    entrypoint: ['/opt/keycloak/bin/kc.sh', 'start-dev']
+  frontend:
+    build:
+      context: './frontend'
+      dockerfile: 'Dockerfile'
+    container_name: bw_frontend
+    profiles: ['frontend-only']
     ports:
-      - 8080:8080
+      - 3000:3000
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+      - database
     networks:
       - bookworm-net
 

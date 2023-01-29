@@ -16,6 +16,16 @@ services:
     networks:
       - bookworm-net
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  database:
+    image: 'postgres:13'
+    ports:
+      - 5432:5432
+    env_file:
+      - ./env/database.env
+
+    networks:
+      - bookworm-net
   frontend:
     build:
       context: './frontend'
@@ -36,15 +46,6 @@ services:
     networks:
       - bookworm-net
     command: npm run start
-  database:
-    image: 'postgres:13'
-    ports:
-      - 5432:5432
-    env_file:
-      - ./env/database.env
-
-    networks:
-      - bookworm-net
   test-runner:
     image: 'cypress'
     build:
