@@ -36,27 +36,29 @@ Parts are hardcoded and some of the setup is pretty contrived.
 
 # Commands
 
-(re)build and start
+Run backend for dev
 
-> docker-compose up --build
-
-#
-
-start containers
-
-> docker-compose up
+> docker-compose --profile backend-only -f docker-compose.yml -f docker-compose.dev.yml up
 
 #
 
-start containers in detached mode
+Seed database for dev
 
-> docker-compose up -d
+> docker exec -it bw_backend bash
+
+> cd database/bash
+
+> bash set_up_db.sh
+
+> exit
 
 #
 
-development
+run frontend for dev
 
-> docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
+> cd frontend
+
+> npm run start
 
 #
 
@@ -124,26 +126,10 @@ run cypress test
 
 #
 
-create csv with dummy data
+Create csv with dummy data
 
 > bash dummy_authors.sh
 
 > bash dummy_books.sh
 
 #
-
-Run project
-
-> docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
-
-> docker exec -it bw_backend bash
-
-> cd database/bash
-
-> bash set_up_db.sh
-
-> cd ../python
-
-> python seed_db.py
-
-> exit
