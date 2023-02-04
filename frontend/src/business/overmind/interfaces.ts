@@ -7,11 +7,13 @@ export interface State {
 	isLoggedIn: boolean
 	user: User | null
 	token: string
-	authorsApi: AuthorApi | null
 	allAuthors: Author[] | null
-	authorForStatistics: { name: string; books_written: number }[] | null
-	booksApi: BookApi | null
+	authorForStatistics: { name: string; books_written: number }[]
 	allBooks: Book[] | null
 	booksGroupedByLanguage: { language: string; number: number }[] | null
 	apiResponse: { message: string; status: AlertColor | undefined }
+	allData: {
+		authorsApi: AuthorApi
+		booksApi: BookApi
+	}
 }

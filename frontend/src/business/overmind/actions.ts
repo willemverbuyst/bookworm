@@ -35,9 +35,9 @@ export const logoutUser = ({ state }: Context) => {
 
 export const onInitializeOvermind = async ({ state, effects }: Context) => {
 	const allBooks = await effects.api.getAllBooks()
-	state.booksApi = allBooks
+	state.allData.booksApi = allBooks
 	const allAuthors = await effects.api.getAllAuthors()
-	state.authorsApi = allAuthors
+	state.allData.authorsApi = allAuthors
 	const token = localStorage.getItem('token')
 	if (token) {
 		state.token = token

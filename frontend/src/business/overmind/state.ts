@@ -6,51 +6,44 @@ export const state: State = {
 	user: null,
 	token: '',
 	isLoggedIn: false,
-	authorsApi: null,
+	allData: {
+		authorsApi: { status: '', data: [], message: '' },
+		booksApi: { status: '', data: [], message: '' },
+	},
 	allAuthors: derived((state: State) =>
-		state.authorsApi
-			? Object.values([...state.authorsApi.data])
-					.map(author => ({ ...author }))
-					.sort((author1, author2) =>
-						`${author1.name}`.localeCompare(author2.name)
-					)
-			: null
+		state.allData.authorsApi.data
+			.map(author => ({ ...author }))
+			.sort((author1, author2) => `${author1.name}`.localeCompare(author2.name))
 	),
 	authorForStatistics: derived((state: State) =>
-		state.authorsApi
-			? [...state.authorsApi.data].map(author => ({
-					name: author.name,
-					books_written: author.books_written,
-			  }))
-			: null
+		state.allData.authorsApi.data.map(author => ({
+			name: author.name,
+			books_written: author.books_written,
+		}))
 	),
-	booksApi: null,
 	allBooks: derived((state: State) =>
-		state.booksApi
-			? Object.values([...state.booksApi.data])
-					.map(book => ({
-						...book,
-						read: book.read === 1,
-					}))
-					.sort((book1, book2) => `${book1.title}`.localeCompare(book2.title))
-			: null
+		state.allData.booksApi.data
+			.map(book => ({
+				...book,
+				read: book.read === 1,
+			}))
+			.sort((book1, book2) => `${book1.title}`.localeCompare(book2.title))
 	),
 	booksGroupedByLanguage: derived((state: State) =>
-		state.booksApi
-			? Object.entries(
-					[...state.booksApi.data].reduce(
-						(rv: { [key: string]: number }, book) => {
-							// eslint-disable-next-line no-param-reassign
-							rv[book.language] = rv[book.language] + 1 || 1
-							return rv
-						},
-						{}
-					)
-			  ).map(([key, value]) => ({
-					language: key,
-					number: value,
-			  }))
-			: null
+		Object.entries(
+			state.allData.booksApi.data.reduce(
+				(rv: { [key: string]: number }, book) => {
+					// eslint-disable-next-line no-param-reassign
+					rv[book.language] = rv[book.language] + 1 || 1
+					return rv
+				},
+				{}
+			)
+		).map(([key, value]) => ({
+			language: key,
+			number: value,
+		}))
 	),
+
 	apiResponse: { message: '', status: undefined },
 }
