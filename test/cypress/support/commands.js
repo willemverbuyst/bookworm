@@ -17,3 +17,29 @@ Cypress.Commands.add('bookwormLogin', function (email, password) {
 	loginPage.enterPassword(password)
 	loginPage.clickLoginButton()
 })
+
+// https://www.cypress.io/blog/2019/02/28/shrink-the-untestable-code-with-app-actions-and-effects/
+Cypress.Commands.add('overmind', () => {
+	let overmind
+
+	const cmd = Cypress.log({
+		name: 'overmind',
+		consoleProps() {
+			return {
+				Overmind: overmind,
+			}
+		},
+	})
+
+	return (
+		cy
+			.window({ log: false })
+			// instead of .its('overmind') that always logs to the console
+			// use ".then" shortcut (but without retry)
+			.then({ log: false }, win => {
+				overmind = win.overmind
+				cmd.end()
+				return overmind
+			})
+	)
+})

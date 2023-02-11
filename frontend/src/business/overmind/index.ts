@@ -21,3 +21,8 @@ export const useAppState = createStateHook<Context>()
 export const useActions = createActionsHook<Context>()
 export const useEffects = createEffectsHook<Context>()
 export const useReaction = createReactionHook<Context>()
+
+// Hack to give Cypress access to Overmind
+if ((window as any).Cypress) {
+	;(window as any).overmind = config
+}

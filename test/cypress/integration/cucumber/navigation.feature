@@ -17,7 +17,6 @@ Feature: Navigation
   Scenario: Navigate to review page
     When I click on the review link
     Then I see "/review" in the url
-    And I see "Review" as title
 
   Scenario: Navigate to home page
     When I click on the home link

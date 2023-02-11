@@ -16,4 +16,5 @@ export interface State {
 		authorsApi: AuthorApi
 		booksApi: BookApi
 	}
+	testProp: number
 }

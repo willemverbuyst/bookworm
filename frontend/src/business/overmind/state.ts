@@ -46,4 +46,5 @@ export const state: State = {
 	),
 
 	apiResponse: { message: '', status: undefined },
+	testProp: 123,
 }
