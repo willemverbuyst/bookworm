@@ -2,6 +2,7 @@ import { Box, Button } from '@mui/material'
 import { useId } from 'react'
 import { useForm, SubmitHandler, Controller, Resolver } from 'react-hook-form'
 import { ControlledTextInput } from '../Components/Input/TextInput'
+import { DevTool } from '@hookform/devtools'
 
 type FormFields = {
   description: string | null
@@ -41,23 +42,31 @@ export function Form() {
   }
 
   return (
-    <Box
-      id={id}
-      component="form"
-      autoComplete="off"
-      onSubmit={handleSubmit(onSubmit)}
-      className="form"
-    >
-      <ControlledTextInput
-        name="description"
-        control={control}
-        label="description"
-        error={errors.description}
-      />
+    <>
+      <Box
+        id={id}
+        component="form"
+        autoComplete="off"
+        onSubmit={handleSubmit(onSubmit)}
+        className="form"
+      >
+        <ControlledTextInput
+          name="description"
+          control={control}
+          label="description"
+          error={errors.description}
+        />
 
-      <Button type="submit" variant="contained" color="success" sx={{ mt: 3 }}>
-        submit
-      </Button>
-    </Box>
+        <Button
+          type="submit"
+          variant="contained"
+          color="success"
+          sx={{ mt: 3 }}
+        >
+          submit
+        </Button>
+      </Box>
+      <DevTool control={control} />
+    </>
   )
 }
