@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material'
+import { FormControl, TextField } from '@mui/material'
 import {
   Controller,
   FieldError,
@@ -22,14 +22,22 @@ export function ControlledTextInput<T extends FieldValues>({
 }: TextInputProps<T>) {
   return (
     <section>
-      {label && <label>{label}</label>}{' '}
       <Controller
         name={name}
         control={control}
         rules={{ required }}
-        render={({ field }) => <TextField {...field} />}
+        render={({ field }) => (
+          <FormControl>
+            <TextField
+              label={label}
+              variant="outlined"
+              error={!!error && error.type === 'required'}
+              helperText={error && error.type === 'required' && error.message}
+              {...field}
+            />
+          </FormControl>
+        )}
       />
-      {error && <p className="error">{error.message}</p>}
     </section>
   )
 }
