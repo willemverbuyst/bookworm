@@ -1,17 +1,17 @@
-import { FormControl, TextField } from '@mui/material'
+import { FormControl, TextField } from "@mui/material";
 import {
   Controller,
   FieldError,
   FieldValues,
   UseControllerProps,
-} from 'react-hook-form'
+} from "react-hook-form";
 
 type NumberInputProps<T extends FieldValues> = {
-  error?: FieldError | undefined
-  label?: string
-  name: string
-  required?: boolean
-} & UseControllerProps<T>
+  error?: FieldError | undefined;
+  label?: string;
+  name: string;
+  required?: boolean;
+} & UseControllerProps<T>;
 
 export function ControlledNumberInput<T extends FieldValues>({
   control,
@@ -21,7 +21,7 @@ export function ControlledNumberInput<T extends FieldValues>({
   required = false,
 }: NumberInputProps<T>) {
   return (
-    <FormControl sx={{ mb: 2, width: '50ch' }}>
+    <FormControl sx={{ mb: 2, width: "50ch" }}>
       <Controller
         name={name}
         control={control}
@@ -39,5 +39,5 @@ export function ControlledNumberInput<T extends FieldValues>({
         )}
       />
     </FormControl>
-  )
+  );
 }
