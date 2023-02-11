@@ -6,20 +6,20 @@ import {
   UseControllerProps,
 } from 'react-hook-form'
 
-type TextInputProps<T extends FieldValues> = {
+type NumberInputProps<T extends FieldValues> = {
   error?: FieldError | undefined
   label?: string
   name: string
   required?: boolean
 } & UseControllerProps<T>
 
-export function ControlledTextInput<T extends FieldValues>({
+export function ControlledNumberInput<T extends FieldValues>({
   control,
   error,
   label,
   name,
   required = false,
-}: TextInputProps<T>) {
+}: NumberInputProps<T>) {
   return (
     <FormControl sx={{ mb: 2, width: '50ch' }}>
       <Controller
@@ -33,6 +33,8 @@ export function ControlledTextInput<T extends FieldValues>({
             variant="outlined"
             error={!!error}
             helperText={error && error.message}
+            type="number"
+            onChange={(event) => field.onChange(parseInt(event.target.value))}
           />
         )}
       />

@@ -3,6 +3,9 @@ import { useId } from 'react'
 import { useForm, SubmitHandler, Controller, Resolver } from 'react-hook-form'
 import { ControlledTextInput } from '../Components/Input/TextInput'
 import { DevTool } from '@hookform/devtools'
+import { ControlledNumberInput } from '../Components/Input/NumberInput'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 type FormFields = {
   description: string | null
@@ -10,19 +13,10 @@ type FormFields = {
   gender: string
 }
 
-const resolver: Resolver<FormFields> = async (values) => {
-  return {
-    values: values.description ? values : {},
-    errors: !values.description
-      ? {
-          description: {
-            type: 'required',
-            message: 'This is field is requried yo!',
-          },
-        }
-      : {},
-  }
-}
+const validationSchema = z.object({
+  description: z.string().min(1, { message: 'Description is required' }),
+  age: z.number({ invalid_type_error: 'Age must be a number' }),
+})
 
 export function Form() {
   const id = useId()
@@ -33,12 +27,12 @@ export function Form() {
     setValue,
     watch,
   } = useForm<FormFields>({
-    defaultValues: { description: '' },
-    resolver,
+    defaultValues: { description: '', age: '' },
+    resolver: zodResolver(validationSchema),
   })
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
-    console.log({ data })
+    console.table(data)
   }
 
   return (
@@ -56,13 +50,14 @@ export function Form() {
           label="description"
           error={errors.description}
         />
+        <ControlledNumberInput
+          name="age"
+          control={control}
+          label="age"
+          error={errors.age}
+        />
 
-        <Button
-          type="submit"
-          variant="contained"
-          color="success"
-          sx={{ mt: 3 }}
-        >
+        <Button type="submit" variant="contained" color="success">
           submit
         </Button>
       </Box>
