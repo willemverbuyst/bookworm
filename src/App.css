@@ -1,5 +1,32 @@
-form {
+.container {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  align-items: center;
+}
+
+.form {
+  width: 50vw;
+  border: 2px solid teal;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.error {
+  color: #ff0000;
+  font-size: 0.6rem;
+  text-align: left;
+}
+
+.label {
+  display: inline-block;
+  width: 100%;
+  font-size: 0.8rem;
+  color: grey;
+  font-weight: bold;
+}
+
+.section {
+  margin-bottom: 1rem;
+  text-align: left;
 }

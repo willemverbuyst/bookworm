@@ -1,11 +1,13 @@
 import './App.css'
-import MuiForm from './Pages/MUIForm'
-import SimpleForm from './Pages/SimpleForm'
+import { Form } from './Pages/Form'
 
 function App() {
   return (
-    <div className="App">
-      <MuiForm />
+    <div className="container">
+      <h1 style={{ color: 'teal', fontStyle: 'italic' }}>
+        react-form-hook and material-ui
+      </h1>
+      <Form />
     </div>
   )
 }
