@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import { useId } from "react";
 import { useForm, SubmitHandler, Controller, Resolver } from "react-hook-form";
 import { ControlledTextInput } from "../Components/Input/TextInput";
@@ -6,16 +6,18 @@ import { DevTool } from "@hookform/devtools";
 import { ControlledNumberInput } from "../Components/Input/NumberInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { ControlledDatePicker } from "../Components/Input/DatePicker";
 
 type FormFields = {
   description: string | null;
   age: number | string;
-  gender: string;
+  birthDate: Date;
 };
 
 const validationSchema = z.object({
   description: z.string().min(1, { message: "Description is required" }),
   age: z.number({ invalid_type_error: "Age must be a number" }),
+  birthDate: z.date(),
 });
 
 export function Form() {
@@ -44,22 +46,30 @@ export function Form() {
         onSubmit={handleSubmit(onSubmit)}
         className="form"
       >
-        <ControlledTextInput
-          name="description"
-          control={control}
-          label="description"
-          error={errors.description}
-        />
-        <ControlledNumberInput
-          name="age"
-          control={control}
-          label="age"
-          error={errors.age}
-        />
+        <Stack spacing={2}>
+          <ControlledTextInput
+            name="description"
+            control={control}
+            label="description"
+            error={errors.description}
+          />
+          <ControlledNumberInput
+            name="age"
+            control={control}
+            label="age"
+            error={errors.age}
+          />
+          <ControlledDatePicker
+            name="birthDate"
+            control={control}
+            label="birthdate"
+            error={errors.birthDate}
+          />
 
-        <Button type="submit" variant="contained" color="success">
-          submit
-        </Button>
+          <Button type="submit" variant="contained" color="success">
+            submit
+          </Button>
+        </Stack>
       </Box>
       <DevTool control={control} />
     </>

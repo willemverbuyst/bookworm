@@ -1,4 +1,5 @@
 import { FormControl, TextField } from "@mui/material";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import {
   Controller,
   FieldError,
@@ -6,20 +7,20 @@ import {
   UseControllerProps,
 } from "react-hook-form";
 
-type NumberInputProps<T extends FieldValues> = {
+type TextInputProps<T extends FieldValues> = {
   error?: FieldError | undefined;
   label?: string;
   name: string;
   required?: boolean;
 } & UseControllerProps<T>;
 
-export function ControlledNumberInput<T extends FieldValues>({
+export function ControlledDatePicker<T extends FieldValues>({
   control,
   error,
   label,
   name,
   required = false,
-}: NumberInputProps<T>) {
+}: TextInputProps<T>) {
   return (
     <FormControl sx={{ width: "50ch" }}>
       <Controller
@@ -27,14 +28,11 @@ export function ControlledNumberInput<T extends FieldValues>({
         control={control}
         rules={{ required }}
         render={({ field }) => (
-          <TextField
+          <DesktopDatePicker
             {...field}
-            label={label}
-            variant="outlined"
-            error={!!error}
-            helperText={error && error.message}
-            type="number"
-            onChange={(event) => field.onChange(parseInt(event.target.value))}
+            label="Date desktop"
+            inputFormat="MM/DD/YYYY"
+            renderInput={(params: any) => <TextField {...params} />}
           />
         )}
       />

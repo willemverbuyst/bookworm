@@ -21,7 +21,7 @@ export function ControlledTextInput<T extends FieldValues>({
   required = false,
 }: TextInputProps<T>) {
   return (
-    <FormControl sx={{ mb: 2, width: "50ch" }}>
+    <FormControl sx={{ width: "50ch" }}>
       <Controller
         name={name}
         control={control}
