@@ -7,12 +7,15 @@ import { ControlledNumberInput } from "../Components/Input/NumberInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { ControlledDatePicker } from "../Components/Input/DatePicker";
+import { ControlledSelect } from "../Components/Input/Select";
+import { dummyDataSet1 } from "../dummyData/select";
 
 type FormFields = {
   description: string | null;
   startDate: Date;
   endDate: Date;
   duration: number | string;
+  country: string;
 };
 
 const validationSchema = z.object({
@@ -20,6 +23,7 @@ const validationSchema = z.object({
   startDate: z.date(),
   endDate: z.date(),
   duration: z.number({ invalid_type_error: "Duration must be a number" }),
+  country: z.string(),
 });
 
 export function Form() {
@@ -31,9 +35,14 @@ export function Form() {
     setValue,
     watch,
   } = useForm<FormFields>({
-    defaultValues: { description: "", duration: "" },
+    defaultValues: { description: "", duration: "", country: "" },
     resolver: zodResolver(validationSchema),
   });
+
+  const countries = dummyDataSet1.data.map((i) => ({
+    value: i.value,
+    display: i.value,
+  }));
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
     console.table(data);
@@ -73,6 +82,13 @@ export function Form() {
             control={control}
             label="duration"
             error={errors.duration}
+          />
+          <ControlledSelect
+            dataSet={countries}
+            name="country"
+            control={control}
+            label="country"
+            error={errors.country}
           />
 
           <Button type="submit" variant="contained" color="success">

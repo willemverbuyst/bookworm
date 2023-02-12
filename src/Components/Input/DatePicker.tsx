@@ -6,8 +6,9 @@ import {
   FieldValues,
   UseControllerProps,
 } from "react-hook-form";
+import { INPUT_FORMAT_DATEPICKER } from "../../configuration/date";
 
-type TextInputProps<T extends FieldValues> = {
+type DatePickerProps<T extends FieldValues> = {
   error?: FieldError | undefined;
   label?: string;
   name: string;
@@ -20,7 +21,7 @@ export function ControlledDatePicker<T extends FieldValues>({
   label,
   name,
   required = false,
-}: TextInputProps<T>) {
+}: DatePickerProps<T>) {
   return (
     <FormControl sx={{ width: "50ch" }}>
       <Controller
@@ -31,7 +32,7 @@ export function ControlledDatePicker<T extends FieldValues>({
           <DesktopDatePicker
             {...field}
             label={label}
-            inputFormat="DD/MM/YYYY"
+            inputFormat={INPUT_FORMAT_DATEPICKER}
             renderInput={(params: any) => <TextField {...params} />}
           />
         )}
