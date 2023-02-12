@@ -30,8 +30,8 @@ export function ControlledDatePicker<T extends FieldValues>({
         render={({ field }) => (
           <DesktopDatePicker
             {...field}
-            label="Date desktop"
-            inputFormat="MM/DD/YYYY"
+            label={label}
+            inputFormat="DD/MM/YYYY"
             renderInput={(params: any) => <TextField {...params} />}
           />
         )}

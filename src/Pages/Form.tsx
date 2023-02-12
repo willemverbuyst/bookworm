@@ -10,14 +10,16 @@ import { ControlledDatePicker } from "../Components/Input/DatePicker";
 
 type FormFields = {
   description: string | null;
-  age: number | string;
-  birthDate: Date;
+  startDate: Date;
+  endDate: Date;
+  duration: number | string;
 };
 
 const validationSchema = z.object({
   description: z.string().min(1, { message: "Description is required" }),
-  age: z.number({ invalid_type_error: "Age must be a number" }),
-  birthDate: z.date(),
+  startDate: z.date(),
+  endDate: z.date(),
+  duration: z.number({ invalid_type_error: "Duration must be a number" }),
 });
 
 export function Form() {
@@ -29,7 +31,7 @@ export function Form() {
     setValue,
     watch,
   } = useForm<FormFields>({
-    defaultValues: { description: "", age: "" },
+    defaultValues: { description: "", duration: "" },
     resolver: zodResolver(validationSchema),
   });
 
@@ -46,6 +48,7 @@ export function Form() {
         onSubmit={handleSubmit(onSubmit)}
         className="form"
       >
+        <h3>your dream trip</h3>
         <Stack spacing={2}>
           <ControlledTextInput
             name="description"
@@ -53,17 +56,23 @@ export function Form() {
             label="description"
             error={errors.description}
           />
-          <ControlledNumberInput
-            name="age"
+          <ControlledDatePicker
+            name="startDate"
             control={control}
-            label="age"
-            error={errors.age}
+            label="startdate"
+            error={errors.startDate}
           />
           <ControlledDatePicker
-            name="birthDate"
+            name="endDate"
             control={control}
-            label="birthdate"
-            error={errors.birthDate}
+            label="enddate"
+            error={errors.endDate}
+          />
+          <ControlledNumberInput
+            name="duration"
+            control={control}
+            label="duration"
+            error={errors.duration}
           />
 
           <Button type="submit" variant="contained" color="success">
