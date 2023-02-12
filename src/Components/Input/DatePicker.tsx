@@ -1,4 +1,4 @@
-import { FormControl, TextField } from "@mui/material";
+import { FormControl, FormHelperText, TextField } from "@mui/material";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import {
   Controller,
@@ -10,6 +10,7 @@ import { INPUT_FORMAT_DATEPICKER } from "../../configuration/date";
 
 type DatePickerProps<T extends FieldValues> = {
   error?: FieldError | undefined;
+  helperText?: string;
   label?: string;
   name: string;
   required?: boolean;
@@ -18,6 +19,7 @@ type DatePickerProps<T extends FieldValues> = {
 export function ControlledDatePicker<T extends FieldValues>({
   control,
   error,
+  helperText,
   label,
   name,
   required = false,
@@ -37,6 +39,7 @@ export function ControlledDatePicker<T extends FieldValues>({
           />
         )}
       />
+      <FormHelperText>{helperText}</FormHelperText>
     </FormControl>
   );
 }

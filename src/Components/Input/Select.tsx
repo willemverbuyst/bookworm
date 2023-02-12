@@ -1,4 +1,9 @@
-import { FormControl, MenuItem, TextField } from "@mui/material";
+import {
+  FormControl,
+  FormHelperText,
+  MenuItem,
+  TextField,
+} from "@mui/material";
 import {
   Controller,
   FieldError,
@@ -9,6 +14,7 @@ import {
 type SelectProps<T extends FieldValues, U> = {
   dataSet: U[];
   error?: FieldError | undefined;
+  helperText?: string;
   label?: string;
   name: string;
   required?: boolean;
@@ -21,6 +27,7 @@ export function ControlledSelect<
   control,
   dataSet,
   error,
+  helperText,
   label,
   name,
   required = false,
@@ -50,6 +57,7 @@ export function ControlledSelect<
           </>
         )}
       />
+      <FormHelperText>{helperText}</FormHelperText>
     </FormControl>
   );
 }

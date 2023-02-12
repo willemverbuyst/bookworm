@@ -1,4 +1,4 @@
-import { FormControl, TextField } from "@mui/material";
+import { FormControl, FormHelperText, TextField } from "@mui/material";
 import {
   Controller,
   FieldError,
@@ -8,6 +8,7 @@ import {
 
 type NumberInputProps<T extends FieldValues> = {
   error?: FieldError | undefined;
+  helperText?: string;
   label?: string;
   name: string;
   required?: boolean;
@@ -16,6 +17,7 @@ type NumberInputProps<T extends FieldValues> = {
 export function ControlledNumberInput<T extends FieldValues>({
   control,
   error,
+  helperText,
   label,
   name,
   required = false,
@@ -38,6 +40,7 @@ export function ControlledNumberInput<T extends FieldValues>({
           />
         )}
       />
+      <FormHelperText>{helperText}</FormHelperText>
     </FormControl>
   );
 }

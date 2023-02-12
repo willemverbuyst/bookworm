@@ -89,6 +89,7 @@ export function Form() {
             control={control}
             label="country"
             error={errors.country}
+            helperText="Select a country, next select city"
           />
 
           <Button type="submit" variant="contained" color="success">
