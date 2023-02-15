@@ -58,7 +58,7 @@ run frontend for dev
 
 > cd frontend
 
-> npm run start
+> yarn start
 
 #
 
