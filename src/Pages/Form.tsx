@@ -9,13 +9,14 @@ import { z } from "zod";
 import { dummyDataSet1 } from "../dummyData/select";
 import { ControlledNumberInput } from "../Components/Input/NumberInput";
 import { ControlledDatePicker } from "../Components/Input/DatePicker";
+import { ControlledSelect } from "../Components/Input/Select";
 
 type FormFields = {
   description: string | null;
   startDate: Date;
   endDate: Date;
   duration: number | string;
-  // country: string;
+  country: string;
 };
 
 const validationSchema = z.object({
@@ -29,7 +30,7 @@ const validationSchema = z.object({
     invalid_type_error: "End date must be a date",
   }),
   duration: z.number({ invalid_type_error: "Duration must be a number" }),
-  // country: z.string(),
+  country: z.string(),
 });
 
 export function Form() {
@@ -44,7 +45,7 @@ export function Form() {
     defaultValues: {
       description: "",
       duration: "",
-      // country: "",
+      country: "",
       startDate: new Date(),
       endDate: undefined,
     },
@@ -91,15 +92,14 @@ export function Form() {
             label="duration"
             error={errors.duration}
           />
-          {/* <ControlledSelect
+          <ControlledSelect
             dataSet={countries}
             name="country"
             control={control}
             label="country"
             error={errors.country}
             helperText="Select a country, next select city"
-          />  */}
-
+          />
           <Button type="submit" colorScheme="teal" size="sm">
             submit
           </Button>

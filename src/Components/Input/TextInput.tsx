@@ -28,7 +28,9 @@ export function ControlledTextInput<T extends FieldValues>({
 }: TextInputProps<T>) {
   return (
     <FormControl isInvalid={!!error}>
-      <FormLabel>{label}</FormLabel>
+      <FormLabel style={{ color: "#a3a3a3", fontStyle: "italic" }}>
+        {label}
+      </FormLabel>
       <Controller
         name={name}
         control={control}

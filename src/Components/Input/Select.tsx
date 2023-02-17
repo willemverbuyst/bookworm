@@ -1,9 +1,10 @@
 import {
   FormControl,
+  FormErrorMessage,
   FormHelperText,
-  MenuItem,
-  TextField,
-} from "@mui/material";
+  FormLabel,
+  Select,
+} from "@chakra-ui/react";
 import {
   Controller,
   FieldError,
@@ -33,30 +34,25 @@ export function ControlledSelect<
   required = false,
 }: SelectProps<T, U>) {
   return (
-    <FormControl sx={{ width: "50ch" }}>
+    <FormControl isInvalid={!!error}>
+      <FormLabel style={{ color: "#a3a3a3", fontStyle: "italic" }}>
+        {label}
+      </FormLabel>
       <Controller
         name={name}
         control={control}
         rules={{ required }}
         render={({ field }) => (
-          <>
-            <TextField
-              {...field}
-              label={label}
-              select
-              variant="outlined"
-              error={!!error}
-              helperText={error && error.message}
-            >
-              {dataSet.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.display}
-                </MenuItem>
-              ))}
-            </TextField>
-          </>
+          <Select {...field}>
+            {dataSet.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.display}
+              </option>
+            ))}
+          </Select>
         )}
       />
+      {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
       <FormHelperText>{helperText}</FormHelperText>
     </FormControl>
   );
