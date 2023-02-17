@@ -1,29 +1,35 @@
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Button, VStack } from "@chakra-ui/react";
 import { useId } from "react";
 import { useForm, SubmitHandler, Controller, Resolver } from "react-hook-form";
 import { ControlledTextInput } from "../Components/Input/TextInput";
 import { DevTool } from "@hookform/devtools";
-import { ControlledNumberInput } from "../Components/Input/NumberInput";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { ControlledDatePicker } from "../Components/Input/DatePicker";
-import { ControlledSelect } from "../Components/Input/Select";
 import { dummyDataSet1 } from "../dummyData/select";
+import { ControlledNumberInput } from "../Components/Input/NumberInput";
+import { ControlledDatePicker } from "../Components/Input/DatePicker";
 
 type FormFields = {
   description: string | null;
   startDate: Date;
   endDate: Date;
   duration: number | string;
-  country: string;
+  // country: string;
 };
 
 const validationSchema = z.object({
   description: z.string().min(1, { message: "Description is required" }),
-  startDate: z.date(),
-  endDate: z.date(),
+  startDate: z.date({
+    required_error: "isrequired",
+    invalid_type_error: "Start date must be a date",
+  }),
+  endDate: z.date({
+    required_error: "req",
+    invalid_type_error: "End date must be a date",
+  }),
   duration: z.number({ invalid_type_error: "Duration must be a number" }),
-  country: z.string(),
+  // country: z.string(),
 });
 
 export function Form() {
@@ -35,7 +41,13 @@ export function Form() {
     setValue,
     watch,
   } = useForm<FormFields>({
-    defaultValues: { description: "", duration: "", country: "" },
+    defaultValues: {
+      description: "",
+      duration: "",
+      // country: "",
+      startDate: new Date(),
+      endDate: undefined,
+    },
     resolver: zodResolver(validationSchema),
   });
 
@@ -45,20 +57,16 @@ export function Form() {
   }));
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
+    // @ts-ignore
+    Object.entries(data).forEach(([k, v]) => (data[k] = String(v)));
     console.table(data);
   };
 
   return (
     <>
-      <Box
-        id={id}
-        component="form"
-        autoComplete="off"
-        onSubmit={handleSubmit(onSubmit)}
-        className="form"
-      >
+      <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)} className="form">
         <h3>your dream trip</h3>
-        <Stack spacing={2}>
+        <VStack>
           <ControlledTextInput
             name="description"
             control={control}
@@ -83,19 +91,19 @@ export function Form() {
             label="duration"
             error={errors.duration}
           />
-          <ControlledSelect
+          {/* <ControlledSelect
             dataSet={countries}
             name="country"
             control={control}
             label="country"
             error={errors.country}
             helperText="Select a country, next select city"
-          />
+          />  */}
 
-          <Button type="submit" variant="contained" color="success">
+          <Button type="submit" colorScheme="teal" size="sm">
             submit
           </Button>
-        </Stack>
+        </VStack>
       </Box>
       <DevTool control={control} />
     </>

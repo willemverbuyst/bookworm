@@ -1,19 +1,22 @@
-import { FormControl, FormHelperText, TextField } from "@mui/material";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import {
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  FormLabel,
+} from "@chakra-ui/react";
+import { SingleDatepicker } from "chakra-dayzed-datepicker";
 import {
   Controller,
   FieldError,
   FieldValues,
   UseControllerProps,
 } from "react-hook-form";
-import { INPUT_FORMAT_DATEPICKER } from "../../configuration/date";
 
 type DatePickerProps<T extends FieldValues> = {
   error?: FieldError | undefined;
   helperText?: string;
   label?: string;
   name: string;
-  required?: boolean;
 } & UseControllerProps<T>;
 
 export function ControlledDatePicker<T extends FieldValues>({
@@ -22,23 +25,21 @@ export function ControlledDatePicker<T extends FieldValues>({
   helperText,
   label,
   name,
-  required = false,
 }: DatePickerProps<T>) {
   return (
-    <FormControl sx={{ width: "50ch" }}>
+    <FormControl isInvalid={!!error}>
+      <FormLabel>{label}</FormLabel>
       <Controller
         name={name}
         control={control}
-        rules={{ required }}
         render={({ field }) => (
-          <DesktopDatePicker
-            {...field}
-            label={label}
-            inputFormat={INPUT_FORMAT_DATEPICKER}
-            renderInput={(params: any) => <TextField {...params} />}
+          <SingleDatepicker
+            date={field.value}
+            onDateChange={(e) => field.onChange(e)}
           />
         )}
       />
+      {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
       <FormHelperText>{helperText}</FormHelperText>
     </FormControl>
   );

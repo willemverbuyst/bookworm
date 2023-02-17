@@ -1,4 +1,14 @@
-import { FormControl, FormHelperText, TextField } from "@mui/material";
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+} from "@chakra-ui/react";
 import {
   Controller,
   FieldError,
@@ -11,7 +21,6 @@ type NumberInputProps<T extends FieldValues> = {
   helperText?: string;
   label?: string;
   name: string;
-  required?: boolean;
 } & UseControllerProps<T>;
 
 export function ControlledNumberInput<T extends FieldValues>({
@@ -20,26 +29,27 @@ export function ControlledNumberInput<T extends FieldValues>({
   helperText,
   label,
   name,
-  required = false,
 }: NumberInputProps<T>) {
   return (
-    <FormControl sx={{ width: "50ch" }}>
+    <FormControl isInvalid={!!error}>
+      <FormLabel>{label}</FormLabel>
       <Controller
         name={name}
         control={control}
-        rules={{ required }}
         render={({ field }) => (
-          <TextField
+          <NumberInput
             {...field}
-            label={label}
-            variant="outlined"
-            error={!!error}
-            helperText={error && error.message}
-            type="number"
-            onChange={(event) => field.onChange(parseInt(event.target.value))}
-          />
+            onChange={(value) => field.onChange(parseInt(value))}
+          >
+            <NumberInputField />
+            <NumberInputStepper>
+              <NumberIncrementStepper />
+              <NumberDecrementStepper />
+            </NumberInputStepper>
+          </NumberInput>
         )}
       />
+      {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
       <FormHelperText>{helperText}</FormHelperText>
     </FormControl>
   );

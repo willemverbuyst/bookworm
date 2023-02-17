@@ -1,18 +1,17 @@
 import "./App.css";
 import { Form } from "./Pages/Form";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { LocalizationProvider } from "@mui/x-date-pickers";
+import { ChakraProvider } from "@chakra-ui/react";
 
 function App() {
   return (
-    <LocalizationProvider dateAdapter={AdapterMoment}>
+    <ChakraProvider>
       <div className="container">
         <h1 style={{ color: "#a3a3a3", fontStyle: "italic" }}>
           react-form-hook and material-ui
         </h1>
         <Form />
       </div>
-    </LocalizationProvider>
+    </ChakraProvider>
   );
 }
 
