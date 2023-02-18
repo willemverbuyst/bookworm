@@ -3,7 +3,6 @@ import { useEffect, useId } from "react";
 import { useForm, SubmitHandler, Controller, Resolver } from "react-hook-form";
 import { ControlledTextInput } from "../Components/Input/TextInput";
 import { DevTool } from "@hookform/devtools";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { dummyDataSet1 } from "../dummyData/select";
@@ -24,11 +23,11 @@ type FormFields = {
 const validationSchema = z.object({
   description: z.string().min(1, { message: "Description is required" }),
   startDate: z.date({
-    required_error: "isrequired",
+    required_error: "This field id required",
     invalid_type_error: "Start date must be a date",
   }),
   endDate: z.date({
-    required_error: "req",
+    required_error: "This field is required",
     invalid_type_error: "End date must be a date",
   }),
   duration: z.number({ invalid_type_error: "Duration must be a number" }),
