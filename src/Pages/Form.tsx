@@ -1,39 +1,15 @@
 import { Box, Button, VStack } from "@chakra-ui/react";
 import { useEffect, useId } from "react";
-import { useForm, SubmitHandler, Controller, Resolver } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { ControlledTextInput } from "../Components/Input/TextInput";
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { dummyDataSet1 } from "../dummyData/select";
 import { ControlledNumberInput } from "../Components/Input/NumberInput";
 import { ControlledDatePicker } from "../Components/Input/DatePicker";
 import { ControlledSelect } from "../Components/Input/Select";
 import { calculateDays } from "../helpers/date";
-
-type FormFields = {
-  description: string | null;
-  startDate: Date;
-  endDate: Date;
-  duration: number | string;
-  country: string;
-  city: string;
-};
-
-const validationSchema = z.object({
-  description: z.string().min(1, { message: "Description is required" }),
-  startDate: z.date({
-    required_error: "This field id required",
-    invalid_type_error: "Start date must be a date",
-  }),
-  endDate: z.date({
-    required_error: "This field is required",
-    invalid_type_error: "End date must be a date",
-  }),
-  duration: z.number({ invalid_type_error: "Duration must be a number" }),
-  country: z.string(),
-  city: z.string(),
-});
+import { defaultValues, FormFields, validationSchema } from "./helpers";
 
 export function Form() {
   const id = useId();
@@ -44,13 +20,7 @@ export function Form() {
     setValue,
     watch,
   } = useForm<FormFields>({
-    defaultValues: {
-      description: "",
-      duration: "",
-      country: "",
-      startDate: new Date(),
-      endDate: undefined,
-    },
+    defaultValues,
     resolver: zodResolver(validationSchema),
   });
 
