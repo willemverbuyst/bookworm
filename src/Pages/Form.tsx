@@ -1,4 +1,4 @@
-import { Box, Button, Heading, VStack } from "@chakra-ui/react";
+import { Box, Button, VStack } from "@chakra-ui/react";
 import { useEffect, useId } from "react";
 import { useForm, SubmitHandler, Controller, Resolver } from "react-hook-form";
 import { ControlledTextInput } from "../Components/Input/TextInput";
@@ -96,9 +96,6 @@ export function Form() {
   return (
     <>
       <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)} className="form">
-        <Heading size="lg" color="teal">
-          your dream trip
-        </Heading>
         <VStack m={4}>
           <ControlledTextInput
             name="description"
