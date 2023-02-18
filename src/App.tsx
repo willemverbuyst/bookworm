@@ -1,14 +1,14 @@
 import "./App.css";
 import { Form } from "./Pages/Form";
-import { ChakraProvider, Heading } from "@chakra-ui/react";
+import { Box, ChakraProvider, Heading } from "@chakra-ui/react";
 
 function App() {
   return (
     <ChakraProvider>
-      <div className="container">
+      <Box className="container">
         <Heading>react-form-hook and chakra-ui</Heading>
         <Form />
-      </div>
+      </Box>
     </ChakraProvider>
   );
 }
