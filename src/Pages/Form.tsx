@@ -1,5 +1,5 @@
 import { Box, Button, Heading, VStack } from "@chakra-ui/react";
-import { useId } from "react";
+import { useEffect, useId } from "react";
 import { useForm, SubmitHandler, Controller, Resolver } from "react-hook-form";
 import { ControlledTextInput } from "../Components/Input/TextInput";
 import { DevTool } from "@hookform/devtools";
@@ -10,6 +10,7 @@ import { dummyDataSet1 } from "../dummyData/select";
 import { ControlledNumberInput } from "../Components/Input/NumberInput";
 import { ControlledDatePicker } from "../Components/Input/DatePicker";
 import { ControlledSelect } from "../Components/Input/Select";
+import { calculateDays } from "../helpers/date";
 
 type FormFields = {
   description: string | null;
@@ -76,6 +77,15 @@ export function Form() {
     value: i,
     display: i,
   }));
+
+  const numberOfDaysCalculated =
+    startDate && endDate && calculateDays(endDate, startDate);
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      setValue("duration", numberOfDaysCalculated);
+    }
+  }, [setValue, startDate, endDate]);
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
     // @ts-ignore

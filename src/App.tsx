@@ -6,7 +6,7 @@ function App() {
   return (
     <ChakraProvider>
       <Box className="container" m={4}>
-        <Heading>react-form-hook and chakra-ui</Heading>
+        <Heading>react-hook-form and chakra-ui</Heading>
         <Form />
       </Box>
     </ChakraProvider>
