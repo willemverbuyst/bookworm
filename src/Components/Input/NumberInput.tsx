@@ -18,7 +18,7 @@ import {
 
 type NumberInputProps<T extends FieldValues> = {
   error?: FieldError | undefined;
-  helperText?: string;
+  helperText?: string | null;
   label?: string;
   name: string;
 } & UseControllerProps<T>;

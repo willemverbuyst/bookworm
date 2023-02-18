@@ -15,7 +15,7 @@ import {
 type SelectProps<T extends FieldValues, U> = {
   dataSet: U[];
   error?: FieldError | undefined;
-  helperText?: string;
+  helperText?: string | null;
   label?: string;
   name: string;
   required?: boolean;
@@ -44,6 +44,7 @@ export function ControlledSelect<
         rules={{ required }}
         render={({ field }) => (
           <Select {...field}>
+            <option key="none"></option>
             {dataSet.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.display}

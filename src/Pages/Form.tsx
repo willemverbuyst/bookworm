@@ -17,6 +17,7 @@ type FormFields = {
   endDate: Date;
   duration: number | string;
   country: string;
+  city: string;
 };
 
 const validationSchema = z.object({
@@ -31,6 +32,7 @@ const validationSchema = z.object({
   }),
   duration: z.number({ invalid_type_error: "Duration must be a number" }),
   country: z.string(),
+  city: z.string(),
 });
 
 export function Form() {
@@ -52,9 +54,27 @@ export function Form() {
     resolver: zodResolver(validationSchema),
   });
 
+  const [description, startDate, endDate, duration, country, city] = watch([
+    "description",
+    "startDate",
+    "endDate",
+    "duration",
+    "country",
+    "city",
+  ]);
+
   const countries = dummyDataSet1.data.map((i) => ({
     value: i.value,
     display: i.value,
+  }));
+  const cities = (
+    dummyDataSet1.data.find((c) => c.value === country)?.subSet ?? {
+      value: [],
+      tag: "",
+    }
+  ).value.map((i) => ({
+    value: i,
+    display: i,
   }));
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
@@ -98,8 +118,17 @@ export function Form() {
             control={control}
             label="country"
             error={errors.country}
-            helperText="Select a country, next select city"
+            helperText={country ? null : "Select a country, next select city"}
           />
+          {country && (
+            <ControlledSelect
+              dataSet={cities}
+              name="city"
+              control={control}
+              label="city"
+              error={errors.city}
+            />
+          )}
           <Button type="submit" colorScheme="teal" size="sm">
             submit
           </Button>
