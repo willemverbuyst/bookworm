@@ -5,7 +5,7 @@ import { Box, ChakraProvider, Heading } from "@chakra-ui/react";
 function App() {
   return (
     <ChakraProvider>
-      <Box className="container">
+      <Box className="container" m={4}>
         <Heading>react-form-hook and chakra-ui</Heading>
         <Form />
       </Box>
