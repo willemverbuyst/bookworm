@@ -1,0 +1,1 @@
+export const INPUT_FORMAT_DATEPICKER = "DD/MM/YYYY";
