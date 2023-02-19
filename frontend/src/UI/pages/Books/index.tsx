@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Container, Typography } from "@mui/material";
+import { Box, Container } from "@chakra-ui/react";
 import React, { ReactElement, useState } from "react";
 import { TableWithAllBooks } from "./table";
 import { ChartWithBooks } from "./chart";
@@ -12,11 +12,9 @@ const Books: React.FC = (): ReactElement => {
 
   return (
     <Container>
-      <Box sx={{ mt: 3 }} id="title">
-        <Typography variant="h2">Books</Typography>
-      </Box>
+      <Box>Books</Box>
       <Box>
-        <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+        {/* <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
           <ButtonGroup variant="outlined" aria-label="outlined button group">
             <Button
               color="secondary"
@@ -35,7 +33,7 @@ const Books: React.FC = (): ReactElement => {
               CHART
             </Button>
           </ButtonGroup>
-        </Box>
+        </Box> */}
         {showTable ? <TableWithAllBooks /> : <ChartWithBooks />}
       </Box>
     </Container>

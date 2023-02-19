@@ -4,25 +4,21 @@ import "./index.css";
 // import reportWebVitals from './reportWebVitals';
 import { createOvermind } from "overmind";
 import { Provider } from "overmind-react";
-import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
-import { ThemeProvider } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
 import { config } from "./business/overmind";
 import App from "./App";
-import theme from "./theme/colors";
 
 const overmind = createOvermind(config);
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider value={overmind}>
-      <ScopedCssBaseline>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </ThemeProvider>
-      </ScopedCssBaseline>
+      <ChakraProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ChakraProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

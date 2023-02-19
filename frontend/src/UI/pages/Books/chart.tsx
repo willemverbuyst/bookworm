@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 
 import { useAppState } from "../../../business/overmind";

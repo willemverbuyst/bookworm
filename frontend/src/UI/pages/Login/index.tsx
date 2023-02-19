@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { Box, Button, Container } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useAppState, useActions } from "../../../business/overmind";
 import { isValidEmail } from "../../../business/validators/email";
@@ -35,16 +35,12 @@ const Login: React.FC = (): ReactElement => {
 
   return (
     <Container>
-      <Box sx={{ mt: 3 }} id="title">
-        <Typography variant="h2">Login</Typography>
-      </Box>
+      <Box>Login</Box>
       {isLoggedIn ? (
-        <Box sx={{ m: 5, textAlign: "center" }}>
-          <Typography variant="h3">you are already logged in</Typography>
-        </Box>
+        <Box>you are already logged in</Box>
       ) : (
         <Box>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          {/* <form onSubmit={handleSubmit(onSubmit)}>
             <Box
               sx={{
                 display: "flex",
@@ -104,7 +100,7 @@ const Login: React.FC = (): ReactElement => {
                 </Button>
               </Box>
             </Box>
-          </form>
+          </form> */}
         </Box>
       )}
     </Container>

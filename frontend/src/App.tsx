@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box } from "@chakra-ui/react";
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import AppBar from "./UI/components/AppBar";

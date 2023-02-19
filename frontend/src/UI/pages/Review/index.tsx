@@ -1,44 +1,33 @@
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import {
-  Box,
-  Button,
-  Container,
-  Rating,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Container } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
-import { useActions } from "../../../business/overmind";
 
-type Inputs = {
-  author: string;
-  bookTitle: string;
-  review: string;
-  rating: number;
-};
+// type Inputs = {
+//   author: string;
+//   bookTitle: string;
+//   review: string;
+//   rating: number;
+// };
 
 const Review: React.FC = (): ReactElement => {
-  const { postReview } = useActions();
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = useForm<Inputs>();
+  // const { postReview } = useActions();
+  // const {
+  //   control,
+  //   formState: { errors },
+  //   handleSubmit,
+  //   reset,
+  // } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    await postReview(data);
-    reset();
-  };
+  // const onSubmit: SubmitHandler<Inputs> = async (data) => {
+  //   await postReview(data);
+  //   reset();
+  // };
 
   return (
     <Container>
-      <Box sx={{ mt: 3 }} id="title">
-        <Typography variant="h2">Review</Typography>
-      </Box>
+      <Box>Review</Box>
 
       <Box>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        {/*    <form onSubmit={handleSubmit(onSubmit)}>
           <Box
             sx={{
               display: "flex",
@@ -138,7 +127,7 @@ const Review: React.FC = (): ReactElement => {
               </Button>
             </Box>
           </Box>
-        </form>
+        </form> */}
       </Box>
     </Container>
   );

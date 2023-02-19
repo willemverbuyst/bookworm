@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 import { Cell, Legend, Pie, PieChart } from "recharts";
 
@@ -19,17 +19,9 @@ const PieChartForStatistics: React.FC<IProps> = ({
 }: IProps): ReactElement | null => {
   return data ? (
     <Box>
-      <Box sx={{ textAlign: "center", mb: 3 }}>
-        <Typography variant="overline">{title}</Typography>
-      </Box>
+      <Box>{title}</Box>
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          width: "100%",
-        }}
-      >
+      <Box>
         <PieChart width={400} height={400}>
           <Legend verticalAlign="bottom" height={36} />
           <Pie

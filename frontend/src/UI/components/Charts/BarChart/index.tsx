@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 import { Bar, BarChart, LabelList } from "recharts";
 
@@ -15,16 +15,8 @@ const BarChartForStatistics: React.FC<IProps> = ({
 }: IProps): ReactElement | null => {
   return data ? (
     <Box>
-      <Box sx={{ textAlign: "center", mb: 3 }}>
-        <Typography variant="overline">{title}</Typography>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          width: "100%",
-        }}
-      >
+      <Box>{title}</Box>
+      <Box>
         <BarChart
           width={600}
           height={400}
