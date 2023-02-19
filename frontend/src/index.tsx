@@ -13,13 +13,13 @@ const overmind = createOvermind(config);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider value={overmind}>
-      <ChakraProvider>
+    <ChakraProvider>
+      <Provider value={overmind}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </ChakraProvider>
-    </Provider>
+      </Provider>
+    </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

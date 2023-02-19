@@ -9,5 +9,5 @@ export const NAV_ITEMS: Array<NavItem> = [
   { label: "Home", href: "#" },
   { label: "Books", href: "#" },
   { label: "Authors", href: "#" },
-  { label: "Review", href: "#" },
+  { label: "Reviews", href: "#" },
 ];
