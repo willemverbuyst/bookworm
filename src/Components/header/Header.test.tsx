@@ -6,6 +6,9 @@ describe("Accordion test", () => {
   test("should show title all the time", () => {
     render(<Header />);
 
-    expect(screen.getByText(/your dream trip/i)).toBeDefined();
+    const header = screen.getByRole("heading", {
+      name: /your dream trip/i,
+    });
+    expect(header).toBeInTheDocument();
   });
 });

@@ -1,7 +1,7 @@
 import "./App.css";
 import { Form } from "./Pages/Form";
-import { Box, ChakraProvider, Heading } from "@chakra-ui/react";
-import { Header } from "./Components/Header";
+import { Box, ChakraProvider } from "@chakra-ui/react";
+import { Header } from "./Components/header/Header";
 
 function App() {
   return (
