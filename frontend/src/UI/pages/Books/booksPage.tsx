@@ -1,20 +1,24 @@
-import { Box, Container } from "@chakra-ui/react";
-import React, { ReactElement, useState } from "react";
+import { Box, Container, Heading } from "@chakra-ui/react";
+import { useState } from "react";
 import { TableWithAllBooks } from "./table";
 import { ChartWithBooks } from "./chart";
 
-const Books: React.FC = (): ReactElement => {
-  const [showTable, setShowTable] = useState<boolean>(true);
+export default function BooksPage() {
+  // const [showTable, setShowTable] = useState<boolean>(true);
 
-  const displayTable = () => setShowTable(true);
+  // const displayTable = () => setShowTable(true);
 
-  const displayChart = () => setShowTable(false);
+  // const displayChart = () => setShowTable(false);
 
   return (
-    <Container>
-      <Box>Books</Box>
+    <Container centerContent>
       <Box>
-        {/* <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+        <Heading as="h1" size="lg">
+          Books
+        </Heading>
+      </Box>
+      {/* <Box>
+        <Box>
           <ButtonGroup variant="outlined" aria-label="outlined button group">
             <Button
               color="secondary"
@@ -33,11 +37,9 @@ const Books: React.FC = (): ReactElement => {
               CHART
             </Button>
           </ButtonGroup>
-        </Box> */}
+        </Box>{" "}
         {showTable ? <TableWithAllBooks /> : <ChartWithBooks />}
-      </Box>
+      </Box> */}
     </Container>
   );
-};
-
-export default Books;
+}

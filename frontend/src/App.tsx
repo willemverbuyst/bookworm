@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
 import AppBar from "./UI/components/AppBar";
 import Authors from "./UI/pages/Authors";
-import Books from "./UI/pages/Books";
+import BooksPage from "./UI/pages/Books/booksPage";
 import ReviewPage from "./UI/pages/Reviews/reviewPage";
 import LoginPage from "./UI/pages/Login/loginPage";
 import Message from "./UI/components/Message";
@@ -29,7 +29,7 @@ export default function App() {
           element={
             <>
               <AppBar />
-              <Books />
+              <BooksPage />
             </>
           }
         />
