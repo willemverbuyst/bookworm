@@ -34,7 +34,7 @@ export default function LoginPage() {
   // }, [isLoggedIn]);
 
   return (
-    <Container>
+    <Container centerContent>
       <Box>
         <Heading as="h1" size="lg">
           Login

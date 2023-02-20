@@ -1,5 +1,4 @@
-import { Box, Container } from "@chakra-ui/react";
-import React, { ReactElement } from "react";
+import { Box, Container, Heading } from "@chakra-ui/react";
 
 // type Inputs = {
 //   author: string;
@@ -8,7 +7,7 @@ import React, { ReactElement } from "react";
 //   rating: number;
 // };
 
-const Review: React.FC = (): ReactElement => {
+export default function ReviewPage() {
   // const { postReview } = useActions();
   // const {
   //   control,
@@ -23,8 +22,12 @@ const Review: React.FC = (): ReactElement => {
   // };
 
   return (
-    <Container>
-      <Box>Review</Box>
+    <Container centerContent>
+      <Box>
+        <Heading as="h1" size="lg">
+          Review
+        </Heading>
+      </Box>
 
       <Box>
         {/*    <form onSubmit={handleSubmit(onSubmit)}>
@@ -131,6 +134,4 @@ const Review: React.FC = (): ReactElement => {
       </Box>
     </Container>
   );
-};
-
-export default Review;
+}

@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import AppBar from "./UI/components/AppBar";
 import Authors from "./UI/pages/Authors";
 import Books from "./UI/pages/Books";
-import Review from "./UI/pages/Review";
+import ReviewPage from "./UI/pages/Reviews/reviewPage";
 import LoginPage from "./UI/pages/Login/loginPage";
 import Message from "./UI/components/Message";
 import PageNotFoundPage from "./UI/pages/PageNotFound/pageNotFoundPage";
@@ -49,7 +49,7 @@ export default function App() {
             <PrivateRoute>
               <>
                 <AppBar />
-                <Review />
+                <ReviewPage />
               </>
             </PrivateRoute>
           }
