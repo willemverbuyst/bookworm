@@ -6,7 +6,7 @@ import Books from "./UI/pages/Books";
 import Review from "./UI/pages/Review";
 import LoginPage from "./UI/pages/Login/loginPage";
 import Message from "./UI/components/Message";
-import PageNotFound from "./UI/pages/PageNotFound";
+import PageNotFoundPage from "./UI/pages/PageNotFound/pageNotFoundPage";
 import WelcomePage from "./UI/pages/Welcome/welcomePage";
 import PrivateRoute from "./helpers/PrivateRoute";
 
@@ -54,7 +54,7 @@ export default function App() {
             </PrivateRoute>
           }
         />
-        <Route path="*" element={<PageNotFound />} />
+        <Route path="*" element={<PageNotFoundPage />} />
       </Routes>
       <Message />
     </Box>
