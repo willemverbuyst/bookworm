@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { Box, Button, Container } from "@chakra-ui/react";
+import { Box, Button, Container, Heading } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useAppState, useActions } from "../../../business/overmind";
 import { isValidEmail } from "../../../business/validators/email";
@@ -10,37 +10,41 @@ type Inputs = {
   password: string;
 };
 
-const Login: React.FC = (): ReactElement => {
-  const navigate = useNavigate();
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    register,
-    reset,
-  } = useForm<Inputs>();
-  const { loginUser } = useActions();
-  const { isLoggedIn } = useAppState();
+export default function LoginPage() {
+  // const navigate = useNavigate();
+  // const {
+  //   control,
+  //   formState: { errors },
+  //   handleSubmit,
+  //   register,
+  //   reset,
+  // } = useForm<Inputs>();
+  // const { loginUser } = useActions();
+  // const { isLoggedIn } = useAppState();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    await loginUser(data);
-    reset();
-  };
+  // const onSubmit: SubmitHandler<Inputs> = async (data) => {
+  //   await loginUser(data);
+  //   reset();
+  // };
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/home");
-    }
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     navigate("/home");
+  //   }
+  // }, [isLoggedIn]);
 
   return (
     <Container>
-      <Box>Login</Box>
-      {isLoggedIn ? (
+      <Box>
+        <Heading as="h1" size="lg">
+          Login
+        </Heading>
+      </Box>
+      {/* {isLoggedIn ? (
         <Box>you are already logged in</Box>
-      ) : (
-        <Box>
-          {/* <form onSubmit={handleSubmit(onSubmit)}>
+      ) : ( */}
+      <Box>
+        {/* <form onSubmit={handleSubmit(onSubmit)}>
             <Box
               sx={{
                 display: "flex",
@@ -101,10 +105,8 @@ const Login: React.FC = (): ReactElement => {
               </Box>
             </Box>
           </form> */}
-        </Box>
-      )}
+      </Box>
+      {/* )} */}
     </Container>
   );
-};
-
-export default Login;
+}

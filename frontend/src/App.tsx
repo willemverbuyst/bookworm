@@ -4,10 +4,10 @@ import AppBar from "./UI/components/AppBar";
 import Authors from "./UI/pages/Authors";
 import Books from "./UI/pages/Books";
 import Review from "./UI/pages/Review";
-import Login from "./UI/pages/Login";
+import LoginPage from "./UI/pages/Login/loginPage";
 import Message from "./UI/components/Message";
 import PageNotFound from "./UI/pages/PageNotFound";
-import WelcomePage from "./UI/pages/Hero/welcomePage";
+import WelcomePage from "./UI/pages/Welcome/welcomePage";
 import PrivateRoute from "./helpers/PrivateRoute";
 
 export default function App() {
@@ -42,7 +42,7 @@ export default function App() {
             </>
           }
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route
           path="/review"
           element={
