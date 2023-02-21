@@ -1,18 +1,22 @@
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Container, Heading } from "@chakra-ui/react";
 import React, { ReactElement, useState } from "react";
 import { TableWithAllAuthors } from "./table";
 import { ChartWithAuthors } from "./chart";
 
-const Authors: React.FC = (): ReactElement => {
-  const [showTable, setShowTable] = useState<boolean>(true);
+export default function AuthorsPage() {
+  // const [showTable, setShowTable] = useState<boolean>(true);
 
-  const displayTable = () => setShowTable(true);
+  // const displayTable = () => setShowTable(true);
 
-  const displayChart = () => setShowTable(false);
+  // const displayChart = () => setShowTable(false);
 
   return (
-    <Container>
-      <Box>Authors</Box>
+    <Container centerContent>
+      <Box>
+        <Heading as="h1" size="lg">
+          Authors
+        </Heading>
+      </Box>
       <Box>
         {/* <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
           <ButtonGroup variant="outlined" aria-label="outlined button group">
@@ -34,10 +38,8 @@ const Authors: React.FC = (): ReactElement => {
             </Button>
           </ButtonGroup>
         </Box> */}
-        {showTable ? <TableWithAllAuthors /> : <ChartWithAuthors />}
+        {/* {showTable ? <TableWithAllAuthors /> : <ChartWithAuthors />} */}
       </Box>
     </Container>
   );
-};
-
-export default Authors;
+}
