@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
-import AppBar from "./UI/components/AppBar";
+import AppBar from "./UI/components/NavigationBar/navigationBar";
 import AuthorsPage from "./UI/pages/Authors/authorsPage";
 import BooksPage from "./UI/pages/Books/booksPage";
 import ReviewPage from "./UI/pages/Reviews/reviewPage";
@@ -9,6 +9,7 @@ import Message from "./UI/components/Message";
 import PageNotFoundPage from "./UI/pages/PageNotFound/pageNotFoundPage";
 import WelcomePage from "./UI/pages/Welcome/welcomePage";
 import PrivateRoute from "./helpers/PrivateRoute";
+import HomePage from "./UI/pages/Home/homePage";
 
 export default function App() {
   return (
@@ -20,7 +21,7 @@ export default function App() {
           element={
             <>
               <AppBar />
-              <WelcomePage />
+              <HomePage />
             </>
           }
         />
