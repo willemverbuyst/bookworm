@@ -1,31 +1,39 @@
-import React, { ReactElement, useEffect } from "react";
+import { useEffect, useId } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { Box, Button, Container, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  Heading,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppState, useActions } from "../../../business/overmind";
-import { isValidEmail } from "../../../business/validators/email";
-
-type Inputs = {
-  email: string;
-  password: string;
-};
+import { ControlledTextInput } from "../../components/Controllers/TextInput";
+import { defaultValues, FormFields, validationSchema } from "./helpers";
 
 export default function LoginPage() {
-  // const navigate = useNavigate();
-  // const {
-  //   control,
-  //   formState: { errors },
-  //   handleSubmit,
-  //   register,
-  //   reset,
-  // } = useForm<Inputs>();
-  // const { loginUser } = useActions();
-  // const { isLoggedIn } = useAppState();
+  const id = useId();
+  const navigate = useNavigate();
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<FormFields>({
+    defaultValues,
+    resolver: zodResolver(validationSchema),
+  });
+  const { loginUser } = useActions();
+  const { isLoggedIn } = useAppState();
 
-  // const onSubmit: SubmitHandler<Inputs> = async (data) => {
-  //   await loginUser(data);
-  //   reset();
-  // };
+  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    // await loginUser(data);
+    console.log(data);
+    reset();
+  };
 
   // useEffect(() => {
   //   if (isLoggedIn) {
@@ -40,73 +48,31 @@ export default function LoginPage() {
           Login
         </Heading>
       </Box>
-      {/* {isLoggedIn ? (
-        <Box>you are already logged in</Box>
-      ) : ( */}
-      <Box>
-        {/* <form onSubmit={handleSubmit(onSubmit)}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                overflow: "hidden",
-                margin: "auto",
-              }}
-            >
-              <Box sx={{ marginTop: 3 }}>
-                <Controller
-                  name="email"
-                  control={control}
-                  rules={{ required: true }}
-                  defaultValue=""
-                  render={({ field }) => (
-                    <TextField
-                      // eslint-disable-next-line react/jsx-props-no-spreading
-                      {...field}
-                      id="outlined-required"
-                      label="email"
-                      type="text"
-                      // eslint-disable-next-line react/jsx-props-no-spreading
-                      {...register("email", {
-                        validate: (value) => isValidEmail(value),
-                      })}
-                    />
-                  )}
-                />
-                <Typography color="red" sx={{ mt: 1, textAlign: "center" }}>
-                  {errors.email && "This is not a valid email buddy!"}
-                </Typography>
-              </Box>
-              <Box sx={{ marginTop: 3 }}>
-                <Controller
-                  name="password"
-                  control={control}
-                  rules={{ required: true }}
-                  defaultValue=""
-                  render={({ field }) => (
-                    <TextField
-                      // eslint-disable-next-line react/jsx-props-no-spreading
-                      {...field}
-                      id="outlined-required"
-                      label="password"
-                      type="password"
-                    />
-                  )}
-                />
-                <Typography color="red" sx={{ mt: 1, textAlign: "center" }}>
-                  {errors.password && "No password, no log in!"}
-                </Typography>
-              </Box>
-              <Box sx={{ marginTop: 3 }}>
-                <Button type="submit" variant="contained">
-                  LOG IN
-                </Button>
-              </Box>
-            </Box>
-          </form> */}
-      </Box>
-      {/* )} */}
+      {isLoggedIn ? (
+        <Box>
+          <Text fontSize="3xl">you are already logged in</Text>
+        </Box>
+      ) : (
+        <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
+          <VStack m={4}>
+            <ControlledTextInput
+              name="email"
+              control={control}
+              label="email"
+              error={errors.email}
+            />
+            <ControlledTextInput
+              name="password"
+              control={control}
+              label="password"
+              error={errors.password}
+            />
+            <Button type="submit" colorScheme="teal" size="sm">
+              Submit
+            </Button>
+          </VStack>
+        </Box>
+      )}
     </Container>
   );
 }
