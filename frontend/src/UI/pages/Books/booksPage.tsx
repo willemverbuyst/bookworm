@@ -1,6 +1,15 @@
-import { Box, Container, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Heading,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+} from "@chakra-ui/react";
 import { useState } from "react";
-import { TableWithAllBooks } from "./table";
+import TableWithAllBooks from "./table";
 import { ChartWithBooks } from "./chart";
 
 export default function BooksPage() {
@@ -17,6 +26,20 @@ export default function BooksPage() {
           Books
         </Heading>
       </Box>
+      <Tabs variant="soft-rounded" colorScheme="teal" align="center">
+        <TabList>
+          <Tab>Table</Tab>
+          <Tab>Chart</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <TableWithAllBooks />
+          </TabPanel>
+          <TabPanel>
+            <p>two</p>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
       {/* <Box>
         <Box>
           <ButtonGroup variant="outlined" aria-label="outlined button group">

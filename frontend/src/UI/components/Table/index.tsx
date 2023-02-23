@@ -1,40 +1,47 @@
-import React, { ReactElement } from "react";
-import { Box } from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+} from "@chakra-ui/react";
 
-const TableForOverview: React.FC<any> = ({
+type Props<T extends Record<"id", string>> = {
+  columns: Array<{ field: keyof T }>;
+  title: string;
+  rows: Array<T>;
+};
+export default function TableForOverview<T extends Record<"id", string>>({
   rows,
   columns,
   title,
-}: any): ReactElement => {
-  const [pageSize, setPageSize] = React.useState(10);
-
-  const width = columns.reduce((rv: any, column: { width: any }): number => {
-    return rv + (column.width ? column.width : 0);
-  }, 10);
-
+}: Props<T>) {
   return (
-    <Box>
-      <Box>{title}</Box>
-      <Box>
-        {/* <div style={{ display: "flex", height: "100%" }}>
-          <div style={{ height: 700, width }}>
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              components={{
-                Toolbar: GridToolbar,
-              }}
-              sx={{ border: "none" }}
-              pageSize={pageSize}
-              onPageSizeChange={(newPage) => setPageSize(newPage)}
-              rowsPerPageOptions={[10, 15, 20, 25]}
-              pagination
-            />
-          </div>
-        </div> */}
-      </Box>
-    </Box>
+    <TableContainer>
+      <Table variant="simple">
+        <TableCaption>{title}</TableCaption>
+        <Thead>
+          <Tr>
+            {columns.map((column) => (
+              <Th key={String(column.field)}>{String(column.field)}</Th>
+            ))}
+          </Tr>
+        </Thead>
+        <Tbody>
+          {rows.map((row) => (
+            <Tr key={row.id}>
+              {columns.map((column) => (
+                <Td key={`${row.id}-${row[column.field]}`}>
+                  {String(row[column.field])}
+                </Td>
+              ))}
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    </TableContainer>
   );
-};
-
-export default TableForOverview;
+}
