@@ -45,7 +45,7 @@ export default function App() {
         />
         <Route path="/login" element={<LoginPage />} />
         <Route
-          path="/review"
+          path="/reviews"
           element={
             <PrivateRoute>
               <>

@@ -1,5 +1,5 @@
 import { useEffect, useId } from "react";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import {
   Box,
   Button,
@@ -30,16 +30,15 @@ export default function LoginPage() {
   const { isLoggedIn } = useAppState();
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    // await loginUser(data);
-    console.log(data);
+    await loginUser(data);
     reset();
   };
 
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     navigate("/home");
-  //   }
-  // }, [isLoggedIn]);
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/home");
+    }
+  }, [isLoggedIn]);
 
   return (
     <Container centerContent>
