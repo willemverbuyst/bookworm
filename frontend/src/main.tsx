@@ -11,13 +11,15 @@ import App from "./App";
 const overmind = createOvermind(config);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <ChakraProvider>
-      <Provider value={overmind}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
-    </ChakraProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  // Strictmode doesn't work with overmind in the lastest version of react and overmind
+  // State (derived fn) updates
+  // Component doesn't rerender
+  <ChakraProvider>
+    <Provider value={overmind}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </ChakraProvider>
 );
