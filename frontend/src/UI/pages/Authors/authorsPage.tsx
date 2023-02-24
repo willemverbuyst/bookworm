@@ -1,15 +1,17 @@
-import { Box, Container, Heading } from "@chakra-ui/react";
-import React, { ReactElement, useState } from "react";
-import { TableWithAllAuthors } from "./table";
-import { ChartWithAuthors } from "./chart";
+import {
+  Box,
+  Container,
+  Heading,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+} from "@chakra-ui/react";
+import TableWithAllAuthors from "./table";
+import ChartWithAuthors from "./chart";
 
 export default function AuthorsPage() {
-  // const [showTable, setShowTable] = useState<boolean>(true);
-
-  // const displayTable = () => setShowTable(true);
-
-  // const displayChart = () => setShowTable(false);
-
   return (
     <Container centerContent>
       <Box>
@@ -17,29 +19,20 @@ export default function AuthorsPage() {
           Authors
         </Heading>
       </Box>
-      <Box>
-        {/* <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
-          <ButtonGroup variant="outlined" aria-label="outlined button group">
-            <Button
-              color="secondary"
-              variant={showTable ? "contained" : "outlined"}
-              disableElevation
-              onClick={displayTable}
-            >
-              TABLE
-            </Button>
-            <Button
-              color="secondary"
-              variant={!showTable ? "contained" : "outlined"}
-              disableElevation
-              onClick={displayChart}
-            >
-              CHART
-            </Button>
-          </ButtonGroup>
-        </Box> */}
-        {/* {showTable ? <TableWithAllAuthors /> : <ChartWithAuthors />} */}
-      </Box>
+      <Tabs variant="soft-rounded" colorScheme="teal" align="center">
+        <TabList>
+          <Tab>Table</Tab>
+          <Tab>Chart</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <TableWithAllAuthors />
+          </TabPanel>
+          <TabPanel>
+            <ChartWithAuthors />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
     </Container>
   );
 }

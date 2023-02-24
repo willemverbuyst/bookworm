@@ -1,9 +1,8 @@
 import { Box } from "@chakra-ui/react";
-import React, { ReactElement } from "react";
 import { useAppState } from "../../../business/overmind";
 import TableForOverview from "../../components/Table";
 
-export const TableWithAllAuthors: React.FC = (): ReactElement => {
+export default function TableWithAllAuthors() {
   const data = useAppState((state) => state.allAuthors);
 
   const columns = [
@@ -14,14 +13,15 @@ export const TableWithAllAuthors: React.FC = (): ReactElement => {
   return (
     <Box>
       {data ? (
-        <TableForOverview
-          rows={data}
-          columns={columns}
-          title="overview of authors"
-        />
+        // <TableForOverview
+        //   rows={data}
+        //   columns={columns}
+        //   title="overview of authors"
+        // />
+        <p>table</p>
       ) : (
         <p>No Authors</p>
       )}
     </Box>
   );
-};
+}

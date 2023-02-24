@@ -1,9 +1,8 @@
 import { Box } from "@chakra-ui/react";
-import React, { ReactElement } from "react";
 import { useAppState } from "../../../business/overmind";
 import BarChartForStatistics from "../../components/Charts/BarChart";
 
-export const ChartWithAuthors: React.FC = (): ReactElement => {
+export default function ChartWithAuthors() {
   const data = useAppState((state) => state.authorForStatistics);
 
   if (!data.length) {
@@ -19,4 +18,4 @@ export const ChartWithAuthors: React.FC = (): ReactElement => {
       />
     </Box>
   );
-};
+}
