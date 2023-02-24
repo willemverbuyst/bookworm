@@ -1,10 +1,8 @@
 import { Box } from "@chakra-ui/react";
-import React, { ReactElement } from "react";
-
 import { useAppState } from "../../../business/overmind";
 import BookPieChart from "../../components/Charts/PieChart";
 
-export const ChartWithBooks: React.FC = (): ReactElement => {
+export default function ChartWithBooks() {
   const data = useAppState((state) => state.booksGroupedByLanguage);
 
   const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -24,4 +22,4 @@ export const ChartWithBooks: React.FC = (): ReactElement => {
       )}
     </Box>
   );
-};
+}

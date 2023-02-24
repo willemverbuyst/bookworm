@@ -16,7 +16,7 @@ export default function TableWithAllBooks() {
 
   return (
     <Box>
-      {data ? (
+      {data?.length ? (
         <TableForOverview
           rows={data}
           columns={columns}
