@@ -1,25 +1,35 @@
-import { Box, Container, Heading } from "@chakra-ui/react";
-
-// type Inputs = {
-//   author: string;
-//   bookTitle: string;
-//   review: string;
-//   rating: number;
-// };
+import {
+  Box,
+  Button,
+  Container,
+  Heading,
+  useId,
+  VStack,
+} from "@chakra-ui/react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+// import { useActions } from "../../../business/overmind";
+import { ControlledTextInput } from "../../components/Controllers/TextInput";
+import { FormFields, defaultValues, validationSchema } from "./helpers";
 
 export default function ReviewPage() {
+  const id = useId();
   // const { postReview } = useActions();
-  // const {
-  //   control,
-  //   formState: { errors },
-  //   handleSubmit,
-  //   reset,
-  // } = useForm<Inputs>();
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<FormFields>({
+    defaultValues,
+    resolver: zodResolver(validationSchema),
+  });
 
-  // const onSubmit: SubmitHandler<Inputs> = async (data) => {
-  //   await postReview(data);
-  //   reset();
-  // };
+  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    // await postReview(data);
+    console.log(data);
+    reset();
+  };
 
   return (
     <Container centerContent>
@@ -27,6 +37,26 @@ export default function ReviewPage() {
         <Heading as="h1" size="lg">
           Review
         </Heading>
+      </Box>
+
+      <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
+        <VStack m={4}>
+          <ControlledTextInput
+            name="bookTitle"
+            control={control}
+            label="book title"
+            error={errors.bookTitle}
+          />
+          <ControlledTextInput
+            name="author"
+            control={control}
+            label="author"
+            error={errors.author}
+          />
+          <Button type="submit" colorScheme="teal" size="sm">
+            Submit
+          </Button>
+        </VStack>
       </Box>
 
       <Box>
