@@ -9,6 +9,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
 import { calculateDays } from "../../../business/functions/date";
 import { useAppState } from "../../../business/overmind";
 import { ControlledDatePicker } from "../../components/Controllers/DatePicker";
@@ -105,7 +106,7 @@ export default function ReviewPage() {
           </Button>
         </VStack>
       </Box>
-
+      <DevTool control={control} />
       <Box>
         {/*    
             <Box sx={{ marginTop: 3, width: 400 }}>

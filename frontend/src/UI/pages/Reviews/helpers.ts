@@ -9,10 +9,7 @@ export type FormFields = {
 };
 
 export const validationSchema = z.object({
-  bookTitle: z
-    .string()
-    .email()
-    .min(1, { message: "Title of the book is required" }),
+  bookTitle: z.string().min(1, { message: "Title of the book is required" }),
   author: z.string().min(1, { message: "Auhtor is required" }),
   startDate: z.date({
     required_error: "This field id required",
