@@ -7,7 +7,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { calculateDays } from "../../../business/functions/date";
+import { ControlledDatePicker } from "../../components/Controllers/DatePicker";
+import { ControlledNumberInput } from "../../components/Controllers/NumberInput";
 // import { useActions } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers/TextInput";
 import { FormFields, defaultValues, validationSchema } from "./helpers";
@@ -20,10 +24,23 @@ export default function ReviewPage() {
     formState: { errors },
     handleSubmit,
     reset,
+    setValue,
+    watch,
   } = useForm<FormFields>({
     defaultValues,
     resolver: zodResolver(validationSchema),
   });
+
+  const [startDate, endDate] = watch(["startDate", "endDate"]);
+
+  const numberOfDaysCalculated =
+    startDate && endDate && calculateDays(endDate, startDate);
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      setValue("duration", numberOfDaysCalculated);
+    }
+  }, [setValue, startDate, endDate]);
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     // await postReview(data);
@@ -52,6 +69,24 @@ export default function ReviewPage() {
             control={control}
             label="author"
             error={errors.author}
+          />
+          <ControlledDatePicker
+            name="startDate"
+            control={control}
+            label="startdate"
+            error={errors.startDate}
+          />
+          <ControlledDatePicker
+            name="endDate"
+            control={control}
+            label="enddate"
+            error={errors.endDate}
+          />
+          <ControlledNumberInput
+            name="duration"
+            control={control}
+            label="duration"
+            error={errors.duration}
           />
           <Button type="submit" colorScheme="teal" size="sm">
             Submit
