@@ -10,12 +10,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { calculateDays } from "../../../business/functions/date";
-import { useActions, useAppState } from "../../../business/overmind";
+import { useAppState } from "../../../business/overmind";
 import { ControlledDatePicker } from "../../components/Controllers/DatePicker";
 import { ControlledNumberInput } from "../../components/Controllers/NumberInput";
 import { ControlledSelect } from "../../components/Controllers/Select";
 // import { useActions } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers/TextInput";
+import useGetAllAuthors from "../../hooks/useGetAllAuthors";
 import { FormFields, defaultValues, validationSchema } from "./helpers";
 
 export default function ReviewPage() {
@@ -26,11 +27,7 @@ export default function ReviewPage() {
     value: a.id,
   }));
 
-  const { getAllAuthors } = useActions();
-
-  useEffect(() => {
-    getAllAuthors();
-  }, []);
+  useGetAllAuthors();
   // const { postReview } = useActions();
   const {
     control,
