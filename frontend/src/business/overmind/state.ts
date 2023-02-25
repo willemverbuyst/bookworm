@@ -5,7 +5,7 @@ import { State } from "./interfaces";
 export const state: State = {
   user: null,
   token: "",
-  isLoggedIn: false,
+  isSignedIn: false,
   authorsApi: { status: "", data: [], message: "" },
   booksApi: { status: "", data: [], message: "" },
   allAuthors: derived(({ authorsApi }: State) => {

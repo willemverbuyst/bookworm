@@ -5,7 +5,7 @@ import { config } from "./index";
 describe("State", () => {
   it("should derive authorsForStatistics", async () => {
     const overmind = createOvermindMock(config, (state) => {
-      state.allData.authorsApi.data = [
+      state.authorsApi.data = [
         {
           id: "1",
           name: "TEST NAME 1",

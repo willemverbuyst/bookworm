@@ -3,7 +3,7 @@ import { Book, BookApi } from "../models/Book";
 import { User } from "../models/User";
 
 export interface State {
-  isLoggedIn: boolean;
+  isSignedIn: boolean;
   user: User | null;
   token: string;
   allAuthors: Author[] | null;

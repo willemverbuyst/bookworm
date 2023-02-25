@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Box } from "@chakra-ui/react";
+import { useState } from "react";
 import { useAppState } from "../../../business/overmind";
 
-const CustomizedSnackbars: React.FC = (): React.ReactElement => {
+export default function CustomizedSnackbars() {
   const { apiResponse } = useAppState();
-  const [open, setOpen] = React.useState(false);
-  const [severity, setSeverity] = React.useState();
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState<"success" | "error" | undefined>();
   const [message, setMessage] = React.useState<string>();
 
   React.useEffect(() => {
@@ -36,6 +37,4 @@ const CustomizedSnackbars: React.FC = (): React.ReactElement => {
       </Snackbar> */}
     </Box>
   );
-};
-
-export default CustomizedSnackbars;
+}

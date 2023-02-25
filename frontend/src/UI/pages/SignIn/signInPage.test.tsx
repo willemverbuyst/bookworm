@@ -1,12 +1,12 @@
 import { render, screen } from "@testing-library/react";
-import LoginPage from "./signInPage";
+import SignInPage from "./signInPage";
 
-describe("Login page", () => {
+describe("Sing In page", () => {
   test("should display a title", () => {
-    render(<LoginPage />);
+    render(<SignInPage />);
 
     const heading = screen.getByRole("heading", {
-      name: /login/i,
+      name: /sign in/i,
     });
     expect(heading).toBeInTheDocument();
   });

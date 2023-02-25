@@ -4,15 +4,15 @@ import { useActions, useAppState } from "../../../business/overmind";
 
 export default function AuthNav() {
   const navigate = useNavigate();
-  const { isLoggedIn } = useAppState();
-  const { logoutUser } = useActions();
+  const { isSignedIn } = useAppState();
+  const { logOutUser } = useActions();
 
   const handleSignOut = () => {
     navigate("/");
-    logoutUser();
+    logOutUser();
   };
 
-  return isLoggedIn ? (
+  return isSignedIn ? (
     <Button
       display={{ base: "none", md: "inline-flex" }}
       fontSize="sm"

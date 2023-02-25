@@ -26,19 +26,19 @@ export default function SignInPage() {
     defaultValues,
     resolver: zodResolver(validationSchema),
   });
-  const { loginUser } = useActions();
-  const { isLoggedIn } = useAppState();
+  const { signInUser } = useActions();
+  const { isSignedIn } = useAppState();
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    await loginUser(data);
+    await signInUser(data);
     reset();
   };
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isSignedIn) {
       navigate("/home");
     }
-  }, [isLoggedIn]);
+  }, [isSignedIn]);
 
   return (
     <Container centerContent>
@@ -47,7 +47,7 @@ export default function SignInPage() {
           Sign In
         </Heading>
       </Box>
-      {isLoggedIn ? (
+      {isSignedIn ? (
         <Box>
           <Text fontSize="3xl">you are already logged in</Text>
         </Box>

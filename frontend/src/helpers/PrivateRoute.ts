@@ -1,9 +1,9 @@
 import { useAppState } from "../business/overmind";
 
-const PrivateRoute = ({ children }: { children: JSX.Element }) => {
-  const { isLoggedIn } = useAppState();
+function PrivateRoute({ children }: { children: JSX.Element }) {
+  const { isSignedIn } = useAppState();
 
-  return isLoggedIn ? children : null;
-};
+  return isSignedIn ? children : null;
+}
 
 export default PrivateRoute;
