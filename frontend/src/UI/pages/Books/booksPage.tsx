@@ -8,10 +8,18 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import TableWithAllBooks from "./table";
 import ChartWithBooks from "./chart";
+import { useActions } from "../../../business/overmind";
 
 export default function BooksPage() {
+  const { getAllBooks } = useActions();
+
+  useEffect(() => {
+    getAllBooks();
+  }, []);
+
   return (
     <Container centerContent>
       <Box>

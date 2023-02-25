@@ -33,16 +33,22 @@ export const logoutUser = ({ state }: Context) => {
   state.apiResponse = { message: "", status: undefined };
 };
 
-export const onInitializeOvermind = async ({ state, effects }: Context) => {
-  const allBooks = await effects.api.getAllBooks();
-  state.allData.booksApi = allBooks;
-  const allAuthors = await effects.api.getAllAuthors();
-  state.allData.authorsApi = allAuthors;
+export const onInitializeOvermind = async ({ state }: Context) => {
   const token = localStorage.getItem("token");
   if (token) {
     state.token = token;
     state.isLoggedIn = true;
   }
+};
+
+export const getAllAuthors = async ({ effects, state }: Context) => {
+  const allAuthors = await effects.api.getAllAuthors();
+  state.authorsApi = allAuthors;
+};
+
+export const getAllBooks = async ({ effects, state }: Context) => {
+  const allBooks = await effects.api.getAllBooks();
+  state.booksApi = allBooks;
 };
 
 export const postReview = async (

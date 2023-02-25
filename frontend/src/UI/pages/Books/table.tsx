@@ -4,7 +4,7 @@ import { useAppState } from "../../../business/overmind";
 import { Book } from "../../../business/models/Book";
 
 export default function TableWithAllBooks() {
-  const data = useAppState((state) => state.allBooks);
+  const data = useAppState().allBooks;
 
   const columns: Array<{ field: keyof Book }> = [
     { field: "title" },

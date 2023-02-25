@@ -8,10 +8,18 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import TableWithAllAuthors from "./table";
 import ChartWithAuthors from "./chart";
+import { useActions } from "../../../business/overmind";
 
 export default function AuthorsPage() {
+  const { getAllAuthors } = useActions();
+
+  useEffect(() => {
+    getAllAuthors();
+  }, []);
+
   return (
     <Container centerContent>
       <Box>
