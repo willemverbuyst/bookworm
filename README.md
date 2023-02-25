@@ -7,8 +7,8 @@ A project to connect and try out some techniques in a docker environment.
 - TypeScript
 - React
 - Overmind
-- MUI
-- UseFormHook
+- Chakra ui
+- React Hook form
 
 ## Backend
 
