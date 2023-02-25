@@ -14,7 +14,7 @@ import { useAppState, useActions } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers/TextInput";
 import { defaultValues, FormFields, validationSchema } from "./helpers";
 
-export default function LoginPage() {
+export default function SignInPage() {
   const id = useId();
   const navigate = useNavigate();
   const {
@@ -44,7 +44,7 @@ export default function LoginPage() {
     <Container centerContent>
       <Box>
         <Heading as="h1" size="lg">
-          Login
+          Sign In
         </Heading>
       </Box>
       {isLoggedIn ? (

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import LoginPage from "./loginPage";
+import LoginPage from "./signInPage";
 
 describe("Login page", () => {
   test("should display a title", () => {

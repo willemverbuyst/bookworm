@@ -4,7 +4,7 @@ import AppBar from "./UI/components/NavigationBar/navigationBar";
 import AuthorsPage from "./UI/pages/Authors/authorsPage";
 import BooksPage from "./UI/pages/Books/booksPage";
 import ReviewPage from "./UI/pages/Reviews/reviewPage";
-import LoginPage from "./UI/pages/Login/loginPage";
+import SignInPage from "./UI/pages/SignIn/signInPage";
 import Message from "./UI/components/Message";
 import PageNotFoundPage from "./UI/pages/PageNotFound/pageNotFoundPage";
 import WelcomePage from "./UI/pages/Welcome/welcomePage";
@@ -43,7 +43,7 @@ export default function App() {
             </>
           }
         />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signin" element={<SignInPage />} />
         <Route
           path="/reviews"
           element={
