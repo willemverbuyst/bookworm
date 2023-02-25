@@ -10,14 +10,27 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { calculateDays } from "../../../business/functions/date";
+import { useActions, useAppState } from "../../../business/overmind";
 import { ControlledDatePicker } from "../../components/Controllers/DatePicker";
 import { ControlledNumberInput } from "../../components/Controllers/NumberInput";
+import { ControlledSelect } from "../../components/Controllers/Select";
 // import { useActions } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers/TextInput";
 import { FormFields, defaultValues, validationSchema } from "./helpers";
 
 export default function ReviewPage() {
   const id = useId();
+  const allAuthors = useAppState().allAuthors || [];
+  const authorsForSelect = allAuthors?.map((a) => ({
+    display: a.name,
+    value: a.id,
+  }));
+
+  const { getAllAuthors } = useActions();
+
+  useEffect(() => {
+    getAllAuthors();
+  }, []);
   // const { postReview } = useActions();
   const {
     control,
@@ -64,11 +77,13 @@ export default function ReviewPage() {
             label="book title"
             error={errors.bookTitle}
           />
-          <ControlledTextInput
+          <ControlledSelect
+            dataSet={authorsForSelect}
             name="author"
             control={control}
-            label="author"
+            label="country"
             error={errors.author}
+            helperText="only known authors can be selected"
           />
           <ControlledDatePicker
             name="startDate"
@@ -95,58 +110,7 @@ export default function ReviewPage() {
       </Box>
 
       <Box>
-        {/*    <form onSubmit={handleSubmit(onSubmit)}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              overflow: "hidden",
-              margin: "auto",
-            }}
-          >
-            <Box sx={{ marginTop: 3, width: 400 }}>
-              <Controller
-                name="author"
-                control={control}
-                rules={{ required: true }}
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    // eslint-disable-next-line react/jsx-props-no-spreading
-                    {...field}
-                    id="authorInput"
-                    label="author"
-                    type="text"
-                    fullWidth
-                  />
-                )}
-              />
-              <Typography color="red" sx={{ mt: 1, textAlign: "center" }}>
-                {errors.author && "This field is required!"}
-              </Typography>
-            </Box>
-            <Box sx={{ marginTop: 3, width: 400 }}>
-              <Controller
-                name="bookTitle"
-                control={control}
-                rules={{ required: true }}
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    // eslint-disable-next-line react/jsx-props-no-spreading
-                    {...field}
-                    id="bookTitleInput"
-                    label="book title"
-                    type="text"
-                    fullWidth
-                  />
-                )}
-              />
-              <Typography color="red" sx={{ mt: 1, textAlign: "center" }}>
-                {errors.bookTitle && "This field is required!"}
-              </Typography>
-            </Box>
+        {/*    
             <Box sx={{ marginTop: 3, width: 400 }}>
               <Controller
                 name="review"
