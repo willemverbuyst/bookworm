@@ -13,8 +13,12 @@ export const api = {
   },
 
   getAllBooks: async (): Promise<BookApi> => {
-    const response = await axios.get(`${BACKEND_URL}/books`);
-    return response.data;
+    try {
+      const response = await axios.get(`${BACKEND_URL}/books`);
+      return response.data;
+    } catch (error) {
+      throw new Error(JSON.stringify(error));
+    }
   },
 
   getUser: async (email: string, password: string): Promise<UserApi> => {
