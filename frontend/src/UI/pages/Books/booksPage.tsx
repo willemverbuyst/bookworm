@@ -8,7 +8,7 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import TableWithAllBooks from "./table";
+import TableWithAllBooks from "./TableWithAllBooks";
 import ChartWithBooks from "./chart";
 import useGetAllBooks from "../../hooks/useGetAllBooks";
 
