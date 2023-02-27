@@ -20,6 +20,9 @@ import { ControlledTextInput } from "../../components/Controllers/TextInput";
 import useGetAllAuthors from "../../hooks/useGetAllAuthors";
 import { FormFields, defaultValues, validationSchema } from "./helpers";
 import { ControlledTextArea } from "../../components/Controllers";
+import StarRating, {
+  ControlledStarRating,
+} from "../../components/Controllers/StarRating";
 
 export default function ReviewPage() {
   const id = useId();
@@ -38,6 +41,7 @@ export default function ReviewPage() {
     reset,
     setValue,
     watch,
+    register,
   } = useForm<FormFields>({
     defaultValues,
     resolver: zodResolver(validationSchema),
@@ -108,64 +112,19 @@ export default function ReviewPage() {
             label="description"
             error={errors.description}
           />
+          <ControlledStarRating
+            name="rating"
+            control={control}
+            label="rating"
+            error={errors.rating}
+          />
           <Button type="submit" colorScheme="teal" size="sm">
             Submit
           </Button>
         </VStack>
       </Box>
       <DevTool control={control} />
-      <Box>
-        {/*    
-            <Box sx={{ marginTop: 3, width: 400 }}>
-              <Controller
-                name="review"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <TextField
-                    // eslint-disable-next-line react/jsx-props-no-spreading
-                    {...field}
-                    id="reviewInput"
-                    label="review"
-                    type="text"
-                    fullWidth
-                    multiline
-                    rows={4}
-                  />
-                )}
-              />
-            </Box>
-            <Box sx={{ marginTop: 3, width: 400 }}>
-              <Controller
-                name="rating"
-                control={control}
-                defaultValue={1}
-                render={({ field }) => (
-                  <>
-                    <Typography component="legend">Rating</Typography>
-                    <Rating
-                      // eslint-disable-next-line react/jsx-props-no-spreading
-                      {...field}
-                      id="ratingInput"
-                      name="rating"
-                      onChange={(e) =>
-                        field.onChange(
-                          Number((e.target as HTMLInputElement).value)
-                        )
-                      }
-                    />
-                  </>
-                )}
-              />
-            </Box>
-            <Box sx={{ marginTop: 3 }}>
-              <Button type="submit" variant="contained">
-                ADD REVIEW
-              </Button>
-            </Box>
-          </Box>
-        </form> */}
-      </Box>
+      <Box />
     </Container>
   );
 }
