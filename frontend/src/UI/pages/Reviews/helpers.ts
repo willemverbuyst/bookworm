@@ -6,6 +6,7 @@ export type FormFields = {
   startDate: Date;
   endDate: Date;
   duration: number | string;
+  description: string;
 };
 
 export const validationSchema = z.object({
@@ -28,4 +29,5 @@ export const defaultValues = {
   startDate: new Date(),
   endDate: undefined,
   duration: "",
+  description: "",
 };

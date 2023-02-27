@@ -19,6 +19,7 @@ import { ControlledSelect } from "../../components/Controllers/Select";
 import { ControlledTextInput } from "../../components/Controllers/TextInput";
 import useGetAllAuthors from "../../hooks/useGetAllAuthors";
 import { FormFields, defaultValues, validationSchema } from "./helpers";
+import { ControlledTextArea } from "../../components/Controllers";
 
 export default function ReviewPage() {
   const id = useId();
@@ -100,6 +101,12 @@ export default function ReviewPage() {
             control={control}
             label="duration"
             error={errors.duration}
+          />
+          <ControlledTextArea
+            name="description"
+            control={control}
+            label="description"
+            error={errors.description}
           />
           <Button type="submit" colorScheme="teal" size="sm">
             Submit
