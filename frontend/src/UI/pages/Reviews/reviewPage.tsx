@@ -20,16 +20,19 @@ import { ControlledTextInput } from "../../components/Controllers/TextInput";
 import useGetAllAuthors from "../../hooks/useGetAllAuthors";
 import { FormFields, defaultValues, validationSchema } from "./helpers";
 import { ControlledTextArea } from "../../components/Controllers";
-import StarRating, {
-  ControlledStarRating,
-} from "../../components/Controllers/StarRating";
+import { ControlledStarRating } from "../../components/Controllers/StarRating";
 
 export default function ReviewPage() {
   const id = useId();
   const allAuthors = useAppState().allAuthors || [];
+  const allBooks = useAppState().allBooks || [];
   const authorsForSelect = allAuthors?.map((a) => ({
     display: a.name,
     value: a.id,
+  }));
+  const booksForSelect = allBooks?.map((b) => ({
+    display: b.title,
+    value: b.id,
   }));
 
   useGetAllAuthors();
@@ -41,7 +44,6 @@ export default function ReviewPage() {
     reset,
     setValue,
     watch,
-    register,
   } = useForm<FormFields>({
     defaultValues,
     resolver: zodResolver(validationSchema),
@@ -75,16 +77,24 @@ export default function ReviewPage() {
       <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
         <VStack m={4}>
           <ControlledTextInput
-            name="bookTitle"
+            name="title"
             control={control}
-            label="book title"
-            error={errors.bookTitle}
+            label="review title"
+            error={errors.title}
+          />
+          <ControlledSelect
+            dataSet={booksForSelect}
+            name="book"
+            control={control}
+            label="book"
+            error={errors.book}
+            helperText="only known books can be selected"
           />
           <ControlledSelect
             dataSet={authorsForSelect}
             name="author"
             control={control}
-            label="country"
+            label="author"
             error={errors.author}
             helperText="only known authors can be selected"
           />

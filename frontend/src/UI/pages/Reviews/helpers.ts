@@ -1,7 +1,8 @@
 import { z } from "zod";
 
 export type FormFields = {
-  bookTitle: string;
+  title: string;
+  book: string;
   author: string;
   startDate: Date;
   endDate: Date;
@@ -11,8 +12,9 @@ export type FormFields = {
 };
 
 export const validationSchema = z.object({
-  bookTitle: z.string().min(1, { message: "Title of the book is required" }),
-  author: z.string().min(1, { message: "Auhtor is required" }),
+  title: z.string().min(1, { message: "Title of the review is required" }),
+  book: z.string().min(1, { message: "Book is required" }),
+  author: z.string().min(1, { message: "Author is required" }),
   startDate: z.date({
     required_error: "This field id required",
     invalid_type_error: "Start date must be a date",
@@ -25,7 +27,8 @@ export const validationSchema = z.object({
 });
 
 export const defaultValues = {
-  bookTitle: "",
+  title: "",
+  book: "",
   author: "",
   startDate: new Date(),
   endDate: undefined,
