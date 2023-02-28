@@ -40,8 +40,8 @@ export default function StarRating({
             key={star}
             icon={<StarIcon color={star <= rating ? "teal.600" : "gray.300"} />}
             onClick={() => {
-              setRating(rating === 1 && star === 1 ? 0 : star);
-              onChange(rating === 1 && star === 1 ? 0 : star);
+              setRating(rating === star && rating > 0 ? rating - 1 : star);
+              onChange(rating === star && rating > 0 ? rating - 1 : star);
             }}
           />
         );
