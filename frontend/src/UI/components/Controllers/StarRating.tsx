@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   FormControl,
@@ -22,34 +22,37 @@ type StarRatingProps<T extends FieldValues> = {
   name: string;
 } & UseControllerProps<T>;
 
-export default function StarRating({
-  onChange,
-}: {
+type Props = {
   onChange: (rating: number) => void;
-}) {
-  const [rating, setRating] = useState(0);
+};
 
-  return (
-    <Box>
-      {[...Array(5)].map((_, index) => {
-        const star = index + 1;
-        return (
-          <IconButton
-            aria-label="star"
-            colorScheme="whiteAlpha"
-            key={star}
-            icon={<StarIcon color={star <= rating ? "teal.600" : "gray.300"} />}
-            onClick={() => {
-              setRating(rating === star && rating > 0 ? rating - 1 : star);
-              onChange(rating === star && rating > 0 ? rating - 1 : star);
-            }}
-          />
-        );
-      })}
-    </Box>
-  );
-}
+const StarRating = React.forwardRef<HTMLDivElement, Props>(
+  ({ onChange }, ref) => {
+    const [rating, setRating] = useState(0);
 
+    return (
+      <Box ref={ref}>
+        {[...Array(5)].map((_, index) => {
+          const star = index + 1;
+          return (
+            <IconButton
+              aria-label="star"
+              colorScheme="whiteAlpha"
+              key={star}
+              icon={
+                <StarIcon color={star <= rating ? "teal.600" : "gray.300"} />
+              }
+              onClick={() => {
+                setRating(rating === star && rating > 0 ? rating - 1 : star);
+                onChange(rating === star && rating > 0 ? rating - 1 : star);
+              }}
+            />
+          );
+        })}
+      </Box>
+    );
+  }
+);
 export function ControlledStarRating<T extends FieldValues>({
   control,
   error,
