@@ -9,7 +9,8 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { NavItem, NAV_ITEMS } from "./navItems";
+import { NavItem } from "./navItems";
+import useNavItems from "../../hooks/useNaveItems";
 
 function MobileNavItem({ label, children, href }: NavItem) {
   const { isOpen, onToggle } = useDisclosure();
@@ -65,13 +66,14 @@ function MobileNavItem({ label, children, href }: NavItem) {
 }
 
 export default function MobileNav() {
+  const navItems = useNavItems();
   return (
     <Stack
       bg={useColorModeValue("white", "gray.800")}
       p={4}
       display={{ md: "none" }}
     >
-      {NAV_ITEMS.map((navItem) => (
+      {navItems.map((navItem) => (
         // eslint-disable-next-line react/jsx-props-no-spreading
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}

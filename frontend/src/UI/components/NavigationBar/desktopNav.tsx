@@ -12,7 +12,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { NavItem, NAV_ITEMS } from "./navItems";
+import { NavItem } from "./navItems";
+import useNavItems from "../../hooks/useNaveItems";
 
 function DesktopSubNav({ label, href, subLabel }: NavItem) {
   return (
@@ -55,10 +56,11 @@ export default function DesktopNav() {
   const linkColor = useColorModeValue("gray.600", "gray.200");
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
+  const navItems = useNavItems();
 
   return (
     <Stack direction="row" spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
+      {navItems.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger="hover" placement="bottom-start">
             <PopoverTrigger>
