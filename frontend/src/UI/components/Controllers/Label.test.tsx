@@ -39,7 +39,5 @@ describe("Label", () => {
     expect(labelText).toHaveStyle(
       "color: rgb(163, 163, 163); font-style: italic;"
     );
-
-    screen.logTestingPlaygroundURL();
   });
 });

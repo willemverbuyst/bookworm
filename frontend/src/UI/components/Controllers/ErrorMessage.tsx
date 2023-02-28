@@ -5,5 +5,7 @@ type Props = {
 };
 
 export default function ErrorMessage({ text }: Props) {
-  return <FormErrorMessage>{text}</FormErrorMessage>;
+  return (
+    <FormErrorMessage style={{ color: "#e53e3e" }}>{text}</FormErrorMessage>
+  );
 }
