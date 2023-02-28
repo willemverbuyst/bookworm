@@ -4,7 +4,6 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  FormHelperText,
   IconButton,
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
@@ -14,6 +13,7 @@ import {
   FieldValues,
   UseControllerProps,
 } from "react-hook-form";
+import HelperText from "./HelperText";
 
 type StarRatingProps<T extends FieldValues> = {
   error?: FieldError | undefined;
@@ -71,9 +71,7 @@ export function ControlledStarRating<T extends FieldValues>({
         render={({ field }) => <StarRating {...field} />}
       />
       {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
-      <FormHelperText fontSize="xs" color="gray.400">
-        {helperText}
-      </FormHelperText>
+      {helperText && <HelperText text={helperText} />}
     </FormControl>
   );
 }

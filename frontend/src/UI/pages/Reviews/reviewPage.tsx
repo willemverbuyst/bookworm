@@ -1,4 +1,13 @@
-import { Box, Button, Container, useId, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  HStack,
+  Spacer,
+  useId,
+  VStack,
+} from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -87,24 +96,26 @@ export default function ReviewPage() {
             error={errors.author}
             helperText="only known authors can be selected"
           />
-          <ControlledDatePicker
-            name="startDate"
-            control={control}
-            label="startdate"
-            error={errors.startDate}
-          />
-          <ControlledDatePicker
-            name="endDate"
-            control={control}
-            label="enddate"
-            error={errors.endDate}
-          />
-          <ControlledNumberInput
-            name="duration"
-            control={control}
-            label="duration"
-            error={errors.duration}
-          />
+          <HStack>
+            <ControlledDatePicker
+              name="startDate"
+              control={control}
+              label="startdate"
+              error={errors.startDate}
+            />
+            <ControlledDatePicker
+              name="endDate"
+              control={control}
+              label="enddate"
+              error={errors.endDate}
+            />
+            <ControlledNumberInput
+              name="duration"
+              control={control}
+              label="duration"
+              error={errors.duration}
+            />
+          </HStack>
           <ControlledTextArea
             name="description"
             control={control}

@@ -15,6 +15,7 @@ import {
   FieldValues,
   UseControllerProps,
 } from "react-hook-form";
+import HelperText from "./HelperText";
 
 type NumberInputProps<T extends FieldValues> = {
   error?: FieldError | undefined;
@@ -52,9 +53,7 @@ export function ControlledNumberInput<T extends FieldValues>({
         )}
       />
       {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
-      <FormHelperText fontSize="xs" color="gray.400">
-        {helperText}
-      </FormHelperText>
+      {helperText && <HelperText text={helperText} />}
     </FormControl>
   );
 }

@@ -2,7 +2,6 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  FormHelperText,
   Input,
 } from "@chakra-ui/react";
 import {
@@ -11,6 +10,7 @@ import {
   FieldValues,
   UseControllerProps,
 } from "react-hook-form";
+import HelperText from "./HelperText";
 
 type TextInputProps<T extends FieldValues> = {
   error?: FieldError | undefined;
@@ -37,9 +37,7 @@ export function ControlledTextInput<T extends FieldValues>({
         render={({ field }) => <Input {...field} />}
       />
       {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
-      <FormHelperText fontSize="xs" color="gray.400">
-        {helperText}
-      </FormHelperText>
+      {helperText && <HelperText text={helperText} />}
     </FormControl>
   );
 }

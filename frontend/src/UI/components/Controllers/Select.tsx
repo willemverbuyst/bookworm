@@ -1,7 +1,6 @@
 import {
   FormControl,
   FormErrorMessage,
-  FormHelperText,
   FormLabel,
   Select,
 } from "@chakra-ui/react";
@@ -11,6 +10,7 @@ import {
   FieldValues,
   UseControllerProps,
 } from "react-hook-form";
+import HelperText from "./HelperText";
 
 type SelectProps<T extends FieldValues, U> = {
   dataSet: U[];
@@ -55,9 +55,7 @@ export function ControlledSelect<
         )}
       />
       {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
-      <FormHelperText fontSize="xs" color="gray.400">
-        {helperText}
-      </FormHelperText>
+      {helperText && <HelperText text={helperText} />}
     </FormControl>
   );
 }
