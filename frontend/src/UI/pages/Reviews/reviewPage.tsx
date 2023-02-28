@@ -51,10 +51,9 @@ export default function ReviewPage() {
 
   const [startDate, endDate] = watch(["startDate", "endDate"]);
 
-  const numberOfDaysCalculated =
-    startDate && endDate && calculateDays(endDate, startDate);
-
   useEffect(() => {
+    const numberOfDaysCalculated =
+      startDate && endDate && calculateDays(endDate, startDate);
     if (startDate && endDate) {
       setValue("duration", numberOfDaysCalculated);
     }

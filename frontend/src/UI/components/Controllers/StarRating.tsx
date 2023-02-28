@@ -68,7 +68,9 @@ export function ControlledStarRating<T extends FieldValues>({
         render={({ field }) => <StarRating {...field} />}
       />
       {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
-      <FormHelperText>{helperText}</FormHelperText>
+      <FormHelperText fontSize="xs" color="gray.400">
+        {helperText}
+      </FormHelperText>
     </FormControl>
   );
 }

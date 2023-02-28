@@ -37,7 +37,9 @@ export function ControlledTextInput<T extends FieldValues>({
         render={({ field }) => <Input {...field} />}
       />
       {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
-      <FormHelperText>{helperText}</FormHelperText>
+      <FormHelperText fontSize="xs" color="gray.400">
+        {helperText}
+      </FormHelperText>
     </FormControl>
   );
 }

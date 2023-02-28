@@ -37,7 +37,9 @@ export function ControlledTextArea<T extends FieldValues>({
         render={({ field }) => <Textarea {...field} />}
       />
       {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
-      <FormHelperText>{helperText}</FormHelperText>
+      <FormHelperText fontSize="xs" color="gray.400">
+        {helperText}
+      </FormHelperText>
     </FormControl>
   );
 }

@@ -55,7 +55,9 @@ export function ControlledSelect<
         )}
       />
       {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
-      <FormHelperText>{helperText}</FormHelperText>
+      <FormHelperText fontSize="xs" color="gray.400">
+        {helperText}
+      </FormHelperText>
     </FormControl>
   );
 }
