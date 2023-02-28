@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Box,
   FormControl,
-  FormLabel,
   FormErrorMessage,
   IconButton,
 } from "@chakra-ui/react";
@@ -14,6 +13,7 @@ import {
   UseControllerProps,
 } from "react-hook-form";
 import HelperText from "./HelperText";
+import Label from "./Label";
 
 type StarRatingProps<T extends FieldValues> = {
   error?: FieldError | undefined;
@@ -62,9 +62,7 @@ export function ControlledStarRating<T extends FieldValues>({
 }: StarRatingProps<T>) {
   return (
     <FormControl isInvalid={!!error}>
-      <FormLabel style={{ color: "#a3a3a3", fontStyle: "italic" }}>
-        {label}
-      </FormLabel>
+      {label && <Label text={label} />}
       <Controller
         name={name}
         control={control}

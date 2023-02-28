@@ -1,4 +1,4 @@
-import { FormControl, FormErrorMessage, FormLabel } from "@chakra-ui/react";
+import { FormControl, FormErrorMessage } from "@chakra-ui/react";
 import { SingleDatepicker } from "chakra-dayzed-datepicker";
 import {
   Controller,
@@ -7,6 +7,7 @@ import {
   UseControllerProps,
 } from "react-hook-form";
 import HelperText from "./HelperText";
+import Label from "./Label";
 
 type DatePickerProps<T extends FieldValues> = {
   error?: FieldError | undefined;
@@ -24,9 +25,7 @@ export function ControlledDatePicker<T extends FieldValues>({
 }: DatePickerProps<T>) {
   return (
     <FormControl isInvalid={!!error}>
-      <FormLabel style={{ color: "#a3a3a3", fontStyle: "italic" }}>
-        {label}
-      </FormLabel>
+      {label && <Label text={label} />}
       <Controller
         name={name}
         control={control}

@@ -1,9 +1,4 @@
-import {
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Select,
-} from "@chakra-ui/react";
+import { FormControl, FormErrorMessage, Select } from "@chakra-ui/react";
 import {
   Controller,
   FieldError,
@@ -11,6 +6,7 @@ import {
   UseControllerProps,
 } from "react-hook-form";
 import HelperText from "./HelperText";
+import Label from "./Label";
 
 type SelectProps<T extends FieldValues, U> = {
   dataSet: U[];
@@ -35,9 +31,7 @@ export function ControlledSelect<
 }: SelectProps<T, U>) {
   return (
     <FormControl isInvalid={!!error}>
-      <FormLabel style={{ color: "#a3a3a3", fontStyle: "italic" }}>
-        {label}
-      </FormLabel>
+      {label && <Label text={label} />}
       <Controller
         name={name}
         control={control}
