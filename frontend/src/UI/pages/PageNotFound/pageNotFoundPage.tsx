@@ -1,13 +1,10 @@
-import { Box, Container, Heading, Text } from "@chakra-ui/react";
+import { Container, Text } from "@chakra-ui/react";
+import PageTitle from "../../components/Text/PageTitle";
 
 export default function PageNotFoundPage() {
   return (
     <Container centerContent>
-      <Box>
-        <Heading as="h1" size="lg">
-          404
-        </Heading>
-      </Box>
+      <PageTitle title="404" />
       <Text fontSize="3xl">Oops...page not found</Text>
     </Container>
   );

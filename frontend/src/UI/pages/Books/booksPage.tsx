@@ -1,7 +1,5 @@
 import {
-  Box,
   Container,
-  Heading,
   Tab,
   TabList,
   TabPanel,
@@ -11,17 +9,14 @@ import {
 import TableWithAllBooks from "./TableWithAllBooks";
 import ChartWithBooks from "./chart";
 import useGetAllBooks from "../../hooks/useGetAllBooks";
+import PageTitle from "../../components/Text/PageTitle";
 
 export default function BooksPage() {
   useGetAllBooks();
 
   return (
     <Container centerContent>
-      <Box>
-        <Heading as="h1" size="lg">
-          Books
-        </Heading>
-      </Box>
+      <PageTitle title="Books" />
       <Tabs variant="soft-rounded" colorScheme="teal" align="center">
         <TabList>
           <Tab>Table</Tab>

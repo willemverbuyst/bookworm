@@ -1,7 +1,5 @@
 import {
-  Box,
   Container,
-  Heading,
   Tab,
   TabList,
   TabPanel,
@@ -11,17 +9,14 @@ import {
 import TableWithAllAuthors from "./table";
 import ChartWithAuthors from "./chart";
 import useGetAllAuthors from "../../hooks/useGetAllAuthors";
+import PageTitle from "../../components/Text/PageTitle";
 
 export default function AuthorsPage() {
   useGetAllAuthors();
 
   return (
     <Container centerContent>
-      <Box>
-        <Heading as="h1" size="lg">
-          Authors
-        </Heading>
-      </Box>
+      <PageTitle title="Authors" />
       <Tabs variant="soft-rounded" colorScheme="teal" align="center">
         <TabList>
           <Tab>Table</Tab>

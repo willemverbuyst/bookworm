@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Heading,
-  useId,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Container, useId, VStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -21,6 +14,7 @@ import useGetAllAuthors from "../../hooks/useGetAllAuthors";
 import { FormFields, defaultValues, validationSchema } from "./helpers";
 import { ControlledTextArea } from "../../components/Controllers";
 import { ControlledStarRating } from "../../components/Controllers/StarRating";
+import PageTitle from "../../components/Text/PageTitle";
 
 export default function ReviewPage() {
   const id = useId();
@@ -67,11 +61,7 @@ export default function ReviewPage() {
 
   return (
     <Container centerContent>
-      <Box>
-        <Heading as="h1" size="lg">
-          Review
-        </Heading>
-      </Box>
+      <PageTitle title="Review" />
 
       <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
         <VStack m={4}>
