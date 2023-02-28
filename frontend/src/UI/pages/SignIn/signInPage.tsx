@@ -44,18 +44,20 @@ export default function SignInPage() {
         </Box>
       ) : (
         <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
-          <VStack m={4}>
+          <VStack spacing={6}>
             <ControlledTextInput
               name="email"
               control={control}
               label="email"
               error={errors.email}
+              required
             />
             <ControlledTextInput
               name="password"
               control={control}
               label="password"
               error={errors.password}
+              required
             />
             <Button type="submit" colorScheme="teal" size="sm">
               Submit

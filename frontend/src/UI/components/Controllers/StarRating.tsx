@@ -15,13 +15,6 @@ import {
 import HelperText from "./HelperText";
 import Label from "./Label";
 
-type StarRatingProps<T extends FieldValues> = {
-  error?: FieldError | undefined;
-  helperText?: string | null;
-  label?: string;
-  name: string;
-} & UseControllerProps<T>;
-
 type Props = {
   onChange: (rating: number) => void;
 };
@@ -53,16 +46,26 @@ const StarRating = React.forwardRef<HTMLDivElement, Props>(
     );
   }
 );
+
+type StarRatingProps<T extends FieldValues> = {
+  error?: FieldError | undefined;
+  helperText?: string | null;
+  label?: string;
+  name: string;
+  required?: boolean;
+} & UseControllerProps<T>;
+
 export function ControlledStarRating<T extends FieldValues>({
   control,
   error,
   helperText,
   label,
   name,
+  required = false,
 }: StarRatingProps<T>) {
   return (
     <FormControl isInvalid={!!error}>
-      {label && <Label text={label} />}
+      {label && <Label text={label} isRequired={required} />}
       <Controller
         name={name}
         control={control}

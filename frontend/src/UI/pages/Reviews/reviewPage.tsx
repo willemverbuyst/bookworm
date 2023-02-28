@@ -73,12 +73,13 @@ export default function ReviewPage() {
       <PageTitle title="Review" />
 
       <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
-        <VStack m={4}>
+        <VStack spacing={6}>
           <ControlledTextInput
             name="title"
             control={control}
             label="review title"
             error={errors.title}
+            required
           />
           <ControlledSelect
             dataSet={booksForSelect}
@@ -87,6 +88,7 @@ export default function ReviewPage() {
             label="book"
             error={errors.book}
             helperText="only known books can be selected"
+            required
           />
           <ControlledSelect
             dataSet={authorsForSelect}
@@ -95,6 +97,7 @@ export default function ReviewPage() {
             label="author"
             error={errors.author}
             helperText="only known authors can be selected"
+            required
           />
           <HStack>
             <ControlledDatePicker
@@ -102,6 +105,7 @@ export default function ReviewPage() {
               control={control}
               label="startdate"
               error={errors.startDate}
+              required
             />
             <ControlledDatePicker
               name="endDate"
@@ -127,6 +131,7 @@ export default function ReviewPage() {
             control={control}
             label="rating"
             error={errors.rating}
+            required
           />
           <Button type="submit" colorScheme="teal" size="sm">
             Submit

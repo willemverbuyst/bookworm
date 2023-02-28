@@ -13,6 +13,7 @@ type TextInputProps<T extends FieldValues> = {
   helperText?: string | null;
   label?: string;
   name: string;
+  required?: boolean;
 } & UseControllerProps<T>;
 
 export function ControlledTextInput<T extends FieldValues>({
@@ -21,10 +22,11 @@ export function ControlledTextInput<T extends FieldValues>({
   helperText,
   label,
   name,
+  required = false,
 }: TextInputProps<T>) {
   return (
     <FormControl isInvalid={!!error}>
-      {label && <Label text={label} />}
+      {label && <Label text={label} isRequired={required} />}
       <Controller
         name={name}
         control={control}

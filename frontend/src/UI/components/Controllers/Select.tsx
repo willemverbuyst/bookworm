@@ -31,7 +31,7 @@ export function ControlledSelect<
 }: SelectProps<T, U>) {
   return (
     <FormControl isInvalid={!!error}>
-      {label && <Label text={label} />}
+      {label && <Label text={label} isRequired={required} />}
       <Controller
         name={name}
         control={control}
