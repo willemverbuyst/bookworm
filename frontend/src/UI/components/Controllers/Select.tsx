@@ -1,10 +1,11 @@
-import { FormControl, FormErrorMessage, Select } from "@chakra-ui/react";
+import { FormControl, Select } from "@chakra-ui/react";
 import {
   Controller,
   FieldError,
   FieldValues,
   UseControllerProps,
 } from "react-hook-form";
+import ErrorMessage from "./ErrorMessage";
 import HelperText from "./HelperText";
 import Label from "./Label";
 
@@ -48,7 +49,7 @@ export function ControlledSelect<
           </Select>
         )}
       />
-      {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+      {error?.message && <ErrorMessage text={error.message} />}
       {helperText && <HelperText text={helperText} />}
     </FormControl>
   );

@@ -1,6 +1,5 @@
 import {
   FormControl,
-  FormErrorMessage,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
@@ -13,6 +12,7 @@ import {
   FieldValues,
   UseControllerProps,
 } from "react-hook-form";
+import ErrorMessage from "./ErrorMessage";
 import HelperText from "./HelperText";
 import Label from "./Label";
 
@@ -51,7 +51,7 @@ export function ControlledNumberInput<T extends FieldValues>({
           </NumberInput>
         )}
       />
-      {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+      {error?.message && <ErrorMessage text={error.message} />}
       {helperText && <HelperText text={helperText} />}
     </FormControl>
   );
