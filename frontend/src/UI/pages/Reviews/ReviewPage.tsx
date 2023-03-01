@@ -2,9 +2,7 @@ import {
   Box,
   Button,
   Container,
-  Flex,
   HStack,
-  Spacer,
   useId,
   VStack,
 } from "@chakra-ui/react";
@@ -24,8 +22,9 @@ import { FormFields, defaultValues, validationSchema } from "./helpers";
 import { ControlledTextArea } from "../../components/Controllers";
 import { ControlledStarRating } from "../../components/Controllers/StarRating";
 import PageTitle from "../../components/Text/PageTitle";
+import NavigationBar from "../../components/Navigation/NavigationBar";
 
-export default function ReviewPage() {
+function ReviewPage() {
   const id = useId();
   const allAuthors = useAppState().allAuthors || [];
   const allBooks = useAppState().allBooks || [];
@@ -69,77 +68,82 @@ export default function ReviewPage() {
   };
 
   return (
-    <Container centerContent>
-      <PageTitle title="Review" />
+    <>
+      <NavigationBar />
+      <Container centerContent>
+        <PageTitle title="Review" />
 
-      <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
-        <VStack spacing={6}>
-          <ControlledTextInput
-            name="title"
-            control={control}
-            label="review title"
-            error={errors.title}
-            required
-          />
-          <ControlledSelect
-            dataSet={booksForSelect}
-            name="book"
-            control={control}
-            label="book"
-            error={errors.book}
-            helperText="only known books can be selected"
-            required
-          />
-          <ControlledSelect
-            dataSet={authorsForSelect}
-            name="author"
-            control={control}
-            label="author"
-            error={errors.author}
-            helperText="only known authors can be selected"
-            required
-          />
-          <HStack>
-            <ControlledDatePicker
-              name="startDate"
+        <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
+          <VStack spacing={6}>
+            <ControlledTextInput
+              name="title"
               control={control}
-              label="startdate"
-              error={errors.startDate}
+              label="review title"
+              error={errors.title}
               required
             />
-            <ControlledDatePicker
-              name="endDate"
+            <ControlledSelect
+              dataSet={booksForSelect}
+              name="book"
               control={control}
-              label="enddate"
-              error={errors.endDate}
+              label="book"
+              error={errors.book}
+              helperText="only known books can be selected"
+              required
             />
-            <ControlledNumberInput
-              name="duration"
+            <ControlledSelect
+              dataSet={authorsForSelect}
+              name="author"
               control={control}
-              label="duration"
-              error={errors.duration}
+              label="author"
+              error={errors.author}
+              helperText="only known authors can be selected"
+              required
             />
-          </HStack>
-          <ControlledTextArea
-            name="description"
-            control={control}
-            label="description"
-            error={errors.description}
-          />
-          <ControlledStarRating
-            name="rating"
-            control={control}
-            label="rating"
-            error={errors.rating}
-            required
-          />
-          <Button type="submit" colorScheme="teal" size="sm">
-            Submit
-          </Button>
-        </VStack>
-      </Box>
-      <DevTool control={control} />
-      <Box />
-    </Container>
+            <HStack>
+              <ControlledDatePicker
+                name="startDate"
+                control={control}
+                label="startdate"
+                error={errors.startDate}
+                required
+              />
+              <ControlledDatePicker
+                name="endDate"
+                control={control}
+                label="enddate"
+                error={errors.endDate}
+              />
+              <ControlledNumberInput
+                name="duration"
+                control={control}
+                label="duration"
+                error={errors.duration}
+              />
+            </HStack>
+            <ControlledTextArea
+              name="description"
+              control={control}
+              label="description"
+              error={errors.description}
+            />
+            <ControlledStarRating
+              name="rating"
+              control={control}
+              label="rating"
+              error={errors.rating}
+              required
+            />
+            <Button type="submit" colorScheme="teal" size="sm">
+              Submit
+            </Button>
+          </VStack>
+        </Box>
+        <DevTool control={control} />
+        <Box />
+      </Container>
+    </>
   );
 }
+
+export default ReviewPage;

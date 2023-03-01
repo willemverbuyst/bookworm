@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import HomePage from "./homePage";
+import HomePage from "./HomePage";
 
 describe("Home page", () => {
   test("should display a title", () => {

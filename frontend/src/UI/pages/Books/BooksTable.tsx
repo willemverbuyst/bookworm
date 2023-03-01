@@ -3,7 +3,7 @@ import TableForOverview from "../../components/Table";
 import { useAppState } from "../../../business/overmind";
 import { Book } from "../../../business/models/Book";
 
-export default function TableWithAllBooks() {
+function BooksTable() {
   const data = useAppState().allBooks;
 
   const columns: Array<{ field: keyof Book }> = [
@@ -28,3 +28,5 @@ export default function TableWithAllBooks() {
     </Box>
   );
 }
+
+export default BooksTable;

@@ -1,7 +1,7 @@
 import { Container, Text } from "@chakra-ui/react";
 import PageTitle from "../../components/Text/PageTitle";
 
-export default function PageNotFoundPage() {
+function PageNotFoundPage() {
   return (
     <Container centerContent>
       <PageTitle title="404" />
@@ -9,3 +9,5 @@ export default function PageNotFoundPage() {
     </Container>
   );
 }
+
+export default PageNotFoundPage;

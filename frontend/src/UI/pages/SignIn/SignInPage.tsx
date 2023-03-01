@@ -8,7 +8,7 @@ import { ControlledTextInput } from "../../components/Controllers/TextInput";
 import { defaultValues, FormFields, validationSchema } from "./helpers";
 import PageTitle from "../../components/Text/PageTitle";
 
-export default function SignInPage() {
+function SignInPage() {
   const id = useId();
   const navigate = useNavigate();
   const {
@@ -68,3 +68,5 @@ export default function SignInPage() {
     </Container>
   );
 }
+
+export default SignInPage;

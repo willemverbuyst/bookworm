@@ -3,7 +3,7 @@ import { Author } from "../../../business/models/Author";
 import { useAppState } from "../../../business/overmind";
 import TableForOverview from "../../components/Table";
 
-export default function TableWithAllAuthors() {
+function AuthorsTable() {
   const data = useAppState().allAuthors;
 
   const columns: Array<{ field: keyof Author }> = [
@@ -25,3 +25,5 @@ export default function TableWithAllAuthors() {
     </Box>
   );
 }
+
+export default AuthorsTable;

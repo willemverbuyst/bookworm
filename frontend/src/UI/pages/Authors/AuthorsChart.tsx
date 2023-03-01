@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { useAppState } from "../../../business/overmind";
 import BarChartForStatistics from "../../components/Charts/BarChart";
 
-export default function ChartWithAuthors() {
+function AuthorsChart() {
   const data = useAppState().authorForStatistics;
 
   return (
@@ -19,3 +19,5 @@ export default function ChartWithAuthors() {
     </Box>
   );
 }
+
+export default AuthorsChart;

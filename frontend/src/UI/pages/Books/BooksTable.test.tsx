@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { createOvermindMock } from "overmind";
 import { Provider } from "overmind-react";
-import TableWithAllBooks from "./TableWithAllBooks";
+import TableWithAllBooks from "./BooksTable";
 import { config } from "../../../business/overmind";
 
 describe("TableWithAllBooks", () => {

@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { useAppState } from "../../../business/overmind";
 import PieChartForStatistics from "../../components/Charts/PieChart";
 
-export default function ChartWithBooks() {
+function BooksChart() {
   const data = useAppState().booksGroupedByLanguage;
 
   const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -23,3 +23,5 @@ export default function ChartWithBooks() {
     </Box>
   );
 }
+
+export default BooksChart;

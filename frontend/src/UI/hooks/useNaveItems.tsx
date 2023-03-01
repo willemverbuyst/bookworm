@@ -1,5 +1,5 @@
 import { useAppState } from "../../business/overmind";
-import { NavItem } from "../components/NavigationBar/navItems";
+import { NavItem } from "../components/Navigation/navItems";
 
 export const NAV_ITEMS: Array<NavItem> = [
   { label: "Home", href: "/home" },
