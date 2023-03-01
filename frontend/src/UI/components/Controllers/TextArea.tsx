@@ -17,7 +17,7 @@ type TextAreaProps<T extends FieldValues> = {
   required?: boolean;
 } & UseControllerProps<T>;
 
-export function ControlledTextArea<T extends FieldValues>({
+function ControlledTextArea<T extends FieldValues>({
   control,
   error,
   helperText,
@@ -38,3 +38,5 @@ export function ControlledTextArea<T extends FieldValues>({
     </FormControl>
   );
 }
+
+export default ControlledTextArea;

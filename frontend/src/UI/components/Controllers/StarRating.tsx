@@ -51,7 +51,7 @@ type StarRatingProps<T extends FieldValues> = {
   required?: boolean;
 } & UseControllerProps<T>;
 
-export function ControlledStarRating<T extends FieldValues>({
+function ControlledStarRating<T extends FieldValues>({
   control,
   error,
   helperText,
@@ -72,3 +72,5 @@ export function ControlledStarRating<T extends FieldValues>({
     </FormControl>
   );
 }
+
+export default ControlledStarRating;

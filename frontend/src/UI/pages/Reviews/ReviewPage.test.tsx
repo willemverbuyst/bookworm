@@ -4,7 +4,7 @@ import { Provider } from "overmind-react";
 import { config } from "../../../business/overmind";
 import ReviewPage from "./ReviewPage";
 
-describe("Review page", () => {
+describe("ReviewPage", () => {
   test("should display a title", () => {
     const overmind = createOvermindMock(config, (state) => {
       // eslint-disable-next-line no-param-reassign

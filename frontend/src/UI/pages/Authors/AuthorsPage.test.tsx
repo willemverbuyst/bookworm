@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import AuthorsPage from "./Authorspage";
 
-describe("Authors page", () => {
+describe("AuthorsPage", () => {
   test("should display a title", () => {
     render(<AuthorsPage />);
 

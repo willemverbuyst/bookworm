@@ -18,7 +18,7 @@ type DatePickerProps<T extends FieldValues> = {
   required?: boolean;
 } & UseControllerProps<T>;
 
-export function ControlledDatePicker<T extends FieldValues>({
+function ControlledDatePicker<T extends FieldValues>({
   control,
   error,
   helperText,
@@ -44,3 +44,5 @@ export function ControlledDatePicker<T extends FieldValues>({
     </FormControl>
   );
 }
+
+export default ControlledDatePicker;

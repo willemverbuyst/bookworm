@@ -4,8 +4,10 @@ type Props = {
   text: string;
 };
 
-export default function ErrorMessage({ text }: Props) {
+function ErrorMessage({ text }: Props) {
   return (
     <FormErrorMessage style={{ color: "#e53e3e" }}>{text}</FormErrorMessage>
   );
 }
+
+export default ErrorMessage;

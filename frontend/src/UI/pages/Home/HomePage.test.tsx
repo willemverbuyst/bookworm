@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import HomePage from "./HomePage";
 
-describe("Home page", () => {
+describe("HomePage", () => {
   test("should display a title", () => {
     render(<HomePage />);
 

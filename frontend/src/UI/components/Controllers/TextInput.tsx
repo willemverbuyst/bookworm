@@ -17,7 +17,7 @@ type TextInputProps<T extends FieldValues> = {
   required?: boolean;
 } & UseControllerProps<T>;
 
-export function ControlledTextInput<T extends FieldValues>({
+function ControlledTextInput<T extends FieldValues>({
   control,
   error,
   helperText,
@@ -38,3 +38,5 @@ export function ControlledTextInput<T extends FieldValues>({
     </FormControl>
   );
 }
+
+export default ControlledTextInput;

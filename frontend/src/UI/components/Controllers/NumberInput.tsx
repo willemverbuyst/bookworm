@@ -24,7 +24,7 @@ type NumberInputProps<T extends FieldValues> = {
   required?: boolean;
 } & UseControllerProps<T>;
 
-export function ControlledNumberInput<T extends FieldValues>({
+function ControlledNumberInput<T extends FieldValues>({
   control,
   error,
   helperText,
@@ -56,3 +56,5 @@ export function ControlledNumberInput<T extends FieldValues>({
     </FormControl>
   );
 }
+
+export default ControlledNumberInput;

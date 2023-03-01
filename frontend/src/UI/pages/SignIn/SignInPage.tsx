@@ -4,7 +4,7 @@ import { Box, Button, Container, Text, VStack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppState, useActions } from "../../../business/overmind";
-import { ControlledTextInput } from "../../components/Controllers/TextInput";
+import ControlledTextInput from "../../components/Controllers/TextInput";
 import { defaultValues, FormFields, validationSchema } from "./helpers";
 import PageTitle from "../../components/Text/PageTitle";
 

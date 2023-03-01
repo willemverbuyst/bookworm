@@ -18,7 +18,7 @@ type SelectProps<T extends FieldValues, U> = {
   required?: boolean;
 } & UseControllerProps<T>;
 
-export function ControlledSelect<
+function ControlledSelect<
   T extends FieldValues,
   U extends { value: string; display: string }
 >({
@@ -54,3 +54,5 @@ export function ControlledSelect<
     </FormControl>
   );
 }
+
+export default ControlledSelect;

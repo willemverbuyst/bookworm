@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import PageNotFoundPage from "./PageNotFoundPage";
 
-describe("PageNotFound page", () => {
+describe("PageNotFoundPage", () => {
   test("should display a title", () => {
     render(<PageNotFoundPage />);
 

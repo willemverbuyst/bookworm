@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import SignInPage from "./SignInPage";
 
-describe("Sing In page", () => {
+describe("SingInPage", () => {
   test("should display a title", () => {
     render(<SignInPage />);
 

@@ -4,7 +4,7 @@ import { Provider } from "overmind-react";
 import TableWithAllBooks from "./BooksTable";
 import { config } from "../../../business/overmind";
 
-describe("TableWithAllBooks", () => {
+describe("BooksTable", () => {
   test("should display a table with column headers", () => {
     const overmind = createOvermindMock(config, (state) => {
       // eslint-disable-next-line no-param-reassign
