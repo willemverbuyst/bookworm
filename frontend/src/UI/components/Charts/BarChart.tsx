@@ -1,5 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import React, { ReactElement } from "react";
 import { Bar, BarChart, LabelList } from "recharts";
 
 interface IProps {
@@ -8,11 +7,7 @@ interface IProps {
   title: string;
 }
 
-const BarChartForStatistics: React.FC<IProps> = ({
-  data,
-  dataKey,
-  title,
-}: IProps): ReactElement | null => {
+function BarChartForStatistics({ data, dataKey, title }: IProps) {
   return data ? (
     <Box>
       <Box>{title}</Box>
@@ -30,6 +25,6 @@ const BarChartForStatistics: React.FC<IProps> = ({
       </Box>
     </Box>
   ) : null;
-};
+}
 
 export default BarChartForStatistics;

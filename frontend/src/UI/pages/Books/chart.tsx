@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { useAppState } from "../../../business/overmind";
-import BookPieChart from "../../components/Charts/PieChart";
+import PieChartForStatistics from "../../components/Charts/PieChart";
 
 export default function ChartWithBooks() {
   const data = useAppState().booksGroupedByLanguage;
@@ -10,7 +10,7 @@ export default function ChartWithBooks() {
   return (
     <Box>
       {data?.length ? (
-        <BookPieChart
+        <PieChartForStatistics
           colors={colors}
           data={data}
           dataKey="number"

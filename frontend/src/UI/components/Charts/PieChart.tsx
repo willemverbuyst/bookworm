@@ -1,5 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import React, { ReactElement } from "react";
 import { Cell, Legend, Pie, PieChart } from "recharts";
 
 interface IProps {
@@ -10,13 +9,13 @@ interface IProps {
   title: string;
 }
 
-const PieChartForStatistics: React.FC<IProps> = ({
+function PieChartForStatistics({
   data,
   colors,
   dataKey,
   nameKey,
   title,
-}: IProps): ReactElement | null => {
+}: IProps) {
   return data ? (
     <Box>
       <Box>{title}</Box>
@@ -45,6 +44,6 @@ const PieChartForStatistics: React.FC<IProps> = ({
       </Box>
     </Box>
   ) : null;
-};
+}
 
 export default PieChartForStatistics;
