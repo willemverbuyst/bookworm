@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import BooksTable from "./BooksTable";
 import BooksChart from "./BooksChart";
-import useGetAllBooks from "../../hooks/useGetAllBooks";
+import { useGetAllBooks } from "../../hooks/useGetAllBooks";
 import PageTitle from "../../components/Text/PageTitle";
 import NavigationBar from "../../components/Navigation/NavigationBar";
 

@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import TableWithAllAuthors from "./AuthorsTable";
 import ChartWithAuthors from "./AuthorsChart";
-import useGetAllAuthors from "../../hooks/useGetAllAuthors";
+import { useGetAllAuthors } from "../../hooks/useGetAllAuthors";
 import PageTitle from "../../components/Text/PageTitle";
 import NavigationBar from "../../components/Navigation/NavigationBar";
 

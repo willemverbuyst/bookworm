@@ -8,7 +8,7 @@ export const NAV_ITEMS: Array<NavItem> = [
   { label: "Reviews", href: "/reviews" },
 ];
 
-export default function useNavItems() {
+export function useNavItems() {
   const { isSignedIn } = useAppState();
 
   if (isSignedIn) {

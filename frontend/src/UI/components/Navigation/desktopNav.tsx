@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { NavItem } from "./navItems";
-import useNavItems from "../../hooks/useNaveItems";
+import { useNavItems } from "../../hooks/useNaveItems";
 
 function DesktopSubNav({ label, href, subLabel }: NavItem) {
   return (

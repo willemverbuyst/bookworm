@@ -17,7 +17,7 @@ import { ControlledNumberInput } from "../../components/Controllers/NumberInput"
 import { ControlledSelect } from "../../components/Controllers/Select";
 // import { useActions } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers/TextInput";
-import useGetAllAuthors from "../../hooks/useGetAllAuthors";
+import { useGetAllAuthors } from "../../hooks/useGetAllAuthors";
 import { FormFields, defaultValues, validationSchema } from "./helpers";
 import { ControlledTextArea } from "../../components/Controllers";
 import { ControlledStarRating } from "../../components/Controllers/StarRating";
