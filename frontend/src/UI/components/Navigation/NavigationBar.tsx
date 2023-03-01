@@ -9,9 +9,9 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import DesktopNav from "./desktopNav";
-import MobileNav from "./mobileNav";
-import AuthNav from "./authNav";
+import NavigationDesktop from "./NavigationDesktop";
+import NavigationMobile from "./NavigationMobile";
+import NavigationAuth from "./NavigationAuth";
 
 export default function NavigationBar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -53,14 +53,14 @@ export default function NavigationBar() {
           </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
-            <DesktopNav />
+            <NavigationDesktop />
           </Flex>
         </Flex>
-        <AuthNav />
+        <NavigationAuth />
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
+        <NavigationMobile />
       </Collapse>
     </Box>
   );

@@ -14,7 +14,8 @@ type Props<T extends Record<"id", string>> = {
   title: string;
   rows: Array<T>;
 };
-export default function TableForOverview<T extends Record<"id", string>>({
+
+function TableOverview<T extends Record<"id", string>>({
   rows,
   columns,
   title,
@@ -45,3 +46,5 @@ export default function TableForOverview<T extends Record<"id", string>>({
     </TableContainer>
   );
 }
+
+export default TableOverview;

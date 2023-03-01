@@ -9,8 +9,8 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { NavItem } from "./navItems";
-import useNavItems from "../../hooks/useNaveItems";
+import { NavItem } from "./types";
+import { useNavItems } from "../../hooks/useNaveItems";
 
 function MobileNavItem({ label, children, href }: NavItem) {
   const { isOpen, onToggle } = useDisclosure();
@@ -65,7 +65,7 @@ function MobileNavItem({ label, children, href }: NavItem) {
   );
 }
 
-export default function MobileNav() {
+function NavigationMobile() {
   const navItems = useNavItems();
   return (
     <Stack
@@ -80,3 +80,5 @@ export default function MobileNav() {
     </Stack>
   );
 }
+
+export default NavigationMobile;

@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { Author } from "../../../business/models/Author";
 import { useAppState } from "../../../business/overmind";
-import TableForOverview from "../../components/Table";
+import TableOverview from "../../components/Table/TableOverView";
 
 function AuthorsTable() {
   const data = useAppState().allAuthors;
@@ -14,7 +14,7 @@ function AuthorsTable() {
   return (
     <Box>
       {data?.length ? (
-        <TableForOverview
+        <TableOverview
           rows={data}
           columns={columns}
           title="overview of authors"

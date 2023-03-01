@@ -2,7 +2,7 @@ import { Stack, Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
 import { useActions, useAppState } from "../../../business/overmind";
 
-export default function AuthNav() {
+function NavigationAuth() {
   const navigate = useNavigate();
   const { isSignedIn } = useAppState();
   const { logOutUser } = useActions();
@@ -59,3 +59,5 @@ export default function AuthNav() {
     </Stack>
   );
 }
+
+export default NavigationAuth;

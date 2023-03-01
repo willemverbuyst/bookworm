@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import TableForOverview from "../../components/Table";
+import TableOverview from "../../components/Table/TableOverView";
 import { useAppState } from "../../../business/overmind";
 import { Book } from "../../../business/models/Book";
 
@@ -17,7 +17,7 @@ function BooksTable() {
   return (
     <Box>
       {data?.length ? (
-        <TableForOverview
+        <TableOverview
           rows={data}
           columns={columns}
           title="overview of books"
