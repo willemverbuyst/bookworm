@@ -10,6 +10,7 @@ import {
   validationSchemaSignUp,
 } from "./helpers";
 import PageTitle from "../../components/Text/PageTitle";
+import NavigationBar from "../../components/Navigation/NavigationBar";
 
 function SignUpPage() {
   const id = useId();
@@ -32,44 +33,47 @@ function SignUpPage() {
   };
 
   return (
-    <Container centerContent>
-      <PageTitle title="Sign Up" />
+    <>
+      <NavigationBar />
+      <Container centerContent>
+        <PageTitle title="Sign Up" />
 
-      {isSignedIn ? (
-        <Box>
-          <Text fontSize="3xl">you are already </Text>have an account
-        </Box>
-      ) : (
-        <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
-          <VStack spacing={6}>
-            <ControlledTextInput
-              name="userName"
-              control={control}
-              label="username"
-              error={errors.userName}
-              required
-            />
-            <ControlledTextInput
-              name="email"
-              control={control}
-              label="email"
-              error={errors.email}
-              required
-            />
-            <ControlledTextInput
-              name="password"
-              control={control}
-              label="password"
-              error={errors.password}
-              required
-            />
-            <Button type="submit" colorScheme="teal" size="sm">
-              Submit
-            </Button>
-          </VStack>
-        </Box>
-      )}
-    </Container>
+        {isSignedIn ? (
+          <Box>
+            <Text fontSize="3xl">you are already </Text>have an account
+          </Box>
+        ) : (
+          <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
+            <VStack spacing={6}>
+              <ControlledTextInput
+                name="userName"
+                control={control}
+                label="username"
+                error={errors.userName}
+                required
+              />
+              <ControlledTextInput
+                name="email"
+                control={control}
+                label="email"
+                error={errors.email}
+                required
+              />
+              <ControlledTextInput
+                name="password"
+                control={control}
+                label="password"
+                error={errors.password}
+                required
+              />
+              <Button type="submit" colorScheme="teal" size="sm">
+                Submit
+              </Button>
+            </VStack>
+          </Box>
+        )}
+      </Container>
+    </>
   );
 }
 

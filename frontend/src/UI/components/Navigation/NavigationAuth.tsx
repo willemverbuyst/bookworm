@@ -1,3 +1,4 @@
+import { Link as RLink } from "react-router-dom";
 import { Stack, Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
 import { useActions, useAppState } from "../../../business/overmind";
@@ -34,22 +35,22 @@ function NavigationAuth() {
       spacing={6}
     >
       <Button
-        as="a"
+        as={RLink}
         fontSize="sm"
         fontWeight={400}
         variant="link"
-        href="/signin"
+        to="/signin"
       >
         Sign In
       </Button>
       <Button
-        as="a"
+        as={RLink}
         display={{ base: "none", md: "inline-flex" }}
         fontSize="sm"
         fontWeight={600}
         color="white"
         bg="pink.400"
-        href="/signup"
+        to="/signup"
         _hover={{
           bg: "pink.300",
         }}

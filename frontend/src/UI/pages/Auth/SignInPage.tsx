@@ -11,6 +11,7 @@ import {
   validationSchemaSignIn,
 } from "./helpers";
 import PageTitle from "../../components/Text/PageTitle";
+import NavigationBar from "../../components/Navigation/NavigationBar";
 
 function SignInPage() {
   const id = useId();
@@ -39,37 +40,40 @@ function SignInPage() {
   }, [isSignedIn]);
 
   return (
-    <Container centerContent>
-      <PageTitle title="Sign In" />
+    <>
+      <NavigationBar />
+      <Container centerContent>
+        <PageTitle title="Sign In" />
 
-      {isSignedIn ? (
-        <Box>
-          <Text fontSize="3xl">you are already logged in</Text>
-        </Box>
-      ) : (
-        <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
-          <VStack spacing={6}>
-            <ControlledTextInput
-              name="email"
-              control={control}
-              label="email"
-              error={errors.email}
-              required
-            />
-            <ControlledTextInput
-              name="password"
-              control={control}
-              label="password"
-              error={errors.password}
-              required
-            />
-            <Button type="submit" colorScheme="teal" size="sm">
-              Submit
-            </Button>
-          </VStack>
-        </Box>
-      )}
-    </Container>
+        {isSignedIn ? (
+          <Box>
+            <Text fontSize="3xl">you are already logged in</Text>
+          </Box>
+        ) : (
+          <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
+            <VStack spacing={6}>
+              <ControlledTextInput
+                name="email"
+                control={control}
+                label="email"
+                error={errors.email}
+                required
+              />
+              <ControlledTextInput
+                name="password"
+                control={control}
+                label="password"
+                error={errors.password}
+                required
+              />
+              <Button type="submit" colorScheme="teal" size="sm">
+                Submit
+              </Button>
+            </VStack>
+          </Box>
+        )}
+      </Container>
+    </>
   );
 }
 
