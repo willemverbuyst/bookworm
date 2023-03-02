@@ -23,6 +23,7 @@ import ControlledTextArea from "../../components/Controllers/TextArea";
 import ControlledStarRating from "../../components/Controllers/StarRating";
 import PageTitle from "../../components/Text/PageTitle";
 import NavigationBar from "../../components/Navigation/NavigationBar";
+import { useGetAllBooks } from "../../hooks/useGetAllBooks";
 
 function ReviewPage() {
   const id = useId();
@@ -38,6 +39,7 @@ function ReviewPage() {
   }));
 
   useGetAllAuthors();
+  useGetAllBooks();
   // const { postReview } = useActions();
   const {
     control,

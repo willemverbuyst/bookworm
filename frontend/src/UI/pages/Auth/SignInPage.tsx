@@ -5,7 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppState, useActions } from "../../../business/overmind";
 import ControlledTextInput from "../../components/Controllers/TextInput";
-import { defaultValues, FormFields, validationSchema } from "./helpers";
+import {
+  defaultValuesSignIn,
+  FormFieldsSignIn,
+  validationSchemaSignIn,
+} from "./helpers";
 import PageTitle from "../../components/Text/PageTitle";
 
 function SignInPage() {
@@ -16,14 +20,14 @@ function SignInPage() {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<FormFields>({
-    defaultValues,
-    resolver: zodResolver(validationSchema),
+  } = useForm<FormFieldsSignIn>({
+    defaultValues: defaultValuesSignIn,
+    resolver: zodResolver(validationSchemaSignIn),
   });
   const { signInUser } = useActions();
   const { isSignedIn } = useAppState();
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+  const onSubmit: SubmitHandler<FormFieldsSignIn> = async (data) => {
     await signInUser(data);
     reset();
   };
