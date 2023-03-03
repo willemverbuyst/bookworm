@@ -8,7 +8,7 @@ A project to connect and try out some techniques in a docker environment.
 - React
 - Overmind
 - Chakra ui
-- React Hook form
+- React Hook Form
 
 ## Backend
 
