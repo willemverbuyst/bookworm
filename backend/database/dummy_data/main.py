@@ -17,14 +17,18 @@ with open('authors.csv', 'w', newline='') as file:
     writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
     header=[
       "author_id", 
-      "author_name", 
+      "first_name",
+      "last_name", 
+      "last_updated"
     ]
 
     writer.writerow(header)
     for i in range(7):
       writer.writerow([
         1 + i, 
-        fake.name(), 
+        fake.first_name(), 
+        fake.last_name(),
+        datetime.datetime.now()
       ])
 
 
@@ -32,11 +36,12 @@ with open('books.csv', 'w', newline='') as file:
     writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
     header=[
       "book_id", 
-      "book_title", 
-      "book_language", 
-      "book_author_id", 
-      "book_year", 
-      "book_read"
+      "title", 
+      "language", 
+      "author_id", 
+      "year", 
+      "read",
+      "last_updated"
     ]
     
     writer.writerow(header)
@@ -47,7 +52,8 @@ with open('books.csv', 'w', newline='') as file:
         fake.language(), 
         random.randint(1, 7), 
         fake.year(), 
-        random.randint(0,1)
+        random.randint(0,1),
+        datetime.datetime.now()
       ])
 
 with open('countries.csv', 'w', newline='') as file:

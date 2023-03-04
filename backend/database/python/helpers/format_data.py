@@ -3,8 +3,9 @@ def format_authors(author_data):
     for row in author_data:
         author = {
             "id": row[0],
-            "name": row[1],
-            "books_written": row[2],
+            "first_name": row[1],
+            "last_name": row[2],
+            "books_written": row[3],
         }
         authors.append(author)
 
@@ -18,7 +19,7 @@ def format_books(book_data):
             "id": row[0],
             "title": row[1],
             "language": row[2],
-            "author": row[7],
+            "author": row[8] + " " + row[9],
             "year": row[4],
             "read": row[5],
         }
@@ -30,8 +31,15 @@ def format_books(book_data):
 def format_user(user_data):
     user = {
         "id": user_data[0],
-        "username": user_data[1],
-        "email": user_data[2],
+        "first_name": user_data[2],
+        "last_name": user_data[3],
+        "username": user_data[4],
+        "email": user_data[5],
+        "address": user_data[6],
+        "postal_code": user_data[7],
+        "phone": user_data[8],
+        "city": user_data[9],
+        "country": user_data[10],
     }
 
     return user

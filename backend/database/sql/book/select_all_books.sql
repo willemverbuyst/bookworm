@@ -1,3 +1,7 @@
-SELECT * FROM book 
+SELECT 
+  *, 
+  author.first_name, 
+  author.last_name 
+FROM book 
 INNER JOIN author 
-ON book.book_author_id = author.author_id;
+ON book.author_id = author.author_id;
