@@ -1,7 +1,7 @@
-INSERT INTO author (author_id,author_name) VALUES (1,'Dr. Charles Sanchez Jr.');
-INSERT INTO author (author_id,author_name) VALUES (2,'Bryan Moore');
-INSERT INTO author (author_id,author_name) VALUES (3,'Wayne Anderson');
-INSERT INTO author (author_id,author_name) VALUES (4,'Ashley Smith');
-INSERT INTO author (author_id,author_name) VALUES (5,'Caleb Frazier');
-INSERT INTO author (author_id,author_name) VALUES (6,'Dr. Christopher Bradford');
-INSERT INTO author (author_id,author_name) VALUES (7,'Jerome Rodriguez');
+INSERT INTO author (author_id,author_name) VALUES (1,'John Martin');
+INSERT INTO author (author_id,author_name) VALUES (2,'John Herrera');
+INSERT INTO author (author_id,author_name) VALUES (3,'Karen Smith');
+INSERT INTO author (author_id,author_name) VALUES (4,'Melissa Rojas');
+INSERT INTO author (author_id,author_name) VALUES (5,'Adrian Martin');
+INSERT INTO author (author_id,author_name) VALUES (6,'Ruben Jones');
+INSERT INTO author (author_id,author_name) VALUES (7,'Frederick Hodge');

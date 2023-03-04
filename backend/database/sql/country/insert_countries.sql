@@ -1,10 +1,5 @@
-INSERT INTO country (country_id,country,last_updated) VALUES (1,'Niger','2023-03-04 07:34:32.814522');
-INSERT INTO country (country_id,country,last_updated) VALUES (2,'Greenland','2023-03-04 07:34:32.814541');
-INSERT INTO country (country_id,country,last_updated) VALUES (3,'Lesotho','2023-03-04 07:34:32.814550');
-INSERT INTO country (country_id,country,last_updated) VALUES (4,'Cuba','2023-03-04 07:34:32.814557');
-INSERT INTO country (country_id,country,last_updated) VALUES (5,'Thailand','2023-03-04 07:34:32.814564');
-INSERT INTO country (country_id,country,last_updated) VALUES (6,'Bolivia','2023-03-04 07:34:32.814571');
-INSERT INTO country (country_id,country,last_updated) VALUES (7,'Lesotho','2023-03-04 07:34:32.814578');
-INSERT INTO country (country_id,country,last_updated) VALUES (8,'Brazil','2023-03-04 07:34:32.814585');
-INSERT INTO country (country_id,country,last_updated) VALUES (9,'Romania','2023-03-04 07:34:32.814591');
-INSERT INTO country (country_id,country,last_updated) VALUES (10,'Dominica','2023-03-04 07:34:32.814598');
+INSERT INTO country (country_id,country,last_updated) VALUES (1,'Sudan','2023-03-04 08:02:53.933161');
+INSERT INTO country (country_id,country,last_updated) VALUES (2,'United States Minor Outlying Islands','2023-03-04 08:02:53.933180');
+INSERT INTO country (country_id,country,last_updated) VALUES (3,'Gibraltar','2023-03-04 08:02:53.933190');
+INSERT INTO country (country_id,country,last_updated) VALUES (4,'Isle of Man','2023-03-04 08:02:53.933199');
+INSERT INTO country (country_id,country,last_updated) VALUES (5,'Mauritius','2023-03-04 08:02:53.933206');

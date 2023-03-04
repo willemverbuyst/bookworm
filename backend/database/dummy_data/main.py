@@ -45,7 +45,7 @@ with open('books.csv', 'w', newline='') as file:
         1 + i, 
         fake.sentence(nb_words=5, variable_nb_words=True)[:-1], 
         fake.language(), 
-        1 + random.randint(1, 7), 
+        random.randint(1, 7), 
         fake.year(), 
         random.randint(0,1)
       ])
@@ -59,11 +59,27 @@ with open('countries.csv', 'w', newline='') as file:
     ]
     
     writer.writerow(header)
-    for i in range(10):
+    for i in range(5):
       writer.writerow([
         1 + i, 
         fake.country(),
         datetime.datetime.now()
       ])
 
-print(datetime.datetime.now())
+with open('cities.csv', 'w', newline='') as file:
+    writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
+    header=[
+      "city_id", 
+      "city", 
+      "country_id",
+      "last_updated"
+    ]
+    
+    writer.writerow(header)
+    for i in range(20):
+      writer.writerow([
+        1 + i, 
+        fake.city(),
+        random.randint(1,5),
+        datetime.datetime.now()
+      ])
