@@ -1,54 +1,54 @@
-"book_id"|"book_title"|"book_language"|"book_author"|"book_year"|"book_read"
-2000|"Else PM show street play"|"FR"|"Brian Kelley"|"2012"|1
-2001|"Should sit meeting but"|"NL"|"Hannah Harrell"|"2022"|0
-2002|"Travel debate rich score rich mean"|"NL"|"Andrew Gonzales"|"1983"|0
-2003|"Want dinner example machine rest"|"EN"|"Stacey Hicks"|"1977"|1
-2004|"Charge either pressure certainly sell quality"|"NL"|"Daniel Thornton"|"2020"|1
-2005|"Although light lose seven street"|"EN"|"Christian Wright"|"1982"|0
-2006|"Participant pressure commercial him its always"|"FR"|"Steven Richardson"|"1992"|0
-2007|"Mother what yard return"|"NL"|"Paige Andrews"|"1996"|0
-2008|"Street attention than represent floor staff"|"NL"|"Mark Cox"|"1992"|1
-2009|"Official quickly detail act brother should"|"FR"|"Jason Johnson"|"2012"|0
-2010|"Scene return interest"|"EN"|"Tina Villarreal"|"1998"|0
-2011|"Prevent enough kid model practice"|"EN"|"David Cameron"|"1976"|0
-2012|"Alone size same bit"|"ES"|"Natalie Moses MD"|"2000"|1
-2013|"Reveal the front crime"|"ES"|"Michael Smith"|"1988"|0
-2014|"Population contain name stock man"|"ES"|"Timothy Smith"|"1974"|0
-2015|"Throw technology leg"|"EN"|"Nicole Anderson"|"2000"|0
-2016|"Want task believe either us green"|"NL"|"Amanda Macias"|"2013"|1
-2017|"Response respond decision sell learn skin"|"FR"|"Anthony Taylor"|"1999"|0
-2018|"Author fall former"|"FR"|"Brian Schmitt"|"2006"|0
-2019|"Together leader pretty"|"ES"|"Jeffrey Golden"|"1986"|1
-2020|"Address human service"|"NL"|"Judy Sullivan"|"1998"|1
-2021|"In big oil"|"EN"|"Edward Berg"|"1971"|1
-2022|"Her like process voice matter discover"|"NL"|"Richard Berger"|"1989"|0
-2023|"Body fear very off security soon"|"FR"|"Mary Thompson"|"2007"|1
-2024|"Store establish ten"|"FR"|"James Davis"|"1993"|0
-2025|"Pull quickly water"|"ES"|"John French"|"1971"|0
-2026|"Can by be economy"|"ES"|"Rhonda Tucker"|"2000"|1
-2027|"Field best sometimes type"|"ES"|"Shelia Vargas"|"2020"|0
-2028|"Until position to picture student simply"|"NL"|"Troy Beltran"|"1970"|1
-2029|"Really himself serious claim individual"|"FR"|"Robert Campos"|"1976"|1
-2030|"True prove sign call black"|"NL"|"Karen Dennis"|"2015"|0
-2031|"Official machine news pull together"|"ES"|"Alicia Alexander"|"1977"|1
-2032|"Reflect determine school"|"EN"|"Christine Conley"|"2006"|0
-2033|"Single fund know drop computer throughout"|"NL"|"Brian Fisher"|"1971"|1
-2034|"Tax play surface"|"ES"|"Zoe Jackson"|"1981"|0
-2035|"Tough marriage happen national laugh"|"EN"|"Carlos Carpenter"|"2023"|1
-2036|"Teacher rest theory political"|"FR"|"James Arellano"|"1988"|0
-2037|"Bad group throughout husband someone central"|"FR"|"Breanna Robinson"|"2014"|1
-2038|"Suggest fine half today later PM"|"NL"|"Samuel Nixon"|"1979"|0
-2039|"Leg be whatever art conference power"|"NL"|"James Morris"|"1995"|0
-2040|"Decade across mother"|"ES"|"Mr. Timothy Downs"|"1990"|1
-2041|"Reduce real turn foot"|"EN"|"Cory Harris"|"1989"|0
-2042|"Bed boy time political"|"NL"|"Bryan Shelton"|"1991"|0
-2043|"Discussion industry ever computer"|"EN"|"Matthew Harris"|"2016"|1
-2044|"Agree picture side near mind score"|"ES"|"Richard Hill"|"1971"|1
-2045|"After inside city market indeed stop"|"FR"|"Ellen Faulkner"|"2022"|1
-2046|"Play evening any eye management worry"|"FR"|"Shannon French"|"1993"|1
-2047|"Hope citizen miss out"|"ES"|"Claire Woods"|"1996"|0
-2048|"Technology business letter talk"|"ES"|"Alexander Torres"|"1990"|1
-2049|"Issue history authority prove trip subject"|"EN"|"Jacob Martin"|"1992"|0
-2050|"Tax company bank appear"|"NL"|"Zachary Reese"|"2007"|1
-2051|"Fish decision include popular"|"EN"|"Julie Moore"|"2004"|1
-2052|"Down finish think Republican traditional spend"|"FR"|"Shane Thompson"|"1986"|0
+"book_id"|"book_title"|"book_language"|"book_author_id"|"book_year"|"book_read"
+2000|"Increase yard sell section approach test"|"ES"|1002|"1999"|1
+2001|"Alone describe treatment develop discuss but"|"ES"|1002|"1980"|1
+2002|"Talk movie system"|"ES"|1001|"2022"|0
+2003|"Thought in remember"|"ES"|1002|"2007"|0
+2004|"Claim police century successful"|"EN"|1005|"2021"|0
+2005|"Inside project part relationship station"|"NL"|1006|"1973"|0
+2006|"Drug form may compare by special"|"NL"|1003|"1996"|1
+2007|"Teacher energy culture ahead rich"|"EN"|1004|"1987"|0
+2008|"Truth result often message experience"|"ES"|1001|"1988"|1
+2009|"Alone design different continue"|"FR"|1003|"1977"|1
+2010|"Science west pattern his"|"NL"|1006|"2001"|1
+2011|"After significant knowledge"|"NL"|1004|"1989"|1
+2012|"Claim city home field"|"FR"|1006|"2009"|0
+2013|"Trip quality top available character"|"FR"|1001|"1975"|0
+2014|"Down city space set"|"FR"|1004|"2005"|1
+2015|"Lawyer owner population rule"|"EN"|1007|"1988"|0
+2016|"East ask them hundred crime"|"FR"|1007|"2018"|0
+2017|"Force while list"|"EN"|1003|"2013"|1
+2018|"However matter produce"|"NL"|1005|"1999"|0
+2019|"Natural interesting west certainly instead"|"EN"|1002|"1980"|0
+2020|"Risk face and agree defense new show"|"NL"|1006|"2002"|1
+2021|"Personal return system condition party democratic"|"ES"|1001|"2020"|1
+2022|"Light major few"|"ES"|1001|"2013"|1
+2023|"Customer peace hope soldier kid"|"NL"|1002|"2003"|0
+2024|"Energy executive several"|"NL"|1003|"2022"|1
+2025|"Certain him skin"|"ES"|1001|"1972"|0
+2026|"Few brother compare"|"ES"|1006|"1972"|1
+2027|"Hand old everything national heart"|"ES"|1004|"1980"|0
+2028|"Political manage yet else"|"ES"|1007|"2023"|0
+2029|"At positive traditional foreign"|"EN"|1001|"1993"|0
+2030|"Wife support per"|"FR"|1002|"2000"|1
+2031|"Gas forward day accept form"|"NL"|1001|"1975"|0
+2032|"Remain purpose thank"|"FR"|1001|"2022"|0
+2033|"Local suffer since staff word"|"NL"|1004|"1991"|1
+2034|"Across former scientist"|"FR"|1002|"1988"|1
+2035|"Either issue news policy"|"ES"|1002|"1978"|0
+2036|"Car successful cut difference experience free"|"ES"|1002|"2021"|1
+2037|"Air share step decide"|"ES"|1001|"1993"|1
+2038|"Second TV have order sea cut"|"NL"|1005|"2014"|0
+2039|"Hundred score hit wrong purpose"|"EN"|1004|"1990"|1
+2040|"His fact easy customer"|"ES"|1004|"2016"|0
+2041|"Of anyone commercial each"|"EN"|1004|"2014"|0
+2042|"Bit perhaps only"|"EN"|1001|"2022"|0
+2043|"Become assume management range like wall"|"EN"|1002|"2014"|0
+2044|"But assume book fact make"|"FR"|1003|"1992"|1
+2045|"Raise everybody his item few floor"|"EN"|1005|"2007"|0
+2046|"Up black seek treat social car"|"EN"|1001|"2014"|1
+2047|"Whom line conference training cultural improve"|"FR"|1006|"2002"|1
+2048|"Newspaper street whether use tell campaign this"|"ES"|1003|"1988"|0
+2049|"Democratic imagine fear job"|"FR"|1004|"1993"|1
+2050|"Herself imagine live as meeting everybody"|"EN"|1003|"1978"|0
+2051|"Particular fear ok"|"FR"|1007|"2000"|1
+2052|"Participant though executive"|"FR"|1002|"1971"|1

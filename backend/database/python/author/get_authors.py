@@ -8,6 +8,7 @@ select_all_authors_sql = os.path.join(
     dirname, "../../sql/author/select_all_authors.sql"
 )
 
+
 DATABASE = os.environ.get("DATABASE")
 DATABASE_USER = os.environ.get("DATABASE_USER")
 DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")

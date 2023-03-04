@@ -17,15 +17,13 @@ with open('authors.csv', 'w', newline='') as file:
     header=[
       "author_id", 
       "author_name", 
-      "author_books_written"
     ]
 
     writer.writerow(header)
-    for x in range(27):
+    for x in range(7):
       writer.writerow([
         1000 + x, 
         fake.name(), 
-        random.randint(0,20)
       ])
 
 
@@ -35,7 +33,7 @@ with open('books.csv', 'w', newline='') as file:
       "book_id", 
       "book_title", 
       "book_language", 
-      "book_author", 
+      "book_author_id", 
       "book_year", 
       "book_read"
     ]
@@ -46,8 +44,9 @@ with open('books.csv', 'w', newline='') as file:
         2000 + x, 
         fake.sentence(nb_words=5, variable_nb_words=True)[:-1], 
         fake.language(), 
-        fake.name(), 
+        1000 + random.randint(1, 7), 
         fake.year(), 
         random.randint(0,1)
       ])
+
     
