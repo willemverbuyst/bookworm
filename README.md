@@ -24,6 +24,7 @@ A project to connect and try out some techniques in a docker environment.
 ## Test
 
 - Cypress
+- Vitest
 
 ## Documentation for API
 
@@ -46,7 +47,7 @@ Seed database for dev
 
 > docker exec -it bw_backend bash
 
-> cd database/bash
+> cd database/dummy_data
 
 > bash set_up_db.sh
 
@@ -94,7 +95,7 @@ seed database
 
 > docker-compose run backend bash
 
-> cd database/bash
+> cd database/dummy_data
 
 > bash set_up_db.sh
 
