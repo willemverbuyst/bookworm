@@ -28,7 +28,7 @@ function TableOverview<T extends Record<"id", string>>({
           <Tr>
             {columns.map((column) => (
               <Th key={String(column.field)} isNumeric={column.isNumeric}>
-                {String(column.field)}
+                {String(column.field).replace("_", " ")}
               </Th>
             ))}
           </Tr>
