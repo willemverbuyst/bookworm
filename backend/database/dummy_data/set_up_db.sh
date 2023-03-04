@@ -3,7 +3,7 @@
 echo 'CREATING CSV FILES'
 
 echo 'Create csv files with dummy data'
-CSV_SCRIPT="$(cd ../ && pwd)/main.py"
+CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/main.py"
 python $CSV_SCRIPT
 
 echo 'CREAING SQL FILES'

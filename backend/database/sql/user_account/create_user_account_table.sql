@@ -6,7 +6,7 @@ CREATE TABLE user_account (
   last_name VARCHAR(250) NOT NULL,
   username VARCHAR(250) NOT NULL,
   email VARCHAR(250) NOT NULL,
-  address_id SMALLINT NOT NULL,
+  address_id INT NOT NULL,
   create_date DATE NOT NULL,
   last_upated TIMESTAMP NOT NULL,
   password VARCHAR(250) NOT NULL,

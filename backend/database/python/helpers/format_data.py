@@ -18,7 +18,7 @@ def format_books(book_data):
             "id": row[0],
             "title": row[1],
             "language": row[2],
-            "author": row[3],
+            "author": row[7],
             "year": row[4],
             "read": row[5],
         }
