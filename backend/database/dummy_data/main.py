@@ -83,3 +83,25 @@ with open('cities.csv', 'w', newline='') as file:
         random.randint(1,5),
         datetime.datetime.now()
       ])
+
+with open('addresses.csv', 'w', newline='') as file:
+    writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
+    header=[
+      "address_id", 
+      "address", 
+      "city_id",
+      "postal_code",
+      "phone",
+      "last_updated"
+    ]
+    
+    writer.writerow(header)
+    for i in range(40):
+      writer.writerow([
+        1 + i, 
+        fake.street_address(),
+        random.randint(1,20),
+        fake.postcode(),
+        fake.phone_number(),
+        datetime.datetime.now()
+      ])

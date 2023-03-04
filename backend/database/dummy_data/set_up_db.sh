@@ -20,6 +20,9 @@ bash csv_to_sql.sh "countries.csv" "country/insert_countries.sql" "country"
 echo 'Creating sql for cities file from csv'
 bash csv_to_sql.sh "cities.csv" "city/insert_cities.sql" "city"
 
+echo 'Creating sql for addresses file from csv'
+bash csv_to_sql.sh "addresses.csv" "address/insert_addresses.sql" "address"
+
 echo 'SEEDING THE DATABSE'
 
 echo 'Inserting data into database'
@@ -28,16 +31,19 @@ python $SEED_SCRIPT
 
 echo 'CLEAN UP CSV FILES'
 
-echo 'Removing "books.csv"'
+echo 'Removing books.csv'
 rm -rf "./books.csv"
 
-echo 'Removing "authors.csv"'
+echo 'Removing authors.csv'
 rm -rf "./authors.csv"
 
-echo 'Removing "countries.csv"'
+echo 'Removing countries.csv'
 rm -rf "./countries.csv"
 
-echo 'Removing "cities.csv"'
+echo 'Removing cities.csv'
 rm -rf "./cities.csv"
+
+echo 'Removing address.csv'
+rm -rf "./address.csv"
 
 echo 'DONE'
