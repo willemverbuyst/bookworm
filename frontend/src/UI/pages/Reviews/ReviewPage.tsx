@@ -7,7 +7,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { calculateDays } from "../../../business/functions/date";
@@ -33,10 +33,9 @@ function ReviewPage() {
     display: a.name,
     value: a.id,
   }));
-  const booksForSelect = allBooks?.map((b) => ({
-    display: b.title,
-    value: b.id,
-  }));
+  const [booksForSelect, setBooksForSelect] = useState<
+    Array<{ display: string; value: string }>
+  >([]);
 
   useGetAllAuthors();
   useGetAllBooks();
@@ -53,7 +52,11 @@ function ReviewPage() {
     resolver: zodResolver(validationSchema),
   });
 
-  const [startDate, endDate] = watch(["startDate", "endDate"]);
+  const [startDate, endDate, author] = watch([
+    "startDate",
+    "endDate",
+    "author",
+  ]);
 
   useEffect(() => {
     const numberOfDaysCalculated =
@@ -62,6 +65,19 @@ function ReviewPage() {
       setValue("duration", numberOfDaysCalculated);
     }
   }, [setValue, startDate, endDate]);
+
+  useEffect(() => {
+    if (!author) {
+      setBooksForSelect([]);
+    }
+    const booksToSelect = allBooks
+      ?.filter((b) => String(b.author) === String(author))
+      .map((b) => ({
+        display: b.title,
+        value: b.id,
+      }));
+    setBooksForSelect(booksToSelect);
+  }, [author]);
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     // await postReview(data);
@@ -85,21 +101,20 @@ function ReviewPage() {
               required
             />
             <ControlledSelect
-              dataSet={booksForSelect}
-              name="book"
-              control={control}
-              label="book"
-              error={errors.book}
-              helperText="only known books can be selected"
-              required
-            />
-            <ControlledSelect
               dataSet={authorsForSelect}
               name="author"
               control={control}
               label="author"
               error={errors.author}
               helperText="only known authors can be selected"
+              required
+            />
+            <ControlledSelect
+              dataSet={booksForSelect}
+              name="book"
+              control={control}
+              label="book"
+              error={errors.book}
               required
             />
             <HStack>
