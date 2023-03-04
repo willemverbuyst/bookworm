@@ -1,0 +1,10 @@
+INSERT INTO country (country_id,country,last_updated) VALUES (1,'Niger','2023-03-04 07:34:32.814522');
+INSERT INTO country (country_id,country,last_updated) VALUES (2,'Greenland','2023-03-04 07:34:32.814541');
+INSERT INTO country (country_id,country,last_updated) VALUES (3,'Lesotho','2023-03-04 07:34:32.814550');
+INSERT INTO country (country_id,country,last_updated) VALUES (4,'Cuba','2023-03-04 07:34:32.814557');
+INSERT INTO country (country_id,country,last_updated) VALUES (5,'Thailand','2023-03-04 07:34:32.814564');
+INSERT INTO country (country_id,country,last_updated) VALUES (6,'Bolivia','2023-03-04 07:34:32.814571');
+INSERT INTO country (country_id,country,last_updated) VALUES (7,'Lesotho','2023-03-04 07:34:32.814578');
+INSERT INTO country (country_id,country,last_updated) VALUES (8,'Brazil','2023-03-04 07:34:32.814585');
+INSERT INTO country (country_id,country,last_updated) VALUES (9,'Romania','2023-03-04 07:34:32.814591');
+INSERT INTO country (country_id,country,last_updated) VALUES (10,'Dominica','2023-03-04 07:34:32.814598');

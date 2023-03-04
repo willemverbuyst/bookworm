@@ -14,6 +14,9 @@ bash csv_to_sql.sh "books.csv" "book/insert_books.sql" "book"
 echo 'Creating sql for author file from csv'
 bash csv_to_sql.sh "authors.csv" "author/insert_authors.sql" "author"
 
+echo 'Creating sql for country file from csv'
+bash csv_to_sql.sh "countries.csv" "country/insert_countries.sql" "country"
+
 echo 'SEEDING THE DATABSE'
 
 echo 'Inserting data into database'
