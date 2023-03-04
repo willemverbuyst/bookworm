@@ -1,4 +1,3 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 DROP TABLE IF EXISTS author;
 CREATE TABLE author (
   author_id INT NOT NULL,
