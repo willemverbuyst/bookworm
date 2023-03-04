@@ -12,13 +12,13 @@ INSERT INTO user_account (
   active
 ) 
 VALUES (
-  9999,
-  2001,
+  1,
+  1,
   'Ping',
   'Pong',
   'Batman',
   'ping@pong.io',
-  3001,
+  1,
   '2023-02-04',
   CURRENT_TIMESTAMP,
   'test123',
@@ -39,15 +39,15 @@ INSERT INTO user_account (
   active
 ) 
 VALUES (
-  9998,
-  2001,
+  2,
+  1,
   'Jack',
   'Sparrow',
   'Jack',
   'jack@sparrow.io',
-  3002,
+  2,
   '2023-02-03',
   CURRENT_TIMESTAMP,
   'test123',
-  true
+  false
 );
