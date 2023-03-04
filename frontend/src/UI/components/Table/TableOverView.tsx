@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 type Props<T extends Record<"id", string>> = {
-  columns: Array<{ field: keyof T }>;
+  columns: Array<{ field: keyof T; isNumeric?: boolean }>;
   title: string;
   rows: Array<T>;
 };
@@ -27,7 +27,9 @@ function TableOverview<T extends Record<"id", string>>({
         <Thead>
           <Tr>
             {columns.map((column) => (
-              <Th key={String(column.field)}>{String(column.field)}</Th>
+              <Th key={String(column.field)} isNumeric={column.isNumeric}>
+                {String(column.field)}
+              </Th>
             ))}
           </Tr>
         </Thead>
@@ -35,7 +37,10 @@ function TableOverview<T extends Record<"id", string>>({
           {rows.map((row) => (
             <Tr key={row.id}>
               {columns.map((column) => (
-                <Td key={`${row.id}-${row[column.field]}`}>
+                <Td
+                  key={`${row.id}-${row[column.field]}`}
+                  isNumeric={column.isNumeric}
+                >
                   {String(row[column.field])}
                 </Td>
               ))}

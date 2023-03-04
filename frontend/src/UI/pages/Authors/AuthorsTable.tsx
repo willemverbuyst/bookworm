@@ -6,9 +6,9 @@ import TableOverview from "../../components/Table/TableOverView";
 function AuthorsTable() {
   const data = useAppState().allAuthors;
 
-  const columns: Array<{ field: keyof Author }> = [
+  const columns: Array<{ field: keyof Author; isNumeric?: boolean }> = [
     { field: "name" },
-    { field: "books_written" },
+    { field: "books_written", isNumeric: true },
   ];
 
   return (
