@@ -1,5 +1,5 @@
-INSERT INTO country (country_id,country,last_updated) VALUES (1,'Singapore','2023-03-04 13:43:16.573315');
-INSERT INTO country (country_id,country,last_updated) VALUES (2,'Cambodia','2023-03-04 13:43:16.573329');
-INSERT INTO country (country_id,country,last_updated) VALUES (3,'Oman','2023-03-04 13:43:16.573339');
-INSERT INTO country (country_id,country,last_updated) VALUES (4,'Lithuania','2023-03-04 13:43:16.573348');
-INSERT INTO country (country_id,country,last_updated) VALUES (5,'Seychelles','2023-03-04 13:43:16.573358');
+INSERT INTO country (country_id,country,last_updated) VALUES (1,'New Caledonia','2023-03-05 03:51:28.190918');
+INSERT INTO country (country_id,country,last_updated) VALUES (2,'Paraguay','2023-03-05 03:51:28.190929');
+INSERT INTO country (country_id,country,last_updated) VALUES (3,'Latvia','2023-03-05 03:51:28.190938');
+INSERT INTO country (country_id,country,last_updated) VALUES (4,'Syrian Arab Republic','2023-03-05 03:51:28.190947');
+INSERT INTO country (country_id,country,last_updated) VALUES (5,'Yemen','2023-03-05 03:51:28.190955');
