@@ -7,7 +7,8 @@ function AuthorsTable() {
   const data = useAppState().allAuthors;
 
   const columns: Array<{ field: keyof Author; isNumeric?: boolean }> = [
-    { field: "name" },
+    { field: "last_name" },
+    { field: "first_name" },
     { field: "books_written", isNumeric: true },
   ];
 

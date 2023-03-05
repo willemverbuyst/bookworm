@@ -13,9 +13,11 @@ export const state: State = {
       return null;
     }
     return authorsApi.data
-      .map((author) => ({ ...author }))
+      .map((author) => ({
+        ...author,
+      }))
       .sort((author1, author2) =>
-        `${author1.name}`.localeCompare(author2.name)
+        `${author1.last_name}`.localeCompare(author2.last_name)
       );
   }),
   authorForStatistics: derived(({ authorsApi }: State) => {
@@ -23,7 +25,7 @@ export const state: State = {
       return null;
     }
     return authorsApi.data.map((author) => ({
-      name: author.name,
+      name: `${author.first_name} ${author.last_name}`,
       books_written: author.books_written,
     }));
   }),

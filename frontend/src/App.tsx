@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
-import AuthorsPage from "./UI/pages/Authors/Authorspage";
+import AuthorsPage from "./UI/pages/Authors/AuthorsPage";
 import BooksPage from "./UI/pages/Books/BooksPage";
 import ReviewPage from "./UI/pages/Reviews/ReviewPage";
 import SignInPage from "./UI/pages/Auth/SignInPage";
@@ -9,7 +9,7 @@ import PageNotFoundPage from "./UI/pages/PageNotFound/PageNotFoundPage";
 import WelcomePage from "./UI/pages/Welcome/WelcomePage";
 import PrivateRoute from "./helpers/PrivateRoute";
 import HomePage from "./UI/pages/Home/HomePage";
-import SignUpPage from "./UI/pages/Auth/SinhUpPage";
+import SignUpPage from "./UI/pages/Auth/SingUpPage";
 
 export default function App() {
   return (
