@@ -1,7 +1,7 @@
-INSERT INTO author (author_id,first_name,last_name,last_updated) VALUES (1,'Lisa','Brown','2023-03-05 04:06:57.372680');
-INSERT INTO author (author_id,first_name,last_name,last_updated) VALUES (2,'Brandon','Lawrence','2023-03-05 04:06:57.372822');
-INSERT INTO author (author_id,first_name,last_name,last_updated) VALUES (3,'Danielle','King','2023-03-05 04:06:57.372946');
-INSERT INTO author (author_id,first_name,last_name,last_updated) VALUES (4,'Amy','York','2023-03-05 04:06:57.373068');
-INSERT INTO author (author_id,first_name,last_name,last_updated) VALUES (5,'Daniel','Cooper','2023-03-05 04:06:57.373189');
-INSERT INTO author (author_id,first_name,last_name,last_updated) VALUES (6,'Dennis','Martinez','2023-03-05 04:06:57.373420');
-INSERT INTO author (author_id,first_name,last_name,last_updated) VALUES (7,'Cameron','Gill','2023-03-05 04:06:57.373577');
+INSERT INTO author (author_id,first_name,last_name,last_updated) VALUES (1,'Monica','Roach','2023-03-05 04:35:42.101706');
+INSERT INTO author (author_id,first_name,last_name,last_updated) VALUES (2,'Jennifer','James','2023-03-05 04:35:42.101842');
+INSERT INTO author (author_id,first_name,last_name,last_updated) VALUES (3,'Kayla','Acosta','2023-03-05 04:35:42.101963');
+INSERT INTO author (author_id,first_name,last_name,last_updated) VALUES (4,'David','Smith','2023-03-05 04:35:42.102083');
+INSERT INTO author (author_id,first_name,last_name,last_updated) VALUES (5,'Louis','Morgan','2023-03-05 04:35:42.102249');
+INSERT INTO author (author_id,first_name,last_name,last_updated) VALUES (6,'Michael','Wells','2023-03-05 04:35:42.102368');
+INSERT INTO author (author_id,first_name,last_name,last_updated) VALUES (7,'Martha','Simpson','2023-03-05 04:35:42.102486');

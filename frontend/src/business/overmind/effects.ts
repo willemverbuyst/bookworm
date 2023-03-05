@@ -29,6 +29,13 @@ export const api = {
     return response.data;
   },
 
+  getUserByToken: async (token: string): Promise<UserApi> => {
+    const response = await axios.post(`${BACKEND_URL}/user/me`, {
+      token,
+    });
+    return response.data;
+  },
+
   postReview: async (
     author: string,
     bookTitle: string,
@@ -46,7 +53,6 @@ export const api = {
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log("response", response);
     return response.data;
   },
 };

@@ -33,11 +33,22 @@ export const logOutUser = ({ state }: Context) => {
   state.apiResponse = { message: "", status: undefined };
 };
 
-export const onInitializeOvermind = async ({ state }: Context) => {
-  const token = localStorage.getItem("token");
-  if (token) {
+export const onInitializeOvermind = async ({ effects, state }: Context) => {
+  const tokenFromLocalStorage = localStorage.getItem("token");
+  if (!tokenFromLocalStorage) {
+    return;
+  }
+  state.apiResponse = { message: "", status: undefined };
+  const response = await effects.api.getUserByToken(tokenFromLocalStorage);
+  if (response.status === "success") {
+    state.apiResponse = { message: response.message, status: "success" };
+    const token = response.token.access_token;
+    localStorage.setItem("token", token);
     state.token = token;
     state.isSignedIn = true;
+    state.user = response.data;
+  } else {
+    state.apiResponse = { message: response.message, status: "error" };
   }
 };
 

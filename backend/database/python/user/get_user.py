@@ -57,3 +57,51 @@ def get_user_from_db(email, password):
         return format_user(data)
     else:
         return None
+
+
+def get_user_from_db_by_email(email):
+    conn = psycopg2.connect(
+        database=DATABASE,
+        user=DATABASE_USER,
+        password=DATABASE_PASSWORD,
+        host=DATABASE_HOST,
+        port=DATABASE_PORT,
+    )
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT 
+            user_account.user_account_id,
+            user_account.bookstore_id,
+            user_account.first_name,
+            user_account.last_name,
+            user_account.username,
+            user_account.email,
+            address.address,
+            address.postal_code,
+            address.phone,
+            city.city,
+            country.country
+        FROM user_account
+        INNER JOIN address
+        ON user_account.address_id = address.address_id
+        INNER JOIN city
+        ON address.city_id = city.city_id
+        INNER JOIN country
+        ON city.country_id = country.country_id
+        WHERE user_account.active is True
+        AND user_account.email=%s; 
+        """,
+        (
+            email,
+        ),
+    )
+
+    data = cursor.fetchone()
+    conn.close()
+
+    if data:
+        return format_user(data)
+    else:
+        return None

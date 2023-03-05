@@ -26,3 +26,14 @@ class UserSchema(BaseModel):
                 "password": "test123"
             }
         }
+
+
+class TokenSchema(BaseModel):
+    token: str = Field(...)
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "token": "123qwe456rty",
+            }
+        }
