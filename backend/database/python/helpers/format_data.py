@@ -43,3 +43,16 @@ def format_user(user_data):
     }
 
     return user
+
+
+def format_genres(genre_data):
+    genres = []
+    for row in genre_data:
+        genre = {
+            "id": row[0],
+            "name": row[1],
+            "last_updated": row[2]
+        }
+        genres.append(genre)
+
+    return genres
