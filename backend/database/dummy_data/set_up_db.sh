@@ -24,6 +24,10 @@ echo -e "${BIBlue}Create addresses.csv${NC}"
 CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/addresses.py"
 python $CSV_SCRIPT
 
+echo -e "${BIBlue}Create genres.csv${NC}"
+CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/genres.py"
+python $CSV_SCRIPT
+
 echo -e "${BIBlue}Create authors.csv${NC}"
 CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/authors.py"
 python $CSV_SCRIPT
@@ -40,6 +44,9 @@ bash csv_to_sql.sh "cities.csv" "city/insert_cities.sql" "city"
 
 echo -e "${BICyan}Create insert_addresses.sql${NC}"
 bash csv_to_sql.sh "addresses.csv" "address/insert_addresses.sql" "address"
+
+echo -e "${BICyan}Create insert_genres.sql${NC}"
+bash csv_to_sql.sh "genres.csv" "genre/insert_genres.sql" "genre"
 
 echo -e "${BICyan}Create insert_authors.sql${NC}"
 bash csv_to_sql.sh "authors.csv" "author/insert_authors.sql" "author"
@@ -59,6 +66,9 @@ rm -rf "./cities.csv"
 
 echo -e "${BIPurple}Remove addresses.csv${NC}"
 rm -rf "./addresses.csv"
+
+echo -e "${BIPurple}Remove genres.csv${NC}"
+rm -rf "./genres.csv"
 
 echo -e "${BIPurple}Remove authors.csv${NC}"
 rm -rf "./authors.csv"

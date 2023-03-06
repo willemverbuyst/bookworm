@@ -7,3 +7,5 @@
 
 **/*.env
 !**/*.example.env
+
+**/insert_*.sql
