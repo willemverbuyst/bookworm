@@ -20,7 +20,7 @@ insert_city_sql = os.path.join(dirname, "../sql/city/insert_city.sql")
 insert_address_sql = os.path.join(dirname, "../sql/address/insert_address.sql")
 insert_genre_sql = os.path.join(dirname, "../sql/genre/insert_genre.sql")
 insert_book_genre_sql = os.path.join(dirname, "../sql/book_genre/insert_book_genre.sql")
-insert_user_accounts_sql = os.path.join(dirname, "../sql/user_account/insert_user_accounts.sql")
+insert_user_account_sql = os.path.join(dirname, "../sql/user_account/insert_user_account.sql")
 
 DATABASE = os.environ.get("DATABASE")
 DATABASE_USER = os.environ.get("DATABASE_USER")
@@ -55,7 +55,7 @@ def seed_db():
     executeScriptsFromFile(insert_address_sql, cursor)
     executeScriptsFromFile(insert_genre_sql, cursor)
     executeScriptsFromFile(insert_book_genre_sql, cursor)
-    executeScriptsFromFile(insert_user_accounts_sql, cursor)
+    executeScriptsFromFile(insert_user_account_sql, cursor)
 
     conn.commit()
     conn.close()

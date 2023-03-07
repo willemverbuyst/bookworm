@@ -3,7 +3,6 @@ SELECT
   user_account.bookstore_id,
   user_account.first_name,
   user_account.last_name,
-  user_account.username,
   user_account.email,
   address.address,
   address.postal_code,
