@@ -24,7 +24,7 @@ with open('books.csv', 'w', newline='') as file:
     ]
     
     writer.writerow(header)
-    for i in range(53):
+    for i in range(100):
       writer.writerow([
         1 + i, 
         fake.sentence(nb_words=5, variable_nb_words=True)[:-1], 
