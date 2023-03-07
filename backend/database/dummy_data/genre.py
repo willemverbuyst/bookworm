@@ -40,7 +40,7 @@ genres=[
   "Science & Technology"
 ]
 
-with open('genres.csv', 'w', newline='') as file:
+with open('genre.csv', 'w', newline='') as file:
     writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
     header=[
       "genre_id", 

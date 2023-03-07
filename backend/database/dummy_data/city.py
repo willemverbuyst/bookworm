@@ -6,24 +6,20 @@ from faker.providers import DynamicProvider
 
 fake = faker.Faker()
 
-with open('addresses.csv', 'w', newline='') as file:
+with open('city.csv', 'w', newline='') as file:
     writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
     header=[
-      "address_id", 
-      "address", 
-      "city_id",
-      "postal_code",
-      "phone",
+      "city_id", 
+      "city", 
+      "country_id",
       "last_updated"
     ]
     
     writer.writerow(header)
-    for i in range(40):
+    for i in range(20):
       writer.writerow([
         1 + i, 
-        fake.street_address(),
-        random.randint(1,20),
-        fake.postcode(),
-        fake.phone_number(),
+        fake.city(),
+        random.randint(1,5),
         datetime.datetime.now()
       ])

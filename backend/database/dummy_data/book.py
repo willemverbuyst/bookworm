@@ -11,7 +11,7 @@ languages_provider = DynamicProvider(
 )
 fake.add_provider(languages_provider)
 
-with open('books.csv', 'w', newline='') as file:
+with open('book.csv', 'w', newline='') as file:
     writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
     header=[
       "book_id", 
