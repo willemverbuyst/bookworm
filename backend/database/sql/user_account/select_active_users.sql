@@ -1,6 +1,6 @@
 SELECT 
   user_account.user_account_id,
-  user_account.bookstore_id,
+  user_account.library_id,
   user_account.first_name,
   user_account.last_name,
   user_account.email,

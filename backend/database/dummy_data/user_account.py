@@ -9,7 +9,7 @@ with open('user_account.csv', 'w', newline='') as file:
     writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
     header=[
       "user_account_id",
-      "bookstore_id", 
+      "library_id", 
       "first_name",
       "last_name",
       "email",
@@ -25,7 +25,7 @@ with open('user_account.csv', 'w', newline='') as file:
     for i in range (40):
       writer.writerow([
         i + 1, 
-        random.randint(1,34),
+        random.randint(1,2),
         fake.first_name(), 
         fake.last_name(),
         fake.email(),

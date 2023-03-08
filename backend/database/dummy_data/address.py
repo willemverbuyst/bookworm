@@ -18,7 +18,7 @@ with open('address.csv', 'w', newline='') as file:
     ]
     
     writer.writerow(header)
-    for i in range(40):
+    for i in range(50):
       writer.writerow([
         1 + i, 
         fake.street_address(),

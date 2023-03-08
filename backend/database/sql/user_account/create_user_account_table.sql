@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS user_account;
 CREATE TABLE user_account (
   user_account_id INT NOT NULL,
-  bookstore_id INT NOT NULL,
+  library_id INT NOT NULL,
   first_name VARCHAR(250) NOT NULL,
   last_name VARCHAR(250) NOT NULL,
   email VARCHAR(250) NOT NULL,
