@@ -19,9 +19,10 @@ def format_books(book_data):
             "id": row[0],
             "title": row[1],
             "language": row[2],
-            "author": row[8] + " " + row[9],
-            "year": row[4],
-            "read": row[5],
+            "year": row[3],
+            "read": row[4],
+            "author": row[6] + " " + row[6],
+            "genre": row[7]
         }
         books.append(book)
 
