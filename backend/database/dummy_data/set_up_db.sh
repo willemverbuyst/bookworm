@@ -44,6 +44,10 @@ echo -e "${BIBlue}Create user_account.csv${NC}"
 CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/user_account.py"
 python $CSV_SCRIPT
 
+echo -e "${BIBlue}Create staff.csv${NC}"
+CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/staff.py"
+python $CSV_SCRIPT
+
 echo -e "${BICyan}Create insert_country.sql${NC}"
 bash csv_to_sql.sh "country.csv" "country/insert_country.sql" "country"
 
@@ -67,6 +71,9 @@ bash csv_to_sql.sh "book_genre.csv" "book_genre/insert_book_genre.sql" "book_gen
 
 echo -e "${BICyan}Create insert_user_account.sql${NC}"
 bash csv_to_sql.sh "user_account.csv" "user_account/insert_user_account.sql" "user_account"
+
+echo -e "${BICyan}Create insert_staff.sql${NC}"
+bash csv_to_sql.sh "staff.csv" "staff/insert_staff.sql" "staff"
 
 echo -e "${BIYellow}Insert data into database${NC}"
 SEED_SCRIPT="$(cd ../ && pwd)/python/seed_db.py"
@@ -95,6 +102,9 @@ rm -rf "./book_genre.csv"
 
 echo -e "${BIPurple}Remove user_account.csv${NC}"
 rm -rf "./user_account.csv"
+
+echo -e "${BIPurple}Remove staff.csv${NC}"
+rm -rf "./staff.csv"
 
 echo "|-------------|"
 echo "|--- DONE! ---|"
