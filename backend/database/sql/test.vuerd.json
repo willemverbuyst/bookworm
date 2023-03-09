@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -5.8333331015375025,
-    "scrollLeft": -1063.34375,
+    "scrollTop": -1066,
+    "scrollLeft": 0,
     "zoomLevel": 1,
     "show": {
       "tableComment": true,
@@ -1511,7 +1511,7 @@
             "id": "556dd4c3-f9be-43a0-9fa8-c79a4a60429d"
           },
           {
-            "name": "genre_name",
+            "name": "genre",
             "comment": "",
             "dataType": "VARCHAR",
             "default": "",
@@ -1526,7 +1526,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 74.998046875,
+              "widthName": 60,
               "widthComment": 60,
               "widthDataType": 64.6005859375,
               "widthDefault": 60
@@ -1558,10 +1558,10 @@
           }
         ],
         "ui": {
-          "active": false,
+          "active": true,
           "left": 46.1109,
           "top": 1475.7463,
-          "zIndex": 4,
+          "zIndex": 23,
           "widthName": 60,
           "widthComment": 60
         },

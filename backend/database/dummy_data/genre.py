@@ -44,14 +44,14 @@ with open('genre.csv', 'w', newline='') as file:
     writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
     header=[
       "genre_id", 
-      "name",
+      "genre",
       "last_updated"
     ]
     
     writer.writerow(header)
-    for num, name in enumerate(genres, start=1):
+    for num, genre in enumerate(genres, start=1):
       writer.writerow([
         num, 
-        name,
+        genre,
         datetime.datetime.now()      
       ])
