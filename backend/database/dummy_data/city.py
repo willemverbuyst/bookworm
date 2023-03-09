@@ -11,8 +11,8 @@ with open('city.csv', 'w', newline='') as file:
     header=[
       "city_id", 
       "city", 
-      "country_id",
       "last_updated"
+      "country_id",
     ]
     
     writer.writerow(header)
@@ -20,6 +20,6 @@ with open('city.csv', 'w', newline='') as file:
       writer.writerow([
         1 + i, 
         fake.city(),
-        random.randint(1,5),
-        datetime.datetime.now()
+        datetime.datetime.now(),
+        random.randint(1,5)
       ])

@@ -11,10 +11,10 @@ with open('address.csv', 'w', newline='') as file:
     header=[
       "address_id", 
       "address", 
-      "city_id",
       "postal_code",
       "phone",
-      "last_updated"
+      "last_updated",
+      "city_id"
     ]
     
     writer.writerow(header)
@@ -22,8 +22,8 @@ with open('address.csv', 'w', newline='') as file:
       writer.writerow([
         1 + i, 
         fake.street_address(),
-        random.randint(1,20),
         fake.postcode(),
         fake.phone_number(),
-        datetime.datetime.now()
+        datetime.datetime.now(),
+        random.randint(1,20)
       ])
