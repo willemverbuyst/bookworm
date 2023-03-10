@@ -16,6 +16,8 @@ create_book_table_sql = os.path.join(dirname, "../sql/book/create_book_table.sql
 create_library_table_sql = os.path.join(dirname, "../sql/library/create_library_table.sql")
 create_user_account_table_sql = os.path.join(dirname, "../sql/user_account/create_user_account_table.sql")
 create_staff_table_sql = os.path.join(dirname, "../sql/staff/create_staff_table.sql")
+create_inventory_table_sql = os.path.join(dirname, "../sql/inventory/create_inventory_table.sql")
+create_review_table_sql = os.path.join(dirname, "../sql/review/create_review_table.sql")
 
 insert_country_sql = os.path.join(dirname, "../sql/country/insert_country.sql")
 insert_city_sql = os.path.join(dirname, "../sql/city/insert_city.sql")
@@ -28,6 +30,8 @@ insert_book_sql = os.path.join(dirname, "../sql/book/insert_book.sql")
 insert_library_sql = os.path.join(dirname, "../sql/library/insert_library.sql")
 insert_user_account_sql = os.path.join(dirname, "../sql/user_account/insert_user_account.sql")
 insert_staff_sql = os.path.join(dirname, "../sql/staff/insert_staff.sql")
+insert_inventory_sql = os.path.join(dirname, "../sql/inventory/insert_inventory.sql")
+insert_review_sql = os.path.join(dirname, "../sql/review/insert_review.sql")
 
 DATABASE = os.environ.get("DATABASE")
 DATABASE_USER = os.environ.get("DATABASE_USER")
@@ -58,6 +62,8 @@ def seed_db():
     executeScriptsFromFile(create_library_table_sql, cursor)
     executeScriptsFromFile(create_user_account_table_sql, cursor)
     executeScriptsFromFile(create_staff_table_sql, cursor)
+    executeScriptsFromFile(create_inventory_table_sql, cursor)
+    executeScriptsFromFile(create_review_table_sql, cursor)
 
     executeScriptsFromFile(insert_country_sql, cursor)
     executeScriptsFromFile(insert_city_sql, cursor)
@@ -70,6 +76,8 @@ def seed_db():
     executeScriptsFromFile(insert_library_sql, cursor)
     executeScriptsFromFile(insert_user_account_sql, cursor)
     executeScriptsFromFile(insert_staff_sql, cursor)
+    executeScriptsFromFile(insert_inventory_sql, cursor)
+    executeScriptsFromFile(insert_review_sql, cursor)
 
     conn.commit()
     conn.close()

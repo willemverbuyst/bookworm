@@ -56,6 +56,14 @@ echo -e "${BIBlue}Create staff.csv${NC}"
 CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/staff.py"
 python $CSV_SCRIPT
 
+echo -e "${BIBlue}Create inventory.csv${NC}"
+CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/inventory.py"
+python $CSV_SCRIPT
+
+echo -e "${BIBlue}Create review.csv${NC}"
+CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/review.py"
+python $CSV_SCRIPT
+
 echo -e "${BICyan}Create insert_country.sql${NC}"
 bash csv_to_sql.sh "country.csv" "country/insert_country.sql" "country"
 
@@ -88,6 +96,12 @@ bash csv_to_sql.sh "user_account.csv" "user_account/insert_user_account.sql" "us
 
 echo -e "${BICyan}Create insert_staff.sql${NC}"
 bash csv_to_sql.sh "staff.csv" "staff/insert_staff.sql" "staff"
+
+echo -e "${BICyan}Create insert_inventory.sql${NC}"
+bash csv_to_sql.sh "inventory.csv" "inventory/insert_inventory.sql" "inventory"
+
+echo -e "${BICyan}Create insert_review.sql${NC}"
+bash csv_to_sql.sh "review.csv" "review/insert_review.sql" "review"
 
 echo -e "${BIYellow}Insert data into database${NC}"
 SEED_SCRIPT="$(cd ../ && pwd)/python/seed_db.py"
@@ -126,6 +140,11 @@ rm -rf "./user_account.csv"
 echo -e "${BIPurple}Remove staff.csv${NC}"
 rm -rf "./staff.csv"
 
+echo -e "${BIPurple}Remove inventory.csv${NC}"
+rm -rf "./inventory.csv"
+
+echo -e "${BIPurple}Remove review.csv${NC}"
+rm -rf "./review.csv"
 
 echo "|-------------|"
 echo "|--- DONE! ---|"
