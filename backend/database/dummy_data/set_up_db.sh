@@ -24,6 +24,14 @@ echo -e "${BIBlue}Create address.csv${NC}"
 CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/address.py"
 python $CSV_SCRIPT
 
+echo -e "${BIBlue}Create lanuage.csv${NC}"
+CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/language.py"
+python $CSV_SCRIPT
+
+echo -e "${BIBlue}Create rental_rate.csv${NC}"
+CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/rental_rate.py"
+python $CSV_SCRIPT
+
 echo -e "${BIBlue}Create genre.csv${NC}"
 CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/genre.py"
 python $CSV_SCRIPT
@@ -36,8 +44,8 @@ echo -e "${BIBlue}Create book.csv${NC}"
 CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/book.py"
 python $CSV_SCRIPT
 
-echo -e "${BIBlue}Create book_genre.csv${NC}"
-CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/book_genre.py"
+echo -e "${BIBlue}Create library.csv${NC}"
+CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/library.py"
 python $CSV_SCRIPT
 
 echo -e "${BIBlue}Create user_account.csv${NC}"
@@ -46,10 +54,6 @@ python $CSV_SCRIPT
 
 echo -e "${BIBlue}Create staff.csv${NC}"
 CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/staff.py"
-python $CSV_SCRIPT
-
-echo -e "${BIBlue}Create library.csv${NC}"
-CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/library.py"
 python $CSV_SCRIPT
 
 echo -e "${BICyan}Create insert_country.sql${NC}"
@@ -61,6 +65,12 @@ bash csv_to_sql.sh "city.csv" "city/insert_city.sql" "city"
 echo -e "${BICyan}Create insert_address.sql${NC}"
 bash csv_to_sql.sh "address.csv" "address/insert_address.sql" "address"
 
+echo -e "${BICyan}Create insert_language.sql${NC}"
+bash csv_to_sql.sh "language.csv" "language/insert_language.sql" "language"
+
+echo -e "${BICyan}Create insert_rental_rate.sql${NC}"
+bash csv_to_sql.sh "rental_rate.csv" "rental_rate/insert_rental_rate.sql" "rental_rate"
+
 echo -e "${BICyan}Create insert_genre.sql${NC}"
 bash csv_to_sql.sh "genre.csv" "genre/insert_genre.sql" "genre"
 
@@ -70,17 +80,14 @@ bash csv_to_sql.sh "author.csv" "author/insert_author.sql" "author"
 echo -e "${BICyan}Create insert_book.sql${NC}"
 bash csv_to_sql.sh "book.csv" "book/insert_book.sql" "book"
 
-echo -e "${BICyan}Create insert_book_genre.sql${NC}"
-bash csv_to_sql.sh "book_genre.csv" "book_genre/insert_book_genre.sql" "book_genre"
+echo -e "${BICyan}Create insert_library.sql${NC}"
+bash csv_to_sql.sh "library.csv" "library/insert_library.sql" "library"
 
 echo -e "${BICyan}Create insert_user_account.sql${NC}"
 bash csv_to_sql.sh "user_account.csv" "user_account/insert_user_account.sql" "user_account"
 
 echo -e "${BICyan}Create insert_staff.sql${NC}"
 bash csv_to_sql.sh "staff.csv" "staff/insert_staff.sql" "staff"
-
-echo -e "${BICyan}Create insert_library.sql${NC}"
-bash csv_to_sql.sh "library.csv" "library/insert_library.sql" "library"
 
 echo -e "${BIYellow}Insert data into database${NC}"
 SEED_SCRIPT="$(cd ../ && pwd)/python/seed_db.py"
@@ -95,6 +102,12 @@ rm -rf "./city.csv"
 echo -e "${BIPurple}Remove address.csv${NC}"
 rm -rf "./address.csv"
 
+echo -e "${BIPurple}Remove language.csv${NC}"
+rm -rf "./language.csv"
+
+echo -e "${BIPurple}Remove rental_rate.csv${NC}"
+rm -rf "./rental_rate.csv"
+
 echo -e "${BIPurple}Remove genre.csv${NC}"
 rm -rf "./genre.csv"
 
@@ -104,8 +117,8 @@ rm -rf "./author.csv"
 echo -e "${BIPurple}Remove book.csv${NC}"
 rm -rf "./book.csv"
 
-echo -e "${BIPurple}Remove book_genre.csv${NC}"
-rm -rf "./book_genre.csv"
+echo -e "${BIPurple}Remove library.csv${NC}"
+rm -rf "./library.csv"
 
 echo -e "${BIPurple}Remove user_account.csv${NC}"
 rm -rf "./user_account.csv"
@@ -113,8 +126,6 @@ rm -rf "./user_account.csv"
 echo -e "${BIPurple}Remove staff.csv${NC}"
 rm -rf "./staff.csv"
 
-echo -e "${BIPurple}Remove library.csv${NC}"
-rm -rf "./library.csv"
 
 echo "|-------------|"
 echo "|--- DONE! ---|"

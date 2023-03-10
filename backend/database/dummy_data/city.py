@@ -11,7 +11,7 @@ with open('city.csv', 'w', newline='') as file:
     header=[
       "city_id", 
       "city", 
-      "last_updated"
+      "last_updated",
       "country_id",
     ]
     

@@ -15,7 +15,7 @@ with open('author.csv', 'w', newline='') as file:
     ]
 
     writer.writerow(header)
-    for i in range(7):
+    for i in range(80):
       writer.writerow([
         1 + i, 
         fake.first_name(), 

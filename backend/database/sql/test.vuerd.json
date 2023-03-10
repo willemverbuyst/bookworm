@@ -3,9 +3,9 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -1066,
-    "scrollLeft": 0,
-    "zoomLevel": 1,
+    "scrollTop": 0,
+    "scrollLeft": -629,
+    "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -1175,7 +1175,7 @@
           "active": false,
           "left": 996.0648,
           "top": 1327.5682,
-          "zIndex": 15,
+          "zIndex": 25,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1368,7 +1368,7 @@
           "active": false,
           "left": 1515.7173,
           "top": 1792.7315,
-          "zIndex": 5,
+          "zIndex": 28,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1426,29 +1426,6 @@
             "id": "04865322-23c7-448b-a6f8-c37ae5cf5dcb"
           },
           {
-            "name": "author_id",
-            "comment": "",
-            "dataType": "INT",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": true,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "39f73988-1e77-4999-8603-f3c5493bade6"
-          },
-          {
             "name": "book_id",
             "comment": "",
             "dataType": "INT",
@@ -1469,14 +1446,37 @@
               "widthDataType": 60,
               "widthDefault": 60
             },
-            "id": "37d00218-f387-4fc9-af8f-df2675252e54"
+            "id": "d02dea87-ec7a-46ea-843d-33f8ef790ae3"
+          },
+          {
+            "name": "author_id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "e3cb7c3f-1bf6-4844-b20b-5b40fc75c4fe"
           }
         ],
         "ui": {
           "active": false,
           "left": 868.2641,
           "top": 1792.9626,
-          "zIndex": 11,
+          "zIndex": 29,
           "widthName": 101.68359375,
           "widthComment": 60
         },
@@ -1558,7 +1558,7 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 46.1109,
           "top": 1475.7463,
           "zIndex": 23,
@@ -2663,58 +2663,6 @@
         "relationshipType": "OneN",
         "startRelationshipType": "Dash",
         "start": {
-          "tableId": "282feecf-fd8c-4b6d-8f24-c523a8caaf1f",
-          "columnIds": [
-            "bc07d2cf-2408-4701-bd7c-d28e4ac8e972"
-          ],
-          "x": 1515.7173,
-          "y": 1868.2315,
-          "direction": "left"
-        },
-        "end": {
-          "tableId": "0878715a-6e9d-4416-a6f3-db7507697936",
-          "columnIds": [
-            "39f73988-1e77-4999-8603-f3c5493bade6"
-          ],
-          "x": 1263.7636117187499,
-          "y": 1868.4626,
-          "direction": "right"
-        },
-        "constraintName": "fk_author_to_book_author",
-        "visible": true,
-        "id": "108cfc80-f7bf-4c66-b3a0-3cebd35a992f"
-      },
-      {
-        "identification": false,
-        "relationshipType": "OneN",
-        "startRelationshipType": "Dash",
-        "start": {
-          "tableId": "a306c1ce-a2ac-4e21-a6a7-1cf3e26cd13c",
-          "columnIds": [
-            "3ca53d9c-b152-4716-bea9-0c7be28d2d9c"
-          ],
-          "x": 1200.305034375,
-          "y": 1581.0682,
-          "direction": "bottom"
-        },
-        "end": {
-          "tableId": "0878715a-6e9d-4416-a6f3-db7507697936",
-          "columnIds": [
-            "37d00218-f387-4fc9-af8f-df2675252e54"
-          ],
-          "x": 1066.0138558593749,
-          "y": 1792.9626,
-          "direction": "top"
-        },
-        "constraintName": "fk_book_to_book_author",
-        "visible": true,
-        "id": "ee380977-1c92-463b-8c70-5e9119f777fc"
-      },
-      {
-        "identification": false,
-        "relationshipType": "OneN",
-        "startRelationshipType": "Dash",
-        "start": {
           "tableId": "a306c1ce-a2ac-4e21-a6a7-1cf3e26cd13c",
           "columnIds": [
             "3ca53d9c-b152-4716-bea9-0c7be28d2d9c"
@@ -2943,6 +2891,58 @@
         "constraintName": "fk_rental_to_payment",
         "visible": true,
         "id": "78f49d1d-9571-45f9-b224-3cd28e70a5dd"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "a306c1ce-a2ac-4e21-a6a7-1cf3e26cd13c",
+          "columnIds": [
+            "3ca53d9c-b152-4716-bea9-0c7be28d2d9c"
+          ],
+          "x": 1200.305034375,
+          "y": 1581.0682,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "0878715a-6e9d-4416-a6f3-db7507697936",
+          "columnIds": [
+            "d02dea87-ec7a-46ea-843d-33f8ef790ae3"
+          ],
+          "x": 1066.0138558593749,
+          "y": 1792.9626,
+          "direction": "top"
+        },
+        "constraintName": "fk_book_to_book_author",
+        "visible": true,
+        "id": "f88e53ef-a802-43a3-a89c-a73ee8d015df"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "282feecf-fd8c-4b6d-8f24-c523a8caaf1f",
+          "columnIds": [
+            "bc07d2cf-2408-4701-bd7c-d28e4ac8e972"
+          ],
+          "x": 1515.7173,
+          "y": 1868.2315,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "0878715a-6e9d-4416-a6f3-db7507697936",
+          "columnIds": [
+            "e3cb7c3f-1bf6-4844-b20b-5b40fc75c4fe"
+          ],
+          "x": 1263.7636117187499,
+          "y": 1868.4626,
+          "direction": "right"
+        },
+        "constraintName": "fk_author_to_book_author",
+        "visible": true,
+        "id": "1d2e870e-24c3-4610-bbad-21074d68c688"
       }
     ]
   }

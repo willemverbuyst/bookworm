@@ -14,6 +14,6 @@ with open('rental_rate.csv', 'w', newline='') as file:
     for i in range (5):
       writer.writerow([
         i + 1, 
-        random.randint(i + 0.99),
+        i + 0.99,
         datetime.datetime.now(),      
       ])

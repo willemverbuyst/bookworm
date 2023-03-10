@@ -2,20 +2,20 @@ import csv
 import datetime
 import random
 
-with open('staff.csv', 'w', newline='') as file:
+with open('book_author.csv', 'w', newline='') as file:
     writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
     header=[
-      "staff_id",
+      "book_author_id",
       "last_updated",
-      "user_account_id",
-      "library_id"
+      "book_id",
+      "author_id"
     ]
     
     writer.writerow(header)
-    for i in range (2):
+    for i in range (100):
       writer.writerow([
         i + 1, 
-        datetime.datetime.now(),      
-        random.randint(1,40),
-        random.randint(1,2)
+        datetime.datetime.now(), 
+        i + 1,
+        random.randint(1, 80)
       ])
