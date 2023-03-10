@@ -18,6 +18,8 @@ create_user_account_table_sql = os.path.join(dirname, "../sql/user_account/creat
 create_staff_table_sql = os.path.join(dirname, "../sql/staff/create_staff_table.sql")
 create_inventory_table_sql = os.path.join(dirname, "../sql/inventory/create_inventory_table.sql")
 create_review_table_sql = os.path.join(dirname, "../sql/review/create_review_table.sql")
+create_rental_table_sql = os.path.join(dirname, "../sql/rental/create_rental_table.sql")
+create_payment_table_sql = os.path.join(dirname, "../sql/payment/create_payment_table.sql")
 
 insert_country_sql = os.path.join(dirname, "../sql/country/insert_country.sql")
 insert_city_sql = os.path.join(dirname, "../sql/city/insert_city.sql")
@@ -32,6 +34,8 @@ insert_user_account_sql = os.path.join(dirname, "../sql/user_account/insert_user
 insert_staff_sql = os.path.join(dirname, "../sql/staff/insert_staff.sql")
 insert_inventory_sql = os.path.join(dirname, "../sql/inventory/insert_inventory.sql")
 insert_review_sql = os.path.join(dirname, "../sql/review/insert_review.sql")
+insert_rental_sql = os.path.join(dirname, "../sql/rental/insert_rental.sql")
+insert_payment_sql = os.path.join(dirname, "../sql/payment/insert_payment.sql")
 
 DATABASE = os.environ.get("DATABASE")
 DATABASE_USER = os.environ.get("DATABASE_USER")
@@ -64,6 +68,8 @@ def seed_db():
     executeScriptsFromFile(create_staff_table_sql, cursor)
     executeScriptsFromFile(create_inventory_table_sql, cursor)
     executeScriptsFromFile(create_review_table_sql, cursor)
+    executeScriptsFromFile(create_rental_table_sql, cursor)
+    executeScriptsFromFile(create_payment_table_sql, cursor)
 
     executeScriptsFromFile(insert_country_sql, cursor)
     executeScriptsFromFile(insert_city_sql, cursor)
@@ -78,6 +84,8 @@ def seed_db():
     executeScriptsFromFile(insert_staff_sql, cursor)
     executeScriptsFromFile(insert_inventory_sql, cursor)
     executeScriptsFromFile(insert_review_sql, cursor)
+    executeScriptsFromFile(insert_rental_sql, cursor)
+    executeScriptsFromFile(insert_payment_sql, cursor)
 
     conn.commit()
     conn.close()
