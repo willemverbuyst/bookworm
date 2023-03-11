@@ -1,8 +1,8 @@
 import csv
 import datetime
 import random
+import config
 
-languages=["EN", "NL", "ES", "FR"]
 
 with open('language.csv', 'w', newline='') as file:
     writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
@@ -13,7 +13,7 @@ with open('language.csv', 'w', newline='') as file:
     ]
     
     writer.writerow(header)
-    for i,language in enumerate(languages):
+    for i,language in enumerate(config.LANGUAGES):
       writer.writerow([
         i + 1, 
         language,

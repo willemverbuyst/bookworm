@@ -2,6 +2,7 @@ import faker
 import csv
 import random
 import datetime
+import config
 from faker.providers import DynamicProvider
 
 fake = faker.Faker()
@@ -16,10 +17,10 @@ with open('city.csv', 'w', newline='') as file:
     ]
     
     writer.writerow(header)
-    for i in range(20):
+    for i in range(config.CITY):
       writer.writerow([
         1 + i, 
         fake.city(),
         datetime.datetime.now(),
-        random.randint(1,5)
+        random.randint(1,config.COUNTRY)
       ])

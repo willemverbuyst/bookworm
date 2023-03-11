@@ -1,6 +1,7 @@
 import csv
 import datetime
 import random
+import config
 
 with open('book_author.csv', 'w', newline='') as file:
     writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
@@ -12,10 +13,10 @@ with open('book_author.csv', 'w', newline='') as file:
     ]
     
     writer.writerow(header)
-    for i in range (100):
+    for i in range (config.BOOK + 50):
       writer.writerow([
         i + 1, 
         datetime.datetime.now(), 
-        i + 1,
-        random.randint(1, 80)
+        config.BOOK,
+        random.randint(1, config.AUTHOR)
       ])

@@ -2,6 +2,7 @@ import faker
 import csv
 import datetime
 import random
+import config
 
 fake = faker.Faker()
 
@@ -15,10 +16,10 @@ with open('library.csv', 'w', newline='') as file:
     ]
     
     writer.writerow(header)
-    for i in range (2):
+    for i in range (config.LIBRARY):
       writer.writerow([
         i + 1, 
         fake.company(),
         datetime.datetime.now(),    
-        random.randint(1,50)
+        random.randint(1,config.ADDRESS)
       ])

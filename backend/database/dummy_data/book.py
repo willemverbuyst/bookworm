@@ -2,6 +2,7 @@ import faker
 import csv
 import random
 import datetime
+import config
 
 fake = faker.Faker()
 
@@ -20,15 +21,15 @@ with open('book.csv', 'w', newline='') as file:
     ]
     
     writer.writerow(header)
-    for i in range(100):
+    for i in range(config.BOOK):
       writer.writerow([
         1 + i, 
         fake.sentence(nb_words=5, variable_nb_words=True)[:-1], 
         fake.year(), 
-        random.randint(1, 9),
-        random.randint(50, 400),
+        random.randint(1, config.REPLACEMENT_COST_MAX),
+        random.randint(config.PAGES_MIN, config.PAGES_MAX),
         datetime.datetime.now(),
-        random.randint(1,4),
-        random.randint(1, 34),
-        random.randint(1, 5),
+        random.randint(1,len(config.LANGUAGES)),
+        random.randint(1, len(config.GENRES)),
+        random.randint(config.RENTAL_RATE_MIN, config.RENTAL_RATE_MAX),
       ])

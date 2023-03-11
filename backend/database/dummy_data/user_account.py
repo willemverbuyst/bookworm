@@ -2,6 +2,7 @@ import faker
 import csv
 import datetime
 import random
+import config
 
 fake = faker.Faker()
 
@@ -21,7 +22,7 @@ with open('user_account.csv', 'w', newline='') as file:
     ]
     
     writer.writerow(header)
-    for i in range (40):
+    for i in range (config.USER_ACCOUNT):
       writer.writerow([
         i + 1, 
         fake.first_name(), 
@@ -32,5 +33,5 @@ with open('user_account.csv', 'w', newline='') as file:
         fake.boolean(chance_of_getting_true=50),
         random.randint(0,1),   
         datetime.datetime.now(),
-        random.randint(1,40)
+        random.randint(1,config.ADDRESS)
       ])

@@ -1,6 +1,7 @@
 import faker
 import csv
 import datetime
+import config
 from faker.providers import DynamicProvider
 
 fake = faker.Faker()
@@ -14,7 +15,7 @@ with open('country.csv', 'w', newline='') as file:
     ]
     
     writer.writerow(header)
-    for i in range(5):
+    for i in range(config.COUNTRY):
       writer.writerow([
         1 + i, 
         fake.country(),

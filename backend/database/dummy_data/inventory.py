@@ -1,6 +1,8 @@
 import csv
 import datetime
 import random
+import config
+
 
 with open('inventory.csv', 'w', newline='') as file:
     writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
@@ -12,10 +14,10 @@ with open('inventory.csv', 'w', newline='') as file:
     ]
     
     writer.writerow(header)
-    for i in range (100):
+    for i in range (config.INVENTORY):
       writer.writerow([
         i + 1, 
         datetime.datetime.now(), 
-        i + 1,
-        random.randint(1, 2)
+        config.BOOK,
+        random.randint(1, config.LIBRARY)
       ])
