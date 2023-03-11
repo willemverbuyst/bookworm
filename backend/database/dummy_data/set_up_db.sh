@@ -44,6 +44,10 @@ echo -e "${BIBlue}Create book.csv${NC}"
 CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/book.py"
 python $CSV_SCRIPT
 
+echo -e "${BIBlue}Create book_author.csv${NC}"
+CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/book_author.py"
+python $CSV_SCRIPT
+
 echo -e "${BIBlue}Create library.csv${NC}"
 CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/library.py"
 python $CSV_SCRIPT
@@ -54,6 +58,10 @@ python $CSV_SCRIPT
 
 echo -e "${BIBlue}Create staff.csv${NC}"
 CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/staff.py"
+python $CSV_SCRIPT
+
+echo -e "${BIBlue}Create bookworm.csv${NC}"
+CSV_SCRIPT="$(cd ../ && pwd)/dummy_data/bookworm.py"
 python $CSV_SCRIPT
 
 echo -e "${BIBlue}Create inventory.csv${NC}"
@@ -96,6 +104,9 @@ bash csv_to_sql.sh "author.csv" "author/insert_author.sql" "author"
 echo -e "${BICyan}Create insert_book.sql${NC}"
 bash csv_to_sql.sh "book.csv" "book/insert_book.sql" "book"
 
+echo -e "${BICyan}Create insert_book_author.sql${NC}"
+bash csv_to_sql.sh "book_author.csv" "book_author/insert_book_author.sql" "book_author"
+
 echo -e "${BICyan}Create insert_library.sql${NC}"
 bash csv_to_sql.sh "library.csv" "library/insert_library.sql" "library"
 
@@ -104,6 +115,9 @@ bash csv_to_sql.sh "user_account.csv" "user_account/insert_user_account.sql" "us
 
 echo -e "${BICyan}Create insert_staff.sql${NC}"
 bash csv_to_sql.sh "staff.csv" "staff/insert_staff.sql" "staff"
+
+echo -e "${BICyan}Create insert_bookwoorm.sql${NC}"
+bash csv_to_sql.sh "bookworm.csv" "bookworm/insert_bookworm.sql" "bookworm"
 
 echo -e "${BICyan}Create insert_inventory.sql${NC}"
 bash csv_to_sql.sh "inventory.csv" "inventory/insert_inventory.sql" "inventory"
@@ -140,12 +154,16 @@ echo "-- AUTHOR" >> "dev.sql"
 cat "$(cd ../ && pwd)/sql/author/create_author_table.sql" >> "dev.sql"
 echo "-- BOOK" >> "dev.sql"
 cat "$(cd ../ && pwd)/sql/book/create_book_table.sql" >> "dev.sql"
+echo "-- BOOK_AUTHOR" >> "dev.sql"
+cat "$(cd ../ && pwd)/sql/book_author/create_book_author_table.sql" >> "dev.sql"
 echo "-- LIBRARY" >> "dev.sql"
 cat "$(cd ../ && pwd)/sql/library/create_library_table.sql" >> "dev.sql"
 echo "-- USER_ACCOUNT" >> "dev.sql"
 cat "$(cd ../ && pwd)/sql/user_account/create_user_account_table.sql" >> "dev.sql"
 echo "-- STAFF" >> "dev.sql"
 cat "$(cd ../ && pwd)/sql/staff/create_staff_table.sql" >> "dev.sql"
+echo "-- BOOKWORM" >> "dev.sql"
+cat "$(cd ../ && pwd)/sql/bookworm/create_bookworm_table.sql" >> "dev.sql"
 echo "-- INVENTORY" >> "dev.sql"
 cat "$(cd ../ && pwd)/sql/inventory/create_inventory_table.sql" >> "dev.sql"
 echo "-- REVIEW" >> "dev.sql"
@@ -171,12 +189,16 @@ echo "-- AUTHOR" >> "dev.sql"
 cat "$(cd ../ && pwd)/sql/author/insert_author.sql" >> "dev.sql"
 echo "-- BOOK" >> "dev.sql"
 cat "$(cd ../ && pwd)/sql/book/insert_book.sql" >> "dev.sql"
+echo "-- BOOK_AUTHOR" >> "dev.sql"
+cat "$(cd ../ && pwd)/sql/book_author/insert_book_author.sql" >> "dev.sql"
 echo "-- LIBRARY" >> "dev.sql"
 cat "$(cd ../ && pwd)/sql/library/insert_library.sql" >> "dev.sql"
 echo "-- USER_ACCOUNT" >> "dev.sql"
 cat "$(cd ../ && pwd)/sql/user_account/insert_user_account.sql" >> "dev.sql"
 echo "-- STAFF" >> "dev.sql"
 cat "$(cd ../ && pwd)/sql/staff/insert_staff.sql" >> "dev.sql"
+echo "-- BOOKWORM" >> "dev.sql"
+cat "$(cd ../ && pwd)/sql/bookworm/insert_bookworm.sql" >> "dev.sql"
 echo "-- INVENTORY" >> "dev.sql"
 cat "$(cd ../ && pwd)/sql/inventory/insert_inventory.sql" >> "dev.sql"
 echo "-- REVIEW" >> "dev.sql"
@@ -210,6 +232,9 @@ rm -rf "./author.csv"
 echo -e "${BIPurple}Remove book.csv${NC}"
 rm -rf "./book.csv"
 
+echo -e "${BIPurple}Remove book_author.csv${NC}"
+rm -rf "./book_author.csv"
+
 echo -e "${BIPurple}Remove library.csv${NC}"
 rm -rf "./library.csv"
 
@@ -218,6 +243,9 @@ rm -rf "./user_account.csv"
 
 echo -e "${BIPurple}Remove staff.csv${NC}"
 rm -rf "./staff.csv"
+
+echo -e "${BIPurple}Remove bookworm.csv${NC}"
+rm -rf "./bookworm.csv"
 
 echo -e "${BIPurple}Remove inventory.csv${NC}"
 rm -rf "./inventory.csv"
