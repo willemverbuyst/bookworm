@@ -1,6 +1,5 @@
 SELECT 
   user_account.user_account_id,
-  user_account.library_id,
   user_account.first_name,
   user_account.last_name,
   user_account.email,
@@ -16,4 +15,4 @@ INNER JOIN city
 ON address.city_id = city.city_id
 INNER JOIN country
 ON city.country_id = country.country_id
-WHERE user_account.active is True;
+WHERE user_account.activebool is True;

@@ -1,1 +1,1 @@
-SELECT * FROM genre;
+SELECT genre_id, genre FROM genre;

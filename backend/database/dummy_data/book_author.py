@@ -13,10 +13,10 @@ with open('book_author.csv', 'w', newline='') as file:
     ]
     
     writer.writerow(header)
-    for i in range (config.BOOK + 50):
+    for i in range (config.BOOK):
       writer.writerow([
         i + 1, 
         datetime.datetime.now(), 
-        config.BOOK,
+        i + 1,
         random.randint(1, config.AUTHOR)
       ])

@@ -1,16 +1,16 @@
 SELECT 
   book.book_id,
   book.title,
-  book.language,
-  book.year,
-  book.read, 
-  author.first_name, 
-  author.last_name,
-  genre.name AS genre 
+  book.year_published, 
+  CONCAT (author.first_name, ' ', author.last_name) as author,
+  genre.genre, 
+  language.language 
 FROM book 
+INNER JOIN book_author 
+ON book.book_id = book_author.book_id 
 INNER JOIN author 
-ON book.author_id = author.author_id 
-INNER JOIN book_genre 
-ON book.book_id = book_genre.book_id 
+ON author.author_id = book_author.author_id 
 INNER JOIN genre 
-ON book_genre.genre_id = genre.genre_id;
+ON genre.genre_id = book.genre_id 
+INNER JOIN language 
+ON book.language_id = language.language_id;

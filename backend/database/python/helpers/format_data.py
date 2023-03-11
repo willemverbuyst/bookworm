@@ -18,11 +18,10 @@ def format_books(book_data):
         book = {
             "id": row[0],
             "title": row[1],
-            "language": row[2],
-            "year": row[3],
-            "read": row[4],
-            "author": row[6] + " " + row[6],
-            "genre": row[7]
+            "year_published": row[2],
+            "author": row[3],
+            "genre": row[4],
+            "language": row[5]
         }
         books.append(book)
 
@@ -32,15 +31,14 @@ def format_books(book_data):
 def format_user(user_data):
     user = {
         "id": user_data[0],
-        "first_name": user_data[2],
-        "last_name": user_data[3],
-        "username": user_data[4],
-        "email": user_data[5],
-        "address": user_data[6],
-        "postal_code": user_data[7],
-        "phone": user_data[8],
-        "city": user_data[9],
-        "country": user_data[10],
+        "first_name": user_data[1],
+        "last_name": user_data[2],
+        "email": user_data[3],
+        "address": user_data[4],
+        "postal_code": user_data[5],
+        "phone": user_data[6],
+        "city": user_data[7],
+        "country": user_data[8],
     }
 
     return user
@@ -51,8 +49,7 @@ def format_genres(genre_data):
     for row in genre_data:
         genre = {
             "id": row[0],
-            "name": row[1],
-            "last_updated": row[2]
+            "genre": row[1],
         }
         genres.append(genre)
 
