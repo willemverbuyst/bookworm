@@ -21,6 +21,15 @@ export const api = {
     }
   },
 
+  getAllGenres: async (): Promise<BookApi> => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/genres`);
+      return response.data;
+    } catch (error) {
+      throw new Error(JSON.stringify(error));
+    }
+  },
+
   getUser: async (email: string, password: string): Promise<UserApi> => {
     const response = await axios.post(`${BACKEND_URL}/user/login`, {
       email,

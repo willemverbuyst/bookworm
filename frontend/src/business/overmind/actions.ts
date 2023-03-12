@@ -62,6 +62,11 @@ export const getAllBooks = async ({ effects, state }: Context) => {
   state.booksApi = allBooks;
 };
 
+export const getAllGenres = async ({ effects, state }: Context) => {
+  const allGenres = await effects.api.getAllGenres();
+  state.genresApi = allGenres;
+};
+
 export const postReview = async (
   { state, effects }: Context,
   { author, bookTitle, review, rating }: Review

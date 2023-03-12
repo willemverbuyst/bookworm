@@ -8,6 +8,7 @@ export const state: State = {
   isSignedIn: false,
   authorsApi: { status: "", data: [], message: "" },
   booksApi: { status: "", data: [], message: "" },
+  genresApi: { status: "", data: [], message: "" },
   allAuthors: derived(({ authorsApi }: State) => {
     if (!authorsApi.data.length) {
       return null;
@@ -38,6 +39,12 @@ export const state: State = {
         ...book,
       }))
       .sort((book1, book2) => `${book1.title}`.localeCompare(book2.title));
+  }),
+  allGenres: derived(({ genresApi }: State) => {
+    if (!genresApi.data.length) {
+      return null;
+    }
+    return genresApi.data;
   }),
   booksGroupedByLanguage: derived(({ booksApi }: State) => {
     if (!booksApi.data.length) {

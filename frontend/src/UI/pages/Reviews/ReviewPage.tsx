@@ -30,7 +30,7 @@ function ReviewPage() {
   const allAuthors = useAppState().allAuthors || [];
   const allBooks = useAppState().allBooks || [];
   const authorsForSelect = allAuthors?.map((a) => ({
-    display: a.name,
+    display: a.first_name,
     value: a.id,
   }));
   const [booksForSelect, setBooksForSelect] = useState<

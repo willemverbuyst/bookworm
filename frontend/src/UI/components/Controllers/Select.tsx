@@ -16,6 +16,7 @@ type SelectProps<T extends FieldValues, U> = {
   label?: string;
   name: string;
   required?: boolean;
+  placeholder?: string;
 } & UseControllerProps<T>;
 
 function ControlledSelect<
@@ -28,6 +29,7 @@ function ControlledSelect<
   helperText,
   label,
   name,
+  placeholder,
   required = false,
 }: SelectProps<T, U>) {
   return (
