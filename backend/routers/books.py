@@ -3,6 +3,7 @@ from error.main import raise_exception
 from database.python.book.get_books import (
     get_books_from_db, 
     get_books_from_db_by_genre, 
+    get_books_from_db_by_genre_and_language, 
     get_books_from_db_by_language
 )
 
@@ -14,7 +15,9 @@ book_router = APIRouter()
 def get_all_books(genre = None, language = None) -> dict:
 
     try:
-        if genre:
+        if genre and language:
+            books = get_books_from_db_by_genre_and_language(genre, language)
+        elif genre:
             books = get_books_from_db_by_genre(genre)
         elif language:
             books = get_books_from_db_by_language(language)
