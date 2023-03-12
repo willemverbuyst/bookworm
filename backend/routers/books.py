@@ -4,7 +4,8 @@ from database.python.book.get_books import (
     get_books_from_db, 
     get_books_from_db_by_genre, 
     get_books_from_db_by_genre_and_language, 
-    get_books_from_db_by_language
+    get_books_from_db_by_language,
+    get_total_number_of_books
 )
 
 
@@ -26,11 +27,14 @@ def get_all_books(genre = None, language = None) -> dict:
         
         result = len(books)
 
+        total_number_of_books = get_total_number_of_books()
+
         return {
             "status": "success",
             "result": result,
+            "total_number_of_books": total_number_of_books,
             "data": books,
-            "message": "all books have been fetched",
+            "message": "books have been fetched",
         }
     except:
         raise_exception(500, "Something went wrong!")

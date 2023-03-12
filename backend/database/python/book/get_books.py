@@ -173,3 +173,26 @@ def get_books_from_db_by_genre(genre):
     books_formatted = format_books(data)
 
     return books_formatted
+
+
+def get_total_number_of_books():
+    conn = psycopg2.connect(
+        database=DATABASE,
+        user=DATABASE_USER,
+        password=DATABASE_PASSWORD,
+        host=DATABASE_HOST,
+        port=DATABASE_PORT,
+    )
+
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT 
+        COUNT(*) AS number_of_books 
+        FROM book;
+        """
+    )
+
+    result = cursor.fetchone()
+    conn.close()
+
+    return result[0]
