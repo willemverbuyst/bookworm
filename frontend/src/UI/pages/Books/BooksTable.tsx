@@ -8,10 +8,10 @@ function BooksTable() {
 
   const columns: Array<{ field: keyof Book }> = [
     { field: "title" },
-    { field: "language" },
     { field: "author" },
-    { field: "year" },
-    { field: "read" },
+    { field: "year_published" },
+    { field: "genre" },
+    { field: "language" },
   ];
 
   return (

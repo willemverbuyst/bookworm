@@ -1,10 +1,10 @@
 export interface Book {
   id: string;
   title: string;
-  language: string;
   author: string;
-  year: number;
-  read: boolean;
+  year_published: number;
+  genre: string;
+  language: string;
 }
 
 export interface BookApi {
@@ -12,10 +12,10 @@ export interface BookApi {
   data: {
     id: string;
     title: string;
-    language: string;
     author: string;
-    year: number;
-    read: number;
+    year_published: number;
+    genre: string;
+    language: string;
   }[];
   message: string;
 }

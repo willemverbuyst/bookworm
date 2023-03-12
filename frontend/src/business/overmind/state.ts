@@ -36,7 +36,6 @@ export const state: State = {
     return booksApi.data
       .map((book) => ({
         ...book,
-        read: book.read === 1,
       }))
       .sort((book1, book2) => `${book1.title}`.localeCompare(book2.title));
   }),
