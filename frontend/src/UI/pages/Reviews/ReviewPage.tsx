@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  HStack,
-  useId,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, useId, VStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -88,7 +81,7 @@ function ReviewPage() {
   return (
     <>
       <NavigationBar />
-      <Container centerContent>
+      <Flex flexDirection="column" alignItems="center">
         <PageTitle title="Review" />
 
         <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
@@ -158,7 +151,7 @@ function ReviewPage() {
         </Box>
         <DevTool control={control} />
         <Box />
-      </Container>
+      </Flex>
     </>
   );
 }

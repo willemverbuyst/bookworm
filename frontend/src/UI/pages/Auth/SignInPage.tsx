@@ -1,6 +1,6 @@
 import { useEffect, useId } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Box, Button, Container, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Text, VStack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppState, useActions } from "../../../business/overmind";
@@ -42,7 +42,7 @@ function SignInPage() {
   return (
     <>
       <NavigationBar />
-      <Container centerContent>
+      <Flex flexDirection="column" alignItems="center">
         <PageTitle title="Sign In" />
 
         {isSignedIn ? (
@@ -72,7 +72,7 @@ function SignInPage() {
             </VStack>
           </Box>
         )}
-      </Container>
+      </Flex>
     </>
   );
 }

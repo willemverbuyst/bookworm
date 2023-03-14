@@ -1,4 +1,4 @@
-import { Box, Button, Container, HStack } from "@chakra-ui/react";
+import { Box, Button, HStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useId } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -36,29 +36,27 @@ function FilterAndSort() {
   };
 
   return (
-    <Container centerContent m={10}>
-      <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)} w="100%">
-        <HStack spacing={6}>
-          <ControlledSelect
-            dataSet={genresForSelect}
-            name="genre"
-            control={control}
-            error={errors.genre}
-            placeholder="genre"
-          />
-          <ControlledSelect
-            dataSet={languagesForSelect}
-            name="language"
-            control={control}
-            error={errors.language}
-            placeholder="language"
-          />
-          <Button type="submit" colorScheme="teal" size="sm">
-            Submit
-          </Button>
-        </HStack>
-      </Box>
-    </Container>
+    <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)} m={10}>
+      <HStack spacing={6}>
+        <ControlledSelect
+          dataSet={genresForSelect}
+          name="genre"
+          control={control}
+          error={errors.genre}
+          placeholder="genre"
+        />
+        <ControlledSelect
+          dataSet={languagesForSelect}
+          name="language"
+          control={control}
+          error={errors.language}
+          placeholder="language"
+        />
+        <Button type="submit" colorScheme="teal" size="md" px={10}>
+          Submit
+        </Button>
+      </HStack>
+    </Box>
   );
 }
 

@@ -1,5 +1,5 @@
 import {
-  Container,
+  Flex,
   Tab,
   TabList,
   TabPanel,
@@ -18,7 +18,7 @@ function AuthorsPage() {
   return (
     <>
       <NavigationBar />
-      <Container centerContent>
+      <Flex flexDirection="column" alignItems="center">
         <PageTitle title="Authors" />
         <Tabs variant="soft-rounded" colorScheme="teal" align="center">
           <TabList>
@@ -34,7 +34,7 @@ function AuthorsPage() {
             </TabPanel>
           </TabPanels>
         </Tabs>
-      </Container>
+      </Flex>
     </>
   );
 }
