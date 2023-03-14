@@ -9,9 +9,14 @@ import { defaultValues, FormFields, validationSchema } from "./helpers";
 function FilterAndSort() {
   const id = useId();
   const allGenres = useAppState().allGenres || [];
+  const allLanguages = useAppState().allLanguages || [];
   const genresForSelect = allGenres.map((g) => ({
     value: g.id,
     display: g.genre,
+  }));
+  const languagesForSelect = allLanguages.map((l) => ({
+    value: l.id,
+    display: l.language,
   }));
 
   const {
@@ -32,7 +37,7 @@ function FilterAndSort() {
 
   return (
     <Container centerContent m={10}>
-      <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
+      <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)} w="100%">
         <HStack spacing={6}>
           <ControlledSelect
             dataSet={genresForSelect}
@@ -41,14 +46,13 @@ function FilterAndSort() {
             error={errors.genre}
             placeholder="genre"
           />
-          {/* <ControlledSelect
-          dataSet={lanugageForSelect}
-          name="language"
-          control={control}
-          label="language"
-          error={errors.language}
-          required
-        /> */}
+          <ControlledSelect
+            dataSet={languagesForSelect}
+            name="language"
+            control={control}
+            error={errors.language}
+            placeholder="language"
+          />
           <Button type="submit" colorScheme="teal" size="sm">
             Submit
           </Button>

@@ -9,6 +9,7 @@ export const state: State = {
   authorsApi: { status: "", data: [], message: "" },
   booksApi: { status: "", data: [], message: "" },
   genresApi: { status: "", data: [], message: "" },
+  languagesApi: { status: "", data: [], message: "" },
   allAuthors: derived(({ authorsApi }: State) => {
     if (!authorsApi.data.length) {
       return null;
@@ -45,6 +46,12 @@ export const state: State = {
       return null;
     }
     return genresApi.data;
+  }),
+  allLanguages: derived(({ languagesApi }: State) => {
+    if (!languagesApi.data.length) {
+      return null;
+    }
+    return languagesApi.data;
   }),
   booksGroupedByLanguage: derived(({ booksApi }: State) => {
     if (!booksApi.data.length) {

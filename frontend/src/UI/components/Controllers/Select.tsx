@@ -42,7 +42,9 @@ function ControlledSelect<
         render={({ field }) => (
           <Select {...field}>
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <option key="none" />
+            <option key="genre" disabled value="">
+              {placeholder}
+            </option>
             {dataSet.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.display}

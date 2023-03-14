@@ -13,7 +13,7 @@ import SignUpPage from "./UI/pages/Auth/SingUpPage";
 
 export default function App() {
   return (
-    <Box w="100%">
+    <Box>
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/home" element={<HomePage />} />

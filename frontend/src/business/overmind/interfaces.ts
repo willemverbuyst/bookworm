@@ -1,6 +1,7 @@
 import { Author, AuthorApi } from "../models/Author";
 import { Book, BookApi } from "../models/Book";
 import { Genre, GenreApi } from "../models/Genre";
+import { Language, LanguageApi } from "../models/Language";
 import { User } from "../models/User";
 
 export interface State {
@@ -15,6 +16,8 @@ export interface State {
   authorsApi: AuthorApi;
   booksApi: BookApi;
   genresApi: GenreApi;
+  languagesApi: LanguageApi;
   allGenres: Array<Genre> | null;
+  allLanguages: Array<Language> | null;
   testProp: number;
 }

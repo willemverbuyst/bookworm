@@ -1,6 +1,8 @@
 import axios from "axios";
 import { AuthorApi } from "../models/Author";
 import { BookApi } from "../models/Book";
+import { GenreApi } from "../models/Genre";
+import { LanguageApi } from "../models/Language";
 import { ReviewApi } from "../models/ReviewApi";
 import { UserApi } from "../models/User";
 
@@ -21,9 +23,18 @@ export const api = {
     }
   },
 
-  getAllGenres: async (): Promise<BookApi> => {
+  getAllGenres: async (): Promise<GenreApi> => {
     try {
       const response = await axios.get(`${BACKEND_URL}/genres`);
+      return response.data;
+    } catch (error) {
+      throw new Error(JSON.stringify(error));
+    }
+  },
+
+  getAllLanguages: async (): Promise<LanguageApi> => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/languages`);
       return response.data;
     } catch (error) {
       throw new Error(JSON.stringify(error));

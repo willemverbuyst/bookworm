@@ -1,5 +1,7 @@
 import {
+  Box,
   Container,
+  Flex,
   Tab,
   TabList,
   TabPanel,
@@ -13,15 +15,17 @@ import PageTitle from "../../components/Text/PageTitle";
 import NavigationBar from "../../components/Navigation/NavigationBar";
 import { useGetAllGenres } from "../../hooks/useGetAllGenrs";
 import FilterAndSort from "./FilterAndSort";
+import { useGetAllLanguages } from "../../hooks/useGetAllLanguages";
 
 function BooksPage() {
   useGetAllBooks();
   useGetAllGenres();
+  useGetAllLanguages();
 
   return (
     <>
       <NavigationBar />
-      <Container centerContent>
+      <Flex direction="column" alignItems="center">
         <PageTitle title="Books" />
         <FilterAndSort />
         <Tabs variant="soft-rounded" colorScheme="teal" align="center">
@@ -38,7 +42,7 @@ function BooksPage() {
             </TabPanel>
           </TabPanels>
         </Tabs>
-      </Container>
+      </Flex>
     </>
   );
 }

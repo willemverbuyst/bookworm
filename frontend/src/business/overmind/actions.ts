@@ -67,6 +67,11 @@ export const getAllGenres = async ({ effects, state }: Context) => {
   state.genresApi = allGenres;
 };
 
+export const getAllLanguages = async ({ effects, state }: Context) => {
+  const allLanguages = await effects.api.getAllLanguages();
+  state.languagesApi = allLanguages;
+};
+
 export const postReview = async (
   { state, effects }: Context,
   { author, bookTitle, review, rating }: Review
