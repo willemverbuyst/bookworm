@@ -4,6 +4,7 @@ from routers.root import root_router
 from routers.authors import author_router
 from routers.books import book_router
 from routers.genres import genre_router
+from routers.languages import language_router
 from routers.reviews import review_router
 from routers.user import user_router
 
@@ -24,5 +25,6 @@ app.include_router(root_router)
 app.include_router(author_router)
 app.include_router(book_router)
 app.include_router(genre_router)
+app.include_router(language_router)
 app.include_router(review_router)
 app.include_router(user_router)
