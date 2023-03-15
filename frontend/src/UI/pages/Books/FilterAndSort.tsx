@@ -2,14 +2,16 @@ import { Box, Button, HStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useId } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useAppState } from "../../../business/overmind";
+import { useActions, useAppState } from "../../../business/overmind";
 import ControlledSelect from "../../components/Controllers/Select";
+
 import { defaultValues, FormFields, validationSchema } from "./helpers";
 
 function FilterAndSort() {
   const id = useId();
   const allGenres = useAppState().allGenres || [];
   const allLanguages = useAppState().allLanguages || [];
+  const { getAllBooks } = useActions();
   const genresForSelect = allGenres.map((g) => ({
     value: g.id,
     display: g.genre,
@@ -29,10 +31,8 @@ function FilterAndSort() {
     resolver: zodResolver(validationSchema),
   });
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    // await postReview(data);
-    console.log(data);
-    reset();
+  const onSubmit: SubmitHandler<FormFields> = async ({ genre, language }) => {
+    getAllBooks({ genre, language });
   };
 
   return (
@@ -53,7 +53,7 @@ function FilterAndSort() {
           placeholder="language"
         />
         <Button type="submit" colorScheme="teal" size="md" px={10}>
-          Submit
+          Search
         </Button>
       </HStack>
     </Box>

@@ -6,8 +6,8 @@ export type FormFields = {
 };
 
 export const validationSchema = z.object({
-  genre: z.string().min(1, { message: "Book is required" }),
-  language: z.string().min(1, { message: "Author is required" }),
+  genre: z.string(),
+  language: z.string(),
 });
 
 export const defaultValues = {

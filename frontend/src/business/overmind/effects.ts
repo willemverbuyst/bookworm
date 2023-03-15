@@ -14,9 +14,17 @@ export const api = {
     return response.data;
   },
 
-  getAllBooks: async (): Promise<BookApi> => {
+  getAllBooks: async ({
+    genre,
+    language,
+  }: {
+    genre: string;
+    language: string;
+  }): Promise<BookApi> => {
     try {
-      const response = await axios.get(`${BACKEND_URL}/books`);
+      const response = await axios.get(
+        `${BACKEND_URL}/books/?genre=${genre}&language=${language}`
+      );
       return response.data;
     } catch (error) {
       throw new Error(JSON.stringify(error));

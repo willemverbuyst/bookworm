@@ -57,8 +57,11 @@ export const getAllAuthors = async ({ effects, state }: Context) => {
   state.authorsApi = allAuthors;
 };
 
-export const getAllBooks = async ({ effects, state }: Context) => {
-  const allBooks = await effects.api.getAllBooks();
+export const getAllBooks = async (
+  { effects, state }: Context,
+  { genre, language }: { genre: string; language: string }
+) => {
+  const allBooks = await effects.api.getAllBooks({ genre, language });
   state.booksApi = allBooks;
 };
 
