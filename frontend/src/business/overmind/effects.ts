@@ -1,6 +1,10 @@
 import axios from "axios";
 import { AuthorApi } from "../models/Author";
-import { BookApi } from "../models/Book";
+import {
+  BookApi,
+  BookStatsGenreApi,
+  BookStatsLanguageApi,
+} from "../models/Book";
 import { GenreApi } from "../models/Genre";
 import { LanguageApi } from "../models/Language";
 import { ReviewApi } from "../models/ReviewApi";
@@ -43,6 +47,26 @@ export const api = {
   getAllLanguages: async (): Promise<LanguageApi> => {
     try {
       const response = await axios.get(`${BACKEND_URL}/languages`);
+      return response.data;
+    } catch (error) {
+      throw new Error(JSON.stringify(error));
+    }
+  },
+
+  getStatsBooksLanguages: async (): Promise<BookStatsLanguageApi> => {
+    try {
+      const response = await axios.get(
+        `${BACKEND_URL}/books/stats/?by=language`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(JSON.stringify(error));
+    }
+  },
+
+  getStatsBooksGenres: async (): Promise<BookStatsGenreApi> => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/books/stats/?by=genre`);
       return response.data;
     } catch (error) {
       throw new Error(JSON.stringify(error));

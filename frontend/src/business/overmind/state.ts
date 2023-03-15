@@ -8,6 +8,8 @@ export const state: State = {
   isSignedIn: false,
   authorsApi: { status: "", data: [], message: "" },
   booksApi: { status: "", data: [], message: "" },
+  bookStatsGenreApi: { status: "", data: [], message: "" },
+  bookStatsLanguageApi: { status: "", data: [], message: "" },
   genresApi: { status: "", data: [], message: "" },
   languagesApi: { status: "", data: [], message: "" },
   allAuthors: derived(({ authorsApi }: State) => {
@@ -52,6 +54,18 @@ export const state: State = {
       return null;
     }
     return languagesApi.data;
+  }),
+  bookStatsGenre: derived(({ bookStatsGenreApi }: State) => {
+    if (!bookStatsGenreApi.data.length) {
+      return null;
+    }
+    return bookStatsGenreApi.data;
+  }),
+  bookStatsLanguage: derived(({ bookStatsLanguageApi }: State) => {
+    if (!bookStatsLanguageApi.data.length) {
+      return null;
+    }
+    return bookStatsLanguageApi.data;
   }),
   booksGroupedByLanguage: derived(({ booksApi }: State) => {
     if (!booksApi.data.length) {

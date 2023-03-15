@@ -25,7 +25,6 @@ function FilterAndSort() {
     control,
     formState: { errors },
     handleSubmit,
-    reset,
   } = useForm<FormFields>({
     defaultValues,
     resolver: zodResolver(validationSchema),
