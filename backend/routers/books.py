@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from error.main import raise_exception
 from database.python.book.get_books import (
+    get_book_stats_genre_from_db,
     get_book_stats_language_from_db,
     get_books_from_db, 
     get_books_from_db_by_genre, 
@@ -44,7 +45,13 @@ def get_all_books(genre = None, language = None) -> dict:
 def get_books_stats(by = None) -> dict:
 
     try:
-        stats = get_book_stats_language_from_db()
+        if (by == "language"):
+            stats = get_book_stats_language_from_db()
+        elif (by == "genre"):
+            stats = get_book_stats_genre_from_db()
+        else:
+            stats = []
+
         
         return {
             "status": "success",

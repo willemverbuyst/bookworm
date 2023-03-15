@@ -79,3 +79,16 @@ def format_stats_languages(language_data):
         stats.append(data)
 
     return stats
+
+
+def format_stats_genres(genre_data):
+    stats = []
+    for row in genre_data:
+        data = {
+            "id": row[0],
+            "genre": row[1],
+            "number_of_books": row[2],
+        }
+        stats.append(data)
+
+    return stats

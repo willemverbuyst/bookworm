@@ -3,10 +3,12 @@ import os
 from database.python.helpers.sql_helpers import executeScriptsFromFile
 from database.python.helpers.format_data import (
     format_books,
+    format_stats_genres,
     format_stats_languages
 )
 
 dirname = os.path.dirname(__file__)
+select_book_stats_genre_sql = os.path.join(dirname, "../../sql/book/select_book_stats_genre.sql")
 select_book_stats_language_sql = os.path.join(dirname, "../../sql/book/select_book_stats_language.sql")
 
 DATABASE = os.environ.get("DATABASE")
@@ -219,5 +221,26 @@ def get_book_stats_language_from_db():
     conn.close()
 
     stats_formatted = format_stats_languages(data)
+
+    return stats_formatted
+
+
+def get_book_stats_genre_from_db():
+    conn = psycopg2.connect(
+        database=DATABASE,
+        user=DATABASE_USER,
+        password=DATABASE_PASSWORD,
+        host=DATABASE_HOST,
+        port=DATABASE_PORT,
+    )
+
+    cursor = conn.cursor()
+
+    executeScriptsFromFile(select_book_stats_genre_sql, cursor)
+
+    data = cursor.fetchall()
+    conn.close()
+
+    stats_formatted = format_stats_genres(data)
 
     return stats_formatted
