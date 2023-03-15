@@ -25,7 +25,6 @@ function BooksPage() {
       <NavigationBar />
       <Flex flexDirection="column" alignItems="center">
         <PageTitle title="Books" />
-        <FilterAndSort />
         <Tabs variant="soft-rounded" colorScheme="teal" align="center">
           <TabList>
             <Tab>Table</Tab>
@@ -33,6 +32,7 @@ function BooksPage() {
           </TabList>
           <TabPanels>
             <TabPanel>
+              <FilterAndSort />
               <BooksTable />
             </TabPanel>
             <TabPanel>
