@@ -1,9 +1,13 @@
 import psycopg2
 import os
-from database.python.helpers.format_data import format_books
+from database.python.helpers.sql_helpers import executeScriptsFromFile
+from database.python.helpers.format_data import (
+    format_books,
+    format_stats_languages
+)
 
 dirname = os.path.dirname(__file__)
-select_all_books_sql = os.path.join(dirname, "../../sql/book/books_filtered.sql")
+select_book_stats_language_sql = os.path.join(dirname, "../../sql/book/select_book_stats_language.sql")
 
 DATABASE = os.environ.get("DATABASE")
 DATABASE_USER = os.environ.get("DATABASE_USER")
@@ -196,3 +200,24 @@ def get_total_number_of_books():
     conn.close()
 
     return result[0]
+
+
+def get_book_stats_language_from_db():
+    conn = psycopg2.connect(
+        database=DATABASE,
+        user=DATABASE_USER,
+        password=DATABASE_PASSWORD,
+        host=DATABASE_HOST,
+        port=DATABASE_PORT,
+    )
+
+    cursor = conn.cursor()
+
+    executeScriptsFromFile(select_book_stats_language_sql, cursor)
+
+    data = cursor.fetchall()
+    conn.close()
+
+    stats_formatted = format_stats_languages(data)
+
+    return stats_formatted

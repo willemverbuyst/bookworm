@@ -66,3 +66,16 @@ def format_languages(language_data):
         languages.append(language)
 
     return languages
+
+
+def format_stats_languages(language_data):
+    stats = []
+    for row in language_data:
+        data = {
+            "id": row[0],
+            "language": row[1],
+            "number_of_books": row[2],
+        }
+        stats.append(data)
+
+    return stats

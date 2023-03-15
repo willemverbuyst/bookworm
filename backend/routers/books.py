@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from error.main import raise_exception
 from database.python.book.get_books import (
+    get_book_stats_language_from_db,
     get_books_from_db, 
     get_books_from_db_by_genre, 
     get_books_from_db_by_genre_and_language, 
@@ -35,6 +36,20 @@ def get_all_books(genre = None, language = None) -> dict:
             "total_number_of_books": total_number_of_books,
             "data": books,
             "message": "books have been fetched",
+        }
+    except:
+        raise_exception(500, "Something went wrong!")
+
+@book_router.get("/books/stats/", tags=["books"])
+def get_books_stats(by = None) -> dict:
+
+    try:
+        stats = get_book_stats_language_from_db()
+        
+        return {
+            "status": "success",
+            "data": stats,
+            "message": "stats have been fetched",
         }
     except:
         raise_exception(500, "Something went wrong!")
