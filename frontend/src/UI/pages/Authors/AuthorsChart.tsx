@@ -1,8 +1,10 @@
 import { Box } from "@chakra-ui/react";
 import { useAppState } from "../../../business/overmind";
 import BarChartForStatistics from "../../components/Charts/BarChart";
+import { useGetAuthorStatsPage } from "../../hooks/useGetAuthorStatsPage";
 
 function AuthorsChart() {
+  useGetAuthorStatsPage();
   const data = useAppState().authorForStatistics;
 
   return (
