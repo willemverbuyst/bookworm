@@ -92,3 +92,16 @@ def format_stats_genres(genre_data):
         stats.append(data)
 
     return stats
+
+
+def format_stats_pages(page_data):
+    stats = []
+    for row in page_data:
+        data = {
+            "id": row[0],
+            "author": row[1],
+            "number_of_pages": row[2],
+        }
+        stats.append(data)
+
+    return stats

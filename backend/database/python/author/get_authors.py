@@ -1,12 +1,16 @@
 import psycopg2
 import os
 from database.python.helpers.sql_helpers import executeScriptsFromFile
-from database.python.helpers.format_data import format_authors
+from database.python.helpers.format_data import (
+    format_authors,
+    format_stats_pages
+)
 
 dirname = os.path.dirname(__file__)
 select_all_authors_sql = os.path.join(
     dirname, "../../sql/author/select_all_authors.sql"
 )
+select_author_stats_page_sql = os.path.join(dirname, "../../sql/author/select_author_stats_page.sql")
 
 
 DATABASE = os.environ.get("DATABASE")
@@ -35,3 +39,24 @@ def get_authors_from_db():
     authors_formatted = format_authors(data)
 
     return authors_formatted
+
+
+def get_author_stats_page_from_db():
+    conn = psycopg2.connect(
+        database=DATABASE,
+        user=DATABASE_USER,
+        password=DATABASE_PASSWORD,
+        host=DATABASE_HOST,
+        port=DATABASE_PORT,
+    )
+
+    cursor = conn.cursor()
+
+    executeScriptsFromFile(select_author_stats_page_sql, cursor)
+
+    data = cursor.fetchall()
+    conn.close()
+
+    stats_formatted = format_stats_pages(data)
+
+    return stats_formatted
