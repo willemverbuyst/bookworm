@@ -22,8 +22,8 @@ function AuthorsPage() {
         <PageTitle title="Authors" />
         <Tabs variant="soft-rounded" colorScheme="teal" align="center">
           <TabList>
-            <Tab>Table</Tab>
-            <Tab>Chart</Tab>
+            <Tab>Overview</Tab>
+            <Tab>Pages</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
