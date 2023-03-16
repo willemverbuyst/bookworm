@@ -1,8 +1,10 @@
 import { Box } from "@chakra-ui/react";
 import { Cell, Legend, PieChart, Pie } from "recharts";
 import { useAppState } from "../../../business/overmind";
+import { useGetBookStatsGenre } from "../../hooks/useGetBookStatsGenre";
 
 function BooksChartLanguages() {
+  useGetBookStatsGenre();
   const data = useAppState().bookStatsLanguage || [];
   const dataForChart = data.map((d) => ({
     language: d.language,

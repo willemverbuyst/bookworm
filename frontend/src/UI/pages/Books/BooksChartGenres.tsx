@@ -1,8 +1,10 @@
 import { Box } from "@chakra-ui/react";
 import { Bar, BarChart, LabelList, XAxis, YAxis } from "recharts";
 import { useAppState } from "../../../business/overmind";
+import { useGetBookStatsLanguage } from "../../hooks/useGetBookStatsLanguage";
 
 function BooksChartGenres() {
+  useGetBookStatsLanguage();
   const data = useAppState().bookStatsGenre || [];
   const dataForChart = data.map((d) => ({
     name: d.genre,
