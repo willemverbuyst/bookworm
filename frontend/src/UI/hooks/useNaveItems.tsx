@@ -9,7 +9,7 @@ export const NAV_ITEMS: Array<NavItem> = [
 ];
 
 export function useNavItems() {
-  const { isSignedIn } = useAppState();
+  const { isSignedIn } = useAppState().auth;
 
   if (isSignedIn) {
     return NAV_ITEMS;

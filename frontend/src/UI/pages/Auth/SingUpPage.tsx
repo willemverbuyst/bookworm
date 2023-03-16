@@ -24,7 +24,7 @@ function SignUpPage() {
     resolver: zodResolver(validationSchemaSignUp),
   });
 
-  const { isSignedIn } = useAppState();
+  const { isSignedIn } = useAppState().auth;
 
   const onSubmit: SubmitHandler<FormfieldsSignUp> = async (data) => {
     // await signInUser(data);

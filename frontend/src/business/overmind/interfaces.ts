@@ -1,3 +1,5 @@
+import { ApiResponse } from "../models/Api";
+import { Auth } from "../models/Auth";
 import {
   Author,
   AuthorApi,
@@ -17,10 +19,8 @@ import { Language, LanguageApi } from "../models/Language";
 import { User } from "../models/User";
 
 export interface State {
-  isSignedIn: boolean;
-  user: User | null;
-  token: string;
-  apiResponse: { message: string; status: "success" | "error" | undefined };
+  auth: Auth;
+  apiResponse: ApiResponse;
   authorsApi: AuthorApi | null;
   authorOverview: Author[] | null;
   authorStatsPage: Array<AuthorStatsPagesPerAuthor> | null;
@@ -35,5 +35,5 @@ export interface State {
   genresOverview: Array<Genre> | null;
   languagesApi: LanguageApi | null;
   languagesOverview: Array<Language> | null;
-  testProp: number;
+  user: User | null;
 }

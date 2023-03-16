@@ -5,7 +5,7 @@ import { useActions, useAppState } from "../../../business/overmind";
 
 function NavigationAuth() {
   const navigate = useNavigate();
-  const { isSignedIn } = useAppState();
+  const { isSignedIn } = useAppState().auth;
   const { logOutUser } = useActions();
 
   const handleSignOut = () => {

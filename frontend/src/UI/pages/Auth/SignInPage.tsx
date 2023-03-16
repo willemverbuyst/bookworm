@@ -25,8 +25,8 @@ function SignInPage() {
     defaultValues: defaultValuesSignIn,
     resolver: zodResolver(validationSchemaSignIn),
   });
+  const { isSignedIn } = useAppState().auth;
   const { signInUser } = useActions();
-  const { isSignedIn } = useAppState();
 
   const onSubmit: SubmitHandler<FormFieldsSignIn> = async (data) => {
     await signInUser(data);

@@ -17,8 +17,8 @@ export const signInUser = async (
     state.apiResponse = { message: response.message, status: "success" };
     const token = response.token.access_token;
     localStorage.setItem("token", token);
-    state.token = token;
-    state.isSignedIn = true;
+    state.auth.token = token;
+    state.auth.isSignedIn = true;
     state.user = response.data;
   } else {
     state.apiResponse = { message: response.message, status: "error" };
@@ -27,8 +27,8 @@ export const signInUser = async (
 
 export const logOutUser = ({ state }: Context) => {
   localStorage.removeItem("token");
-  state.token = "";
-  state.isSignedIn = false;
+  state.auth.token = "";
+  state.auth.isSignedIn = false;
   state.user = null;
   state.apiResponse = { message: "", status: undefined };
 };
@@ -44,8 +44,8 @@ export const onInitializeOvermind = async ({ effects, state }: Context) => {
     state.apiResponse = { message: response.message, status: "success" };
     const token = response.token.access_token;
     localStorage.setItem("token", token);
-    state.token = token;
-    state.isSignedIn = true;
+    state.auth.token = token;
+    state.auth.isSignedIn = true;
     state.user = response.data;
   } else {
     state.apiResponse = { message: response.message, status: "error" };
@@ -94,7 +94,7 @@ export const postReview = async (
   { state, effects }: Context,
   { author, bookTitle, review, rating }: Review
 ) => {
-  const { token } = state;
+  const { token } = state.auth;
   const response = await effects.api.postReview(
     author,
     bookTitle,
