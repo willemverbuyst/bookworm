@@ -6,7 +6,7 @@ export function useGetBookStatsLanguage() {
   const { getBookStatsLanguage } = useActions();
 
   useEffect(() => {
-    if (!bookStatsLanguageApi.data.length) {
+    if (!bookStatsLanguageApi?.data.length) {
       getBookStatsLanguage();
     }
   }, []);

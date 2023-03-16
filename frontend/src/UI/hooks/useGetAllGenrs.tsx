@@ -6,7 +6,7 @@ export function useGetAllGenres() {
   const { getAllGenres } = useActions();
 
   useEffect(() => {
-    if (!genresApi.data.length) {
+    if (!genresApi?.data.length) {
       getAllGenres();
     }
   }, []);

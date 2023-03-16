@@ -6,7 +6,7 @@ export function useGetAuthorStatsPage() {
   const { getAuthorStatsPage } = useActions();
 
   useEffect(() => {
-    if (!authorStatsPageApi.data.length) {
+    if (!authorStatsPageApi?.data.pages_per_author.length) {
       getAuthorStatsPage();
     }
   }, []);

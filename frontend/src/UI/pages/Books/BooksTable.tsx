@@ -11,7 +11,7 @@ function BooksTable() {
   useGetAllGenres();
   useGetAllLanguages();
 
-  const data = useAppState().allBooks;
+  const data = useAppState().bookOverview;
 
   const columns: Array<{ field: keyof Book }> = [
     { field: "title" },

@@ -6,7 +6,7 @@ export function useGetBookStatsGenre() {
   const { getBookStatsGenre } = useActions();
 
   useEffect(() => {
-    if (!bookStatsGenreApi.data.length) {
+    if (!bookStatsGenreApi?.data.length) {
       getBookStatsGenre();
     }
   }, []);

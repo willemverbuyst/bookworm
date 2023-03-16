@@ -6,21 +6,21 @@ export const state: State = {
   user: null,
   token: "",
   isSignedIn: false,
-  authorsApi: { status: "", data: [], message: "" },
-  authorStatsPageApi: { status: "", data: [], message: "" },
+  authorsApi: null,
+  authorStatsPageApi: null,
   authorStatsPage: derived(({ authorStatsPageApi }: State) => {
-    if (!authorStatsPageApi.data.length) {
+    if (!authorStatsPageApi?.data.pages_per_author.length) {
       return null;
     }
-    return authorStatsPageApi.data;
+    return authorStatsPageApi.data.pages_per_author;
   }),
-  booksApi: { status: "", data: [], message: "" },
-  bookStatsGenreApi: { status: "", data: [], message: "" },
-  bookStatsLanguageApi: { status: "", data: [], message: "" },
-  genresApi: { status: "", data: [], message: "" },
-  languagesApi: { status: "", data: [], message: "" },
-  allAuthors: derived(({ authorsApi }: State) => {
-    if (!authorsApi.data.length) {
+  booksApi: null,
+  bookStatsGenreApi: null,
+  bookStatsLanguageApi: null,
+  genresApi: null,
+  languagesApi: null,
+  authorOverview: derived(({ authorsApi }: State) => {
+    if (!authorsApi?.data.length) {
       return null;
     }
     return authorsApi.data
@@ -31,17 +31,8 @@ export const state: State = {
         `${author1.last_name}`.localeCompare(author2.last_name)
       );
   }),
-  authorForStatistics: derived(({ authorsApi }: State) => {
-    if (!authorsApi.data.length) {
-      return null;
-    }
-    return authorsApi.data.map((author) => ({
-      name: `${author.first_name} ${author.last_name}`,
-      books_written: author.books_written,
-    }));
-  }),
-  allBooks: derived(({ booksApi }: State) => {
-    if (!booksApi.data.length) {
+  bookOverview: derived(({ booksApi }: State) => {
+    if (!booksApi?.data.length) {
       return null;
     }
     return booksApi.data
@@ -50,45 +41,29 @@ export const state: State = {
       }))
       .sort((book1, book2) => `${book1.title}`.localeCompare(book2.title));
   }),
-  allGenres: derived(({ genresApi }: State) => {
-    if (!genresApi.data.length) {
+  genresOverview: derived(({ genresApi }: State) => {
+    if (!genresApi?.data.length) {
       return null;
     }
     return genresApi.data;
   }),
-  allLanguages: derived(({ languagesApi }: State) => {
-    if (!languagesApi.data.length) {
+  languagesOverview: derived(({ languagesApi }: State) => {
+    if (!languagesApi?.data.length) {
       return null;
     }
     return languagesApi.data;
   }),
   bookStatsGenre: derived(({ bookStatsGenreApi }: State) => {
-    if (!bookStatsGenreApi.data.length) {
+    if (!bookStatsGenreApi?.data.length) {
       return null;
     }
     return bookStatsGenreApi.data;
   }),
   bookStatsLanguage: derived(({ bookStatsLanguageApi }: State) => {
-    if (!bookStatsLanguageApi.data.length) {
+    if (!bookStatsLanguageApi?.data.length) {
       return null;
     }
     return bookStatsLanguageApi.data;
-  }),
-  booksGroupedByLanguage: derived(({ booksApi }: State) => {
-    if (!booksApi.data.length) {
-      return null;
-    }
-
-    return Object.entries(
-      booksApi.data.reduce((rv: { [key: string]: number }, book) => {
-        // eslint-disable-next-line no-param-reassign
-        rv[book.language] = rv[book.language] + 1 || 1;
-        return rv;
-      }, {})
-    ).map(([key, value]) => ({
-      language: key,
-      number: value,
-    }));
   }),
   apiResponse: { message: "", status: undefined },
   testProp: 123,

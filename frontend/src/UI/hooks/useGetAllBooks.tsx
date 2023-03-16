@@ -6,7 +6,7 @@ export function useGetAllBooks() {
   const { getAllBooks } = useActions();
 
   useEffect(() => {
-    if (!booksApi.data.length) {
+    if (!booksApi?.data.length) {
       getAllBooks({ genre: "", language: "" });
     }
   }, []);

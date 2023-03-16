@@ -1,8 +1,8 @@
 import {
   Author,
   AuthorApi,
-  AuthorStatsPage,
   AuthorStatsPageApi,
+  AuthorStatsPagesPerAuthor,
 } from "../models/Author";
 import {
   Book,
@@ -20,22 +20,20 @@ export interface State {
   isSignedIn: boolean;
   user: User | null;
   token: string;
-  allAuthors: Author[] | null;
-  authorForStatistics: { name: string; books_written: number }[] | null;
-  allBooks: Book[] | null;
-  booksGroupedByLanguage: { language: string; number: number }[] | null;
   apiResponse: { message: string; status: "success" | "error" | undefined };
-  authorsApi: AuthorApi;
-  authorStatsPageApi: AuthorStatsPageApi;
-  booksApi: BookApi;
-  bookStatsGenreApi: BookStatsGenreApi;
-  bookStatsLanguageApi: BookStatsLanguageApi;
-  genresApi: GenreApi;
-  languagesApi: LanguageApi;
-  allGenres: Array<Genre> | null;
-  allLanguages: Array<Language> | null;
-  authorStatsPage: Array<AuthorStatsPage> | null;
+  authorsApi: AuthorApi | null;
+  authorOverview: Author[] | null;
+  authorStatsPage: Array<AuthorStatsPagesPerAuthor> | null;
+  authorStatsPageApi: AuthorStatsPageApi | null;
+  booksApi: BookApi | null;
+  bookOverview: Book[] | null;
   bookStatsGenre: Array<BookStatsGenre> | null;
+  bookStatsGenreApi: BookStatsGenreApi | null;
   bookStatsLanguage: Array<BookStatsLanguage> | null;
+  bookStatsLanguageApi: BookStatsLanguageApi | null;
+  genresApi: GenreApi | null;
+  genresOverview: Array<Genre> | null;
+  languagesApi: LanguageApi | null;
+  languagesOverview: Array<Language> | null;
   testProp: number;
 }

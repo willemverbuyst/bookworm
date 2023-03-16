@@ -4,7 +4,7 @@ import { useAppState } from "../../../business/overmind";
 import TableOverview from "../../components/Table/TableOverView";
 
 function AuthorsTable() {
-  const data = useAppState().allAuthors;
+  const data = useAppState().authorOverview;
 
   const columns: Array<{ field: keyof Author; isNumeric?: boolean }> = [
     { field: "last_name" },

@@ -5,10 +5,15 @@ export interface Author {
   books_written: number;
 }
 
-export interface AuthorStatsPage {
+export interface AuthorStatsPagesPerAuthor {
   id: string;
   author: string;
   number_of_pages: number;
+}
+
+export interface AuthorStatsPage {
+  pages_per_author: AuthorStatsPagesPerAuthor[];
+  average_pages: number;
 }
 
 export interface AuthorApi {
@@ -19,6 +24,6 @@ export interface AuthorApi {
 
 export interface AuthorStatsPageApi {
   status: string;
-  data: AuthorStatsPage[];
+  data: AuthorStatsPage;
   message: string;
 }

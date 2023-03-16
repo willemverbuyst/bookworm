@@ -6,7 +6,7 @@ export function useGetAllLanguages() {
   const { getAllLanguages } = useActions();
 
   useEffect(() => {
-    if (!languagesApi.data.length) {
+    if (!languagesApi?.data.length) {
       getAllLanguages();
     }
   }, []);
