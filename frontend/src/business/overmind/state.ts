@@ -7,6 +7,13 @@ export const state: State = {
   token: "",
   isSignedIn: false,
   authorsApi: { status: "", data: [], message: "" },
+  authorStatsPageApi: { status: "", data: [], message: "" },
+  authorStatsPage: derived(({ authorStatsPageApi }: State) => {
+    if (!authorStatsPageApi.data.length) {
+      return null;
+    }
+    return authorStatsPageApi.data;
+  }),
   booksApi: { status: "", data: [], message: "" },
   bookStatsGenreApi: { status: "", data: [], message: "" },
   bookStatsLanguageApi: { status: "", data: [], message: "" },
