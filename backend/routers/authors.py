@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from database.python.author.get_authors import (
     get_authors_from_db,
+    get_author_stats_avg_pages_from_db,
     get_author_stats_page_from_db
 )
 from error.main import raise_exception
@@ -48,10 +49,14 @@ def get_author_stats(by = None) -> dict:
         else:
             stats = []
 
+        avg_pages = get_author_stats_avg_pages_from_db()
         
         return {
             "status": "success",
-            "data": stats,
+            "data": {
+                "pages_per_author": stats,
+                "average_pages": avg_pages
+            },
             "message": "stats have been fetched",
         }
     except:

@@ -10,6 +10,7 @@ dirname = os.path.dirname(__file__)
 select_all_authors_sql = os.path.join(
     dirname, "../../sql/author/select_all_authors.sql"
 )
+select_author_stats_avg_pages_sql = os.path.join(dirname, "../../sql/author/select_author_stats_avg_pages.sql")
 select_author_stats_page_sql = os.path.join(dirname, "../../sql/author/select_author_stats_page.sql")
 
 
@@ -60,3 +61,22 @@ def get_author_stats_page_from_db():
     stats_formatted = format_stats_pages(data)
 
     return stats_formatted
+
+
+def get_author_stats_avg_pages_from_db():
+    conn = psycopg2.connect(
+        database=DATABASE,
+        user=DATABASE_USER,
+        password=DATABASE_PASSWORD,
+        host=DATABASE_HOST,
+        port=DATABASE_PORT,
+    )
+
+    cursor = conn.cursor()
+
+    executeScriptsFromFile(select_author_stats_avg_pages_sql, cursor)
+
+    result = cursor.fetchone()
+    conn.close()
+
+    return result[0]
