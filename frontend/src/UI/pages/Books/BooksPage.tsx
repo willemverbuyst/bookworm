@@ -7,7 +7,6 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import BooksTable from "./BooksTable";
-import { BooksChartGenre, BooksChartLanguage } from "./BooksChart";
 import { useGetAllBooks } from "../../hooks/useGetAllBooks";
 import PageTitle from "../../components/Text/PageTitle";
 import NavigationBar from "../../components/Navigation/NavigationBar";
@@ -16,6 +15,8 @@ import FilterAndSort from "./FilterAndSort";
 import { useGetAllLanguages } from "../../hooks/useGetAllLanguages";
 import { useGetBookStatsGenre } from "../../hooks/useGetBookStatsGenre";
 import { useGetBookStatsLanguage } from "../../hooks/useGetBookStatsLanguage";
+import BooksChartLanguages from "./BookChartLanguages";
+import BooksChartGenres from "./BooksChartGenres";
 
 function BooksPage() {
   useGetAllBooks();
@@ -31,8 +32,9 @@ function BooksPage() {
         <PageTitle title="Books" />
         <Tabs variant="soft-rounded" colorScheme="teal" align="center">
           <TabList>
-            <Tab>Table</Tab>
-            <Tab>Chart</Tab>
+            <Tab>Overview</Tab>
+            <Tab>Languages</Tab>
+            <Tab>Genres</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -40,8 +42,10 @@ function BooksPage() {
               <BooksTable />
             </TabPanel>
             <TabPanel>
-              <BooksChartLanguage />
-              <BooksChartGenre />
+              <BooksChartLanguages />
+            </TabPanel>
+            <TabPanel>
+              <BooksChartGenres />
             </TabPanel>
           </TabPanels>
         </Tabs>
