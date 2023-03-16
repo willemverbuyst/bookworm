@@ -4,8 +4,8 @@ SELECT
   author.last_name, 
   COUNT(book.title) AS books_written 
 FROM author 
-INNER JOIN book_author 
+FULL OUTER JOIN book_author 
 ON author.author_id = book_author.author_id 
-INNER JOIN book 
+FULL OUTER JOIN book 
 ON book_author.book_id = book.book_id 
 GROUP BY author.author_id, author.first_name, author.last_name;
