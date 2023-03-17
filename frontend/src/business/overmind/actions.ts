@@ -52,8 +52,11 @@ export const onInitializeOvermind = async ({ effects, state }: Context) => {
   }
 };
 
-export const getAllAuthors = async ({ effects, state }: Context) => {
-  const allAuthors = await effects.api.getAllAuthors();
+export const getAllAuthors = async (
+  { effects, state }: Context,
+  { limit, page }: { limit: number; page: number }
+) => {
+  const allAuthors = await effects.api.getAllAuthors({ limit, page });
   state.authorsApi = allAuthors;
 };
 

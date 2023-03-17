@@ -13,8 +13,10 @@ import { UserApi } from "../models/User";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 
 export const api = {
-  getAllAuthors: async (): Promise<AuthorApi> => {
-    const response = await axios.get(`${BACKEND_URL}/authors`);
+  getAllAuthors: async ({ limit = 10, page = 1 }): Promise<AuthorApi> => {
+    const response = await axios.get(
+      `${BACKEND_URL}/authors/?limit=${limit}&page=${page}`
+    );
     return response.data;
   },
 
