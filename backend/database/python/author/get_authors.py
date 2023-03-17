@@ -42,6 +42,46 @@ def get_authors_from_db():
     return authors_formatted
 
 
+def get_authors_with_limit_and_page_from_db(limit, page):
+    conn = psycopg2.connect(
+        database=DATABASE,
+        user=DATABASE_USER,
+        password=DATABASE_PASSWORD,
+        host=DATABASE_HOST,
+        port=DATABASE_PORT,
+    )
+
+    cursor = conn.cursor()
+
+    offset = int(limit) * (int(page) - 1)
+
+    cursor.execute("""
+        SELECT 
+            author.author_id, 
+            author.first_name, 
+            author.last_name, 
+            COUNT(book.title) AS books_written 
+        FROM author 
+        FULL OUTER JOIN book_author 
+        ON author.author_id = book_author.author_id 
+        FULL OUTER JOIN book 
+        ON book_author.book_id = book.book_id 
+        GROUP BY author.author_id, author.first_name, author.last_name 
+        ORDER BY author.author_id 
+        LIMIT %s 
+        OFFSET %s;
+        """,
+        (limit, offset)
+    )
+
+    data = cursor.fetchall()
+    conn.close()
+
+    authors_formatted = format_authors(data)
+
+    return authors_formatted
+
+
 def get_author_stats_page_from_db():
     conn = psycopg2.connect(
         database=DATABASE,
