@@ -25,7 +25,10 @@ export const state: State = {
     if (!authorStatsPageApi?.data.pages_per_author.length) {
       return null;
     }
-    return authorStatsPageApi.data.pages_per_author;
+    return {
+      pages_per_author: authorStatsPageApi.data.pages_per_author,
+      average_pages: authorStatsPageApi.data.average_pages,
+    };
   }),
   authorStatsPageApi: null,
   booksApi: null,

@@ -1,21 +1,24 @@
 import { Box } from "@chakra-ui/react";
-import { BarChart, XAxis, Bar, LabelList } from "recharts";
+import { ComposedChart, XAxis, Bar, LabelList, Line } from "recharts";
 import { useAppState } from "../../../business/overmind";
 import { useGetAuthorStatsPage } from "../../hooks/useGetAuthorStatsPage";
 
 function AuthorsChart() {
   useGetAuthorStatsPage();
-  const data = useAppState().authorStatsPage || [];
+  const { pages_per_author: data = [], average_pages: avg } =
+    useAppState().authorStatsPage || {};
+
   const dataForChart = data.map((d) => ({
     name: d.author,
     number: Number(d.number_of_pages),
+    avg,
   }));
 
   return (
     <Box>
       {data.length ? (
         <Box>
-          <BarChart
+          <ComposedChart
             width={1000}
             height={900}
             data={dataForChart}
@@ -41,7 +44,8 @@ function AuthorsChart() {
             <Bar dataKey="number" fill="#ED64A6">
               <LabelList dataKey="number" position="top" />
             </Bar>
-          </BarChart>
+            <Line dataKey="avg" stroke="#666" strokeWidth={2} dot={false} />
+          </ComposedChart>
         </Box>
       ) : (
         <p>no authors</p>

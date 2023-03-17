@@ -3,6 +3,7 @@ import { Auth } from "../models/Auth";
 import {
   Author,
   AuthorApi,
+  AuthorStatsPage,
   AuthorStatsPageApi,
   AuthorStatsPagesPerAuthor,
 } from "../models/Author";
@@ -23,7 +24,7 @@ export interface State {
   apiResponse: ApiResponse;
   authorsApi: AuthorApi | null;
   authorOverview: Author[] | null;
-  authorStatsPage: Array<AuthorStatsPagesPerAuthor> | null;
+  authorStatsPage: AuthorStatsPage | null;
   authorStatsPageApi: AuthorStatsPageApi | null;
   booksApi: BookApi | null;
   bookOverview: Book[] | null;
