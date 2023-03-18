@@ -5,7 +5,6 @@ import {
   AuthorApi,
   AuthorStatsPage,
   AuthorStatsPageApi,
-  AuthorStatsPagesPerAuthor,
 } from "../models/Author";
 import {
   Book,

@@ -1,32 +1,61 @@
+/* eslint-disable no-param-reassign */
+import { ChakraProvider } from "@chakra-ui/react";
 import { render, screen } from "@testing-library/react";
 import { createOvermindMock } from "overmind";
 import { Provider } from "overmind-react";
-import BooksPage from "./BooksPage";
+import { vi } from "vitest";
 import { config } from "../../../business/overmind";
+import BooksPage from "./BooksPage";
+
+vi.mock("../../components/Navigation/NavigationBar", () => {
+  const NavigationBar = vi.fn();
+  return { default: NavigationBar };
+});
 
 describe("BooksPage", () => {
+  const overmind = createOvermindMock(config, (state) => {
+    state.booksApi = {
+      status: "ok",
+      data: [
+        {
+          id: "abc123",
+          title: "test_title_one",
+          language: "test_language_one",
+          author: "test_author_one",
+          year_published: 1900,
+          genre: "test_genre",
+        },
+      ],
+      message: "testing",
+    };
+    state.genresApi = {
+      status: "ok",
+      data: [{ id: "1", genre: "genre" }],
+      message: "testing",
+    };
+    state.languagesApi = {
+      status: "ok",
+      data: [{ id: "1", language: "language" }],
+      message: "testing",
+    };
+    state.bookStatsGenreApi = {
+      status: "ok",
+      data: [{ id: "1", genre: "genre", number_of_books: 1 }],
+      message: "testing",
+    };
+    state.bookStatsLanguageApi = {
+      status: "ok",
+      data: [{ id: "1", language: "language", number_of_books: 1 }],
+      message: "testing",
+    };
+  });
   test("should display a title", () => {
-    const overmind = createOvermindMock(config, (state) => {
-      // eslint-disable-next-line no-param-reassign
-      state.booksApi = {
-        status: "ok",
-        data: [
-          {
-            id: "abc123",
-            title: "test_title_one",
-            language: "test_language_one",
-            author: "test_author_one",
-            year_published: 1900,
-            genre: "test_genre",
-          },
-        ],
-        message: "testing",
-      };
-    });
     render(
-      <Provider value={overmind}>
-        <BooksPage />
-      </Provider>
+      <ChakraProvider>
+        <Provider value={overmind}>
+          <BooksPage />
+        </Provider>
+      </ChakraProvider>
     );
 
     const heading = screen.getByRole("heading", {
@@ -37,27 +66,12 @@ describe("BooksPage", () => {
   });
 
   test("should display a table", () => {
-    const overmind = createOvermindMock(config, (state) => {
-      // eslint-disable-next-line no-param-reassign
-      state.booksApi = {
-        status: "ok",
-        data: [
-          {
-            id: "abc123",
-            title: "test_title_one",
-            language: "test_language_one",
-            author: "test_author_one",
-            year: 1900,
-            read: 1,
-          },
-        ],
-        message: "testing",
-      };
-    });
     render(
-      <Provider value={overmind}>
-        <BooksPage />
-      </Provider>
+      <ChakraProvider>
+        <Provider value={overmind}>
+          <BooksPage />
+        </Provider>
+      </ChakraProvider>
     );
 
     const table = screen.getByRole("table", {
