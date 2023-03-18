@@ -1,17 +1,38 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import { Box, Button, Container, HStack, Spacer } from "@chakra-ui/react";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useId, useState } from "react";
+import { useForm } from "react-hook-form";
+import ControlledSelect from "../../components/Controllers/Select";
+
+interface FormFields {
+  numberOfItemsPerPage: string;
+}
 
 interface Props {
   total: number | undefined;
   limit: number;
+  updateLimit: Dispatch<SetStateAction<number>>;
   updatePage: Dispatch<SetStateAction<number>>;
 }
 
-function Pagination({ total, limit, updatePage }: Props) {
+function Pagination({ total, limit, updateLimit, updatePage }: Props) {
+  const id = useId();
   const [currentPage, setCurrentPage] = useState(1);
   const totalNumberOfPages = total ? Math.ceil(total / limit) : 0;
-  console.log("totalNumberOfPages :>> ", totalNumberOfPages);
+
+  const { control, watch } = useForm<FormFields>({
+    defaultValues: { numberOfItemsPerPage: "10" },
+  });
+  const dataSet = [5, 10, 15, 20, 25, 30].map((i) => ({
+    value: String(i),
+    display: String(i),
+  }));
+
+  const numberOfItemsPerPage = watch("numberOfItemsPerPage");
+
+  useEffect(() => {
+    updateLimit(Number(numberOfItemsPerPage));
+  }, [numberOfItemsPerPage]);
 
   const handleClick = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -152,6 +173,14 @@ function Pagination({ total, limit, updatePage }: Props) {
           ))}
         </Box>
       )}
+      <Box as="form" id={id} mt={5}>
+        <ControlledSelect
+          dataSet={dataSet}
+          name="numberOfItemsPerPage"
+          control={control}
+          label="items per page"
+        />
+      </Box>
     </Container>
   );
 }

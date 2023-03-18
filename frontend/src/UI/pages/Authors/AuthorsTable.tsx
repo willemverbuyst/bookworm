@@ -7,11 +7,10 @@ import Pagination from "./Pagination";
 
 function AuthorsTable() {
   const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
   const data = useAppState().authorOverview;
   const total = useAppState().authorsApi?.total_number_of_authors;
   const { getAllAuthors } = useActions();
-
-  console.log("total :>> ", total);
   const columns: Array<{ field: keyof Author; isNumeric?: boolean }> = [
     { field: "last_name" },
     { field: "first_name" },
@@ -19,8 +18,8 @@ function AuthorsTable() {
   ];
 
   useEffect(() => {
-    getAllAuthors({ limit: 10, page });
-  }, [page]);
+    getAllAuthors({ limit, page });
+  }, [page, limit]);
 
   return (
     <Box>
@@ -31,7 +30,12 @@ function AuthorsTable() {
             columns={columns}
             title="overview of authors"
           />
-          <Pagination total={total} limit={10} updatePage={setPage} />
+          <Pagination
+            total={total}
+            limit={limit}
+            updatePage={setPage}
+            updateLimit={setLimit}
+          />
         </>
       ) : (
         <p>No Authors</p>
