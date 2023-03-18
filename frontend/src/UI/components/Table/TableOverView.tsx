@@ -23,7 +23,7 @@ function TableOverview<T extends Record<"id", string>>({
   return (
     <TableContainer>
       <Table variant="simple">
-        <TableCaption>{title}</TableCaption>
+        <TableCaption placement="top">{title}</TableCaption>
         <Thead>
           <Tr>
             {columns.map((column) => (

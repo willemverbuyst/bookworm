@@ -9,8 +9,8 @@ import { defaultValues, FormFields, validationSchema } from "./helpers";
 
 function FilterAndSort() {
   const id = useId();
-  const allGenres = useAppState().allGenres || [];
-  const allLanguages = useAppState().allLanguages || [];
+  const allGenres = useAppState().genresOverview || [];
+  const allLanguages = useAppState().languagesOverview || [];
   const { getAllBooks } = useActions();
   const genresForSelect = allGenres.map((g) => ({
     value: g.id,

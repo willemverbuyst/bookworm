@@ -20,14 +20,11 @@ function AuthorsChart() {
         <Box>
           <ComposedChart
             width={1000}
-            height={900}
+            height={700}
             data={dataForChart}
             barSize={50}
             layout="horizontal"
             margin={{
-              top: 10,
-              right: 10,
-              bottom: 10,
               left: 100,
             }}
           >
