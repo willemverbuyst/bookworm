@@ -3,31 +3,41 @@ import { createOvermindMock } from "overmind";
 import { config } from "./index";
 
 describe("State", () => {
-  it("should derive authorsForStatistics", async () => {
+  it("should derive genresOverview", async () => {
     const overmind = createOvermindMock(config, (state) => {
-      state.authorsApi.data = [
-        {
-          id: "1",
-          name: "TEST NAME 1",
-          books_written: 1,
-        },
-        {
-          id: "2",
-          name: "TEST NAME 2",
-          books_written: 2,
-        },
-      ];
+      state.genresApi = {
+        status: "ok,",
+        data: [
+          {
+            id: "1",
+            genre: "GENRE 1",
+          },
+          {
+            id: "2",
+            genre: "GENRE 2",
+          },
+        ],
+        message: "testing",
+      };
     });
 
-    expect(overmind.state.authorForStatistics).toEqual([
+    expect(overmind.state.genresOverview).toEqual([
       {
-        name: "TEST NAME 1",
-        books_written: 1,
+        id: "1",
+        genre: "GENRE 1",
       },
       {
-        name: "TEST NAME 2",
-        books_written: 2,
+        id: "2",
+        genre: "GENRE 2",
       },
     ]);
+  });
+
+  it("should derive genresOverview and return null when genres api is null", async () => {
+    const overmind = createOvermindMock(config, (state) => {
+      state.genresApi = null;
+    });
+
+    expect(overmind.state.genresOverview).toBeNull();
   });
 });
