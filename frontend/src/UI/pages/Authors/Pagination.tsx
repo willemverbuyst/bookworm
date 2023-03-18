@@ -1,19 +1,21 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import { Box, Button, Container, HStack, Spacer } from "@chakra-ui/react";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 interface Props {
-  total: number;
+  total: number | undefined;
   limit: number;
+  updatePage: Dispatch<SetStateAction<number>>;
 }
 
-function Pagination({ total, limit }: Props) {
+function Pagination({ total, limit, updatePage }: Props) {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalNumberOfPages = Math.ceil(total / limit);
+  const totalNumberOfPages = total ? Math.ceil(total / limit) : 0;
+  console.log("totalNumberOfPages :>> ", totalNumberOfPages);
 
   const handleClick = (pageNumber: number) => {
-    console.log("object :>> ", pageNumber);
     setCurrentPage(pageNumber);
+    updatePage(pageNumber);
   };
 
   const handleClickLeft = () => {
@@ -48,7 +50,6 @@ function Pagination({ total, limit }: Props) {
 
   return (
     <Container centerContent mt={5}>
-      {currentPage}
       {totalNumberOfPages > 7 ? (
         <HStack>
           <Button

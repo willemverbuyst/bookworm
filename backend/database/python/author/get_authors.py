@@ -1,10 +1,9 @@
-import psycopg2
 import os
+
+import psycopg2
+from database.python.helpers.format_data import (format_authors,
+                                                 format_stats_pages)
 from database.python.helpers.sql_helpers import executeScriptsFromFile
-from database.python.helpers.format_data import (
-    format_authors,
-    format_stats_pages
-)
 
 dirname = os.path.dirname(__file__)
 select_all_authors_sql = os.path.join(
@@ -115,6 +114,30 @@ def get_author_stats_avg_pages_from_db():
     cursor = conn.cursor()
 
     executeScriptsFromFile(select_author_stats_avg_pages_sql, cursor)
+
+    result = cursor.fetchone()
+    conn.close()
+
+    return result[0]
+
+
+
+def get_total_number_of_authors():
+    conn = psycopg2.connect(
+        database=DATABASE,
+        user=DATABASE_USER,
+        password=DATABASE_PASSWORD,
+        host=DATABASE_HOST,
+        port=DATABASE_PORT,
+    )
+
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT 
+        COUNT(*) AS number_of_authors 
+        FROM author;
+        """
+    )
 
     result = cursor.fetchone()
     conn.close()

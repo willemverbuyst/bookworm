@@ -1,11 +1,9 @@
-from fastapi import APIRouter
 from database.python.author.get_authors import (
-    get_author_stats_avg_pages_from_db,
-    get_author_stats_page_from_db,
-    get_authors_from_db,
-    get_authors_with_limit_and_page_from_db
-)
+    get_author_stats_avg_pages_from_db, get_author_stats_page_from_db,
+    get_authors_from_db, get_authors_with_limit_and_page_from_db,
+    get_total_number_of_authors)
 from error.main import raise_exception
+from fastapi import APIRouter
 from models.author import AuthorSchema
 
 author_router = APIRouter()
@@ -21,10 +19,13 @@ def get_all_authors(limit = None, page = 1) -> dict:
             authors = get_authors_from_db()
             result = len(authors)
 
+        total_number_of_authors = get_total_number_of_authors()
+
         return {
             "status": "success",
             "result": result,
             "data": authors,
+            "total_number_of_authors": total_number_of_authors,
             "message": "all authors have been fetched",
         }
     except:
