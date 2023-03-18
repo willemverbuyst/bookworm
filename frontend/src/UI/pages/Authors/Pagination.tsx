@@ -48,14 +48,16 @@ function Pagination({ total, limit }: Props) {
 
   return (
     <Container centerContent mt={5}>
+      {currentPage}
       {totalNumberOfPages > 7 ? (
         <HStack>
           <Button
             type="button"
-            disabled={currentPage === 1}
+            isDisabled={currentPage === 1}
             variant={currentPage === 1 ? "ghost" : "solid"}
             color={currentPage === 1 ? "gray" : "gray.800"}
             onClick={handleClickLeft}
+            data-testid="left-arrow"
           >
             <ArrowLeftIcon />
           </Button>
@@ -126,10 +128,11 @@ function Pagination({ total, limit }: Props) {
           </Button>
           <Button
             type="button"
-            disabled={currentPage === totalNumberOfPages}
+            isDisabled={currentPage === totalNumberOfPages}
             variant={currentPage === totalNumberOfPages ? "ghost" : "solid"}
             color={currentPage === totalNumberOfPages ? "gray" : "gray.800"}
             onClick={handleClickRight}
+            data-testid="right-arrow"
           >
             <ArrowRightIcon />
           </Button>
