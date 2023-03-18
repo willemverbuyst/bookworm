@@ -1,8 +1,14 @@
 import { render, screen } from "@testing-library/react";
 import { createOvermindMock } from "overmind";
 import { Provider } from "overmind-react";
+import { vi } from "vitest";
 import { config } from "../../../business/overmind";
 import ReviewPage from "./ReviewPage";
+
+vi.mock("../../components/Navigation/NavigationBar", () => {
+  const NavigationBar = vi.fn();
+  return { default: NavigationBar };
+});
 
 describe("ReviewPage", () => {
   test("should display a title", () => {
@@ -13,7 +19,8 @@ describe("ReviewPage", () => {
         data: [
           {
             id: "abc123",
-            name: "test_title_one",
+            first_name: "test_first_name",
+            last_name: "test_last_name",
             books_written: 1,
           },
         ],
@@ -28,8 +35,8 @@ describe("ReviewPage", () => {
             title: "test_title_one",
             language: "test_language_one",
             author: "test_author_one",
-            year: 1900,
-            read: 1,
+            year_published: 1900,
+            genre: "genre_1",
           },
         ],
         message: "testing",
