@@ -17,6 +17,7 @@ type SelectProps<T extends FieldValues, U> = {
   name: string;
   required?: boolean;
   placeholder?: string;
+  allOption?: boolean;
 } & UseControllerProps<T>;
 
 function ControlledSelect<
@@ -31,6 +32,7 @@ function ControlledSelect<
   name,
   placeholder,
   required = false,
+  allOption = false,
 }: SelectProps<T, U>) {
   return (
     <FormControl isInvalid={!!error}>
@@ -45,9 +47,11 @@ function ControlledSelect<
             <option key="genre" disabled value="">
               {placeholder}
             </option>
-            <option key="none" value="none">
-              None
-            </option>
+            {allOption && (
+              <option key="all" value="all">
+                All
+              </option>
+            )}
             {dataSet.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.display}

@@ -36,13 +36,13 @@ function FilterAndSort({ updateGenre, updateLanguage }: Props) {
   const [genre, language] = watch(["genre", "language"]);
 
   useEffect(() => {
-    if (genre && genre === "none") {
+    if (genre && genre === "all") {
       updateGenre(null);
     } else if (genre) {
       updateGenre(genre);
     }
 
-    if (language && language === "none") {
+    if (language && language === "all") {
       updateLanguage(null);
     } else if (language) {
       updateLanguage(language);
@@ -58,6 +58,7 @@ function FilterAndSort({ updateGenre, updateLanguage }: Props) {
           control={control}
           error={errors.genre}
           placeholder="genre"
+          allOption
         />
         <ControlledSelect
           dataSet={languagesForSelect}
@@ -65,6 +66,7 @@ function FilterAndSort({ updateGenre, updateLanguage }: Props) {
           control={control}
           error={errors.language}
           placeholder="language"
+          allOption
         />
       </HStack>
     </Box>
