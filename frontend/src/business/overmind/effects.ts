@@ -23,14 +23,24 @@ export const api = {
   getAllBooks: async ({
     genre,
     language,
+    limit = 10,
+    page = 1,
   }: {
-    genre: string;
-    language: string;
+    genre: string | null;
+    language: string | null;
+    limit: number;
+    page: number;
   }): Promise<BookApi> => {
     try {
-      const response = await axios.get(
-        `${BACKEND_URL}/books/?genre=${genre}&language=${language}`
-      );
+      let url = `${BACKEND_URL}/books/?limit=${limit}&page=${page}`;
+      if (language) {
+        url += `&language=${language}`;
+      }
+
+      if (genre) {
+        url += `&genre=${genre}`;
+      }
+      const response = await axios.get(url);
       return response.data;
     } catch (error) {
       throw new Error(JSON.stringify(error));

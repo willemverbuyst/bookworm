@@ -6,6 +6,6 @@ export function useGetAllAuthors() {
   const { getAllAuthors } = useActions();
 
   useEffect(() => {
-    if (!authorsApi?.data.length) getAllAuthors({ limit: 20, page: 3 });
+    if (!authorsApi?.data.length) getAllAuthors({ limit: 10, page: 1 });
   }, []);
 }

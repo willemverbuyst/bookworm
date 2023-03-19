@@ -77,8 +77,6 @@ def get_total_number_of_books(genre, language):
         port=DATABASE_PORT,
     )
 
-    print("r")
-
     cursor = conn.cursor()
     cursor.execute("""
         SELECT 

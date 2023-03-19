@@ -7,7 +7,7 @@ export function useGetAllBooks() {
 
   useEffect(() => {
     if (!booksApi?.data.length) {
-      getAllBooks({ genre: "", language: "" });
+      getAllBooks({ genre: null, language: null, limit: 10, page: 1 });
     }
   }, []);
 }

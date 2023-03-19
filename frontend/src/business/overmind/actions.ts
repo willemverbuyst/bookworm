@@ -62,9 +62,24 @@ export const getAllAuthors = async (
 
 export const getAllBooks = async (
   { effects, state }: Context,
-  { genre, language }: { genre: string; language: string }
+  {
+    genre,
+    language,
+    limit,
+    page,
+  }: {
+    genre: string | null;
+    language: string | null;
+    limit: number;
+    page: number;
+  }
 ) => {
-  const allBooks = await effects.api.getAllBooks({ genre, language });
+  const allBooks = await effects.api.getAllBooks({
+    genre,
+    language,
+    limit,
+    page,
+  });
   state.booksApi = allBooks;
 };
 
