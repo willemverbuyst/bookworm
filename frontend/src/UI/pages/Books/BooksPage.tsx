@@ -6,12 +6,11 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import BooksTable from "./BooksTable";
-import PageTitle from "../../components/Text/PageTitle";
 import NavigationBar from "../../components/Navigation/NavigationBar";
-import FilterAndSort from "./FilterAndSort";
+import PageTitle from "../../components/Text/PageTitle";
 import BooksChartLanguages from "./BookChartLanguages";
 import BooksChartGenres from "./BooksChartGenres";
+import BooksTable from "./BooksTable";
 
 function BooksPage() {
   return (
@@ -27,7 +26,6 @@ function BooksPage() {
           </TabList>
           <TabPanels>
             <TabPanel>
-              <FilterAndSort />
               <BooksTable />
             </TabPanel>
             <TabPanel>

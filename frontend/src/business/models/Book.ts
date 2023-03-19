@@ -23,6 +23,8 @@ export interface BookApi {
   status: string;
   data: Book[];
   message: string;
+  total_number_of_books: number;
+  result: number;
 }
 
 export interface BookStatsGenreApi {

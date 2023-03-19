@@ -1,17 +1,20 @@
-import { Box, Button, HStack } from "@chakra-ui/react";
+import { Box, HStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useId } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useActions, useAppState } from "../../../business/overmind";
+import { Dispatch, SetStateAction, useEffect, useId } from "react";
+import { useForm } from "react-hook-form";
+import { useAppState } from "../../../business/overmind";
 import ControlledSelect from "../../components/Controllers/Select";
-
 import { defaultValues, FormFields, validationSchema } from "./helpers";
 
-function FilterAndSort() {
+interface Props {
+  updateGenre: Dispatch<SetStateAction<string | null>>;
+  updateLanguage: Dispatch<SetStateAction<string | null>>;
+}
+
+function FilterAndSort({ updateGenre, updateLanguage }: Props) {
   const id = useId();
   const allGenres = useAppState().genresOverview || [];
   const allLanguages = useAppState().languagesOverview || [];
-  const { getAllBooks } = useActions();
   const genresForSelect = allGenres.map((g) => ({
     value: g.id,
     display: g.genre,
@@ -24,18 +27,25 @@ function FilterAndSort() {
   const {
     control,
     formState: { errors },
-    handleSubmit,
+    watch,
   } = useForm<FormFields>({
     defaultValues,
     resolver: zodResolver(validationSchema),
   });
 
-  const onSubmit: SubmitHandler<FormFields> = async ({ genre, language }) => {
-    getAllBooks({ genre, language });
-  };
+  const [genre, language] = watch(["genre", "language"]);
+
+  useEffect(() => {
+    if (genre) {
+      updateGenre(genre);
+    }
+    if (language) {
+      updateLanguage(language);
+    }
+  }, [genre, language]);
 
   return (
-    <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)} m={10}>
+    <Box as="form" id={id} m={10}>
       <HStack spacing={6}>
         <ControlledSelect
           dataSet={genresForSelect}
@@ -51,9 +61,6 @@ function FilterAndSort() {
           error={errors.language}
           placeholder="language"
         />
-        <Button type="submit" colorScheme="teal" size="md" px={10}>
-          Search
-        </Button>
       </HStack>
     </Box>
   );

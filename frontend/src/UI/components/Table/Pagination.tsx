@@ -2,7 +2,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import { Box, Button, Container, HStack, Spacer } from "@chakra-ui/react";
 import { Dispatch, SetStateAction, useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
-import ControlledSelect from "../../components/Controllers/Select";
+import ControlledSelect from "../Controllers/Select";
 
 interface FormFields {
   numberOfItemsPerPage: string;

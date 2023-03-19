@@ -2,8 +2,8 @@ import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Author } from "../../../business/models/Author";
 import { useActions, useAppState } from "../../../business/overmind";
+import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
-import Pagination from "./Pagination";
 
 function AuthorsTable() {
   const [page, setPage] = useState(1);
