@@ -1,35 +1,20 @@
-from fastapi import APIRouter
+from database.python.book.get_books import (get_book_stats_genre_from_db,
+                                            get_book_stats_language_from_db,
+                                            get_books_from_db,
+                                            get_total_number_of_books)
 from error.main import raise_exception
-from database.python.book.get_books import (
-    get_book_stats_genre_from_db,
-    get_book_stats_language_from_db,
-    get_books_from_db, 
-    get_books_from_db_by_genre, 
-    get_books_from_db_by_genre_and_language, 
-    get_books_from_db_by_language,
-    get_total_number_of_books
-)
-
+from fastapi import APIRouter
 
 book_router = APIRouter()
 
 
 @book_router.get("/books/", tags=["books"])
-def get_all_books(genre = None, language = None) -> dict:
+def get_all_books(genre = None, language = None, limit = None, page = 1) -> dict:
 
     try:
-        if genre and language:
-            books = get_books_from_db_by_genre_and_language(genre, language)
-        elif genre:
-            books = get_books_from_db_by_genre(genre)
-        elif language:
-            books = get_books_from_db_by_language(language)
-        else:
-            books = get_books_from_db()
-        
+        books = get_books_from_db(genre, language, limit, page)
         result = len(books)
-
-        total_number_of_books = get_total_number_of_books()
+        total_number_of_books = get_total_number_of_books(genre, language)
 
         return {
             "status": "success",

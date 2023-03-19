@@ -1,11 +1,10 @@
-import psycopg2
 import os
+
+import psycopg2
+from database.python.helpers.format_data import (format_books,
+                                                 format_stats_genres,
+                                                 format_stats_languages)
 from database.python.helpers.sql_helpers import executeScriptsFromFile
-from database.python.helpers.format_data import (
-    format_books,
-    format_stats_genres,
-    format_stats_languages
-)
 
 dirname = os.path.dirname(__file__)
 select_book_stats_genre_sql = os.path.join(dirname, "../../sql/book/select_book_stats_genre.sql")
@@ -18,7 +17,7 @@ DATABASE_HOST = os.environ.get("DATABASE_HOST")
 DATABASE_PORT = os.environ.get("DATABASE_PORT")
 
 
-def get_books_from_db():
+def get_books_from_db(genre, language, limit, page):
     conn = psycopg2.connect(
         database=DATABASE,
         user=DATABASE_USER,
@@ -26,6 +25,11 @@ def get_books_from_db():
         host=DATABASE_HOST,
         port=DATABASE_PORT,
     )
+
+    if limit:
+        offset = int(limit) * (int(page) - 1)
+    else:
+        offset = 0
 
     cursor = conn.cursor()
     cursor.execute("""
@@ -45,49 +49,15 @@ def get_books_from_db():
         ON genre.genre_id = book.genre_id 
         INNER JOIN language 
         ON book.language_id = language.language_id 
-        ORDER BY book.title;
-        """
-    )
-
-    data = cursor.fetchall()
-    conn.close()
-
-    books_formatted = format_books(data)
-
-    return books_formatted
-
-
-def get_books_from_db_by_language(language):
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
-
-    cursor = conn.cursor()
-    cursor.execute("""
-        SELECT 
-            book.book_id,
-            book.title,
-            book.year_published, 
-            CONCAT (author.first_name, ' ', author.last_name) as author,
-            genre.genre, 
-            language.language 
-        FROM book 
-        INNER JOIN book_author 
-        ON book.book_id = book_author.book_id 
-        INNER JOIN author 
-        ON author.author_id = book_author.author_id 
-        INNER JOIN genre 
-        ON genre.genre_id = book.genre_id 
-        INNER JOIN language 
-        ON book.language_id = language.language_id 
-        WHERE language.language_id = %s 
-        ORDER BY book.title; 
+        WHERE ( ( %s IS NOT NULL AND genre.genre_id = %s ) 
+            OR %s IS NULL) 
+        AND ( ( %s IS NOT NULL AND language.language_id = %s ) 
+            OR %s IS NULL) 
+        ORDER BY book.title 
+        LIMIT %s 
+        OFFSET %s;
         """, 
-        (language,)
+        (genre, genre, genre, language, language, language,  limit, offset)
     )
 
     data = cursor.fetchall()
@@ -98,7 +68,7 @@ def get_books_from_db_by_language(language):
     return books_formatted
 
 
-def get_books_from_db_by_genre_and_language(genre, language):
+def get_total_number_of_books(genre, language):
     conn = psycopg2.connect(
         database=DATABASE,
         user=DATABASE_USER,
@@ -107,15 +77,12 @@ def get_books_from_db_by_genre_and_language(genre, language):
         port=DATABASE_PORT,
     )
 
+    print("r")
+
     cursor = conn.cursor()
     cursor.execute("""
         SELECT 
-            book.book_id,
-            book.title,
-            book.year_published, 
-            CONCAT (author.first_name, ' ', author.last_name) as author,
-            genre.genre, 
-            language.language 
+        COUNT (*) 
         FROM book 
         INNER JOIN book_author 
         ON book.book_id = book_author.book_id 
@@ -125,77 +92,12 @@ def get_books_from_db_by_genre_and_language(genre, language):
         ON genre.genre_id = book.genre_id 
         INNER JOIN language 
         ON book.language_id = language.language_id 
-        WHERE genre.genre_id = %s 
-        AND language.language_id = %s 
-        ORDER BY book.title; 
+        WHERE ( ( %s IS NOT NULL AND genre.genre_id = %s ) 
+            OR %s IS NULL) 
+        AND ( ( %s IS NOT NULL AND language.language_id = %s ) 
+            OR %s IS NULL);
         """, 
-        (genre, language,)
-    )
-
-    data = cursor.fetchall()
-    conn.close()
-
-    books_formatted = format_books(data)
-
-    return books_formatted
-
-
-def get_books_from_db_by_genre(genre):
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
-
-    cursor = conn.cursor()
-    cursor.execute("""
-        SELECT 
-            book.book_id,
-            book.title,
-            book.year_published, 
-            CONCAT (author.first_name, ' ', author.last_name) as author,
-            genre.genre, 
-            language.language 
-        FROM book 
-        INNER JOIN book_author 
-        ON book.book_id = book_author.book_id 
-        INNER JOIN author 
-        ON author.author_id = book_author.author_id 
-        INNER JOIN genre 
-        ON genre.genre_id = book.genre_id 
-        INNER JOIN language 
-        ON book.language_id = language.language_id 
-        WHERE genre.genre_id = %s 
-        ORDER BY book.title; 
-        """, 
-        (genre,)
-    )
-
-    data = cursor.fetchall()
-    conn.close()
-
-    books_formatted = format_books(data)
-
-    return books_formatted
-
-
-def get_total_number_of_books():
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
-
-    cursor = conn.cursor()
-    cursor.execute("""
-        SELECT 
-        COUNT(*) AS number_of_books 
-        FROM book;
-        """
+        (genre, genre, genre, language, language, language)
     )
 
     result = cursor.fetchone()
