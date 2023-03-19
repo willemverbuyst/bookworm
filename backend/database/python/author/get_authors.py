@@ -20,7 +20,7 @@ DATABASE_HOST = os.environ.get("DATABASE_HOST")
 DATABASE_PORT = os.environ.get("DATABASE_PORT")
 
 
-def get_authors_from_db():
+def get_authors_from_db(limit, page):
     conn = psycopg2.connect(
         database=DATABASE,
         user=DATABASE_USER,
@@ -31,28 +31,10 @@ def get_authors_from_db():
 
     cursor = conn.cursor()
 
-    executeScriptsFromFile(select_all_authors_sql, cursor)
-
-    data = cursor.fetchall()
-    conn.close()
-
-    authors_formatted = format_authors(data)
-
-    return authors_formatted
-
-
-def get_authors_with_limit_and_page_from_db(limit, page):
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
-
-    cursor = conn.cursor()
-
-    offset = int(limit) * (int(page) - 1)
+    if limit:
+        offset = int(limit) * (int(page) - 1)
+    else:
+        offset = 0
 
     cursor.execute("""
         SELECT 

@@ -1,7 +1,6 @@
 from database.python.author.get_authors import (
     get_author_stats_avg_pages_from_db, get_author_stats_page_from_db,
-    get_authors_from_db, get_authors_with_limit_and_page_from_db,
-    get_total_number_of_authors)
+    get_authors_from_db, get_total_number_of_authors)
 from error.main import raise_exception
 from fastapi import APIRouter
 from models.author import AuthorSchema
@@ -12,12 +11,9 @@ author_router = APIRouter()
 @author_router.get("/authors/", tags=["authors"])
 def get_all_authors(limit = None, page = 1) -> dict:
     try:
-        if limit:
-            authors = get_authors_with_limit_and_page_from_db(limit, page)
-            result = len(authors)
-        else:
-            authors = get_authors_from_db()
-            result = len(authors)
+        print(limit, page)
+        authors = get_authors_from_db(limit, page)
+        result = len(authors)
 
         total_number_of_authors = get_total_number_of_authors()
 
