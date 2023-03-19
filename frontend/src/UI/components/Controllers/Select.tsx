@@ -45,6 +45,9 @@ function ControlledSelect<
             <option key="genre" disabled value="">
               {placeholder}
             </option>
+            <option key="none" value="none">
+              None
+            </option>
             {dataSet.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.display}

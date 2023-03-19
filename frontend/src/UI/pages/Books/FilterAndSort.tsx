@@ -36,10 +36,15 @@ function FilterAndSort({ updateGenre, updateLanguage }: Props) {
   const [genre, language] = watch(["genre", "language"]);
 
   useEffect(() => {
-    if (genre) {
+    if (genre && genre === "none") {
+      updateGenre(null);
+    } else if (genre) {
       updateGenre(genre);
     }
-    if (language) {
+
+    if (language && language === "none") {
+      updateLanguage(null);
+    } else if (language) {
       updateLanguage(language);
     }
   }, [genre, language]);
