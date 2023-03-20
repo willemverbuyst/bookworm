@@ -9,9 +9,10 @@ import { defaultValues, FormFields, validationSchema } from "./helpers";
 interface Props {
   updateGenre: Dispatch<SetStateAction<string | null>>;
   updateLanguage: Dispatch<SetStateAction<string | null>>;
+  updatePage: Dispatch<SetStateAction<number>>;
 }
 
-function FilterAndSort({ updateGenre, updateLanguage }: Props) {
+function FilterAndSort({ updateGenre, updateLanguage, updatePage }: Props) {
   const id = useId();
   const allGenres = useAppState().genresOverview || [];
   const allLanguages = useAppState().languagesOverview || [];
@@ -47,6 +48,7 @@ function FilterAndSort({ updateGenre, updateLanguage }: Props) {
     } else if (language) {
       updateLanguage(language);
     }
+    updatePage(1);
   }, [genre, language]);
 
   return (

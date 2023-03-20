@@ -1,6 +1,6 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import { Box, Button, Container, HStack, Spacer } from "@chakra-ui/react";
-import { Dispatch, SetStateAction, useEffect, useId, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useId } from "react";
 import { useForm } from "react-hook-form";
 import ControlledSelect from "../Controllers/Select";
 
@@ -11,13 +11,19 @@ interface FormFields {
 interface Props {
   total: number | undefined;
   limit: number;
+  page: number;
   updateLimit: Dispatch<SetStateAction<number>>;
   updatePage: Dispatch<SetStateAction<number>>;
 }
 
-function Pagination({ total, limit, updateLimit, updatePage }: Props) {
+function Pagination({
+  total,
+  limit,
+  page: currentPage,
+  updateLimit,
+  updatePage,
+}: Props) {
   const id = useId();
-  const [currentPage, setCurrentPage] = useState(1);
   const totalNumberOfPages = total ? Math.ceil(total / limit) : 0;
 
   const { control, watch } = useForm<FormFields>({
@@ -35,18 +41,18 @@ function Pagination({ total, limit, updateLimit, updatePage }: Props) {
   }, [numberOfItemsPerPage]);
 
   const handleClick = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
+    // setCurrentPage(pageNumber);
     updatePage(pageNumber);
   };
 
   const handleClickLeft = () => {
     if (currentPage === 1) return;
-    setCurrentPage((prev) => prev - 1);
+    updatePage((prev) => prev - 1);
   };
 
   const handleClickRight = () => {
     if (currentPage === totalNumberOfPages) return;
-    setCurrentPage((prev) => prev + 1);
+    updatePage((prev) => prev + 1);
   };
 
   const calculateValue = (btnNumber: number) => {

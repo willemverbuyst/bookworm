@@ -36,7 +36,11 @@ function BooksTable() {
 
   return (
     <Box>
-      <FilterAndSort updateGenre={setGenre} updateLanguage={setLanguage} />
+      <FilterAndSort
+        updateGenre={setGenre}
+        updateLanguage={setLanguage}
+        updatePage={setPage}
+      />
       {data?.length ? (
         <>
           <TableOverview
@@ -47,6 +51,7 @@ function BooksTable() {
           <Pagination
             total={total}
             limit={limit}
+            page={page}
             updatePage={setPage}
             updateLimit={setLimit}
           />
