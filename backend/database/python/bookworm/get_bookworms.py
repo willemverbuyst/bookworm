@@ -42,13 +42,13 @@ def get_bookworms_from_db(limit, page):
         FROM bookworm
         FULL OUTER JOIN user_account
         ON bookworm.user_account_id = user_account.user_account_id
-        FULL OUTER JOIN library
+        INNER JOIN library
         ON bookworm.library_id = library.library_id
-        FULL OUTER JOIN address
+        INNER JOIN address
         ON user_account.address_id = address.address_id
-        FULL OUTER JOIN city
+        INNER JOIN city
         ON address.city_id = city.city_id
-        FULL OUTER JOIN country
+        INNER JOIN country
         ON city.country_id = country.country_id 
         ORDER BY bookworm.bookworm_id 
         LIMIT %s 
