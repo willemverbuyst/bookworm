@@ -28,6 +28,27 @@ def format_books(book_data):
     return books
 
 
+def format_bookworms(bookworm_data):
+    bookworms = []
+    for row in bookworm_data:
+        bookworm = {
+            "id": row[0],
+            "first_name": row[1],
+            "last_name": row[2],
+            "email": row[3],
+            "phone": row[4],
+            "address": row[5],
+            "postal_code": row[6],
+            "city": row[7],
+            "country": row[8],
+            "user_is_active": row[9],
+            "library_name": row[10]
+        }
+        bookworms.append(bookworm)
+
+    return bookworms
+
+
 def format_user(user_data):
     user = {
         "id": user_data[0],

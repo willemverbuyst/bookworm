@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers.root import root_router
 from routers.authors import author_router
 from routers.books import book_router
+from routers.bookworms import bookworm_router
 from routers.genres import genre_router
 from routers.languages import language_router
 from routers.reviews import review_router
+from routers.root import root_router
 from routers.user import user_router
-
 
 origins = ["http://0.0.0.0:3000", "http://localhost:3000", "http://frontend:3000"]
 
@@ -24,6 +24,7 @@ app.add_middleware(
 app.include_router(root_router)
 app.include_router(author_router)
 app.include_router(book_router)
+app.include_router(bookworm_router)
 app.include_router(genre_router)
 app.include_router(language_router)
 app.include_router(review_router)
