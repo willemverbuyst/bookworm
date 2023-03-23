@@ -32,6 +32,7 @@ def get_bookworms_from_db(limit, page):
           user_account.first_name, 
           user_account.last_name, 
           user_account.email, 
+          user_account.birth_date, 
           address.phone, 
           address.address, 
           address.postal_code, 

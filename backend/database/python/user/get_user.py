@@ -1,4 +1,5 @@
 import os
+
 import psycopg2
 from database.python.helpers.format_data import format_user
 
@@ -78,6 +79,7 @@ def get_user_from_db_by_email(email):
             user_account.last_name,
             user_account.username,
             user_account.email,
+            user_account.birth_date, 
             address.address,
             address.postal_code,
             address.phone,

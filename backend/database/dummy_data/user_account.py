@@ -1,8 +1,9 @@
-import faker
 import csv
 import datetime
 import random
+
 import config
+import faker
 
 fake = faker.Faker()
 
@@ -18,7 +19,8 @@ with open('user_account.csv', 'w', newline='') as file:
       "activebool",
       "activeint",
       "last_updated",
-      "address_id"
+      "address_id",
+      "birth_date"
     ]
     
     writer.writerow(header)
@@ -33,5 +35,6 @@ with open('user_account.csv', 'w', newline='') as file:
         fake.boolean(chance_of_getting_true=50),
         random.randint(0,1),   
         datetime.datetime.now(),
-        random.randint(1,config.ADDRESS)
+        random.randint(1,config.ADDRESS),
+        fake.date()
       ])

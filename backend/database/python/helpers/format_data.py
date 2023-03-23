@@ -36,13 +36,14 @@ def format_bookworms(bookworm_data):
             "first_name": row[1],
             "last_name": row[2],
             "email": row[3],
-            "phone": row[4],
-            "address": row[5],
-            "postal_code": row[6],
-            "city": row[7],
-            "country": row[8],
-            "user_is_active": row[9],
-            "library_name": row[10]
+            "birth_date": row[4],
+            "phone": row[5],
+            "address": row[6],
+            "postal_code": row[7],
+            "city": row[6],
+            "country": row[9],
+            "user_is_active": row[10],
+            "library_name": row[11]
         }
         bookworms.append(bookworm)
 

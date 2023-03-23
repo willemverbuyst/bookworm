@@ -10,5 +10,6 @@ CREATE TABLE user_account (
   activeint INT NOT NULL,
   last_updated TIMESTAMP NOT NULL,
   address_id INT NOT NULL,
+  birth_date DATE NOT NULL, 
   PRIMARY KEY (user_account_id)
 );
