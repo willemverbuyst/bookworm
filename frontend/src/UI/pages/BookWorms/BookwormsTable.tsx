@@ -19,6 +19,7 @@ function BookwormsTable() {
   const columns: Array<{ field: keyof Bookworm }> = [
     { field: "first_name" },
     { field: "last_name" },
+    { field: "birth_date" },
     { field: "email" },
     { field: "phone" },
     { field: "address" },
