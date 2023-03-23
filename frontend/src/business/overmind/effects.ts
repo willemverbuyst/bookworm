@@ -5,6 +5,7 @@ import {
   BookStatsGenreApi,
   BookStatsLanguageApi,
 } from "../models/Book";
+import { BookwormApi } from "../models/Bookworm";
 import { GenreApi } from "../models/Genre";
 import { LanguageApi } from "../models/Language";
 import { ReviewApi } from "../models/ReviewApi";
@@ -16,6 +17,13 @@ export const api = {
   getAllAuthors: async ({ limit = 10, page = 1 }): Promise<AuthorApi> => {
     const response = await axios.get(
       `${BACKEND_URL}/authors/?limit=${limit}&page=${page}`
+    );
+    return response.data;
+  },
+
+  getBookworms: async ({ limit = 10, page = 1 }): Promise<BookwormApi> => {
+    const response = await axios.get(
+      `${BACKEND_URL}/bookworms/?limit=${limit}&page=${page}`
     );
     return response.data;
   },

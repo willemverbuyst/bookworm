@@ -60,6 +60,14 @@ export const getAllAuthors = async (
   state.authorsApi = allAuthors;
 };
 
+export const getBookworms = async (
+  { effects, state }: Context,
+  { limit, page }: { limit: number; page: number }
+) => {
+  const bookworms = await effects.api.getBookworms({ limit, page });
+  state.bookwormApi = bookworms;
+};
+
 export const getAllBooks = async (
   { effects, state }: Context,
   {

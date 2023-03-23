@@ -17,7 +17,7 @@ def get_all_bookworms(limit = None, page = 1) -> dict:
         return {
             "status": "success",
             "result": result,
-            "total_number_of_books": total_number_of_bookworms,
+            "total_number_of_bookworms": total_number_of_bookworms,
             "data": bookworms,
             "message": "bookworms have been fetched",
         }
