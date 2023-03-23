@@ -4,6 +4,7 @@ import { NavItem } from "../components/Navigation/types";
 export const NAV_ITEMS: Array<NavItem> = [
   { label: "Home", href: "/home" },
   { label: "Books", href: "/books" },
+  { label: "Bookworms", href: "/bookworms" },
   { label: "Authors", href: "/authors" },
   { label: "Reviews", href: "/reviews" },
 ];

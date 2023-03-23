@@ -1,15 +1,16 @@
 import { Box } from "@chakra-ui/react";
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import PrivateRoute from "./helpers/PrivateRoute";
+import Message from "./UI/components/Message";
+import SignInPage from "./UI/pages/Auth/SignInPage";
+import SignUpPage from "./UI/pages/Auth/SingUpPage";
 import AuthorsPage from "./UI/pages/Authors/AuthorsPage";
 import BooksPage from "./UI/pages/Books/BooksPage";
-import ReviewPage from "./UI/pages/Reviews/ReviewPage";
-import SignInPage from "./UI/pages/Auth/SignInPage";
-import Message from "./UI/components/Message";
-import PageNotFoundPage from "./UI/pages/PageNotFound/PageNotFoundPage";
-import WelcomePage from "./UI/pages/Welcome/WelcomePage";
-import PrivateRoute from "./helpers/PrivateRoute";
+import BookwormsPage from "./UI/pages/BookWorms/BookwormsPage";
 import HomePage from "./UI/pages/Home/HomePage";
-import SignUpPage from "./UI/pages/Auth/SingUpPage";
+import PageNotFoundPage from "./UI/pages/PageNotFound/PageNotFoundPage";
+import ReviewPage from "./UI/pages/Reviews/ReviewPage";
+import WelcomePage from "./UI/pages/Welcome/WelcomePage";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/" element={<WelcomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/books" element={<BooksPage />} />
+        <Route path="/bookworms" element={<BookwormsPage />} />
         <Route path="/authors" element={<AuthorsPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
