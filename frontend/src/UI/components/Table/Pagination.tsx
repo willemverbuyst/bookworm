@@ -27,7 +27,7 @@ function Pagination({
   const totalNumberOfPages = total ? Math.ceil(total / limit) : 0;
 
   const { control, watch } = useForm<FormFields>({
-    defaultValues: { numberOfItemsPerPage: "10" },
+    defaultValues: { numberOfItemsPerPage: String(limit) },
   });
   const dataSet = [5, 10, 15, 20, 25, 30].map((i) => ({
     value: String(i),

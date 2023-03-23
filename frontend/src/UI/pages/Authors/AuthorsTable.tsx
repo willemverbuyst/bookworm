@@ -18,6 +18,7 @@ function AuthorsTable() {
   ];
 
   useEffect(() => {
+    console.log("author :>> ");
     getAllAuthors({ limit, page });
   }, [page, limit]);
 
@@ -33,6 +34,7 @@ function AuthorsTable() {
           <Pagination
             total={total}
             limit={limit}
+            page={page}
             updatePage={setPage}
             updateLimit={setLimit}
           />

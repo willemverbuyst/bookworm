@@ -27,13 +27,13 @@ export interface State {
   authorStatsPage: AuthorStatsPage | null;
   authorStatsPageApi: AuthorStatsPageApi | null;
   booksApi: BookApi | null;
-  bookOverview: Book[] | null;
+  bookOverview: Array<Book> | null;
   bookStatsGenre: Array<BookStatsGenre> | null;
   bookStatsGenreApi: BookStatsGenreApi | null;
   bookStatsLanguage: Array<BookStatsLanguage> | null;
   bookStatsLanguageApi: BookStatsLanguageApi | null;
   bookwormApi: BookwormApi | null;
-  bookwormOverview: Bookworm[] | null;
+  bookwormOverview: Array<Bookworm> | null;
   genresApi: GenreApi | null;
   genresOverview: Array<Genre> | null;
   languagesApi: LanguageApi | null;

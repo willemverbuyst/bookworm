@@ -7,7 +7,7 @@ export function useGetBooksworms() {
 
   useEffect(() => {
     if (!bookwormApi?.data.length) {
-      getBookworms({ limit: 15, page: 1 });
+      getBookworms({ limit: 10, page: 1 });
     }
   }, []);
 }
