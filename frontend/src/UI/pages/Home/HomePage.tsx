@@ -23,7 +23,7 @@ function HomePage() {
       <NavigationBar />
       <Flex flexDirection="column" alignItems="center">
         <PageTitle title="Home" />
-        <Card>
+        <Card width={400}>
           <CardHeader>
             <Heading size="md">User details</Heading>
           </CardHeader>
@@ -40,7 +40,7 @@ function HomePage() {
                   </Text>
                 </Box>
                 <Spacer />
-                <Box>
+                <Box textAlign="right">
                   <Heading size="xs" textTransform="uppercase">
                     last name
                   </Heading>
@@ -59,7 +59,7 @@ function HomePage() {
                   </Text>
                 </Box>
                 <Spacer />
-                <Box>
+                <Box textAlign="right">
                   <Heading size="xs" textTransform="uppercase">
                     place of birth
                   </Heading>
@@ -84,16 +84,15 @@ function HomePage() {
                   {user?.phone}
                 </Text>
               </Box>
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  address
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  {user?.address}
+                </Text>
+              </Box>
               <HStack>
-                <Box>
-                  <Heading size="xs" textTransform="uppercase">
-                    address
-                  </Heading>
-                  <Text pt="2" fontSize="sm">
-                    {user?.address}
-                  </Text>
-                </Box>
-                <Spacer />
                 <Box>
                   <Heading size="xs" textTransform="uppercase">
                     city
@@ -103,7 +102,7 @@ function HomePage() {
                   </Text>
                 </Box>
                 <Spacer />
-                <Box>
+                <Box textAlign="right">
                   <Heading size="xs" textTransform="uppercase">
                     country
                   </Heading>
