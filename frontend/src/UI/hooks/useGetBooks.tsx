@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useActions, useAppState } from "../../business/overmind";
 
-export function useGetAllBooks() {
+export function useGetBooks() {
   const { booksApi } = useAppState();
-  const { getAllBooks } = useActions();
+  const { getBooks } = useActions();
 
   useEffect(() => {
     if (!booksApi?.data.length) {
-      getAllBooks({ genre: null, language: null, limit: 10, page: 1 });
+      getBooks({ genre: null, language: null, limit: 10, page: 1 });
     }
   }, []);
 }

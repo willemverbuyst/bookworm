@@ -14,8 +14,8 @@ import ControlledTextArea from "../../components/Controllers/TextArea";
 import ControlledTextInput from "../../components/Controllers/TextInput";
 import NavigationBar from "../../components/Navigation/NavigationBar";
 import PageTitle from "../../components/Text/PageTitle";
-import { useGetAllAuthors } from "../../hooks/useGetAllAuthors";
-import { useGetAllBooks } from "../../hooks/useGetAllBooks";
+import { useGetAuthors } from "../../hooks/useGetAuthors";
+import { useGetBooks } from "../../hooks/useGetBooks";
 import { defaultValues, FormFields, validationSchema } from "./helpers";
 
 function ReviewPage() {
@@ -30,8 +30,8 @@ function ReviewPage() {
     Array<{ display: string; value: string }>
   >([]);
 
-  useGetAllAuthors();
-  useGetAllBooks();
+  useGetAuthors();
+  useGetBooks();
   // const { postReview } = useActions();
   const {
     control,

@@ -10,7 +10,7 @@ function AuthorsTable() {
   const [limit, setLimit] = useState(10);
   const data = useAppState().authorOverview;
   const total = useAppState().authorsApi?.total_number_of_authors;
-  const { getAllAuthors } = useActions();
+  const { getAuthors } = useActions();
   const columns: Array<{ field: keyof Author; isNumeric?: boolean }> = [
     { field: "last_name" },
     { field: "first_name" },
@@ -18,8 +18,7 @@ function AuthorsTable() {
   ];
 
   useEffect(() => {
-    console.log("author :>> ");
-    getAllAuthors({ limit, page });
+    getAuthors({ limit, page });
   }, [page, limit]);
 
   return (

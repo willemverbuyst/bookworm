@@ -14,21 +14,23 @@ import { UserApi } from "../models/User";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 
 export const api = {
-  getAllAuthors: async ({ limit = 10, page = 1 }): Promise<AuthorApi> => {
+  getAuthors: async ({ limit = 10, page = 1 }): Promise<AuthorApi> => {
     const response = await axios.get(
       `${BACKEND_URL}/authors/?limit=${limit}&page=${page}`
     );
     return response.data;
   },
 
-  getBookworms: async ({ limit = 10, page = 1 }): Promise<BookwormApi> => {
-    const response = await axios.get(
-      `${BACKEND_URL}/bookworms/?limit=${limit}&page=${page}`
-    );
-    return response.data;
+  getAuthorStatsPages: async (): Promise<AuthorStatsPageApi> => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/author/stats/?by=page`);
+      return response.data;
+    } catch (error) {
+      throw new Error(JSON.stringify(error));
+    }
   },
 
-  getAllBooks: async ({
+  getBooks: async ({
     genre,
     language,
     limit = 10,
@@ -55,34 +57,16 @@ export const api = {
     }
   },
 
-  getAllGenres: async (): Promise<GenreApi> => {
+  getBookStatsGenres: async (): Promise<BookStatsGenreApi> => {
     try {
-      const response = await axios.get(`${BACKEND_URL}/genres`);
+      const response = await axios.get(`${BACKEND_URL}/books/stats/?by=genre`);
       return response.data;
     } catch (error) {
       throw new Error(JSON.stringify(error));
     }
   },
 
-  getAllLanguages: async (): Promise<LanguageApi> => {
-    try {
-      const response = await axios.get(`${BACKEND_URL}/languages`);
-      return response.data;
-    } catch (error) {
-      throw new Error(JSON.stringify(error));
-    }
-  },
-
-  getStatsAuthorPages: async (): Promise<AuthorStatsPageApi> => {
-    try {
-      const response = await axios.get(`${BACKEND_URL}/author/stats/?by=page`);
-      return response.data;
-    } catch (error) {
-      throw new Error(JSON.stringify(error));
-    }
-  },
-
-  getStatsBooksLanguages: async (): Promise<BookStatsLanguageApi> => {
+  getBookStatsLanguages: async (): Promise<BookStatsLanguageApi> => {
     try {
       const response = await axios.get(
         `${BACKEND_URL}/books/stats/?by=language`
@@ -93,9 +77,25 @@ export const api = {
     }
   },
 
-  getStatsBooksGenres: async (): Promise<BookStatsGenreApi> => {
+  getBookworms: async ({ limit = 10, page = 1 }): Promise<BookwormApi> => {
+    const response = await axios.get(
+      `${BACKEND_URL}/bookworms/?limit=${limit}&page=${page}`
+    );
+    return response.data;
+  },
+
+  getGenres: async (): Promise<GenreApi> => {
     try {
-      const response = await axios.get(`${BACKEND_URL}/books/stats/?by=genre`);
+      const response = await axios.get(`${BACKEND_URL}/genres`);
+      return response.data;
+    } catch (error) {
+      throw new Error(JSON.stringify(error));
+    }
+  },
+
+  getLanguages: async (): Promise<LanguageApi> => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/languages`);
       return response.data;
     } catch (error) {
       throw new Error(JSON.stringify(error));

@@ -52,12 +52,12 @@ export const onInitializeOvermind = async ({ effects, state }: Context) => {
   }
 };
 
-export const getAllAuthors = async (
+export const getAuthors = async (
   { effects, state }: Context,
   { limit, page }: { limit: number; page: number }
 ) => {
-  const allAuthors = await effects.api.getAllAuthors({ limit, page });
-  state.authorsApi = allAuthors;
+  const authors = await effects.api.getAuthors({ limit, page });
+  state.authorsApi = authors;
 };
 
 export const getBookworms = async (
@@ -68,7 +68,7 @@ export const getBookworms = async (
   state.bookwormApi = bookworms;
 };
 
-export const getAllBooks = async (
+export const getBooks = async (
   { effects, state }: Context,
   {
     genre,
@@ -82,37 +82,37 @@ export const getAllBooks = async (
     page: number;
   }
 ) => {
-  const allBooks = await effects.api.getAllBooks({
+  const books = await effects.api.getBooks({
     genre,
     language,
     limit,
     page,
   });
-  state.booksApi = allBooks;
+  state.booksApi = books;
 };
 
-export const getAllGenres = async ({ effects, state }: Context) => {
-  const allGenres = await effects.api.getAllGenres();
-  state.genresApi = allGenres;
+export const getGenres = async ({ effects, state }: Context) => {
+  const genres = await effects.api.getGenres();
+  state.genresApi = genres;
 };
 
-export const getAllLanguages = async ({ effects, state }: Context) => {
-  const allLanguages = await effects.api.getAllLanguages();
-  state.languagesApi = allLanguages;
+export const getLanguages = async ({ effects, state }: Context) => {
+  const languages = await effects.api.getLanguages();
+  state.languagesApi = languages;
 };
 
 export const getAuthorStatsPage = async ({ effects, state }: Context) => {
-  const pagesStats = await effects.api.getStatsAuthorPages();
+  const pagesStats = await effects.api.getAuthorStatsPages();
   state.authorStatsPageApi = pagesStats;
 };
 
 export const getBookStatsGenre = async ({ effects, state }: Context) => {
-  const genresStats = await effects.api.getStatsBooksGenres();
+  const genresStats = await effects.api.getBookStatsGenres();
   state.bookStatsGenreApi = genresStats;
 };
 
 export const getBookStatsLanguage = async ({ effects, state }: Context) => {
-  const languagesStats = await effects.api.getStatsBooksLanguages();
+  const languagesStats = await effects.api.getBookStatsLanguages();
   state.bookStatsLanguageApi = languagesStats;
 };
 

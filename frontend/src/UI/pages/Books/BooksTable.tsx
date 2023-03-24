@@ -4,8 +4,8 @@ import { Book } from "../../../business/models/Book";
 import { useActions, useAppState } from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
-import { useGetAllGenres } from "../../hooks/useGetAllGenrs";
-import { useGetAllLanguages } from "../../hooks/useGetAllLanguages";
+import { useGetGenres } from "../../hooks/useGetGenres";
+import { useGetLanguages } from "../../hooks/useGetLanguages";
 import FilterAndSort from "./FilterAndSort";
 
 function BooksTable() {
@@ -15,12 +15,12 @@ function BooksTable() {
   const [language, setLanguage] = useState<string | null>(null);
   const data = useAppState().bookOverview;
   const total = useAppState().booksApi?.total_number_of_books;
-  const { getAllBooks } = useActions();
-  useGetAllGenres();
-  useGetAllLanguages();
+  const { getBooks } = useActions();
+  useGetGenres();
+  useGetLanguages();
 
   useEffect(() => {
-    getAllBooks({ genre, language, limit, page });
+    getBooks({ genre, language, limit, page });
   }, [genre, language, limit, page]);
 
   const columns: Array<{ field: keyof Book }> = [

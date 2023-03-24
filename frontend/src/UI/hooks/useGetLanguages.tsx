@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useActions, useAppState } from "../../business/overmind";
 
-export function useGetAllLanguages() {
+export function useGetLanguages() {
   const { languagesApi } = useAppState();
-  const { getAllLanguages } = useActions();
+  const { getLanguages } = useActions();
 
   useEffect(() => {
     if (!languagesApi?.data.length) {
-      getAllLanguages();
+      getLanguages();
     }
   }, []);
 }
