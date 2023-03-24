@@ -24,24 +24,28 @@ def get_user_from_db(email, password):
     cursor.execute("""
         SELECT 
             user_account.user_account_id,
-            user_account.bookstore_id,
             user_account.first_name,
             user_account.last_name,
-            user_account.username,
-            user_account.email,
-            address.address,
-            address.postal_code,
-            address.phone,
+            TO_CHAR(user_account.birth_date, 'DD/MM/YYYY'), 
+            user_account.email, 
+            address.phone, 
+            address.address, 
+            address.postal_code, 
             city.city,
-            country.country
+            country.country,
+            library.library_name 
         FROM user_account
         INNER JOIN address
         ON user_account.address_id = address.address_id
         INNER JOIN city
         ON address.city_id = city.city_id
         INNER JOIN country
-        ON city.country_id = country.country_id
-        WHERE user_account.active is True
+        ON city.country_id = country.country_id 
+        INNER JOIN bookworm 
+        ON bookworm.user_account_id = user_account.user_account_id 
+        INNER JOIN library
+        ON bookworm.library_id = library.library_id 
+        WHERE user_account.activebool is True
         AND user_account.email=%s 
         AND user_account.password=%s;
         """,
@@ -74,26 +78,29 @@ def get_user_from_db_by_email(email):
     cursor.execute("""
         SELECT 
             user_account.user_account_id,
-            user_account.bookstore_id,
             user_account.first_name,
             user_account.last_name,
-            user_account.username,
-            user_account.email,
-            user_account.birth_date, 
-            address.address,
-            address.postal_code,
-            address.phone,
+            TO_CHAR(user_account.birth_date, 'DD/MM/YYYY'), 
+            user_account.email, 
+            address.phone, 
+            address.address, 
+            address.postal_code, 
             city.city,
-            country.country
+            country.country,
+            library.library_name 
         FROM user_account
         INNER JOIN address
         ON user_account.address_id = address.address_id
         INNER JOIN city
         ON address.city_id = city.city_id
         INNER JOIN country
-        ON city.country_id = country.country_id
-        WHERE user_account.active is True
-        AND user_account.email=%s; 
+        ON city.country_id = country.country_id 
+        INNER JOIN bookworm 
+        ON bookworm.user_account_id = user_account.user_account_id 
+        INNER JOIN library
+        ON bookworm.library_id = library.library_id 
+        WHERE user_account.activebool is True
+        AND user_account.email=%s;
         """,
         (
             email,

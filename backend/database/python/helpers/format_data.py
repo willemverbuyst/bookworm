@@ -55,12 +55,14 @@ def format_user(user_data):
         "id": user_data[0],
         "first_name": user_data[1],
         "last_name": user_data[2],
-        "email": user_data[3],
-        "address": user_data[4],
-        "postal_code": user_data[5],
-        "phone": user_data[6],
-        "city": user_data[7],
-        "country": user_data[8],
+        "birth_date": user_data[3],
+        "email": user_data[4],
+        "phone": user_data[5],
+        "address": user_data[6],
+        "postal_code": user_data[7],
+        "city": user_data[8],
+        "country": user_data[9],
+        "library_name": user_data[10],
     }
 
     return user

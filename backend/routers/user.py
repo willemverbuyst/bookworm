@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Body
-from error.main import raise_exception
-from database.python.user.get_user import get_user_from_db, get_user_from_db_by_email
-from models.user import CredentialsSchema, TokenSchema, UserSchema
 from auth.auth_handler import decodeJWT, signJWT
-
+from database.python.user.get_user import (get_user_from_db,
+                                           get_user_from_db_by_email)
+from error.main import raise_exception
+from fastapi import APIRouter, Body
+from models.user import CredentialsSchema, TokenSchema, UserSchema
 
 user_router = APIRouter()
 
@@ -15,18 +15,7 @@ def login_user(credentials: CredentialsSchema = Body(...)) -> dict:
         if user:
             return {
                 "status": "success",
-                "data": {
-                    "id": user["id"],
-                    "first_name": user["first_name"],
-                    "last_name": user["last_name"],
-                    "username": user["username"],
-                    "email": user["email"],
-                    "address": user["address"],
-                    "postal_code": user["postal_code"],
-                    "phone": user["phone"],
-                    "city": user["city"],
-                    "country": user["country"],
-                },
+                "data": user,
                 "token": signJWT(user["email"]),
                 "message": "Welcome back",
             }
@@ -54,18 +43,7 @@ def login_user(credentials: TokenSchema = Body(...)) -> dict:
         if user:
             return {
                 "status": "success",
-                "data": {
-                    "id": user["id"],
-                    "first_name": user["first_name"],
-                    "last_name": user["last_name"],
-                    "username": user["username"],
-                    "email": user["email"],
-                    "address": user["address"],
-                    "postal_code": user["postal_code"],
-                    "phone": user["phone"],
-                    "city": user["city"],
-                    "country": user["country"],
-                },
+                "data": user,
                 "token": signJWT(user["email"]),
                 "message": "Welcome back",
             }
