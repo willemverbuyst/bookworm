@@ -49,14 +49,25 @@ function HomePage() {
                   </Text>
                 </Box>
               </HStack>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  birth date
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  {user?.birth_date}
-                </Text>
-              </Box>
+              <HStack>
+                <Box>
+                  <Heading size="xs" textTransform="uppercase">
+                    birth date
+                  </Heading>
+                  <Text pt="2" fontSize="sm">
+                    {user?.birth_date}
+                  </Text>
+                </Box>
+                <Spacer />
+                <Box>
+                  <Heading size="xs" textTransform="uppercase">
+                    place of birth
+                  </Heading>
+                  <Text pt="2" fontSize="sm">
+                    {user?.place_of_birth}
+                  </Text>
+                </Box>
+              </HStack>
               <Box>
                 <Heading size="xs" textTransform="uppercase">
                   email

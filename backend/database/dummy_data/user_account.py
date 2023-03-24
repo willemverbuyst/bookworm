@@ -20,7 +20,8 @@ with open('user_account.csv', 'w', newline='') as file:
       "activeint",
       "last_updated",
       "address_id",
-      "birth_date"
+      "birth_date",
+      "place_of_birth"
     ]
     
     writer.writerow(header)
@@ -36,5 +37,6 @@ with open('user_account.csv', 'w', newline='') as file:
         random.randint(0,1),   
         datetime.datetime.now(),
         random.randint(1,config.ADDRESS),
-        fake.date()
+        fake.date(),
+        random.randint(0, 200)
       ])
