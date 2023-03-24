@@ -1,7 +1,15 @@
 export interface User {
-  id: string;
-  user_name: string;
+  address: string;
+  birth_date: string;
+  city: string;
+  country: string;
   email: string;
+  first_name: string;
+  id: number;
+  last_name: string;
+  library_name: string;
+  phone: string;
+  postal_code: string;
 }
 
 export interface UserApi {
