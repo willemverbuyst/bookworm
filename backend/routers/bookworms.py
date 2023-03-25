@@ -1,5 +1,6 @@
 from database.python.bookworm.get_bookworms import (
-    get_bookworms_from_db, get_total_number_of_bookworms)
+    get_bookworm_details_from_db_by_id, get_bookworms_from_db,
+    get_total_number_of_bookworms)
 from error.main import raise_exception
 from fastapi import APIRouter
 
@@ -24,3 +25,24 @@ def get_all_bookworms(limit = None, page = 1) -> dict:
     except:
         raise_exception(500, "Something went wrong!")
 
+
+@bookworm_router.get("/bookworms/{id}", tags=["bookworms"])
+def get_bookworm_by_id(id) -> dict:
+    try:
+        bookworm = get_bookworm_details_from_db_by_id(id)
+
+        if bookworm:
+            return {
+                "status": "success",
+                "data": bookworm,
+                "message": "bookworm has been fetched",
+            }
+        else:
+            return{
+                "status": "fail",
+                "data": None,
+                "message": "No details found for this bookworm"
+            }
+
+    except:
+        raise_exception(500, "Something went wrong!")

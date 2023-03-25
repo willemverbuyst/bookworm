@@ -1,7 +1,7 @@
 import os
 
 import psycopg2
-from database.python.helpers.format_data import format_bookworms
+from database.python.helpers.format_data import format_bookworms, format_user
 from database.python.helpers.sql_helpers import executeScriptsFromFile
 
 DATABASE = os.environ.get("DATABASE")
@@ -78,3 +78,57 @@ def get_total_number_of_bookworms():
     conn.close()
 
     return result[0]
+
+
+def get_bookworm_details_from_db_by_id(id):
+    conn = psycopg2.connect(
+        database=DATABASE,
+        user=DATABASE_USER,
+        password=DATABASE_PASSWORD,
+        host=DATABASE_HOST,
+        port=DATABASE_PORT,
+    )
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT 
+            user_account.user_account_id,
+            user_account.first_name,
+            user_account.last_name,
+            TO_CHAR(user_account.birth_date, 'DD/MM/YYYY'), 
+            city_place_of_birth.city AS place_of_birth,
+            user_account.email, 
+            address.phone, 
+            address.address, 
+            address.postal_code, 
+            city_city.city,
+            country.country,
+            library.library_name
+        FROM user_account
+        INNER JOIN address
+        ON user_account.address_id = address.address_id
+        INNER JOIN city AS city_city
+        ON city_city.city_id = address.city_id
+        INNER JOIN city AS city_place_of_birth
+        ON city_place_of_birth.city_id = user_account.place_of_birth
+        INNER JOIN country
+        ON city_place_of_birth.country_id = country.country_id 
+        INNER JOIN bookworm 
+        ON bookworm.user_account_id = user_account.user_account_id 
+        INNER JOIN library
+        ON bookworm.library_id = library.library_id
+        AND bookworm.bookworm_id=%s;
+        """,
+        (
+            id,
+        ),
+    )
+
+    data = cursor.fetchone()
+    conn.close()
+
+    if data:
+        return format_user(data)
+    else:
+        return None
