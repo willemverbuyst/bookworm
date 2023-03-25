@@ -1,3 +1,4 @@
+import datetime
 import os
 
 import psycopg2
@@ -14,7 +15,7 @@ DATABASE_HOST = os.environ.get("DATABASE_HOST")
 DATABASE_PORT = os.environ.get("DATABASE_PORT")
 
 
-def get_languages_from_db():
+def add_language_to_db(new_id, language):
     conn = psycopg2.connect(
         database=DATABASE,
         user=DATABASE_USER,
@@ -23,37 +24,21 @@ def get_languages_from_db():
         port=DATABASE_PORT,
     )
 
-    cursor = conn.cursor()
-
-    executeScriptsFromFile(select_all_languages_sql, cursor)
-
-    data = cursor.fetchall()
-
-    conn.close()
-
-    languages_formatted = format_languages(data)
-
-    return languages_formatted
-
-
-def get_total_number_of_languages():
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
+    print(new_id, language)
 
     cursor = conn.cursor()
     cursor.execute("""
-        SELECT 
-        COUNT(*) AS number_of_lanugages 
-        FROM language;
-        """
+        INSERT INTO language (language_id,language,last_updated) 
+        VALUES (%s, %s, %s);
+        """, 
+        (
+        new_id, language, datetime.datetime.now()
+        )
     )
-
-    result = cursor.fetchone()
+    
+    conn.commit()
     conn.close()
 
-    return result[0]
+    print("fin")
+
+    return
