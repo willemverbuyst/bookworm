@@ -35,15 +35,10 @@ def format_bookworms(bookworm_data):
             "id": row[0],
             "first_name": row[1],
             "last_name": row[2],
-            "birth_date": row[3],
-            "email": row[4],
-            "phone": row[5],
-            "address": row[6],
-            "postal_code": row[7],
-            "city": row[6],
-            "country": row[9],
-            "user_is_active": row[10],
-            "library_name": row[11]
+            "email": row[3],
+            "phone": row[4],
+            "user_is_active": row[5],
+            "library_name": row[6]
         }
         bookworms.append(bookworm)
 

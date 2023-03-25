@@ -1,8 +1,8 @@
 import csv
 import datetime
 import random
-import config
 
+import config
 
 with open('bookworm.csv', 'w', newline='') as file:
     writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
@@ -18,6 +18,6 @@ with open('bookworm.csv', 'w', newline='') as file:
       writer.writerow([
         i + 1, 
         datetime.datetime.now(),      
-        random.randint(1,config.USER_ACCOUNT),
+        config.STAFF + i + 1,
         random.randint(1,config.LIBRARY)
       ])

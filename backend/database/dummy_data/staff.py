@@ -1,6 +1,7 @@
 import csv
 import datetime
 import random
+
 import config
 
 with open('staff.csv', 'w', newline='') as file:
@@ -17,6 +18,6 @@ with open('staff.csv', 'w', newline='') as file:
       writer.writerow([
         i + 1, 
         datetime.datetime.now(),      
-        random.randint(1, config.USER_ACCOUNT),
+        i + 1,
         random.randint(1,config.LIBRARY)
       ])

@@ -2,13 +2,8 @@ export interface Bookworm {
   id: string;
   first_name: string;
   last_name: string;
-  birth_date: string;
   email: string;
   phone: string;
-  address: string;
-  postal_code: string;
-  city: string;
-  country: string;
   user_is_active: boolean;
   library_name: string;
 }

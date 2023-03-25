@@ -1,12 +1,12 @@
 import {
   Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
   TableCaption,
   TableContainer,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
 } from "@chakra-ui/react";
 
 type Props<T extends Record<"id", string>> = {
@@ -35,13 +35,15 @@ function TableOverview<T extends Record<"id", string>>({
         </Thead>
         <Tbody>
           {rows.map((row) => (
-            <Tr key={row.id}>
+            <Tr key={row.id} onClick={() => console.log(row.id)}>
               {columns.map((column) => (
                 <Td
-                  key={`${row.id}-${row[column.field]}`}
+                  key={`${row.id}-${String(column.field)}`}
                   isNumeric={column.isNumeric}
                 >
-                  {String(row[column.field])}
+                  {row[column.field] == null
+                    ? "---"
+                    : String(row[column.field])}
                 </Td>
               ))}
             </Tr>
