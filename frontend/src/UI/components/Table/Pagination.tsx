@@ -92,7 +92,7 @@ function Pagination({
           <Button
             type="button"
             onClick={() => handleClick(valueBtnOne)}
-            colorScheme={currentPage === valueBtnOne ? "blue" : "gray"}
+            colorScheme={currentPage === valueBtnOne ? "telegram" : "gray"}
           >
             {valueBtnOne}
           </Button>
@@ -100,7 +100,7 @@ function Pagination({
             <Button
               type="button"
               onClick={() => handleClick(valueBtnTwo)}
-              colorScheme={currentPage === valueBtnTwo ? "blue" : "gray"}
+              colorScheme={currentPage === valueBtnTwo ? "telegram" : "gray"}
             >
               {valueBtnTwo}
             </Button>
@@ -114,21 +114,21 @@ function Pagination({
           <Button
             type="button"
             onClick={() => handleClick(valueBtnThree)}
-            colorScheme={currentPage === valueBtnThree ? "blue" : "gray"}
+            colorScheme={currentPage === valueBtnThree ? "telegram" : "gray"}
           >
             {valueBtnThree}
           </Button>
           <Button
             type="button"
             onClick={() => handleClick(valueBtnFour)}
-            colorScheme={currentPage === valueBtnFour ? "blue" : "gray"}
+            colorScheme={currentPage === valueBtnFour ? "telegram" : "gray"}
           >
             {valueBtnFour}
           </Button>
           <Button
             type="button"
             onClick={() => handleClick(valueBtnFive)}
-            colorScheme={currentPage === valueBtnFive ? "blue" : "gray"}
+            colorScheme={currentPage === valueBtnFive ? "telegram" : "gray"}
           >
             {valueBtnFive}
           </Button>
@@ -136,7 +136,7 @@ function Pagination({
             <Button
               type="button"
               onClick={() => handleClick(valueBtnSix)}
-              colorScheme={currentPage === valueBtnSix ? "blue" : "gray"}
+              colorScheme={currentPage === valueBtnSix ? "telegram" : "gray"}
             >
               {valueBtnSix}
             </Button>
@@ -150,7 +150,7 @@ function Pagination({
           <Button
             type="button"
             onClick={() => handleClick(valueBtnSeven)}
-            colorScheme={currentPage === valueBtnSeven ? "blue" : "gray"}
+            colorScheme={currentPage === valueBtnSeven ? "telegram" : "gray"}
           >
             {valueBtnSeven}
           </Button>
@@ -172,7 +172,7 @@ function Pagination({
               type="button"
               onClick={() => handleClick(b + 1)}
               key={b}
-              colorScheme={currentPage === b + 1 ? "blue" : "gray"}
+              colorScheme={currentPage === b + 1 ? "telegram" : "gray"}
             >
               {b + 1}
             </Button>
