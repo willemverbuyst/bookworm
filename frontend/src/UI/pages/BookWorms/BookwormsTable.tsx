@@ -5,12 +5,16 @@ import { useActions, useAppState } from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
 
-function BookwormsTable() {
+interface Props {
+  action: (id: string) => void;
+}
+
+function BookwormsTable({ action }: Props) {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(15);
   const data = useAppState().bookwormOverview;
   const total = useAppState().bookwormApi?.total_number_of_bookworms;
-  const { getBookworms, getBookWormById } = useActions();
+  const { getBookworms } = useActions();
 
   useEffect(() => {
     getBookworms({ limit, page });
@@ -25,10 +29,6 @@ function BookwormsTable() {
     { field: "library_name" },
   ];
 
-  const getUser = (id: string) => {
-    getBookWormById({ id });
-  };
-
   return (
     <Box>
       {data?.length ? (
@@ -37,7 +37,7 @@ function BookwormsTable() {
             rows={data}
             columns={columns}
             title="overview of bookworms"
-            action={getUser}
+            action={action}
           />
           <Pagination
             total={total}

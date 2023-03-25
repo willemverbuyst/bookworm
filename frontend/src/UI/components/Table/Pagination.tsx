@@ -41,7 +41,6 @@ function Pagination({
   }, [numberOfItemsPerPage]);
 
   const handleClick = (pageNumber: number) => {
-    // setCurrentPage(pageNumber);
     updatePage(pageNumber);
   };
 

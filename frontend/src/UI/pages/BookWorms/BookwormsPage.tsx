@@ -1,6 +1,6 @@
 import { Box, Button, Flex } from "@chakra-ui/react";
 import { useState } from "react";
-import { useAppState } from "../../../business/overmind";
+import { useActions, useAppState } from "../../../business/overmind";
 import UserDetails from "../../components/Cards/UserDetails";
 import NavigationBar from "../../components/Navigation/NavigationBar";
 import PageTitle from "../../components/Text/PageTitle";
@@ -10,7 +10,14 @@ import BookwormsTable from "./BookwormsTable";
 function BookwormsPage() {
   const [showDetails, setShowDetails] = useState(false);
   const { bookwormDetailsApi } = useAppState();
+  const { getBookWormById } = useActions();
   const bookwormDetails = bookwormDetailsApi?.data;
+
+  const getUser = async (id: string) => {
+    await getBookWormById({ id });
+    setShowDetails(true);
+  };
+
   return (
     <>
       <NavigationBar />
@@ -30,7 +37,7 @@ function BookwormsPage() {
             <UserDetails user={bookwormDetails} />
           </Box>
         )}
-        <BookwormsTable />
+        <BookwormsTable action={getUser} />
       </Flex>
     </>
   );

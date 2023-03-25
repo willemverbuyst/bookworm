@@ -1,4 +1,6 @@
+import { ViewIcon } from "@chakra-ui/icons";
 import {
+  IconButton,
   Table,
   TableCaption,
   TableContainer,
@@ -30,19 +32,15 @@ function TableOverview<T extends Record<"id", string>>({
           <Tr>
             {columns.map((column) => (
               <Th key={String(column.field)} isNumeric={column.isNumeric}>
-                {String(column.field).replace("_", " ")}
+                {String(column.field).replaceAll("_", " ")}
               </Th>
             ))}
+            {action ? <Th>get details</Th> : null}
           </Tr>
         </Thead>
         <Tbody>
           {rows.map((row) => (
-            <Tr
-              key={row.id}
-              onClick={
-                action ? () => action(row.id) : () => console.log(row.id)
-              }
-            >
+            <Tr key={row.id}>
               {columns.map((column) => (
                 <Td
                   key={`${row.id}-${String(column.field)}`}
@@ -53,6 +51,17 @@ function TableOverview<T extends Record<"id", string>>({
                     : String(row[column.field])}
                 </Td>
               ))}
+              {action ? (
+                <Td isNumeric>
+                  <IconButton
+                    aria-label="show details"
+                    onClick={
+                      action ? () => action(row.id) : () => console.log(row.id)
+                    }
+                    icon={<ViewIcon />}
+                  />
+                </Td>
+              ) : null}
             </Tr>
           ))}
         </Tbody>
