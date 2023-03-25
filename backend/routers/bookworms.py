@@ -23,3 +23,4 @@ def get_all_bookworms(limit = None, page = 1) -> dict:
         }
     except:
         raise_exception(500, "Something went wrong!")
+
