@@ -10,7 +10,7 @@ function BookwormsTable() {
   const [limit, setLimit] = useState(15);
   const data = useAppState().bookwormOverview;
   const total = useAppState().bookwormApi?.total_number_of_bookworms;
-  const { getBookworms } = useActions();
+  const { getBookworms, getBookWormById } = useActions();
 
   useEffect(() => {
     getBookworms({ limit, page });
@@ -25,6 +25,10 @@ function BookwormsTable() {
     { field: "library_name" },
   ];
 
+  const getUser = (id: string) => {
+    getBookWormById({ id });
+  };
+
   return (
     <Box>
       {data?.length ? (
@@ -33,6 +37,7 @@ function BookwormsTable() {
             rows={data}
             columns={columns}
             title="overview of bookworms"
+            action={getUser}
           />
           <Pagination
             total={total}

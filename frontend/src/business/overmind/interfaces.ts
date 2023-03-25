@@ -17,7 +17,7 @@ import {
 import { Bookworm, BookwormApi } from "../models/Bookworm";
 import { Genre, GenreApi } from "../models/Genre";
 import { Language, LanguageApi } from "../models/Language";
-import { User } from "../models/User";
+import { User, UserApi } from "../models/User";
 
 export interface State {
   auth: Auth;
@@ -33,6 +33,7 @@ export interface State {
   bookStatsLanguage: Array<BookStatsLanguage> | null;
   bookStatsLanguageApi: BookStatsLanguageApi | null;
   bookwormApi: BookwormApi | null;
+  bookwormDetailsApi: Omit<UserApi, "token"> | null;
   bookwormOverview: Array<Bookworm> | null;
   genresApi: GenreApi | null;
   genresOverview: Array<Genre> | null;

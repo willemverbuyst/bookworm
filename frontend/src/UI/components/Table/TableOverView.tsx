@@ -13,12 +13,14 @@ type Props<T extends Record<"id", string>> = {
   columns: Array<{ field: keyof T; isNumeric?: boolean }>;
   title: string;
   rows: Array<T>;
+  action?: (id: string) => void;
 };
 
 function TableOverview<T extends Record<"id", string>>({
   rows,
   columns,
   title,
+  action,
 }: Props<T>) {
   return (
     <TableContainer>
@@ -35,7 +37,12 @@ function TableOverview<T extends Record<"id", string>>({
         </Thead>
         <Tbody>
           {rows.map((row) => (
-            <Tr key={row.id} onClick={() => console.log(row.id)}>
+            <Tr
+              key={row.id}
+              onClick={
+                action ? () => action(row.id) : () => console.log(row.id)
+              }
+            >
               {columns.map((column) => (
                 <Td
                   key={`${row.id}-${String(column.field)}`}

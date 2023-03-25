@@ -116,6 +116,14 @@ export const getBookStatsLanguage = async ({ effects, state }: Context) => {
   state.bookStatsLanguageApi = languagesStats;
 };
 
+export const getBookWormById = async (
+  { effects, state }: Context,
+  { id }: { id: string }
+) => {
+  const user = await effects.api.getBookwormById(id);
+  state.bookwormDetailsApi = user;
+};
+
 export const postReview = async (
   { state, effects }: Context,
   { author, bookTitle, review, rating }: Review

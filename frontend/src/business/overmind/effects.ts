@@ -77,6 +77,11 @@ export const api = {
     }
   },
 
+  getBookwormById: async (id: string): Promise<Omit<UserApi, "token">> => {
+    const response = await axios.get(`${BACKEND_URL}/bookworms/${id}`);
+    return response.data;
+  },
+
   getBookworms: async ({ limit = 10, page = 1 }): Promise<BookwormApi> => {
     const response = await axios.get(
       `${BACKEND_URL}/bookworms/?limit=${limit}&page=${page}`
