@@ -15,7 +15,7 @@ DATABASE_HOST = os.environ.get("DATABASE_HOST")
 DATABASE_PORT = os.environ.get("DATABASE_PORT")
 
 
-def add_language_to_db(new_id, language):
+def delete_language_from_db(id):
     conn = psycopg2.connect(
         database=DATABASE,
         user=DATABASE_USER,
@@ -26,14 +26,14 @@ def add_language_to_db(new_id, language):
 
     cursor = conn.cursor()
     cursor.execute("""
-        INSERT INTO language (language_id,language,last_updated) 
-        VALUES (%s, %s, %s);
+        DELETE FROM language
+        WHERE language.language_id=%s;
         """, 
         (
-        new_id, language, datetime.datetime.now()
+        id
         )
     )
-
+    
     conn.commit()
     conn.close()
 

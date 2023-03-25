@@ -1,4 +1,5 @@
 from database.python.language.add_language import add_language_to_db
+from database.python.language.delete_language import delete_language_from_db
 from database.python.language.get_languages import (
     get_languages_from_db, get_total_number_of_languages)
 from error.main import raise_exception
@@ -35,5 +36,19 @@ def add_language(language: str) -> dict:
             "status": "success",
             "message": "language has been added",
         }
+    except:
+        raise_exception(500, "Something went wrong!")
+
+
+@language_router.delete("/languages", tags=["languages"])
+def delete_language(id: str) -> dict:
+    try:
+        delete_language_from_db(id)
+
+        return {
+            "status": "success",
+            "message": "language has been deleted",
+        }
+
     except:
         raise_exception(500, "Something went wrong!")
