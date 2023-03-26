@@ -1,7 +1,8 @@
 import os
-import psycopg2
-from helpers.sql_helpers import executeScriptsFromFile
 
+import psycopg2
+import psycopg2.extras
+from helpers.sql_helpers import executeScriptsFromFile
 
 dirname = os.path.dirname(__file__)
 sql_helpers = os.path.join(dirname, "../helpers/sql_helpers.py")
@@ -49,6 +50,8 @@ DATABASE_PORT = os.environ.get("DATABASE_PORT")
 
 
 def seed_db():
+    psycopg2.extras.register_uuid()
+
     conn = psycopg2.connect(
         database=DATABASE,
         user=DATABASE_USER,

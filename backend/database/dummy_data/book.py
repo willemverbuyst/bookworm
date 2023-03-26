@@ -1,8 +1,9 @@
-import faker
 import csv
-import random
 import datetime
+import random
+
 import config
+import faker
 
 fake = faker.Faker()
 
@@ -29,7 +30,7 @@ with open('book.csv', 'w', newline='') as file:
         random.randint(1, config.REPLACEMENT_COST_MAX),
         random.randint(config.PAGES_MIN, config.PAGES_MAX),
         datetime.datetime.now(),
-        random.randint(1,len(config.LANGUAGES)),
+        str(config.UUIDS_LANGUAGES[random.randint(0,len(config.LANGUAGES) - 1)]),
         random.randint(1, len(config.GENRES)),
         random.randint(config.RENTAL_RATE_MIN, config.RENTAL_RATE_MAX),
       ])
