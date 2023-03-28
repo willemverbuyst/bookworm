@@ -1,23 +1,23 @@
-import faker
 import csv
 import datetime
+
 import config
-from faker.providers import DynamicProvider
+import faker
 
 fake = faker.Faker()
 
-with open('country.csv', 'w', newline='') as file:
-    writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
-    header=[
-      "country_id", 
-      "country", 
-      "last_updated"
-    ]
-    
-    writer.writerow(header)
-    for i in range(config.COUNTRY):
-      writer.writerow([
-        1 + i, 
-        fake.country(),
-        datetime.datetime.now()
-      ])
+
+def create_insert_countries_sql(config):
+    print("[INFO] Creating 'insert_countries.sql'")
+    with open('insert_countries.sql', 'w') as file:
+        insert_statements = ""
+        for i in config.get("COUNTRIES"):
+            country_id = i.get("uuid")
+            country = fake.country().replace("'", "''")
+            last_updated = datetime.datetime.now() 
+      
+            sql = "INSERT INTO country (country_id, country, last_updated)" \
+                f"VALUES ('{country_id}'::UUID,'{country}','{last_updated}');\n"
+            insert_statements += sql
+
+        file.write(insert_statements)

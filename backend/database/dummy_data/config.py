@@ -42,7 +42,7 @@ GENRES=[
   "Science & Technology"
 ]
 INVENTORY=3100
-LANGUAGES=["EN", "NL", "ES", "FR"]
+# LANGUAGES=["EN", "NL", "ES", "FR"]
 LIBRARY=2
 PAGES_MAX=800
 PAGES_MIN=50
@@ -58,4 +58,8 @@ USER_ACCOUNT=599
 
 BOOKWORM = USER_ACCOUNT - STAFF
 
-UUIDS_LANGUAGES = [uuid.uuid4() for l in LANGUAGES ]
+config = {
+  "CITIES": [{"uuid": uuid.uuid4()} for i in range(200)],
+  "COUNTRIES": [{"uuid": uuid.uuid4()} for i in range(50)],
+  "LANGUAGES": [{"uuid": uuid.uuid4(), "language": l} for l in ["EN", "NL", "ES", "FR"] ],
+  }
