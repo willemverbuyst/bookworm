@@ -1,7 +1,5 @@
 import uuid
 
-ADDRESS=300
-AUTHOR=200
 BOOK=500
 CITY=200
 COUNTRY=50
@@ -60,6 +58,7 @@ BOOKWORM = USER_ACCOUNT - STAFF
 
 config = {
   "ADDRESS": [{"uuid": uuid.uuid4()} for i in range(300)],
+  "AUTHOR": [{"uuid": uuid.uuid4()} for i in range(200)],
   "CITY": [{"uuid": uuid.uuid4()} for i in range(200)],
   "COUNTRY": [{"uuid": uuid.uuid4()} for i in range(50)],
   "GENRE":[{"uuid": uuid.uuid4(), "genre": g} for g in GENRES ],

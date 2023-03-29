@@ -3,6 +3,7 @@ import os
 import psycopg2
 import psycopg2.extras
 from address import create_insert_addresses_sql
+from author import create_insert_authors_sql
 from city import create_insert_cities_sql
 from config import config
 from country import create_insert_countries_sql
@@ -21,7 +22,7 @@ create_address_table_sql = os.path.join(dirname, "../sql/address/create_address_
 create_language_table_sql = os.path.join(dirname, "../sql/language/create_language_table.sql")
 create_rental_rate_table_sql = os.path.join(dirname, "../sql/rental_rate/create_rental_rate_table.sql")
 create_genre_table_sql = os.path.join(dirname, "../sql/genre/create_genre_table.sql")
-# create_author_table_sql = os.path.join(dirname, "../sql/author/create_author_table.sql")
+create_author_table_sql = os.path.join(dirname, "../sql/author/create_author_table.sql")
 # create_book_table_sql = os.path.join(dirname, "../sql/book/create_book_table.sql")
 # create_book_author_table_sql = os.path.join(dirname, "../sql/book_author/create_book_author_table.sql")
 # create_library_table_sql = os.path.join(dirname, "../sql/library/create_library_table.sql")
@@ -42,7 +43,7 @@ insert_addresses_sql = os.path.join(dirname, "./insert_addresses.sql")
 insert_languages_sql = os.path.join(dirname, "./insert_languages.sql")
 insert_rental_rates_sql = os.path.join(dirname, "./insert_rental_rates.sql")
 insert_genres_sql = os.path.join(dirname, "./insert_genres.sql")
-# insert_author_sql = os.path.join(dirname, "../sql/author/insert_author.sql")
+insert_authors_sql = os.path.join(dirname, "./insert_authors.sql")
 # insert_book_sql = os.path.join(dirname, "../sql/book/insert_book.sql")
 # insert_book_author_sql = os.path.join(dirname, "../sql/book_author/insert_book_author.sql")
 # insert_library_sql = os.path.join(dirname, "../sql/library/insert_library.sql")
@@ -81,6 +82,7 @@ def seed_db():
     create_insert_languages_sql(config)
     create_insert_rental_rates_sql(config)
     create_insert_genres_sql(config)
+    create_insert_authors_sql(config)
 
     psycopg2.extras.register_uuid()
 
@@ -100,7 +102,7 @@ def seed_db():
     executeScriptsFromFile(create_language_table_sql, cursor)
     executeScriptsFromFile(create_rental_rate_table_sql, cursor)
     executeScriptsFromFile(create_genre_table_sql, cursor)
-    # executeScriptsFromFile(create_author_table_sql, cursor)
+    executeScriptsFromFile(create_author_table_sql, cursor)
     # executeScriptsFromFile(create_book_table_sql, cursor)
     # executeScriptsFromFile(create_book_author_table_sql, cursor)
     # executeScriptsFromFile(create_library_table_sql, cursor)
@@ -118,7 +120,7 @@ def seed_db():
     executeScriptsFromFile(insert_languages_sql, cursor)
     executeScriptsFromFile(insert_rental_rates_sql, cursor)
     executeScriptsFromFile(insert_genres_sql, cursor)
-    # executeScriptsFromFile(insert_author_sql, cursor)
+    executeScriptsFromFile(insert_authors_sql, cursor)
     # executeScriptsFromFile(insert_book_sql, cursor)
     # executeScriptsFromFile(insert_book_author_sql, cursor)
     # executeScriptsFromFile(insert_library_sql, cursor)
