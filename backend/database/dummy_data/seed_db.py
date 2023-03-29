@@ -2,6 +2,7 @@ import os
 
 import psycopg2
 import psycopg2.extras
+from address import create_insert_addresses_sql
 from city import create_insert_cities_sql
 from config import config
 from country import create_insert_countries_sql
@@ -14,7 +15,7 @@ from language import create_insert_languages_sql
 dirname = os.path.dirname(__file__)
 create_country_table_sql = os.path.join(dirname, "../sql/country/create_country_table.sql")
 create_city_table_sql = os.path.join(dirname, "../sql/city/create_city_table.sql")
-# create_address_table_sql = os.path.join(dirname, "../sql/address/create_address_table.sql")
+create_address_table_sql = os.path.join(dirname, "../sql/address/create_address_table.sql")
 create_language_table_sql = os.path.join(dirname, "../sql/language/create_language_table.sql")
 
 # create_rental_rate_table_sql = os.path.join(dirname, "../sql/rental_rate/create_rental_rate_table.sql")
@@ -36,7 +37,7 @@ create_language_table_sql = os.path.join(dirname, "../sql/language/create_langua
 
 insert_countries_sql = os.path.join(dirname, "./insert_countries.sql")
 insert_cities_sql = os.path.join(dirname, "./insert_cities.sql")
-# insert_address_sql = os.path.join(dirname, "../sql/address/insert_address.sql")
+insert_addresses_sql = os.path.join(dirname, "./insert_addresses.sql")
 insert_languages_sql = os.path.join(dirname, "./insert_languages.sql")
 # insert_rental_rate_sql = os.path.join(dirname, "../sql/rental_rate/insert_rental_rate.sql")
 # insert_genre_sql = os.path.join(dirname, "../sql/genre/insert_genre.sql")
@@ -73,6 +74,7 @@ def executeScriptsFromFile(filename, cursor):
 
 
 def seed_db():
+    create_insert_addresses_sql(config)
     create_insert_cities_sql(config)
     create_insert_countries_sql(config)
     create_insert_languages_sql(config)
@@ -91,7 +93,7 @@ def seed_db():
 
     executeScriptsFromFile(create_country_table_sql, cursor)
     executeScriptsFromFile(create_city_table_sql, cursor)
-    # executeScriptsFromFile(create_address_table_sql, cursor)
+    executeScriptsFromFile(create_address_table_sql, cursor)
     executeScriptsFromFile(create_language_table_sql, cursor)
     # executeScriptsFromFile(create_rental_rate_table_sql, cursor)
     # executeScriptsFromFile(create_genre_table_sql, cursor)
@@ -109,7 +111,7 @@ def seed_db():
 
     executeScriptsFromFile(insert_countries_sql, cursor)
     executeScriptsFromFile(insert_cities_sql, cursor)
-    # executeScriptsFromFile(insert_address_sql, cursor)
+    executeScriptsFromFile(insert_addresses_sql, cursor)
     executeScriptsFromFile(insert_languages_sql, cursor)
     # executeScriptsFromFile(insert_rental_rate_sql, cursor)
     # executeScriptsFromFile(insert_genre_sql, cursor)

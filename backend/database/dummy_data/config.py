@@ -59,7 +59,8 @@ USER_ACCOUNT=599
 BOOKWORM = USER_ACCOUNT - STAFF
 
 config = {
-  "CITIES": [{"uuid": uuid.uuid4()} for i in range(200)],
-  "COUNTRIES": [{"uuid": uuid.uuid4()} for i in range(50)],
-  "LANGUAGES": [{"uuid": uuid.uuid4(), "language": l} for l in ["EN", "NL", "ES", "FR"] ],
+  "ADDRESS": [{"uuid": uuid.uuid4()} for i in range(300)],
+  "CITY": [{"uuid": uuid.uuid4()} for i in range(200)],
+  "COUNTRY": [{"uuid": uuid.uuid4()} for i in range(50)],
+  "LANGUAGE": [{"uuid": uuid.uuid4(), "language": l} for l in ["EN", "NL", "ES", "FR"] ],
   }
