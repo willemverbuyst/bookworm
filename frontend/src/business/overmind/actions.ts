@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { Context } from ".";
-import { Review } from "../models/ReviewApi";
+import { Review } from "../models/Review";
 
 interface SignInCredentials {
   email: string;

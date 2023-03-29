@@ -39,7 +39,7 @@
     "zod": "^3.20.6"
   },
   "scripts": {
-    "architecture": "madge --extensions ts,tsx --image graph.svg src/",
+    "architecture": "madge --extensions ts,tsx --exclude \"^.*\\.(test\\.(ts|tsx)|css)$\" --image graph.svg src/",
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",

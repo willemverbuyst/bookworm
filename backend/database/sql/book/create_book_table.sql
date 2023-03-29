@@ -6,7 +6,7 @@ CREATE TABLE book (
   replacement_cost NUMERIC NOT NULL, 
   pages INT NOT NULL, 
   last_updated TIMESTAMP NOT NULL,
-  language_id INT NOT NULL,
+  language_id UUID NOT NULL,
   genre_id INT NOT NULL,
   rental_rate_id INT NOT NULL, 
   PRIMARY KEY (book_id)

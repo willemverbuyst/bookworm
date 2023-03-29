@@ -1,3 +1,5 @@
+import uuid
+
 ADDRESS=300
 AUTHOR=200
 BOOK=500
@@ -55,3 +57,12 @@ STAFF=2
 USER_ACCOUNT=599
 
 BOOKWORM = USER_ACCOUNT - STAFF
+
+config = {
+  "ADDRESS": [{"uuid": uuid.uuid4()} for i in range(300)],
+  "CITY": [{"uuid": uuid.uuid4()} for i in range(200)],
+  "COUNTRY": [{"uuid": uuid.uuid4()} for i in range(50)],
+  "GENRE":[{"uuid": uuid.uuid4(), "genre": g} for g in GENRES ],
+  "LANGUAGE": [{"uuid": uuid.uuid4(), "language": l} for l in LANGUAGES ],
+  "RENTAL_RATE":[{"uuid": uuid.uuid4(), "rate": i + 0.99} for i in range(5)]
+  }

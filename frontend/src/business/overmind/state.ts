@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { derived } from "overmind";
-import { State } from "./interfaces";
+import { State } from "../models/State";
 
 export const state: State = {
   auth: {

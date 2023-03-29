@@ -1,26 +1,24 @@
-import faker
-import csv
-import random
 import datetime
-import config
-from faker.providers import DynamicProvider
+import random
+
+import faker
 
 fake = faker.Faker()
 
-with open('city.csv', 'w', newline='') as file:
-    writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
-    header=[
-      "city_id", 
-      "city", 
-      "last_updated",
-      "country_id",
-    ]
-    
-    writer.writerow(header)
-    for i in range(config.CITY):
-      writer.writerow([
-        1 + i, 
-        fake.city(),
-        datetime.datetime.now(),
-        random.randint(1,config.COUNTRY)
-      ])
+
+def create_insert_cities_sql(config):
+    print("[INFO] Creating 'insert_cities.sql'")
+    with open('insert_cities.sql', 'w') as file:
+        insert_statements = ""
+        for i in config.get("CITY"):
+            city_id = i.get("uuid")
+            city = fake.city().replace("'", "''")
+            last_updated = datetime.datetime.now()
+            country = config.get("COUNTRY")[random.randint(0, len(config.get("COUNTRY")) - 1)]
+            country_id = country.get("uuid")
+      
+            sql = "INSERT INTO city (city_id,city,last_updated,country_id) " \
+                f"VALUES ('{city_id}'::UUID,'{city}','{last_updated}','{country_id}');\n"
+            insert_statements += sql
+
+        file.write(insert_statements)

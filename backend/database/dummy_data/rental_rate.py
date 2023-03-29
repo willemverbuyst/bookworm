@@ -1,20 +1,17 @@
-import csv
 import datetime
-import random
-import config
 
-with open('rental_rate.csv', 'w', newline='') as file:
-    writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
-    header=[
-      "rental_rate_id",
-      "rate",
-      "last_updated"
-    ]
-    
-    writer.writerow(header)
-    for i in range (config.RENTAL_RATE_MAX):
-      writer.writerow([
-        i + 1, 
-        i + 0.99,
-        datetime.datetime.now(),      
-      ])
+
+def create_insert_rental_rates_sql(config):
+    print("[INFO] Creating 'insert_rental_rates.sql'")
+    with open('insert_rental_rates.sql', 'w') as file:
+        insert_statements = ""
+        for i in config.get("RENTAL_RATE"):
+            rental_rate_id = i.get("uuid")
+            rate = i.get("rate")
+            last_updated = datetime.datetime.now() 
+      
+            sql = "INSERT INTO rental_rate (rental_rate_id,rate,last_updated) " \
+                f"VALUES ('{rental_rate_id}'::UUID,{rate},'{last_updated}');\n"
+            insert_statements += sql
+
+        file.write(insert_statements)

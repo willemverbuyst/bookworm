@@ -8,7 +8,7 @@ import {
 import { BookwormApi } from "../models/Bookworm";
 import { GenreApi } from "../models/Genre";
 import { LanguageApi } from "../models/Language";
-import { ReviewApi } from "../models/ReviewApi";
+import { ReviewApi } from "../models/Review";
 import { UserApi } from "../models/User";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";

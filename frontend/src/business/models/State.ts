@@ -1,11 +1,11 @@
-import { ApiResponse } from "../models/Api";
-import { Auth } from "../models/Auth";
+import { ApiResponse } from "./Api";
+import { Auth } from "./Auth";
 import {
   Author,
   AuthorApi,
   AuthorStatsPage,
   AuthorStatsPageApi,
-} from "../models/Author";
+} from "./Author";
 import {
   Book,
   BookApi,
@@ -13,11 +13,11 @@ import {
   BookStatsGenreApi,
   BookStatsLanguage,
   BookStatsLanguageApi,
-} from "../models/Book";
-import { Bookworm, BookwormApi } from "../models/Bookworm";
-import { Genre, GenreApi } from "../models/Genre";
-import { Language, LanguageApi } from "../models/Language";
-import { User, UserApi } from "../models/User";
+} from "./Book";
+import { Bookworm, BookwormApi } from "./Bookworm";
+import { Genre, GenreApi } from "./Genre";
+import { Language, LanguageApi } from "./Language";
+import { User, UserApi } from "./User";
 
 export interface State {
   auth: Auth;
