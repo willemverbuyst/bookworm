@@ -42,7 +42,7 @@ GENRES=[
   "Science & Technology"
 ]
 INVENTORY=3100
-# LANGUAGES=["EN", "NL", "ES", "FR"]
+LANGUAGES=["EN", "NL", "ES", "FR"]
 LIBRARY=2
 PAGES_MAX=800
 PAGES_MIN=50
@@ -62,6 +62,7 @@ config = {
   "ADDRESS": [{"uuid": uuid.uuid4()} for i in range(300)],
   "CITY": [{"uuid": uuid.uuid4()} for i in range(200)],
   "COUNTRY": [{"uuid": uuid.uuid4()} for i in range(50)],
-  "LANGUAGE": [{"uuid": uuid.uuid4(), "language": l} for l in ["EN", "NL", "ES", "FR"] ],
+  "GENRE":[{"uuid": uuid.uuid4(), "genre": g} for g in GENRES ],
+  "LANGUAGE": [{"uuid": uuid.uuid4(), "language": l} for l in LANGUAGES ],
   "RENTAL_RATE":[{"uuid": uuid.uuid4(), "rate": i + 0.99} for i in range(5)]
   }
