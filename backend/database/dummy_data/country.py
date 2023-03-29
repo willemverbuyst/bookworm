@@ -14,7 +14,7 @@ def create_insert_countries_sql(config):
             country = fake.country().replace("'", "''")
             last_updated = datetime.datetime.now() 
       
-            sql = "INSERT INTO country (country_id,country,last_updated)" \
+            sql = "INSERT INTO country (country_id,country,last_updated) " \
                 f"VALUES ('{country_id}'::UUID,'{country}','{last_updated}');\n"
             insert_statements += sql
 

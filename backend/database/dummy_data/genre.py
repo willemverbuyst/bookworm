@@ -10,7 +10,7 @@ def create_insert_genres_sql(config):
             genre = i.get("genre")
             last_updated = datetime.datetime.now() 
       
-            sql = "INSERT INTO genre (genre_id,genre,last_updated)" \
+            sql = "INSERT INTO genre (genre_id,genre,last_updated) " \
                 f"VALUES ('{genre_id}'::UUID,'{genre}','{last_updated}');\n"
             insert_statements += sql
 
