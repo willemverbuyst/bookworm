@@ -1,5 +1,4 @@
 import datetime
-import random
 
 
 def create_insert_languages_sql(config):

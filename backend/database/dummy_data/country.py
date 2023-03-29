@@ -1,7 +1,5 @@
-import csv
 import datetime
 
-import config
 import faker
 
 fake = faker.Faker()

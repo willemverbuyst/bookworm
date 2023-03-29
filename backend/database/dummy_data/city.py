@@ -1,8 +1,6 @@
-import csv
 import datetime
 import random
 
-import config
 import faker
 
 fake = faker.Faker()

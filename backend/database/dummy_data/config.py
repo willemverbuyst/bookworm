@@ -63,4 +63,5 @@ config = {
   "CITY": [{"uuid": uuid.uuid4()} for i in range(200)],
   "COUNTRY": [{"uuid": uuid.uuid4()} for i in range(50)],
   "LANGUAGE": [{"uuid": uuid.uuid4(), "language": l} for l in ["EN", "NL", "ES", "FR"] ],
+  "RENTAL_RATE":[{"uuid": uuid.uuid4(), "rate": i + 0.99} for i in range(5)]
   }
