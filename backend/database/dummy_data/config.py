@@ -109,4 +109,5 @@ config = {
   "RATING_MAX":5,
   "RENTAL_RATE":[{"uuid": uuid.uuid4(), "rate": i + 0.99} for i in range(5)],
   "REPLACEMENT_COST_MAX": 9,
+  "USER_ACCOUNT":[{"uuid": uuid.uuid4()} for i in range(599)],
   }

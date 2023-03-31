@@ -13,6 +13,7 @@ from genre import create_insert_genres_sql
 from language import create_insert_languages_sql
 from library import create_insert_libraries_sql
 from rental_rate import create_insert_rental_rates_sql
+from user_account import create_insert_user_accounts_sql
 
 # from helpers.sql_helpers import executeScriptsFromFile
 
@@ -29,7 +30,7 @@ create_author_table_sql = os.path.join(dirname, "../sql/author/create_author_tab
 create_book_table_sql = os.path.join(dirname, "../sql/book/create_book_table.sql")
 create_book_author_table_sql = os.path.join(dirname, "../sql/book_author/create_book_author_table.sql")
 create_library_table_sql = os.path.join(dirname, "../sql/library/create_library_table.sql")
-# create_user_account_table_sql = os.path.join(dirname, "../sql/user_account/create_user_account_table.sql")
+create_user_account_table_sql = os.path.join(dirname, "../sql/user_account/create_user_account_table.sql")
 # create_staff_table_sql = os.path.join(dirname, "../sql/staff/create_staff_table.sql")
 # create_bookworm_table_sql = os.path.join(dirname, "../sql/bookworm/create_bookworm_table.sql")
 # create_inventory_table_sql = os.path.join(dirname, "../sql/inventory/create_inventory_table.sql")
@@ -50,7 +51,7 @@ insert_authors_sql = os.path.join(dirname, "./insert_authors.sql")
 insert_books_sql = os.path.join(dirname, "./insert_books.sql")
 insert_book_author_sql = os.path.join(dirname, "./insert_book_author.sql")
 insert_libraries_sql = os.path.join(dirname, "./insert_libraries.sql")
-# insert_user_account_sql = os.path.join(dirname, "../sql/user_account/insert_user_account.sql")
+insert_user_accounts_sql = os.path.join(dirname, "./insert_user_accounts.sql")
 # insert_staff_sql = os.path.join(dirname, "../sql/staff/insert_staff.sql")
 # insert_bookworm_sql = os.path.join(dirname, "../sql/bookworm/insert_bookworm.sql")
 # insert_inventory_sql = os.path.join(dirname, "../sql/inventory/insert_inventory.sql")
@@ -89,6 +90,7 @@ def seed_db():
     create_insert_books_sql(config)
     create_insert_book_author_sql(config)
     create_insert_libraries_sql(config)
+    create_insert_user_accounts_sql(config)
 
     psycopg2.extras.register_uuid()
 
@@ -112,7 +114,7 @@ def seed_db():
     executeScriptsFromFile(create_book_table_sql, cursor)
     executeScriptsFromFile(create_book_author_table_sql, cursor)
     executeScriptsFromFile(create_library_table_sql, cursor)
-    # executeScriptsFromFile(create_user_account_table_sql, cursor)
+    executeScriptsFromFile(create_user_account_table_sql, cursor)
     # executeScriptsFromFile(create_staff_table_sql, cursor)
     # executeScriptsFromFile(create_bookworm_table_sql, cursor)
     # executeScriptsFromFile(create_inventory_table_sql, cursor)
@@ -130,7 +132,7 @@ def seed_db():
     executeScriptsFromFile(insert_books_sql, cursor)
     executeScriptsFromFile(insert_book_author_sql, cursor)
     executeScriptsFromFile(insert_libraries_sql, cursor)
-    # executeScriptsFromFile(insert_user_account_sql, cursor)
+    executeScriptsFromFile(insert_user_accounts_sql, cursor)
     # executeScriptsFromFile(insert_staff_sql, cursor)
     # executeScriptsFromFile(insert_bookworm_sql, cursor)
     # executeScriptsFromFile(insert_inventory_sql, cursor)
