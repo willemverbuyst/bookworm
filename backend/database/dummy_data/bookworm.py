@@ -1,23 +1,23 @@
-import csv
 import datetime
 import random
 
-import config
+import faker
 
-with open('bookworm.csv', 'w', newline='') as file:
-    writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
-    header=[
-      "bookworm_id",
-      "last_updated",
-      "user_account_id",
-      "library_id"
-    ]
-    
-    writer.writerow(header)
-    for i in range (config.BOOKWORM):
-      writer.writerow([
-        i + 1, 
-        datetime.datetime.now(),      
-        config.STAFF + i + 1,
-        random.randint(1,config.LIBRARY)
-      ])
+fake = faker.Faker()
+
+
+def create_insert_bookworms_sql(config):
+    print("[INFO] Creating 'insert_bookworms.sql'")
+    with open('insert_bookworms.sql', 'w') as file:
+        insert_statements = ""
+        for i, bookworm in enumerate(config.get("BOOKWORM")):
+            bookworm_id = bookworm.get("uuid")
+            last_updated = datetime.datetime.now()
+            user_account_id = (config.get("USER_ACCOUNT")[i + 2]).get("uuid")
+            library_id = (config.get("LIBRARY")[random.randint(0,len(config.get("LIBRARY")) - 1)]).get("uuid")
+      
+            sql = "INSERT INTO bookworm (bookworm_id,last_updated,user_account_id,library_id) " \
+                f"VALUES ('{bookworm_id}'::UUID,'{last_updated}','{user_account_id}'::UUID,'{library_id}'::UUID);\n"
+            insert_statements += sql
+
+        file.write(insert_statements)

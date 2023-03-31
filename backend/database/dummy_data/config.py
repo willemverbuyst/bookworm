@@ -61,6 +61,7 @@ config = {
   "AUTHOR": [{"uuid": uuid.uuid4()} for i in range(200)],
   "BOOK": [{"uuid": uuid.uuid4() } for i in range(500)],
   "BOOK_AUTHOR": [{"uuid": uuid.uuid4() } for i in range(500)],
+  "BOOKWORM": [{"uuid": uuid.uuid4() } for i in range(599 - 2)],
   "CITY": [{"uuid": uuid.uuid4()} for i in range(200)],
   "COUNTRY": [{"uuid": uuid.uuid4()} for i in range(50)],
   "GENRE":[{"uuid": uuid.uuid4(), "genre": g} for g in GENRES ],
