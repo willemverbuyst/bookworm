@@ -14,6 +14,7 @@ from inventory import create_insert_inventory_sql
 from language import create_insert_languages_sql
 from library import create_insert_libraries_sql
 from rental_rate import create_insert_rental_rates_sql
+from review import create_insert_reviews_sql
 from staff import create_insert_staff_sql
 from user_account import create_insert_user_accounts_sql
 
@@ -38,7 +39,7 @@ create_user_account_table_sql = os.path.join(dirname, "../sql/user_account/creat
 create_staff_table_sql = os.path.join(dirname, "../sql/staff/create_staff_table.sql")
 create_bookworm_table_sql = os.path.join(dirname, "../sql/bookworm/create_bookworm_table.sql")
 create_inventory_table_sql = os.path.join(dirname, "../sql/inventory/create_inventory_table.sql")
-# create_review_table_sql = os.path.join(dirname, "../sql/review/create_review_table.sql")
+create_review_table_sql = os.path.join(dirname, "../sql/review/create_review_table.sql")
 # create_rental_table_sql = os.path.join(dirname, "../sql/rental/create_rental_table.sql")
 # create_payment_table_sql = os.path.join(dirname, "../sql/payment/create_payment_table.sql")
 
@@ -59,7 +60,7 @@ insert_user_accounts_sql = os.path.join(dirname, "./insert_user_accounts.sql")
 insert_staff_sql = os.path.join(dirname, "./insert_staff.sql")
 insert_bookworms_sql = os.path.join(dirname, "./insert_bookworms.sql")
 insert_inventory_sql = os.path.join(dirname, "./insert_inventory.sql")
-# insert_review_sql = os.path.join(dirname, "../sql/review/insert_review.sql")
+insert_reviews_sql = os.path.join(dirname, "./insert_reviews.sql")
 # insert_rental_sql = os.path.join(dirname, "../sql/rental/insert_rental.sql")
 # insert_payment_sql = os.path.join(dirname, "../sql/payment/insert_payment.sql")
 
@@ -98,6 +99,7 @@ def seed_db():
     create_insert_staff_sql(config)
     create_insert_bookworms_sql(config)
     create_insert_inventory_sql(config)
+    create_insert_reviews_sql(config)
 
     psycopg2.extras.register_uuid()
 
@@ -125,7 +127,7 @@ def seed_db():
     executeScriptsFromFile(create_staff_table_sql, cursor)
     executeScriptsFromFile(create_bookworm_table_sql, cursor)
     executeScriptsFromFile(create_inventory_table_sql, cursor)
-    # executeScriptsFromFile(create_review_table_sql, cursor)
+    executeScriptsFromFile(create_review_table_sql, cursor)
     # executeScriptsFromFile(create_rental_table_sql, cursor)
     # executeScriptsFromFile(create_payment_table_sql, cursor)
 
@@ -143,7 +145,7 @@ def seed_db():
     executeScriptsFromFile(insert_staff_sql, cursor)
     executeScriptsFromFile(insert_bookworms_sql, cursor)
     executeScriptsFromFile(insert_inventory_sql, cursor)
-    # executeScriptsFromFile(insert_review_sql, cursor)
+    executeScriptsFromFile(insert_reviews_sql, cursor)
     # executeScriptsFromFile(insert_rental_sql, cursor)
     # executeScriptsFromFile(insert_payment_sql, cursor)
 
