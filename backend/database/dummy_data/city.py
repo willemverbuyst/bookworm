@@ -18,7 +18,7 @@ def create_insert_cities_sql(config):
             country_id = country.get("uuid")
       
             sql = "INSERT INTO city (city_id,city,last_updated,country_id) " \
-                f"VALUES ('{city_id}'::UUID,'{city}','{last_updated}','{country_id}');\n"
+                f"VALUES ('{city_id}'::UUID,'{city}','{last_updated}','{country_id}'::UUID);\n"
             insert_statements += sql
 
         file.write(insert_statements)

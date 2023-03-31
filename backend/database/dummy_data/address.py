@@ -20,7 +20,7 @@ def create_insert_addresses_sql(config):
             city_id = city.get("uuid")
       
             sql = "INSERT INTO address (address_id,address,postal_code,phone,last_updated,city_id) " \
-                f"VALUES ('{address_id}'::UUID,'{address}','{postal_code}','{phone}','{last_updated}','{city_id}');\n"
+                f"VALUES ('{address_id}'::UUID,'{address}','{postal_code}','{phone}','{last_updated}','{city_id}'::UUID);\n"
             insert_statements += sql
 
         file.write(insert_statements)

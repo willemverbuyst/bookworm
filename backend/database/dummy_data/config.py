@@ -102,6 +102,7 @@ config = {
   ],
   "LANGUAGE": [{"uuid": uuid.uuid4(), "language": l} for l in LANGUAGES ],
   "LANGUAGES": ["EN", "NL", "ES", "FR"],
+  "LIBRARY": [{"uuid": uuid.uuid4()} for i in range(2)],
   "PAGES_MAX":800,
   "PAGES_MIN":50,
   "RATING_MIN":0,
