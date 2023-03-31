@@ -10,6 +10,7 @@ from city import create_insert_cities_sql
 from config import config
 from country import create_insert_countries_sql
 from genre import create_insert_genres_sql
+from inventory import create_insert_inventory_sql
 from language import create_insert_languages_sql
 from library import create_insert_libraries_sql
 from rental_rate import create_insert_rental_rates_sql
@@ -36,7 +37,7 @@ create_library_table_sql = os.path.join(dirname, "../sql/library/create_library_
 create_user_account_table_sql = os.path.join(dirname, "../sql/user_account/create_user_account_table.sql")
 create_staff_table_sql = os.path.join(dirname, "../sql/staff/create_staff_table.sql")
 create_bookworm_table_sql = os.path.join(dirname, "../sql/bookworm/create_bookworm_table.sql")
-# create_inventory_table_sql = os.path.join(dirname, "../sql/inventory/create_inventory_table.sql")
+create_inventory_table_sql = os.path.join(dirname, "../sql/inventory/create_inventory_table.sql")
 # create_review_table_sql = os.path.join(dirname, "../sql/review/create_review_table.sql")
 # create_rental_table_sql = os.path.join(dirname, "../sql/rental/create_rental_table.sql")
 # create_payment_table_sql = os.path.join(dirname, "../sql/payment/create_payment_table.sql")
@@ -57,7 +58,7 @@ insert_libraries_sql = os.path.join(dirname, "./insert_libraries.sql")
 insert_user_accounts_sql = os.path.join(dirname, "./insert_user_accounts.sql")
 insert_staff_sql = os.path.join(dirname, "./insert_staff.sql")
 insert_bookworms_sql = os.path.join(dirname, "./insert_bookworms.sql")
-# insert_inventory_sql = os.path.join(dirname, "../sql/inventory/insert_inventory.sql")
+insert_inventory_sql = os.path.join(dirname, "./insert_inventory.sql")
 # insert_review_sql = os.path.join(dirname, "../sql/review/insert_review.sql")
 # insert_rental_sql = os.path.join(dirname, "../sql/rental/insert_rental.sql")
 # insert_payment_sql = os.path.join(dirname, "../sql/payment/insert_payment.sql")
@@ -96,6 +97,7 @@ def seed_db():
     create_insert_user_accounts_sql(config)
     create_insert_staff_sql(config)
     create_insert_bookworms_sql(config)
+    create_insert_inventory_sql(config)
 
     psycopg2.extras.register_uuid()
 
@@ -122,7 +124,7 @@ def seed_db():
     executeScriptsFromFile(create_user_account_table_sql, cursor)
     executeScriptsFromFile(create_staff_table_sql, cursor)
     executeScriptsFromFile(create_bookworm_table_sql, cursor)
-    # executeScriptsFromFile(create_inventory_table_sql, cursor)
+    executeScriptsFromFile(create_inventory_table_sql, cursor)
     # executeScriptsFromFile(create_review_table_sql, cursor)
     # executeScriptsFromFile(create_rental_table_sql, cursor)
     # executeScriptsFromFile(create_payment_table_sql, cursor)
@@ -140,7 +142,7 @@ def seed_db():
     executeScriptsFromFile(insert_user_accounts_sql, cursor)
     executeScriptsFromFile(insert_staff_sql, cursor)
     executeScriptsFromFile(insert_bookworms_sql, cursor)
-    # executeScriptsFromFile(insert_inventory_sql, cursor)
+    executeScriptsFromFile(insert_inventory_sql, cursor)
     # executeScriptsFromFile(insert_review_sql, cursor)
     # executeScriptsFromFile(insert_rental_sql, cursor)
     # executeScriptsFromFile(insert_payment_sql, cursor)

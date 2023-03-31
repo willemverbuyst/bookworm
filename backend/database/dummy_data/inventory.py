@@ -1,23 +1,21 @@
-import csv
 import datetime
 import random
-import config
 
 
-with open('inventory.csv', 'w', newline='') as file:
-    writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
-    header=[
-      "inventory_id",
-      "last_updated",
-      "book_id",
-      "library_id"
-    ]
-    
-    writer.writerow(header)
-    for i in range (config.INVENTORY):
-      writer.writerow([
-        i + 1, 
-        datetime.datetime.now(), 
-        config.BOOK,
-        random.randint(1, config.LIBRARY)
-      ])
+def create_insert_inventory_sql(config):
+    print("[INFO] Creating 'insert_inventory.sql'")
+    with open('insert_inventory.sql', 'w') as file:
+        insert_statements = ""
+        for i in config.get("INVENTORY"):
+            inventory_id = i.get("uuid")
+            last_updated = datetime.datetime.now() 
+            book_id = (config.get("BOOK")[random.randint(0,len(config.get("BOOK")) - 1)]).get("uuid")
+            library_id = (config.get("LIBRARY")[random.randint(0,len(config.get("LIBRARY")) - 1)]).get("uuid")
+      
+            sql = "INSERT INTO inventory (inventory_id,last_updated,book_id,library_id) " \
+                f"VALUES ('{inventory_id}'::UUID,'{last_updated}','{book_id}'::UUID,'{library_id}'::UUID);\n"
+            insert_statements += sql
+
+        file.write(insert_statements)
+
+
