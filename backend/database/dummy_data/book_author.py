@@ -1,22 +1,20 @@
-import csv
 import datetime
 import random
-import config
 
-with open('book_author.csv', 'w', newline='') as file:
-    writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
-    header=[
-      "book_author_id",
-      "last_updated",
-      "book_id",
-      "author_id"
-    ]
-    
-    writer.writerow(header)
-    for i in range (config.BOOK):
-      writer.writerow([
-        i + 1, 
-        datetime.datetime.now(), 
-        i + 1,
-        random.randint(1, config.AUTHOR)
-      ])
+
+def create_insert_book_author_sql(config):
+    print("[INFO] Creating 'insert_book_author.sql'")
+    with open('insert_book_author.sql', 'w') as file:
+        insert_statements = ""
+        for i in config.get("BOOK_AUTHOR"):
+            book_author_id = i.get("uuid")
+            last_updated = datetime.datetime.now() 
+            book_id = (config.get("BOOK")[random.randint(0,len(config.get("BOOK")) - 1)]).get("uuid")
+            author_id = (config.get("AUTHOR")[random.randint(0,len(config.get("AUTHOR")) - 1)]).get("uuid")
+
+      
+            sql = "INSERT INTO book_author (book_author_id,last_updated,book_id,author_id) " \
+                f"VALUES ('{book_author_id}'::UUID,'{last_updated}','{book_id}'::UUID,'{author_id}'::UUID);\n"
+            insert_statements += sql
+
+        file.write(insert_statements)
