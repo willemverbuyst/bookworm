@@ -9,7 +9,7 @@ author_router = APIRouter()
 
 
 @author_router.get("/authors/", tags=["authors"])
-def get_all_authors(limit = None, page = 1) -> dict:
+def get_authors(limit = None, page = 1) -> dict:
     try:
         authors = get_authors_from_db(limit, page)
         result = len(authors)

@@ -9,7 +9,7 @@ book_router = APIRouter()
 
 
 @book_router.get("/books/", tags=["books"])
-def get_all_books(genre = None, language = None, limit = None, page = 1) -> dict:
+def get_books(genre = None, language = None, limit = None, page = 1) -> dict:
 
     try:
         books = get_books_from_db(genre, language, limit, page)
