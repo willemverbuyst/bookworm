@@ -3,7 +3,6 @@ import os
 import psycopg2
 from database.python.helpers.format_data import (format_authors,
                                                  format_stats_pages)
-from database.python.helpers.sql_helpers import executeScriptsFromFile
 
 dirname = os.path.dirname(__file__)
 select_authors_sql = os.path.join(dirname, "../../sql/author/select_authors.sql")
@@ -57,9 +56,12 @@ def get_author_stats_page_from_db():
         port=DATABASE_PORT,
     )
 
-    cursor = conn.cursor()
+    sql_file = open(select_author_stats_page_sql, 'r')
+    raw_sql = sql_file.read()
+    sql_file.close()
 
-    executeScriptsFromFile(select_author_stats_page_sql, cursor)
+    cursor = conn.cursor()
+    cursor.execute(raw_sql)
 
     data = cursor.fetchall()
     conn.close()
@@ -78,15 +80,17 @@ def get_author_stats_avg_pages_from_db():
         port=DATABASE_PORT,
     )
 
-    cursor = conn.cursor()
+    sql_file = open(select_author_stats_avg_pages_sql, 'r')
+    raw_sql = sql_file.read()
+    sql_file.close()
 
-    executeScriptsFromFile(select_author_stats_avg_pages_sql, cursor)
+    cursor = conn.cursor()
+    cursor.execute(raw_sql)
 
     result = cursor.fetchone()
     conn.close()
 
     return result[0]
-
 
 
 def get_total_number_of_authors():

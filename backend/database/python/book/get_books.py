@@ -83,7 +83,7 @@ def get_book_stats_language_from_db():
     sql_file.close()
 
     cursor = conn.cursor()
-    cursor.execute(raw_sql, cursor)
+    cursor.execute(raw_sql)
 
     data = cursor.fetchall()
     conn.close()
@@ -107,7 +107,7 @@ def get_book_stats_genre_from_db():
     sql_file.close()
 
     cursor = conn.cursor()
-    cursor.execute(raw_sql, cursor)
+    cursor.execute(raw_sql)
 
     data = cursor.fetchall()
     conn.close()
