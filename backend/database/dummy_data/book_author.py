@@ -5,10 +5,10 @@ import random
 def create_dummy_book_author_sql(config):
     print("[INFO] Create dummy data for book_author table")
     insert_statements = ""
-    for i in config.get("BOOK_AUTHOR"):
-        book_author_id = i.get("uuid")
+    for i, book in enumerate(config.get("BOOK")):
+        book_author_id = (config.get("BOOK_AUTHOR")[i]).get("uuid")
         last_updated = datetime.datetime.now() 
-        book_id = (config.get("BOOK")[random.randint(0,len(config.get("BOOK")) - 1)]).get("uuid")
+        book_id = (config.get("BOOK")[i]).get("uuid")
         author_id = (config.get("AUTHOR")[random.randint(0,len(config.get("AUTHOR")) - 1)]).get("uuid")
 
         sql = "INSERT INTO book_author (book_author_id,last_updated,book_id,author_id) " \
