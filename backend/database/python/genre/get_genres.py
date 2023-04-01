@@ -4,7 +4,7 @@ import psycopg2
 from database.python.helpers.format_data import format_genres
 
 dirname = os.path.dirname(__file__)
-select_all_genres_sql = os.path.join(dirname, "../../sql/genre/select_all_genres.sql")
+select_genres_sql = os.path.join(dirname, "../../sql/genre/select_genres.sql")
 
 DATABASE = os.environ.get("DATABASE")
 DATABASE_USER = os.environ.get("DATABASE_USER")
@@ -22,7 +22,7 @@ def get_genres_from_db():
         port=DATABASE_PORT,
     )
 
-    sql_file = open(select_all_genres_sql, 'r')
+    sql_file = open(select_genres_sql, 'r')
     raw_sql = sql_file.read()
     sql_file.close()
 
