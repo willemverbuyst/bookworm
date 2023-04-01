@@ -3,7 +3,7 @@ import random
 
 
 def create_dummy_book_author_sql(config):
-    print("[INFO] Creating dummy data for book_author table")
+    print("[INFO] Create dummy data for book_author table")
     insert_statements = ""
     for i in config.get("BOOK_AUTHOR"):
         book_author_id = i.get("uuid")

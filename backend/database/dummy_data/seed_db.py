@@ -2,71 +2,12 @@ import os
 
 import psycopg2
 import psycopg2.extras
-from address import create_dummy_addresses_sql
-from author import create_dummy_authors_sql
-from book import create_dummy_books_sql
-from book_author import create_dummy_book_author_sql
-from city import create_dummy_cities_sql
 from config import config
-from country import create_dummy_countries_sql
+from create_dummy_data import create_dummy_data
 from create_sql_insert_files import create_sql_insert_files
-from create_tables import create_tables
-from genre import create_dummy_genres_sql
-from inventory import create_dummy_inventory_sql
-from language import create_dummy_languages_sql
-from library import create_dummy_libraries_sql
-from payment import create_dummy_payments_sql
-from rental import create_dummy_rentals_sql
-from rental_rate import create_dummy_rental_rates_sql
-from review import create_dummy_reviews_sql
-from staff import create_dummy_staff_sql
-from user_account import create_dummy_user_accounts_sql
-
-from bookworm import create_dummy_bookworms_sql
-
-# from helpers.sql_helpers import executeScriptsFromFile
-
-# from language import create_insert_languages_sql
+from create_sql_tables import create_sql_tables
 
 dirname = os.path.dirname(__file__)
-# create_country_table_sql = os.path.join(dirname, "../sql/country/create_country_table.sql")
-# create_city_table_sql = os.path.join(dirname, "../sql/city/create_city_table.sql")
-# create_address_table_sql = os.path.join(dirname, "../sql/address/create_address_table.sql")
-# create_language_table_sql = os.path.join(dirname, "../sql/language/create_language_table.sql")
-# create_rental_rate_table_sql = os.path.join(dirname, "../sql/rental_rate/create_rental_rate_table.sql")
-# create_genre_table_sql = os.path.join(dirname, "../sql/genre/create_genre_table.sql")
-# create_author_table_sql = os.path.join(dirname, "../sql/author/create_author_table.sql")
-# create_book_table_sql = os.path.join(dirname, "../sql/book/create_book_table.sql")
-# create_book_author_table_sql = os.path.join(dirname, "../sql/book_author/create_book_author_table.sql")
-# create_library_table_sql = os.path.join(dirname, "../sql/library/create_library_table.sql")
-# create_user_account_table_sql = os.path.join(dirname, "../sql/user_account/create_user_account_table.sql")
-# create_staff_table_sql = os.path.join(dirname, "../sql/staff/create_staff_table.sql")
-# create_bookworm_table_sql = os.path.join(dirname, "../sql/bookworm/create_bookworm_table.sql")
-# create_inventory_table_sql = os.path.join(dirname, "../sql/inventory/create_inventory_table.sql")
-# create_review_table_sql = os.path.join(dirname, "../sql/review/create_review_table.sql")
-# create_rental_table_sql = os.path.join(dirname, "../sql/rental/create_rental_table.sql")
-# create_payment_table_sql = os.path.join(dirname, "../sql/payment/create_payment_table.sql")
-
-
-
-
-insert_countries_sql = os.path.join(dirname, "./insert_countries.sql")
-insert_cities_sql = os.path.join(dirname, "./insert_cities.sql")
-insert_addresses_sql = os.path.join(dirname, "./insert_addresses.sql")
-insert_languages_sql = os.path.join(dirname, "./insert_languages.sql")
-insert_rental_rates_sql = os.path.join(dirname, "./insert_rental_rates.sql")
-insert_genres_sql = os.path.join(dirname, "./insert_genres.sql")
-insert_authors_sql = os.path.join(dirname, "./insert_authors.sql")
-insert_books_sql = os.path.join(dirname, "./insert_books.sql")
-insert_book_author_sql = os.path.join(dirname, "./insert_book_author.sql")
-insert_libraries_sql = os.path.join(dirname, "./insert_libraries.sql")
-insert_user_accounts_sql = os.path.join(dirname, "./insert_user_accounts.sql")
-insert_staff_sql = os.path.join(dirname, "./insert_staff.sql")
-insert_bookworms_sql = os.path.join(dirname, "./insert_bookworms.sql")
-insert_inventory_sql = os.path.join(dirname, "./insert_inventory.sql")
-insert_reviews_sql = os.path.join(dirname, "./insert_reviews.sql")
-insert_rentals_sql = os.path.join(dirname, "./insert_rentals.sql")
-insert_payments_sql = os.path.join(dirname, "./insert_payments.sql")
 
 DATABASE = os.environ.get("DATABASE")
 DATABASE_USER = os.environ.get("DATABASE_USER")
@@ -75,41 +16,7 @@ DATABASE_HOST = os.environ.get("DATABASE_HOST")
 DATABASE_PORT = os.environ.get("DATABASE_PORT")
 
 
-def executeScriptsFromFile(filename, cursor):
-    with open(filename, "r") as sqlFile:
-        content = sqlFile.read()
-        commands = content.split(";")
-
-        for command in commands:
-            try:
-                if c := command.replace("\n", "").replace("\t", ""): 
-                    cursor.execute(c)
-            except psycopg2.OperationalError as e:
-                print("Command skipped: ", e)
-
-
 def seed_db():
-    dummy_addresses = create_dummy_addresses_sql(config)
-    create_sql_insert_files(dummy_addresses)
-
-    create_dummy_cities_sql(config)
-    create_dummy_countries_sql(config)
-    create_dummy_languages_sql(config)
-    create_dummy_rental_rates_sql(config)
-    create_dummy_genres_sql(config)
-    create_dummy_authors_sql(config)
-    create_dummy_books_sql(config)
-    create_dummy_book_author_sql(config)
-    create_dummy_libraries_sql(config)
-    create_dummy_user_accounts_sql(config)
-    create_dummy_staff_sql(config)
-    create_dummy_bookworms_sql(config)
-    create_dummy_inventory_sql(config)
-    create_dummy_reviews_sql(config)
-    create_dummy_rentals_sql(config)
-    create_dummy_payments_sql(config)
-
-
 
     psycopg2.extras.register_uuid()
 
@@ -123,25 +30,28 @@ def seed_db():
 
     cursor = conn.cursor()
 
-    create_tables(cursor)
+    create_sql_tables(cursor)
 
-    executeScriptsFromFile(insert_countries_sql, cursor)
-    executeScriptsFromFile(insert_cities_sql, cursor)
-    executeScriptsFromFile(insert_addresses_sql, cursor)
-    executeScriptsFromFile(insert_languages_sql, cursor)
-    executeScriptsFromFile(insert_rental_rates_sql, cursor)
-    executeScriptsFromFile(insert_genres_sql, cursor)
-    executeScriptsFromFile(insert_authors_sql, cursor)
-    executeScriptsFromFile(insert_books_sql, cursor)
-    executeScriptsFromFile(insert_book_author_sql, cursor)
-    executeScriptsFromFile(insert_libraries_sql, cursor)
-    executeScriptsFromFile(insert_user_accounts_sql, cursor)
-    executeScriptsFromFile(insert_staff_sql, cursor)
-    executeScriptsFromFile(insert_bookworms_sql, cursor)
-    executeScriptsFromFile(insert_inventory_sql, cursor)
-    executeScriptsFromFile(insert_reviews_sql, cursor)
-    executeScriptsFromFile(insert_rentals_sql, cursor)
-    executeScriptsFromFile(insert_payments_sql, cursor)
+    dummy_data = create_dummy_data(config)
+
+    print("[INFO] Insert dummy data into DB")
+    cursor.execute(dummy_data.get("country"))
+    cursor.execute(dummy_data.get("city"))
+    cursor.execute(dummy_data.get("address"))
+    cursor.execute(dummy_data.get("language"))
+    cursor.execute(dummy_data.get("rental_rate"))
+    cursor.execute(dummy_data.get("genre"))
+    cursor.execute(dummy_data.get("author"))
+    cursor.execute(dummy_data.get("book"))
+    cursor.execute(dummy_data.get("book_author"))
+    cursor.execute(dummy_data.get("library"))
+    cursor.execute(dummy_data.get("user_account"))
+    cursor.execute(dummy_data.get("staff"))
+    cursor.execute(dummy_data.get("bookworm"))
+    cursor.execute(dummy_data.get("inventory"))
+    cursor.execute(dummy_data.get("review"))
+    cursor.execute(dummy_data.get("rental"))
+    cursor.execute(dummy_data.get("payment"))
 
     conn.commit()
     conn.close()

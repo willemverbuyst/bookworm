@@ -36,8 +36,8 @@ def executeScriptsFromFile(filename, cursor):
                 print("Command skipped: ", e)
 
 
-def create_tables(cursor):
-    print("[INFO] Creating tables")
+def create_sql_tables(cursor):
+    print("[INFO] Create tables for DB")
     executeScriptsFromFile(create_country_table_sql, cursor)
     executeScriptsFromFile(create_city_table_sql, cursor)
     executeScriptsFromFile(create_address_table_sql, cursor)

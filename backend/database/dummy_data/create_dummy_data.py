@@ -6,7 +6,6 @@ from book import create_dummy_books_sql
 from book_author import create_dummy_book_author_sql
 from city import create_dummy_cities_sql
 from country import create_dummy_countries_sql
-from create_tables import create_tables
 from genre import create_dummy_genres_sql
 from inventory import create_dummy_inventory_sql
 from language import create_dummy_languages_sql
