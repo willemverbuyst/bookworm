@@ -8,5 +8,5 @@
 **/*.env
 !**/*.example.env
 
-**/insert_*.sql
+**/dummy_data_*.sql
 **/dev.sql
