@@ -6,11 +6,10 @@ from database.python.helpers.format_data import (format_authors,
 from database.python.helpers.sql_helpers import executeScriptsFromFile
 
 dirname = os.path.dirname(__file__)
-select_all_authors_sql = os.path.join(
-    dirname, "../../sql/author/select_all_authors.sql"
-)
+select_authors_sql = os.path.join(dirname, "../../sql/author/select_authors.sql")
 select_author_stats_avg_pages_sql = os.path.join(dirname, "../../sql/author/select_author_stats_avg_pages.sql")
 select_author_stats_page_sql = os.path.join(dirname, "../../sql/author/select_author_stats_page.sql")
+select_count_author_sql = os.path.join(dirname, "../../sql/author/select_count_authors.sql")
 
 
 DATABASE = os.environ.get("DATABASE")
@@ -29,31 +28,17 @@ def get_authors_from_db(limit, page):
         port=DATABASE_PORT,
     )
 
-    cursor = conn.cursor()
-
     if limit:
         offset = int(limit) * (int(page) - 1)
     else:
         offset = 0
 
-    cursor.execute("""
-        SELECT 
-            author.author_id, 
-            author.first_name, 
-            author.last_name, 
-            COUNT(book.title) AS books_written 
-        FROM author 
-        FULL OUTER JOIN book_author 
-        ON author.author_id = book_author.author_id 
-        FULL OUTER JOIN book 
-        ON book_author.book_id = book.book_id 
-        GROUP BY author.author_id, author.first_name, author.last_name 
-        ORDER BY author.author_id 
-        LIMIT %s 
-        OFFSET %s;
-        """,
-        (limit, offset)
-    )
+    sql_file = open(select_authors_sql, 'r')
+    raw_sql = sql_file.read()
+    sql_file.close()
+
+    cursor = conn.cursor()
+    cursor.execute(raw_sql,(limit, offset))
 
     data = cursor.fetchall()
     conn.close()
@@ -113,13 +98,12 @@ def get_total_number_of_authors():
         port=DATABASE_PORT,
     )
 
+    sql_file = open(select_count_author_sql, 'r')
+    raw_sql = sql_file.read()
+    sql_file.close()
+
     cursor = conn.cursor()
-    cursor.execute("""
-        SELECT 
-        COUNT(*) AS number_of_authors 
-        FROM author;
-        """
-    )
+    cursor.execute(raw_sql)
 
     result = cursor.fetchone()
     conn.close()
