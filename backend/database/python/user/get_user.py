@@ -3,6 +3,10 @@ import os
 import psycopg2
 from database.python.helpers.format_data import format_user
 
+dirname = os.path.dirname(__file__)
+select_user_sql = os.path.join(dirname, "../../sql/user/select_user.sql")
+select_user_by_email_sql = os.path.join(dirname, "../../sql/user/select_user_by_email.sql")
+
 DATABASE = os.environ.get("DATABASE")
 DATABASE_USER = os.environ.get("DATABASE_USER")
 DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
@@ -19,44 +23,12 @@ def get_user_from_db(email, password):
         port=DATABASE_PORT,
     )
 
-    cursor = conn.cursor()
+    sql_file = open(select_user_sql, 'r')
+    raw_sql = sql_file.read()
+    sql_file.close()
 
-    cursor.execute("""
-        SELECT 
-            user_account.user_account_id,
-            user_account.first_name,
-            user_account.last_name,
-            TO_CHAR(user_account.birth_date, 'DD/MM/YYYY'), 
-            city_place_of_birth.city AS place_of_birth,
-            user_account.email, 
-            address.phone, 
-            address.address, 
-            address.postal_code, 
-            city_city.city,
-            country.country,
-            library.library_name
-        FROM user_account
-        FULL OUTER JOIN address
-        ON user_account.address_id = address.address_id
-        FULL OUTER JOIN city AS city_city
-        ON city_city.city_id = address.city_id
-        FULL OUTER JOIN city AS city_place_of_birth
-        ON city_place_of_birth.city_id = user_account.place_of_birth
-        FULL OUTER JOIN country
-        ON city_place_of_birth.country_id = country.country_id 
-        FULL OUTER JOIN bookworm 
-        ON bookworm.user_account_id = user_account.user_account_id 
-        FULL OUTER JOIN library
-        ON bookworm.library_id = library.library_id
-        WHERE user_account.activebool is True
-        AND user_account.email=%s 
-        AND user_account.password=%s;
-        """,
-        (
-            email,
-            password,
-        ),
-    )
+    cursor = conn.cursor()
+    cursor.execute(raw_sql, (email, password))
 
     data = cursor.fetchone()
     conn.close()
@@ -76,42 +48,12 @@ def get_user_from_db_by_email(email):
         port=DATABASE_PORT,
     )
 
-    cursor = conn.cursor()
+    sql_file = open(select_user_by_email_sql, 'r')
+    raw_sql = sql_file.read()
+    sql_file.close()
 
-    cursor.execute("""
-        SELECT 
-            user_account.user_account_id,
-            user_account.first_name,
-            user_account.last_name,
-            TO_CHAR(user_account.birth_date, 'DD/MM/YYYY'), 
-            city_place_of_birth.city AS place_of_birth,
-            user_account.email, 
-            address.phone, 
-            address.address, 
-            address.postal_code, 
-            city_city.city,
-            country.country,
-            library.library_name
-        FROM user_account
-        INNER JOIN address
-        ON user_account.address_id = address.address_id
-        INNER JOIN city AS city_city
-        ON city_city.city_id = address.city_id
-        INNER JOIN city AS city_place_of_birth
-        ON city_place_of_birth.city_id = user_account.place_of_birth
-        INNER JOIN country
-        ON city_place_of_birth.country_id = country.country_id 
-        INNER JOIN bookworm 
-        ON bookworm.user_account_id = user_account.user_account_id 
-        INNER JOIN library
-        ON bookworm.library_id = library.library_id
-        WHERE user_account.activebool is True
-        AND user_account.email=%s;
-        """,
-        (
-            email,
-        ),
-    )
+    cursor = conn.cursor()
+    cursor.execute(raw_sql, (email,))
 
     data = cursor.fetchone()
     conn.close()
