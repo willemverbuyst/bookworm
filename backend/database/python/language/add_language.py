@@ -28,7 +28,7 @@ def add_language_to_db(new_id, language):
     sql_file.close()
 
     cursor = conn.cursor()
-    cursor.execute(raw_sql, (new_id, language, datetime.datetime.now()))
+    cursor.execute(raw_sql, (str(new_id), language, datetime.datetime.now()))
 
     conn.commit()
     conn.close()

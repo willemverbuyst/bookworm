@@ -27,7 +27,7 @@ def delete_language_from_db(id):
     sql_file.close()
 
     cursor = conn.cursor()
-    cursor.execute(raw_sql, (id))
+    cursor.execute(raw_sql, (id,))
     
     conn.commit()
     conn.close()
