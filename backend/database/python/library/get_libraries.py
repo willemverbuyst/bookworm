@@ -3,6 +3,10 @@ import os
 import psycopg2
 from database.python.library.helpers import format_libraries
 
+dirname = os.path.dirname(__file__)
+select_count_libraries_sql = os.path.join(dirname, "../../sql/library/select_count_libraries.sql")
+select_libraries_sql = os.path.join(dirname, "../../sql/library/select_libraries.sql")
+
 DATABASE = os.environ.get("DATABASE")
 DATABASE_USER = os.environ.get("DATABASE_USER")
 DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
@@ -24,29 +28,12 @@ def get_libraries_from_db(limit, offset):
     else:
         offset = 0
 
+    sql_file = open(select_libraries_sql, 'r')
+    raw_sql = sql_file.read()
+    sql_file.close()
+
     cursor = conn.cursor()
-    cursor.execute("""
-        SELECT 
-            library.library_id,
-            library.library_name,
-            address.phone, 
-            address.address, 
-            address.postal_code, 
-            city.city,
-            country.country
-        FROM library
-        INNER JOIN address 
-        ON library.address_id = address.address_id
-        INNER JOIN city
-        ON city.city_id = address.city_id
-        INNER JOIN country
-        ON country.country_id = city.country_id 
-        ORDER BY library.library_id  
-        LIMIT %s 
-        OFFSET %s;
-        """, 
-        (limit, offset)
-    )
+    cursor.execute(raw_sql, (limit, offset))
 
     data = cursor.fetchall()
     conn.close()
@@ -65,13 +52,12 @@ def get_total_number_of_libraries():
         port=DATABASE_PORT,
     )
 
+    sql_file = open(select_count_libraries_sql, 'r')
+    raw_sql = sql_file.read()
+    sql_file.close()
+
     cursor = conn.cursor()
-    cursor.execute("""
-        SELECT 
-        COUNT(*) AS number_of_libraries 
-        FROM library;
-        """
-    )
+    cursor.execute(raw_sql)
 
     result = cursor.fetchone()
     conn.close()

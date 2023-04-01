@@ -1,6 +1,6 @@
-from fastapi import APIRouter
-from error.main import raise_exception
 from database.python.genre.get_genres import get_genres_from_db
+from error.main import raise_exception
+from fastapi import APIRouter
 
 genre_router = APIRouter()
 

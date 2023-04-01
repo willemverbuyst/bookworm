@@ -2,11 +2,9 @@ import datetime
 import os
 
 import psycopg2
-from database.python.helpers.format_data import format_languages
-from database.python.helpers.sql_helpers import executeScriptsFromFile
 
 dirname = os.path.dirname(__file__)
-select_all_languages_sql = os.path.join(dirname, "../../sql/language/select_all_languages.sql")
+delete_language_sql = os.path.join(dirname, "../../sql/language/delete_language.sql")
 
 DATABASE = os.environ.get("DATABASE")
 DATABASE_USER = os.environ.get("DATABASE_USER")
@@ -24,15 +22,12 @@ def delete_language_from_db(id):
         port=DATABASE_PORT,
     )
 
+    sql_file = open(delete_language_sql, 'r')
+    raw_sql = sql_file.read()
+    sql_file.close()
+
     cursor = conn.cursor()
-    cursor.execute("""
-        DELETE FROM language
-        WHERE language.language_id=%s;
-        """, 
-        (
-        id
-        )
-    )
+    cursor.execute(raw_sql, (id,))
     
     conn.commit()
     conn.close()

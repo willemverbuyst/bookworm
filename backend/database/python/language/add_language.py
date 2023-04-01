@@ -3,10 +3,9 @@ import os
 
 import psycopg2
 from database.python.helpers.format_data import format_languages
-from database.python.helpers.sql_helpers import executeScriptsFromFile
 
 dirname = os.path.dirname(__file__)
-select_all_languages_sql = os.path.join(dirname, "../../sql/language/select_all_languages.sql")
+insert_language_sql = os.path.join(dirname, "../../sql/language/insert_language.sql")
 
 DATABASE = os.environ.get("DATABASE")
 DATABASE_USER = os.environ.get("DATABASE_USER")
@@ -24,15 +23,12 @@ def add_language_to_db(new_id, language):
         port=DATABASE_PORT,
     )
 
+    sql_file = open(insert_language_sql, 'r')
+    raw_sql = sql_file.read()
+    sql_file.close()
+
     cursor = conn.cursor()
-    cursor.execute("""
-        INSERT INTO language (language_id,language,last_updated) 
-        VALUES (%s, %s, %s);
-        """, 
-        (
-        new_id, language, datetime.datetime.now()
-        )
-    )
+    cursor.execute(raw_sql, (str(new_id), language, datetime.datetime.now()))
 
     conn.commit()
     conn.close()

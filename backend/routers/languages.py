@@ -1,3 +1,5 @@
+import uuid
+
 from database.python.language.add_language import add_language_to_db
 from database.python.language.delete_language import delete_language_from_db
 from database.python.language.get_languages import (
@@ -27,7 +29,7 @@ def get_all_languages() -> dict:
 @language_router.post("/languages", tags=["languages"])
 def add_language(language: str) -> dict:
     try:
-        new_id = get_total_number_of_languages() + 1
+        new_id = uuid.uuid4()
 
         add_language_to_db(new_id, language)
 

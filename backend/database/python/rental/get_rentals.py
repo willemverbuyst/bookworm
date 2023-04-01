@@ -1,11 +1,11 @@
 import os
 
 import psycopg2
-from database.python.helpers.format_data import format_languages
+from database.python.rental.helpers import format_rentals
 
 dirname = os.path.dirname(__file__)
-select_count_languages_sql = os.path.join(dirname, "../../sql/language/select_count_languages.sql")
-select_languages_sql = os.path.join(dirname, "../../sql/language/select_languages.sql")
+select_count_rentals_sql = os.path.join(dirname, "../../sql/rental/select_count_rentals.sql")
+select_rentals_sql = os.path.join(dirname, "../../sql/rental/select_rentals.sql")
 
 DATABASE = os.environ.get("DATABASE")
 DATABASE_USER = os.environ.get("DATABASE_USER")
@@ -14,7 +14,8 @@ DATABASE_HOST = os.environ.get("DATABASE_HOST")
 DATABASE_PORT = os.environ.get("DATABASE_PORT")
 
 
-def get_languages_from_db():
+def get_rentals_from_db(limit, page):
+    
     conn = psycopg2.connect(
         database=DATABASE,
         user=DATABASE_USER,
@@ -23,23 +24,29 @@ def get_languages_from_db():
         port=DATABASE_PORT,
     )
 
-    sql_file = open(select_languages_sql, 'r')
+    if limit:
+        offset = int(limit) * (int(page) - 1)
+    else:
+        offset = 0
+
+    print(limit, offset)
+
+    sql_file = open(select_rentals_sql, 'r')
     raw_sql = sql_file.read()
     sql_file.close()
 
     cursor = conn.cursor()
-    cursor.execute(raw_sql)
+    cursor.execute(raw_sql, (limit, offset))
 
     data = cursor.fetchall()
-
     conn.close()
 
-    languages_formatted = format_languages(data)
+    rentals_formatted = format_rentals(data)
 
-    return languages_formatted
+    return rentals_formatted
 
 
-def get_total_number_of_languages():
+def get_total_number_of_rentals():
     conn = psycopg2.connect(
         database=DATABASE,
         user=DATABASE_USER,
@@ -48,7 +55,7 @@ def get_total_number_of_languages():
         port=DATABASE_PORT,
     )
 
-    sql_file = open(select_count_languages_sql, 'r')
+    sql_file = open(select_count_rentals_sql, 'r')
     raw_sql = sql_file.read()
     sql_file.close()
 

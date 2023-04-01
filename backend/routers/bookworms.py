@@ -8,7 +8,7 @@ bookworm_router = APIRouter()
 
 
 @bookworm_router.get("/bookworms/", tags=["bookworms"])
-def get_all_bookworms(limit = None, page = 1) -> dict:
+def get_bookworms(limit = None, page = 1) -> dict:
 
     try:
         bookworms = get_bookworms_from_db(limit, page)
