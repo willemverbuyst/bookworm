@@ -1,25 +1,22 @@
-import faker
-import csv
 import datetime
 import random
-import config
+
+import faker
 
 fake = faker.Faker()
 
-with open('library.csv', 'w', newline='') as file:
-    writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
-    header=[
-      "library_id",
-      "library_name", 
-      "last_updated",
-      "address_id"
-    ]
+
+def create_dummy_libraries_sql(config):
+    print("[INFO] Create dummy data for library table")
+    insert_statements = ""
+    for i in config.get("LIBRARY"):
+        library_id = i.get("uuid")
+        library_name = fake.company()
+        last_updated = datetime.datetime.now()
+        address_id = (config.get("ADDRESS")[random.randint(0,len(config.get("ADDRESS")) - 1)]).get("uuid")
     
-    writer.writerow(header)
-    for i in range (config.LIBRARY):
-      writer.writerow([
-        i + 1, 
-        fake.company(),
-        datetime.datetime.now(),    
-        random.randint(1,config.ADDRESS)
-      ])
+        sql = "INSERT INTO library (library_id,library_name,last_updated,address_id) " \
+            f"VALUES ('{library_id}'::UUID,'{library_name}','{last_updated}','{address_id}'::UUID);\n"
+        insert_statements += sql
+
+    return insert_statements
