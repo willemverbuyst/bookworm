@@ -37,7 +37,7 @@ def get_books_from_db(genre, language, limit, page):
     sql_file.close()
 
     cursor = conn.cursor()
-    cursor.execute(raw_sql, (genre, genre, genre, language, language, language,  limit, offset))
+    cursor.execute(raw_sql, (genre, genre, genre, language, language, language, limit, offset))
 
     data = cursor.fetchall()
     conn.close()
