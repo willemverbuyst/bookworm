@@ -20,6 +20,5 @@ def create_dummy_cities_sql(config):
             f"VALUES ('{city_id}'::UUID,'{city}','{last_updated}','{country_id}'::UUID);\n"
         insert_statements += sql
 
-    print("[INFO] Write to 'insert_cities.sql'")
-    with open('insert_cities.sql', 'w') as file:
-        file.write(insert_statements)
+    return insert_statements
+    

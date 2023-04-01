@@ -21,7 +21,7 @@ def create_dummy_addresses_sql(config):
         sql = "INSERT INTO address (address_id,address,postal_code,phone,last_updated,city_id) " \
             f"VALUES ('{address_id}'::UUID,'{address}','{postal_code}','{phone}','{last_updated}','{city_id}'::UUID);\n"
         insert_statements += sql
+    
+    return insert_statements
 
-    print("[INFO] Write to 'insert_addresses.sql'")
-    with open('insert_addresses.sql', 'w') as file:
-        file.write(insert_statements)
+

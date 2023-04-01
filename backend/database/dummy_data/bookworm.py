@@ -19,6 +19,5 @@ def create_dummy_bookworms_sql(config):
             f"VALUES ('{bookworm_id}'::UUID,'{last_updated}','{user_account_id}'::UUID,'{library_id}'::UUID);\n"
         insert_statements += sql
 
-    print("[INFO] Write to 'insert_bookworms.sql'")
-    with open('insert_bookworms.sql', 'w') as file:
-        file.write(insert_statements)
+    return insert_statements
+    

@@ -17,6 +17,5 @@ def create_dummy_countries_sql(config):
             f"VALUES ('{country_id}'::UUID,'{country}','{last_updated}');\n"
         insert_statements += sql
 
-    print("[INFO] Write to 'insert_countries.sql'")
-    with open('insert_countries.sql', 'w') as file:
-        file.write(insert_statements)
+    return insert_statements
+    

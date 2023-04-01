@@ -18,6 +18,4 @@ def create_dummy_payments_sql(config):
             f"VALUES ('{payment_id}'::UUID,{amount},'{payment_date}','{last_updated}','{bookworm_id}'::UUID,'{staff_id}'::UUID,'{rental_id}'::UUID);\n"
         insert_statements += sql
 
-    print("[INFO] Write to 'insert_payments.sql'")
-    with open('insert_payments.sql', 'w') as file:
-        file.write(insert_statements)
+    return insert_statements

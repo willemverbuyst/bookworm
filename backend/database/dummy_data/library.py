@@ -19,6 +19,4 @@ def create_dummy_libraries_sql(config):
             f"VALUES ('{library_id}'::UUID,'{library_name}','{last_updated}','{address_id}'::UUID);\n"
         insert_statements += sql
 
-    print("[INFO] Write to 'insert_libraries.sql'")
-    with open('insert_libraries.sql', 'w') as file:
-        file.write(insert_statements)
+    return insert_statements

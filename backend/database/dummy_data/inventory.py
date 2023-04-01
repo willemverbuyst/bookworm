@@ -15,8 +15,5 @@ def create_dummy_inventory_sql(config):
             f"VALUES ('{inventory_id}'::UUID,'{last_updated}','{book_id}'::UUID,'{library_id}'::UUID);\n"
         insert_statements += sql
 
-    print("[INFO] Write to 'insert_inventory.sql'")
-    with open('insert_inventory.sql', 'w') as file:
-        file.write(insert_statements)
-
+    return insert_statements
 

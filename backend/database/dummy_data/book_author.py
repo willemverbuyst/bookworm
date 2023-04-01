@@ -15,6 +15,5 @@ def create_dummy_book_author_sql(config):
             f"VALUES ('{book_author_id}'::UUID,'{last_updated}','{book_id}'::UUID,'{author_id}'::UUID);\n"
         insert_statements += sql
 
-    print("[INFO] Write to 'insert_book_author.sql'")
-    with open('insert_book_author.sql', 'w') as file:
-        file.write(insert_statements)
+    return insert_statements
+    

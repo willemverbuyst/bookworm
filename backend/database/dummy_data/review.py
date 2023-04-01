@@ -24,6 +24,4 @@ def create_dummy_reviews_sql(config):
             f"VALUES ('{review_id}'::UUID,'{description}','{rating}','{startdate}','{enddate}','{duration}','{last_updated}','{book_id}'::UUID,'{bookworm_id}'::UUID);\n"
         insert_statements += sql
 
-    print("[INFO] Write to 'insert_reviews.sql'")
-    with open('insert_reviews.sql', 'w') as file:
-        file.write(insert_statements)
+    return insert_statements

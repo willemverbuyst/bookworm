@@ -9,6 +9,7 @@ from book_author import create_dummy_book_author_sql
 from city import create_dummy_cities_sql
 from config import config
 from country import create_dummy_countries_sql
+from create_sql_insert_files import create_sql_insert_files
 from create_tables import create_tables
 from genre import create_dummy_genres_sql
 from inventory import create_dummy_inventory_sql
@@ -88,7 +89,9 @@ def executeScriptsFromFile(filename, cursor):
 
 
 def seed_db():
-    create_dummy_addresses_sql(config)
+    dummy_addresses = create_dummy_addresses_sql(config)
+    create_sql_insert_files(dummy_addresses)
+
     create_dummy_cities_sql(config)
     create_dummy_countries_sql(config)
     create_dummy_languages_sql(config)
@@ -121,24 +124,6 @@ def seed_db():
     cursor = conn.cursor()
 
     create_tables(cursor)
-
-    # executeScriptsFromFile(create_country_table_sql, cursor)
-    # executeScriptsFromFile(create_city_table_sql, cursor)
-    # executeScriptsFromFile(create_address_table_sql, cursor)
-    # executeScriptsFromFile(create_language_table_sql, cursor)
-    # executeScriptsFromFile(create_rental_rate_table_sql, cursor)
-    # executeScriptsFromFile(create_genre_table_sql, cursor)
-    # executeScriptsFromFile(create_author_table_sql, cursor)
-    # executeScriptsFromFile(create_book_table_sql, cursor)
-    # executeScriptsFromFile(create_book_author_table_sql, cursor)
-    # executeScriptsFromFile(create_library_table_sql, cursor)
-    # executeScriptsFromFile(create_user_account_table_sql, cursor)
-    # executeScriptsFromFile(create_staff_table_sql, cursor)
-    # executeScriptsFromFile(create_bookworm_table_sql, cursor)
-    # executeScriptsFromFile(create_inventory_table_sql, cursor)
-    # executeScriptsFromFile(create_review_table_sql, cursor)
-    # executeScriptsFromFile(create_rental_table_sql, cursor)
-    # executeScriptsFromFile(create_payment_table_sql, cursor)
 
     executeScriptsFromFile(insert_countries_sql, cursor)
     executeScriptsFromFile(insert_cities_sql, cursor)

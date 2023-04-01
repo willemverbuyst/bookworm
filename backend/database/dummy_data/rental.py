@@ -18,6 +18,4 @@ def create_dummy_rentals_sql(config):
             f"VALUES ('{rental_id}'::UUID,'{rental_date}','{return_date}','{last_updated}','{bookworm_id}'::UUID,'{inventory_id}'::UUID,'{staff_id}'::UUID);\n"
         insert_statements += sql
 
-    print("[INFO] Write to 'insert_rentals.sql'")
-    with open('insert_rentals.sql', 'w') as file:
-        file.write(insert_statements)
+    return insert_statements

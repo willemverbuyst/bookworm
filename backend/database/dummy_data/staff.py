@@ -19,6 +19,4 @@ def create_dummy_staff_sql(config):
             f"VALUES ('{staff_id}'::UUID,'{last_updated}','{user_account_id}'::UUID,'{library_id}'::UUID);\n"
         insert_statements += sql
 
-    print("[INFO] Write to 'insert_staff.sql'")
-    with open('insert_staff.sql', 'w') as file:
-        file.write(insert_statements)
+    return insert_statements

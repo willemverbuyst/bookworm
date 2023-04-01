@@ -24,6 +24,5 @@ def create_dummy_books_sql(config):
             f"VALUES ('{book_id}'::UUID,'{title}','{year_published}',{replacement_cost},{pages},'{last_updated}','{language_id}'::UUID,'{genre_id}'::UUID,'{rental_rate_id}'::UUID);\n"
         insert_statements += sql
 
-    print("[INFO] Write to 'insert_books.sql'")
-    with open('insert_books.sql', 'w') as file:
-        file.write(insert_statements)
+    return insert_statements
+    

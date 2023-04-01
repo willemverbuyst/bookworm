@@ -18,6 +18,4 @@ def create_dummy_authors_sql(config):
             f"VALUES ('{author_id}'::UUID,'{first_name}','{last_name}','{last_updated}');\n"
         insert_statements += sql
 
-    print("[INFO] Write to 'insert_authors.sql'")
-    with open('insert_authors.sql', 'w') as file:
-        file.write(insert_statements)
+    return insert_statements

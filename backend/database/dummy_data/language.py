@@ -13,8 +13,5 @@ def create_dummy_languages_sql(config):
             f"VALUES ('{language_id}'::UUID,'{language}','{last_updated}');\n"
         insert_statements += sql
 
-    print("[INFO] Write to 'insert_languages.sql'")
-    with open('insert_languages.sql', 'w') as file:
-        file.write(insert_statements)
-
+    return insert_statements
 

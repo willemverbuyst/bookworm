@@ -13,6 +13,4 @@ def create_dummy_rental_rates_sql(config):
             f"VALUES ('{rental_rate_id}'::UUID,{rate},'{last_updated}');\n"
         insert_statements += sql
 
-    print("[INFO] Write to 'insert_rental_rates.sql'")
-    with open('insert_rental_rates.sql', 'w') as file:
-        file.write(insert_statements)
+    return insert_statements

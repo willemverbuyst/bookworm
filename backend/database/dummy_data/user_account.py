@@ -29,6 +29,5 @@ def create_dummy_user_accounts_sql(config):
             f"VALUES ('{user_account_id}'::UUID,'{first_name}','{last_name}','{email}','{create_date}','{password}',{activebool},{activeint},'{last_updated}','{address_id}'::UUID,'{birth_date}','{place_of_birth}'::UUID);\n"
         insert_statements += sql
 
-    print("[INFO] Write to 'insert_user_accounts.sql'")
-    with open('insert_user_accounts.sql', 'w') as file:
-        file.write(insert_statements)
+    return insert_statements
+    
