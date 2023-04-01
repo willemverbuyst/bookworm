@@ -2,10 +2,10 @@ import os
 
 import psycopg2
 from database.python.helpers.format_data import format_languages
-from database.python.helpers.sql_helpers import executeScriptsFromFile
 
 dirname = os.path.dirname(__file__)
 select_all_languages_sql = os.path.join(dirname, "../../sql/language/select_all_languages.sql")
+select_count_languages_sql = os.path.join(dirname, "../../sql/language/select_count_languages.sql")
 
 DATABASE = os.environ.get("DATABASE")
 DATABASE_USER = os.environ.get("DATABASE_USER")
@@ -23,9 +23,12 @@ def get_languages_from_db():
         port=DATABASE_PORT,
     )
 
-    cursor = conn.cursor()
+    sql_file = open(select_all_languages_sql, 'r')
+    raw_sql = sql_file.read()
+    sql_file.close()
 
-    executeScriptsFromFile(select_all_languages_sql, cursor)
+    cursor = conn.cursor()
+    cursor.execute(raw_sql)
 
     data = cursor.fetchall()
 
@@ -45,13 +48,12 @@ def get_total_number_of_languages():
         port=DATABASE_PORT,
     )
 
+    sql_file = open(select_count_languages_sql, 'r')
+    raw_sql = sql_file.read()
+    sql_file.close()
+
     cursor = conn.cursor()
-    cursor.execute("""
-        SELECT 
-        COUNT(*) AS number_of_lanugages 
-        FROM language;
-        """
-    )
+    cursor.execute(raw_sql)
 
     result = cursor.fetchone()
     conn.close()

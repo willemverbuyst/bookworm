@@ -1,6 +1,6 @@
-import psycopg2
 import os
-from database.python.helpers.sql_helpers import executeScriptsFromFile
+
+import psycopg2
 from database.python.helpers.format_data import format_genres
 
 dirname = os.path.dirname(__file__)
@@ -22,9 +22,12 @@ def get_genres_from_db():
         port=DATABASE_PORT,
     )
 
-    cursor = conn.cursor()
+    sql_file = open(select_all_genres_sql, 'r')
+    raw_sql = sql_file.read()
+    sql_file.close()
 
-    executeScriptsFromFile(select_all_genres_sql, cursor)
+    cursor = conn.cursor()
+    cursor.execute(raw_sql)
 
     data = cursor.fetchall()
 
