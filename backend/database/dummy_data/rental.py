@@ -2,8 +2,8 @@ import datetime
 import random
 
 
-def create_insert_rentals_sql(config):
-    print("[INFO] Creating dummy data for inserting rentals")
+def create_dummy_rentals_sql(config):
+    print("[INFO] Create dummy data for rental table")
     insert_statements = ""
     for i in config.get("RENTAL"):
         rental_id = i.get("uuid")
@@ -18,6 +18,6 @@ def create_insert_rentals_sql(config):
             f"VALUES ('{rental_id}'::UUID,'{rental_date}','{return_date}','{last_updated}','{bookworm_id}'::UUID,'{inventory_id}'::UUID,'{staff_id}'::UUID);\n"
         insert_statements += sql
 
-    print("[INFO] Writing to 'insert_rentals.sql'")
+    print("[INFO] Write to 'insert_rentals.sql'")
     with open('insert_rentals.sql', 'w') as file:
         file.write(insert_statements)

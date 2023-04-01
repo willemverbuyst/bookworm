@@ -2,26 +2,26 @@ import os
 
 import psycopg2
 import psycopg2.extras
-from address import create_insert_addresses_sql
-from author import create_insert_authors_sql
-from book import create_insert_books_sql
-from book_author import create_insert_book_author_sql
-from city import create_insert_cities_sql
+from address import create_dummy_addresses_sql
+from author import create_dummy_authors_sql
+from book import create_dummy_books_sql
+from book_author import create_dummy_book_author_sql
+from city import create_dummy_cities_sql
 from config import config
-from country import create_insert_countries_sql
+from country import create_dummy_countries_sql
 from create_tables import create_tables
-from genre import create_insert_genres_sql
-from inventory import create_insert_inventory_sql
-from language import create_insert_languages_sql
-from library import create_insert_libraries_sql
-from payment import create_insert_payments_sql
-from rental import create_insert_rentals_sql
-from rental_rate import create_insert_rental_rates_sql
-from review import create_insert_reviews_sql
-from staff import create_insert_staff_sql
-from user_account import create_insert_user_accounts_sql
+from genre import create_dummy_genres_sql
+from inventory import create_dummy_inventory_sql
+from language import create_dummy_languages_sql
+from library import create_dummy_libraries_sql
+from payment import create_dummy_payments_sql
+from rental import create_dummy_rentals_sql
+from rental_rate import create_dummy_rental_rates_sql
+from review import create_dummy_reviews_sql
+from staff import create_dummy_staff_sql
+from user_account import create_dummy_user_accounts_sql
 
-from bookworm import create_insert_bookworms_sql
+from bookworm import create_dummy_bookworms_sql
 
 # from helpers.sql_helpers import executeScriptsFromFile
 
@@ -88,23 +88,23 @@ def executeScriptsFromFile(filename, cursor):
 
 
 def seed_db():
-    create_insert_addresses_sql(config)
-    create_insert_cities_sql(config)
-    create_insert_countries_sql(config)
-    create_insert_languages_sql(config)
-    create_insert_rental_rates_sql(config)
-    create_insert_genres_sql(config)
-    create_insert_authors_sql(config)
-    create_insert_books_sql(config)
-    create_insert_book_author_sql(config)
-    create_insert_libraries_sql(config)
-    create_insert_user_accounts_sql(config)
-    create_insert_staff_sql(config)
-    create_insert_bookworms_sql(config)
-    create_insert_inventory_sql(config)
-    create_insert_reviews_sql(config)
-    create_insert_rentals_sql(config)
-    create_insert_payments_sql(config)
+    create_dummy_addresses_sql(config)
+    create_dummy_cities_sql(config)
+    create_dummy_countries_sql(config)
+    create_dummy_languages_sql(config)
+    create_dummy_rental_rates_sql(config)
+    create_dummy_genres_sql(config)
+    create_dummy_authors_sql(config)
+    create_dummy_books_sql(config)
+    create_dummy_book_author_sql(config)
+    create_dummy_libraries_sql(config)
+    create_dummy_user_accounts_sql(config)
+    create_dummy_staff_sql(config)
+    create_dummy_bookworms_sql(config)
+    create_dummy_inventory_sql(config)
+    create_dummy_reviews_sql(config)
+    create_dummy_rentals_sql(config)
+    create_dummy_payments_sql(config)
 
 
 

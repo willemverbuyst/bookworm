@@ -6,8 +6,8 @@ import faker
 fake = faker.Faker()
 
 
-def create_insert_reviews_sql(config):
-    print("[INFO] Creating dummy data for inserting reviews")
+def create_dummy_reviews_sql(config):
+    print("[INFO] Create dummy data for review table")
     insert_statements = ""
     for i in config.get("REVIEW"):
         review_id = i.get("uuid")
@@ -24,6 +24,6 @@ def create_insert_reviews_sql(config):
             f"VALUES ('{review_id}'::UUID,'{description}','{rating}','{startdate}','{enddate}','{duration}','{last_updated}','{book_id}'::UUID,'{bookworm_id}'::UUID);\n"
         insert_statements += sql
 
-    print("[INFO] Writing to 'insert_reviews.sql'")
+    print("[INFO] Write to 'insert_reviews.sql'")
     with open('insert_reviews.sql', 'w') as file:
         file.write(insert_statements)
