@@ -13,6 +13,7 @@ from genre import create_insert_genres_sql
 from inventory import create_insert_inventory_sql
 from language import create_insert_languages_sql
 from library import create_insert_libraries_sql
+from payment import create_insert_payments_sql
 from rental import create_insert_rentals_sql
 from rental_rate import create_insert_rental_rates_sql
 from review import create_insert_reviews_sql
@@ -63,7 +64,7 @@ insert_bookworms_sql = os.path.join(dirname, "./insert_bookworms.sql")
 insert_inventory_sql = os.path.join(dirname, "./insert_inventory.sql")
 insert_reviews_sql = os.path.join(dirname, "./insert_reviews.sql")
 insert_rentals_sql = os.path.join(dirname, "./insert_rentals.sql")
-# insert_payment_sql = os.path.join(dirname, "../sql/payment/insert_payment.sql")
+insert_payments_sql = os.path.join(dirname, "./insert_payments.sql")
 
 DATABASE = os.environ.get("DATABASE")
 DATABASE_USER = os.environ.get("DATABASE_USER")
@@ -102,6 +103,7 @@ def seed_db():
     create_insert_inventory_sql(config)
     create_insert_reviews_sql(config)
     create_insert_rentals_sql(config)
+    create_insert_payments_sql(config)
 
     psycopg2.extras.register_uuid()
 
@@ -131,7 +133,7 @@ def seed_db():
     executeScriptsFromFile(create_inventory_table_sql, cursor)
     executeScriptsFromFile(create_review_table_sql, cursor)
     executeScriptsFromFile(create_rental_table_sql, cursor)
-    # executeScriptsFromFile(create_payment_table_sql, cursor)
+    executeScriptsFromFile(create_payment_table_sql, cursor)
 
     executeScriptsFromFile(insert_countries_sql, cursor)
     executeScriptsFromFile(insert_cities_sql, cursor)
@@ -149,7 +151,7 @@ def seed_db():
     executeScriptsFromFile(insert_inventory_sql, cursor)
     executeScriptsFromFile(insert_reviews_sql, cursor)
     executeScriptsFromFile(insert_rentals_sql, cursor)
-    # executeScriptsFromFile(insert_payment_sql, cursor)
+    executeScriptsFromFile(insert_payments_sql, cursor)
 
     conn.commit()
     conn.close()

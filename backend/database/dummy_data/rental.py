@@ -1,10 +1,6 @@
 import datetime
 import random
 
-import faker
-
-fake = faker.Faker()
-
 
 def create_insert_rentals_sql(config):
     print("[INFO] Creating dummy data for inserting rentals")

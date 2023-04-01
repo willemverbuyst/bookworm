@@ -17,7 +17,7 @@ def create_insert_books_sql(config):
             replacement_cost =  random.randint(1, config.get("REPLACEMENT_COST_MAX"))
             pages = random.randint(config.get("PAGES_MIN"), config.get("PAGES_MAX"))
             last_updated = datetime.datetime.now() 
-            language_id = (config.get("LANGUAGE")[random.randint(0,len(config.get("LANGUAGES")) - 1)]).get("uuid")
+            language_id = (config.get("LANGUAGE")[random.randint(0,len(config.get("LANGUAGE")) - 1)]).get("uuid")
             genre_id = (config.get("GENRE")[random.randint(0,len(config.get("GENRE")) - 1)]).get("uuid")
             rental_rate_id = (config.get("RENTAL_RATE")[random.randint(0,len(config.get("RENTAL_RATE")) - 1)]).get("uuid")
       

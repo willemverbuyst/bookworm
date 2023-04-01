@@ -1,28 +1,23 @@
-import csv
 import datetime
 import random
-import config
 
-with open('payment.csv', 'w', newline='') as file:
-    writer = csv.writer(file, delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
-    header=[
-      "payment_id",
-      "amount",
-      "payment_date",
-      "last_updated",
-      "bookworm_id",
-      "staff_id",
-      "rental_id"
-    ]
-    
-    writer.writerow(header)
-    for i in range (config.RENTAL):
-      writer.writerow([
-        i + 1, 
-        random.randint(config.RENTAL_RATE_MIN, config.RENTAL_RATE_MAX),
-        datetime.datetime.now(),   
-        datetime.datetime.now(),     
-        random.randint(1, config.BOOKWORM),
-        random.randint(1, config.STAFF),
-        i
-      ])
+
+def create_insert_payments_sql(config):
+    print("[INFO] Creating dummy data for inserting payments")
+    insert_statements = ""
+    for i in config.get("PAYMENT"):
+        payment_id = i.get("uuid")
+        amount = (config.get("RENTAL_RATE")[random.randint(0,len(config.get("RENTAL_RATE")) - 1)]).get("rate")
+        payment_date = datetime.datetime.now()
+        last_updated = datetime.datetime.now() 
+        bookworm_id = (config.get("BOOKWORM")[random.randint(0,len(config.get("BOOKWORM")) - 1)]).get("uuid")
+        staff_id = (config.get("STAFF")[random.randint(0,len(config.get("STAFF")) - 1)]).get("uuid")
+        rental_id = (config.get("RENTAL")[random.randint(0,len(config.get("RENTAL")) - 1)]).get("uuid")
+  
+        sql = "INSERT INTO payment (payment_id,amount,payment_date,last_updated,bookworm_id,staff_id,rental_id) " \
+            f"VALUES ('{payment_id}'::UUID,{amount},'{payment_date}','{last_updated}','{bookworm_id}'::UUID,'{staff_id}'::UUID,'{rental_id}'::UUID);\n"
+        insert_statements += sql
+
+    print("[INFO] Writing to 'insert_payments.sql'")
+    with open('insert_payments.sql', 'w') as file:
+        file.write(insert_statements)
