@@ -17,6 +17,7 @@ import {
 import { Bookworm, BookwormApi } from "./Bookworm";
 import { Genre, GenreApi } from "./Genre";
 import { Language, LanguageApi } from "./Language";
+import { Rental, RentalApi } from "./Rental";
 import { User, UserApi } from "./User";
 
 export interface State {
@@ -39,5 +40,7 @@ export interface State {
   genresOverview: Array<Genre> | null;
   languagesApi: LanguageApi | null;
   languagesOverview: Array<Language> | null;
+  rentalsApi: RentalApi | null;
+  rentalsOverview: Array<Rental> | null;
   user: User | null;
 }
