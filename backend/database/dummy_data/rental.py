@@ -1,14 +1,18 @@
 import datetime
 import random
 
+import faker
+
+fake = faker.Faker()
+
 
 def create_dummy_rentals_sql(config):
     print("[INFO] Create dummy data for rental table")
     insert_statements = ""
     for i in config.get("RENTAL"):
         rental_id = i.get("uuid")
-        rental_date = datetime.datetime.now()
-        return_date = datetime.datetime.now()
+        rental_date = fake.date_between("-3y")
+        return_date = rental_date + datetime.timedelta(days=random.randint(1, 14))
         last_updated = datetime.datetime.now() 
         bookworm_id = (config.get("BOOKWORM")[random.randint(0,len(config.get("BOOKWORM")) - 1)]).get("uuid")
         inventory_id = (config.get("INVENTORY")[random.randint(0,len(config.get("INVENTORY")) - 1)]).get("uuid")

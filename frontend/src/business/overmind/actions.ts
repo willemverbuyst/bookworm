@@ -124,6 +124,14 @@ export const getBookWormById = async (
   state.bookwormDetailsApi = user;
 };
 
+export const getRentals = async (
+  { effects, state }: Context,
+  { limit, page }: { limit: number; page: number }
+) => {
+  const rentals = await effects.api.getRentals({ limit, page });
+  state.rentalsApi = rentals;
+};
+
 export const postReview = async (
   { state, effects }: Context,
   { author, bookTitle, review, rating }: Review

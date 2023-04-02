@@ -7,6 +7,7 @@ export const NAV_ITEMS: Array<NavItem> = [
   { label: "Bookworms", href: "/bookworms" },
   { label: "Authors", href: "/authors" },
   { label: "Reviews", href: "/reviews" },
+  { label: "Rentals", href: "/rentals" },
 ];
 
 export function useNavItems() {

@@ -11,11 +11,13 @@ def get_rentals(limit = None, page=1) -> dict:
     try:
         rentals = get_rentals_from_db(limit, page)
         total_number_of_rentals = get_total_number_of_rentals()
+        result = len(rentals)
 
         return {
             "status": "success",
-            "total_number_of_rentals": "total_number_of_rentals",
+            "result": result,
             "data": rentals,
+            "total_number_of_rentals": total_number_of_rentals,
             "message": "rentals have been fetched",
         }
     except:
