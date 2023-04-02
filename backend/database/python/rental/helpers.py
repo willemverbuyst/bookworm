@@ -11,3 +11,15 @@ def format_rentals(rental_data):
         rentals.append(rental)
 
     return rentals
+
+
+def format_rental_stats_duration(rental_data):
+    rentals = []
+    for row in rental_data:
+        rental = {
+            "duration": row[0],
+            "total_rentals": row[1]
+        }
+        rentals.append(rental)
+
+    return rentals
