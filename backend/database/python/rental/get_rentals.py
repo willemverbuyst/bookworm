@@ -15,7 +15,6 @@ DATABASE_PORT = os.environ.get("DATABASE_PORT")
 
 
 def get_rentals_from_db(limit, page):
-    
     conn = psycopg2.connect(
         database=DATABASE,
         user=DATABASE_USER,
@@ -29,7 +28,6 @@ def get_rentals_from_db(limit, page):
     else:
         offset = 0
 
-    print(limit, offset)
 
     sql_file = open(select_rentals_sql, 'r')
     raw_sql = sql_file.read()

@@ -14,7 +14,7 @@ def get_rentals(limit = None, page=1) -> dict:
 
         return {
             "status": "success",
-            "total_number_of_rentals": "total_number_of_rentals",
+            "total_number_of_rentals": total_number_of_rentals,
             "data": rentals,
             "message": "rentals have been fetched",
         }
