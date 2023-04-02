@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import NavigationBar from "../../components/Navigation/NavigationBar";
 import PageTitle from "../../components/Text/PageTitle";
+import RentalsDurationChart from "./RentalsDurationChart";
 import RentalsTable from "./RentalsTable";
 
 function RentalsPage() {
@@ -19,10 +20,14 @@ function RentalsPage() {
         <Tabs variant="soft-rounded" colorScheme="teal" align="center">
           <TabList>
             <Tab>Overview</Tab>
+            <Tab>Duration of Rentals</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
               <RentalsTable />
+            </TabPanel>
+            <TabPanel>
+              <RentalsDurationChart />
             </TabPanel>
           </TabPanels>
         </Tabs>
