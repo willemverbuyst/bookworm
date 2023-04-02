@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import { ComposedChart, XAxis, Bar, LabelList, Line } from "recharts";
+import { Bar, ComposedChart, LabelList, Line, XAxis } from "recharts";
 import { useAppState } from "../../../business/overmind";
 import { useGetAuthorStatsPage } from "../../hooks/useGetAuthorStatsPage";
 
@@ -26,6 +26,7 @@ function AuthorsChart() {
             layout="horizontal"
             margin={{
               left: 100,
+              top: 20,
             }}
           >
             <XAxis

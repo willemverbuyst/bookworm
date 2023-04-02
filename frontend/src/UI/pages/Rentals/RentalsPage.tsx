@@ -1,6 +1,14 @@
-import { Flex, Tab, TabList, TabPanels, Tabs } from "@chakra-ui/react";
+import {
+  Flex,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+} from "@chakra-ui/react";
 import NavigationBar from "../../components/Navigation/NavigationBar";
 import PageTitle from "../../components/Text/PageTitle";
+import RentalsTable from "./RentalsTable";
 
 function RentalsPage() {
   return (
@@ -13,15 +21,9 @@ function RentalsPage() {
             <Tab>Overview</Tab>
           </TabList>
           <TabPanels>
-            {/* <TabPanel>
-              <BooksTable />
-            </TabPanel>
             <TabPanel>
-              <BooksChartLanguages />
+              <RentalsTable />
             </TabPanel>
-            <TabPanel>
-              <BooksChartGenres />
-            </TabPanel> */}
           </TabPanels>
         </Tabs>
       </Flex>
