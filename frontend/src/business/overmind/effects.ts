@@ -8,7 +8,7 @@ import {
 import { BookwormApi } from "../models/Bookworm";
 import { GenreApi } from "../models/Genre";
 import { LanguageApi } from "../models/Language";
-import { RentalApi } from "../models/Rental";
+import { RentalApi, RentalStatsDurationApi } from "../models/Rental";
 import { ReviewApi } from "../models/Review";
 import { UserApi } from "../models/User";
 
@@ -113,6 +113,17 @@ export const api = {
       `${BACKEND_URL}/rentals/?limit=${limit}&page=${page}`
     );
     return response.data;
+  },
+
+  getRentalStatsDuration: async (): Promise<RentalStatsDurationApi> => {
+    try {
+      const response = await axios.get(
+        `${BACKEND_URL}/rentals/stats/?by=duration`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(JSON.stringify(error));
+    }
   },
 
   getUser: async (email: string, password: string): Promise<UserApi> => {

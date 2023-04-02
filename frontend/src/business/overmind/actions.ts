@@ -132,6 +132,11 @@ export const getRentals = async (
   state.rentalsApi = rentals;
 };
 
+export const getRentalStatsDuration = async ({ effects, state }: Context) => {
+  const rentalStats = await effects.api.getRentalStatsDuration();
+  state.rentalStatsDurationApi = rentalStats;
+};
+
 export const postReview = async (
   { state, effects }: Context,
   { author, bookTitle, review, rating }: Review
