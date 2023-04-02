@@ -9,6 +9,7 @@ import BooksPage from "./UI/pages/Books/BooksPage";
 import BookwormsPage from "./UI/pages/BookWorms/BookwormsPage";
 import HomePage from "./UI/pages/Home/HomePage";
 import PageNotFoundPage from "./UI/pages/PageNotFound/PageNotFoundPage";
+import RentalsPage from "./UI/pages/Rentals/RentalsPage";
 import ReviewPage from "./UI/pages/Reviews/ReviewPage";
 import WelcomePage from "./UI/pages/Welcome/WelcomePage";
 
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/authors" element={<AuthorsPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/rentals" element={<RentalsPage />} />
         <Route
           path="/reviews"
           element={
