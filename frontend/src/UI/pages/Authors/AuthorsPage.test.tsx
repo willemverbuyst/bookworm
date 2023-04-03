@@ -24,6 +24,7 @@ describe("AuthorsPage", () => {
           books_written: 1,
         },
       ],
+      total_number_of_authors: 100,
       message: "testing",
     };
     state.authorStatsPageApi = {

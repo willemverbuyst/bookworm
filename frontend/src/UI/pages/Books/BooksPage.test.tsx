@@ -16,6 +16,7 @@ describe("BooksPage", () => {
   const overmind = createOvermindMock(config, (state) => {
     state.booksApi = {
       status: "ok",
+      result: 1,
       data: [
         {
           id: "abc123",
@@ -26,6 +27,7 @@ describe("BooksPage", () => {
           genre: "test_genre",
         },
       ],
+      total_number_of_books: 100,
       message: "testing",
     };
     state.genresApi = {

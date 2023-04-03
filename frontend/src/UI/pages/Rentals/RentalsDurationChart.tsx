@@ -34,8 +34,11 @@ function RentalsDurationChart() {
               tickLine={false}
             />
             <Bar dataKey="number">
-              {data.map((_entry, index) => (
-                <Cell fill={data[index].duration < 11 ? "green" : "red"} />
+              {data.map((entry, index) => (
+                <Cell
+                  key={JSON.stringify(entry)}
+                  fill={data[index].duration < 15 ? "green" : "red"}
+                />
               ))}
               <LabelList dataKey="number" position="top" />
             </Bar>
