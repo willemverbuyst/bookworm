@@ -6,10 +6,12 @@ import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
 import { useGetGenres } from "../../hooks/useGetGenres";
 import { useGetLanguages } from "../../hooks/useGetLanguages";
+import Filter from "./Filter";
 
 function RentalsTable() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);
+  const [filter, setFilter] = useState("not_returned");
   const data = useAppState().rentalsOverview;
   const total = useAppState().rentalsApi?.total_number_of_rentals;
   const { getRentals } = useActions();
@@ -17,8 +19,8 @@ function RentalsTable() {
   useGetLanguages();
 
   useEffect(() => {
-    getRentals({ limit, page });
-  }, [limit, page]);
+    getRentals({ limit, page, filter });
+  }, [filter, limit, page]);
 
   const columns: Array<{ field: keyof Rental }> = [
     { field: "title" },
@@ -31,6 +33,7 @@ function RentalsTable() {
     <Box>
       {data?.length ? (
         <>
+          <Filter filter={filter} updateFilter={setFilter} />
           <TableOverview
             rows={data}
             columns={columns}

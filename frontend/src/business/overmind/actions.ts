@@ -126,9 +126,9 @@ export const getBookWormById = async (
 
 export const getRentals = async (
   { effects, state }: Context,
-  { limit, page }: { limit: number; page: number }
+  { limit, page, filter }: { limit: number; page: number; filter: string }
 ) => {
-  const rentals = await effects.api.getRentals({ limit, page });
+  const rentals = await effects.api.getRentals({ limit, page, filter });
   state.rentalsApi = rentals;
 };
 
