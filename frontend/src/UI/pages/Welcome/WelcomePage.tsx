@@ -1,17 +1,17 @@
 import {
-  Stack,
-  Flex,
   Button,
+  Flex,
+  Stack,
   Text,
-  VStack,
   useBreakpointValue,
+  VStack,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
 
 function WelcomePage() {
   const navigate = useNavigate();
 
-  const goToHome = () => navigate("/home");
+  const goToHome = () => navigate("/books");
 
   return (
     <Flex

@@ -18,13 +18,20 @@ export default function App() {
     <Box>
       <Routes>
         <Route path="/" element={<WelcomePage />} />
-        <Route path="/home" element={<HomePage />} />
         <Route path="/books" element={<BooksPage />} />
         <Route path="/bookworms" element={<BookwormsPage />} />
         <Route path="/authors" element={<AuthorsPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/rentals" element={<RentalsPage />} />
+        <Route
+          path="/home"
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="/reviews"
           element={
