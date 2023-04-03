@@ -13,3 +13,14 @@ export interface RentalApi {
   total_number_of_rentals: number;
   result: number;
 }
+
+export interface RentalStatsDuration {
+  duration: number;
+  total_rentals: number;
+}
+
+export interface RentalStatsDurationApi {
+  status: string;
+  data: Array<RentalStatsDuration>;
+  message: string;
+}

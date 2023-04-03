@@ -24,11 +24,13 @@ describe("ReviewPage", () => {
             books_written: 1,
           },
         ],
+        total_number_of_authors: 100,
         message: "testing",
       };
       // eslint-disable-next-line no-param-reassign
       state.booksApi = {
         status: "ok",
+        result: 1,
         data: [
           {
             id: "abc123",
@@ -39,6 +41,7 @@ describe("ReviewPage", () => {
             genre: "genre_1",
           },
         ],
+        total_number_of_books: 100,
         message: "testing",
       };
     });

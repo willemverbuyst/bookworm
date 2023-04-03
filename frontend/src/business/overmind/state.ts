@@ -85,5 +85,12 @@ export const state: State = {
     }
     return rentalsApi.data;
   }),
+  rentalStatsDuration: derived(({ rentalStatsDurationApi }: State) => {
+    if (!rentalStatsDurationApi?.data.length) {
+      return null;
+    }
+    return rentalStatsDurationApi.data;
+  }),
+  rentalStatsDurationApi: null,
   user: null,
 };

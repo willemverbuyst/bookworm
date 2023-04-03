@@ -13,6 +13,7 @@ INNER JOIN book_author
 ON book.book_id = book_author.book_id 
 INNER JOIN author 
 ON author.author_id = book_author.author_id 
-ORDER BY rental.return_date DESC, rental.rental_date DESC  
+WHERE rental.return_date is NULL 
+ORDER BY rental.rental_date DESC  
 LIMIT %s 
 OFFSET %s;
