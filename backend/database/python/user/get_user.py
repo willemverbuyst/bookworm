@@ -4,8 +4,8 @@ import psycopg2
 from database.python.helpers.format_data import format_user
 
 dirname = os.path.dirname(__file__)
-select_user_sql = os.path.join(dirname, "../../sql/user/select_user.sql")
-select_user_by_email_sql = os.path.join(dirname, "../../sql/user/select_user_by_email.sql")
+select_user_sql = os.path.join(dirname, "../../sql/user_account/select_user.sql")
+select_user_by_email_sql = os.path.join(dirname, "../../sql/user_account/select_user_by_email.sql")
 
 DATABASE = os.environ.get("DATABASE")
 DATABASE_USER = os.environ.get("DATABASE_USER")
