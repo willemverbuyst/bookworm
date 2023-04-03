@@ -17,8 +17,12 @@ def create_dummy_user_accounts_sql(config):
         create_date = datetime.date.today()
         password = "test123"
         activebool = fake.boolean(chance_of_getting_true=50)
-        # TODO FIX THIS CAN BE OUT OF SYNC WITH ACTIVE BOOL
-        activeint = random.randint(0,1)
+
+        if (activebool):
+            activeint = 1
+        else:
+            activeint = 0
+            
         last_updated = datetime.datetime.now()
         address_id = (config.get("ADDRESS")[random.randint(0,len(config.get("ADDRESS")) - 1)]).get("uuid")
         birth_date = fake.date()
