@@ -6,6 +6,8 @@ from database.python.rental.helpers import (format_rental_stats_duration,
 
 dirname = os.path.dirname(__file__)
 select_count_rentals_sql = os.path.join(dirname, "../../sql/rental/select_count_rentals.sql")
+select_count_rentals_returned_false_sql = os.path.join(dirname, "../../sql/rental/select_count_rentals_returned_false.sql")
+select_count_rentals_returned_true_sql = os.path.join(dirname, "../../sql/rental/select_count_rentals_returned_true.sql")
 select_rental_stats_duration_sql = os.path.join(dirname, "../../sql/rental/select_rental_stats_duration.sql")
 select_rentals_returned_false_sql = os.path.join(dirname, "../../sql/rental/select_rentals_returned_false.sql")
 select_rentals_returned_true_sql = os.path.join(dirname, "../../sql/rental/select_rentals_returned_true.sql")
@@ -26,8 +28,6 @@ def get_rentals_from_db(limit, page, filter):
         host=DATABASE_HOST,
         port=DATABASE_PORT,
     )
-
-    print(filter)
 
     if limit:
         offset = int(limit) * (int(page) - 1)
@@ -56,7 +56,7 @@ def get_rentals_from_db(limit, page, filter):
     return rentals_formatted
 
 
-def get_total_number_of_rentals():
+def get_total_number_of_rentals(filter):
     conn = psycopg2.connect(
         database=DATABASE,
         user=DATABASE_USER,
@@ -65,7 +65,14 @@ def get_total_number_of_rentals():
         port=DATABASE_PORT,
     )
 
-    sql_file = open(select_count_rentals_sql, 'r')
+    if filter == "returned":
+        file = select_count_rentals_returned_true_sql
+    elif filter == "not_returned":
+        file = select_count_rentals_returned_false_sql
+    else:
+        file = select_count_rentals_sql 
+    
+    sql_file = open(file, 'r')
     raw_sql = sql_file.read()
     sql_file.close()
 

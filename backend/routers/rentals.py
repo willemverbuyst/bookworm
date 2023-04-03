@@ -11,7 +11,7 @@ rental_router = APIRouter()
 def get_rentals(limit = None, page=1, filter = None) -> dict:
     try:
         rentals = get_rentals_from_db(limit, page, filter)
-        total_number_of_rentals = get_total_number_of_rentals()
+        total_number_of_rentals = get_total_number_of_rentals(filter)
         result = len(rentals)
 
         return {
