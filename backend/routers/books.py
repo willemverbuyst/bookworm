@@ -1,7 +1,7 @@
-from database.python.book.get_books import (get_book_stats_genre_from_db,
-                                            get_book_stats_language_from_db,
-                                            get_books_from_db,
-                                            get_total_number_of_books)
+from database.python.book.get_books import (
+    get_book_stats_genre_from_db, get_book_stats_language_from_db,
+    get_book_stats_year_published_from_db, get_books_from_db,
+    get_total_number_of_books)
 from error.main import raise_exception
 from fastapi import APIRouter
 
@@ -34,12 +34,15 @@ def get_books_stats(by = None) -> dict:
             stats = get_book_stats_language_from_db()
         elif (by == "genre"):
             stats = get_book_stats_genre_from_db()
+        elif (by == "year_published"):
+            stats = get_book_stats_year_published_from_db()
         else:
             stats = []
 
         
         return {
             "status": "success",
+            "result": len(stats),
             "data": stats,
             "message": "stats have been fetched",
         }

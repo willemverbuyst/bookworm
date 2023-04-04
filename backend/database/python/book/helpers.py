@@ -38,3 +38,15 @@ def format_stats_genres(genre_data):
         stats.append(data)
 
     return stats
+
+
+def format_stats_year_published(year_published_data):
+    stats = []
+    for row in year_published_data:
+        data = {
+            "year_published": row[0],
+            "number_of_books": row[1],
+        }
+        stats.append(data)
+
+    return stats
