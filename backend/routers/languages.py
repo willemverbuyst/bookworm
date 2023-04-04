@@ -33,7 +33,6 @@ def add_language(language: str) -> dict:
 
         add_language_to_db(new_id, language)
 
-
         return {
             "status": "success",
             "message": "language has been added",
