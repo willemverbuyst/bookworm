@@ -39,7 +39,6 @@ def get_books_stats(by = None) -> dict:
         else:
             stats = []
 
-        
         return {
             "status": "success",
             "result": len(stats),

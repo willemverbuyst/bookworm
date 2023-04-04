@@ -56,6 +56,13 @@ export const state: State = {
     return bookStatsLanguageApi.data;
   }),
   bookStatsLanguageApi: null,
+  bookStatsYearPublished: derived(({ bookStatsYearPublishedApi }: State) => {
+    if (!bookStatsYearPublishedApi?.data.length) {
+      return null;
+    }
+    return bookStatsYearPublishedApi.data;
+  }),
+  bookStatsYearPublishedApi: null,
   bookwormApi: null,
   bookwormDetailsApi: null,
   bookwormOverview: derived(({ bookwormApi }: State) => {
