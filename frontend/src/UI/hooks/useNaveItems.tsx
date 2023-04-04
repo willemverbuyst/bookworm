@@ -17,7 +17,9 @@ export function useNavItems() {
     return NAV_ITEMS;
   }
 
-  const navItmesWithoutReview = NAV_ITEMS.filter((i) => i.href !== "/reviews");
+  const navItmesWithoutReview = NAV_ITEMS.filter(
+    (i) => i.href !== "/reviews" && i.href !== "/home"
+  );
 
   return navItmesWithoutReview;
 }

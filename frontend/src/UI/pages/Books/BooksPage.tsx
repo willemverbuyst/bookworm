@@ -9,6 +9,7 @@ import {
 import NavigationBar from "../../components/Navigation/NavigationBar";
 import PageTitle from "../../components/Text/PageTitle";
 import BooksChartLanguages from "./BookChartLanguages";
+import BookChartYearPublished from "./BookChartYearPublished";
 import BooksChartGenres from "./BooksChartGenres";
 import BooksTable from "./BooksTable";
 
@@ -23,6 +24,7 @@ function BooksPage() {
             <Tab>Overview</Tab>
             <Tab>Languages</Tab>
             <Tab>Genres</Tab>
+            <Tab>Year Published</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -33,6 +35,9 @@ function BooksPage() {
             </TabPanel>
             <TabPanel>
               <BooksChartGenres />
+            </TabPanel>
+            <TabPanel>
+              <BookChartYearPublished />
             </TabPanel>
           </TabPanels>
         </Tabs>

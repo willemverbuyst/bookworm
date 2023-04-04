@@ -116,6 +116,14 @@ export const getBookStatsLanguage = async ({ effects, state }: Context) => {
   state.bookStatsLanguageApi = languagesStats;
 };
 
+export const getBookStatsYearPublished = async ({
+  effects,
+  state,
+}: Context) => {
+  const yearPublishedStats = await effects.api.getBookStatsYearPublished();
+  state.bookStatsYearPublishedApi = yearPublishedStats;
+};
+
 export const getBookWormById = async (
   { effects, state }: Context,
   { id }: { id: string }

@@ -19,6 +19,11 @@ export interface BookStatsLanguage {
   number_of_books: number;
 }
 
+export interface BookStatsYearPublished {
+  year_published: string;
+  number_of_books: number;
+}
+
 export interface BookApi {
   status: string;
   data: Book[];
@@ -29,12 +34,21 @@ export interface BookApi {
 
 export interface BookStatsGenreApi {
   status: string;
-  data: BookStatsGenre[];
+  result: number;
+  data: Array<BookStatsGenre>;
   message: string;
 }
 
 export interface BookStatsLanguageApi {
   status: string;
-  data: BookStatsLanguage[];
+  result: number;
+  data: Array<BookStatsLanguage>;
+  message: string;
+}
+
+export interface BookStatsYearPubishedApi {
+  status: string;
+  result: number;
+  data: Array<BookStatsYearPublished>;
   message: string;
 }

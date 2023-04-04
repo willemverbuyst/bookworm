@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": 0,
-    "scrollLeft": -535.0104304088478,
+    "scrollTop": -353.3489925728889,
+    "scrollLeft": -337.4999865889555,
     "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
@@ -49,7 +49,7 @@
           {
             "name": "staff_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -95,7 +95,7 @@
           {
             "name": "user_account_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -118,7 +118,7 @@
           {
             "name": "library_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -143,7 +143,7 @@
           "active": false,
           "left": 1183.889,
           "top": 362.1985,
-          "zIndex": 4,
+          "zIndex": 80,
           "widthName": 60,
           "widthComment": 60
         },
@@ -157,7 +157,7 @@
           {
             "name": "library_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -226,7 +226,7 @@
           {
             "name": "address_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -251,7 +251,7 @@
           "active": false,
           "left": 564.9076,
           "top": 388.3574,
-          "zIndex": 8,
+          "zIndex": 35,
           "widthName": 60,
           "widthComment": 60
         },
@@ -265,7 +265,7 @@
           {
             "name": "user_account_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -472,7 +472,7 @@
           {
             "name": "address_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -497,7 +497,7 @@
           "active": false,
           "left": 1566.7858,
           "top": 35.4167,
-          "zIndex": 2,
+          "zIndex": 77,
           "widthName": 109.62451171875,
           "widthComment": 60
         },
@@ -511,7 +511,7 @@
           {
             "name": "booworm_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -557,7 +557,7 @@
           {
             "name": "user_account_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -580,7 +580,7 @@
           {
             "name": "library_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -605,7 +605,7 @@
           "active": false,
           "left": 1553.0323,
           "top": 715.6712,
-          "zIndex": 5,
+          "zIndex": 73,
           "widthName": 82.16455078125,
           "widthComment": 60
         },
@@ -619,7 +619,7 @@
           {
             "name": "address_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -734,7 +734,7 @@
           {
             "name": "city_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -759,7 +759,7 @@
           "active": false,
           "left": 660.1143,
           "top": 28.7272,
-          "zIndex": 1,
+          "zIndex": 30,
           "widthName": 64.84814453125,
           "widthComment": 60
         },
@@ -773,7 +773,7 @@
           {
             "name": "city_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -842,7 +842,7 @@
           {
             "name": "country_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -867,7 +867,7 @@
           "active": false,
           "left": 92.5925,
           "top": 270.3763,
-          "zIndex": 12,
+          "zIndex": 25,
           "widthName": 60,
           "widthComment": 60
         },
@@ -881,7 +881,7 @@
           {
             "name": "country_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -952,7 +952,7 @@
           "active": false,
           "left": 27.7803,
           "top": 25.9774,
-          "zIndex": 11,
+          "zIndex": 21,
           "widthName": 66.04150390625,
           "widthComment": 60
         },
@@ -966,7 +966,7 @@
           {
             "name": "book_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1104,7 +1104,7 @@
           {
             "name": "language_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1127,7 +1127,7 @@
           {
             "name": "genre_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1150,7 +1150,7 @@
           {
             "name": "rental_rate_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1175,7 +1175,7 @@
           "active": false,
           "left": 996.0648,
           "top": 1327.5682,
-          "zIndex": 14,
+          "zIndex": 43,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1189,7 +1189,7 @@
           {
             "name": "language_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1260,7 +1260,7 @@
           "active": false,
           "left": 24.7224,
           "top": 1827.546,
-          "zIndex": 10,
+          "zIndex": 63,
           "widthName": 74.24267578125,
           "widthComment": 60
         },
@@ -1274,7 +1274,7 @@
           {
             "name": "author_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1368,7 +1368,7 @@
           "active": false,
           "left": 1515.7173,
           "top": 1792.7315,
-          "zIndex": 15,
+          "zIndex": 70,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1382,7 +1382,7 @@
           {
             "name": "book_author_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1428,7 +1428,7 @@
           {
             "name": "book_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1451,7 +1451,7 @@
           {
             "name": "author_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1476,7 +1476,7 @@
           "active": false,
           "left": 868.2641,
           "top": 1792.9626,
-          "zIndex": 16,
+          "zIndex": 67,
           "widthName": 101.68359375,
           "widthComment": 60
         },
@@ -1490,7 +1490,7 @@
           {
             "name": "genre_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1561,7 +1561,7 @@
           "active": false,
           "left": 46.1109,
           "top": 1475.7463,
-          "zIndex": 13,
+          "zIndex": 55,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1575,7 +1575,7 @@
           {
             "name": "inventory_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1621,7 +1621,7 @@
           {
             "name": "book_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1644,7 +1644,7 @@
           {
             "name": "library_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1669,7 +1669,7 @@
           "active": false,
           "left": 72.3145,
           "top": 677.7829,
-          "zIndex": 3,
+          "zIndex": 85,
           "widthName": 86.9951171875,
           "widthComment": 60
         },
@@ -1683,7 +1683,7 @@
           {
             "name": "review_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1844,7 +1844,7 @@
           {
             "name": "book_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1867,7 +1867,7 @@
           {
             "name": "booworm_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1892,7 +1892,7 @@
           "active": false,
           "left": 60.1857,
           "top": 885.6531,
-          "zIndex": 17,
+          "zIndex": 51,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1906,7 +1906,7 @@
           {
             "name": "rental_rate_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1977,7 +1977,7 @@
           "active": false,
           "left": 35.1848,
           "top": 1648.6163,
-          "zIndex": 7,
+          "zIndex": 58,
           "widthName": 93.26025390625,
           "widthComment": 60
         },
@@ -1991,7 +1991,7 @@
           {
             "name": "rental_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -2043,7 +2043,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": true
+              "notNull": false
             },
             "ui": {
               "active": false,
@@ -2083,7 +2083,7 @@
           {
             "name": "booworm_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -2106,7 +2106,7 @@
           {
             "name": "inventory_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -2129,7 +2129,7 @@
           {
             "name": "staff_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -2151,10 +2151,10 @@
           }
         ],
         "ui": {
-          "active": false,
+          "active": true,
           "left": 725.0002,
           "top": 660.6526,
-          "zIndex": 19,
+          "zIndex": 101,
           "widthName": 60,
           "widthComment": 60
         },
@@ -2168,7 +2168,7 @@
           {
             "name": "payment_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -2260,7 +2260,7 @@
           {
             "name": "booworm_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -2283,7 +2283,7 @@
           {
             "name": "staff_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -2306,7 +2306,7 @@
           {
             "name": "rental_id",
             "comment": "",
-            "dataType": "INT",
+            "dataType": "UUID",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -2329,9 +2329,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 1136.1102,
-          "top": 1048.9864,
-          "zIndex": 9,
+          "left": 1211.1104,
+          "top": 1006.3936,
+          "zIndex": 87,
           "widthName": 62.912109375,
           "widthComment": 60
         },
@@ -2755,7 +2755,7 @@
             "424e12b2-9f5b-4c5d-97b3-cf33e3619529"
           ],
           "x": 1105.322465625,
-          "y": 820.0276,
+          "y": 837.7359333333335,
           "direction": "right"
         },
         "constraintName": "fk_bookworm_to_rental",
@@ -2807,7 +2807,7 @@
             "f54dfe6e-c3ac-4d2c-86f3-16c04f9c2a2f"
           ],
           "x": 1105.322465625,
-          "y": 713.7776,
+          "y": 696.0692666666667,
           "direction": "right"
         },
         "constraintName": "fk_staff_to_rental",
@@ -2832,8 +2832,8 @@
           "columnIds": [
             "a8f5c427-ad31-4a85-aa0b-cb8300a53179"
           ],
-          "x": 1233.1759958984376,
-          "y": 1048.9864,
+          "x": 1308.1761958984375,
+          "y": 1006.3936,
           "direction": "top"
         },
         "constraintName": "fk_bookworm_to_payment",
@@ -2858,8 +2858,8 @@
           "columnIds": [
             "a08e78a3-b85f-47c3-8180-ab3b970c2f05"
           ],
-          "x": 1427.3075876953126,
-          "y": 1048.9864,
+          "x": 1502.3077876953125,
+          "y": 1006.3936,
           "direction": "top"
         },
         "constraintName": "fk_staff_to_payment",
@@ -2875,17 +2875,17 @@
           "columnIds": [
             "3ca90f10-4ad4-49c9-ab0a-b2692e4af581"
           ],
-          "x": 915.1613328125,
-          "y": 873.1526,
-          "direction": "bottom"
+          "x": 1105.322465625,
+          "y": 766.9026000000001,
+          "direction": "right"
         },
         "end": {
           "tableId": "a0705699-95f9-4292-ab08-949405a11c12",
           "columnIds": [
             "1d7eab18-59db-45be-a391-b9ed8dc207ba"
           ],
-          "x": 1136.1102,
-          "y": 1155.2364,
+          "x": 1211.1104,
+          "y": 1112.6435999999999,
           "direction": "left"
         },
         "constraintName": "fk_rental_to_payment",

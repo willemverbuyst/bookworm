@@ -13,6 +13,8 @@ import {
   BookStatsGenreApi,
   BookStatsLanguage,
   BookStatsLanguageApi,
+  BookStatsYearPubishedApi,
+  BookStatsYearPublished,
 } from "./Book";
 import { Bookworm, BookwormApi } from "./Bookworm";
 import { Genre, GenreApi } from "./Genre";
@@ -38,6 +40,8 @@ export interface State {
   bookStatsGenreApi: BookStatsGenreApi | null;
   bookStatsLanguage: Array<BookStatsLanguage> | null;
   bookStatsLanguageApi: BookStatsLanguageApi | null;
+  bookStatsYearPublished: Array<BookStatsYearPublished> | null;
+  bookStatsYearPublishedApi: BookStatsYearPubishedApi | null;
   bookwormApi: BookwormApi | null;
   bookwormDetailsApi: Omit<UserApi, "token"> | null;
   bookwormOverview: Array<Bookworm> | null;

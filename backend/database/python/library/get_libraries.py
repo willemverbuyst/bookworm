@@ -1,27 +1,16 @@
 import os
 
 import psycopg2
+from database.python.helpers.sql_helpers import create_connection
 from database.python.library.helpers import format_libraries
 
 dirname = os.path.dirname(__file__)
 select_count_libraries_sql = os.path.join(dirname, "../../sql/library/select_count_libraries.sql")
 select_libraries_sql = os.path.join(dirname, "../../sql/library/select_libraries.sql")
 
-DATABASE = os.environ.get("DATABASE")
-DATABASE_USER = os.environ.get("DATABASE_USER")
-DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
-DATABASE_HOST = os.environ.get("DATABASE_HOST")
-DATABASE_PORT = os.environ.get("DATABASE_PORT")
-
 
 def get_libraries_from_db(limit, offset):
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
+    conn = create_connection()
 
     if limit:
         offset = int(limit) * (int(page) - 1)
@@ -44,13 +33,7 @@ def get_libraries_from_db(limit, offset):
 
 
 def get_total_number_of_libraries():
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
+    conn = create_connection()
 
     sql_file = open(select_count_libraries_sql, 'r')
     raw_sql = sql_file.read()
