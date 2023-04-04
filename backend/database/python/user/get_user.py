@@ -1,7 +1,7 @@
 import os
 
 import psycopg2
-from database.python.helpers.format_data import format_user
+from database.python.user.helpers import format_user
 
 dirname = os.path.dirname(__file__)
 select_user_sql = os.path.join(dirname, "../../sql/user_account/select_user.sql")

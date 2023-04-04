@@ -1,7 +1,7 @@
 import os
 
 import psycopg2
-from database.python.helpers.format_data import format_genres
+from database.python.genre.helpers import format_genres
 from database.python.helpers.sql_helpers import create_connection
 
 dirname = os.path.dirname(__file__)

@@ -1,8 +1,9 @@
 import os
 
 import psycopg2
-from database.python.helpers.format_data import format_bookworms, format_user
+from database.python.bookworm.helpers import format_bookworms
 from database.python.helpers.sql_helpers import create_connection
+from database.python.user.helpers import format_user
 
 dirname = os.path.dirname(__file__)
 select_bookworm_details_sql = os.path.join(dirname, "../../sql/bookworm/select_bookworm_details.sql")

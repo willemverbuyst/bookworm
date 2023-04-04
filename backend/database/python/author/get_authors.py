@@ -1,8 +1,7 @@
 import os
 
 import psycopg2
-from database.python.helpers.format_data import (format_authors,
-                                                 format_stats_pages)
+from database.python.author.helpers import format_authors, format_stats_pages
 from database.python.helpers.sql_helpers import create_connection
 
 dirname = os.path.dirname(__file__)

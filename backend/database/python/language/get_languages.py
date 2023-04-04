@@ -1,8 +1,8 @@
 import os
 
 import psycopg2
-from database.python.helpers.format_data import format_languages
 from database.python.helpers.sql_helpers import create_connection
+from database.python.language.helpers import format_languages
 
 dirname = os.path.dirname(__file__)
 select_count_languages_sql = os.path.join(dirname, "../../sql/language/select_count_languages.sql")
