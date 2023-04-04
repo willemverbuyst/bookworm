@@ -4,6 +4,7 @@ import psycopg2
 from database.python.helpers.format_data import (format_books,
                                                  format_stats_genres,
                                                  format_stats_languages)
+from database.python.helpers.sql_helpers import create_connection
 
 dirname = os.path.dirname(__file__)
 select_books_sql = os.path.join(dirname, "../../sql/book/select_books.sql")
@@ -11,21 +12,9 @@ select_book_stats_genre_sql = os.path.join(dirname, "../../sql/book/select_book_
 select_book_stats_language_sql = os.path.join(dirname, "../../sql/book/select_book_stats_language.sql")
 select_count_books_sql = os.path.join(dirname, "../../sql/book/select_count_books.sql")
 
-DATABASE = os.environ.get("DATABASE")
-DATABASE_USER = os.environ.get("DATABASE_USER")
-DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
-DATABASE_HOST = os.environ.get("DATABASE_HOST")
-DATABASE_PORT = os.environ.get("DATABASE_PORT")
-
 
 def get_books_from_db(genre, language, limit, page):
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
+    conn = create_connection()
 
     if limit:
         offset = int(limit) * (int(page) - 1)
@@ -48,13 +37,7 @@ def get_books_from_db(genre, language, limit, page):
 
 
 def get_total_number_of_books(genre, language):
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
+    conn = create_connection()
 
     sql_file = open(select_count_books_sql, 'r')
     raw_sql = sql_file.read()
@@ -70,13 +53,7 @@ def get_total_number_of_books(genre, language):
 
 
 def get_book_stats_language_from_db():
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
+    conn = create_connection()
 
     sql_file = open(select_book_stats_language_sql, 'r')
     raw_sql = sql_file.read()
@@ -94,13 +71,7 @@ def get_book_stats_language_from_db():
 
 
 def get_book_stats_genre_from_db():
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
+    conn = create_connection()
 
     sql_file = open(select_book_stats_genre_sql, 'r')
     raw_sql = sql_file.read()

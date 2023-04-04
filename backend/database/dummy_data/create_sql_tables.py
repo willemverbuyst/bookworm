@@ -23,7 +23,7 @@ create_rental_table_sql = os.path.join(dirname, "../sql/rental/create_rental_tab
 create_payment_table_sql = os.path.join(dirname, "../sql/payment/create_payment_table.sql")
 
 
-def executeScriptsFromFile(filename, cursor):
+def execute_script_from_file(filename, cursor):
     with open(filename, "r") as sqlFile:
         content = sqlFile.read()
         commands = content.split(";")
@@ -38,20 +38,20 @@ def executeScriptsFromFile(filename, cursor):
 
 def create_sql_tables(cursor):
     print("[INFO] Create tables for DB")
-    executeScriptsFromFile(create_country_table_sql, cursor)
-    executeScriptsFromFile(create_city_table_sql, cursor)
-    executeScriptsFromFile(create_address_table_sql, cursor)
-    executeScriptsFromFile(create_language_table_sql, cursor)
-    executeScriptsFromFile(create_rental_rate_table_sql, cursor)
-    executeScriptsFromFile(create_genre_table_sql, cursor)
-    executeScriptsFromFile(create_author_table_sql, cursor)
-    executeScriptsFromFile(create_book_table_sql, cursor)
-    executeScriptsFromFile(create_book_author_table_sql, cursor)
-    executeScriptsFromFile(create_library_table_sql, cursor)
-    executeScriptsFromFile(create_user_account_table_sql, cursor)
-    executeScriptsFromFile(create_staff_table_sql, cursor)
-    executeScriptsFromFile(create_bookworm_table_sql, cursor)
-    executeScriptsFromFile(create_inventory_table_sql, cursor)
-    executeScriptsFromFile(create_review_table_sql, cursor)
-    executeScriptsFromFile(create_rental_table_sql, cursor)
-    executeScriptsFromFile(create_payment_table_sql, cursor)
+    execute_script_from_file(create_country_table_sql, cursor)
+    execute_script_from_file(create_city_table_sql, cursor)
+    execute_script_from_file(create_address_table_sql, cursor)
+    execute_script_from_file(create_language_table_sql, cursor)
+    execute_script_from_file(create_rental_rate_table_sql, cursor)
+    execute_script_from_file(create_genre_table_sql, cursor)
+    execute_script_from_file(create_author_table_sql, cursor)
+    execute_script_from_file(create_book_table_sql, cursor)
+    execute_script_from_file(create_book_author_table_sql, cursor)
+    execute_script_from_file(create_library_table_sql, cursor)
+    execute_script_from_file(create_user_account_table_sql, cursor)
+    execute_script_from_file(create_staff_table_sql, cursor)
+    execute_script_from_file(create_bookworm_table_sql, cursor)
+    execute_script_from_file(create_inventory_table_sql, cursor)
+    execute_script_from_file(create_review_table_sql, cursor)
+    execute_script_from_file(create_rental_table_sql, cursor)
+    execute_script_from_file(create_payment_table_sql, cursor)

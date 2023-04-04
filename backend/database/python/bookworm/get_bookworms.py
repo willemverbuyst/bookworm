@@ -2,27 +2,16 @@ import os
 
 import psycopg2
 from database.python.helpers.format_data import format_bookworms, format_user
+from database.python.helpers.sql_helpers import create_connection
 
 dirname = os.path.dirname(__file__)
 select_bookworm_details_sql = os.path.join(dirname, "../../sql/bookworm/select_bookworm_details.sql")
 select_bookworms_sql = os.path.join(dirname, "../../sql/bookworm/select_bookworms.sql")
 select_count_bookworms_sql = os.path.join(dirname, "../../sql/bookworm/select_count_bookworms.sql")
 
-DATABASE = os.environ.get("DATABASE")
-DATABASE_USER = os.environ.get("DATABASE_USER")
-DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
-DATABASE_HOST = os.environ.get("DATABASE_HOST")
-DATABASE_PORT = os.environ.get("DATABASE_PORT")
-
 
 def get_bookworms_from_db(limit, page):
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
+    conn = create_connection()
 
     if limit:
         offset = int(limit) * (int(page) - 1)
@@ -45,13 +34,7 @@ def get_bookworms_from_db(limit, page):
 
 
 def get_total_number_of_bookworms():
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
+    conn = create_connection()
 
     sql_file = open(select_count_bookworms_sql, 'r')
     raw_sql = sql_file.read()
@@ -67,13 +50,7 @@ def get_total_number_of_bookworms():
 
 
 def get_bookworm_details_from_db_by_id(id):
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
+    conn = create_connection()
 
     sql_file = open(select_bookworm_details_sql, 'r')
     raw_sql = sql_file.read()

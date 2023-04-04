@@ -3,6 +3,7 @@ import os
 import psycopg2
 from database.python.helpers.format_data import (format_authors,
                                                  format_stats_pages)
+from database.python.helpers.sql_helpers import create_connection
 
 dirname = os.path.dirname(__file__)
 select_authors_sql = os.path.join(dirname, "../../sql/author/select_authors.sql")
@@ -11,21 +12,8 @@ select_author_stats_page_sql = os.path.join(dirname, "../../sql/author/select_au
 select_count_author_sql = os.path.join(dirname, "../../sql/author/select_count_authors.sql")
 
 
-DATABASE = os.environ.get("DATABASE")
-DATABASE_USER = os.environ.get("DATABASE_USER")
-DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
-DATABASE_HOST = os.environ.get("DATABASE_HOST")
-DATABASE_PORT = os.environ.get("DATABASE_PORT")
-
-
 def get_authors_from_db(limit, page):
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
+    conn = create_connection()
 
     if limit:
         offset = int(limit) * (int(page) - 1)
@@ -48,13 +36,7 @@ def get_authors_from_db(limit, page):
 
 
 def get_author_stats_page_from_db():
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
+    conn = create_connection()
 
     sql_file = open(select_author_stats_page_sql, 'r')
     raw_sql = sql_file.read()
@@ -72,13 +54,7 @@ def get_author_stats_page_from_db():
 
 
 def get_author_stats_avg_pages_from_db():
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
+    conn = create_connection()
 
     sql_file = open(select_author_stats_avg_pages_sql, 'r')
     raw_sql = sql_file.read()
@@ -94,13 +70,7 @@ def get_author_stats_avg_pages_from_db():
 
 
 def get_total_number_of_authors():
-    conn = psycopg2.connect(
-        database=DATABASE,
-        user=DATABASE_USER,
-        password=DATABASE_PASSWORD,
-        host=DATABASE_HOST,
-        port=DATABASE_PORT,
-    )
+    conn = create_connection()
 
     sql_file = open(select_count_author_sql, 'r')
     raw_sql = sql_file.read()
