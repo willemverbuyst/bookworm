@@ -4,7 +4,6 @@ from typing import Dict
 import jwt
 from decouple import config
 
-
 JWT_SECRET = config("SECRET")
 JWT_ALGORITHM = config("ALGORITHM")
 
@@ -32,4 +31,4 @@ def decodeJWT(token: str) -> dict:
         decoded_token = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
         return decoded_token if decoded_token["expires"] >= time.time() else None
     except:
-        return {}
+        return None
