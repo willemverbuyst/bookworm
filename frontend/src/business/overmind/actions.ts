@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import { AxiosError } from "axios";
 import { Context } from ".";
 import { Review } from "../models/Review";
 
@@ -39,16 +40,38 @@ export const onInitializeOvermind = async ({ effects, state }: Context) => {
     return;
   }
   state.apiResponse = { message: "", status: undefined };
+
   const response = await effects.api.getUserByToken(tokenFromLocalStorage);
-  if (response.status === "success") {
+
+  if (!response) {
+    state.apiResponse = {
+      message: "Something went very wrong",
+      status: "error",
+    };
+  } else if (
+    response instanceof AxiosError &&
+    response.response &&
+    "data" in response.response &&
+    typeof response.response.data === "object" &&
+    response.response.data != null &&
+    "detail" in response.response.data
+  ) {
+    state.apiResponse = {
+      message: JSON.stringify(response.response?.data.detail),
+      status: "error",
+    };
+  } else if (response instanceof AxiosError) {
+    state.apiResponse = {
+      message: "Something went very wrong",
+      status: "error",
+    };
+  } else {
     state.apiResponse = { message: response.message, status: "success" };
     const token = response.token.access_token;
     localStorage.setItem("token", token);
     state.auth.token = token;
     state.auth.isSignedIn = true;
     state.user = response.data;
-  } else {
-    state.apiResponse = { message: response.message, status: "error" };
   }
 };
 

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { AuthorApi, AuthorStatsPageApi } from "../models/Author";
 import {
   BookApi,
@@ -162,11 +162,22 @@ export const api = {
     return response.data;
   },
 
-  getUserByToken: async (token: string): Promise<UserApi> => {
-    const response = await axios.post(`${BACKEND_URL}/user/me`, {
-      token,
-    });
-    return response.data;
+  getUserByToken: async (
+    token: string
+  ): Promise<UserApi | AxiosError | null> => {
+    try {
+      const response = await axios.post(`${BACKEND_URL}/user/me`, {
+        token,
+      });
+      return response.data;
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        console.error(JSON.stringify(error.response));
+        return error;
+      }
+      console.error(JSON.stringify(error));
+      return null;
+    }
   },
 
   postReview: async (

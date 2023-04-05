@@ -1,7 +1,9 @@
 import { Box } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useAppState } from "./business/overmind";
 import PrivateRoute from "./helpers/PrivateRoute";
-import Message from "./UI/components/Message";
+import { useToastHook } from "./UI/hooks/useToastHook";
 import SignInPage from "./UI/pages/Auth/SignInPage";
 import SignUpPage from "./UI/pages/Auth/SingUpPage";
 import AuthorsPage from "./UI/pages/Authors/AuthorsPage";
@@ -14,6 +16,16 @@ import ReviewPage from "./UI/pages/Reviews/ReviewPage";
 import WelcomePage from "./UI/pages/Welcome/WelcomePage";
 
 export default function App() {
+  const [toast, setToast] = useToastHook();
+
+  const { message, status } = useAppState().apiResponse;
+
+  useEffect(() => {
+    if (message && status) {
+      setToast({ title: message, status });
+    }
+  }, [message, status]);
+
   return (
     <Box>
       <Routes>
@@ -42,7 +54,6 @@ export default function App() {
         />
         <Route path="*" element={<PageNotFoundPage />} />
       </Routes>
-      <Message />
     </Box>
   );
 }
