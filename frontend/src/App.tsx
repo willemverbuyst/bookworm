@@ -16,7 +16,7 @@ import ReviewPage from "./UI/pages/Reviews/ReviewPage";
 import WelcomePage from "./UI/pages/Welcome/WelcomePage";
 
 export default function App() {
-  const [toast, setToast] = useToastHook();
+  const [, setToast] = useToastHook();
 
   const { message, status } = useAppState().apiResponse;
 

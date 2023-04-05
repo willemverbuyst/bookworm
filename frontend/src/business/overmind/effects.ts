@@ -154,12 +154,24 @@ export const api = {
     }
   },
 
-  getUser: async (email: string, password: string): Promise<UserApi> => {
-    const response = await axios.post(`${BACKEND_URL}/user/login`, {
-      email,
-      password,
-    });
-    return response.data;
+  getUser: async (
+    email: string,
+    password: string
+  ): Promise<UserApi | AxiosError | null> => {
+    try {
+      const response = await axios.post(`${BACKEND_URL}/user/login`, {
+        email,
+        password,
+      });
+      return response.data;
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        console.error(JSON.stringify(error.response));
+        return error;
+      }
+      console.error(JSON.stringify(error));
+      return null;
+    }
   },
 
   getUserByToken: async (
