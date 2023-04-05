@@ -18,11 +18,11 @@ import WelcomePage from "./UI/pages/Welcome/WelcomePage";
 export default function App() {
   const [, setToast] = useToastHook();
 
-  const { message, status } = useAppState().apiResponse;
+  const { message, status, statusText } = useAppState().apiResponse;
 
   useEffect(() => {
     if (message && status) {
-      setToast({ title: message, status });
+      setToast({ title: statusText, status, description: message });
     }
   }, [message, status]);
 

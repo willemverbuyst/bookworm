@@ -2,8 +2,8 @@ import { useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 type ToastState = {
-  title: string;
-  description?: string;
+  title?: string;
+  description: string;
   status: "info" | "warning" | "success" | "error";
   position?:
     | "top"
@@ -16,13 +16,13 @@ type ToastState = {
 
 export function useToastHook() {
   const [state, setState] = useState<ToastState>({
-    title: "",
+    description: "",
     status: "info",
   });
   const toast = useToast();
 
   useEffect(() => {
-    if (state.title && state.status) {
+    if (state.description && state.status) {
       const { title, description, status, position } = state;
 
       toast({

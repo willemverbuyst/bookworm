@@ -20,7 +20,10 @@ export const signInUser = async (
     return;
   }
 
-  state.apiResponse = { message: response.message, status: "success" };
+  state.apiResponse = {
+    message: response.message,
+    status: "success",
+  };
   const token = response.token.access_token;
   localStorage.setItem("token", token);
   state.auth.token = token;
@@ -45,7 +48,7 @@ export const onInitializeOvermind = async ({
   if (!tokenFromLocalStorage) {
     return;
   }
-  state.apiResponse = { message: "", status: undefined };
+  state.apiResponse = { statusText: "", message: "", status: undefined };
 
   const response = await effects.api.getUserByToken(tokenFromLocalStorage);
 
@@ -168,9 +171,16 @@ export const postReview = async (
     token
   );
   if (response.status === "success") {
-    state.apiResponse = { message: response.message, status: "success" };
+    state.apiResponse = {
+      message: response.message,
+      status: "success",
+    };
   } else {
-    state.apiResponse = { message: response.message, status: "error" };
+    state.apiResponse = {
+      statusText: "Bad request",
+      message: response.message,
+      status: "error",
+    };
   }
 };
 
@@ -188,11 +198,13 @@ export const handleErrorResponse = (
     "detail" in response.response.data
   ) {
     state.apiResponse = {
+      statusText: JSON.stringify(response.response.statusText),
       message: JSON.stringify(response.response?.data.detail),
       status: "error",
     };
   } else {
     state.apiResponse = {
+      statusText: "Bad request",
       message: "something went very wrong",
       status: "error",
     };
