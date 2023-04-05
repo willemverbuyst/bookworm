@@ -47,7 +47,7 @@ function BookChartYearPublished() {
             />
             <YAxis interval={1} />
             {maxYears.map((m) => (
-              <ReferenceLine x={m} stroke="red">
+              <ReferenceLine key={m} x={m} stroke="red">
                 <Label value={m} position="top" />
               </ReferenceLine>
             ))}
