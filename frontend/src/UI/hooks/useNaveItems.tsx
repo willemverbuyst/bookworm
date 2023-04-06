@@ -2,24 +2,23 @@ import { useAppState } from "../../business/overmind";
 import { NavItem } from "../components/Navigation/types";
 
 export const NAV_ITEMS: Array<NavItem> = [
-  { label: "Home", href: "/home" },
   { label: "Books", href: "/books" },
-  { label: "Bookworms", href: "/bookworms" },
   { label: "Authors", href: "/authors" },
-  { label: "Reviews", href: "/reviews" },
+];
+
+export const PRIVATE_NAV_ITEMS: Array<NavItem> = [
+  { label: "Home", href: "/home" },
+  { label: "Bookworms", href: "/bookworms" },
   { label: "Rentals", href: "/rentals" },
+  { label: "Reviews", href: "/reviews" },
 ];
 
 export function useNavItems() {
   const { isSignedIn } = useAppState().auth;
 
   if (isSignedIn) {
-    return NAV_ITEMS;
+    return [...PRIVATE_NAV_ITEMS, ...NAV_ITEMS];
   }
 
-  const navItmesWithoutReview = NAV_ITEMS.filter(
-    (i) => i.href !== "/reviews" && i.href !== "/home"
-  );
-
-  return navItmesWithoutReview;
+  return NAV_ITEMS;
 }

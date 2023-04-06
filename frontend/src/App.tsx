@@ -35,12 +35,19 @@ export default function App() {
         <Route path="/authors" element={<AuthorsPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/rentals" element={<RentalsPage />} />
         <Route
           path="/home"
           element={
             <PrivateRoute>
               <HomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/rentals"
+          element={
+            <PrivateRoute>
+              <RentalsPage />
             </PrivateRoute>
           }
         />

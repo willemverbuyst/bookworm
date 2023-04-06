@@ -32,6 +32,7 @@ export const signInUser = async (
 };
 
 export const logOutUser = ({ state }: Context) => {
+  // todo: send request to invalidate token
   localStorage.removeItem("token");
   state.auth.token = "";
   state.auth.isSignedIn = false;
