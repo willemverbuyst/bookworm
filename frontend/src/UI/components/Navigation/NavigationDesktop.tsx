@@ -1,24 +1,25 @@
-import { Link as RLink } from "react-router-dom";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
   Box,
   Flex,
-  Text,
-  Stack,
   Icon,
   Link,
   Popover,
-  PopoverTrigger,
   PopoverContent,
+  PopoverTrigger,
+  Stack,
+  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { ChevronRightIcon } from "@chakra-ui/icons";
-import { NavItem } from "./types";
+import { Link as RLink } from "react-router-dom";
 import { useNavItems } from "../../hooks/useNaveItems";
+import { NavItem } from "./types";
 
 function DesktopSubNav({ label, href, subLabel }: NavItem) {
   return (
     <Link
-      href={href}
+      as={RLink}
+      to={href ?? "#"}
       role="group"
       display="block"
       p={2}

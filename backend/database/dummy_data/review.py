@@ -21,7 +21,7 @@ def create_dummy_reviews_sql(config):
         bookworm_id = (config.get("BOOKWORM")[random.randint(0,len(config.get("BOOKWORM")) - 1)]).get("uuid")
   
         sql = "INSERT INTO review (review_id,description,rating,startdate,enddate,duration,last_updated,book_id,bookworm_id) " \
-            f"VALUES ('{review_id}'::UUID,'{description}','{rating}','{startdate}','{enddate}','{duration}','{last_updated}','{book_id}'::UUID,'{bookworm_id}'::UUID);\n"
+            f"VALUES ('{review_id}'::UUID,'{description}',{rating},'{startdate}','{enddate}','{duration}','{last_updated}','{book_id}'::UUID,'{bookworm_id}'::UUID);\n"
         insert_statements += sql
 
     return insert_statements

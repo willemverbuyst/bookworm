@@ -51,7 +51,7 @@ config = {
   "PAGES_MAX":800,
   "PAGES_MIN":50,
   "PAYMENT":[{"uuid": uuid.uuid4()} for i in range(8000)],
-  "RATING_MIN":0,
+  "RATING_MIN":1,
   "RATING_MAX":5,
   "RENTAL_RATE":[{"uuid": uuid.uuid4(), "rate": i + 0.99} for i in range(5)],
   "RENTAL":[{"uuid": uuid.uuid4()} for i in range(8000)],

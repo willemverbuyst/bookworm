@@ -1,12 +1,15 @@
 export interface Review {
-  author: string;
-  bookTitle: string;
-  review: string;
-  rating: number | null;
+  id: string;
+  description: string;
+  rating: number;
+  book_title: string;
+  reviewer: string;
 }
 
 export interface ReviewApi {
   status: string;
-  data: null;
+  result: number;
+  data: Array<Review>;
+  total_number_of_reviews: number;
   message: string;
 }

@@ -1,7 +1,9 @@
 import { Box } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useAppState } from "./business/overmind";
 import PrivateRoute from "./helpers/PrivateRoute";
-import Message from "./UI/components/Message";
+import { useToastHook } from "./UI/hooks/useToastHook";
 import SignInPage from "./UI/pages/Auth/SignInPage";
 import SignUpPage from "./UI/pages/Auth/SingUpPage";
 import AuthorsPage from "./UI/pages/Authors/AuthorsPage";
@@ -10,10 +12,21 @@ import BookwormsPage from "./UI/pages/BookWorms/BookwormsPage";
 import HomePage from "./UI/pages/Home/HomePage";
 import PageNotFoundPage from "./UI/pages/PageNotFound/PageNotFoundPage";
 import RentalsPage from "./UI/pages/Rentals/RentalsPage";
-import ReviewPage from "./UI/pages/Reviews/ReviewPage";
+import AddReviewPage from "./UI/pages/Reviews/AddReviewPage";
+import AllReviewsPage from "./UI/pages/Reviews/AllReviewsPage";
 import WelcomePage from "./UI/pages/Welcome/WelcomePage";
 
 export default function App() {
+  const [, setToast] = useToastHook();
+
+  const { message, status, statusText } = useAppState().apiResponse;
+
+  useEffect(() => {
+    if (message && status) {
+      setToast({ title: statusText, status, description: message });
+    }
+  }, [message, status]);
+
   return (
     <Box>
       <Routes>
@@ -23,7 +36,6 @@ export default function App() {
         <Route path="/authors" element={<AuthorsPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/rentals" element={<RentalsPage />} />
         <Route
           path="/home"
           element={
@@ -33,16 +45,31 @@ export default function App() {
           }
         />
         <Route
+          path="/rentals"
+          element={
+            <PrivateRoute>
+              <RentalsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/reviews/add"
+          element={
+            <PrivateRoute>
+              <AddReviewPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/reviews"
           element={
             <PrivateRoute>
-              <ReviewPage />
+              <AllReviewsPage />
             </PrivateRoute>
           }
         />
         <Route path="*" element={<PageNotFoundPage />} />
       </Routes>
-      <Message />
     </Box>
   );
 }

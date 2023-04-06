@@ -99,5 +99,12 @@ export const state: State = {
     return rentalStatsDurationApi.data;
   }),
   rentalStatsDurationApi: null,
+  reviewsApi: null,
+  reviewsOverview: derived(({ reviewsApi }: State) => {
+    if (!reviewsApi?.data.length) {
+      return null;
+    }
+    return reviewsApi.data;
+  }),
   user: null,
 };
