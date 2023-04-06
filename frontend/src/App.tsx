@@ -12,7 +12,8 @@ import BookwormsPage from "./UI/pages/BookWorms/BookwormsPage";
 import HomePage from "./UI/pages/Home/HomePage";
 import PageNotFoundPage from "./UI/pages/PageNotFound/PageNotFoundPage";
 import RentalsPage from "./UI/pages/Rentals/RentalsPage";
-import ReviewPage from "./UI/pages/Reviews/ReviewPage";
+import AddReviewPage from "./UI/pages/Reviews/AddReviewPage";
+import AllReviewsPage from "./UI/pages/Reviews/AllReviewsPage";
 import WelcomePage from "./UI/pages/Welcome/WelcomePage";
 
 export default function App() {
@@ -52,10 +53,18 @@ export default function App() {
           }
         />
         <Route
+          path="/reviews/add"
+          element={
+            <PrivateRoute>
+              <AddReviewPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/reviews"
           element={
             <PrivateRoute>
-              <ReviewPage />
+              <AllReviewsPage />
             </PrivateRoute>
           }
         />

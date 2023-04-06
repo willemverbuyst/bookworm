@@ -10,7 +10,21 @@ export const PRIVATE_NAV_ITEMS: Array<NavItem> = [
   { label: "Home", href: "/home" },
   { label: "Bookworms", href: "/bookworms" },
   { label: "Rentals", href: "/rentals" },
-  { label: "Reviews", href: "/reviews" },
+  {
+    label: "Reviews",
+    children: [
+      {
+        label: "Add review",
+        subLabel: "Add a review for a book your read",
+        href: "/reviews/add",
+      },
+      {
+        label: "All reviews",
+        subLabel: "Have a look at existing reviews",
+        href: "/reviews",
+      },
+    ],
+  },
 ];
 
 export function useNavItems() {

@@ -18,7 +18,7 @@ import { useGetAuthors } from "../../hooks/useGetAuthors";
 import { useGetBooks } from "../../hooks/useGetBooks";
 import { defaultValues, FormFields, validationSchema } from "./helpers";
 
-function ReviewPage() {
+function AddReviewPage() {
   const id = useId();
   const allAuthors = useAppState().authorOverview || [];
   const allBooks = useAppState().bookOverview || [];
@@ -156,4 +156,4 @@ function ReviewPage() {
   );
 }
 
-export default ReviewPage;
+export default AddReviewPage;

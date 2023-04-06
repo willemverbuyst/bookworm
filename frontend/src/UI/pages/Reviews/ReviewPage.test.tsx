@@ -3,7 +3,7 @@ import { createOvermindMock } from "overmind";
 import { Provider } from "overmind-react";
 import { vi } from "vitest";
 import { config } from "../../../business/overmind";
-import ReviewPage from "./ReviewPage";
+import ReviewPage from "./AllReviewsPage";
 
 vi.mock("../../components/Navigation/NavigationBar", () => {
   const NavigationBar = vi.fn();
