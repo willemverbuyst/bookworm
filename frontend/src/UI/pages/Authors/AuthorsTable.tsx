@@ -8,6 +8,7 @@ import TableOverview from "../../components/Table/TableOverView";
 function AuthorsTable() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
+  const [showAll, setShowAll] = useState(false);
   const data = useAppState().authorOverview;
   const total = useAppState().authorsApi?.total_number_of_authors;
   const { getAuthors } = useActions();
@@ -18,8 +19,12 @@ function AuthorsTable() {
   ];
 
   useEffect(() => {
-    getAuthors({ limit, page });
-  }, [page, limit]);
+    if (showAll && total) {
+      getAuthors({ limit: total, page: 1 });
+    } else {
+      getAuthors({ limit, page });
+    }
+  }, [page, limit, showAll]);
 
   return (
     <Box>
@@ -34,8 +39,10 @@ function AuthorsTable() {
             total={total}
             limit={limit}
             page={page}
+            showAll={showAll}
             updatePage={setPage}
             updateLimit={setLimit}
+            updateShowAll={setShowAll}
           />
         </>
       ) : (

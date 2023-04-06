@@ -11,6 +11,7 @@ import Filter from "./Filter";
 function RentalsTable() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);
+  const [showAll, setShowAll] = useState(false);
   const [filter, setFilter] = useState("not_returned");
   const data = useAppState().rentalsOverview;
   const total = useAppState().rentalsApi?.total_number_of_rentals;
@@ -19,8 +20,12 @@ function RentalsTable() {
   useGetLanguages();
 
   useEffect(() => {
-    getRentals({ limit, page, filter });
-  }, [filter, limit, page]);
+    if (showAll && total) {
+      getRentals({ limit: total, page: 1, filter });
+    } else {
+      getRentals({ limit, page, filter });
+    }
+  }, [filter, limit, page, showAll]);
 
   const columns: Array<{ field: keyof Rental }> = [
     { field: "title" },
@@ -43,8 +48,10 @@ function RentalsTable() {
             total={total}
             limit={limit}
             page={page}
+            showAll={showAll}
             updatePage={setPage}
             updateLimit={setLimit}
+            updateShowAll={setShowAll}
           />
         </>
       ) : (

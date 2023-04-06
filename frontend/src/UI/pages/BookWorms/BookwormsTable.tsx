@@ -12,13 +12,18 @@ interface Props {
 function BookwormsTable({ action }: Props) {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(15);
+  const [showAll, setShowAll] = useState(false);
   const data = useAppState().bookwormOverview;
   const total = useAppState().bookwormApi?.total_number_of_bookworms;
   const { getBookworms } = useActions();
 
   useEffect(() => {
-    getBookworms({ limit, page });
-  }, [limit, page]);
+    if (showAll && total) {
+      getBookworms({ limit: total, page: 1 });
+    } else {
+      getBookworms({ limit, page });
+    }
+  }, [page, limit, showAll]);
 
   const columns: Array<{ field: keyof Bookworm }> = [
     { field: "first_name" },
@@ -43,8 +48,10 @@ function BookwormsTable({ action }: Props) {
             total={total}
             limit={limit}
             page={page}
+            showAll={showAll}
             updatePage={setPage}
             updateLimit={setLimit}
+            updateShowAll={setShowAll}
           />
         </>
       ) : (
