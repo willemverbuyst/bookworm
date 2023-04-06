@@ -154,6 +154,24 @@ export const api = {
     }
   },
 
+  getUserByToken: async (
+    token: string
+  ): Promise<UserApi | AxiosError | null> => {
+    try {
+      const response = await axios.post(`${BACKEND_URL}/user/me`, {
+        token,
+      });
+      return response.data;
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        console.error(JSON.stringify(error.response));
+        return error;
+      }
+      console.error(JSON.stringify(error));
+      return null;
+    }
+  },
+
   getUser: async (
     email: string,
     password: string
@@ -174,13 +192,14 @@ export const api = {
     }
   },
 
-  getUserByToken: async (
-    token: string
-  ): Promise<UserApi | AxiosError | null> => {
+  getReviews: async ({
+    limit = 10,
+    page = 1,
+  }): Promise<ReviewApi | AxiosError | null> => {
     try {
-      const response = await axios.post(`${BACKEND_URL}/user/me`, {
-        token,
-      });
+      const response = await axios.get(
+        `${BACKEND_URL}/reviews/?limit=${limit}&page=${page}`
+      );
       return response.data;
     } catch (error: unknown) {
       if (error instanceof AxiosError) {

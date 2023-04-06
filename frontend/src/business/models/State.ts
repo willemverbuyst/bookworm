@@ -25,6 +25,7 @@ import {
   RentalStatsDuration,
   RentalStatsDurationApi,
 } from "./Rental";
+import { Review, ReviewApi } from "./Review";
 import { User, UserApi } from "./User";
 
 export interface State {
@@ -53,5 +54,7 @@ export interface State {
   rentalsOverview: Array<Rental> | null;
   rentalStatsDurationApi: RentalStatsDurationApi | null;
   rentalStatsDuration: Array<RentalStatsDuration> | null;
+  reviewsApi: ReviewApi | null;
+  reviewsOverview: Array<Review> | null;
   user: User | null;
 }

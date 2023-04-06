@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { AxiosError } from "axios";
 import { Context } from ".";
-import { Review } from "../models/Review";
 
 interface SignInCredentials {
   email: string;
@@ -49,7 +48,7 @@ export const onInitializeOvermind = async ({
   if (!tokenFromLocalStorage) {
     return;
   }
-  state.apiResponse = { statusText: "", message: "", status: undefined };
+  actions.resetApiResponse();
 
   const response = await effects.api.getUserByToken(tokenFromLocalStorage);
 
@@ -159,9 +158,34 @@ export const getRentalStatsDuration = async ({ effects, state }: Context) => {
   state.rentalStatsDurationApi = rentalStats;
 };
 
+export const getReviews = async (
+  { actions, effects, state }: Context,
+  { limit, page }: { limit: number; page: number }
+) => {
+  actions.resetApiResponse();
+  const response = await effects.api.getReviews({ limit, page });
+
+  if (!response || response instanceof AxiosError) {
+    actions.handleErrorResponse({ response });
+    return;
+  }
+
+  state.reviewsApi = response;
+};
+
 export const postReview = async (
   { state, effects }: Context,
-  { author, bookTitle, review, rating }: Review
+  {
+    author,
+    bookTitle,
+    review,
+    rating,
+  }: {
+    author: string;
+    bookTitle: string;
+    review: string;
+    rating: number | null;
+  }
 ) => {
   const { token } = state.auth;
   const response = await effects.api.postReview(
@@ -210,4 +234,8 @@ export const handleErrorResponse = (
       status: "error",
     };
   }
+};
+
+export const resetApiResponse = ({ state }: Context) => {
+  state.apiResponse = { statusText: "", message: "", status: undefined };
 };
