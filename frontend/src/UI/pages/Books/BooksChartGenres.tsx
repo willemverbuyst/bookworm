@@ -43,7 +43,7 @@ function BooksChartGenres() {
           </BarChart>
         </Box>
       ) : (
-        <p>No books</p>
+        <p>no books</p>
       )}
     </Box>
   );

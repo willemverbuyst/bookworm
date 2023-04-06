@@ -64,7 +64,7 @@ function BookChartYearPublished() {
           </LineChart>
         </Box>
       ) : (
-        <p>No books</p>
+        <p>no books</p>
       )}
     </Box>
   );

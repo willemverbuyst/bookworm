@@ -48,7 +48,7 @@ function RentalsTable() {
           />
         </>
       ) : (
-        <p>No rentals</p>
+        <p>no rentals</p>
       )}
     </Box>
   );

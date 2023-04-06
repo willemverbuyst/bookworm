@@ -45,7 +45,7 @@ function RentalsDurationChart() {
           </ComposedChart>
         </Box>
       ) : (
-        <p>no stats</p>
+        <p>no rentals</p>
       )}
     </Box>
   );

@@ -39,7 +39,7 @@ function AuthorsTable() {
           />
         </>
       ) : (
-        <p>No Authors</p>
+        <p>no authors</p>
       )}
     </Box>
   );

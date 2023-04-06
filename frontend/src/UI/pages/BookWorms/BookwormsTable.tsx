@@ -48,7 +48,7 @@ function BookwormsTable({ action }: Props) {
           />
         </>
       ) : (
-        <p>No books</p>
+        <p>no bookworms</p>
       )}
     </Box>
   );

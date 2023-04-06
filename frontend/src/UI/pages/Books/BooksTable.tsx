@@ -33,13 +33,13 @@ function BooksTable() {
 
   return (
     <Box>
-      <FilterAndSort
-        updateGenre={setGenre}
-        updateLanguage={setLanguage}
-        updatePage={setPage}
-      />
       {data?.length ? (
         <>
+          <FilterAndSort
+            updateGenre={setGenre}
+            updateLanguage={setLanguage}
+            updatePage={setPage}
+          />
           <TableOverview
             rows={data}
             columns={columns}
@@ -54,7 +54,7 @@ function BooksTable() {
           />
         </>
       ) : (
-        <p>No books</p>
+        <p>no books</p>
       )}
     </Box>
   );

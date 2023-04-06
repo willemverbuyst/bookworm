@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import { Cell, Legend, PieChart, Pie } from "recharts";
+import { Cell, Legend, Pie, PieChart } from "recharts";
 import { useAppState } from "../../../business/overmind";
 import { useGetBookStatsGenre } from "../../hooks/useGetBookStatsGenre";
 
@@ -39,7 +39,7 @@ function BooksChartLanguages() {
           </PieChart>
         </Box>
       ) : (
-        <p>No books</p>
+        <p>no books</p>
       )}
     </Box>
   );

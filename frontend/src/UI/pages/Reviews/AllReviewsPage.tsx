@@ -137,7 +137,7 @@ function AllReviewsPage() {
             </Flex>
           </Flex>
         ) : (
-          <p>No reviews</p>
+          <p>no reviews</p>
         )}
       </Flex>
     </>
