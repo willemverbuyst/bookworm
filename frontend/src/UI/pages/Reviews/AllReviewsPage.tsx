@@ -1,4 +1,6 @@
+import { StarIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Button,
   Card,
   CardBody,
@@ -23,9 +25,13 @@ function AllReviewsPage() {
         <PageTitle title="All Reviews" />
         <Flex flexDirection="row" alignItems="center">
           <Flex flexDirection="column" alignItems="center">
-            <Text>Rating: ***</Text>
+            <Box>
+              {[...Array(5).keys()].map((i) => (
+                <StarIcon key={i} color="teal.600" />
+              ))}
+            </Box>
             {data.map((d) => (
-              <Card width={300} m={2}>
+              <Card width={300} my={4} mx={6}>
                 <CardHeader>
                   <Heading size="md">{d.book_title}</Heading>
                 </CardHeader>
@@ -39,9 +45,83 @@ function AllReviewsPage() {
             ))}
           </Flex>
           <Flex flexDirection="column" alignItems="center">
-            <Text>Rating: **</Text>
+            <Box>
+              {[...Array(4).keys()].map((i) => (
+                <StarIcon key={i} color="teal.600" />
+              ))}
+              <StarIcon color="gray.300" />
+            </Box>
             {data.map((d) => (
-              <Card width={300} m={2}>
+              <Card width={300} my={4} mx={6}>
+                <CardHeader>
+                  <Heading size="md">{d.book_title}</Heading>
+                </CardHeader>
+                <CardBody>
+                  <Text noOfLines={3}>{d.description}</Text>
+                </CardBody>
+                <CardFooter>
+                  <Button>Read here</Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </Flex>
+          <Flex flexDirection="column" alignItems="center">
+            <Box>
+              {[...Array(3).keys()].map((i) => (
+                <StarIcon key={i} color="teal.600" />
+              ))}
+              {[...Array(2).keys()].map((i) => (
+                <StarIcon key={i} color="gray.300" />
+              ))}
+            </Box>
+            {data.map((d) => (
+              <Card width={300} my={4} mx={6}>
+                <CardHeader>
+                  <Heading size="md">{d.book_title}</Heading>
+                </CardHeader>
+                <CardBody>
+                  <Text noOfLines={3}>{d.description}</Text>
+                </CardBody>
+                <CardFooter>
+                  <Button>Read here</Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </Flex>
+          <Flex flexDirection="column" alignItems="center">
+            <Box>
+              {[...Array(2).keys()].map((i) => (
+                <StarIcon key={i} color="teal.600" />
+              ))}
+              {[...Array(3).keys()].map((i) => (
+                <StarIcon key={i} color="gray.300" />
+              ))}
+            </Box>
+            {data.map((d) => (
+              <Card width={300} my={4} mx={6}>
+                <CardHeader>
+                  <Heading size="md">{d.book_title}</Heading>
+                </CardHeader>
+                <CardBody>
+                  <Text noOfLines={3}>{d.description}</Text>
+                </CardBody>
+                <CardFooter>
+                  <Button>Read here</Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </Flex>
+          <Flex flexDirection="column" alignItems="center">
+            <Box>
+              {[...Array(1).keys()].map((i) => (
+                <StarIcon key={i} color="teal.600" />
+              ))}
+              {[...Array(4).keys()].map((i) => (
+                <StarIcon key={i} color="gray.300" />
+              ))}
+            </Box>
+            {data.map((d) => (
+              <Card width={300} my={4} mx={6}>
                 <CardHeader>
                   <Heading size="md">{d.book_title}</Heading>
                 </CardHeader>

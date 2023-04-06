@@ -7,7 +7,7 @@ export function useGetReviews() {
 
   useEffect(() => {
     if (!reviewsApi?.data.length) {
-      getReviews({ limit: 5, page: 1 });
+      getReviews({ limit: 3, page: 1 });
     }
   }, []);
 }
