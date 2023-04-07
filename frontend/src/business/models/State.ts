@@ -27,9 +27,6 @@ import { Review, ReviewApi } from "./Review";
 import { User, UserApi } from "./User";
 
 export interface State {
-  languagesApi: LanguageApi | null;
-  languagesOverview: Array<Language> | null;
-
   user: User | null;
 }
 
@@ -73,6 +70,11 @@ export interface BookwormState {
 export interface GenreState {
   genresApi: GenreApi | null;
   genresOverview: Array<Genre> | null;
+}
+
+export interface LanguageState {
+  languagesApi: LanguageApi | null;
+  languagesOverview: Array<Language> | null;
 }
 
 export interface RentalState {
