@@ -1,4 +1,3 @@
-import { ApiResponse } from "./Api";
 import {
   Author,
   AuthorApi,
@@ -28,13 +27,20 @@ import { Review, ReviewApi } from "./Review";
 import { User, UserApi } from "./User";
 
 export interface State {
-  apiResponse: ApiResponse;
   genresApi: GenreApi | null;
   genresOverview: Array<Genre> | null;
   languagesApi: LanguageApi | null;
   languagesOverview: Array<Language> | null;
 
   user: User | null;
+}
+
+export interface ApiState {
+  response: {
+    statusText?: string;
+    message: string;
+    status: "success" | "error" | undefined;
+  };
 }
 
 export interface AuthState {
