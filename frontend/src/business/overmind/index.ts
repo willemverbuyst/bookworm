@@ -10,6 +10,7 @@ import * as author from "./Author";
 import * as book from "./Book";
 import * as bookworm from "./Bookworm";
 import * as rental from "./Rental";
+import * as review from "./Review";
 // import * as actions from "./actions";
 // import * as effects from "./effects";
 // import { state } from "./state";
@@ -19,6 +20,7 @@ export const config = namespaced({
   book,
   bookworm,
   rental,
+  review,
 });
 
 export type Context = IContext<{

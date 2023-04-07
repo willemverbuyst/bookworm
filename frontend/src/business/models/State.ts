@@ -36,8 +36,6 @@ export interface State {
   languagesApi: LanguageApi | null;
   languagesOverview: Array<Language> | null;
 
-  reviewsApi: ReviewApi | null;
-  reviewsOverview: Array<Review> | null;
   user: User | null;
 }
 
@@ -70,4 +68,9 @@ export interface RentalState {
   rentalsOverview: Array<Rental> | null;
   rentalStatsDurationApi: RentalStatsDurationApi | null;
   rentalStatsDuration: Array<RentalStatsDuration> | null;
+}
+
+export interface ReviewState {
+  reviewsApi: ReviewApi | null;
+  reviewsOverview: Array<Review> | null;
 }
