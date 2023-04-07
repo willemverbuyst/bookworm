@@ -11,6 +11,7 @@ import * as auth from "./Auth";
 import * as author from "./Author";
 import * as book from "./Book";
 import * as bookworm from "./Bookworm";
+import * as genre from "./Genre";
 import * as rental from "./Rental";
 import * as review from "./Review";
 // import * as actions from "./actions";
@@ -23,6 +24,7 @@ export const config = namespaced({
   author,
   book,
   bookworm,
+  genre,
   rental,
   review,
 });

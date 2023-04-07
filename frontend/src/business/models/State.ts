@@ -27,8 +27,6 @@ import { Review, ReviewApi } from "./Review";
 import { User, UserApi } from "./User";
 
 export interface State {
-  genresApi: GenreApi | null;
-  genresOverview: Array<Genre> | null;
   languagesApi: LanguageApi | null;
   languagesOverview: Array<Language> | null;
 
@@ -70,6 +68,11 @@ export interface BookwormState {
   bookwormApi: BookwormApi | null;
   bookwormDetailsApi: Omit<UserApi, "token"> | null;
   bookwormOverview: Array<Bookworm> | null;
+}
+
+export interface GenreState {
+  genresApi: GenreApi | null;
+  genresOverview: Array<Genre> | null;
 }
 
 export interface RentalState {
