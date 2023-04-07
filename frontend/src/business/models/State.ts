@@ -26,10 +26,6 @@ import {
 import { Review, ReviewApi } from "./Review";
 import { User, UserApi } from "./User";
 
-export interface State {
-  user: User | null;
-}
-
 export interface ApiState {
   response: {
     statusText?: string;
@@ -87,4 +83,8 @@ export interface RentalState {
 export interface ReviewState {
   reviewsApi: ReviewApi | null;
   reviewsOverview: Array<Review> | null;
+}
+
+export interface UserState {
+  user: User | null;
 }

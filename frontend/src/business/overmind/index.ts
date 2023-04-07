@@ -15,9 +15,7 @@ import * as genre from "./Genre";
 import * as language from "./Language";
 import * as rental from "./Rental";
 import * as review from "./Review";
-// import * as actions from "./actions";
-// import * as effects from "./effects";
-// import { state } from "./state";
+import * as user from "./User";
 
 export const config = namespaced({
   api,
@@ -29,6 +27,7 @@ export const config = namespaced({
   language,
   rental,
   review,
+  user,
 });
 
 export type Context = IContext<{
