@@ -8,14 +8,6 @@ export const state: State = {
     token: "",
   },
   apiResponse: { message: "", status: undefined },
-  bookwormApi: null,
-  bookwormDetailsApi: null,
-  bookwormOverview: derived(({ bookwormApi }: State) => {
-    if (!bookwormApi?.data.length) {
-      return null;
-    }
-    return bookwormApi.data;
-  }),
   genresApi: null,
   genresOverview: derived(({ genresApi }: State) => {
     if (!genresApi?.data.length) {

@@ -1,5 +1,4 @@
 import axios, { AxiosError } from "axios";
-import { BookwormApi } from "../models/Bookworm";
 import { GenreApi } from "../models/Genre";
 import { LanguageApi } from "../models/Language";
 import { RentalApi, RentalStatsDurationApi } from "../models/Rental";
@@ -9,18 +8,6 @@ import { UserApi } from "../models/User";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 
 export const api = {
-  getBookwormById: async (id: string): Promise<Omit<UserApi, "token">> => {
-    const response = await axios.get(`${BACKEND_URL}/bookworms/${id}`);
-    return response.data;
-  },
-
-  getBookworms: async ({ limit = 10, page = 1 }): Promise<BookwormApi> => {
-    const response = await axios.get(
-      `${BACKEND_URL}/bookworms/?limit=${limit}&page=${page}`
-    );
-    return response.data;
-  },
-
   getGenres: async (): Promise<GenreApi> => {
     try {
       const response = await axios.get(`${BACKEND_URL}/genres`);

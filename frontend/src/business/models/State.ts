@@ -33,9 +33,7 @@ export interface State {
   apiResponse: ApiResponse;
   author: AuthorState;
   book: BookState;
-  bookwormApi: BookwormApi | null;
-  bookwormDetailsApi: Omit<UserApi, "token"> | null;
-  bookwormOverview: Array<Bookworm> | null;
+  bookworm: BookwormState;
   genresApi: GenreApi | null;
   genresOverview: Array<Genre> | null;
   languagesApi: LanguageApi | null;
@@ -65,4 +63,10 @@ export interface BookState {
   bookStatsLanguageApi: BookStatsLanguageApi | null;
   bookStatsYearPublished: Array<BookStatsYearPublished> | null;
   bookStatsYearPublishedApi: BookStatsYearPubishedApi | null;
+}
+
+export interface BookwormState {
+  bookwormApi: BookwormApi | null;
+  bookwormDetailsApi: Omit<UserApi, "token"> | null;
+  bookwormOverview: Array<Bookworm> | null;
 }

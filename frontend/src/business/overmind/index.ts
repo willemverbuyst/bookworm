@@ -8,13 +8,15 @@ import {
 import { namespaced } from "overmind/config";
 import * as author from "./Author";
 import * as book from "./Book";
+import * as bookworm from "./Bookworm";
 // import * as actions from "./actions";
 // import * as effects from "./effects";
 // import { state } from "./state";
 
 export const config = namespaced({
-  book,
   author,
+  book,
+  bookworm,
 });
 
 export type Context = IContext<{

@@ -65,22 +65,6 @@ export const onInitializeOvermind = async ({
   state.user = response.data;
 };
 
-export const getAuthors = async (
-  { effects, state }: Context,
-  { limit, page }: { limit: number; page: number }
-) => {
-  const authors = await effects.api.getAuthors({ limit, page });
-  state.authorsApi = authors;
-};
-
-export const getBookworms = async (
-  { effects, state }: Context,
-  { limit, page }: { limit: number; page: number }
-) => {
-  const bookworms = await effects.api.getBookworms({ limit, page });
-  state.bookwormApi = bookworms;
-};
-
 export const getGenres = async ({ effects, state }: Context) => {
   const genres = await effects.api.getGenres();
   state.genresApi = genres;
@@ -94,14 +78,6 @@ export const getLanguages = async ({ effects, state }: Context) => {
 export const getAuthorStatsPage = async ({ effects, state }: Context) => {
   const pagesStats = await effects.api.getAuthorStatsPages();
   state.authorStatsPageApi = pagesStats;
-};
-
-export const getBookWormById = async (
-  { effects, state }: Context,
-  { id }: { id: string }
-) => {
-  const user = await effects.api.getBookwormById(id);
-  state.bookwormDetailsApi = user;
 };
 
 export const getRentals = async (
