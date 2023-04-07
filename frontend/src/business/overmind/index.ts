@@ -6,6 +6,7 @@ import {
   createStateHook,
 } from "overmind-react";
 import { namespaced } from "overmind/config";
+import * as auth from "./Auth";
 import * as author from "./Author";
 import * as book from "./Book";
 import * as bookworm from "./Bookworm";
@@ -16,6 +17,7 @@ import * as review from "./Review";
 // import { state } from "./state";
 
 export const config = namespaced({
+  auth,
   author,
   book,
   bookworm,

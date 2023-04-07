@@ -1,5 +1,4 @@
 import { ApiResponse } from "./Api";
-import { Auth } from "./Auth";
 import {
   Author,
   AuthorApi,
@@ -29,7 +28,6 @@ import { Review, ReviewApi } from "./Review";
 import { User, UserApi } from "./User";
 
 export interface State {
-  auth: Auth;
   apiResponse: ApiResponse;
   genresApi: GenreApi | null;
   genresOverview: Array<Genre> | null;
@@ -37,6 +35,11 @@ export interface State {
   languagesOverview: Array<Language> | null;
 
   user: User | null;
+}
+
+export interface AuthState {
+  isSignedIn: boolean;
+  token: string;
 }
 
 export interface AuthorState {
