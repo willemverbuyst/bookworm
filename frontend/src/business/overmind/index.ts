@@ -7,6 +7,7 @@ import {
 } from "overmind-react";
 import { namespaced } from "overmind/config";
 import * as api from "./Api";
+import * as app from "./App";
 import * as auth from "./Auth";
 import * as author from "./Author";
 import * as book from "./Book";
@@ -19,6 +20,7 @@ import * as user from "./User";
 
 export const config = namespaced({
   api,
+  app,
   auth,
   author,
   book,
