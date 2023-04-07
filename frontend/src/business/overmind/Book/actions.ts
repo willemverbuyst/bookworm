@@ -15,7 +15,7 @@ export const getBooks = async (
     page: number;
   }
 ) => {
-  const books = await effects.api.getBooks({
+  const books = await effects.book.api.getBooks({
     genre,
     language,
     limit,
@@ -25,12 +25,12 @@ export const getBooks = async (
 };
 
 export const getBookStatsGenre = async ({ effects, state }: Context) => {
-  const genresStats = await effects.api.getBookStatsGenres();
+  const genresStats = await effects.book.api.getBookStatsGenres();
   state.book.bookStatsGenreApi = genresStats;
 };
 
 export const getBookStatsLanguage = async ({ effects, state }: Context) => {
-  const languagesStats = await effects.api.getBookStatsLanguages();
+  const languagesStats = await effects.book.api.getBookStatsLanguages();
   state.book.bookStatsLanguageApi = languagesStats;
 };
 
@@ -38,6 +38,6 @@ export const getBookStatsYearPublished = async ({
   effects,
   state,
 }: Context) => {
-  const yearPublishedStats = await effects.api.getBookStatsYearPublished();
+  const yearPublishedStats = await effects.book.api.getBookStatsYearPublished();
   state.book.bookStatsYearPublishedApi = yearPublishedStats;
 };

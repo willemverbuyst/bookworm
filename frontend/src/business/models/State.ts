@@ -31,10 +31,7 @@ import { User, UserApi } from "./User";
 export interface State {
   auth: Auth;
   apiResponse: ApiResponse;
-  authorsApi: AuthorApi | null;
-  authorOverview: Author[] | null;
-  authorStatsPage: AuthorStatsPage | null;
-  authorStatsPageApi: AuthorStatsPageApi | null;
+  author: AuthorState;
   book: BookState;
   bookwormApi: BookwormApi | null;
   bookwormDetailsApi: Omit<UserApi, "token"> | null;
@@ -50,6 +47,13 @@ export interface State {
   reviewsApi: ReviewApi | null;
   reviewsOverview: Array<Review> | null;
   user: User | null;
+}
+
+export interface AuthorState {
+  authorsApi: AuthorApi | null;
+  authorOverview: Author[] | null;
+  authorStatsPage: AuthorStatsPage | null;
+  authorStatsPageApi: AuthorStatsPageApi | null;
 }
 
 export interface BookState {
