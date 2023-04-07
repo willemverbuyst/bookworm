@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { derived } from "overmind";
-import { BookState, State } from "../../models/State";
+import { BookState } from "../../models/State";
 
 export const state: BookState = {
   booksApi: null,
-  bookOverview: derived(({ booksApi }: State["book"]) => {
+  bookOverview: derived(({ booksApi }: BookState) => {
     if (!booksApi?.data.length) {
       return null;
     }

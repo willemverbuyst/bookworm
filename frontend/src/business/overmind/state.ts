@@ -22,20 +22,7 @@ export const state: State = {
     }
     return languagesApi.data;
   }),
-  rentalsApi: null,
-  rentalsOverview: derived(({ rentalsApi }: State) => {
-    if (!rentalsApi?.data.length) {
-      return null;
-    }
-    return rentalsApi.data;
-  }),
-  rentalStatsDuration: derived(({ rentalStatsDurationApi }: State) => {
-    if (!rentalStatsDurationApi?.data.length) {
-      return null;
-    }
-    return rentalStatsDurationApi.data;
-  }),
-  rentalStatsDurationApi: null,
+
   reviewsApi: null,
   reviewsOverview: derived(({ reviewsApi }: State) => {
     if (!reviewsApi?.data.length) {

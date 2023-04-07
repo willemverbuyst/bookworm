@@ -31,17 +31,11 @@ import { User, UserApi } from "./User";
 export interface State {
   auth: Auth;
   apiResponse: ApiResponse;
-  author: AuthorState;
-  book: BookState;
-  bookworm: BookwormState;
   genresApi: GenreApi | null;
   genresOverview: Array<Genre> | null;
   languagesApi: LanguageApi | null;
   languagesOverview: Array<Language> | null;
-  rentalsApi: RentalApi | null;
-  rentalsOverview: Array<Rental> | null;
-  rentalStatsDurationApi: RentalStatsDurationApi | null;
-  rentalStatsDuration: Array<RentalStatsDuration> | null;
+
   reviewsApi: ReviewApi | null;
   reviewsOverview: Array<Review> | null;
   user: User | null;
@@ -69,4 +63,11 @@ export interface BookwormState {
   bookwormApi: BookwormApi | null;
   bookwormDetailsApi: Omit<UserApi, "token"> | null;
   bookwormOverview: Array<Bookworm> | null;
+}
+
+export interface RentalState {
+  rentalsApi: RentalApi | null;
+  rentalsOverview: Array<Rental> | null;
+  rentalStatsDurationApi: RentalStatsDurationApi | null;
+  rentalStatsDuration: Array<RentalStatsDuration> | null;
 }
