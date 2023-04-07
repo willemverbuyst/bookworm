@@ -35,14 +35,7 @@ export interface State {
   authorOverview: Author[] | null;
   authorStatsPage: AuthorStatsPage | null;
   authorStatsPageApi: AuthorStatsPageApi | null;
-  booksApi: BookApi | null;
-  bookOverview: Array<Book> | null;
-  bookStatsGenre: Array<BookStatsGenre> | null;
-  bookStatsGenreApi: BookStatsGenreApi | null;
-  bookStatsLanguage: Array<BookStatsLanguage> | null;
-  bookStatsLanguageApi: BookStatsLanguageApi | null;
-  bookStatsYearPublished: Array<BookStatsYearPublished> | null;
-  bookStatsYearPublishedApi: BookStatsYearPubishedApi | null;
+  book: BookState;
   bookwormApi: BookwormApi | null;
   bookwormDetailsApi: Omit<UserApi, "token"> | null;
   bookwormOverview: Array<Bookworm> | null;
@@ -57,4 +50,15 @@ export interface State {
   reviewsApi: ReviewApi | null;
   reviewsOverview: Array<Review> | null;
   user: User | null;
+}
+
+export interface BookState {
+  booksApi: BookApi | null;
+  bookOverview: Array<Book> | null;
+  bookStatsGenre: Array<BookStatsGenre> | null;
+  bookStatsGenreApi: BookStatsGenreApi | null;
+  bookStatsLanguage: Array<BookStatsLanguage> | null;
+  bookStatsLanguageApi: BookStatsLanguageApi | null;
+  bookStatsYearPublished: Array<BookStatsYearPublished> | null;
+  bookStatsYearPublishedApi: BookStatsYearPubishedApi | null;
 }

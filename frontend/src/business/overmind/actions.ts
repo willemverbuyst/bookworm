@@ -81,29 +81,6 @@ export const getBookworms = async (
   state.bookwormApi = bookworms;
 };
 
-export const getBooks = async (
-  { effects, state }: Context,
-  {
-    genre,
-    language,
-    limit,
-    page,
-  }: {
-    genre: string | null;
-    language: string | null;
-    limit: number;
-    page: number;
-  }
-) => {
-  const books = await effects.api.getBooks({
-    genre,
-    language,
-    limit,
-    page,
-  });
-  state.booksApi = books;
-};
-
 export const getGenres = async ({ effects, state }: Context) => {
   const genres = await effects.api.getGenres();
   state.genresApi = genres;
@@ -117,24 +94,6 @@ export const getLanguages = async ({ effects, state }: Context) => {
 export const getAuthorStatsPage = async ({ effects, state }: Context) => {
   const pagesStats = await effects.api.getAuthorStatsPages();
   state.authorStatsPageApi = pagesStats;
-};
-
-export const getBookStatsGenre = async ({ effects, state }: Context) => {
-  const genresStats = await effects.api.getBookStatsGenres();
-  state.bookStatsGenreApi = genresStats;
-};
-
-export const getBookStatsLanguage = async ({ effects, state }: Context) => {
-  const languagesStats = await effects.api.getBookStatsLanguages();
-  state.bookStatsLanguageApi = languagesStats;
-};
-
-export const getBookStatsYearPublished = async ({
-  effects,
-  state,
-}: Context) => {
-  const yearPublishedStats = await effects.api.getBookStatsYearPublished();
-  state.bookStatsYearPublishedApi = yearPublishedStats;
 };
 
 export const getBookWormById = async (
