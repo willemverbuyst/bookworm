@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axiosGet } from "../../../api/axios";
 import { ApiResponse } from "../../models/Api";
 import { Rental, RentalStatsDuration } from "../../models/Rental";
 
@@ -24,20 +24,16 @@ export const api = {
       url += "&filter=not_returned";
     }
 
-    const response = await axios.get(url);
-    return response.data;
+    const response = await axiosGet({ url });
+    return response;
   },
 
   getRentalStatsDuration: async (): Promise<
     ApiResponse<Array<RentalStatsDuration>>
   > => {
-    try {
-      const response = await axios.get(
-        `${BACKEND_URL}/rentals/stats/?by=duration`
-      );
-      return response.data;
-    } catch (error) {
-      throw new Error(JSON.stringify(error));
-    }
+    const url = `${BACKEND_URL}/rentals/stats/?by=duration`;
+
+    const response = await axiosGet({ url });
+    return response;
   },
 };

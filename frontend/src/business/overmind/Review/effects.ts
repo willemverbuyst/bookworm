@@ -11,6 +11,7 @@ export const api = {
     page = 1,
   }): Promise<ApiResponse<Array<Review>> | AxiosError | null> => {
     const url = `${BACKEND_URL}/reviews/?limit=${limit}&page=${page}`;
+
     const response = await axiosGet({ url });
     return response;
   },

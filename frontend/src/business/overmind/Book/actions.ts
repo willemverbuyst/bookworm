@@ -1,8 +1,9 @@
 /* eslint-disable no-param-reassign */
+import { AxiosError } from "axios";
 import { Context } from "..";
 
 export const getBooks = async (
-  { effects, state }: Context,
+  { actions, effects, state }: Context,
   {
     genre,
     language,
@@ -16,36 +17,69 @@ export const getBooks = async (
   }
 ) => {
   state.app.isLoading = true;
-  const books = await effects.book.api.getBooks({
+  const response = await effects.book.api.getBooks({
     genre,
     language,
     limit,
     page,
   });
-  state.book.getAllApi = books;
+
+  if (!response || response instanceof AxiosError) {
+    actions.api.handleErrorResponse({ response });
+  } else {
+    state.book.getAllApi = response;
+  }
+
   state.app.isLoading = false;
 };
 
-export const getBookStatsGenre = async ({ effects, state }: Context) => {
-  state.app.isLoading = true;
-  const genresStats = await effects.book.api.getBookStatsGenres();
-  state.book.statsGenreApi = genresStats;
-  state.app.isLoading = false;
-};
-
-export const getBookStatsLanguage = async ({ effects, state }: Context) => {
-  state.app.isLoading = true;
-  const languagesStats = await effects.book.api.getBookStatsLanguages();
-  state.book.statsLanguageApi = languagesStats;
-  state.app.isLoading = false;
-};
-
-export const getBookStatsYearPublished = async ({
+export const getBookStatsGenre = async ({
+  actions,
   effects,
   state,
 }: Context) => {
   state.app.isLoading = true;
-  const yearPublishedStats = await effects.book.api.getBookStatsYearPublished();
-  state.book.statsYearPublishedApi = yearPublishedStats;
+  const response = await effects.book.api.getBookStatsGenres();
+
+  if (!response || response instanceof AxiosError) {
+    actions.api.handleErrorResponse({ response });
+  } else {
+    state.book.statsGenreApi = response;
+  }
+
+  state.app.isLoading = false;
+};
+
+export const getBookStatsLanguage = async ({
+  actions,
+  effects,
+  state,
+}: Context) => {
+  state.app.isLoading = true;
+  const response = await effects.book.api.getBookStatsLanguages();
+
+  if (!response || response instanceof AxiosError) {
+    actions.api.handleErrorResponse({ response });
+  } else {
+    state.book.statsLanguageApi = response;
+  }
+
+  state.app.isLoading = false;
+};
+
+export const getBookStatsYearPublished = async ({
+  actions,
+  effects,
+  state,
+}: Context) => {
+  state.app.isLoading = true;
+  const response = await effects.book.api.getBookStatsYearPublished();
+
+  if (!response || response instanceof AxiosError) {
+    actions.api.handleErrorResponse({ response });
+  } else {
+    state.book.statsYearPublishedApi = response;
+  }
+
   state.app.isLoading = false;
 };
