@@ -24,14 +24,6 @@ export interface BookStatsYearPublished {
   number_of_books: number;
 }
 
-export interface BookApi {
-  status: string;
-  result: number;
-  data: Book[];
-  message: string;
-  total: number;
-}
-
 export interface BookStatsGenreApi {
   status: string;
   result: number;

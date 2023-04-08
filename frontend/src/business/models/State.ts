@@ -1,12 +1,7 @@
-import {
-  Author,
-  AuthorApi,
-  AuthorStatsPage,
-  AuthorStatsPageApi,
-} from "./Author";
+import { ApiResponse } from "./Api";
+import { Author, AuthorStatsPage, AuthorStatsPageApi } from "./Author";
 import {
   Book,
-  BookApi,
   BookStatsGenre,
   BookStatsGenreApi,
   BookStatsLanguage,
@@ -14,16 +9,11 @@ import {
   BookStatsYearPubishedApi,
   BookStatsYearPublished,
 } from "./Book";
-import { Bookworm, BookwormApi } from "./Bookworm";
-import { Genre, GenreApi } from "./Genre";
-import { Language, LanguageApi } from "./Language";
-import {
-  Rental,
-  RentalApi,
-  RentalStatsDuration,
-  RentalStatsDurationApi,
-} from "./Rental";
-import { Review, ReviewApi } from "./Review";
+import { Bookworm } from "./Bookworm";
+import { Genre } from "./Genre";
+import { Language } from "./Language";
+import { Rental, RentalStatsDuration, RentalStatsDurationApi } from "./Rental";
+import { Review } from "./Review";
 import { User, UserApi } from "./User";
 
 export interface ApiState {
@@ -44,14 +34,14 @@ export interface AuthState {
 }
 
 export interface AuthorState {
-  authorsApi: AuthorApi | null;
+  authorsApi: ApiResponse<Author> | null;
   authorOverview: Author[] | null;
   authorStatsPage: AuthorStatsPage | null;
   authorStatsPageApi: AuthorStatsPageApi | null;
 }
 
 export interface BookState {
-  booksApi: BookApi | null;
+  booksApi: ApiResponse<Book> | null;
   bookOverview: Array<Book> | null;
   bookStatsGenre: Array<BookStatsGenre> | null;
   bookStatsGenreApi: BookStatsGenreApi | null;
@@ -62,30 +52,30 @@ export interface BookState {
 }
 
 export interface BookwormState {
-  bookwormApi: BookwormApi | null;
+  bookwormApi: ApiResponse<Bookworm> | null;
   bookwormDetailsApi: Omit<UserApi, "token"> | null;
   bookwormOverview: Array<Bookworm> | null;
 }
 
 export interface GenreState {
-  genresApi: GenreApi | null;
+  genresApi: ApiResponse<Genre> | null;
   genresOverview: Array<Genre> | null;
 }
 
 export interface LanguageState {
-  languagesApi: LanguageApi | null;
+  languagesApi: ApiResponse<Language> | null;
   languagesOverview: Array<Language> | null;
 }
 
 export interface RentalState {
-  rentalsApi: RentalApi | null;
+  rentalsApi: ApiResponse<Rental> | null;
   rentalsOverview: Array<Rental> | null;
   rentalStatsDurationApi: RentalStatsDurationApi | null;
   rentalStatsDuration: Array<RentalStatsDuration> | null;
 }
 
 export interface ReviewState {
-  reviewsApi: ReviewApi | null;
+  reviewsApi: ApiResponse<Review> | null;
   reviewsOverview: Array<Review> | null;
 }
 

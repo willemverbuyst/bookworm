@@ -6,14 +6,6 @@ export interface Rental {
   author: string;
 }
 
-export interface RentalApi {
-  status: string;
-  result: number;
-  data: Rental[];
-  message: string;
-  total: number;
-}
-
 export interface RentalStatsDuration {
   duration: number;
   total_rentals: number;

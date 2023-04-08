@@ -16,14 +16,6 @@ export interface AuthorStatsPage {
   average_pages: number;
 }
 
-export interface AuthorApi {
-  status: string;
-  result: number;
-  data: Array<Author>;
-  total: number;
-  message: string;
-}
-
 export interface AuthorStatsPageApi {
   status: string;
   data: AuthorStatsPage;
