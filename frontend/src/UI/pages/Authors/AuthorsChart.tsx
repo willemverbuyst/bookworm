@@ -6,7 +6,7 @@ import { useGetAuthorStatsPage } from "../../hooks/useGetAuthorStatsPage";
 function AuthorsChart() {
   useGetAuthorStatsPage();
   const { pages_per_author: data = [], average_pages: avg } =
-    useAppState().authorStatsPage || {};
+    useAppState().author.authorStatsPage || {};
 
   const dataForChart = data.map((d) => ({
     name: d.author,

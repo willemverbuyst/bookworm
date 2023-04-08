@@ -5,7 +5,7 @@ import NavigationBar from "../../components/Navigation/NavigationBar";
 import PageTitle from "../../components/Text/PageTitle";
 
 function HomePage() {
-  const { user } = useAppState();
+  const { user } = useAppState().user;
 
   return (
     <>

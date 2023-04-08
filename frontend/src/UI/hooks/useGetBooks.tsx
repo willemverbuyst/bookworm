@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useActions, useAppState } from "../../business/overmind";
 
 export function useGetBooks() {
-  const { booksApi } = useAppState();
-  const { getBooks } = useActions();
+  const { booksApi } = useAppState().book;
+  const { getBooks } = useActions().book;
 
   useEffect(() => {
     if (!booksApi?.data.length) {

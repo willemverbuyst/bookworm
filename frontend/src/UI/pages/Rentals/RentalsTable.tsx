@@ -13,9 +13,9 @@ function RentalsTable() {
   const [limit, setLimit] = useState(20);
   const [showAll, setShowAll] = useState(false);
   const [filter, setFilter] = useState("not_returned");
-  const data = useAppState().rentalsOverview;
-  const total = useAppState().rentalsApi?.total_number_of_rentals;
-  const { getRentals } = useActions();
+  const data = useAppState().rental.rentalsOverview;
+  const total = useAppState().rental.rentalsApi?.total_number_of_rentals;
+  const { getRentals } = useActions().rental;
   useGetGenres();
   useGetLanguages();
 

@@ -14,8 +14,8 @@ interface Props {
 
 function FilterAndSort({ updateGenre, updateLanguage, updatePage }: Props) {
   const id = useId();
-  const allGenres = useAppState().genresOverview || [];
-  const allLanguages = useAppState().languagesOverview || [];
+  const allGenres = useAppState().genre.genresOverview || [];
+  const allLanguages = useAppState().language.languagesOverview || [];
   const genresForSelect = allGenres.map((g) => ({
     value: g.id,
     display: g.genre,

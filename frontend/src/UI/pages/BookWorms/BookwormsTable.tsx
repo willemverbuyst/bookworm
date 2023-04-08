@@ -13,9 +13,9 @@ function BookwormsTable({ action }: Props) {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(15);
   const [showAll, setShowAll] = useState(false);
-  const data = useAppState().bookwormOverview;
-  const total = useAppState().bookwormApi?.total_number_of_bookworms;
-  const { getBookworms } = useActions();
+  const data = useAppState().bookworm.bookwormOverview;
+  const total = useAppState().bookworm.bookwormApi?.total_number_of_bookworms;
+  const { getBookworms } = useActions().bookworm;
 
   useEffect(() => {
     if (showAll && total) {

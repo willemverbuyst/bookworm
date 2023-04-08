@@ -5,7 +5,7 @@ import { useGetRentalStatsDuration } from "../../hooks/useGetRentalStatsDuration
 
 function RentalsDurationChart() {
   useGetRentalStatsDuration();
-  const data = useAppState().rentalStatsDuration || [];
+  const data = useAppState().rental.rentalStatsDuration || [];
   const dataForChart = data.map((d) => ({
     duration: `${d.duration}d`,
     number: Number(d.total_rentals),

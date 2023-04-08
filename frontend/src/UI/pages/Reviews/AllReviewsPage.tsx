@@ -17,7 +17,7 @@ import { useGetReviews } from "../../hooks/useGetReviews";
 
 function AllReviewsPage() {
   useGetReviews();
-  const data = useAppState().reviewsOverview || [];
+  const data = useAppState().review.reviewsOverview || [];
   return (
     <>
       <NavigationBar />

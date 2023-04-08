@@ -13,7 +13,7 @@ import { useGetBookStatsYearPublished } from "../../hooks/useGetBookStatsYearPub
 
 function BookChartYearPublished() {
   useGetBookStatsYearPublished();
-  const data = useAppState().bookStatsYearPublished || [];
+  const data = useAppState().book.bookStatsYearPublished || [];
   const dataForChart = data.map((d) => ({
     name: d.year_published,
     number: Number(d.number_of_books),

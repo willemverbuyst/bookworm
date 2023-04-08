@@ -9,9 +9,9 @@ function AuthorsTable() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [showAll, setShowAll] = useState(false);
-  const data = useAppState().authorOverview;
-  const total = useAppState().authorsApi?.total_number_of_authors;
-  const { getAuthors } = useActions();
+  const data = useAppState().author.authorOverview;
+  const total = useAppState().author.authorsApi?.total_number_of_authors;
+  const { getAuthors } = useActions().author;
   const columns: Array<{ field: keyof Author; isNumeric?: boolean }> = [
     { field: "last_name" },
     { field: "first_name" },

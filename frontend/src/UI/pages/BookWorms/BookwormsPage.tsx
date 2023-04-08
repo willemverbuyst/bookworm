@@ -9,8 +9,8 @@ import BookwormsTable from "./BookwormsTable";
 
 function BookwormsPage() {
   const [showDetails, setShowDetails] = useState(false);
-  const { bookwormDetailsApi } = useAppState();
-  const { getBookWormById } = useActions();
+  const { bookwormDetailsApi } = useAppState().bookworm;
+  const { getBookWormById } = useActions().bookworm;
   const bookwormDetails = bookwormDetailsApi?.data;
 
   const getUser = async (id: string) => {
