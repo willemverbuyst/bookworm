@@ -6,6 +6,7 @@ export const getReviews = async (
   { actions, effects, state }: Context,
   { limit, page }: { limit: number; page: number }
 ) => {
+  state.app.isLoading = true;
   actions.api.resetApiResponse();
   const response = await effects.review.api.getReviews({ limit, page });
 
@@ -15,6 +16,7 @@ export const getReviews = async (
   }
 
   state.review.reviewsApi = response;
+  state.app.isLoading = false;
 };
 
 export const postReview = async (
@@ -31,6 +33,7 @@ export const postReview = async (
     rating: number | null;
   }
 ) => {
+  state.app.isLoading = true;
   const { token } = state.auth;
   const response = await effects.review.api.postReview(
     author,
@@ -51,4 +54,5 @@ export const postReview = async (
       status: "error",
     };
   }
+  state.app.isLoading = false;
 };

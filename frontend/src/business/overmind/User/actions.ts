@@ -11,6 +11,7 @@ export const signInUser = async (
   { actions, effects, state }: Context,
   { email, password }: SignInCredentials
 ) => {
+  state.app.isLoading = true;
   state.api.response = { message: "", status: undefined };
   const response = await effects.user.api.getUser(email, password);
 
@@ -28,13 +29,16 @@ export const signInUser = async (
   state.auth.token = token;
   state.auth.isSignedIn = true;
   state.user.user = response.data;
+  state.app.isLoading = false;
 };
 
 export const logOutUser = ({ state }: Context) => {
+  state.app.isLoading = true;
   // todo: send request to invalidate token
   localStorage.removeItem("token");
   state.auth.token = "";
   state.auth.isSignedIn = false;
   state.user.user = null;
   state.api.response = { message: "", status: undefined };
+  state.app.isLoading = false;
 };

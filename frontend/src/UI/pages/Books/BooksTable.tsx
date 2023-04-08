@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Book } from "../../../business/models/Book";
 import { useActions, useAppState } from "../../../business/overmind";
@@ -14,6 +14,7 @@ function BooksTable() {
   const [showAll, setShowAll] = useState(false);
   const [genre, setGenre] = useState<string | null>(null);
   const [language, setLanguage] = useState<string | null>(null);
+  const { isLoading } = useAppState().app;
   const data = useAppState().book.bookOverview;
   const total = useAppState().book.booksApi?.total_number_of_books;
   const { getBooks } = useActions().book;
@@ -35,6 +36,10 @@ function BooksTable() {
     { field: "genre" },
     { field: "language" },
   ];
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Box>

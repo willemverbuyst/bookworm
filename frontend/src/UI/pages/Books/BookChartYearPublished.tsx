@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import {
   CartesianGrid,
   Label,
@@ -12,6 +12,7 @@ import { useAppState } from "../../../business/overmind";
 import { useGetBookStatsYearPublished } from "../../hooks/useGetBookStatsYearPublished";
 
 function BookChartYearPublished() {
+  const { isLoading } = useAppState().app;
   useGetBookStatsYearPublished();
   const data = useAppState().book.bookStatsYearPublished || [];
   const dataForChart = data.map((d) => ({
@@ -24,6 +25,10 @@ function BookChartYearPublished() {
   const maxYears = dataForChart
     .filter((i) => i.number === max)
     .map((i) => i.name);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Box>

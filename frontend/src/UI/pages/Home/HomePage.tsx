@@ -1,11 +1,16 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Spinner } from "@chakra-ui/react";
 import { useAppState } from "../../../business/overmind";
 import UserDetails from "../../components/Cards/UserDetails";
 import NavigationBar from "../../components/Navigation/NavigationBar";
 import PageTitle from "../../components/Text/PageTitle";
 
 function HomePage() {
+  const { isLoading } = useAppState().app;
   const { user } = useAppState().user;
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>

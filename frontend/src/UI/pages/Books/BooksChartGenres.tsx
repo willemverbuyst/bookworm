@@ -1,15 +1,20 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import { Bar, BarChart, LabelList, XAxis, YAxis } from "recharts";
 import { useAppState } from "../../../business/overmind";
 import { useGetBookStatsLanguage } from "../../hooks/useGetBookStatsLanguage";
 
 function BooksChartGenres() {
+  const { isLoading } = useAppState().app;
   useGetBookStatsLanguage();
   const data = useAppState().book.bookStatsGenre || [];
   const dataForChart = data.map((d) => ({
     name: d.genre,
     number: Number(d.number_of_books),
   }));
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Box>

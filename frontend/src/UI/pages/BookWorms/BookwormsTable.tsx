@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Bookworm } from "../../../business/models/Bookworm";
 import { useActions, useAppState } from "../../../business/overmind";
@@ -10,6 +10,7 @@ interface Props {
 }
 
 function BookwormsTable({ action }: Props) {
+  const { isLoading } = useAppState().app;
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(15);
   const [showAll, setShowAll] = useState(false);
@@ -33,6 +34,10 @@ function BookwormsTable({ action }: Props) {
     { field: "user_is_active" },
     { field: "library_name" },
   ];
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Box>

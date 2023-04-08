@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Rental } from "../../../business/models/Rental";
 import { useActions, useAppState } from "../../../business/overmind";
@@ -9,6 +9,7 @@ import { useGetLanguages } from "../../hooks/useGetLanguages";
 import Filter from "./Filter";
 
 function RentalsTable() {
+  const { isLoading } = useAppState().app;
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);
   const [showAll, setShowAll] = useState(false);
@@ -33,6 +34,10 @@ function RentalsTable() {
     { field: "rental_date" },
     { field: "return_date" },
   ];
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Box>
