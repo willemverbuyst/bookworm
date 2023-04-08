@@ -1,16 +1,7 @@
-import { axiosGet } from "../../../api/axios";
-import { ApiResponse } from "../../models/Api";
-import {
-  Book,
-  BookStatsGenre,
-  BookStatsLanguage,
-  BookStatsYearPublished,
-} from "../../models/Book";
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
+import { apiGet } from "../../../api/apiGet";
 
 export const api = {
-  getBooks: async ({
+  getBooks: ({
     genre,
     language,
     limit = 10,
@@ -20,8 +11,8 @@ export const api = {
     language: string | null;
     limit: number;
     page: number;
-  }): Promise<ApiResponse<Array<Book>>> => {
-    let url = `${BACKEND_URL}/books/?limit=${limit}&page=${page}`;
+  }) => {
+    let url = `books/?limit=${limit}&page=${page}`;
     if (language) {
       url += `&language=${language}`;
     }
@@ -30,32 +21,13 @@ export const api = {
       url += `&genre=${genre}`;
     }
 
-    const response = await axiosGet({ url });
-    return response;
+    return apiGet({ url });
   },
 
-  getBookStatsGenres: async (): Promise<ApiResponse<Array<BookStatsGenre>>> => {
-    const url = `${BACKEND_URL}/books/stats/?by=genre`;
+  getBookStatsGenres: () => apiGet({ url: "books/stats/?by=genre" }),
 
-    const response = await axiosGet({ url });
-    return response;
-  },
+  getBookStatsLanguages: () => apiGet({ url: "books/stats/?by=language" }),
 
-  getBookStatsLanguages: async (): Promise<
-    ApiResponse<Array<BookStatsLanguage>>
-  > => {
-    const url = `${BACKEND_URL}/books/stats/?by=language`;
-
-    const response = await axiosGet({ url });
-    return response;
-  },
-
-  getBookStatsYearPublished: async (): Promise<
-    ApiResponse<Array<BookStatsYearPublished>>
-  > => {
-    const url = `${BACKEND_URL}/books/stats/?by=year_published`;
-
-    const response = await axiosGet({ url });
-    return response;
-  },
+  getBookStatsYearPublished: () =>
+    apiGet({ url: "books/stats/?by=year_published" }),
 };
