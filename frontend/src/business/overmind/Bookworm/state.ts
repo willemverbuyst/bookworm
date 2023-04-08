@@ -2,12 +2,12 @@ import { derived } from "overmind";
 import { BookwormState } from "../../models/State";
 
 export const state: BookwormState = {
-  bookwormApi: null,
+  getAllApiResponse: null,
   bookwormDetailsApi: null,
-  bookwormOverview: derived(({ bookwormApi }: BookwormState) => {
-    if (!bookwormApi?.data.length) {
+  overview: derived(({ getAllApiResponse }: BookwormState) => {
+    if (!getAllApiResponse?.data.length) {
       return null;
     }
-    return bookwormApi.data;
+    return getAllApiResponse.data;
   }),
 };

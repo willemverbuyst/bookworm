@@ -2,12 +2,12 @@ import { derived } from "overmind";
 import { RentalState } from "../../models/State";
 
 export const state: RentalState = {
-  rentalsApi: null,
-  rentalsOverview: derived(({ rentalsApi }: RentalState) => {
-    if (!rentalsApi?.data.length) {
+  getAllApiResponse: null,
+  overview: derived(({ getAllApiResponse }: RentalState) => {
+    if (!getAllApiResponse?.data.length) {
       return null;
     }
-    return rentalsApi.data;
+    return getAllApiResponse.data;
   }),
   rentalStatsDuration: derived(({ rentalStatsDurationApi }: RentalState) => {
     if (!rentalStatsDurationApi?.data.length) {

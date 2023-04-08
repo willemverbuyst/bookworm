@@ -1,4 +1,4 @@
-import { ApiResponse } from "./Api";
+import { GetAllApiResponse } from "./Api";
 import { Author, AuthorStatsPage, AuthorStatsPageApi } from "./Author";
 import {
   Book,
@@ -33,16 +33,17 @@ export interface AuthState {
   token: string;
 }
 
-export interface AuthorState {
-  authorsApi: ApiResponse<Author> | null;
-  authorOverview: Author[] | null;
+export interface StateBase<T> {
+  getAllApiResponse: GetAllApiResponse<Array<T>> | null;
+  overview: Array<T> | null;
+}
+
+export interface AuthorState extends StateBase<Author> {
   authorStatsPage: AuthorStatsPage | null;
   authorStatsPageApi: AuthorStatsPageApi | null;
 }
 
-export interface BookState {
-  booksApi: ApiResponse<Book> | null;
-  bookOverview: Array<Book> | null;
+export interface BookState extends StateBase<Book> {
   bookStatsGenre: Array<BookStatsGenre> | null;
   bookStatsGenreApi: BookStatsGenreApi | null;
   bookStatsLanguage: Array<BookStatsLanguage> | null;
@@ -51,33 +52,20 @@ export interface BookState {
   bookStatsYearPublishedApi: BookStatsYearPubishedApi | null;
 }
 
-export interface BookwormState {
-  bookwormApi: ApiResponse<Bookworm> | null;
+export interface BookwormState extends StateBase<Bookworm> {
   bookwormDetailsApi: Omit<UserApi, "token"> | null;
-  bookwormOverview: Array<Bookworm> | null;
 }
 
-export interface GenreState {
-  genresApi: ApiResponse<Genre> | null;
-  genresOverview: Array<Genre> | null;
-}
+export type GenreState = StateBase<Genre>;
 
-export interface LanguageState {
-  languagesApi: ApiResponse<Language> | null;
-  languagesOverview: Array<Language> | null;
-}
+export type LanguageState = StateBase<Language>;
 
-export interface RentalState {
-  rentalsApi: ApiResponse<Rental> | null;
-  rentalsOverview: Array<Rental> | null;
+export interface RentalState extends StateBase<Rental> {
   rentalStatsDurationApi: RentalStatsDurationApi | null;
   rentalStatsDuration: Array<RentalStatsDuration> | null;
 }
 
-export interface ReviewState {
-  reviewsApi: ApiResponse<Review> | null;
-  reviewsOverview: Array<Review> | null;
-}
+export type ReviewState = StateBase<Review>;
 
 export interface UserState {
   user: User | null;

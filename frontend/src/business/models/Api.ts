@@ -1,7 +1,9 @@
-export interface ApiResponse<T> {
+export interface ApiResponseBase<T> {
   status: string;
-  result: number;
-  data: Array<T>;
-  total: number;
+  data: T;
   message: string;
+}
+export interface GetAllApiResponse<T> extends ApiResponseBase<T> {
+  result: number;
+  total: number;
 }

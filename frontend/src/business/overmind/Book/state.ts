@@ -2,12 +2,12 @@ import { derived } from "overmind";
 import { BookState } from "../../models/State";
 
 export const state: BookState = {
-  booksApi: null,
-  bookOverview: derived(({ booksApi }: BookState) => {
-    if (!booksApi?.data.length) {
+  getAllApiResponse: null,
+  overview: derived(({ getAllApiResponse }: BookState) => {
+    if (!getAllApiResponse?.data.length) {
       return null;
     }
-    return booksApi.data
+    return getAllApiResponse.data
       .map((book) => ({
         ...book,
       }))
