@@ -8,10 +8,10 @@ export interface Rental {
 
 export interface RentalApi {
   status: string;
+  result: number;
   data: Rental[];
   message: string;
-  total_number_of_rentals: number;
-  result: number;
+  total: number;
 }
 
 export interface RentalStatsDuration {

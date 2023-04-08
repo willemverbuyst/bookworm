@@ -18,8 +18,9 @@ export interface AuthorStatsPage {
 
 export interface AuthorApi {
   status: string;
-  data: Author[];
-  total_number_of_authors: number;
+  result: number;
+  data: Array<Author>;
+  total: number;
   message: string;
 }
 

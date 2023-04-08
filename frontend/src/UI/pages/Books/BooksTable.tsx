@@ -16,7 +16,7 @@ function BooksTable() {
   const [language, setLanguage] = useState<string | null>(null);
   const { isLoading } = useAppState().app;
   const data = useAppState().book.bookOverview;
-  const total = useAppState().book.booksApi?.total_number_of_books;
+  const total = useAppState().book.booksApi?.total;
   const { getBooks } = useActions().book;
   useGetGenres();
   useGetLanguages();

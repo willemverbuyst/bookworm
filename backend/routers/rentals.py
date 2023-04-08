@@ -18,7 +18,7 @@ def get_rentals(limit = None, page=1, filter = None) -> dict:
             "status": "success",
             "result": result,
             "data": rentals,
-            "total_number_of_rentals": total_number_of_rentals,
+            "total": total_number_of_rentals,
             "message": "rentals have been fetched",
         }
     except:

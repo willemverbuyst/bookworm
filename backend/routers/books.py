@@ -19,8 +19,8 @@ def get_books(genre = None, language = None, limit = None, page = 1) -> dict:
         return {
             "status": "success",
             "result": result,
-            "total_number_of_books": total_number_of_books,
             "data": books,
+            "total": total_number_of_books,
             "message": "books have been fetched",
         }
     except:

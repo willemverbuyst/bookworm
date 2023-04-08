@@ -10,8 +10,8 @@ export interface Bookworm {
 
 export interface BookwormApi {
   status: string;
-  data: Bookworm[];
-  message: string;
   result: number;
-  total_number_of_bookworms: number;
+  data: Bookworm[];
+  total: number;
+  message: string;
 }

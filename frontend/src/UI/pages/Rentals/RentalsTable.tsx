@@ -15,7 +15,7 @@ function RentalsTable() {
   const [showAll, setShowAll] = useState(false);
   const [filter, setFilter] = useState("not_returned");
   const data = useAppState().rental.rentalsOverview;
-  const total = useAppState().rental.rentalsApi?.total_number_of_rentals;
+  const total = useAppState().rental.rentalsApi?.total;
   const { getRentals } = useActions().rental;
   useGetGenres();
   useGetLanguages();

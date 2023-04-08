@@ -19,7 +19,7 @@ def get_authors(limit = None, page = 1) -> dict:
             "status": "success",
             "result": result,
             "data": authors,
-            "total_number_of_authors": total_number_of_authors,
+            "total": total_number_of_authors,
             "message": "all authors have been fetched",
         }
     except:

@@ -26,10 +26,10 @@ export interface BookStatsYearPublished {
 
 export interface BookApi {
   status: string;
+  result: number;
   data: Book[];
   message: string;
-  total_number_of_books: number;
-  result: number;
+  total: number;
 }
 
 export interface BookStatsGenreApi {

@@ -5,6 +5,8 @@ export interface Language {
 
 export interface LanguageApi {
   status: string;
+  result: number;
   data: Array<Language>;
+  total: number;
   message: string;
 }

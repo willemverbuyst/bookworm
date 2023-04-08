@@ -10,6 +10,6 @@ export interface ReviewApi {
   status: string;
   result: number;
   data: Array<Review>;
-  total_number_of_reviews: number;
+  total: number;
   message: string;
 }
