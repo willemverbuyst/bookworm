@@ -7,7 +7,7 @@ function AuthorsChart() {
   const { isLoading } = useAppState().app;
   useGetAuthorStatsPage();
   const { pages_per_author: data = [], average_pages: avg } =
-    useAppState().author.authorStatsPage || {};
+    useAppState().author.statsPage || {};
 
   const dataForChart = data.map((d) => ({
     name: d.author,

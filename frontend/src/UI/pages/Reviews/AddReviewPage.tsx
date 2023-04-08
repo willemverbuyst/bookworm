@@ -20,8 +20,8 @@ import { defaultValues, FormFields, validationSchema } from "./helpers";
 
 function AddReviewPage() {
   const id = useId();
-  const allAuthors = useAppState().author.authorOverview || [];
-  const allBooks = useAppState().book.bookOverview || [];
+  const allAuthors = useAppState().author.overview || [];
+  const allBooks = useAppState().book.overview || [];
   const authorsForSelect = allAuthors?.map((a) => ({
     display: a.first_name,
     value: a.id,

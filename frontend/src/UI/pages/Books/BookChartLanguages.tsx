@@ -6,7 +6,7 @@ import { useGetBookStatsGenre } from "../../hooks/useGetBookStatsGenre";
 function BooksChartLanguages() {
   const { isLoading } = useAppState().app;
   useGetBookStatsGenre();
-  const data = useAppState().book.bookStatsLanguage || [];
+  const data = useAppState().book.statsLanguage || [];
   const dataForChart = data.map((d) => ({
     language: d.language,
     number: d.number_of_books,

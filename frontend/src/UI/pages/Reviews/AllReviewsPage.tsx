@@ -19,7 +19,7 @@ import { useGetReviews } from "../../hooks/useGetReviews";
 function AllReviewsPage() {
   const { isLoading } = useAppState().app;
   useGetReviews();
-  const data = useAppState().review.reviewsOverview || [];
+  const data = useAppState().review.overview || [];
 
   if (isLoading) {
     return <Spinner />;

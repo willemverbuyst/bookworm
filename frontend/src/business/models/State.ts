@@ -41,7 +41,7 @@ export interface AuthorState extends BaseState<Author> {
 }
 
 export interface BookState extends BaseState<Book> {
-  statsGenre: Array<Array<BookStatsGenre>> | null;
+  statsGenre: Array<BookStatsGenre> | null;
   statsGenreApi: ApiResponse<Array<BookStatsGenre>> | null;
   statsLanguage: Array<BookStatsLanguage> | null;
   statsLanguageApi: ApiResponse<Array<BookStatsLanguage>> | null;
