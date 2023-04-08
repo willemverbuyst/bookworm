@@ -2,11 +2,11 @@ import { derived } from "overmind";
 import { ReviewState } from "../../models/State";
 
 export const state: ReviewState = {
-  getAllApiResponse: null,
-  overview: derived(({ getAllApiResponse }: ReviewState) => {
-    if (!getAllApiResponse?.data.length) {
+  getAllApi: null,
+  overview: derived(({ getAllApi }: ReviewState) => {
+    if (!getAllApi?.data.length) {
       return null;
     }
-    return getAllApiResponse.data;
+    return getAllApi.data;
   }),
 };

@@ -2,11 +2,11 @@ import { derived } from "overmind";
 import { LanguageState } from "../../models/State";
 
 export const state: LanguageState = {
-  getAllApiResponse: null,
-  overview: derived(({ getAllApiResponse }: LanguageState) => {
-    if (!getAllApiResponse?.data.length) {
+  getAllApi: null,
+  overview: derived(({ getAllApi }: LanguageState) => {
+    if (!getAllApi?.data.length) {
       return null;
     }
-    return getAllApiResponse.data;
+    return getAllApi.data;
   }),
 };
