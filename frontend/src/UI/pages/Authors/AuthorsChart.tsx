@@ -1,9 +1,10 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import { Bar, ComposedChart, LabelList, Line, XAxis } from "recharts";
 import { useAppState } from "../../../business/overmind";
 import { useGetAuthorStatsPage } from "../../hooks/useGetAuthorStatsPage";
 
 function AuthorsChart() {
+  const { isLoading } = useAppState().app;
   useGetAuthorStatsPage();
   const { pages_per_author: data = [], average_pages: avg } =
     useAppState().author.authorStatsPage || {};
@@ -13,6 +14,10 @@ function AuthorsChart() {
     number: Number(d.number_of_pages),
     avg,
   }));
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Box>

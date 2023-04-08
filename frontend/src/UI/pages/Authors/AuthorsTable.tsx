@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Author } from "../../../business/models/Author";
 import { useActions, useAppState } from "../../../business/overmind";
@@ -6,6 +6,7 @@ import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
 
 function AuthorsTable() {
+  const { isLoading } = useAppState().app;
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [showAll, setShowAll] = useState(false);
@@ -25,6 +26,10 @@ function AuthorsTable() {
       getAuthors({ limit, page });
     }
   }, [page, limit, showAll]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Box>
