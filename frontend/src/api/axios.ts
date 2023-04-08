@@ -1,23 +1,15 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
-export const configAxios = () => {
-  axios.interceptors.response.use(
-    function (response) {
-      if (response.data) {
-        // return success
-        if (response.status === 200 || response.status === 201) {
-          return response;
-        }
-        // reject errors & warnings
-        return Promise.reject(response);
-      }
-
-      // default fallback
-      return Promise.reject(response);
-    },
-    function (error) {
-      // if the server throws an error (404, 500 etc.)
-      return Promise.reject(error);
+export const axiosGet = async ({ url }: { url: string }) => {
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      console.error(JSON.stringify(error.response));
+      return error;
     }
-  );
+    console.error(JSON.stringify(error));
+    return null;
+  }
 };
