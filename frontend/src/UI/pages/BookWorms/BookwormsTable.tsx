@@ -4,19 +4,18 @@ import { Bookworm } from "../../../business/models/Bookworm";
 import { useActions, useAppState } from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
+import BookwormsDetails from "./BookwormsDetails";
 
-interface Props {
-  action: (id: string) => void;
-}
-
-function BookwormsTable({ action }: Props) {
+function BookwormsTable() {
   const { isLoading } = useAppState().app;
+  const [showDetails, setShowDetails] = useState(false);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(15);
   const [showAll, setShowAll] = useState(false);
   const data = useAppState().bookworm.overview;
   const total = useAppState().bookworm.getAllApi?.total;
   const { getBookworms } = useActions().bookworm;
+  const { getBookWormById } = useActions().bookworm;
 
   useEffect(() => {
     if (showAll && total) {
@@ -35,6 +34,11 @@ function BookwormsTable({ action }: Props) {
     { field: "library_name" },
   ];
 
+  const getUser = async (id: string) => {
+    await getBookWormById({ id });
+    setShowDetails(true);
+  };
+
   if (isLoading) {
     return <Spinner />;
   }
@@ -43,11 +47,15 @@ function BookwormsTable({ action }: Props) {
     <Box>
       {data?.length ? (
         <>
+          <BookwormsDetails
+            showDetails={showDetails}
+            updateShowDetails={setShowDetails}
+          />
           <TableOverview
             rows={data}
             columns={columns}
             title="overview of bookworms"
-            action={action}
+            action={getUser}
           />
           <Pagination
             total={total}

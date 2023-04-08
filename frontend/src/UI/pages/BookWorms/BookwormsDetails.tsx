@@ -2,7 +2,6 @@ import { Box, Button, Spinner } from "@chakra-ui/react";
 import { Dispatch, SetStateAction } from "react";
 import { useAppState } from "../../../business/overmind";
 import UserDetails from "../../components/Cards/UserDetails";
-import Warning from "../../components/Text/Warning";
 
 interface Props {
   showDetails: boolean;
@@ -19,22 +18,17 @@ function BookwormsDetails({ showDetails, updateShowDetails }: Props) {
   }
 
   return (
-    <>
-      <Box>
+    <Box>
+      {showDetails && (
         <Button
           colorScheme="telegram"
           onClick={() => updateShowDetails(!showDetails)}
         >
-          {showDetails ? "Hide details" : "Show details"}
+          Hide details
         </Button>
-      </Box>
-      {showDetails && !bookwormDetails && <Warning text="select bookworm" />}
-      {showDetails && bookwormDetails && (
-        <Box m={5}>
-          <UserDetails user={bookwormDetails} />
-        </Box>
       )}
-    </>
+      {showDetails && bookwormDetails && <UserDetails user={bookwormDetails} />}
+    </Box>
   );
 }
 
