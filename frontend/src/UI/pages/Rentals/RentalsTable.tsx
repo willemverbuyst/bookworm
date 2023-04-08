@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Rental } from "../../../business/models/Rental";
 import { useActions, useAppState } from "../../../business/overmind";
@@ -9,18 +9,24 @@ import { useGetLanguages } from "../../hooks/useGetLanguages";
 import Filter from "./Filter";
 
 function RentalsTable() {
+  const { isLoading } = useAppState().app;
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);
+  const [showAll, setShowAll] = useState(false);
   const [filter, setFilter] = useState("not_returned");
-  const data = useAppState().rentalsOverview;
-  const total = useAppState().rentalsApi?.total_number_of_rentals;
-  const { getRentals } = useActions();
+  const data = useAppState().rental.overview;
+  const total = useAppState().rental.getAllApi?.total;
+  const { getRentals } = useActions().rental;
   useGetGenres();
   useGetLanguages();
 
   useEffect(() => {
-    getRentals({ limit, page, filter });
-  }, [filter, limit, page]);
+    if (showAll && total) {
+      getRentals({ limit: total, page: 1, filter });
+    } else {
+      getRentals({ limit, page, filter });
+    }
+  }, [filter, limit, page, showAll]);
 
   const columns: Array<{ field: keyof Rental }> = [
     { field: "title" },
@@ -28,6 +34,10 @@ function RentalsTable() {
     { field: "rental_date" },
     { field: "return_date" },
   ];
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Box>
@@ -43,12 +53,14 @@ function RentalsTable() {
             total={total}
             limit={limit}
             page={page}
+            showAll={showAll}
             updatePage={setPage}
             updateLimit={setLimit}
+            updateShowAll={setShowAll}
           />
         </>
       ) : (
-        <p>No rentals</p>
+        <p>no rentals</p>
       )}
     </Box>
   );

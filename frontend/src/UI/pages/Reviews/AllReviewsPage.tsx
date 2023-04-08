@@ -8,6 +8,7 @@ import {
   CardHeader,
   Flex,
   Heading,
+  Spinner,
   Text,
 } from "@chakra-ui/react";
 import { useAppState } from "../../../business/overmind";
@@ -16,8 +17,14 @@ import PageTitle from "../../components/Text/PageTitle";
 import { useGetReviews } from "../../hooks/useGetReviews";
 
 function AllReviewsPage() {
+  const { isLoading } = useAppState().app;
   useGetReviews();
-  const data = useAppState().reviewsOverview || [];
+  const data = useAppState().review.overview || [];
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <>
       <NavigationBar />
@@ -137,7 +144,7 @@ function AllReviewsPage() {
             </Flex>
           </Flex>
         ) : (
-          <p>No reviews</p>
+          <p>no reviews</p>
         )}
       </Flex>
     </>

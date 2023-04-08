@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Bookworm } from "../../../business/models/Bookworm";
 import { useActions, useAppState } from "../../../business/overmind";
@@ -10,15 +10,21 @@ interface Props {
 }
 
 function BookwormsTable({ action }: Props) {
+  const { isLoading } = useAppState().app;
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(15);
-  const data = useAppState().bookwormOverview;
-  const total = useAppState().bookwormApi?.total_number_of_bookworms;
-  const { getBookworms } = useActions();
+  const [showAll, setShowAll] = useState(false);
+  const data = useAppState().bookworm.overview;
+  const total = useAppState().bookworm.getAllApi?.total;
+  const { getBookworms } = useActions().bookworm;
 
   useEffect(() => {
-    getBookworms({ limit, page });
-  }, [limit, page]);
+    if (showAll && total) {
+      getBookworms({ limit: total, page: 1 });
+    } else {
+      getBookworms({ limit, page });
+    }
+  }, [page, limit, showAll]);
 
   const columns: Array<{ field: keyof Bookworm }> = [
     { field: "first_name" },
@@ -28,6 +34,10 @@ function BookwormsTable({ action }: Props) {
     { field: "user_is_active" },
     { field: "library_name" },
   ];
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Box>
@@ -43,12 +53,14 @@ function BookwormsTable({ action }: Props) {
             total={total}
             limit={limit}
             page={page}
+            showAll={showAll}
             updatePage={setPage}
             updateLimit={setLimit}
+            updateShowAll={setShowAll}
           />
         </>
       ) : (
-        <p>No books</p>
+        <p>no bookworms</p>
       )}
     </Box>
   );

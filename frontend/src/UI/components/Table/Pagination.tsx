@@ -1,5 +1,5 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
-import { Box, Button, Container, HStack, Spacer } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, HStack, Spacer } from "@chakra-ui/react";
 import { Dispatch, SetStateAction, useEffect, useId } from "react";
 import { useForm } from "react-hook-form";
 import ControlledSelect from "../Controllers/Select";
@@ -12,16 +12,20 @@ interface Props {
   total: number | undefined;
   limit: number;
   page: number;
+  showAll: boolean;
   updateLimit: Dispatch<SetStateAction<number>>;
   updatePage: Dispatch<SetStateAction<number>>;
+  updateShowAll: Dispatch<SetStateAction<boolean>>;
 }
 
 function Pagination({
   total,
   limit,
   page: currentPage,
+  showAll,
   updateLimit,
   updatePage,
+  updateShowAll,
 }: Props) {
   const id = useId();
   const totalNumberOfPages = total ? Math.ceil(total / limit) : 0;
@@ -66,6 +70,16 @@ function Pagination({
     return currentPage + btnNumber - 4;
   };
 
+  const handleBtnClick = () => {
+    if (total && !showAll) {
+      updateShowAll(true);
+    } else if (total && showAll) {
+      updateShowAll(false);
+      updateLimit(limit);
+      updatePage(1);
+    }
+  };
+
   const valueBtnOne = 1;
   const valueBtnTwo = 2;
   const valueBtnThree = calculateValue(3);
@@ -76,7 +90,7 @@ function Pagination({
 
   return (
     <Container centerContent mt={5}>
-      {totalNumberOfPages > 7 ? (
+      {!showAll && totalNumberOfPages > 7 && (
         <HStack>
           <Button
             type="button"
@@ -164,7 +178,8 @@ function Pagination({
             <ArrowRightIcon />
           </Button>
         </HStack>
-      ) : (
+      )}
+      {!showAll && totalNumberOfPages <= 7 && totalNumberOfPages > 1 && (
         <Box>
           {[...Array(totalNumberOfPages).keys()].map((b) => (
             <Button
@@ -179,12 +194,21 @@ function Pagination({
         </Box>
       )}
       <Box as="form" id={id} mt={5}>
-        <ControlledSelect
-          dataSet={dataSet}
-          name="numberOfItemsPerPage"
-          control={control}
-          label="items per page"
-        />
+        <Flex align="end">
+          {!showAll && (
+            <ControlledSelect
+              dataSet={dataSet}
+              name="numberOfItemsPerPage"
+              control={control}
+              label="items per page"
+            />
+          )}
+          {total && (
+            <Button onClick={handleBtnClick} ml={2} px={7} variant="outline">
+              {!showAll ? "Show all" : "Use items per page"}
+            </Button>
+          )}
+        </Flex>
       </Box>
     </Container>
   );

@@ -1,17 +1,17 @@
-import { useEffect, useId } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { Box, Button, Flex, Text, VStack } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAppState, useActions } from "../../../business/overmind";
+import { useEffect, useId } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useActions, useAppState } from "../../../business/overmind";
 import ControlledTextInput from "../../components/Controllers/TextInput";
+import NavigationBar from "../../components/Navigation/NavigationBar";
+import PageTitle from "../../components/Text/PageTitle";
 import {
   defaultValuesSignIn,
   FormFieldsSignIn,
   validationSchemaSignIn,
 } from "./helpers";
-import PageTitle from "../../components/Text/PageTitle";
-import NavigationBar from "../../components/Navigation/NavigationBar";
 
 function SignInPage() {
   const id = useId();
@@ -26,7 +26,7 @@ function SignInPage() {
     resolver: zodResolver(validationSchemaSignIn),
   });
   const { isSignedIn } = useAppState().auth;
-  const { signInUser } = useActions();
+  const { signInUser } = useActions().user;
 
   const onSubmit: SubmitHandler<FormFieldsSignIn> = async (data) => {
     await signInUser(data);

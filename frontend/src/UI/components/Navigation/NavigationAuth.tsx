@@ -1,12 +1,12 @@
-import { Link as RLink } from "react-router-dom";
-import { Stack, Button } from "@chakra-ui/react";
+import { Button, Stack } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
+import { Link as RLink } from "react-router-dom";
 import { useActions, useAppState } from "../../../business/overmind";
 
 function NavigationAuth() {
   const navigate = useNavigate();
   const { isSignedIn } = useAppState().auth;
-  const { logOutUser } = useActions();
+  const { logOutUser } = useActions().user;
 
   const handleSignOut = () => {
     navigate("/");

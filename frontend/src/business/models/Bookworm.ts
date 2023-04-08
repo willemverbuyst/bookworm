@@ -7,11 +7,3 @@ export interface Bookworm {
   user_is_active: boolean;
   library_name: string;
 }
-
-export interface BookwormApi {
-  status: string;
-  data: Bookworm[];
-  message: string;
-  result: number;
-  total_number_of_bookworms: number;
-}

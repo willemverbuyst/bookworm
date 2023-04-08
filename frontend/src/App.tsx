@@ -19,7 +19,7 @@ import WelcomePage from "./UI/pages/Welcome/WelcomePage";
 export default function App() {
   const [, setToast] = useToastHook();
 
-  const { message, status, statusText } = useAppState().apiResponse;
+  const { message, status, statusText } = useAppState().api.response;
 
   useEffect(() => {
     if (message && status) {

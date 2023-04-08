@@ -1,15 +1,20 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import { Bar, Cell, ComposedChart, LabelList, XAxis } from "recharts";
 import { useAppState } from "../../../business/overmind";
 import { useGetRentalStatsDuration } from "../../hooks/useGetRentalStatsDuration";
 
 function RentalsDurationChart() {
+  const { isLoading } = useAppState().app;
   useGetRentalStatsDuration();
-  const data = useAppState().rentalStatsDuration || [];
+  const data = useAppState().rental.statsDuration || [];
   const dataForChart = data.map((d) => ({
     duration: `${d.duration}d`,
     number: Number(d.total_rentals),
   }));
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Box>
@@ -45,7 +50,7 @@ function RentalsDurationChart() {
           </ComposedChart>
         </Box>
       ) : (
-        <p>no stats</p>
+        <p>no rentals</p>
       )}
     </Box>
   );

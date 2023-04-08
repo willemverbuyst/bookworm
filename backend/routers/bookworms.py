@@ -18,8 +18,8 @@ def get_bookworms(limit = None, page = 1) -> dict:
         return {
             "status": "success",
             "result": result,
-            "total_number_of_bookworms": total_number_of_bookworms,
             "data": bookworms,
+            "total": total_number_of_bookworms,
             "message": "bookworms have been fetched",
         }
     except:

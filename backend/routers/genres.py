@@ -15,6 +15,7 @@ def get_all_genres() -> dict:
             "status": "success",
             "result": result,
             "data": genres,
+            "total": result,
             "message": "all genres have been fetched",
         }
     except:

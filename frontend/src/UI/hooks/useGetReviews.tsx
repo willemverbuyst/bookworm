@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useActions, useAppState } from "../../business/overmind";
 
 export function useGetReviews() {
-  const { reviewsApi } = useAppState();
-  const { getReviews } = useActions();
+  const { reviewsApi } = useAppState().review;
+  const { getReviews } = useActions().review;
 
   useEffect(() => {
     if (!reviewsApi?.data.length) {

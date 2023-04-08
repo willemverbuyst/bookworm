@@ -1,28 +1,44 @@
 import { IContext } from "overmind";
 import {
-  createStateHook,
   createActionsHook,
   createEffectsHook,
   createReactionHook,
+  createStateHook,
 } from "overmind-react";
-import { state } from "./state";
-import * as actions from "./actions";
-import * as effects from "./effects";
+import { namespaced } from "overmind/config";
+import * as api from "./Api";
+import * as app from "./App";
+import * as auth from "./Auth";
+import * as author from "./Author";
+import * as book from "./Book";
+import * as bookworm from "./Bookworm";
+import * as genre from "./Genre";
+import * as language from "./Language";
+import * as rental from "./Rental";
+import * as review from "./Review";
+import * as user from "./User";
 
-export const config = {
-  state,
-  actions,
-  effects,
-};
+export const config = namespaced({
+  api,
+  app,
+  auth,
+  author,
+  book,
+  bookworm,
+  genre,
+  language,
+  rental,
+  review,
+  user,
+});
 
-export type Context = IContext<typeof config>;
+export type Context = IContext<{
+  state: typeof config.state;
+  actions: typeof config.actions;
+  effects: typeof config.effects;
+}>;
 
 export const useAppState = createStateHook<Context>();
 export const useActions = createActionsHook<Context>();
 export const useEffects = createEffectsHook<Context>();
 export const useReaction = createReactionHook<Context>();
-
-// Hack to give Cypress access to Overmind
-if ((window as any).Cypress) {
-  (window as any).overmind = config;
-}

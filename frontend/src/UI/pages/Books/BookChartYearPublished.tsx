@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import {
   CartesianGrid,
   Label,
@@ -12,8 +12,9 @@ import { useAppState } from "../../../business/overmind";
 import { useGetBookStatsYearPublished } from "../../hooks/useGetBookStatsYearPublished";
 
 function BookChartYearPublished() {
+  const { isLoading } = useAppState().app;
   useGetBookStatsYearPublished();
-  const data = useAppState().bookStatsYearPublished || [];
+  const data = useAppState().book.statsYearPublished || [];
   const dataForChart = data.map((d) => ({
     name: d.year_published,
     number: Number(d.number_of_books),
@@ -24,6 +25,10 @@ function BookChartYearPublished() {
   const maxYears = dataForChart
     .filter((i) => i.number === max)
     .map((i) => i.name);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Box>
@@ -64,7 +69,7 @@ function BookChartYearPublished() {
           </LineChart>
         </Box>
       ) : (
-        <p>No books</p>
+        <p>no books</p>
       )}
     </Box>
   );

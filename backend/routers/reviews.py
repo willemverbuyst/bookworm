@@ -19,7 +19,7 @@ def get_reviews(limit = None, page=1) -> dict:
             "status": "success",
             "result": result,
             "data": reviews,
-            "total_number_of_reviews": total_number_of_reviews,
+            "total": total_number_of_reviews,
             "message": "reviews have been fetched",
         }
     except:

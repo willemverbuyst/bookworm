@@ -17,8 +17,9 @@ def get_all_libraries(limit = None, page=1) -> dict:
 
         return {
             "status": "success",
-            "total_number_of_libraries": total_number_of_libraries,
+            "result": total_number_of_libraries,
             "data": libraries,
+            "total": total_number_of_libraries,
             "message": "all libraries have been fetched",
         }
     except:

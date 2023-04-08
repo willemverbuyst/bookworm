@@ -1,17 +1,22 @@
-import { Box } from "@chakra-ui/react";
-import { Cell, Legend, PieChart, Pie } from "recharts";
+import { Box, Spinner } from "@chakra-ui/react";
+import { Cell, Legend, Pie, PieChart } from "recharts";
 import { useAppState } from "../../../business/overmind";
 import { useGetBookStatsGenre } from "../../hooks/useGetBookStatsGenre";
 
 function BooksChartLanguages() {
+  const { isLoading } = useAppState().app;
   useGetBookStatsGenre();
-  const data = useAppState().bookStatsLanguage || [];
+  const data = useAppState().book.statsLanguage || [];
   const dataForChart = data.map((d) => ({
     language: d.language,
     number: d.number_of_books,
   }));
 
   const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Box>
@@ -39,7 +44,7 @@ function BooksChartLanguages() {
           </PieChart>
         </Box>
       ) : (
-        <p>No books</p>
+        <p>no books</p>
       )}
     </Box>
   );

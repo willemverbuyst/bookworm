@@ -20,6 +20,7 @@ def get_all_languages() -> dict:
             "status": "success",
             "result": result,
             "data": languages,
+            "total": result,
             "message": "all languages have been fetched",
         }
     except:
