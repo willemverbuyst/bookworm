@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 import { derived } from "overmind";
 import { ReviewState } from "../../models/State";
 

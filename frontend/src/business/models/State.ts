@@ -34,6 +34,10 @@ export interface ApiState {
   };
 }
 
+export interface AppState {
+  isLoading: boolean;
+}
+
 export interface AuthState {
   isSignedIn: boolean;
   token: string;
