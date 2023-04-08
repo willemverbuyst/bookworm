@@ -7,7 +7,7 @@ export const getBookworms = async (
 ) => {
   state.app.isLoading = true;
   const bookworms = await effects.bookworm.api.getBookworms({ limit, page });
-  state.bookworm.bookwormApi = bookworms;
+  state.bookworm.getAllApi = bookworms;
   state.app.isLoading = false;
 };
 

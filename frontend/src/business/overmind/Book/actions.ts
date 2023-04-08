@@ -22,21 +22,21 @@ export const getBooks = async (
     limit,
     page,
   });
-  state.book.booksApi = books;
+  state.book.getAllApi = books;
   state.app.isLoading = false;
 };
 
 export const getBookStatsGenre = async ({ effects, state }: Context) => {
   state.app.isLoading = true;
   const genresStats = await effects.book.api.getBookStatsGenres();
-  state.book.bookStatsGenreApi = genresStats;
+  state.book.statsGenreApi = genresStats;
   state.app.isLoading = false;
 };
 
 export const getBookStatsLanguage = async ({ effects, state }: Context) => {
   state.app.isLoading = true;
   const languagesStats = await effects.book.api.getBookStatsLanguages();
-  state.book.bookStatsLanguageApi = languagesStats;
+  state.book.statsLanguageApi = languagesStats;
   state.app.isLoading = false;
 };
 
@@ -46,6 +46,6 @@ export const getBookStatsYearPublished = async ({
 }: Context) => {
   state.app.isLoading = true;
   const yearPublishedStats = await effects.book.api.getBookStatsYearPublished();
-  state.book.bookStatsYearPublishedApi = yearPublishedStats;
+  state.book.statsYearPublishedApi = yearPublishedStats;
   state.app.isLoading = false;
 };

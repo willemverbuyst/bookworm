@@ -7,13 +7,13 @@ export const getRentals = async (
 ) => {
   state.app.isLoading = true;
   const rentals = await effects.rental.api.getRentals({ limit, page, filter });
-  state.rental.rentalsApi = rentals;
+  state.rental.getAllApi = rentals;
   state.app.isLoading = false;
 };
 
 export const getRentalStatsDuration = async ({ effects, state }: Context) => {
   state.app.isLoading = true;
   const rentalStats = await effects.rental.api.getRentalStatsDuration();
-  state.rental.rentalStatsDurationApi = rentalStats;
+  state.rental.statsDurationApi = rentalStats;
   state.app.isLoading = false;
 };

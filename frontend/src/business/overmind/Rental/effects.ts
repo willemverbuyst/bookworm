@@ -1,5 +1,6 @@
 import axios from "axios";
-import { RentalApi, RentalStatsDurationApi } from "../../models/Rental";
+import { ApiResponse } from "../../models/Api";
+import { Rental, RentalStatsDuration } from "../../models/Rental";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 
@@ -12,7 +13,7 @@ export const api = {
     limit: number;
     page: number;
     filter: string;
-  }): Promise<RentalApi> => {
+  }): Promise<ApiResponse<Array<Rental>>> => {
     let url = `${BACKEND_URL}/rentals/?limit=${limit}&page=${page}`;
 
     if (filter === "returned") {
@@ -27,7 +28,9 @@ export const api = {
     return response.data;
   },
 
-  getRentalStatsDuration: async (): Promise<RentalStatsDurationApi> => {
+  getRentalStatsDuration: async (): Promise<
+    ApiResponse<Array<RentalStatsDuration>>
+  > => {
     try {
       const response = await axios.get(
         `${BACKEND_URL}/rentals/stats/?by=duration`

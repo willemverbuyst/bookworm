@@ -1,9 +1,10 @@
 import axios from "axios";
+import { ApiResponse } from "../../models/Api";
 import {
-  BookApi,
-  BookStatsGenreApi,
-  BookStatsLanguageApi,
-  BookStatsYearPubishedApi,
+  Book,
+  BookStatsGenre,
+  BookStatsLanguage,
+  BookStatsYearPublished,
 } from "../../models/Book";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
@@ -19,7 +20,7 @@ export const api = {
     language: string | null;
     limit: number;
     page: number;
-  }): Promise<BookApi> => {
+  }): Promise<ApiResponse<Array<Book>>> => {
     try {
       let url = `${BACKEND_URL}/books/?limit=${limit}&page=${page}`;
       if (language) {
@@ -36,7 +37,7 @@ export const api = {
     }
   },
 
-  getBookStatsGenres: async (): Promise<BookStatsGenreApi> => {
+  getBookStatsGenres: async (): Promise<ApiResponse<Array<BookStatsGenre>>> => {
     try {
       const response = await axios.get(`${BACKEND_URL}/books/stats/?by=genre`);
       return response.data;
@@ -45,7 +46,9 @@ export const api = {
     }
   },
 
-  getBookStatsLanguages: async (): Promise<BookStatsLanguageApi> => {
+  getBookStatsLanguages: async (): Promise<
+    ApiResponse<Array<BookStatsLanguage>>
+  > => {
     try {
       const response = await axios.get(
         `${BACKEND_URL}/books/stats/?by=language`
@@ -56,7 +59,9 @@ export const api = {
     }
   },
 
-  getBookStatsYearPublished: async (): Promise<BookStatsYearPubishedApi> => {
+  getBookStatsYearPublished: async (): Promise<
+    ApiResponse<Array<BookStatsYearPublished>>
+  > => {
     try {
       const response = await axios.get(
         `${BACKEND_URL}/books/stats/?by=year_published`

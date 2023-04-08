@@ -15,7 +15,7 @@ export const getReviews = async (
     return;
   }
 
-  state.review.reviewsApi = response;
+  state.review.getAllApi = response;
   state.app.isLoading = false;
 };
 

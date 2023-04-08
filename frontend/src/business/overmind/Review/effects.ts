@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
-import { ReviewApi } from "../../models/Review";
+import { ApiResponse } from "../../models/Api";
+import { Review } from "../../models/Review";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 
@@ -7,7 +8,7 @@ export const api = {
   getReviews: async ({
     limit = 10,
     page = 1,
-  }): Promise<ReviewApi | AxiosError | null> => {
+  }): Promise<ApiResponse<Array<Review>> | AxiosError | null> => {
     try {
       const response = await axios.get(
         `${BACKEND_URL}/reviews/?limit=${limit}&page=${page}`
@@ -29,7 +30,7 @@ export const api = {
     review: string,
     rating: number | null,
     token: string
-  ): Promise<ReviewApi> => {
+  ): Promise<ApiResponse<Array<Review>>> => {
     const response = await axios.post(
       `${BACKEND_URL}/reviews`,
       {

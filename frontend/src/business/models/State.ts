@@ -31,7 +31,7 @@ export interface AuthState {
 }
 
 export interface BaseState<T> {
-  getAllApiResponse: ApiResponse<Array<T>> | null;
+  getAllApi: ApiResponse<Array<T>> | null;
   overview: Array<T> | null;
 }
 
@@ -41,7 +41,7 @@ export interface AuthorState extends BaseState<Author> {
 }
 
 export interface BookState extends BaseState<Book> {
-  statsGenre: Array<BookStatsGenre> | null;
+  statsGenre: Array<Array<BookStatsGenre>> | null;
   statsGenreApi: ApiResponse<Array<BookStatsGenre>> | null;
   statsLanguage: Array<BookStatsLanguage> | null;
   statsLanguageApi: ApiResponse<Array<BookStatsLanguage>> | null;

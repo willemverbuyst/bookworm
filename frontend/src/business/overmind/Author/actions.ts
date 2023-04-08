@@ -7,13 +7,13 @@ export const getAuthors = async (
 ) => {
   state.app.isLoading = true;
   const authors = await effects.author.api.getAuthors({ limit, page });
-  state.author.authorsApi = authors;
+  state.author.getAllApi = authors;
   state.app.isLoading = false;
 };
 
 export const getAuthorStatsPage = async ({ effects, state }: Context) => {
   state.app.isLoading = true;
   const pagesStats = await effects.author.api.getAuthorStatsPages();
-  state.author.authorStatsPageApi = pagesStats;
+  state.author.statsPageApi = pagesStats;
   state.app.isLoading = false;
 };
