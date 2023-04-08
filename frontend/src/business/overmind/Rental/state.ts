@@ -9,11 +9,11 @@ export const state: RentalState = {
     }
     return getAllApiResponse.data;
   }),
-  rentalStatsDuration: derived(({ rentalStatsDurationApi }: RentalState) => {
-    if (!rentalStatsDurationApi?.data.length) {
+  statsDuration: derived(({ statsDurationApi }: RentalState) => {
+    if (!statsDurationApi?.data.length) {
       return null;
     }
-    return rentalStatsDurationApi.data;
+    return statsDurationApi.data;
   }),
-  rentalStatsDurationApi: null,
+  statsDurationApi: null,
 };

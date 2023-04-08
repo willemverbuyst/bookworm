@@ -1,18 +1,15 @@
-import { GetAllApiResponse } from "./Api";
-import { Author, AuthorStatsPage, AuthorStatsPageApi } from "./Author";
+import { ApiResponse } from "./Api";
+import { Author, AuthorStatsPage } from "./Author";
 import {
   Book,
   BookStatsGenre,
-  BookStatsGenreApi,
   BookStatsLanguage,
-  BookStatsLanguageApi,
-  BookStatsYearPubishedApi,
   BookStatsYearPublished,
 } from "./Book";
 import { Bookworm } from "./Bookworm";
 import { Genre } from "./Genre";
 import { Language } from "./Language";
-import { Rental, RentalStatsDuration, RentalStatsDurationApi } from "./Rental";
+import { Rental, RentalStatsDuration } from "./Rental";
 import { Review } from "./Review";
 import { User, UserApi } from "./User";
 
@@ -33,39 +30,39 @@ export interface AuthState {
   token: string;
 }
 
-export interface StateBase<T> {
-  getAllApiResponse: GetAllApiResponse<Array<T>> | null;
+export interface BaseState<T> {
+  getAllApiResponse: ApiResponse<Array<T>> | null;
   overview: Array<T> | null;
 }
 
-export interface AuthorState extends StateBase<Author> {
-  authorStatsPage: AuthorStatsPage | null;
-  authorStatsPageApi: AuthorStatsPageApi | null;
+export interface AuthorState extends BaseState<Author> {
+  statsPage: AuthorStatsPage | null;
+  statsPageApi: ApiResponse<AuthorStatsPage> | null;
 }
 
-export interface BookState extends StateBase<Book> {
-  bookStatsGenre: Array<BookStatsGenre> | null;
-  bookStatsGenreApi: BookStatsGenreApi | null;
-  bookStatsLanguage: Array<BookStatsLanguage> | null;
-  bookStatsLanguageApi: BookStatsLanguageApi | null;
-  bookStatsYearPublished: Array<BookStatsYearPublished> | null;
-  bookStatsYearPublishedApi: BookStatsYearPubishedApi | null;
+export interface BookState extends BaseState<Book> {
+  statsGenre: Array<BookStatsGenre> | null;
+  statsGenreApi: ApiResponse<Array<BookStatsGenre>> | null;
+  statsLanguage: Array<BookStatsLanguage> | null;
+  statsLanguageApi: ApiResponse<Array<BookStatsLanguage>> | null;
+  statsYearPublished: Array<BookStatsYearPublished> | null;
+  statsYearPublishedApi: ApiResponse<Array<BookStatsYearPublished>> | null;
 }
 
-export interface BookwormState extends StateBase<Bookworm> {
+export interface BookwormState extends BaseState<Bookworm> {
   bookwormDetailsApi: Omit<UserApi, "token"> | null;
 }
 
-export type GenreState = StateBase<Genre>;
+export type GenreState = BaseState<Genre>;
 
-export type LanguageState = StateBase<Language>;
+export type LanguageState = BaseState<Language>;
 
-export interface RentalState extends StateBase<Rental> {
-  rentalStatsDurationApi: RentalStatsDurationApi | null;
-  rentalStatsDuration: Array<RentalStatsDuration> | null;
+export interface RentalState extends BaseState<Rental> {
+  statsDuration: Array<RentalStatsDuration> | null;
+  statsDurationApi: ApiResponse<Array<RentalStatsDuration>> | null;
 }
 
-export type ReviewState = StateBase<Review>;
+export type ReviewState = BaseState<Review>;
 
 export interface UserState {
   user: User | null;

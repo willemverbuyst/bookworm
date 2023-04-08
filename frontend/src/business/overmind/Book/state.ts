@@ -13,27 +13,25 @@ export const state: BookState = {
       }))
       .sort((book1, book2) => `${book1.title}`.localeCompare(book2.title));
   }),
-  bookStatsGenre: derived(({ bookStatsGenreApi }: BookState) => {
-    if (!bookStatsGenreApi?.data.length) {
+  statsGenre: derived(({ statsGenreApi }: BookState) => {
+    if (!statsGenreApi?.data.length) {
       return null;
     }
-    return bookStatsGenreApi.data;
+    return statsGenreApi.data;
   }),
-  bookStatsGenreApi: null,
-  bookStatsLanguage: derived(({ bookStatsLanguageApi }: BookState) => {
-    if (!bookStatsLanguageApi?.data.length) {
+  statsGenreApi: null,
+  statsLanguage: derived(({ statsLanguageApi }: BookState) => {
+    if (!statsLanguageApi?.data.length) {
       return null;
     }
-    return bookStatsLanguageApi.data;
+    return statsLanguageApi.data;
   }),
-  bookStatsLanguageApi: null,
-  bookStatsYearPublished: derived(
-    ({ bookStatsYearPublishedApi }: BookState) => {
-      if (!bookStatsYearPublishedApi?.data.length) {
-        return null;
-      }
-      return bookStatsYearPublishedApi.data;
+  statsLanguageApi: null,
+  statsYearPublished: derived(({ statsYearPublishedApi }: BookState) => {
+    if (!statsYearPublishedApi?.data.length) {
+      return null;
     }
-  ),
-  bookStatsYearPublishedApi: null,
+    return statsYearPublishedApi.data;
+  }),
+  statsYearPublishedApi: null,
 };

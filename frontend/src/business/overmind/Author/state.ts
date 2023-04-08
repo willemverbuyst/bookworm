@@ -15,14 +15,14 @@ export const state: AuthorState = {
         `${author1.last_name}`.localeCompare(author2.last_name)
       );
   }),
-  authorStatsPage: derived(({ authorStatsPageApi }: AuthorState) => {
-    if (!authorStatsPageApi?.data.pages_per_author.length) {
+  statsPage: derived(({ statsPageApi }: AuthorState) => {
+    if (!statsPageApi?.data.pages_per_author.length) {
       return null;
     }
     return {
-      pages_per_author: authorStatsPageApi.data.pages_per_author,
-      average_pages: authorStatsPageApi.data.average_pages,
+      pages_per_author: statsPageApi.data.pages_per_author,
+      average_pages: statsPageApi.data.average_pages,
     };
   }),
-  authorStatsPageApi: null,
+  statsPageApi: null,
 };

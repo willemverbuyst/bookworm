@@ -10,9 +10,3 @@ export interface RentalStatsDuration {
   duration: number;
   total_rentals: number;
 }
-
-export interface RentalStatsDurationApi {
-  status: string;
-  data: Array<RentalStatsDuration>;
-  message: string;
-}

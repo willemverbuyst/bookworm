@@ -12,12 +12,6 @@ export interface AuthorStatsPagesPerAuthor {
 }
 
 export interface AuthorStatsPage {
-  pages_per_author: AuthorStatsPagesPerAuthor[];
+  pages_per_author: Array<AuthorStatsPagesPerAuthor>;
   average_pages: number;
-}
-
-export interface AuthorStatsPageApi {
-  status: string;
-  data: AuthorStatsPage;
-  message: string;
 }
