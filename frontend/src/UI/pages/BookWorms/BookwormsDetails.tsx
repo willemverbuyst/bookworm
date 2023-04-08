@@ -1,34 +1,42 @@
-import { Box, Button, Spinner } from "@chakra-ui/react";
-import { Dispatch, SetStateAction } from "react";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+} from "@chakra-ui/react";
 import { useAppState } from "../../../business/overmind";
 import UserDetails from "../../components/Cards/UserDetails";
 
 interface Props {
-  showDetails: boolean;
-  updateShowDetails: Dispatch<SetStateAction<boolean>>;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-function BookwormsDetails({ showDetails, updateShowDetails }: Props) {
-  const { isLoading } = useAppState().app;
+function BookwormsDetails({ isOpen, onClose }: Props) {
   const { bookwormDetailsApi } = useAppState().bookworm;
   const bookwormDetails = bookwormDetailsApi?.data;
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-
   return (
-    <Box>
-      {showDetails && (
-        <Button
-          colorScheme="telegram"
-          onClick={() => updateShowDetails(!showDetails)}
-        >
-          Hide details
-        </Button>
-      )}
-      {showDetails && bookwormDetails && <UserDetails user={bookwormDetails} />}
-    </Box>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Bookworm</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          {bookwormDetails && <UserDetails user={bookwormDetails} />}
+        </ModalBody>
+
+        <ModalFooter>
+          <Button colorScheme="blue" mr={3} onClick={onClose}>
+            Close
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 }
 

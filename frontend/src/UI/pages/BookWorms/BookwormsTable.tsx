@@ -1,4 +1,4 @@
-import { Box, Spinner } from "@chakra-ui/react";
+import { Box, Spinner, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Bookworm } from "../../../business/models/Bookworm";
 import { useActions, useAppState } from "../../../business/overmind";
@@ -8,12 +8,12 @@ import BookwormsDetails from "./BookwormsDetails";
 
 function BookwormsTable() {
   const { isLoading } = useAppState().app;
-  const [showDetails, setShowDetails] = useState(false);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(15);
   const [showAll, setShowAll] = useState(false);
   const data = useAppState().bookworm.overview;
   const total = useAppState().bookworm.getAllApi?.total;
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { getBookworms } = useActions().bookworm;
   const { getBookWormById } = useActions().bookworm;
 
@@ -36,7 +36,7 @@ function BookwormsTable() {
 
   const getUser = async (id: string) => {
     await getBookWormById({ id });
-    setShowDetails(true);
+    onOpen();
   };
 
   if (isLoading) {
@@ -47,10 +47,7 @@ function BookwormsTable() {
     <Box>
       {data?.length ? (
         <>
-          <BookwormsDetails
-            showDetails={showDetails}
-            updateShowDetails={setShowDetails}
-          />
+          <BookwormsDetails isOpen={isOpen} onClose={onClose} />
           <TableOverview
             rows={data}
             columns={columns}
