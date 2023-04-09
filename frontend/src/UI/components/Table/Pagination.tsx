@@ -1,21 +1,23 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
-import { Box, Button, Container, Flex, HStack, Spacer } from "@chakra-ui/react";
-import { Dispatch, SetStateAction, useEffect, useId } from "react";
-import { useForm } from "react-hook-form";
-import ControlledSelect from "../Controllers/Select";
-
-interface FormFields {
-  numberOfItemsPerPage: string;
-}
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  HStack,
+  Select,
+  Spacer,
+} from "@chakra-ui/react";
+import { useId } from "react";
 
 interface Props {
   total: number | undefined;
   limit: number;
   page: number;
   showAll: boolean;
-  updateLimit: Dispatch<SetStateAction<number>>;
-  updatePage: Dispatch<SetStateAction<number>>;
-  updateShowAll: Dispatch<SetStateAction<boolean>>;
+  updateLimit: ({ limit }: { limit: number }) => void;
+  updatePage: ({ page }: { page: number }) => void;
+  updateShowAll: ({ showAll }: { showAll: boolean }) => void;
 }
 
 function Pagination({
@@ -29,33 +31,23 @@ function Pagination({
 }: Props) {
   const id = useId();
   const totalNumberOfPages = total ? Math.ceil(total / limit) : 0;
-
-  const { control, watch } = useForm<FormFields>({
-    defaultValues: { numberOfItemsPerPage: String(limit) },
-  });
   const dataSet = [5, 10, 15, 20, 25, 30].map((i) => ({
     value: String(i),
     display: String(i),
   }));
 
-  const numberOfItemsPerPage = watch("numberOfItemsPerPage");
-
-  useEffect(() => {
-    updateLimit(Number(numberOfItemsPerPage));
-  }, [numberOfItemsPerPage]);
-
   const handleClick = (pageNumber: number) => {
-    updatePage(pageNumber);
+    updatePage({ page: pageNumber });
   };
 
   const handleClickLeft = () => {
     if (currentPage === 1) return;
-    updatePage((prev) => prev - 1);
+    updatePage({ page: currentPage - 1 });
   };
 
   const handleClickRight = () => {
     if (currentPage === totalNumberOfPages) return;
-    updatePage((prev) => prev + 1);
+    updatePage({ page: currentPage + 1 });
   };
 
   const calculateValue = (btnNumber: number) => {
@@ -72,12 +64,16 @@ function Pagination({
 
   const handleBtnClick = () => {
     if (total && !showAll) {
-      updateShowAll(true);
+      updateShowAll({ showAll: true });
     } else if (total && showAll) {
-      updateShowAll(false);
-      updateLimit(limit);
-      updatePage(1);
+      updateShowAll({ showAll: false });
+      updateLimit({ limit });
+      updatePage({ page: 1 });
     }
+  };
+
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    updateLimit({ limit: Number(e.target.value) });
   };
 
   const valueBtnOne = 1;
@@ -196,12 +192,13 @@ function Pagination({
       <Box as="form" id={id} mt={5}>
         <Flex align="end">
           {!showAll && (
-            <ControlledSelect
-              dataSet={dataSet}
-              name="numberOfItemsPerPage"
-              control={control}
-              label="items per page"
-            />
+            <Select defaultValue={limit} onChange={handleSelect}>
+              {dataSet.map((d) => (
+                <option key={JSON.stringify(d)} value={d.value}>
+                  {d.display}
+                </option>
+              ))}
+            </Select>
           )}
           {total && (
             <Button onClick={handleBtnClick} ml={2} px={7} variant="outline">

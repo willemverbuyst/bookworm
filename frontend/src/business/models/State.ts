@@ -38,6 +38,14 @@ export interface BaseState<T> {
 export interface AuthorState extends BaseState<Author> {
   statsPage: AuthorStatsPage | null;
   statsPageApi: ApiResponse<AuthorStatsPage> | null;
+  ui: {
+    table: {
+      limit: number;
+      page: number;
+      queryString: string;
+      showAll: boolean;
+    };
+  };
 }
 
 export interface BookState extends BaseState<Book> {

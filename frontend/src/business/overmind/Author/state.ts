@@ -25,4 +25,12 @@ export const state: AuthorState = {
     };
   }),
   statsPageApi: null,
+  ui: {
+    table: {
+      limit: 10,
+      page: 1,
+      queryString: "",
+      showAll: false,
+    },
+  },
 };

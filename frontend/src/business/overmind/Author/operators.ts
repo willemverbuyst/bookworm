@@ -1,7 +1,11 @@
 import { Context } from "..";
 import { genericSearch } from "../../functions/genericSearch";
 
-export const searching = ({ state }: Context, { str }: { str: string }) => {
+export const searching = (
+  { actions, state }: Context,
+  { str }: { str: string }
+) => {
+  actions.author.setQueryString({ queryString: str });
   if (state.author.getAllApi?.data && state.author.getAllApi.data?.length) {
     const filteredOverview = [...state.author.getAllApi.data].filter((a) =>
       genericSearch(a, ["last_name", "first_name"], str, false)
