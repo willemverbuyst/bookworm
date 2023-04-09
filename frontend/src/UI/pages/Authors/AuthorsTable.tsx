@@ -1,4 +1,4 @@
-import { Box, Spinner } from "@chakra-ui/react";
+import { Box, Input, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Author } from "../../../business/models/Author";
 import { useActions, useAppState } from "../../../business/overmind";
@@ -10,20 +10,28 @@ function AuthorsTable() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [showAll, setShowAll] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const data = useAppState().author.overview;
   const total = useAppState().author.getAllApi?.total;
-  const { getAuthors } = useActions().author;
+  const { getAuthors, search } = useActions().author;
   const columns: Array<{ field: keyof Author; isNumeric?: boolean }> = [
     { field: "last_name" },
     { field: "first_name" },
     { field: "books_written", isNumeric: true },
   ];
 
+  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    search({ str: e.target.value });
+  };
+
   useEffect(() => {
     if (showAll && total) {
       getAuthors({ limit: total, page: 1 });
+      search({ str: "" });
     } else {
       getAuthors({ limit, page });
+      search({ str: "" });
     }
   }, [page, limit, showAll]);
 
@@ -33,6 +41,7 @@ function AuthorsTable() {
 
   return (
     <Box>
+      <Input onChange={searchInTable} placeholder="search" />
       {data?.length ? (
         <>
           <TableOverview
@@ -40,15 +49,17 @@ function AuthorsTable() {
             columns={columns}
             title="overview of authors"
           />
-          <Pagination
-            total={total}
-            limit={limit}
-            page={page}
-            showAll={showAll}
-            updatePage={setPage}
-            updateLimit={setLimit}
-            updateShowAll={setShowAll}
-          />
+          {!searchQuery && (
+            <Pagination
+              total={total}
+              limit={limit}
+              page={page}
+              showAll={showAll}
+              updatePage={setPage}
+              updateLimit={setLimit}
+              updateShowAll={setShowAll}
+            />
+          )}
         </>
       ) : (
         <p>no authors</p>

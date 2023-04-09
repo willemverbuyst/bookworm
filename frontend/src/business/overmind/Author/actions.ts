@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { AxiosError } from "axios";
+import { debounce, pipe } from "overmind";
 import { Context } from "..";
+import * as o from "./operators";
 
 export const getAuthors = async (
   { actions, effects, state }: Context,
@@ -34,3 +36,5 @@ export const getAuthorStatsPage = async ({
 
   state.app.isLoading = false;
 };
+
+export const search = pipe(debounce(200), o.searching);
