@@ -9,27 +9,26 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import { useId } from "react";
+import {
+  stateSections,
+  useActions,
+  useAppState,
+} from "../../../business/overmind";
 
 interface Props {
   total: number | undefined;
-  limit: number;
-  page: number;
-  showAll: boolean;
-  updateLimit: ({ limit }: { limit: number }) => void;
-  updatePage: ({ page }: { page: number }) => void;
-  updateShowAll: ({ showAll }: { showAll: boolean }) => void;
+  state: keyof typeof stateSections;
 }
 
-function Pagination({
-  total,
-  limit,
-  page: currentPage,
-  showAll,
-  updateLimit,
-  updatePage,
-  updateShowAll,
-}: Props) {
+function Pagination({ total, state }: Props) {
   const id = useId();
+  const {
+    limit,
+    page: currentPage,
+    showAll,
+  } = useAppState()[state].ui.table || {};
+  const { setLimit, setPage, setShowAll } = useActions()[state];
+
   const totalNumberOfPages = total ? Math.ceil(total / limit) : 0;
   const dataSet = [5, 10, 15, 20, 25, 30].map((i) => ({
     value: String(i),
@@ -37,17 +36,17 @@ function Pagination({
   }));
 
   const handleClick = (pageNumber: number) => {
-    updatePage({ page: pageNumber });
+    setPage({ page: pageNumber });
   };
 
   const handleClickLeft = () => {
     if (currentPage === 1) return;
-    updatePage({ page: currentPage - 1 });
+    setPage({ page: currentPage - 1 });
   };
 
   const handleClickRight = () => {
     if (currentPage === totalNumberOfPages) return;
-    updatePage({ page: currentPage + 1 });
+    setPage({ page: currentPage + 1 });
   };
 
   const calculateValue = (btnNumber: number) => {
@@ -64,16 +63,16 @@ function Pagination({
 
   const handleBtnClick = () => {
     if (total && !showAll) {
-      updateShowAll({ showAll: true });
+      setShowAll({ showAll: true });
     } else if (total && showAll) {
-      updateShowAll({ showAll: false });
-      updateLimit({ limit });
-      updatePage({ page: 1 });
+      setShowAll({ showAll: false });
+      setLimit({ limit });
+      setPage({ page: 1 });
     }
   };
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    updateLimit({ limit: Number(e.target.value) });
+    setLimit({ limit: Number(e.target.value) });
   };
 
   const valueBtnOne = 1;

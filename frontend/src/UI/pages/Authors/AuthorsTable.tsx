@@ -1,16 +1,26 @@
 import { Box, Input, Spinner } from "@chakra-ui/react";
+import { useState } from "react";
+import { genericSearch } from "../../../business/functions/genericSearch";
 import { Author } from "../../../business/models/Author";
-import { useActions, useAppState } from "../../../business/overmind";
+import {
+  stateSections,
+  useActions,
+  useAppState,
+} from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
 
 function AuthorsTable() {
   const { isLoading } = useAppState().app;
-  const { ui, overview, getAllApi } = useAppState().author;
-  const { limit, page, queryString, showAll } = ui.table;
-  const { setLimit, setPage, setShowAll, getAuthors, search } =
-    useActions().author;
-
+  const {
+    ui: {
+      table: { limit, page },
+    },
+    overview,
+    getAllApi,
+  } = useAppState().author;
+  const { getAuthors } = useActions().author;
+  const [queryString, setQueryString] = useState("");
   const { total } = getAllApi || {};
 
   if (!getAllApi) getAuthors({ limit, page });
@@ -22,12 +32,14 @@ function AuthorsTable() {
   ];
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    search({ str: e.target.value });
+    setQueryString(() => e.target.value);
   };
 
   if (isLoading) {
     return <Spinner />;
   }
+
+  const stateSection = stateSections.author;
 
   return (
     <Box>
@@ -35,21 +47,13 @@ function AuthorsTable() {
       {overview?.length ? (
         <>
           <TableOverview
-            rows={overview}
+            rows={overview.filter((a) =>
+              genericSearch(a, ["last_name", "first_name"], queryString, false)
+            )}
             columns={columns}
             title="overview of authors"
           />
-          {!queryString && (
-            <Pagination
-              total={total}
-              limit={limit}
-              page={page}
-              showAll={showAll}
-              updatePage={setPage}
-              updateLimit={setLimit}
-              updateShowAll={setShowAll}
-            />
-          )}
+          {!queryString && <Pagination total={total} state={stateSection} />}
         </>
       ) : (
         <p>no authors</p>

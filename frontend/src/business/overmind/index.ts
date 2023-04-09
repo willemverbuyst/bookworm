@@ -38,7 +38,21 @@ export type Context = IContext<{
   effects: typeof config.effects;
 }>;
 
+export type RootState = typeof config.state;
+
+export type StateSection = keyof RootState;
+
 export const useAppState = createStateHook<Context>();
 export const useActions = createActionsHook<Context>();
 export const useEffects = createEffectsHook<Context>();
 export const useReaction = createReactionHook<Context>();
+
+export const stateSections1 = Object.keys(config.state).reduce(
+  (a, b) => ({
+    ...a,
+    [b]: b,
+  }),
+  {} as { [k in keyof typeof config.state]: k }
+);
+
+export const stateSections = { [stateSections1.author]: stateSections1.author };
