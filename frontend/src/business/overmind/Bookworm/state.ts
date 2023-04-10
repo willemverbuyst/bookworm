@@ -7,6 +7,7 @@ export interface BookwormState extends BaseState<Bookworm> {
   bookwormDetailsApi: Omit<UserApi, "token"> | null;
   ui: {
     table: {
+      columns: Array<{ field: keyof Bookworm; isNumeric?: boolean }>;
       filter: boolean;
       limit: number;
       page: number;
@@ -27,6 +28,13 @@ export const state: BookwormState = {
   }),
   ui: {
     table: {
+      columns: [
+        { field: "first_name" },
+        { field: "last_name" },
+        { field: "email" },
+        { field: "phone" },
+        { field: "library_name" },
+      ],
       filter: true,
       limit: 15,
       page: 1,

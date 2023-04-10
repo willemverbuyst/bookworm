@@ -1,6 +1,5 @@
 import { Box, Input, Spinner } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions/genericSearch";
-import { Book } from "../../../business/models/Book";
 import {
   stateSectionsWithTable,
   useActions,
@@ -22,19 +21,11 @@ function BooksTable() {
     getAllApi,
     overview,
     ui: {
-      table: { queryString },
+      table: { columns, queryString },
     },
   } = useAppState().book;
   const { total } = getAllApi || {};
   const { setQueryString } = useActions().book;
-
-  const columns: Array<{ field: keyof Book }> = [
-    { field: "title" },
-    { field: "author" },
-    { field: "year_published" },
-    { field: "genre" },
-    { field: "language" },
-  ];
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQueryString({ queryString: e.target.value });

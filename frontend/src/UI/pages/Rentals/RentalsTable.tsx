@@ -1,6 +1,5 @@
 import { Box, Input, Spinner } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions/genericSearch";
-import { Rental } from "../../../business/models/Rental";
 import {
   stateSectionsWithTable,
   useActions,
@@ -18,18 +17,11 @@ function RentalsTable() {
     getAllApi,
     overview,
     ui: {
-      table: { queryString },
+      table: { columns, queryString },
     },
   } = useAppState().rental;
   const { total } = getAllApi || {};
   const { setQueryString } = useActions().rental;
-
-  const columns: Array<{ field: keyof Rental }> = [
-    { field: "title" },
-    { field: "author" },
-    { field: "rental_date" },
-    { field: "return_date" },
-  ];
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQueryString({ queryString: e.target.value });

@@ -17,6 +17,7 @@ export interface BookState extends BaseState<Book> {
   statsYearPublishedApi: ApiResponse<Array<BookStatsYearPublished>> | null;
   ui: {
     table: {
+      columns: Array<{ field: keyof Book; isNumeric?: boolean }>;
       genre: string;
       language: string;
       limit: number;
@@ -62,6 +63,13 @@ export const state: BookState = {
   statsYearPublishedApi: null,
   ui: {
     table: {
+      columns: [
+        { field: "title" },
+        { field: "author" },
+        { field: "year_published" },
+        { field: "genre" },
+        { field: "language" },
+      ],
       genre: "",
       language: "",
       limit: 10,

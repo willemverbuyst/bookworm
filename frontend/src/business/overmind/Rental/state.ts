@@ -8,6 +8,7 @@ export interface RentalState extends BaseState<Rental> {
   statsDurationApi: ApiResponse<Array<RentalStatsDuration>> | null;
   ui: {
     table: {
+      columns: Array<{ field: keyof Rental; isNumeric?: boolean }>;
       filter: string;
       limit: number;
       page: number;
@@ -34,6 +35,12 @@ export const state: RentalState = {
   statsDurationApi: null,
   ui: {
     table: {
+      columns: [
+        { field: "title" },
+        { field: "author" },
+        { field: "rental_date" },
+        { field: "return_date" },
+      ],
       filter: "not_returned",
       limit: 20,
       page: 1,

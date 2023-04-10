@@ -1,6 +1,5 @@
 import { Box, Input, Spinner } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions/genericSearch";
-import { Author } from "../../../business/models/Author";
 import {
   stateSectionsWithTable,
   useActions,
@@ -17,18 +16,11 @@ function AuthorsTable() {
     getAllApi,
     overview,
     ui: {
-      table: { queryString },
+      table: { columns, queryString },
     },
   } = useAppState().author;
   const { setQueryString } = useActions().author;
-
   const { total } = getAllApi || {};
-
-  const columns: Array<{ field: keyof Author; isNumeric?: boolean }> = [
-    { field: "last_name" },
-    { field: "first_name" },
-    { field: "books_written", isNumeric: true },
-  ];
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQueryString({ queryString: e.target.value });

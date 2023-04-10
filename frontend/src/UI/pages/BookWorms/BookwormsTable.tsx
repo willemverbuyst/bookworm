@@ -1,6 +1,5 @@
 import { Box, Input, Spinner, useDisclosure } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions/genericSearch";
-import { Bookworm } from "../../../business/models/Bookworm";
 import {
   stateSectionsWithTable,
   useActions,
@@ -19,20 +18,12 @@ function BookwormsTable() {
     getAllApi,
     overview,
     ui: {
-      table: { queryString },
+      table: { columns, queryString },
     },
   } = useAppState().bookworm;
   const { total } = getAllApi || {};
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getBookWormById, setQueryString } = useActions().bookworm;
-
-  const columns: Array<{ field: keyof Bookworm }> = [
-    { field: "first_name" },
-    { field: "last_name" },
-    { field: "email" },
-    { field: "phone" },
-    { field: "library_name" },
-  ];
 
   const getUser = async (id: string) => {
     await getBookWormById({ id });

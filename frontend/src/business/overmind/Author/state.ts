@@ -8,6 +8,7 @@ export interface AuthorState extends BaseState<Author> {
   statsPageApi: ApiResponse<AuthorStatsPage> | null;
   ui: {
     table: {
+      columns: Array<{ field: keyof Author; isNumeric?: boolean }>;
       limit: number;
       page: number;
       queryString: string;
@@ -42,6 +43,11 @@ export const state: AuthorState = {
   statsPageApi: null,
   ui: {
     table: {
+      columns: [
+        { field: "last_name" },
+        { field: "first_name" },
+        { field: "books_written", isNumeric: true },
+      ],
       limit: 10,
       page: 1,
       queryString: "",
