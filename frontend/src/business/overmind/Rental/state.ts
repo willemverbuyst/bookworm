@@ -18,7 +18,7 @@ export const state: RentalState = {
   statsDurationApi: null,
   ui: {
     table: {
-      filter: "",
+      filter: "not_returned",
       limit: 20,
       page: 1,
       queryString: "",
