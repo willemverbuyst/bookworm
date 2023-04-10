@@ -78,6 +78,14 @@ export interface BookState extends BaseState<Book> {
 
 export interface BookwormState extends BaseState<Bookworm> {
   bookwormDetailsApi: Omit<UserApi, "token"> | null;
+  ui: {
+    table: {
+      limit: number;
+      page: number;
+      queryString: string;
+      showAll: boolean;
+    };
+  };
 }
 
 export type GenreState = BaseState<Genre>;

@@ -1,29 +1,22 @@
 import { Box, Spinner, useDisclosure } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { Bookworm } from "../../../business/models/Bookworm";
-import { useActions, useAppState } from "../../../business/overmind";
+import {
+  stateSections,
+  useActions,
+  useAppState,
+} from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
+import { useGetBooksworms } from "../../hooks/useGetBookworms";
 import BookwormsDetails from "./BookwormsDetails";
 
 function BookwormsTable() {
+  useGetBooksworms();
   const { isLoading } = useAppState().app;
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(15);
-  const [showAll, setShowAll] = useState(false);
   const data = useAppState().bookworm.overview;
   const total = useAppState().bookworm.getAllApi?.total;
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { getBookworms } = useActions().bookworm;
   const { getBookWormById } = useActions().bookworm;
-
-  useEffect(() => {
-    if (showAll && total) {
-      getBookworms({ limit: total, page: 1 });
-    } else {
-      getBookworms({ limit, page });
-    }
-  }, [page, limit, showAll]);
 
   const columns: Array<{ field: keyof Bookworm }> = [
     { field: "first_name" },
@@ -43,6 +36,8 @@ function BookwormsTable() {
     return <Spinner />;
   }
 
+  const stateSection = stateSections.bookworm;
+
   return (
     <Box>
       {data?.length ? (
@@ -54,15 +49,7 @@ function BookwormsTable() {
             title="overview of bookworms"
             action={getUser}
           />
-          <Pagination
-            total={total}
-            limit={limit}
-            page={page}
-            showAll={showAll}
-            updatePage={setPage}
-            updateLimit={setLimit}
-            updateShowAll={setShowAll}
-          />
+          <Pagination total={total} state={stateSection} />
         </>
       ) : (
         <p>no bookworms</p>

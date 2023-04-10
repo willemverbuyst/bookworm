@@ -10,4 +10,12 @@ export const state: BookwormState = {
     }
     return getAllApi.data;
   }),
+  ui: {
+    table: {
+      limit: 15,
+      page: 1,
+      queryString: "",
+      showAll: false,
+    },
+  },
 };
