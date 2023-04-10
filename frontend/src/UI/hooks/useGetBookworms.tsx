@@ -2,12 +2,13 @@ import { useEffect } from "react";
 import { useActions, useAppState } from "../../business/overmind";
 
 export function useGetBooksworms() {
-  const { bookwormApi } = useAppState().bookworm;
+  const { getAllApi, ui } = useAppState().bookworm;
   const { getBookworms } = useActions().bookworm;
+  const { filter, limit, page } = ui.table;
 
   useEffect(() => {
-    if (!bookwormApi?.data.length) {
-      getBookworms({ limit: 10, page: 1 });
+    if (!getAllApi?.data.length) {
+      getBookworms({ filter, limit, page });
     }
   }, []);
 }

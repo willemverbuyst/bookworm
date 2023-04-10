@@ -1,5 +1,30 @@
 import { derived } from "overmind";
-import { BookState } from "../../models/State";
+import { ApiResponse } from "../../models/Api";
+import {
+  Book,
+  BookStatsGenre,
+  BookStatsLanguage,
+  BookStatsYearPublished,
+} from "../../models/Book";
+import { BaseState, UITable } from "../../models/State";
+
+export interface BookState extends BaseState<Book> {
+  statsGenre: Array<BookStatsGenre> | null;
+  statsGenreApi: ApiResponse<Array<BookStatsGenre>> | null;
+  statsLanguage: Array<BookStatsLanguage> | null;
+  statsLanguageApi: ApiResponse<Array<BookStatsLanguage>> | null;
+  statsYearPublished: Array<BookStatsYearPublished> | null;
+  statsYearPublishedApi: ApiResponse<Array<BookStatsYearPublished>> | null;
+  ui: {
+    table: UITable<
+      Book,
+      {
+        genre: string;
+        language: string;
+      }
+    >;
+  };
+}
 
 export const state: BookState = {
   getAllApi: null,
@@ -34,4 +59,23 @@ export const state: BookState = {
     return statsYearPublishedApi.data;
   }),
   statsYearPublishedApi: null,
+  ui: {
+    table: {
+      columns: [
+        { field: "title" },
+        { field: "author" },
+        { field: "year_published" },
+        { field: "genre" },
+        { field: "language" },
+      ],
+      filter: {
+        genre: "",
+        language: "",
+      },
+      limit: 10,
+      page: 1,
+      queryString: "",
+      showAll: false,
+    },
+  },
 };

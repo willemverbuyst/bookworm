@@ -1,12 +1,15 @@
 import { derived } from "overmind";
-import { GenreState } from "../../models/State";
+import { Genre } from "../../models/Genre";
+import { BaseState } from "../../models/State";
+
+export type GenreState = BaseState<Genre>;
 
 export const state: GenreState = {
-  getAllApiResponse: null,
-  overview: derived(({ getAllApiResponse }: GenreState) => {
-    if (!getAllApiResponse?.data.length) {
+  getAllApi: null,
+  overview: derived(({ getAllApi }: GenreState) => {
+    if (!getAllApi?.data.length) {
       return null;
     }
-    return getAllApiResponse.data;
+    return getAllApi.data;
   }),
 };

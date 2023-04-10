@@ -12,10 +12,10 @@ export const getReviews = async (
 
   if (!response || response instanceof AxiosError) {
     actions.api.handleErrorResponse({ response });
-    return;
+  } else {
+    state.review.getAllApi = response;
   }
 
-  state.review.getAllApi = response;
   state.app.isLoading = false;
 };
 

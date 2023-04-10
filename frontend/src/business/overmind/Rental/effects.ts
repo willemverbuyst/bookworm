@@ -1,8 +1,4 @@
-import axios from "axios";
-import { ApiResponse } from "../../models/Api";
-import { Rental, RentalStatsDuration } from "../../models/Rental";
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
+import { apiGet } from "../../../api/apiGet";
 
 export const api = {
   getRentals: async ({
@@ -13,8 +9,8 @@ export const api = {
     limit: number;
     page: number;
     filter: string;
-  }): Promise<ApiResponse<Array<Rental>>> => {
-    let url = `${BACKEND_URL}/rentals/?limit=${limit}&page=${page}`;
+  }) => {
+    let url = `rentals/?limit=${limit}&page=${page}`;
 
     if (filter === "returned") {
       url += "&filter=returned";
@@ -24,20 +20,9 @@ export const api = {
       url += "&filter=not_returned";
     }
 
-    const response = await axios.get(url);
-    return response.data;
+    return apiGet({ url });
   },
 
-  getRentalStatsDuration: async (): Promise<
-    ApiResponse<Array<RentalStatsDuration>>
-  > => {
-    try {
-      const response = await axios.get(
-        `${BACKEND_URL}/rentals/stats/?by=duration`
-      );
-      return response.data;
-    } catch (error) {
-      throw new Error(JSON.stringify(error));
-    }
-  },
+  getRentalStatsDuration: async () =>
+    apiGet({ url: "rentals/stats/?by=duration" }),
 };

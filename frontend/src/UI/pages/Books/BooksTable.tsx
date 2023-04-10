@@ -1,41 +1,35 @@
-import { Box, Spinner } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { Book } from "../../../business/models/Book";
-import { useActions, useAppState } from "../../../business/overmind";
+import { Box, Input, Spinner } from "@chakra-ui/react";
+import { genericSearch } from "../../../business/functions/genericSearch";
+import {
+  stateSectionsWithTable,
+  useActions,
+  useAppState,
+} from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
+import { useGetBooks } from "../../hooks/useGetBooks";
 import { useGetGenres } from "../../hooks/useGetGenres";
 import { useGetLanguages } from "../../hooks/useGetLanguages";
-import FilterAndSort from "./FilterAndSort";
+import Filter from "./Filter";
 
 function BooksTable() {
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const [showAll, setShowAll] = useState(false);
-  const [genre, setGenre] = useState<string | null>(null);
-  const [language, setLanguage] = useState<string | null>(null);
-  const { isLoading } = useAppState().app;
-  const data = useAppState().book.overview;
-  const total = useAppState().book.getAllApi?.total;
-  const { getBooks } = useActions().book;
   useGetGenres();
   useGetLanguages();
+  useGetBooks();
+  const { isLoading } = useAppState().app;
+  const {
+    getAllApi,
+    overview,
+    ui: {
+      table: { columns, queryString },
+    },
+  } = useAppState().book;
+  const { total } = getAllApi || {};
+  const { setQueryString } = useActions().book;
 
-  useEffect(() => {
-    if (showAll && total) {
-      getBooks({ genre, language, limit: total, page: 1 });
-    } else {
-      getBooks({ genre, language, limit, page });
-    }
-  }, [genre, language, page, limit, showAll]);
-
-  const columns: Array<{ field: keyof Book }> = [
-    { field: "title" },
-    { field: "author" },
-    { field: "year_published" },
-    { field: "genre" },
-    { field: "language" },
-  ];
+  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQueryString({ queryString: e.target.value });
+  };
 
   if (isLoading) {
     return <Spinner />;
@@ -43,27 +37,18 @@ function BooksTable() {
 
   return (
     <Box>
-      {data?.length ? (
+      <Filter />
+      <Input onChange={searchInTable} placeholder="search" my={5} />
+      {overview?.length ? (
         <>
-          <FilterAndSort
-            updateGenre={setGenre}
-            updateLanguage={setLanguage}
-            updatePage={setPage}
-          />
           <TableOverview
-            rows={data}
+            rows={overview.filter((a) =>
+              genericSearch(a, ["title", "author"], queryString, false)
+            )}
             columns={columns}
             title="overview of books"
           />
-          <Pagination
-            total={total}
-            limit={limit}
-            page={page}
-            showAll={showAll}
-            updatePage={setPage}
-            updateLimit={setLimit}
-            updateShowAll={setShowAll}
-          />
+          <Pagination total={total} state={stateSectionsWithTable.book} />
         </>
       ) : (
         <p>no books</p>

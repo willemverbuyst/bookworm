@@ -1,9 +1,16 @@
 /* eslint-disable no-param-reassign */
+import { AxiosError } from "axios";
 import { Context } from "..";
 
-export const getGenres = async ({ effects, state }: Context) => {
+export const getGenres = async ({ actions, effects, state }: Context) => {
   state.app.isLoading = true;
-  const genres = await effects.genre.api.getGenres();
-  state.genre.genresApi = genres;
+  const response = await effects.genre.api.getGenres();
+
+  if (!response || response instanceof AxiosError) {
+    actions.api.handleErrorResponse({ response });
+  } else {
+    state.genre.getAllApi = response;
+  }
+
   state.app.isLoading = false;
 };

@@ -1,39 +1,31 @@
-import { Box, Spinner } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { Rental } from "../../../business/models/Rental";
-import { useActions, useAppState } from "../../../business/overmind";
+import { Box, Input, Spinner } from "@chakra-ui/react";
+import { genericSearch } from "../../../business/functions/genericSearch";
+import {
+  stateSectionsWithTable,
+  useActions,
+  useAppState,
+} from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
-import { useGetGenres } from "../../hooks/useGetGenres";
-import { useGetLanguages } from "../../hooks/useGetLanguages";
+import { useGetRentals } from "../../hooks/useGetRentals";
 import Filter from "./Filter";
 
 function RentalsTable() {
+  useGetRentals();
   const { isLoading } = useAppState().app;
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(20);
-  const [showAll, setShowAll] = useState(false);
-  const [filter, setFilter] = useState("not_returned");
-  const data = useAppState().rental.overview;
-  const total = useAppState().rental.getAllApi?.total;
-  const { getRentals } = useActions().rental;
-  useGetGenres();
-  useGetLanguages();
+  const {
+    getAllApi,
+    overview,
+    ui: {
+      table: { columns, queryString },
+    },
+  } = useAppState().rental;
+  const { total } = getAllApi || {};
+  const { setQueryString } = useActions().rental;
 
-  useEffect(() => {
-    if (showAll && total) {
-      getRentals({ limit: total, page: 1, filter });
-    } else {
-      getRentals({ limit, page, filter });
-    }
-  }, [filter, limit, page, showAll]);
-
-  const columns: Array<{ field: keyof Rental }> = [
-    { field: "title" },
-    { field: "author" },
-    { field: "rental_date" },
-    { field: "return_date" },
-  ];
+  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQueryString({ queryString: e.target.value });
+  };
 
   if (isLoading) {
     return <Spinner />;
@@ -41,23 +33,18 @@ function RentalsTable() {
 
   return (
     <Box>
-      {data?.length ? (
+      <Filter />
+      <Input onChange={searchInTable} placeholder="search" my={5} />
+      {overview?.length ? (
         <>
-          <Filter filter={filter} updateFilter={setFilter} />
           <TableOverview
-            rows={data}
+            rows={overview.filter((a) =>
+              genericSearch(a, ["title", "author"], queryString, false)
+            )}
             columns={columns}
             title="overview of rentals"
           />
-          <Pagination
-            total={total}
-            limit={limit}
-            page={page}
-            showAll={showAll}
-            updatePage={setPage}
-            updateLimit={setLimit}
-            updateShowAll={setShowAll}
-          />
+          <Pagination total={total} state={stateSectionsWithTable.rental} />
         </>
       ) : (
         <p>no rentals</p>

@@ -11,7 +11,7 @@ select_bookworms_sql = os.path.join(dirname, "../../sql/bookworm/select_bookworm
 select_count_bookworms_sql = os.path.join(dirname, "../../sql/bookworm/select_count_bookworms.sql")
 
 
-def get_bookworms_from_db(limit, page):
+def get_bookworms_from_db(limit, page, active):
     conn = create_connection()
 
     if limit:
@@ -23,8 +23,13 @@ def get_bookworms_from_db(limit, page):
     raw_sql = sql_file.read()
     sql_file.close()
 
+    if (active == "true"):
+        active_int = 1
+    else:
+        active_int = 0
+
     cursor = conn.cursor()
-    cursor.execute(raw_sql, (limit, offset))
+    cursor.execute(raw_sql, (active_int, limit, offset))
 
     data = cursor.fetchall()
     conn.close()
@@ -34,15 +39,20 @@ def get_bookworms_from_db(limit, page):
     return bookworms_formatted
 
 
-def get_total_number_of_bookworms():
+def get_total_number_of_bookworms(active):
     conn = create_connection()
 
     sql_file = open(select_count_bookworms_sql, 'r')
     raw_sql = sql_file.read()
     sql_file.close()
 
+    if (active == "true"):
+        active_int = 1
+    else:
+        active_int = 0
+
     cursor = conn.cursor()
-    cursor.execute(raw_sql)
+    cursor.execute(raw_sql, (active_int,))
 
     result = cursor.fetchone()
     conn.close()

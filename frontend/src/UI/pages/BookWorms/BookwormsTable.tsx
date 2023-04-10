@@ -1,39 +1,38 @@
-import { Box, Spinner } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { Bookworm } from "../../../business/models/Bookworm";
-import { useActions, useAppState } from "../../../business/overmind";
+import { Box, Input, Spinner, useDisclosure } from "@chakra-ui/react";
+import { genericSearch } from "../../../business/functions/genericSearch";
+import {
+  stateSectionsWithTable,
+  useActions,
+  useAppState,
+} from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
+import { useGetBooksworms } from "../../hooks/useGetBookworms";
+import BookwormsDetails from "./BookwormsDetails";
+import Filter from "./Filter";
 
-interface Props {
-  action: (id: string) => void;
-}
-
-function BookwormsTable({ action }: Props) {
+function BookwormsTable() {
+  useGetBooksworms();
   const { isLoading } = useAppState().app;
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(15);
-  const [showAll, setShowAll] = useState(false);
-  const data = useAppState().bookworm.overview;
-  const total = useAppState().bookworm.getAllApi?.total;
-  const { getBookworms } = useActions().bookworm;
+  const {
+    getAllApi,
+    overview,
+    ui: {
+      table: { columns, queryString },
+    },
+  } = useAppState().bookworm;
+  const { total } = getAllApi || {};
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { getBookWormById, setQueryString } = useActions().bookworm;
 
-  useEffect(() => {
-    if (showAll && total) {
-      getBookworms({ limit: total, page: 1 });
-    } else {
-      getBookworms({ limit, page });
-    }
-  }, [page, limit, showAll]);
+  const getUser = async (id: string) => {
+    await getBookWormById({ id });
+    onOpen();
+  };
 
-  const columns: Array<{ field: keyof Bookworm }> = [
-    { field: "first_name" },
-    { field: "last_name" },
-    { field: "email" },
-    { field: "phone" },
-    { field: "user_is_active" },
-    { field: "library_name" },
-  ];
+  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQueryString({ queryString: e.target.value });
+  };
 
   if (isLoading) {
     return <Spinner />;
@@ -41,23 +40,25 @@ function BookwormsTable({ action }: Props) {
 
   return (
     <Box>
-      {data?.length ? (
+      <Filter />
+      <Input onChange={searchInTable} placeholder="search" my={5} />
+      {overview?.length ? (
         <>
+          <BookwormsDetails isOpen={isOpen} onClose={onClose} />
           <TableOverview
-            rows={data}
+            rows={overview.filter((a) =>
+              genericSearch(
+                a,
+                ["first_name", "last_name", "email"],
+                queryString,
+                false
+              )
+            )}
             columns={columns}
             title="overview of bookworms"
-            action={action}
+            action={getUser}
           />
-          <Pagination
-            total={total}
-            limit={limit}
-            page={page}
-            showAll={showAll}
-            updatePage={setPage}
-            updateLimit={setLimit}
-            updateShowAll={setShowAll}
-          />
+          <Pagination total={total} state={stateSectionsWithTable.bookworm} />
         </>
       ) : (
         <p>no bookworms</p>

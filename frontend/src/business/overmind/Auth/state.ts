@@ -1,4 +1,7 @@
-import { AuthState } from "../../models/State";
+export interface AuthState {
+  isSignedIn: boolean;
+  token: string;
+}
 
 export const state: AuthState = {
   isSignedIn: false,

@@ -1,13 +1,23 @@
 import { derived } from "overmind";
-import { AuthorState } from "../../models/State";
+import { ApiResponse } from "../../models/Api";
+import { Author, AuthorStatsPage } from "../../models/Author";
+import { BaseState, UITable } from "../../models/State";
+
+export interface AuthorState extends BaseState<Author> {
+  statsPage: AuthorStatsPage | null;
+  statsPageApi: ApiResponse<AuthorStatsPage> | null;
+  ui: {
+    table: UITable<Author, null>;
+  };
+}
 
 export const state: AuthorState = {
-  getAllApiResponse: null,
-  overview: derived(({ getAllApiResponse }: AuthorState) => {
-    if (!getAllApiResponse?.data.length) {
+  getAllApi: null,
+  overview: derived(({ getAllApi }: AuthorState) => {
+    if (!getAllApi?.data.length) {
       return null;
     }
-    return getAllApiResponse.data
+    return getAllApi.data
       .map((author) => ({
         ...author,
       }))
@@ -25,4 +35,18 @@ export const state: AuthorState = {
     };
   }),
   statsPageApi: null,
+  ui: {
+    table: {
+      columns: [
+        { field: "last_name" },
+        { field: "first_name" },
+        { field: "books_written", isNumeric: true },
+      ],
+      filter: null,
+      limit: 10,
+      page: 1,
+      queryString: "",
+      showAll: false,
+    },
+  },
 };

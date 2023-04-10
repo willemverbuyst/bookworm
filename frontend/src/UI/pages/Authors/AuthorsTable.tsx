@@ -1,31 +1,30 @@
-import { Box, Spinner } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { Author } from "../../../business/models/Author";
-import { useActions, useAppState } from "../../../business/overmind";
+import { Box, Input, Spinner } from "@chakra-ui/react";
+import { genericSearch } from "../../../business/functions/genericSearch";
+import {
+  stateSectionsWithTable,
+  useActions,
+  useAppState,
+} from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
+import { useGetAuthors } from "../../hooks/useGetAuthors";
 
 function AuthorsTable() {
+  useGetAuthors();
   const { isLoading } = useAppState().app;
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const [showAll, setShowAll] = useState(false);
-  const data = useAppState().author.overview;
-  const total = useAppState().author.getAllApi?.total;
-  const { getAuthors } = useActions().author;
-  const columns: Array<{ field: keyof Author; isNumeric?: boolean }> = [
-    { field: "last_name" },
-    { field: "first_name" },
-    { field: "books_written", isNumeric: true },
-  ];
+  const {
+    getAllApi,
+    overview,
+    ui: {
+      table: { columns, queryString },
+    },
+  } = useAppState().author;
+  const { setQueryString } = useActions().author;
+  const { total } = getAllApi || {};
 
-  useEffect(() => {
-    if (showAll && total) {
-      getAuthors({ limit: total, page: 1 });
-    } else {
-      getAuthors({ limit, page });
-    }
-  }, [page, limit, showAll]);
+  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQueryString({ queryString: e.target.value });
+  };
 
   if (isLoading) {
     return <Spinner />;
@@ -33,22 +32,19 @@ function AuthorsTable() {
 
   return (
     <Box>
-      {data?.length ? (
+      <Input onChange={searchInTable} placeholder="search" my={5} />
+      {overview?.length ? (
         <>
           <TableOverview
-            rows={data}
+            rows={overview.filter((a) =>
+              genericSearch(a, ["last_name", "first_name"], queryString, false)
+            )}
             columns={columns}
             title="overview of authors"
           />
-          <Pagination
-            total={total}
-            limit={limit}
-            page={page}
-            showAll={showAll}
-            updatePage={setPage}
-            updateLimit={setLimit}
-            updateShowAll={setShowAll}
-          />
+          {!queryString && (
+            <Pagination total={total} state={stateSectionsWithTable.author} />
+          )}
         </>
       ) : (
         <p>no authors</p>
