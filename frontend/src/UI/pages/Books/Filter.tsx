@@ -5,8 +5,10 @@ import Label from "../../components/Controllers/Label";
 function Filter() {
   const allGenres = useAppState().genre.overview || [];
   const allLanguages = useAppState().language.overview || [];
-  const { genre, language } = useAppState().book.ui.table;
-  const { setGenre, setLanguage } = useActions().book;
+  const {
+    filter: { genre, language },
+  } = useAppState().book.ui.table;
+  const { setGenreFilter, setLanguageFilter } = useActions().book;
   const genresForSelect = allGenres.map((g) => ({
     value: g.id,
     display: g.genre,
@@ -17,11 +19,11 @@ function Filter() {
   }));
 
   const handleSelectGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setGenre({ genre: e.target.value });
+    setGenreFilter({ genre: e.target.value });
   };
 
   const handleSelectLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setLanguage({ language: e.target.value });
+    setLanguageFilter({ language: e.target.value });
   };
 
   return (

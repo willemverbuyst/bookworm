@@ -84,14 +84,18 @@ export const getBookStatsYearPublished = async ({
   state.app.isLoading = false;
 };
 
-export const setGenre = (
+export const setGenreFilter = (
   { actions, state }: Context,
   { genre }: { genre: string }
 ) => {
-  const { language, limit, showAll } = state.book.ui.table;
+  const {
+    filter: { language },
+    limit,
+    showAll,
+  } = state.book.ui.table;
   const { total } = state.book.getAllApi || {};
 
-  state.book.ui.table.genre = genre;
+  state.book.ui.table.filter.genre = genre;
   state.book.ui.table.page = 1;
 
   if (showAll && total) {
@@ -108,14 +112,18 @@ export const setGenre = (
   }
 };
 
-export const setLanguage = (
+export const setLanguageFilter = (
   { actions, state }: Context,
   { language }: { language: string }
 ) => {
-  const { genre, limit, showAll } = state.book.ui.table;
+  const {
+    filter: { genre },
+    limit,
+    showAll,
+  } = state.book.ui.table;
   const { total } = state.book.getAllApi || {};
 
-  state.book.ui.table.language = language;
+  state.book.ui.table.filter.language = language;
   state.book.ui.table.page = 1;
 
   if (showAll && total) {
@@ -136,7 +144,11 @@ export const setLimit = (
   { actions, state }: Context,
   { limit }: { limit: number }
 ) => {
-  const { genre, language, showAll, page } = state.book.ui.table;
+  const {
+    filter: { genre, language },
+    showAll,
+    page,
+  } = state.book.ui.table;
   const { total } = state.book.getAllApi || {};
 
   state.book.ui.table.limit = limit;
@@ -159,7 +171,11 @@ export const setPage = (
   { actions, state }: Context,
   { page }: { page: number }
 ) => {
-  const { genre, language, limit, showAll } = state.book.ui.table;
+  const {
+    filter: { genre, language },
+    limit,
+    showAll,
+  } = state.book.ui.table;
   const { total } = state.book.getAllApi || {};
 
   state.book.ui.table.page = page;
@@ -189,7 +205,11 @@ export const setShowAll = (
   { actions, state }: Context,
   { showAll }: { showAll: boolean }
 ) => {
-  const { genre, language, limit, page } = state.book.ui.table;
+  const {
+    filter: { genre, language },
+    limit,
+    page,
+  } = state.book.ui.table;
   const { total } = state.book.getAllApi || {};
 
   state.book.ui.table.showAll = showAll;

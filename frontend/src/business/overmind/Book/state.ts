@@ -19,8 +19,10 @@ export interface BookState extends BaseState<Book> {
   ui: {
     table: {
       columns: Column<Book>;
-      genre: string;
-      language: string;
+      filter: {
+        genre: string;
+        language: string;
+      };
       limit: number;
       page: number;
       queryString: string;
@@ -71,8 +73,10 @@ export const state: BookState = {
         { field: "genre" },
         { field: "language" },
       ],
-      genre: "",
-      language: "",
+      filter: {
+        genre: "",
+        language: "",
+      },
       limit: 10,
       page: 1,
       queryString: "",
