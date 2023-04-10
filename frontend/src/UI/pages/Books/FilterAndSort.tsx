@@ -1,21 +1,12 @@
-import { Box, HStack } from "@chakra-ui/react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Dispatch, SetStateAction, useEffect, useId } from "react";
-import { useForm } from "react-hook-form";
-import { useAppState } from "../../../business/overmind";
-import ControlledSelect from "../../components/Controllers/Select";
-import { defaultValues, FormFields, validationSchema } from "./helpers";
+import { Box, FormControl, HStack, Select } from "@chakra-ui/react";
+import { useActions, useAppState } from "../../../business/overmind";
+import Label from "../../components/Controllers/Label";
 
-interface Props {
-  updateGenre: Dispatch<SetStateAction<string | null>>;
-  updateLanguage: Dispatch<SetStateAction<string | null>>;
-  updatePage: Dispatch<SetStateAction<number>>;
-}
-
-function FilterAndSort({ updateGenre, updateLanguage, updatePage }: Props) {
-  const id = useId();
-  const allGenres = useAppState().genre.genresOverview || [];
-  const allLanguages = useAppState().language.languagesOverview || [];
+function FilterAndSort() {
+  const allGenres = useAppState().genre.overview || [];
+  const allLanguages = useAppState().language.overview || [];
+  const { genre, language } = useAppState().book.ui.table;
+  const { setGenre, setLanguage } = useActions().book;
   const genresForSelect = allGenres.map((g) => ({
     value: g.id,
     display: g.genre,
@@ -25,51 +16,39 @@ function FilterAndSort({ updateGenre, updateLanguage, updatePage }: Props) {
     display: l.language,
   }));
 
-  const {
-    control,
-    formState: { errors },
-    watch,
-  } = useForm<FormFields>({
-    defaultValues,
-    resolver: zodResolver(validationSchema),
-  });
+  const handleSelectGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setGenre({ genre: e.target.value });
+  };
 
-  const [genre, language] = watch(["genre", "language"]);
-
-  useEffect(() => {
-    if (genre && genre === "all") {
-      updateGenre(null);
-    } else if (genre) {
-      updateGenre(genre);
-    }
-
-    if (language && language === "all") {
-      updateLanguage(null);
-    } else if (language) {
-      updateLanguage(language);
-    }
-    updatePage(1);
-  }, [genre, language]);
+  const handleSelectLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setLanguage({ language: e.target.value });
+  };
 
   return (
-    <Box as="form" id={id} m={10}>
+    <Box m={10}>
       <HStack spacing={6}>
-        <ControlledSelect
-          dataSet={genresForSelect}
-          name="genre"
-          control={control}
-          error={errors.genre}
-          placeholder="genre"
-          allOption
-        />
-        <ControlledSelect
-          dataSet={languagesForSelect}
-          name="language"
-          control={control}
-          error={errors.language}
-          placeholder="language"
-          allOption
-        />
+        <FormControl>
+          <Label text="Genre" isRequired={false} />
+          <Select onChange={handleSelectGenre} value={genre}>
+            <option value="">All</option>
+            {genresForSelect.map((d) => (
+              <option key={JSON.stringify(d)} value={d.value}>
+                {d.display}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl>
+          <Label text="Language" isRequired={false} />
+          <Select onChange={handleSelectLanguage} value={language}>
+            <option value="">All</option>
+            {languagesForSelect.map((d) => (
+              <option key={JSON.stringify(d)} value={d.value}>
+                {d.display}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
       </HStack>
     </Box>
   );

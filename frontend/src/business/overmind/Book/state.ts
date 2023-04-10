@@ -34,4 +34,14 @@ export const state: BookState = {
     return statsYearPublishedApi.data;
   }),
   statsYearPublishedApi: null,
+  ui: {
+    table: {
+      genre: "",
+      language: "",
+      limit: 10,
+      page: 1,
+      queryString: "",
+      showAll: false,
+    },
+  },
 };

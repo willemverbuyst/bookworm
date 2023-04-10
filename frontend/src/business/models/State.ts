@@ -13,6 +13,15 @@ import { Rental, RentalStatsDuration } from "./Rental";
 import { Review } from "./Review";
 import { User, UserApi } from "./User";
 
+export interface UI {
+  table: {
+    limit: number;
+    page: number;
+    queryString: string;
+    showAll: boolean;
+  };
+}
+
 export interface ApiState {
   response: {
     statusText?: string;
@@ -55,6 +64,16 @@ export interface BookState extends BaseState<Book> {
   statsLanguageApi: ApiResponse<Array<BookStatsLanguage>> | null;
   statsYearPublished: Array<BookStatsYearPublished> | null;
   statsYearPublishedApi: ApiResponse<Array<BookStatsYearPublished>> | null;
+  ui: {
+    table: {
+      genre: string;
+      language: string;
+      limit: number;
+      page: number;
+      queryString: string;
+      showAll: boolean;
+    };
+  };
 }
 
 export interface BookwormState extends BaseState<Bookworm> {

@@ -8,7 +8,6 @@ import {
   Select,
   Spacer,
 } from "@chakra-ui/react";
-import { useId } from "react";
 import {
   stateSections,
   useActions,
@@ -21,7 +20,6 @@ interface Props {
 }
 
 function Pagination({ total, state }: Props) {
-  const id = useId();
   const {
     limit,
     page: currentPage,
@@ -188,7 +186,7 @@ function Pagination({ total, state }: Props) {
           ))}
         </Box>
       )}
-      <Box as="form" id={id} mt={5}>
+      <Box mt={5}>
         <Flex align="end">
           {!showAll && (
             <Select defaultValue={limit} onChange={handleSelect}>

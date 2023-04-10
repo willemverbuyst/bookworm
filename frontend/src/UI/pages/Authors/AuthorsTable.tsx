@@ -1,5 +1,5 @@
 import { Box, Input, Spinner } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect } from "react";
 import { genericSearch } from "../../../business/functions/genericSearch";
 import { Author } from "../../../business/models/Author";
 import {
@@ -14,16 +14,20 @@ function AuthorsTable() {
   const { isLoading } = useAppState().app;
   const {
     ui: {
-      table: { limit, page },
+      table: { limit, page, queryString },
     },
     overview,
     getAllApi,
   } = useAppState().author;
-  const { getAuthors } = useActions().author;
-  const [queryString, setQueryString] = useState("");
+  const { getAuthors, setQueryString } = useActions().author;
+
   const { total } = getAllApi || {};
 
-  if (!getAllApi) getAuthors({ limit, page });
+  useEffect(() => {
+    if (!getAllApi) {
+      getAuthors({ limit, page });
+    }
+  }, [getAllApi]);
 
   const columns: Array<{ field: keyof Author; isNumeric?: boolean }> = [
     { field: "last_name" },
@@ -32,7 +36,7 @@ function AuthorsTable() {
   ];
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQueryString(() => e.target.value);
+    setQueryString({ queryString: e.target.value });
   };
 
   if (isLoading) {

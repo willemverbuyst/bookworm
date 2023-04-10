@@ -55,4 +55,7 @@ export const stateSections1 = Object.keys(config.state).reduce(
   {} as { [k in keyof typeof config.state]: k }
 );
 
-export const stateSections = { [stateSections1.author]: stateSections1.author };
+export const stateSections = {
+  [stateSections1.author]: stateSections1.author,
+  [stateSections1.book]: stateSections1.book,
+};

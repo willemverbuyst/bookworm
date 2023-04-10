@@ -1,7 +1,11 @@
 import { Box, Spinner } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Book } from "../../../business/models/Book";
-import { useActions, useAppState } from "../../../business/overmind";
+import {
+  stateSections,
+  useActions,
+  useAppState,
+} from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
 import { useGetGenres } from "../../hooks/useGetGenres";
@@ -9,25 +13,24 @@ import { useGetLanguages } from "../../hooks/useGetLanguages";
 import FilterAndSort from "./FilterAndSort";
 
 function BooksTable() {
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const [showAll, setShowAll] = useState(false);
-  const [genre, setGenre] = useState<string | null>(null);
-  const [language, setLanguage] = useState<string | null>(null);
-  const { isLoading } = useAppState().app;
-  const data = useAppState().book.overview;
-  const total = useAppState().book.getAllApi?.total;
-  const { getBooks } = useActions().book;
   useGetGenres();
   useGetLanguages();
+  const { isLoading } = useAppState().app;
+  const {
+    ui: {
+      table: { limit, page },
+    },
+    overview,
+    getAllApi,
+  } = useAppState().book;
+  const { getBooks } = useActions().book;
+  const { total } = getAllApi || {};
 
   useEffect(() => {
-    if (showAll && total) {
-      getBooks({ genre, language, limit: total, page: 1 });
-    } else {
-      getBooks({ genre, language, limit, page });
+    if (!getAllApi) {
+      getBooks({ genre: null, language: null, limit, page });
     }
-  }, [genre, language, page, limit, showAll]);
+  }, [getAllApi]);
 
   const columns: Array<{ field: keyof Book }> = [
     { field: "title" },
@@ -43,27 +46,15 @@ function BooksTable() {
 
   return (
     <Box>
-      {data?.length ? (
+      <FilterAndSort />
+      {overview?.length ? (
         <>
-          <FilterAndSort
-            updateGenre={setGenre}
-            updateLanguage={setLanguage}
-            updatePage={setPage}
-          />
           <TableOverview
-            rows={data}
+            rows={overview}
             columns={columns}
             title="overview of books"
           />
-          <Pagination
-            total={total}
-            limit={limit}
-            page={page}
-            showAll={showAll}
-            updatePage={setPage}
-            updateLimit={setLimit}
-            updateShowAll={setShowAll}
-          />
+          <Pagination total={total} state={stateSections.book} />
         </>
       ) : (
         <p>no books</p>

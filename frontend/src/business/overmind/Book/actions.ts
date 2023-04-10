@@ -83,3 +83,127 @@ export const getBookStatsYearPublished = async ({
 
   state.app.isLoading = false;
 };
+
+export const setGenre = (
+  { actions, state }: Context,
+  { genre }: { genre: string }
+) => {
+  const { language, limit, showAll } = state.book.ui.table;
+  const { total } = state.book.getAllApi || {};
+
+  state.book.ui.table.genre = genre;
+  state.book.ui.table.page = 1;
+
+  if (showAll && total) {
+    actions.book.getBooks({
+      genre: null,
+      language: null,
+      limit: total,
+      page: 1,
+    });
+    actions.book.setQueryString({ queryString: "" });
+  } else {
+    actions.book.getBooks({ genre, language, limit, page: 1 });
+    actions.book.setQueryString({ queryString: "" });
+  }
+};
+
+export const setLanguage = (
+  { actions, state }: Context,
+  { language }: { language: string }
+) => {
+  const { genre, limit, showAll } = state.book.ui.table;
+  const { total } = state.book.getAllApi || {};
+
+  state.book.ui.table.language = language;
+  state.book.ui.table.page = 1;
+
+  if (showAll && total) {
+    actions.book.getBooks({
+      genre: null,
+      language: null,
+      limit: total,
+      page: 1,
+    });
+    actions.book.setQueryString({ queryString: "" });
+  } else {
+    actions.book.getBooks({ genre, language, limit, page: 1 });
+    actions.book.setQueryString({ queryString: "" });
+  }
+};
+
+export const setLimit = (
+  { actions, state }: Context,
+  { limit }: { limit: number }
+) => {
+  const { genre, language, showAll, page } = state.book.ui.table;
+  const { total } = state.book.getAllApi || {};
+
+  state.book.ui.table.limit = limit;
+
+  if (showAll && total) {
+    actions.book.getBooks({
+      genre: null,
+      language: null,
+      limit: total,
+      page: 1,
+    });
+    actions.book.setQueryString({ queryString: "" });
+  } else {
+    actions.book.getBooks({ genre, language, limit, page });
+    actions.book.setQueryString({ queryString: "" });
+  }
+};
+
+export const setPage = (
+  { actions, state }: Context,
+  { page }: { page: number }
+) => {
+  const { genre, language, limit, showAll } = state.book.ui.table;
+  const { total } = state.book.getAllApi || {};
+
+  state.book.ui.table.page = page;
+
+  if (showAll && total) {
+    actions.book.getBooks({
+      genre: null,
+      language: null,
+      limit: total,
+      page: 1,
+    });
+    actions.book.setQueryString({ queryString: "" });
+  } else {
+    actions.book.getBooks({ genre, language, limit, page });
+    actions.book.setQueryString({ queryString: "" });
+  }
+};
+
+export const setQueryString = (
+  { state }: Context,
+  { queryString }: { queryString: string }
+) => {
+  state.book.ui.table.queryString = queryString;
+};
+
+export const setShowAll = (
+  { actions, state }: Context,
+  { showAll }: { showAll: boolean }
+) => {
+  const { genre, language, limit, page } = state.book.ui.table;
+  const { total } = state.book.getAllApi || {};
+
+  state.book.ui.table.showAll = showAll;
+
+  if (showAll && total) {
+    actions.book.getBooks({
+      genre: null,
+      language: null,
+      limit: total,
+      page: 1,
+    });
+    actions.book.setQueryString({ queryString: "" });
+  } else {
+    actions.book.getBooks({ genre, language, limit, page });
+    actions.book.setQueryString({ queryString: "" });
+  }
+};
