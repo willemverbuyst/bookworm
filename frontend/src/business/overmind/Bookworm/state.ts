@@ -7,6 +7,7 @@ export interface BookwormState extends BaseState<Bookworm> {
   bookwormDetailsApi: Omit<UserApi, "token"> | null;
   ui: {
     table: {
+      filter: string;
       limit: number;
       page: number;
       queryString: string;
@@ -26,6 +27,7 @@ export const state: BookwormState = {
   }),
   ui: {
     table: {
+      filter: "active",
       limit: 15,
       page: 1,
       queryString: "",

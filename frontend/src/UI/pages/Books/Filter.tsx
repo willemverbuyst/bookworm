@@ -2,7 +2,7 @@ import { Box, FormControl, HStack, Select } from "@chakra-ui/react";
 import { useActions, useAppState } from "../../../business/overmind";
 import Label from "../../components/Controllers/Label";
 
-function FilterAndSort() {
+function Filter() {
   const allGenres = useAppState().genre.overview || [];
   const allLanguages = useAppState().language.overview || [];
   const { genre, language } = useAppState().book.ui.table;
@@ -54,4 +54,4 @@ function FilterAndSort() {
   );
 }
 
-export default FilterAndSort;
+export default Filter;

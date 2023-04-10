@@ -11,7 +11,7 @@ import TableOverview from "../../components/Table/TableOverView";
 import { useGetBooks } from "../../hooks/useGetBooks";
 import { useGetGenres } from "../../hooks/useGetGenres";
 import { useGetLanguages } from "../../hooks/useGetLanguages";
-import FilterAndSort from "./FilterAndSort";
+import Filter from "./Filter";
 
 function BooksTable() {
   useGetGenres();
@@ -46,7 +46,7 @@ function BooksTable() {
 
   return (
     <Box>
-      <FilterAndSort />
+      <Filter />
       <Input onChange={searchInTable} placeholder="search" my={5} />
       {overview?.length ? (
         <>

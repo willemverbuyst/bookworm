@@ -10,6 +10,7 @@ import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
 import { useGetBooksworms } from "../../hooks/useGetBookworms";
 import BookwormsDetails from "./BookwormsDetails";
+import Filter from "./Filter";
 
 function BookwormsTable() {
   useGetBooksworms();
@@ -49,6 +50,7 @@ function BookwormsTable() {
 
   return (
     <Box>
+      <Filter />
       <Input onChange={searchInTable} placeholder="search" my={5} />
       {overview?.length ? (
         <>

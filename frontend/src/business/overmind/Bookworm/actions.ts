@@ -4,10 +4,14 @@ import { Context } from "..";
 
 export const getBookworms = async (
   { actions, effects, state }: Context,
-  { limit, page }: { limit: number; page: number }
+  { filter, limit, page }: { filter: string; limit: number; page: number }
 ) => {
   state.app.isLoading = true;
-  const response = await effects.bookworm.api.getBookworms({ limit, page });
+  const response = await effects.bookworm.api.getBookworms({
+    filter,
+    limit,
+    page,
+  });
 
   if (!response || response instanceof AxiosError) {
     actions.api.handleErrorResponse({ response });
@@ -34,20 +38,43 @@ export const getBookWormById = async (
   state.app.isLoading = false;
 };
 
+export const setFilter = (
+  { actions, state }: Context,
+  { filter }: { filter: string }
+) => {
+  const { limit, showAll } = state.bookworm.ui.table;
+  const { total } = state.bookworm.getAllApi || {};
+
+  state.bookworm.ui.table.filter = filter;
+  state.bookworm.ui.table.page = 1;
+
+  if (showAll && total) {
+    actions.bookworm.getBookworms({
+      filter: "all",
+      limit: total,
+      page: 1,
+    });
+    actions.bookworm.setQueryString({ queryString: "" });
+  } else {
+    actions.bookworm.getBookworms({ filter, limit, page: 1 });
+    actions.bookworm.setQueryString({ queryString: "" });
+  }
+};
+
 export const setLimit = (
   { actions, state }: Context,
   { limit }: { limit: number }
 ) => {
-  const { showAll, page } = state.bookworm.ui.table;
+  const { filter, page, showAll } = state.bookworm.ui.table;
   const { total } = state.bookworm.getAllApi || {};
 
   state.bookworm.ui.table.limit = limit;
 
   if (showAll && total) {
-    actions.bookworm.getBookworms({ limit: total, page: 1 });
+    actions.bookworm.getBookworms({ filter: "", limit: total, page: 1 });
     actions.bookworm.setQueryString({ queryString: "" });
   } else {
-    actions.bookworm.getBookworms({ limit, page });
+    actions.bookworm.getBookworms({ filter, limit, page });
     actions.bookworm.setQueryString({ queryString: "" });
   }
 };
@@ -56,16 +83,16 @@ export const setPage = (
   { actions, state }: Context,
   { page }: { page: number }
 ) => {
-  const { showAll, limit } = state.bookworm.ui.table;
+  const { filter, limit, showAll } = state.bookworm.ui.table;
   const { total } = state.bookworm.getAllApi || {};
 
   state.bookworm.ui.table.page = page;
 
   if (showAll && total) {
-    actions.bookworm.getBookworms({ limit: total, page: 1 });
+    actions.bookworm.getBookworms({ filter: "", limit: total, page: 1 });
     actions.bookworm.setQueryString({ queryString: "" });
   } else {
-    actions.bookworm.getBookworms({ limit, page });
+    actions.bookworm.getBookworms({ filter, limit, page });
     actions.bookworm.setQueryString({ queryString: "" });
   }
 };
@@ -81,16 +108,16 @@ export const setShowAll = (
   { actions, state }: Context,
   { showAll }: { showAll: boolean }
 ) => {
-  const { limit, page } = state.bookworm.ui.table;
+  const { filter, limit, page } = state.bookworm.ui.table;
   const { total } = state.bookworm.getAllApi || {};
 
   state.bookworm.ui.table.showAll = showAll;
 
   if (showAll && total) {
-    actions.bookworm.getBookworms({ limit: total, page: 1 });
+    actions.bookworm.getBookworms({ filter: "", limit: total, page: 1 });
     actions.bookworm.setQueryString({ queryString: "" });
   } else {
-    actions.bookworm.getBookworms({ limit, page });
+    actions.bookworm.getBookworms({ filter, limit, page });
     actions.bookworm.setQueryString({ queryString: "" });
   }
 };
