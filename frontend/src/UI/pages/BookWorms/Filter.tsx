@@ -1,4 +1,4 @@
-import { Box, Button, HStack } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup } from "@chakra-ui/react";
 import { useActions, useAppState } from "../../../business/overmind";
 
 function Filter() {
@@ -13,7 +13,7 @@ function Filter() {
 
   return (
     <Box mt={4}>
-      <HStack>
+      <ButtonGroup size="sm" isAttached>
         <Button
           colorScheme={active ? "telegram" : "gray"}
           onClick={() => handleClick(true)}
@@ -26,7 +26,7 @@ function Filter() {
         >
           Not Active
         </Button>
-      </HStack>
+      </ButtonGroup>
     </Box>
   );
 }
