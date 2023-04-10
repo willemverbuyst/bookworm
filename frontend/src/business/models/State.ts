@@ -87,6 +87,15 @@ export type LanguageState = BaseState<Language>;
 export interface RentalState extends BaseState<Rental> {
   statsDuration: Array<RentalStatsDuration> | null;
   statsDurationApi: ApiResponse<Array<RentalStatsDuration>> | null;
+  ui: {
+    table: {
+      filter: string;
+      limit: number;
+      page: number;
+      queryString: string;
+      showAll: boolean;
+    };
+  };
 }
 
 export type ReviewState = BaseState<Review>;

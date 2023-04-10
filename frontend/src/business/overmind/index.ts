@@ -58,4 +58,6 @@ export const stateSections1 = Object.keys(config.state).reduce(
 export const stateSections = {
   [stateSections1.author]: stateSections1.author,
   [stateSections1.book]: stateSections1.book,
+  [stateSections1.bookworm]: stateSections1.bookworm,
+  [stateSections1.rental]: stateSections1.rental,
 };

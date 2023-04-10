@@ -16,4 +16,13 @@ export const state: RentalState = {
     return statsDurationApi.data;
   }),
   statsDurationApi: null,
+  ui: {
+    table: {
+      filter: "",
+      limit: 20,
+      page: 1,
+      queryString: "",
+      showAll: false,
+    },
+  },
 };
