@@ -1,21 +1,13 @@
 import { derived } from "overmind";
 import { ApiResponse } from "../../models/Api";
 import { Author, AuthorStatsPage } from "../../models/Author";
-import { BaseState } from "../../models/State";
-import { Column } from "../../models/Table";
+import { BaseState, UITable } from "../../models/State";
 
 export interface AuthorState extends BaseState<Author> {
   statsPage: AuthorStatsPage | null;
   statsPageApi: ApiResponse<AuthorStatsPage> | null;
   ui: {
-    table: {
-      columns: Column<Author>;
-      filter: null;
-      limit: number;
-      page: number;
-      queryString: string;
-      showAll: boolean;
-    };
+    table: UITable<Author, null>;
   };
 }
 

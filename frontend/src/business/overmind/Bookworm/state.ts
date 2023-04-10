@@ -1,22 +1,17 @@
 import { derived } from "overmind";
 import { Bookworm } from "../../models/Bookworm";
-import { BaseState } from "../../models/State";
-import { Column } from "../../models/Table";
+import { BaseState, UITable } from "../../models/State";
 import { UserApi } from "../../models/User";
 
 export interface BookwormState extends BaseState<Bookworm> {
   bookwormDetailsApi: Omit<UserApi, "token"> | null;
   ui: {
-    table: {
-      columns: Column<Bookworm>;
-      filter: {
+    table: UITable<
+      Bookworm,
+      {
         active: boolean;
-      };
-      limit: number;
-      page: number;
-      queryString: string;
-      showAll: boolean;
-    };
+      }
+    >;
   };
 }
 

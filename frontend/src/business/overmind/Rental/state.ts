@@ -1,23 +1,18 @@
 import { derived } from "overmind";
 import { ApiResponse } from "../../models/Api";
 import { Rental, RentalStatsDuration } from "../../models/Rental";
-import { BaseState } from "../../models/State";
-import { Column } from "../../models/Table";
+import { BaseState, UITable } from "../../models/State";
 
 export interface RentalState extends BaseState<Rental> {
   statsDuration: Array<RentalStatsDuration> | null;
   statsDurationApi: ApiResponse<Array<RentalStatsDuration>> | null;
   ui: {
-    table: {
-      columns: Column<Rental>;
-      filter: {
+    table: UITable<
+      Rental,
+      {
         returned: string;
-      };
-      limit: number;
-      page: number;
-      queryString: string;
-      showAll: boolean;
-    };
+      }
+    >;
   };
 }
 

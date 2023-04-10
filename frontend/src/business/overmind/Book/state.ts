@@ -6,8 +6,7 @@ import {
   BookStatsLanguage,
   BookStatsYearPublished,
 } from "../../models/Book";
-import { BaseState } from "../../models/State";
-import { Column } from "../../models/Table";
+import { BaseState, UITable } from "../../models/State";
 
 export interface BookState extends BaseState<Book> {
   statsGenre: Array<BookStatsGenre> | null;
@@ -17,17 +16,13 @@ export interface BookState extends BaseState<Book> {
   statsYearPublished: Array<BookStatsYearPublished> | null;
   statsYearPublishedApi: ApiResponse<Array<BookStatsYearPublished>> | null;
   ui: {
-    table: {
-      columns: Column<Book>;
-      filter: {
+    table: UITable<
+      Book,
+      {
         genre: string;
         language: string;
-      };
-      limit: number;
-      page: number;
-      queryString: string;
-      showAll: boolean;
-    };
+      }
+    >;
   };
 }
 
