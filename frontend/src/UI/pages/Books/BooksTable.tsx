@@ -1,13 +1,9 @@
 import { Box, Spinner } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { Book } from "../../../business/models/Book";
-import {
-  stateSections,
-  useActions,
-  useAppState,
-} from "../../../business/overmind";
+import { stateSections, useAppState } from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
+import { useGetBooks } from "../../hooks/useGetBooks";
 import { useGetGenres } from "../../hooks/useGetGenres";
 import { useGetLanguages } from "../../hooks/useGetLanguages";
 import FilterAndSort from "./FilterAndSort";
@@ -15,22 +11,10 @@ import FilterAndSort from "./FilterAndSort";
 function BooksTable() {
   useGetGenres();
   useGetLanguages();
+  useGetBooks();
   const { isLoading } = useAppState().app;
-  const {
-    ui: {
-      table: { limit, page },
-    },
-    overview,
-    getAllApi,
-  } = useAppState().book;
-  const { getBooks } = useActions().book;
+  const { overview, getAllApi } = useAppState().book;
   const { total } = getAllApi || {};
-
-  useEffect(() => {
-    if (!getAllApi) {
-      getBooks({ genre: null, language: null, limit, page });
-    }
-  }, [getAllApi]);
 
   const columns: Array<{ field: keyof Book }> = [
     { field: "title" },

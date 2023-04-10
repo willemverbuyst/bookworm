@@ -1,5 +1,4 @@
 import { Box, Input, Spinner } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { genericSearch } from "../../../business/functions/genericSearch";
 import { Author } from "../../../business/models/Author";
 import {
@@ -9,25 +8,21 @@ import {
 } from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
+import { useGetAuthors } from "../../hooks/useGetAuthors";
 
 function AuthorsTable() {
+  useGetAuthors();
   const { isLoading } = useAppState().app;
   const {
     ui: {
-      table: { limit, page, queryString },
+      table: { queryString },
     },
     overview,
     getAllApi,
   } = useAppState().author;
-  const { getAuthors, setQueryString } = useActions().author;
+  const { setQueryString } = useActions().author;
 
   const { total } = getAllApi || {};
-
-  useEffect(() => {
-    if (!getAllApi) {
-      getAuthors({ limit, page });
-    }
-  }, [getAllApi]);
 
   const columns: Array<{ field: keyof Author; isNumeric?: boolean }> = [
     { field: "last_name" },
