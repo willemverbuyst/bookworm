@@ -1,7 +1,7 @@
 import { Box, Spinner, useDisclosure } from "@chakra-ui/react";
 import { Bookworm } from "../../../business/models/Bookworm";
 import {
-  stateSections,
+  stateSectionsWithTable,
   useActions,
   useAppState,
 } from "../../../business/overmind";
@@ -36,8 +36,6 @@ function BookwormsTable() {
     return <Spinner />;
   }
 
-  const stateSection = stateSections.bookworm;
-
   return (
     <Box>
       {data?.length ? (
@@ -49,7 +47,7 @@ function BookwormsTable() {
             title="overview of bookworms"
             action={getUser}
           />
-          <Pagination total={total} state={stateSection} />
+          <Pagination total={total} state={stateSectionsWithTable.bookworm} />
         </>
       ) : (
         <p>no bookworms</p>

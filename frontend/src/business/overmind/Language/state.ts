@@ -1,5 +1,8 @@
 import { derived } from "overmind";
-import { LanguageState } from "../../models/State";
+import { Language } from "../../models/Language";
+import { BaseState } from "../../models/State";
+
+export type LanguageState = BaseState<Language>;
 
 export const state: LanguageState = {
   getAllApi: null,

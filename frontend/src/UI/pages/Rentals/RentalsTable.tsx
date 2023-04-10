@@ -1,6 +1,9 @@
 import { Box, Spinner } from "@chakra-ui/react";
 import { Rental } from "../../../business/models/Rental";
-import { stateSections, useAppState } from "../../../business/overmind";
+import {
+  stateSectionsWithTable,
+  useAppState,
+} from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
 import { useGetRentals } from "../../hooks/useGetRentals";
@@ -23,8 +26,6 @@ function RentalsTable() {
     return <Spinner />;
   }
 
-  const stateSection = stateSections.rental;
-
   return (
     <Box>
       <Filter />
@@ -35,7 +36,7 @@ function RentalsTable() {
             columns={columns}
             title="overview of rentals"
           />
-          <Pagination total={total} state={stateSection} />
+          <Pagination total={total} state={stateSectionsWithTable.rental} />
         </>
       ) : (
         <p>no rentals</p>

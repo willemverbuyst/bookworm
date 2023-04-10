@@ -9,14 +9,14 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import {
-  stateSections,
+  stateSectionsWithTable,
   useActions,
   useAppState,
 } from "../../../business/overmind";
 
 interface Props {
   total: number | undefined;
-  state: keyof typeof stateSections;
+  state: keyof typeof stateSectionsWithTable;
 }
 
 function Pagination({ total, state }: Props) {

@@ -2,7 +2,7 @@ import { Box, Input, Spinner } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions/genericSearch";
 import { Author } from "../../../business/models/Author";
 import {
-  stateSections,
+  stateSectionsWithTable,
   useActions,
   useAppState,
 } from "../../../business/overmind";
@@ -38,8 +38,6 @@ function AuthorsTable() {
     return <Spinner />;
   }
 
-  const stateSection = stateSections.author;
-
   return (
     <Box>
       <Input onChange={searchInTable} placeholder="search" />
@@ -52,7 +50,9 @@ function AuthorsTable() {
             columns={columns}
             title="overview of authors"
           />
-          {!queryString && <Pagination total={total} state={stateSection} />}
+          {!queryString && (
+            <Pagination total={total} state={stateSectionsWithTable.author} />
+          )}
         </>
       ) : (
         <p>no authors</p>

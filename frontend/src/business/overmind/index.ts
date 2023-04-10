@@ -47,7 +47,7 @@ export const useActions = createActionsHook<Context>();
 export const useEffects = createEffectsHook<Context>();
 export const useReaction = createReactionHook<Context>();
 
-export const stateSections1 = Object.keys(config.state).reduce(
+export const stateSections = Object.keys(config.state).reduce(
   (a, b) => ({
     ...a,
     [b]: b,
@@ -55,9 +55,9 @@ export const stateSections1 = Object.keys(config.state).reduce(
   {} as { [k in keyof typeof config.state]: k }
 );
 
-export const stateSections = {
-  [stateSections1.author]: stateSections1.author,
-  [stateSections1.book]: stateSections1.book,
-  [stateSections1.bookworm]: stateSections1.bookworm,
-  [stateSections1.rental]: stateSections1.rental,
+export const stateSectionsWithTable = {
+  [stateSections.author]: stateSections.author,
+  [stateSections.book]: stateSections.book,
+  [stateSections.bookworm]: stateSections.bookworm,
+  [stateSections.rental]: stateSections.rental,
 };

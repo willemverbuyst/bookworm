@@ -1,5 +1,8 @@
 import { derived } from "overmind";
-import { GenreState } from "../../models/State";
+import { Genre } from "../../models/Genre";
+import { BaseState } from "../../models/State";
+
+export type GenreState = BaseState<Genre>;
 
 export const state: GenreState = {
   getAllApi: null,

@@ -1,6 +1,9 @@
 import { Box, Spinner } from "@chakra-ui/react";
 import { Book } from "../../../business/models/Book";
-import { stateSections, useAppState } from "../../../business/overmind";
+import {
+  stateSectionsWithTable,
+  useAppState,
+} from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
 import { useGetBooks } from "../../hooks/useGetBooks";
@@ -38,7 +41,7 @@ function BooksTable() {
             columns={columns}
             title="overview of books"
           />
-          <Pagination total={total} state={stateSections.book} />
+          <Pagination total={total} state={stateSectionsWithTable.book} />
         </>
       ) : (
         <p>no books</p>

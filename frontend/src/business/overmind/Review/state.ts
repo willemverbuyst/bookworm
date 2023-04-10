@@ -1,5 +1,8 @@
 import { derived } from "overmind";
-import { ReviewState } from "../../models/State";
+import { Review } from "../../models/Review";
+import { BaseState } from "../../models/State";
+
+export type ReviewState = BaseState<Review>;
 
 export const state: ReviewState = {
   getAllApi: null,
