@@ -1,7 +1,9 @@
-import { Box, Spinner } from "@chakra-ui/react";
+import { Box, Input, Spinner } from "@chakra-ui/react";
+import { genericSearch } from "../../../business/functions/genericSearch";
 import { Book } from "../../../business/models/Book";
 import {
   stateSectionsWithTable,
+  useActions,
   useAppState,
 } from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
@@ -16,8 +18,15 @@ function BooksTable() {
   useGetLanguages();
   useGetBooks();
   const { isLoading } = useAppState().app;
-  const { overview, getAllApi } = useAppState().book;
+  const {
+    getAllApi,
+    overview,
+    ui: {
+      table: { queryString },
+    },
+  } = useAppState().book;
   const { total } = getAllApi || {};
+  const { setQueryString } = useActions().book;
 
   const columns: Array<{ field: keyof Book }> = [
     { field: "title" },
@@ -27,6 +36,10 @@ function BooksTable() {
     { field: "language" },
   ];
 
+  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQueryString({ queryString: e.target.value });
+  };
+
   if (isLoading) {
     return <Spinner />;
   }
@@ -34,10 +47,13 @@ function BooksTable() {
   return (
     <Box>
       <FilterAndSort />
+      <Input onChange={searchInTable} placeholder="search" my={5} />
       {overview?.length ? (
         <>
           <TableOverview
-            rows={overview}
+            rows={overview.filter((a) =>
+              genericSearch(a, ["title", "author"], queryString, false)
+            )}
             columns={columns}
             title="overview of books"
           />

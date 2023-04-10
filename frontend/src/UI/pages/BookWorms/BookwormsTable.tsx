@@ -1,4 +1,5 @@
-import { Box, Spinner, useDisclosure } from "@chakra-ui/react";
+import { Box, Input, Spinner, useDisclosure } from "@chakra-ui/react";
+import { genericSearch } from "../../../business/functions/genericSearch";
 import { Bookworm } from "../../../business/models/Bookworm";
 import {
   stateSectionsWithTable,
@@ -13,10 +14,16 @@ import BookwormsDetails from "./BookwormsDetails";
 function BookwormsTable() {
   useGetBooksworms();
   const { isLoading } = useAppState().app;
-  const data = useAppState().bookworm.overview;
-  const total = useAppState().bookworm.getAllApi?.total;
+  const {
+    getAllApi,
+    overview,
+    ui: {
+      table: { queryString },
+    },
+  } = useAppState().bookworm;
+  const { total } = getAllApi || {};
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { getBookWormById } = useActions().bookworm;
+  const { getBookWormById, setQueryString } = useActions().bookworm;
 
   const columns: Array<{ field: keyof Bookworm }> = [
     { field: "first_name" },
@@ -32,17 +39,29 @@ function BookwormsTable() {
     onOpen();
   };
 
+  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQueryString({ queryString: e.target.value });
+  };
+
   if (isLoading) {
     return <Spinner />;
   }
 
   return (
     <Box>
-      {data?.length ? (
+      <Input onChange={searchInTable} placeholder="search" my={5} />
+      {overview?.length ? (
         <>
           <BookwormsDetails isOpen={isOpen} onClose={onClose} />
           <TableOverview
-            rows={data}
+            rows={overview.filter((a) =>
+              genericSearch(
+                a,
+                ["first_name", "last_name", "email"],
+                queryString,
+                false
+              )
+            )}
             columns={columns}
             title="overview of bookworms"
             action={getUser}

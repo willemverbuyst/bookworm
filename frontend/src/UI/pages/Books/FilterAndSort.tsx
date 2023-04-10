@@ -25,7 +25,7 @@ function FilterAndSort() {
   };
 
   return (
-    <Box m={10}>
+    <Box mt={4}>
       <HStack spacing={6}>
         <FormControl>
           <Label text="Genre" isRequired={false} />

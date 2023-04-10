@@ -1,7 +1,9 @@
-import { Box, Spinner } from "@chakra-ui/react";
+import { Box, Input, Spinner } from "@chakra-ui/react";
+import { genericSearch } from "../../../business/functions/genericSearch";
 import { Rental } from "../../../business/models/Rental";
 import {
   stateSectionsWithTable,
+  useActions,
   useAppState,
 } from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
@@ -12,8 +14,15 @@ import Filter from "./Filter";
 function RentalsTable() {
   useGetRentals();
   const { isLoading } = useAppState().app;
-  const { overview } = useAppState().rental;
-  const total = useAppState().rental.getAllApi?.total;
+  const {
+    getAllApi,
+    overview,
+    ui: {
+      table: { queryString },
+    },
+  } = useAppState().rental;
+  const { total } = getAllApi || {};
+  const { setQueryString } = useActions().rental;
 
   const columns: Array<{ field: keyof Rental }> = [
     { field: "title" },
@@ -22,6 +31,10 @@ function RentalsTable() {
     { field: "return_date" },
   ];
 
+  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQueryString({ queryString: e.target.value });
+  };
+
   if (isLoading) {
     return <Spinner />;
   }
@@ -29,10 +42,13 @@ function RentalsTable() {
   return (
     <Box>
       <Filter />
+      <Input onChange={searchInTable} placeholder="search" my={5} />
       {overview?.length ? (
         <>
           <TableOverview
-            rows={overview}
+            rows={overview.filter((a) =>
+              genericSearch(a, ["title", "author"], queryString, false)
+            )}
             columns={columns}
             title="overview of rentals"
           />

@@ -14,11 +14,11 @@ function AuthorsTable() {
   useGetAuthors();
   const { isLoading } = useAppState().app;
   const {
+    getAllApi,
+    overview,
     ui: {
       table: { queryString },
     },
-    overview,
-    getAllApi,
   } = useAppState().author;
   const { setQueryString } = useActions().author;
 
@@ -40,7 +40,7 @@ function AuthorsTable() {
 
   return (
     <Box>
-      <Input onChange={searchInTable} placeholder="search" />
+      <Input onChange={searchInTable} placeholder="search" my={5} />
       {overview?.length ? (
         <>
           <TableOverview
