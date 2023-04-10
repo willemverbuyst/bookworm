@@ -10,7 +10,9 @@ export interface RentalState extends BaseState<Rental> {
   ui: {
     table: {
       columns: Column<Rental>;
-      filter: string;
+      filter: {
+        returned: string;
+      };
       limit: number;
       page: number;
       queryString: string;
@@ -42,7 +44,7 @@ export const state: RentalState = {
         { field: "rental_date" },
         { field: "return_date" },
       ],
-      filter: "not_returned",
+      filter: { returned: "not_returned" },
       limit: 20,
       page: 1,
       queryString: "",

@@ -10,6 +10,7 @@ export interface AuthorState extends BaseState<Author> {
   ui: {
     table: {
       columns: Column<Author>;
+      filter: null;
       limit: number;
       page: number;
       queryString: string;
@@ -49,6 +50,7 @@ export const state: AuthorState = {
         { field: "first_name" },
         { field: "books_written", isNumeric: true },
       ],
+      filter: null,
       limit: 10,
       page: 1,
       queryString: "",

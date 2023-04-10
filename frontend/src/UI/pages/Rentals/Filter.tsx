@@ -2,30 +2,32 @@ import { Box, Button, HStack } from "@chakra-ui/react";
 import { useActions, useAppState } from "../../../business/overmind";
 
 function Filter() {
-  const { filter } = useAppState().rental.ui.table;
-  const { setFilter } = useActions().rental;
+  const {
+    filter: { returned },
+  } = useAppState().rental.ui.table;
+  const { setReturnedFilter } = useActions().rental;
 
   const handleClick = (f: string) => {
-    setFilter({ filter: f });
+    setReturnedFilter({ returned: f });
   };
 
   return (
     <Box mt={4}>
       <HStack>
         <Button
-          colorScheme={filter === "not_returned" ? "telegram" : "gray"}
+          colorScheme={returned === "not_returned" ? "telegram" : "gray"}
           onClick={() => handleClick("not_returned")}
         >
           Not Returned
         </Button>
         <Button
-          colorScheme={filter === "returned" ? "telegram" : "gray"}
+          colorScheme={returned === "returned" ? "telegram" : "gray"}
           onClick={() => handleClick("returned")}
         >
           Returned
         </Button>
         <Button
-          colorScheme={filter === "all" ? "telegram" : "gray"}
+          colorScheme={returned === "all" ? "telegram" : "gray"}
           onClick={() => handleClick("all")}
         >
           All

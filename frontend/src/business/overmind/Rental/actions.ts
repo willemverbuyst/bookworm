@@ -35,14 +35,14 @@ export const getRentalStatsDuration = async ({
   state.app.isLoading = false;
 };
 
-export const setFilter = (
+export const setReturnedFilter = (
   { actions, state }: Context,
-  { filter }: { filter: string }
+  { returned }: { returned: string }
 ) => {
   const { limit, showAll } = state.rental.ui.table;
   const { total } = state.rental.getAllApi || {};
 
-  state.rental.ui.table.filter = filter;
+  state.rental.ui.table.filter.returned = returned;
   state.rental.ui.table.page = 1;
 
   if (showAll && total) {
@@ -53,7 +53,7 @@ export const setFilter = (
     });
     actions.rental.setQueryString({ queryString: "" });
   } else {
-    actions.rental.getRentals({ filter, limit, page: 1 });
+    actions.rental.getRentals({ filter: returned, limit, page: 1 });
     actions.rental.setQueryString({ queryString: "" });
   }
 };
@@ -62,7 +62,11 @@ export const setLimit = (
   { actions, state }: Context,
   { limit }: { limit: number }
 ) => {
-  const { filter, page, showAll } = state.rental.ui.table;
+  const {
+    filter: { returned },
+    page,
+    showAll,
+  } = state.rental.ui.table;
   const { total } = state.rental.getAllApi || {};
 
   state.rental.ui.table.limit = limit;
@@ -75,7 +79,7 @@ export const setLimit = (
     });
     actions.rental.setQueryString({ queryString: "" });
   } else {
-    actions.rental.getRentals({ filter, limit, page });
+    actions.rental.getRentals({ filter: returned, limit, page });
     actions.rental.setQueryString({ queryString: "" });
   }
 };
@@ -84,7 +88,11 @@ export const setPage = (
   { actions, state }: Context,
   { page }: { page: number }
 ) => {
-  const { filter, limit, showAll } = state.rental.ui.table;
+  const {
+    filter: { returned },
+    limit,
+    showAll,
+  } = state.rental.ui.table;
   const { total } = state.book.getAllApi || {};
 
   state.rental.ui.table.page = page;
@@ -97,7 +105,7 @@ export const setPage = (
     });
     actions.rental.setQueryString({ queryString: "" });
   } else {
-    actions.rental.getRentals({ filter, limit, page });
+    actions.rental.getRentals({ filter: returned, limit, page });
     actions.rental.setQueryString({ queryString: "" });
   }
 };
@@ -113,7 +121,11 @@ export const setShowAll = (
   { actions, state }: Context,
   { showAll }: { showAll: boolean }
 ) => {
-  const { filter, limit, page } = state.rental.ui.table;
+  const {
+    filter: { returned },
+    limit,
+    page,
+  } = state.rental.ui.table;
   const { total } = state.rental.getAllApi || {};
 
   state.rental.ui.table.showAll = showAll;
@@ -126,7 +138,7 @@ export const setShowAll = (
     });
     actions.rental.setQueryString({ queryString: "" });
   } else {
-    actions.rental.getRentals({ filter, limit, page });
+    actions.rental.getRentals({ filter: returned, limit, page });
     actions.rental.setQueryString({ queryString: "" });
   }
 };
