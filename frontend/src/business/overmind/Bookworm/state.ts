@@ -9,7 +9,9 @@ export interface BookwormState extends BaseState<Bookworm> {
   ui: {
     table: {
       columns: Column<Bookworm>;
-      filter: boolean;
+      filter: {
+        active: boolean;
+      };
       limit: number;
       page: number;
       queryString: string;
@@ -36,7 +38,9 @@ export const state: BookwormState = {
         { field: "phone" },
         { field: "library_name" },
       ],
-      filter: true,
+      filter: {
+        active: true,
+      },
       limit: 15,
       page: 1,
       queryString: "",
