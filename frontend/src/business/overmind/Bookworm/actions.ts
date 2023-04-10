@@ -4,7 +4,7 @@ import { Context } from "..";
 
 export const getBookworms = async (
   { actions, effects, state }: Context,
-  { filter, limit, page }: { filter: string; limit: number; page: number }
+  { filter, limit, page }: { filter: boolean; limit: number; page: number }
 ) => {
   state.app.isLoading = true;
   const response = await effects.bookworm.api.getBookworms({
@@ -40,7 +40,7 @@ export const getBookWormById = async (
 
 export const setFilter = (
   { actions, state }: Context,
-  { filter }: { filter: string }
+  { filter }: { filter: boolean }
 ) => {
   const { limit, showAll } = state.bookworm.ui.table;
   const { total } = state.bookworm.getAllApi || {};
@@ -50,7 +50,7 @@ export const setFilter = (
 
   if (showAll && total) {
     actions.bookworm.getBookworms({
-      filter: "all",
+      filter: true,
       limit: total,
       page: 1,
     });
@@ -71,7 +71,7 @@ export const setLimit = (
   state.bookworm.ui.table.limit = limit;
 
   if (showAll && total) {
-    actions.bookworm.getBookworms({ filter: "", limit: total, page: 1 });
+    actions.bookworm.getBookworms({ filter: true, limit: total, page: 1 });
     actions.bookworm.setQueryString({ queryString: "" });
   } else {
     actions.bookworm.getBookworms({ filter, limit, page });
@@ -89,7 +89,7 @@ export const setPage = (
   state.bookworm.ui.table.page = page;
 
   if (showAll && total) {
-    actions.bookworm.getBookworms({ filter: "", limit: total, page: 1 });
+    actions.bookworm.getBookworms({ filter: true, limit: total, page: 1 });
     actions.bookworm.setQueryString({ queryString: "" });
   } else {
     actions.bookworm.getBookworms({ filter, limit, page });
@@ -114,7 +114,7 @@ export const setShowAll = (
   state.bookworm.ui.table.showAll = showAll;
 
   if (showAll && total) {
-    actions.bookworm.getBookworms({ filter: "", limit: total, page: 1 });
+    actions.bookworm.getBookworms({ filter: true, limit: total, page: 1 });
     actions.bookworm.setQueryString({ queryString: "" });
   } else {
     actions.bookworm.getBookworms({ filter, limit, page });

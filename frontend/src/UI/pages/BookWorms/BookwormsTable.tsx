@@ -31,7 +31,6 @@ function BookwormsTable() {
     { field: "last_name" },
     { field: "email" },
     { field: "phone" },
-    { field: "user_is_active" },
     { field: "library_name" },
   ];
 

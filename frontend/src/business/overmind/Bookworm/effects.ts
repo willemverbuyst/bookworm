@@ -10,18 +10,7 @@ export const api = {
   }: {
     limit: number;
     page: number;
-    filter: string;
-  }) => {
-    let url = `bookworms/?limit=${limit}&page=${page}`;
-
-    if (filter === "active") {
-      url += "&filter=active";
-    }
-
-    if (filter === "not_active") {
-      url += "&filter=not_active";
-    }
-
-    return apiGet({ url });
-  },
+    filter: boolean;
+  }) =>
+    apiGet({ url: `bookworms/?limit=${limit}&page=${page}&active=${filter}` }),
 };

@@ -5,7 +5,7 @@ function Filter() {
   const { filter } = useAppState().bookworm.ui.table;
   const { setFilter } = useActions().bookworm;
 
-  const handleClick = (f: string) => {
+  const handleClick = (f: boolean) => {
     setFilter({ filter: f });
   };
 
@@ -13,22 +13,16 @@ function Filter() {
     <Box mt={4}>
       <HStack>
         <Button
-          colorScheme={filter === "active" ? "telegram" : "gray"}
-          onClick={() => handleClick("active")}
+          colorScheme={filter ? "telegram" : "gray"}
+          onClick={() => handleClick(true)}
         >
           Active
         </Button>
         <Button
-          colorScheme={filter === "not_active" ? "telegram" : "gray"}
-          onClick={() => handleClick("not_active")}
+          colorScheme={!filter ? "telegram" : "gray"}
+          onClick={() => handleClick(false)}
         >
           Not Active
-        </Button>
-        <Button
-          colorScheme={filter === "all" ? "telegram" : "gray"}
-          onClick={() => handleClick("all")}
-        >
-          All
         </Button>
       </HStack>
     </Box>
