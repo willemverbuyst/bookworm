@@ -7,6 +7,7 @@ import {
   BookStatsYearPublished,
 } from "../../models/Book";
 import { BaseState } from "../../models/State";
+import { Column } from "../../models/Table";
 
 export interface BookState extends BaseState<Book> {
   statsGenre: Array<BookStatsGenre> | null;
@@ -17,7 +18,7 @@ export interface BookState extends BaseState<Book> {
   statsYearPublishedApi: ApiResponse<Array<BookStatsYearPublished>> | null;
   ui: {
     table: {
-      columns: Array<{ field: keyof Book; isNumeric?: boolean }>;
+      columns: Column<Book>;
       genre: string;
       language: string;
       limit: number;

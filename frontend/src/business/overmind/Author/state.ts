@@ -2,13 +2,14 @@ import { derived } from "overmind";
 import { ApiResponse } from "../../models/Api";
 import { Author, AuthorStatsPage } from "../../models/Author";
 import { BaseState } from "../../models/State";
+import { Column } from "../../models/Table";
 
 export interface AuthorState extends BaseState<Author> {
   statsPage: AuthorStatsPage | null;
   statsPageApi: ApiResponse<AuthorStatsPage> | null;
   ui: {
     table: {
-      columns: Array<{ field: keyof Author; isNumeric?: boolean }>;
+      columns: Column<Author>;
       limit: number;
       page: number;
       queryString: string;
