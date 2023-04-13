@@ -20,7 +20,7 @@ function AuthorsPage() {
         <Tabs variant="soft-rounded" colorScheme="teal" align="center">
           <TabList>
             <Tab>Overview</Tab>
-            <Tab>Pages</Tab>
+            <Tab>Pages vs Books</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
