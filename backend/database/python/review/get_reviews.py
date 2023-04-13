@@ -9,20 +9,15 @@ select_count_reviews_sql = os.path.join(dirname, "../../sql/review/select_count_
 select_reviews_sql = os.path.join(dirname, "../../sql/review/select_reviews.sql")
 
 
-def get_reviews_from_db(limit, page):
+def get_reviews_from_db():
     conn = create_connection()
-
-    if limit:
-        offset = int(limit) * (int(page) - 1)
-    else:
-        offset = 0
 
     sql_file = open(select_reviews_sql, 'r')
     raw_sql = sql_file.read()
     sql_file.close()
 
     cursor = conn.cursor()
-    cursor.execute(raw_sql, (limit, offset))
+    cursor.execute(raw_sql)
 
     data = cursor.fetchall()
     conn.close()
