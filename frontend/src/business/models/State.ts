@@ -12,7 +12,7 @@ export interface UI {
 
 export interface BaseState<T> {
   getAllApi: ApiResponse<Array<T>> | null;
-  overview: Array<T> | null;
+  overview: { [key: string]: Array<T> } | null;
 }
 
 export interface UITable<T, U> {
