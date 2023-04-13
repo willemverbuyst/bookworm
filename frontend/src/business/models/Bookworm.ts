@@ -7,3 +7,10 @@ export interface Bookworm {
   user_is_active: boolean;
   library_name: string;
 }
+
+export interface BookwormStatsLibrary {
+  id: string;
+  library_name: string;
+  user_active: boolean;
+  number_of_bookworms_per_library: number;
+}

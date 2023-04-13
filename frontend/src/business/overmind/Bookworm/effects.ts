@@ -13,4 +13,6 @@ export const api = {
     filter: boolean;
   }) =>
     apiGet({ url: `bookworms/?limit=${limit}&page=${page}&active=${filter}` }),
+
+  getBookwormStatsibrary: () => apiGet({ url: "bookworms/stats/?by=library" }),
 };

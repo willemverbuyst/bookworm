@@ -38,6 +38,23 @@ export const getBookWormById = async (
   state.app.isLoading = false;
 };
 
+export const getBookwormStatsLibrary = async ({
+  actions,
+  effects,
+  state,
+}: Context) => {
+  state.app.isLoading = true;
+  const response = await effects.bookworm.api.getBookwormStatsibrary();
+
+  if (!response || response instanceof AxiosError) {
+    actions.api.handleErrorResponse({ response });
+  } else {
+    state.bookworm.statsLibraryApi = response;
+  }
+
+  state.app.isLoading = false;
+};
+
 export const setActiveFilter = (
   { actions, state }: Context,
   { active }: { active: boolean }
