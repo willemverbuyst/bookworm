@@ -19,6 +19,7 @@ def format_stats_pages(page_data):
             "id": row[0],
             "author": row[1],
             "number_of_pages": row[2],
+            "number_of_books": row[3]
         }
         stats.append(data)
 

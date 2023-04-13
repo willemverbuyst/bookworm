@@ -1,5 +1,5 @@
 import { Box, Spinner } from "@chakra-ui/react";
-import { Bar, ComposedChart, LabelList, Line, XAxis } from "recharts";
+import { Bar, ComposedChart, LabelList, Line, XAxis, YAxis } from "recharts";
 import { useAppState } from "../../../business/overmind";
 import { useGetAuthorStatsPage } from "../../hooks/useGetAuthorStatsPage";
 
@@ -12,6 +12,7 @@ function AuthorsChart() {
   const dataForChart = data.map((d) => ({
     name: d.author,
     number: Number(d.number_of_pages),
+    book: Number(d.number_of_books),
     avg,
   }));
 
@@ -27,11 +28,10 @@ function AuthorsChart() {
             width={1000}
             height={700}
             data={dataForChart}
-            barSize={50}
             layout="horizontal"
             margin={{
               left: 100,
-              top: 20,
+              top: 50,
             }}
           >
             <XAxis
@@ -44,10 +44,27 @@ function AuthorsChart() {
               angle={-35}
               textAnchor="end"
             />
-            <Bar dataKey="number" fill="#ED64A6">
+            <YAxis yAxisId="number" orientation="left" hide />
+            <YAxis yAxisId="book" orientation="right" hide />
+            <Bar yAxisId="number" dataKey="number" fill="#ED64A6">
               <LabelList dataKey="number" position="top" />
             </Bar>
-            <Line dataKey="avg" stroke="#666" strokeWidth={2} dot={false} />
+            <Bar yAxisId="book" dataKey="book" fill="#666">
+              <LabelList
+                dataKey="book"
+                position="top"
+                offset={-25}
+                fill="#fff"
+              />
+            </Bar>
+
+            <Line
+              yAxisId="number"
+              dataKey="avg"
+              stroke="#ED64A6"
+              strokeWidth={2}
+              dot={false}
+            />
           </ComposedChart>
         </Box>
       ) : (

@@ -1,7 +1,8 @@
 SELECT 
 author.author_id, 
 CONCAT (author.first_name, ' ', author.last_name) as author_name, 
-SUM(COALESCE(book.pages, 0)) AS total_pages 
+SUM(COALESCE(book.pages, 0)) AS total_pages, 
+COUNT(book.title) AS books_written  
 FROM author 
 FULL OUTER JOIN book_author 
 ON author.author_id = book_author.author_id 

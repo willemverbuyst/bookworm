@@ -1,12 +1,14 @@
 import os
 
 import psycopg2
-from database.python.bookworm.helpers import format_bookworms
+from database.python.bookworm.helpers import (format_bookworms,
+                                              format_stats_libraries)
 from database.python.helpers.sql_helpers import create_connection
 from database.python.user.helpers import format_user
 
 dirname = os.path.dirname(__file__)
 select_bookworm_details_sql = os.path.join(dirname, "../../sql/bookworm/select_bookworm_details.sql")
+select_bookworm_stats_library_sql = os.path.join(dirname, "../../sql/bookworm/select_bookworm_stats_library.sql")
 select_bookworms_sql = os.path.join(dirname, "../../sql/bookworm/select_bookworms.sql")
 select_count_bookworms_sql = os.path.join(dirname, "../../sql/bookworm/select_count_bookworms.sql")
 
@@ -77,3 +79,21 @@ def get_bookworm_details_from_db_by_id(id):
         return format_user(data)
     else:
         return None
+
+
+def get_bookworm_stats_library_from_db():
+    conn = create_connection()
+
+    sql_file = open(select_bookworm_stats_library_sql, 'r')
+    raw_sql = sql_file.read()
+    sql_file.close()
+
+    cursor = conn.cursor()
+    cursor.execute(raw_sql)
+
+    data = cursor.fetchall()
+    conn.close()
+
+    stats_formatted = format_stats_libraries(data)
+
+    return stats_formatted

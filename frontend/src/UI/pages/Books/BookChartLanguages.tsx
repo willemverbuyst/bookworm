@@ -12,11 +12,11 @@ function BooksChartLanguages() {
     number: d.number_of_books,
   }));
 
-  const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-
   if (isLoading) {
     return <Spinner />;
   }
+
+  const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
   return (
     <Box>
@@ -30,8 +30,9 @@ function BooksChartLanguages() {
               nameKey="language"
               cx="50%"
               cy="50%"
-              outerRadius={100}
-              fill="#0088FE"
+              innerRadius={60}
+              outerRadius={80}
+              paddingAngle={5}
               label
             >
               {dataForChart.map((entry, index) => (

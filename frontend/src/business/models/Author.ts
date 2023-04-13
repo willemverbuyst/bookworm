@@ -9,6 +9,7 @@ export interface AuthorStatsPagesPerAuthor {
   id: string;
   author: string;
   number_of_pages: number;
+  number_of_books: number;
 }
 
 export interface AuthorStatsPage {

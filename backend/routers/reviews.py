@@ -9,9 +9,9 @@ review_router = APIRouter()
 
 
 @review_router.get("/reviews", tags=["reviews"])
-def get_reviews(limit = None, page=1) -> dict:
+def get_reviews() -> dict:
     try:
-        reviews = get_reviews_from_db(limit, page)
+        reviews = get_reviews_from_db()
         total_number_of_reviews = get_total_number_of_reviews()
         result = len(reviews)
 

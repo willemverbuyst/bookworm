@@ -20,6 +20,9 @@ function AllReviewsPage() {
   const { isLoading } = useAppState().app;
   useGetReviews();
   const data = useAppState().review.overview || [];
+  const dataforDisplay = Object.entries(data).sort(
+    ([k1], [k2]) => Number(k2) - Number(k1)
+  );
 
   if (isLoading) {
     return <Spinner />;
@@ -29,119 +32,35 @@ function AllReviewsPage() {
     <>
       <NavigationBar />
       <Flex flexDirection="column" alignItems="center">
-        <PageTitle title="All Reviews" />
-        {data?.length ? (
+        <PageTitle title="Reviews" />
+        {dataforDisplay?.length ? (
           <Flex flexDirection="row" alignItems="center">
-            <Flex flexDirection="column" alignItems="center">
-              <Box>
-                {[...Array(5).keys()].map((i) => (
-                  <StarIcon key={i} color="teal.600" />
+            {dataforDisplay.map(([k, v]) => (
+              <Flex flexDirection="column" alignItems="center">
+                <Box>
+                  {[...Array(Number(k)).keys()].map((i) => (
+                    <StarIcon key={i} color="teal.600" />
+                  ))}
+                  {[...Array(5 - Number(k)).keys()].map((i) => (
+                    <StarIcon key={i} color="gray.300" />
+                  ))}
+                </Box>
+
+                {v.map((d) => (
+                  <Card width={300} height={300} my={4} mx={6}>
+                    <CardHeader>
+                      <Heading size="md">{d.book_title}</Heading>
+                    </CardHeader>
+                    <CardBody>
+                      <Text noOfLines={3}>{d.description}</Text>
+                    </CardBody>
+                    <CardFooter>
+                      <Button>Read here</Button>
+                    </CardFooter>
+                  </Card>
                 ))}
-              </Box>
-              {data.map((d) => (
-                <Card width={300} my={4} mx={6}>
-                  <CardHeader>
-                    <Heading size="md">{d.book_title}</Heading>
-                  </CardHeader>
-                  <CardBody>
-                    <Text noOfLines={3}>{d.description}</Text>
-                  </CardBody>
-                  <CardFooter>
-                    <Button>Read here</Button>
-                  </CardFooter>
-                </Card>
-              ))}
-            </Flex>
-            <Flex flexDirection="column" alignItems="center">
-              <Box>
-                {[...Array(4).keys()].map((i) => (
-                  <StarIcon key={i} color="teal.600" />
-                ))}
-                <StarIcon color="gray.300" />
-              </Box>
-              {data.map((d) => (
-                <Card width={300} my={4} mx={6}>
-                  <CardHeader>
-                    <Heading size="md">{d.book_title}</Heading>
-                  </CardHeader>
-                  <CardBody>
-                    <Text noOfLines={3}>{d.description}</Text>
-                  </CardBody>
-                  <CardFooter>
-                    <Button>Read here</Button>
-                  </CardFooter>
-                </Card>
-              ))}
-            </Flex>
-            <Flex flexDirection="column" alignItems="center">
-              <Box>
-                {[...Array(3).keys()].map((i) => (
-                  <StarIcon key={i} color="teal.600" />
-                ))}
-                {[...Array(2).keys()].map((i) => (
-                  <StarIcon key={i} color="gray.300" />
-                ))}
-              </Box>
-              {data.map((d) => (
-                <Card width={300} my={4} mx={6}>
-                  <CardHeader>
-                    <Heading size="md">{d.book_title}</Heading>
-                  </CardHeader>
-                  <CardBody>
-                    <Text noOfLines={3}>{d.description}</Text>
-                  </CardBody>
-                  <CardFooter>
-                    <Button>Read here</Button>
-                  </CardFooter>
-                </Card>
-              ))}
-            </Flex>
-            <Flex flexDirection="column" alignItems="center">
-              <Box>
-                {[...Array(2).keys()].map((i) => (
-                  <StarIcon key={i} color="teal.600" />
-                ))}
-                {[...Array(3).keys()].map((i) => (
-                  <StarIcon key={i} color="gray.300" />
-                ))}
-              </Box>
-              {data.map((d) => (
-                <Card width={300} my={4} mx={6}>
-                  <CardHeader>
-                    <Heading size="md">{d.book_title}</Heading>
-                  </CardHeader>
-                  <CardBody>
-                    <Text noOfLines={3}>{d.description}</Text>
-                  </CardBody>
-                  <CardFooter>
-                    <Button>Read here</Button>
-                  </CardFooter>
-                </Card>
-              ))}
-            </Flex>
-            <Flex flexDirection="column" alignItems="center">
-              <Box>
-                {[...Array(1).keys()].map((i) => (
-                  <StarIcon key={i} color="teal.600" />
-                ))}
-                {[...Array(4).keys()].map((i) => (
-                  <StarIcon key={i} color="gray.300" />
-                ))}
-              </Box>
-              {data.map((d) => (
-                <Card width={300} my={4} mx={6}>
-                  <CardHeader>
-                    <Heading size="md">{d.book_title}</Heading>
-                  </CardHeader>
-                  <CardBody>
-                    <Text noOfLines={3}>{d.description}</Text>
-                  </CardBody>
-                  <CardFooter>
-                    <Button>Read here</Button>
-                  </CardFooter>
-                </Card>
-              ))}
-            </Flex>
+              </Flex>
+            ))}
           </Flex>
         ) : (
           <p>no reviews</p>

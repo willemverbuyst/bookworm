@@ -8,7 +8,7 @@ export function useGetBooksworms() {
 
   useEffect(() => {
     if (!getAllApi?.data.length) {
-      getBookworms({ filter, limit, page });
+      getBookworms({ filter: filter.active, limit, page });
     }
   }, []);
 }
