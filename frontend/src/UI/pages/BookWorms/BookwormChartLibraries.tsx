@@ -17,6 +17,8 @@ function BookwormChartLibraries() {
     return <Spinner />;
   }
 
+  const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
   return (
     <Box>
       {data.length ? (
@@ -32,8 +34,11 @@ function BookwormChartLibraries() {
               outerRadius={100}
               label
             >
-              {dataForChart.map((entry) => (
-                <Cell key={`cell-${entry.libraryName}`} />
+              {dataForChart.map((entry, index) => (
+                <Cell
+                  key={`cell-${entry.libraryName}`}
+                  fill={colors[index % colors.length]}
+                />
               ))}
             </Pie>
           </PieChart>
