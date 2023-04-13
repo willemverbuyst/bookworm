@@ -12,7 +12,9 @@ function groupBy(xs: any, key: any) {
   }, {});
 }
 
-export const state: ReviewState = {
+export const state: ReviewState & {
+  overview: { [key: string]: Array<Review> };
+} = {
   getAllApi: null,
   overview: derived(({ getAllApi }: ReviewState) => {
     if (!getAllApi?.data.length) {
