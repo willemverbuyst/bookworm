@@ -8,7 +8,7 @@ export function useGetRentals() {
 
   useEffect(() => {
     if (!getAllApi?.data.length) {
-      getRentals({ limit, page, filter });
+      getRentals({ limit, page, filter: filter.returned });
     }
   }, []);
 }
