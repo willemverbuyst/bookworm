@@ -1,38 +1,12 @@
 import { useAppState } from "../../business/overmind";
-import { NavItem } from "../components/Navigation/types";
-
-export const NAV_ITEMS: Array<NavItem> = [
-  { label: "Books", href: "/books" },
-  { label: "Authors", href: "/authors" },
-];
-
-export const PRIVATE_NAV_ITEMS: Array<NavItem> = [
-  { label: "Home", href: "/home" },
-  { label: "Bookworms", href: "/bookworms" },
-  { label: "Rentals", href: "/rentals" },
-  {
-    label: "Reviews",
-    children: [
-      {
-        label: "Add review",
-        subLabel: "Add a review for a book your read",
-        href: "/reviews/add",
-      },
-      {
-        label: "All reviews",
-        subLabel: "Have a look at existing reviews",
-        href: "/reviews",
-      },
-    ],
-  },
-];
 
 export function useNavItems() {
   const { isSignedIn } = useAppState().auth;
+  const { publicNavItems, privateNavItems } = useAppState().app;
 
   if (isSignedIn) {
-    return [...PRIVATE_NAV_ITEMS, ...NAV_ITEMS];
+    return [...privateNavItems, ...publicNavItems];
   }
 
-  return NAV_ITEMS;
+  return publicNavItems;
 }

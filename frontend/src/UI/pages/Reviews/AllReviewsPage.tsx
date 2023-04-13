@@ -32,7 +32,7 @@ function AllReviewsPage() {
     <>
       <NavigationBar />
       <Flex flexDirection="column" alignItems="center">
-        <PageTitle title="All Reviews" />
+        <PageTitle title="Reviews" />
         {dataforDisplay?.length ? (
           <Flex flexDirection="row" alignItems="center">
             {dataforDisplay.map(([k, v]) => (
