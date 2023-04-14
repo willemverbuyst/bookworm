@@ -3,7 +3,7 @@
 **/__pycache__
 **/mochareports/assets
 **/mocha
-**/screenshots
+
 
 **/*.env
 !**/*.example.env
