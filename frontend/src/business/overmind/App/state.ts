@@ -4,6 +4,7 @@ export interface AppState {
   isLoading: boolean;
   publicNavItems: Array<NavItem>;
   privateNavItems: Array<NavItem>;
+  colors: Array<string>;
 }
 
 export const state: AppState = {
@@ -32,4 +33,5 @@ export const state: AppState = {
       ],
     },
   ],
+  colors: ["#ef476fff", "#ffd166ff", "#06d6a0ff", "#118ab2ff", "#073b4cff"],
 };
