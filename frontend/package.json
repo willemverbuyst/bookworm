@@ -40,6 +40,7 @@
   },
   "scripts": {
     "architecture": "madge --extensions ts,tsx --exclude \"^.*\\.(test\\.(ts|tsx)|css)$\" --image graph.svg src/",
+    "architecture:term": "madge --extensions ts,tsx --exclude \"^.*\\.(test\\.(ts|tsx)|css)$\" src/",
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
