@@ -85,9 +85,12 @@ export const state: BookState = {
         language: "",
       },
       limit: 10,
+      noDataMessage: "no books",
       page: 1,
       queryString: "",
+      searchKeys: ["title", "author"],
       showAll: false,
+      title: "overview of books",
     },
   },
 };

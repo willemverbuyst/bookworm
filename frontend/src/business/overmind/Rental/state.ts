@@ -49,9 +49,12 @@ export const state: RentalState = {
       ],
       filter: { returned: "not_returned" },
       limit: 20,
+      noDataMessage: "no rentals",
       page: 1,
       queryString: "",
+      searchKeys: ["title", "author"],
       showAll: false,
+      title: "overview of rentals",
     },
   },
 };

@@ -57,9 +57,12 @@ export const state: AuthorState = {
       ],
       filter: null,
       limit: 10,
+      noDataMessage: "no authors",
       page: 1,
       queryString: "",
+      searchKeys: ["last_name", "first_name"],
       showAll: false,
+      title: "overview of authors",
     },
   },
 };

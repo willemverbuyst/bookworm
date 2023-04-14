@@ -17,7 +17,7 @@ function RentalsTable() {
     getAllApi,
     overview,
     ui: {
-      table: { columns, queryString },
+      table: { columns, noDataMessage, queryString, searchKeys, title },
     },
   } = useAppState().rental;
   const { total } = getAllApi || {};
@@ -39,15 +39,15 @@ function RentalsTable() {
         <>
           <TableOverview
             rows={overview.filter((a) =>
-              genericSearch(a, ["title", "author"], queryString, false)
+              genericSearch(a, searchKeys, queryString, false)
             )}
             columns={columns}
-            title="overview of rentals"
+            title={title}
           />
           <Pagination total={total} state={stateSectionsWithTable.rental} />
         </>
       ) : (
-        <p>no rentals</p>
+        <p>{noDataMessage}</p>
       )}
     </Box>
   );

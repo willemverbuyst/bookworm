@@ -18,7 +18,7 @@ function BookwormsTable() {
     getAllApi,
     overview,
     ui: {
-      table: { columns, queryString },
+      table: { columns, noDataMessage, queryString, searchKeys, title },
     },
   } = useAppState().bookworm;
   const { total } = getAllApi || {};
@@ -47,21 +47,16 @@ function BookwormsTable() {
           <BookwormsDetails isOpen={isOpen} onClose={onClose} />
           <TableOverview
             rows={overview.filter((a) =>
-              genericSearch(
-                a,
-                ["first_name", "last_name", "email"],
-                queryString,
-                false
-              )
+              genericSearch(a, searchKeys, queryString, false)
             )}
             columns={columns}
-            title="overview of bookworms"
+            title={title}
             action={getUser}
           />
           <Pagination total={total} state={stateSectionsWithTable.bookworm} />
         </>
       ) : (
-        <p>no bookworms</p>
+        <p>{noDataMessage}</p>
       )}
     </Box>
   );

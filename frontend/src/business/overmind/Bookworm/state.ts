@@ -66,9 +66,12 @@ export const state: BookwormState = {
         active: true,
       },
       limit: 15,
+      noDataMessage: "no bookworms",
       page: 1,
       queryString: "",
+      searchKeys: ["first_name", "last_name", "email"],
       showAll: false,
+      title: "overview of bookworms",
     },
   },
 };
