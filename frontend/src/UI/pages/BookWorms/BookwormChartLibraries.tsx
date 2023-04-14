@@ -1,6 +1,5 @@
 import { Box, Spinner } from "@chakra-ui/react";
 import { Cell, Pie, PieChart } from "recharts";
-import { compare } from "../../../business/functions/compare";
 import { useAppState } from "../../../business/overmind";
 import { useGetBookwormStatsLibrary } from "../../hooks/useGetBookwormStatsLibrary";
 
@@ -13,31 +12,10 @@ interface CustomLabelProps {
   index: number;
 }
 
-function getColorIndex(index: number) {
-  switch (true) {
-    case index === 0:
-    case index === 1:
-      return 0;
-    case index % 2 === 0:
-      return index - 1;
-    default:
-      return index - 2;
-  }
-}
-
 function BookwormChartLibraries() {
-  const { isLoading, colors } = useAppState().app;
   useGetBookwormStatsLibrary();
+  const { isLoading, colors } = useAppState().app;
   const data = useAppState().bookworm.statsLibrary || [];
-  const dataForChart = [...data]
-    .sort(compare("user_active"))
-    .sort(compare("id"))
-    .map((d, index) => ({
-      userIsActive: `${d.user_active}`,
-      libraryName: `${d.library_name}`,
-      numberOfBookworms: d.number_of_bookworms_per_library,
-      color: colors[getColorIndex(index)],
-    }));
 
   if (isLoading) {
     return <Spinner />;
@@ -64,7 +42,7 @@ function BookwormChartLibraries() {
         textAnchor={x > cx ? "start" : "end"}
         dominantBaseline="central"
       >
-        {`${dataForChart[index].numberOfBookworms}`}
+        {`${data[index].numberOfBookworms}`}
       </text>
     );
   };
@@ -88,8 +66,8 @@ function BookwormChartLibraries() {
         textAnchor={x > cx ? "start" : "end"}
         dominantBaseline="central"
       >
-        {dataForChart[index].userIsActive === "true"
-          ? `${dataForChart[index].libraryName}`
+        {data[index].userIsActive === "true"
+          ? `${data[index].libraryName}`
           : ""}
       </text>
     );
@@ -101,7 +79,7 @@ function BookwormChartLibraries() {
         <Box>
           <PieChart width={1200} height={600}>
             <Pie
-              data={dataForChart}
+              data={data}
               dataKey="numberOfBookworms"
               nameKey="userIsActive"
               cx="50%"
@@ -110,7 +88,7 @@ function BookwormChartLibraries() {
               labelLine={false}
               label={renderCustomizedLabelLibrary}
             >
-              {dataForChart.map((entry) => (
+              {data.map((entry) => (
                 <Cell
                   key={`cell-${entry.libraryName}`}
                   fill={colors[colors.length - 1]}
@@ -118,7 +96,7 @@ function BookwormChartLibraries() {
               ))}
             </Pie>
             <Pie
-              data={dataForChart}
+              data={data}
               dataKey="numberOfBookworms"
               nameKey="libraryName"
               cx="50%"
@@ -128,15 +106,19 @@ function BookwormChartLibraries() {
               label={renderCustomizedLabelBookworm}
               stroke=""
             >
-              {dataForChart.map((entry) => (
+              {data.map((entry) => (
                 <Cell
                   key={`cell-${entry.userIsActive}`}
-                  fill={entry.userIsActive === "true" ? entry.color : "#fff"}
+                  fill={
+                    entry.userIsActive === "true"
+                      ? entry.color
+                      : "rgba(255, 255, 255, 0)"
+                  }
                 />
               ))}
             </Pie>
             <Pie
-              data={dataForChart}
+              data={data}
               dataKey="numberOfBookworms"
               nameKey="libraryName"
               cx="50%"
@@ -144,9 +126,8 @@ function BookwormChartLibraries() {
               outerRadius={145}
               innerRadius={140}
               stroke=""
-              // label={renderCustomizedLabelBookworm}
             >
-              {dataForChart.map((entry) => (
+              {data.map((entry) => (
                 <Cell
                   key={`cell-${entry.userIsActive}`}
                   fill={

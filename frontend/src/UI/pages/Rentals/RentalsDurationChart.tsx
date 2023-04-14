@@ -4,13 +4,9 @@ import { useAppState } from "../../../business/overmind";
 import { useGetRentalStatsDuration } from "../../hooks/useGetRentalStatsDuration";
 
 function RentalsDurationChart() {
-  const { isLoading } = useAppState().app;
   useGetRentalStatsDuration();
+  const { isLoading } = useAppState().app;
   const data = useAppState().rental.statsDuration || [];
-  const dataForChart = data.map((d) => ({
-    duration: `${d.duration}d`,
-    number: Number(d.total_rentals),
-  }));
 
   if (isLoading) {
     return <Spinner />;
@@ -23,7 +19,7 @@ function RentalsDurationChart() {
           <ComposedChart
             width={1000}
             height={700}
-            data={dataForChart}
+            data={data}
             barSize={80}
             layout="horizontal"
             margin={{
@@ -32,7 +28,7 @@ function RentalsDurationChart() {
             }}
           >
             <XAxis
-              dataKey="duration"
+              dataKey="durationLabel"
               type="category"
               axisLine={false}
               interval={0}

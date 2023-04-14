@@ -9,11 +9,14 @@ import {
 import { BaseState, UITable } from "../../models/State";
 
 export interface BookState extends BaseState<Book> {
-  statsGenre: Array<BookStatsGenre> | null;
+  statsGenre: Array<{ name: string; number: number }> | null;
   statsGenreApi: ApiResponse<Array<BookStatsGenre>> | null;
-  statsLanguage: Array<BookStatsLanguage> | null;
+  statsLanguage: Array<{
+    language: string;
+    number: number;
+  }> | null;
   statsLanguageApi: ApiResponse<Array<BookStatsLanguage>> | null;
-  statsYearPublished: Array<BookStatsYearPublished> | null;
+  statsYearPublished: Array<{ name: string; number: number }> | null;
   statsYearPublishedApi: ApiResponse<Array<BookStatsYearPublished>> | null;
   ui: {
     table: UITable<
@@ -42,21 +45,30 @@ export const state: BookState = {
     if (!statsGenreApi?.data.length) {
       return null;
     }
-    return statsGenreApi.data;
+    return [...statsGenreApi.data].map((d) => ({
+      name: d.genre,
+      number: Number(d.number_of_books),
+    }));
   }),
   statsGenreApi: null,
   statsLanguage: derived(({ statsLanguageApi }: BookState) => {
     if (!statsLanguageApi?.data.length) {
       return null;
     }
-    return statsLanguageApi.data;
+    return [...statsLanguageApi.data].map((d) => ({
+      language: d.language,
+      number: d.number_of_books,
+    }));
   }),
   statsLanguageApi: null,
   statsYearPublished: derived(({ statsYearPublishedApi }: BookState) => {
     if (!statsYearPublishedApi?.data.length) {
       return null;
     }
-    return statsYearPublishedApi.data;
+    return [...statsYearPublishedApi.data].map((d) => ({
+      name: d.year_published,
+      number: Number(d.number_of_books),
+    }));
   }),
   statsYearPublishedApi: null,
   ui: {

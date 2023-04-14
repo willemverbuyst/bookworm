@@ -4,7 +4,11 @@ import { Rental, RentalStatsDuration } from "../../models/Rental";
 import { BaseState, UITable } from "../../models/State";
 
 export interface RentalState extends BaseState<Rental> {
-  statsDuration: Array<RentalStatsDuration> | null;
+  statsDuration: Array<{
+    durationLabel: string;
+    duration: number;
+    number: number;
+  }> | null;
   statsDurationApi: ApiResponse<Array<RentalStatsDuration>> | null;
   ui: {
     table: UITable<
@@ -28,7 +32,11 @@ export const state: RentalState = {
     if (!statsDurationApi?.data.length) {
       return null;
     }
-    return statsDurationApi.data;
+    return [...statsDurationApi.data].map((d) => ({
+      durationLabel: `${d.duration}d`,
+      duration: d.duration,
+      number: Number(d.total_rentals),
+    }));
   }),
   statsDurationApi: null,
   ui: {

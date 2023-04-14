@@ -4,7 +4,15 @@ import { Author, AuthorStatsPage } from "../../models/Author";
 import { BaseState, UITable } from "../../models/State";
 
 export interface AuthorState extends BaseState<Author> {
-  statsPage: AuthorStatsPage | null;
+  statsPage: {
+    pages_per_author: Array<{
+      name: string;
+      number: number;
+      book: number;
+      avg: number;
+    }>;
+    average_pages: number;
+  } | null;
   statsPageApi: ApiResponse<AuthorStatsPage> | null;
   ui: {
     table: UITable<Author, null>;
@@ -30,7 +38,12 @@ export const state: AuthorState = {
       return null;
     }
     return {
-      pages_per_author: statsPageApi.data.pages_per_author,
+      pages_per_author: [...statsPageApi.data.pages_per_author].map((d) => ({
+        name: d.author,
+        number: Number(d.number_of_pages),
+        book: Number(d.number_of_books),
+        avg: statsPageApi.data.average_pages,
+      })),
       average_pages: statsPageApi.data.average_pages,
     };
   }),

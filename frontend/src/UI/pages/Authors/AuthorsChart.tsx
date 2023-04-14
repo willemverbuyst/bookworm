@@ -4,17 +4,9 @@ import { useAppState } from "../../../business/overmind";
 import { useGetAuthorStatsPage } from "../../hooks/useGetAuthorStatsPage";
 
 function AuthorsChart() {
-  const { isLoading } = useAppState().app;
   useGetAuthorStatsPage();
-  const { pages_per_author: data = [], average_pages: avg } =
-    useAppState().author.statsPage || {};
-
-  const dataForChart = data.map((d) => ({
-    name: d.author,
-    number: Number(d.number_of_pages),
-    book: Number(d.number_of_books),
-    avg,
-  }));
+  const { isLoading } = useAppState().app;
+  const { pages_per_author: data = [] } = useAppState().author.statsPage || {};
 
   if (isLoading) {
     return <Spinner />;
@@ -27,7 +19,7 @@ function AuthorsChart() {
           <ComposedChart
             width={1000}
             height={700}
-            data={dataForChart}
+            data={data}
             layout="horizontal"
             margin={{
               left: 100,
