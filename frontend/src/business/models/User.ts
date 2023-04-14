@@ -19,3 +19,7 @@ export interface UserApi {
   message: string;
   token: { access_token: string };
 }
+
+export interface UserState {
+  user: User | null;
+}

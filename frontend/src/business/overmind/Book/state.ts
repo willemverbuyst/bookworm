@@ -1,33 +1,5 @@
 import { derived } from "overmind";
-import { ApiResponse } from "../../models/Api";
-import {
-  Book,
-  BookStatsGenre,
-  BookStatsLanguage,
-  BookStatsYearPublished,
-} from "../../models/Book";
-import { BaseState, UITable } from "../../models/State";
-
-export interface BookState extends BaseState<Book> {
-  statsGenre: Array<{ name: string; number: number }> | null;
-  statsGenreApi: ApiResponse<Array<BookStatsGenre>> | null;
-  statsLanguage: Array<{
-    language: string;
-    number: number;
-  }> | null;
-  statsLanguageApi: ApiResponse<Array<BookStatsLanguage>> | null;
-  statsYearPublished: Array<{ name: string; number: number }> | null;
-  statsYearPublishedApi: ApiResponse<Array<BookStatsYearPublished>> | null;
-  ui: {
-    table: UITable<
-      Book,
-      {
-        genre: string;
-        language: string;
-      }
-    >;
-  };
-}
+import { BookState } from "../../models/Book";
 
 export const state: BookState = {
   getAllApi: null,

@@ -1,3 +1,6 @@
+import { ApiResponse } from "./Api";
+import { BaseState, UITable } from "./State";
+
 export interface Book {
   id: string;
   title: string;
@@ -22,4 +25,25 @@ export interface BookStatsLanguage {
 export interface BookStatsYearPublished {
   year_published: string;
   number_of_books: number;
+}
+
+export interface BookState extends BaseState<Book> {
+  statsGenre: Array<{ name: string; number: number }> | null;
+  statsGenreApi: ApiResponse<Array<BookStatsGenre>> | null;
+  statsLanguage: Array<{
+    language: string;
+    number: number;
+  }> | null;
+  statsLanguageApi: ApiResponse<Array<BookStatsLanguage>> | null;
+  statsYearPublished: Array<{ name: string; number: number }> | null;
+  statsYearPublishedApi: ApiResponse<Array<BookStatsYearPublished>> | null;
+  ui: {
+    table: UITable<
+      Book,
+      {
+        genre: string;
+        language: string;
+      }
+    >;
+  };
 }

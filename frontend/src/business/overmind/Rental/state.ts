@@ -1,24 +1,5 @@
 import { derived } from "overmind";
-import { ApiResponse } from "../../models/Api";
-import { Rental, RentalStatsDuration } from "../../models/Rental";
-import { BaseState, UITable } from "../../models/State";
-
-export interface RentalState extends BaseState<Rental> {
-  statsDuration: Array<{
-    durationLabel: string;
-    duration: number;
-    number: number;
-  }> | null;
-  statsDurationApi: ApiResponse<Array<RentalStatsDuration>> | null;
-  ui: {
-    table: UITable<
-      Rental,
-      {
-        returned: string;
-      }
-    >;
-  };
-}
+import { RentalState } from "../../models/Rental";
 
 export const state: RentalState = {
   getAllApi: null,

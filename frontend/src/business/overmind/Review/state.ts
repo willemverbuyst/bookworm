@@ -1,12 +1,6 @@
 import { derived } from "overmind";
 import { groupBy } from "../../functions/groupBy";
-import { ApiResponse } from "../../models/Api";
-import { Review } from "../../models/Review";
-
-export interface ReviewState {
-  getAllApi: ApiResponse<Array<Review>> | null;
-  overview: { [key: string]: Array<Review> } | null;
-}
+import { ReviewState } from "../../models/Review";
 
 export const state: ReviewState = {
   getAllApi: null,

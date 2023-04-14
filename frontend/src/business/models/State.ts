@@ -1,4 +1,3 @@
-import { ApiResponse } from "./Api";
 import { Column } from "./Table";
 
 export interface UI {
@@ -8,6 +7,14 @@ export interface UI {
     queryString: string;
     showAll: boolean;
   };
+}
+
+export interface ApiResponse<T> {
+  status: string;
+  data: T;
+  message: string;
+  result?: number;
+  total?: number;
 }
 
 export interface BaseState<T> {

@@ -1,3 +1,6 @@
+import { ApiResponse } from "./Api";
+import { BaseState, UITable } from "./State";
+
 export interface Author {
   id: string;
   first_name: string;
@@ -15,4 +18,20 @@ export interface AuthorStatsPagesPerAuthor {
 export interface AuthorStatsPage {
   pages_per_author: Array<AuthorStatsPagesPerAuthor>;
   average_pages: number;
+}
+
+export interface AuthorState extends BaseState<Author> {
+  statsPage: {
+    pages_per_author: Array<{
+      name: string;
+      number: number;
+      book: number;
+      avg: number;
+    }>;
+    average_pages: number;
+  } | null;
+  statsPageApi: ApiResponse<AuthorStatsPage> | null;
+  ui: {
+    table: UITable<Author, null>;
+  };
 }

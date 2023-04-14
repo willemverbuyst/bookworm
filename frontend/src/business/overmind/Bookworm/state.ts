@@ -2,29 +2,7 @@ import { derived } from "overmind";
 import { RootState } from "..";
 import { compare } from "../../functions/compare";
 import { getColorIndex } from "../../functions/getColorIndex";
-import { ApiResponse } from "../../models/Api";
-import { Bookworm, BookwormStatsLibrary } from "../../models/Bookworm";
-import { BaseState, UITable } from "../../models/State";
-import { UserApi } from "../../models/User";
-
-export interface BookwormState extends BaseState<Bookworm> {
-  bookwormDetailsApi: Omit<UserApi, "token"> | null;
-  statsLibrary: Array<{
-    userIsActive: string;
-    libraryName: string;
-    numberOfBookworms: number;
-    color: string;
-  }> | null;
-  statsLibraryApi: ApiResponse<Array<BookwormStatsLibrary>> | null;
-  ui: {
-    table: UITable<
-      Bookworm,
-      {
-        active: boolean;
-      }
-    >;
-  };
-}
+import { BookwormState } from "../../models/Bookworm";
 
 export const state: BookwormState = {
   getAllApi: null,

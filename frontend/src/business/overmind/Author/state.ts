@@ -1,23 +1,5 @@
 import { derived } from "overmind";
-import { ApiResponse } from "../../models/Api";
-import { Author, AuthorStatsPage } from "../../models/Author";
-import { BaseState, UITable } from "../../models/State";
-
-export interface AuthorState extends BaseState<Author> {
-  statsPage: {
-    pages_per_author: Array<{
-      name: string;
-      number: number;
-      book: number;
-      avg: number;
-    }>;
-    average_pages: number;
-  } | null;
-  statsPageApi: ApiResponse<AuthorStatsPage> | null;
-  ui: {
-    table: UITable<Author, null>;
-  };
-}
+import { AuthorState } from "../../models/Author";
 
 export const state: AuthorState = {
   getAllApi: null,
