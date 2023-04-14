@@ -4,7 +4,7 @@ import { useAppState } from "../../../business/overmind";
 import { useGetBookStatsGenre } from "../../hooks/useGetBookStatsGenre";
 
 function BooksChartLanguages() {
-  const { isLoading } = useAppState().app;
+  const { isLoading, colors } = useAppState().app;
   useGetBookStatsGenre();
   const data = useAppState().book.statsLanguage || [];
   const dataForChart = data.map((d) => ({
@@ -15,8 +15,6 @@ function BooksChartLanguages() {
   if (isLoading) {
     return <Spinner />;
   }
-
-  const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
   return (
     <Box>

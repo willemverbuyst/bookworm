@@ -16,7 +16,7 @@ def create_dummy_user_accounts_sql(config):
         email = fake.email()
         create_date = datetime.date.today()
         password = "test123"
-        activebool = fake.boolean(chance_of_getting_true=50)
+        activebool = fake.boolean(chance_of_getting_true=80)
 
         if (activebool):
             activeint = 1

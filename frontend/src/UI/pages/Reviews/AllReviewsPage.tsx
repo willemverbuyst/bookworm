@@ -47,7 +47,13 @@ function AllReviewsPage() {
                 </Box>
 
                 {v.map((d) => (
-                  <Card width={300} height={300} my={4} mx={6}>
+                  <Card
+                    key={JSON.stringify(d)}
+                    width={300}
+                    height={300}
+                    my={4}
+                    mx={6}
+                  >
                     <CardHeader>
                       <Heading size="md">{d.book_title}</Heading>
                     </CardHeader>

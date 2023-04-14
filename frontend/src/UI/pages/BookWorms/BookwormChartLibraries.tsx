@@ -1,79 +1,119 @@
 import { Box, Spinner } from "@chakra-ui/react";
-import { Cell, Legend, Pie, PieChart } from "recharts";
-import { BookwormStatsLibrary } from "../../../business/models/Bookworm";
+import { Cell, Pie, PieChart } from "recharts";
+import { compare } from "../../../business/functions/compare";
 import { useAppState } from "../../../business/overmind";
 import { useGetBookwormStatsLibrary } from "../../hooks/useGetBookwormStatsLibrary";
 
+interface CustomLabelProps {
+  cx: string;
+  cy: string;
+  midAngle: number;
+  innerRadius: number;
+  outerRadius: number;
+  index: number;
+}
+
+function getColorIndex(index: number) {
+  switch (true) {
+    case index === 0:
+    case index === 1:
+      return 0;
+    case index % 2 === 0:
+      return index - 1;
+    default:
+      return index - 2;
+  }
+}
+
 function BookwormChartLibraries() {
-  const { isLoading } = useAppState().app;
+  const { isLoading, colors } = useAppState().app;
   useGetBookwormStatsLibrary();
   const data = useAppState().bookworm.statsLibrary || [];
-
-  function sumItems(items: BookwormStatsLibrary[]): BookwormStatsLibrary[] {
-    const result: { [library_name: string]: BookwormStatsLibrary } = {};
-    items.reduce((acc, item) => {
-      if (item.library_name in acc) {
-        acc[item.library_name].number_of_bookworms_per_library +=
-          item.number_of_bookworms_per_library;
-      } else {
-        acc[item.library_name] = { ...item };
-      }
-      return acc;
-    }, result);
-    return Object.values(result);
-  }
-
-  function sumItems2(items: BookwormStatsLibrary[]): BookwormStatsLibrary[] {
-    const result: { [user_active: string]: BookwormStatsLibrary } = {};
-    items.reduce((acc, item) => {
-      if (String(item.user_active) in acc) {
-        acc[String(item.user_active)].number_of_bookworms_per_library +=
-          item.number_of_bookworms_per_library;
-      } else {
-        acc[String(item.user_active)] = { ...item };
-      }
-      return acc;
-    }, result);
-    return Object.values(result);
-  }
-
-  const dataForChart = sumItems(data).map((d) => ({
-    libraryName: `${d.library_name}`,
-    numberOfBookworms: d.number_of_bookworms_per_library,
-  }));
-
-  const dataForChart2 = sumItems2(data).map((d) => ({
-    userIsActive: `${d.user_active}`,
-    numberOfBookworms: d.number_of_bookworms_per_library,
-  }));
-
-  console.log("dataForChart, dataForChart2 :>> ", dataForChart, dataForChart2);
+  const dataForChart = [...data]
+    .sort(compare("user_active"))
+    .sort(compare("id"))
+    .map((d, index) => ({
+      userIsActive: `${d.user_active}`,
+      libraryName: `${d.library_name}`,
+      numberOfBookworms: d.number_of_bookworms_per_library,
+      color: colors[getColorIndex(index)],
+    }));
 
   if (isLoading) {
     return <Spinner />;
   }
 
-  const colors = ["#0088FE", "#FFBB28"];
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabelLibrary = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    index,
+  }: CustomLabelProps) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.7;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="#fff"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {`${dataForChart[index].numberOfBookworms}`}
+      </text>
+    );
+  };
+  const renderCustomizedLabelBookworm = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    index,
+  }: CustomLabelProps) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 3;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="#333"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {dataForChart[index].userIsActive === "true"
+          ? `${dataForChart[index].libraryName}`
+          : ""}
+      </text>
+    );
+  };
 
   return (
     <Box>
       {data.length ? (
         <Box>
-          <PieChart width={400} height={400}>
-            <Legend verticalAlign="bottom" height={36} />
+          <PieChart width={1200} height={600}>
             <Pie
-              data={dataForChart2}
+              data={dataForChart}
               dataKey="numberOfBookworms"
               nameKey="userIsActive"
               cx="50%"
               cy="50%"
-              outerRadius={60}
-              label
+              outerRadius={120}
+              labelLine={false}
+              label={renderCustomizedLabelLibrary}
             >
-              {dataForChart2.map((entry, index) => (
+              {dataForChart.map((entry) => (
                 <Cell
-                  key={`cell-${entry.userIsActive}`}
-                  fill={colors[index % colors.length]}
+                  key={`cell-${entry.libraryName}`}
+                  fill={colors[colors.length - 1]}
                 />
               ))}
             </Pie>
@@ -83,14 +123,37 @@ function BookwormChartLibraries() {
               nameKey="libraryName"
               cx="50%"
               cy="50%"
-              outerRadius={90}
-              innerRadius={70}
-              label
+              outerRadius={160}
+              innerRadius={140}
+              label={renderCustomizedLabelBookworm}
+              stroke=""
             >
-              {dataForChart.map((entry, index) => (
+              {dataForChart.map((entry) => (
                 <Cell
-                  key={`cell-${entry.libraryName}`}
-                  fill={colors[index % colors.length]}
+                  key={`cell-${entry.userIsActive}`}
+                  fill={entry.userIsActive === "true" ? entry.color : "#fff"}
+                />
+              ))}
+            </Pie>
+            <Pie
+              data={dataForChart}
+              dataKey="numberOfBookworms"
+              nameKey="libraryName"
+              cx="50%"
+              cy="50%"
+              outerRadius={145}
+              innerRadius={140}
+              stroke=""
+              // label={renderCustomizedLabelBookworm}
+            >
+              {dataForChart.map((entry) => (
+                <Cell
+                  key={`cell-${entry.userIsActive}`}
+                  fill={
+                    entry.userIsActive === "true"
+                      ? "rgba(255, 255, 255, 0)"
+                      : entry.color
+                  }
                 />
               ))}
             </Pie>

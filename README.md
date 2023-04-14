@@ -1,6 +1,6 @@
 # What is this?
 
-A project to connect and try out some techniques in a docker environment.
+A project to connect and try out some libraries, tools and techniques in a semi-docker environment.
 
 ## Frontend
 
@@ -9,6 +9,7 @@ A project to connect and try out some techniques in a docker environment.
 - Overmind
 - Chakra ui
 - React Hook Form
+- Recharts
 
 ## Backend
 
@@ -26,14 +27,20 @@ A project to connect and try out some techniques in a docker environment.
 - Cypress
 - Vitest
 
+## Screenshots
+
+![](./screenshots/Screenshot_bookworm_libraries.png)
+![](./screenshots/Screenshot_books_overview.png)
+![](./screenshots/Screenshot_books_languages.png)
+![](./screenshots/Screenshot_books_genres.png)
+![](./screenshots/Screenshot_books_year_published.png)
+![](./screenshots/Screenshot_authors_pagesvsbooks.png)
+![](./screenshots/Screenshot_rentals_duration.png)
+![](./screenshots/Screenshot_api_docs.png)
+
 ## Documentation for API
 
 Swagger docs at localhost:8000/docs
-
-# What is this not?
-
-Focussed on efficiency.
-Parts are hardcoded and some of the setup is pretty contrived.
 
 # Commands
 
@@ -59,7 +66,7 @@ run frontend for dev
 
 > cd frontend
 
-> yarn start
+> yarn dev
 
 #
 
@@ -117,20 +124,10 @@ stop bash in terminal
 
 #
 
-run cypress test
+run cypress test (needs work)
 
 > cd test
 
 > npm run cy:open
 
 > npm run cy:run
-
-#
-
-Create csv with dummy data
-
-> bash dummy_authors.sh
-
-> bash dummy_books.sh
-
-#
