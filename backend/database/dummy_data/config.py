@@ -47,7 +47,7 @@ config = {
   ],
   "INVENTORY": [{"uuid": uuid.uuid4()} for i in range(3100)],
   "LANGUAGE": [{"uuid": uuid.uuid4(), "language": l} for l in ["EN", "NL", "ES", "FR"]],
-  "LIBRARY": [{"uuid": uuid.uuid4()} for i in range(2)],
+  "LIBRARY": [{"uuid": uuid.uuid4()} for i in range(3)],
   "PAGES_MAX":800,
   "PAGES_MIN":50,
   "PAYMENT":[{"uuid": uuid.uuid4()} for i in range(8000)],
