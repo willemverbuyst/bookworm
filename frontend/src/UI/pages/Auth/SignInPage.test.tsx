@@ -5,11 +5,11 @@ import { Provider } from "overmind-react";
 import { BrowserRouter } from "react-router-dom";
 import { vi } from "vitest";
 import { config } from "../../../business/overmind";
-import SignInPage from "./SignInPage";
+import { SignInPage } from "./SignInPage";
 
-vi.mock("../../components/Navigation/NavigationBar", () => {
+vi.mock("../../components/Navigation", () => {
   const NavigationBar = vi.fn();
-  return { default: NavigationBar };
+  return { NavigationBar };
 });
 
 describe("SingInPage", () => {

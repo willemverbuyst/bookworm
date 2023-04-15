@@ -3,51 +3,78 @@ import { render, screen } from "@testing-library/react";
 import { createOvermindMock } from "overmind";
 import { Provider } from "overmind-react";
 import { config } from "../../../business/overmind";
-import TableWithAllBooks from "./BooksTable";
+import { BooksTable } from "./BooksTable";
 
 describe("BooksTable", () => {
   test("should display a table with column headers", () => {
     const overmind = createOvermindMock(config, (state) => {
-      state.booksApi = {
+      state.book.getAllApi = {
         status: "ok",
         result: 1,
         data: [
           {
             id: "abc123",
             title: "test_title_one",
-            language: "test_language_one",
             author: "test_author_one",
             year_published: 1900,
             genre: "test_genre",
+            language: "test_language_one",
           },
         ],
-        total_number_of_books: 100,
+        total: 100,
         message: "testing",
       };
-      state.genresApi = {
+      state.book.ui = {
+        table: {
+          columns: [
+            { field: "title" },
+            { field: "author" },
+            { field: "year_published" },
+            { field: "genre" },
+            { field: "language" },
+          ],
+          filter: {
+            genre: "",
+            language: "",
+          },
+          limit: 10,
+          noDataMessage: "no books",
+          page: 1,
+          queryString: "",
+          searchKeys: ["title", "author"],
+          showAll: false,
+          title: "overview of books",
+        },
+      };
+      state.genre.getAllApi = {
         status: "ok",
         data: [{ id: "1", genre: "genre" }],
         message: "testing",
       };
-      state.languagesApi = {
+      state.language.getAllApi = {
         status: "ok",
         data: [{ id: "1", language: "language" }],
         message: "testing",
       };
-      state.bookStatsGenreApi = {
+      state.book.statsGenreApi = {
         status: "ok",
         data: [{ id: "1", genre: "genre", number_of_books: 1 }],
         message: "testing",
       };
-      state.bookStatsLanguageApi = {
+      state.book.statsLanguageApi = {
         status: "ok",
         data: [{ id: "1", language: "language", number_of_books: 1 }],
+        message: "testing",
+      };
+      state.book.statsYearPublishedApi = {
+        status: "ok",
+        data: [{ year_published: "1900", number_of_books: 10 }],
         message: "testing",
       };
     });
     render(
       <Provider value={overmind}>
-        <TableWithAllBooks />
+        <BooksTable />
       </Provider>
     );
 
@@ -61,10 +88,10 @@ describe("BooksTable", () => {
 
     const columnHeaders = [
       "title",
-      "language",
       "author",
       "year published",
       "genre",
+      "language",
     ];
 
     columnHeaders.forEach((header) => {
@@ -96,38 +123,43 @@ describe("BooksTable", () => {
     ];
 
     const overmind = createOvermindMock(config, (state) => {
-      state.booksApi = {
+      state.book.getAllApi = {
         status: "ok",
         result: data.length,
         data,
-        total_number_of_books: 100,
+        total: 100,
         message: "testing",
       };
-      state.genresApi = {
+      state.genre.getAllApi = {
         status: "ok",
         data: [{ id: "1", genre: "genre" }],
         message: "testing",
       };
-      state.languagesApi = {
+      state.language.getAllApi = {
         status: "ok",
         data: [{ id: "1", language: "language" }],
         message: "testing",
       };
-      state.bookStatsGenreApi = {
+      state.book.statsGenreApi = {
         status: "ok",
         data: [{ id: "1", genre: "genre", number_of_books: 1 }],
         message: "testing",
       };
-      state.bookStatsLanguageApi = {
+      state.book.statsLanguageApi = {
         status: "ok",
         data: [{ id: "1", language: "language", number_of_books: 1 }],
+        message: "testing",
+      };
+      state.book.statsYearPublishedApi = {
+        status: "ok",
+        data: [{ year_published: "1900", number_of_books: 10 }],
         message: "testing",
       };
     });
 
     render(
       <Provider value={overmind}>
-        <TableWithAllBooks />
+        <BooksTable />
       </Provider>
     );
 

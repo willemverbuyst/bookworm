@@ -32,7 +32,7 @@ export function TableOverview<T extends Record<"id", string>>({
           <Tr>
             {columns.map((column) => (
               <Th key={String(column.field)} isNumeric={column.isNumeric}>
-                {String(column.field).replaceAll("_", " ")}
+                {String(column.field).replace(/_/g, " ")}
               </Th>
             ))}
             {action ? <Th>get details</Th> : null}
