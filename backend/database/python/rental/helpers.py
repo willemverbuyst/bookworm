@@ -23,3 +23,16 @@ def format_rental_stats_duration(rental_data):
         rentals.append(rental)
 
     return rentals
+
+
+def format_rental_stats_days(rental_data):
+    rentals = []
+    for row in rental_data:
+        rental = {
+            "number_of_rentals": row[0],
+            "number_of_returns": row[1],
+            "day_of_the_week": row[2]
+        }
+        rentals.append(rental)
+
+    return rentals
