@@ -36,7 +36,7 @@ export function AllReviewsPage() {
         {dataforDisplay?.length ? (
           <Flex flexDirection="row" alignItems="center">
             {dataforDisplay.map(([k, v]) => (
-              <Flex flexDirection="column" alignItems="center">
+              <Flex key={k} flexDirection="column" alignItems="center">
                 <Box>
                   {[...Array(Number(k)).keys()].map((i) => (
                     <StarIcon key={i} color="teal.600" />
