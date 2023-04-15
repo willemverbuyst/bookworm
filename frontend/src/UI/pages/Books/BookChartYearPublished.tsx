@@ -9,7 +9,7 @@ import {
   YAxis,
 } from "recharts";
 import { useAppState } from "../../../business/overmind";
-import { useGetBookStatsYearPublished } from "../../hooks/useGetBookStatsYearPublished";
+import { useGetBookStatsYearPublished } from "../../hooks";
 
 function BookChartYearPublished() {
   useGetBookStatsYearPublished();

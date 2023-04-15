@@ -4,7 +4,7 @@ type Props = {
   title: string;
 };
 
-function PageTitle({ title }: Props) {
+export function PageTitle({ title }: Props) {
   return (
     <Box p={10}>
       <Heading as="h1" size="lg">
@@ -13,5 +13,3 @@ function PageTitle({ title }: Props) {
     </Box>
   );
 }
-
-export default PageTitle;

@@ -1,5 +1,5 @@
 import { Box, Input, Spinner } from "@chakra-ui/react";
-import { genericSearch } from "../../../business/functions/genericSearch";
+import { genericSearch } from "../../../business/functions";
 import {
   stateSectionsWithTable,
   useActions,
@@ -7,7 +7,7 @@ import {
 } from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
-import { useGetRentals } from "../../hooks/useGetRentals";
+import { useGetRentals } from "../../hooks";
 import Filter from "./Filter";
 
 function RentalsTable() {

@@ -1,5 +1,5 @@
 import { Box, Input, Spinner, useDisclosure } from "@chakra-ui/react";
-import { genericSearch } from "../../../business/functions/genericSearch";
+import { genericSearch } from "../../../business/functions";
 import {
   stateSectionsWithTable,
   useActions,
@@ -7,7 +7,7 @@ import {
 } from "../../../business/overmind";
 import Pagination from "../../components/Table/Pagination";
 import TableOverview from "../../components/Table/TableOverView";
-import { useGetBooksworms } from "../../hooks/useGetBookworms";
+import { useGetBooksworms } from "../../hooks";
 import BookwormsDetails from "./BookwormsDetails";
 import Filter from "./Filter";
 

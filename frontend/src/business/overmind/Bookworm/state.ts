@@ -1,7 +1,6 @@
 import { derived } from "overmind";
 import { RootState } from "..";
-import { compare } from "../../functions/compare";
-import { getColorIndex } from "../../functions/getColorIndex";
+import { compare, getColorIndex } from "../../functions";
 import { ApiResponse, BaseState, UITable } from "../../models/State";
 import { UserApi } from "../User/state";
 

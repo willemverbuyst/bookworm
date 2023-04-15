@@ -13,8 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { useAppState } from "../../../business/overmind";
 import NavigationBar from "../../components/Navigation/NavigationBar";
-import PageTitle from "../../components/Text/PageTitle";
-import { useGetReviews } from "../../hooks/useGetReviews";
+import { PageTitle } from "../../components/Text";
+import { useGetReviews } from "../../hooks";
 
 function AllReviewsPage() {
   const { isLoading } = useAppState().app;

@@ -1,5 +1,5 @@
 import { Flex, Text } from "@chakra-ui/react";
-import PageTitle from "../../components/Text/PageTitle";
+import { PageTitle } from "../../components/Text";
 
 function PageNotFoundPage() {
   return (

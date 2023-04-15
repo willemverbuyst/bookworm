@@ -4,9 +4,9 @@ import { useEffect, useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useActions, useAppState } from "../../../business/overmind";
-import ControlledTextInput from "../../components/Controllers/TextInput";
+import { ControlledTextInput } from "../../components/Controllers";
 import NavigationBar from "../../components/Navigation/NavigationBar";
-import PageTitle from "../../components/Text/PageTitle";
+import { PageTitle } from "../../components/Text";
 import {
   defaultValuesSignIn,
   FormFieldsSignIn,

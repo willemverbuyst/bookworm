@@ -5,9 +5,7 @@ import {
   FieldValues,
   UseControllerProps,
 } from "react-hook-form";
-import ErrorMessage from "./ErrorMessage";
-import HelperText from "./HelperText";
-import Label from "./Label";
+import { ErrorMessage, HelperText, Label } from "../Text";
 
 type TextAreaProps<T extends FieldValues> = {
   error?: FieldError | undefined;
@@ -17,7 +15,7 @@ type TextAreaProps<T extends FieldValues> = {
   required?: boolean;
 } & UseControllerProps<T>;
 
-function ControlledTextArea<T extends FieldValues>({
+export function ControlledTextArea<T extends FieldValues>({
   control,
   error,
   helperText,
@@ -38,5 +36,3 @@ function ControlledTextArea<T extends FieldValues>({
     </FormControl>
   );
 }
-
-export default ControlledTextArea;

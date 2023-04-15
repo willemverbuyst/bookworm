@@ -1,5 +1,5 @@
 import { derived } from "overmind";
-import { groupBy } from "../../functions/groupBy";
+import { groupBy } from "../../functions";
 import { ApiResponse } from "../../models/State";
 
 export interface Review {

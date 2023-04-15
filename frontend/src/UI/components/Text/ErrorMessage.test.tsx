@@ -1,6 +1,6 @@
 import { FormControl } from "@chakra-ui/react";
 import { render, screen } from "@testing-library/react";
-import ErrorMessage from "./ErrorMessage";
+import { ErrorMessage } from "./ErrorMessage";
 
 describe("HelperText", () => {
   test("should display the text passed as prop", () => {

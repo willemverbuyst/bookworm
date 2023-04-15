@@ -1,7 +1,7 @@
 import { Box, Spinner } from "@chakra-ui/react";
 import { Cell, Legend, Pie, PieChart } from "recharts";
 import { useAppState } from "../../../business/overmind";
-import { useGetBookStatsGenre } from "../../hooks/useGetBookStatsGenre";
+import { useGetBookStatsGenre } from "../../hooks";
 
 function BooksChartLanguages() {
   useGetBookStatsGenre();

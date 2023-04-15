@@ -1,6 +1,6 @@
 import { Box, FormControl, HStack, Select } from "@chakra-ui/react";
 import { useActions, useAppState } from "../../../business/overmind";
-import Label from "../../components/Controllers/Label";
+import { Label } from "../../components/Text";
 
 function Filter() {
   const allGenres = useAppState().genre.overview || [];

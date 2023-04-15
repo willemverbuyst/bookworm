@@ -1,6 +1,6 @@
 import { FormControl } from "@chakra-ui/react";
 import { render, screen } from "@testing-library/react";
-import Label from "./Label";
+import { Label } from "./Label";
 
 describe("Label", () => {
   test("should display label text passed as prop", () => {

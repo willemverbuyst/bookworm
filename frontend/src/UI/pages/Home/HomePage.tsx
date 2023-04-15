@@ -2,7 +2,7 @@ import { Flex, Spinner } from "@chakra-ui/react";
 import { useAppState } from "../../../business/overmind";
 import UserDetails from "../../components/Cards/UserDetails";
 import NavigationBar from "../../components/Navigation/NavigationBar";
-import PageTitle from "../../components/Text/PageTitle";
+import { PageTitle } from "../../components/Text";
 
 function HomePage() {
   const { isLoading } = useAppState().app;

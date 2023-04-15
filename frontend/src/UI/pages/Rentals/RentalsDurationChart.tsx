@@ -1,7 +1,7 @@
 import { Box, Spinner } from "@chakra-ui/react";
 import { Bar, Cell, ComposedChart, LabelList, XAxis } from "recharts";
 import { useAppState } from "../../../business/overmind";
-import { useGetRentalStatsDuration } from "../../hooks/useGetRentalStatsDuration";
+import { useGetRentalStatsDuration } from "../../hooks";
 
 function RentalsDurationChart() {
   useGetRentalStatsDuration();

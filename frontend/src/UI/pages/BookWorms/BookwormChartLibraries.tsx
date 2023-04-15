@@ -1,7 +1,7 @@
 import { Box, Spinner } from "@chakra-ui/react";
 import { Cell, Pie, PieChart } from "recharts";
 import { useAppState } from "../../../business/overmind";
-import { useGetBookwormStatsLibrary } from "../../hooks/useGetBookwormStatsLibrary";
+import { useGetBookwormStatsLibrary } from "../../hooks";
 
 interface CustomLabelProps {
   cx: string;

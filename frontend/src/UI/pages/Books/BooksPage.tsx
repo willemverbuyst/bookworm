@@ -7,7 +7,7 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import NavigationBar from "../../components/Navigation/NavigationBar";
-import PageTitle from "../../components/Text/PageTitle";
+import { PageTitle } from "../../components/Text";
 import BooksChartLanguages from "./BookChartLanguages";
 import BookChartYearPublished from "./BookChartYearPublished";
 import BooksChartGenres from "./BooksChartGenres";

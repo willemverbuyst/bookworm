@@ -1,5 +1,5 @@
 import { Context } from "..";
-import { genericSearch } from "../../functions/genericSearch";
+import { genericSearch } from "../../functions";
 
 export const searching = (
   { actions, state }: Context,

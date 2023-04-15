@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useAppState } from "./business/overmind";
 import PrivateRoute from "./helpers/PrivateRoute";
-import { useToastHook } from "./UI/hooks/useToastHook";
+import { useToastHook } from "./UI/hooks";
 import SignInPage from "./UI/pages/Auth/SignInPage";
 import SignUpPage from "./UI/pages/Auth/SingUpPage";
 import AuthorsPage from "./UI/pages/Authors/AuthorsPage";

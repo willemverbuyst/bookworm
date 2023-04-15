@@ -1,7 +1,7 @@
 import { Box, Spinner } from "@chakra-ui/react";
 import { Bar, ComposedChart, LabelList, Line, XAxis, YAxis } from "recharts";
 import { useAppState } from "../../../business/overmind";
-import { useGetAuthorStatsPage } from "../../hooks/useGetAuthorStatsPage";
+import { useGetAuthorStatsPage } from "../../hooks";
 
 function AuthorsChart() {
   useGetAuthorStatsPage();

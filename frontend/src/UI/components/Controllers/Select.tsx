@@ -5,9 +5,7 @@ import {
   FieldValues,
   UseControllerProps,
 } from "react-hook-form";
-import ErrorMessage from "./ErrorMessage";
-import HelperText from "./HelperText";
-import Label from "./Label";
+import { ErrorMessage, HelperText, Label } from "../Text";
 
 type SelectProps<T extends FieldValues, U> = {
   dataSet: U[];
@@ -20,7 +18,7 @@ type SelectProps<T extends FieldValues, U> = {
   allOption?: boolean;
 } & UseControllerProps<T>;
 
-function ControlledSelect<
+export function ControlledSelect<
   T extends FieldValues,
   U extends { value: string; display: string }
 >({
@@ -65,5 +63,3 @@ function ControlledSelect<
     </FormControl>
   );
 }
-
-export default ControlledSelect;
