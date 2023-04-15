@@ -18,6 +18,23 @@ export const getRentals = async (
   state.app.isLoading = false;
 };
 
+export const getRentalStatsDay = async ({
+  actions,
+  effects,
+  state,
+}: Context) => {
+  state.app.isLoading = true;
+  const response = await effects.rental.api.getRentalStatsDay();
+
+  if (!response || response instanceof AxiosError) {
+    actions.api.handleErrorResponse({ response });
+  } else {
+    state.rental.statsDayApi = response;
+  }
+
+  state.app.isLoading = false;
+};
+
 export const getRentalStatsDuration = async ({
   actions,
   effects,

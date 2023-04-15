@@ -1,4 +1,5 @@
 import { derived } from "overmind";
+import { WEEKDAYS } from "../../functions";
 import { RentalState } from "../../models";
 
 export const state: RentalState = {
@@ -9,6 +10,17 @@ export const state: RentalState = {
     }
     return getAllApi.data;
   }),
+  statsDay: derived(({ statsDayApi }: RentalState) => {
+    if (!statsDayApi?.data.length) {
+      return null;
+    }
+    return [...statsDayApi.data].map((d) => ({
+      rentals: d.number_of_rentals,
+      returns: d.number_of_returns,
+      day: WEEKDAYS[d.day_of_the_week - 1],
+    }));
+  }),
+  statsDayApi: null,
   statsDuration: derived(({ statsDurationApi }: RentalState) => {
     if (!statsDurationApi?.data.length) {
       return null;

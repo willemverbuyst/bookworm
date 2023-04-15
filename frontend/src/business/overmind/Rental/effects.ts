@@ -23,6 +23,8 @@ export const api = {
     return apiGet({ url });
   },
 
+  getRentalStatsDay: async () => apiGet({ url: "rentals/stats/?by=day" }),
+
   getRentalStatsDuration: async () =>
     apiGet({ url: "rentals/stats/?by=duration" }),
 };
