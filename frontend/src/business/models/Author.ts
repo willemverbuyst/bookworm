@@ -1,36 +1,36 @@
-import { ApiResponse, BaseState, UITable } from "./State";
+import { ApiResponse, BaseState, UI } from "./State";
 
-export interface Author {
+interface Author {
   id: string;
   first_name: string;
   last_name: string;
   books_written: number;
 }
 
-export interface AuthorStatsPagesPerAuthor {
+interface PagesPerAuthor {
   id: string;
   author: string;
   number_of_pages: number;
   number_of_books: number;
 }
 
-export interface AuthorStatsPage {
-  pages_per_author: Array<AuthorStatsPagesPerAuthor>;
+interface Page {
+  pages_per_author: Array<PagesPerAuthor>;
   average_pages: number;
+}
+
+interface PageDisplay {
+  name: string;
+  number: number;
+  book: number;
+  avg: number;
 }
 
 export interface AuthorState extends BaseState<Author> {
   statsPage: {
-    pages_per_author: Array<{
-      name: string;
-      number: number;
-      book: number;
-      avg: number;
-    }>;
+    pages_per_author: PageDisplay[];
     average_pages: number;
   } | null;
-  statsPageApi: ApiResponse<AuthorStatsPage> | null;
-  ui: {
-    table: UITable<Author, null>;
-  };
+  statsPageApi: ApiResponse<Page> | null;
+  ui: UI<Author, null>;
 }

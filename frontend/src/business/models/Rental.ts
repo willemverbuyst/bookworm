@@ -1,6 +1,6 @@
-import { ApiResponse, BaseState, UITable } from "./State";
+import { ApiResponse, BaseState, UI } from "./State";
 
-export interface Rental {
+interface Rental {
   id: string;
   rental_date: string;
   return_date: string;
@@ -8,24 +8,23 @@ export interface Rental {
   author: string;
 }
 
-export interface RentalStatsDuration {
+interface Duration {
   duration: number;
   total_rentals: number;
 }
 
+interface DurationDisplay {
+  durationLabel: string;
+  duration: number;
+  number: number;
+}
+
+interface Filter {
+  returned: string;
+}
+
 export interface RentalState extends BaseState<Rental> {
-  statsDuration: Array<{
-    durationLabel: string;
-    duration: number;
-    number: number;
-  }> | null;
-  statsDurationApi: ApiResponse<Array<RentalStatsDuration>> | null;
-  ui: {
-    table: UITable<
-      Rental,
-      {
-        returned: string;
-      }
-    >;
-  };
+  statsDuration: DurationDisplay[] | null;
+  statsDurationApi: ApiResponse<Duration[]> | null;
+  ui: UI<Rental, Filter>;
 }

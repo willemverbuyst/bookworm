@@ -1,6 +1,6 @@
 import { BaseState } from "./State";
 
-export interface Language {
+interface Language {
   id: string;
   language: string;
 }

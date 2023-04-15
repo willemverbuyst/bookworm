@@ -1,6 +1,6 @@
 import { ApiResponse } from "./State";
 
-export interface Review {
+interface Review {
   id: string;
   description: string;
   rating: number;
@@ -8,7 +8,9 @@ export interface Review {
   reviewer: string;
 }
 
+type Rating = "1" | "2" | "3" | "4" | "5";
+
 export interface ReviewState {
-  getAllApi: ApiResponse<Array<Review>> | null;
-  overview: { [key: string]: Array<Review> } | null;
+  getAllApi: ApiResponse<Review[]> | null;
+  overview: { [key in Rating[number]]: Array<Review> } | null;
 }

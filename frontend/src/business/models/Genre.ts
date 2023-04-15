@@ -1,6 +1,6 @@
 import { BaseState } from "./State";
 
-export interface Genre {
+interface Genre {
   id: string;
   genre: string;
 }
