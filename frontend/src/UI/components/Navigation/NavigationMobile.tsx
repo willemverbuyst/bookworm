@@ -9,7 +9,8 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { NavItem } from "../../../business/overmind/App/state";
+import { NavItem } from "../../../business/models";
+
 import { useNavItems } from "../../hooks";
 
 function MobileNavItem({ label, children, href }: NavItem) {

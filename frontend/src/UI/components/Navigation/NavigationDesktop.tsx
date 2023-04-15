@@ -12,7 +12,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Link as RLink } from "react-router-dom";
-import { NavItem } from "../../../business/overmind/App/state";
+import { NavItem } from "../../../business/models";
 import { useNavItems } from "../../hooks";
 
 function DesktopSubNav({ label, href, subLabel }: NavItem) {

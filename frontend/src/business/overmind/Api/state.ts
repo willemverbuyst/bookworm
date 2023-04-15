@@ -1,10 +1,4 @@
-export interface ApiState {
-  response: {
-    statusText?: string;
-    message: string;
-    status: "success" | "error" | undefined;
-  };
-}
+import { ApiState } from "../../models";
 
 export const state: ApiState = {
   response: {

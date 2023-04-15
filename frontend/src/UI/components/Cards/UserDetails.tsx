@@ -10,7 +10,7 @@ import {
   StackDivider,
   Text,
 } from "@chakra-ui/react";
-import { User } from "../../../business/overmind/User/state";
+import { User } from "../../../business/models";
 
 interface Props {
   user: User;
