@@ -2,7 +2,7 @@ import os
 
 import psycopg2
 from database.python.helpers.sql_helpers import create_connection
-from database.python.rental.helpers import (format_rental_stats_days,
+from database.python.rental.helpers import (format_rental_stats_day,
                                             format_rental_stats_duration,
                                             format_rentals)
 
@@ -10,7 +10,7 @@ dirname = os.path.dirname(__file__)
 select_count_rentals_sql = os.path.join(dirname, "../../sql/rental/select_count_rentals.sql")
 select_count_rentals_returned_false_sql = os.path.join(dirname, "../../sql/rental/select_count_rentals_returned_false.sql")
 select_count_rentals_returned_true_sql = os.path.join(dirname, "../../sql/rental/select_count_rentals_returned_true.sql")
-select_rental_stats_days_sql = os.path.join(dirname, "../../sql/rental/select_rental_stats_days.sql")
+select_rental_stats_day_sql = os.path.join(dirname, "../../sql/rental/select_rental_stats_day.sql")
 select_rental_stats_duration_sql = os.path.join(dirname, "../../sql/rental/select_rental_stats_duration.sql")
 select_rentals_returned_false_sql = os.path.join(dirname, "../../sql/rental/select_rentals_returned_false.sql")
 select_rentals_returned_true_sql = os.path.join(dirname, "../../sql/rental/select_rentals_returned_true.sql")
@@ -88,10 +88,10 @@ def get_rental_stats_duration_from_db():
     return stats_formatted
 
 
-def get_rental_stats_days_from_db():
+def get_rental_stats_day_from_db():
     conn = create_connection()
 
-    sql_file = open(select_rental_stats_days_sql, 'r')
+    sql_file = open(select_rental_stats_day_sql, 'r')
     raw_sql = sql_file.read()
     sql_file.close()
 
@@ -101,6 +101,6 @@ def get_rental_stats_days_from_db():
     data = cursor.fetchall()
     conn.close()
 
-    stats_formatted = format_rental_stats_days(data)
+    stats_formatted = format_rental_stats_day(data)
 
     return stats_formatted

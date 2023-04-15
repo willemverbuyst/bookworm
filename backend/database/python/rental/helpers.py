@@ -25,7 +25,7 @@ def format_rental_stats_duration(rental_data):
     return rentals
 
 
-def format_rental_stats_days(rental_data):
+def format_rental_stats_day(rental_data):
     rentals = []
     for row in rental_data:
         rental = {
