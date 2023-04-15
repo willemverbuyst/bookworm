@@ -19,7 +19,7 @@ def create_dummy_rentals_sql(config):
         inventory_id = (config.get("INVENTORY")[random.randint(0,len(config.get("INVENTORY")) - 1)]).get("uuid")
         staff_id = (config.get("STAFF")[random.randint(0,len(config.get("STAFF")) - 1)]).get("uuid")
 
-        if index < 100:
+        if index < 1000:
             sql = "INSERT INTO rental (rental_id,rental_date,return_date,last_updated,bookworm_id,inventory_id,staff_id) " \
                 f"VALUES ('{rental_id}'::UUID,'{rental_date_current}',NULL,'{last_updated}','{bookworm_id}'::UUID,'{inventory_id}'::UUID,'{staff_id}'::UUID);\n"
             insert_statements += sql

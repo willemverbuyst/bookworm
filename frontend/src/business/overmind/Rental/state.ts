@@ -18,6 +18,9 @@ export const state: RentalState = {
       rentals: d.number_of_rentals,
       returns: d.number_of_returns,
       day: WEEKDAYS[d.day_of_the_week - 1],
+      fullMark: Math.ceil(
+        Math.max(...statsDayApi.data.map((i) => i.number_of_rentals)) * 1.1
+      ),
     }));
   }),
   statsDayApi: null,

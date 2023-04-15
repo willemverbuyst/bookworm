@@ -29,6 +29,7 @@ interface DayDisplay {
   rentals: number;
   returns: number;
   day: string;
+  fullMark: number;
 }
 
 interface Filter {
