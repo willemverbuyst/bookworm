@@ -1,22 +1,7 @@
 import { derived } from "overmind";
-import { ApiResponse } from "../../models/Api";
-import { Bookworm, BookwormStatsLibrary } from "../../models/Bookworm";
-import { BaseState, UITable } from "../../models/State";
-import { UserApi } from "../../models/User";
-
-export interface BookwormState extends BaseState<Bookworm> {
-  bookwormDetailsApi: Omit<UserApi, "token"> | null;
-  statsLibrary: Array<BookwormStatsLibrary> | null;
-  statsLibraryApi: ApiResponse<Array<BookwormStatsLibrary>> | null;
-  ui: {
-    table: UITable<
-      Bookworm,
-      {
-        active: boolean;
-      }
-    >;
-  };
-}
+import { RootState } from "..";
+import { compare, getColorIndex } from "../../functions";
+import { BookwormState } from "../../models";
 
 export const state: BookwormState = {
   getAllApi: null,
@@ -27,12 +12,23 @@ export const state: BookwormState = {
     }
     return getAllApi.data;
   }),
-  statsLibrary: derived(({ statsLibraryApi }: BookwormState) => {
-    if (!statsLibraryApi?.data.length) {
-      return null;
+  statsLibrary: derived(
+    ({ statsLibraryApi }: BookwormState, rootState: RootState) => {
+      if (!statsLibraryApi?.data.length) {
+        return null;
+      }
+
+      return [...statsLibraryApi.data]
+        .sort(compare("user_active"))
+        .sort(compare("id"))
+        .map((d, index) => ({
+          userIsActive: `${d.user_active}`,
+          libraryName: `${d.library_name}`,
+          numberOfBookworms: d.number_of_bookworms_per_library,
+          color: rootState.app.colors[getColorIndex(index)],
+        }));
     }
-    return statsLibraryApi.data;
-  }),
+  ),
   statsLibraryApi: null,
   ui: {
     table: {
@@ -47,9 +43,12 @@ export const state: BookwormState = {
         active: true,
       },
       limit: 15,
+      noDataMessage: "no bookworms",
       page: 1,
       queryString: "",
+      searchKeys: ["first_name", "last_name", "email"],
       showAll: false,
+      title: "overview of bookworms",
     },
   },
 };

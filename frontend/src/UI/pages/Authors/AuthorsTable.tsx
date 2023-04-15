@@ -1,22 +1,21 @@
 import { Box, Input, Spinner } from "@chakra-ui/react";
-import { genericSearch } from "../../../business/functions/genericSearch";
+import { genericSearch } from "../../../business/functions";
 import {
   stateSectionsWithTable,
   useActions,
   useAppState,
 } from "../../../business/overmind";
-import Pagination from "../../components/Table/Pagination";
-import TableOverview from "../../components/Table/TableOverView";
-import { useGetAuthors } from "../../hooks/useGetAuthors";
+import { Pagination, TableOverview } from "../../components/Table";
+import { useGetAuthors } from "../../hooks";
 
-function AuthorsTable() {
+export function AuthorsTable() {
   useGetAuthors();
   const { isLoading } = useAppState().app;
   const {
     getAllApi,
     overview,
     ui: {
-      table: { columns, queryString },
+      table: { columns, noDataMessage, queryString, searchKeys, title },
     },
   } = useAppState().author;
   const { setQueryString } = useActions().author;
@@ -37,20 +36,18 @@ function AuthorsTable() {
         <>
           <TableOverview
             rows={overview.filter((a) =>
-              genericSearch(a, ["last_name", "first_name"], queryString, false)
+              genericSearch(a, searchKeys, queryString, false)
             )}
             columns={columns}
-            title="overview of authors"
+            title={title}
           />
           {!queryString && (
             <Pagination total={total} state={stateSectionsWithTable.author} />
           )}
         </>
       ) : (
-        <p>no authors</p>
+        <p>{noDataMessage}</p>
       )}
     </Box>
   );
 }
-
-export default AuthorsTable;

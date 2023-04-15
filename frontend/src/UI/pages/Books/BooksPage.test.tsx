@@ -5,16 +5,16 @@ import { createOvermindMock } from "overmind";
 import { Provider } from "overmind-react";
 import { vi } from "vitest";
 import { config } from "../../../business/overmind";
-import BooksPage from "./BooksPage";
+import { BooksPage } from "./BooksPage";
 
-vi.mock("../../components/Navigation/NavigationBar", () => {
+vi.mock("../../components/Navigation", () => {
   const NavigationBar = vi.fn();
-  return { default: NavigationBar };
+  return { NavigationBar };
 });
 
 describe("BooksPage", () => {
   const overmind = createOvermindMock(config, (state) => {
-    state.booksApi = {
+    state.book.getAllApi = {
       status: "ok",
       result: 1,
       data: [
@@ -27,31 +27,58 @@ describe("BooksPage", () => {
           genre: "test_genre",
         },
       ],
-      total_number_of_books: 100,
+      total: 100,
       message: "testing",
     };
-    state.genresApi = {
+    state.book.ui = {
+      table: {
+        columns: [
+          { field: "title" },
+          { field: "author" },
+          { field: "year_published" },
+          { field: "genre" },
+          { field: "language" },
+        ],
+        filter: {
+          genre: "",
+          language: "",
+        },
+        limit: 10,
+        noDataMessage: "no books",
+        page: 1,
+        queryString: "",
+        searchKeys: ["title", "author"],
+        showAll: false,
+        title: "overview of books",
+      },
+    };
+    state.genre.getAllApi = {
       status: "ok",
       data: [{ id: "1", genre: "genre" }],
       message: "testing",
     };
-    state.languagesApi = {
+    state.language.getAllApi = {
       status: "ok",
       data: [{ id: "1", language: "language" }],
       message: "testing",
     };
-    state.bookStatsGenreApi = {
+    state.book.statsGenreApi = {
       status: "ok",
       data: [{ id: "1", genre: "genre", number_of_books: 1 }],
       message: "testing",
     };
-    state.bookStatsLanguageApi = {
+    state.book.statsLanguageApi = {
       status: "ok",
       data: [{ id: "1", language: "language", number_of_books: 1 }],
       message: "testing",
     };
+    state.book.statsYearPublishedApi = {
+      status: "ok",
+      data: [{ year_published: "1900", number_of_books: 10 }],
+      message: "testing",
+    };
   });
-  test("should display a title", () => {
+  test.only("should display a title", () => {
     render(
       <ChakraProvider>
         <Provider value={overmind}>

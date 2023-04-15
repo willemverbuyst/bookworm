@@ -1,23 +1,22 @@
 import { Box, Input, Spinner } from "@chakra-ui/react";
-import { genericSearch } from "../../../business/functions/genericSearch";
+import { genericSearch } from "../../../business/functions";
 import {
   stateSectionsWithTable,
   useActions,
   useAppState,
 } from "../../../business/overmind";
-import Pagination from "../../components/Table/Pagination";
-import TableOverview from "../../components/Table/TableOverView";
-import { useGetRentals } from "../../hooks/useGetRentals";
-import Filter from "./Filter";
+import { Pagination, TableOverview } from "../../components/Table";
+import { useGetRentals } from "../../hooks";
+import { Filter } from "./Filter";
 
-function RentalsTable() {
+export function RentalsTable() {
   useGetRentals();
   const { isLoading } = useAppState().app;
   const {
     getAllApi,
     overview,
     ui: {
-      table: { columns, queryString },
+      table: { columns, noDataMessage, queryString, searchKeys, title },
     },
   } = useAppState().rental;
   const { total } = getAllApi || {};
@@ -39,18 +38,16 @@ function RentalsTable() {
         <>
           <TableOverview
             rows={overview.filter((a) =>
-              genericSearch(a, ["title", "author"], queryString, false)
+              genericSearch(a, searchKeys, queryString, false)
             )}
             columns={columns}
-            title="overview of rentals"
+            title={title}
           />
           <Pagination total={total} state={stateSectionsWithTable.rental} />
         </>
       ) : (
-        <p>no rentals</p>
+        <p>{noDataMessage}</p>
       )}
     </Box>
   );
 }
-
-export default RentalsTable;

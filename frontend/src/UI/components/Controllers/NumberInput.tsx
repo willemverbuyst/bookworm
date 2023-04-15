@@ -1,10 +1,10 @@
 import {
   FormControl,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import {
   Controller,
@@ -12,9 +12,7 @@ import {
   FieldValues,
   UseControllerProps,
 } from "react-hook-form";
-import ErrorMessage from "./ErrorMessage";
-import HelperText from "./HelperText";
-import Label from "./Label";
+import { ErrorMessage, HelperText, Label } from "../Text";
 
 type NumberInputProps<T extends FieldValues> = {
   error?: FieldError | undefined;
@@ -24,7 +22,7 @@ type NumberInputProps<T extends FieldValues> = {
   required?: boolean;
 } & UseControllerProps<T>;
 
-function ControlledNumberInput<T extends FieldValues>({
+export function ControlledNumberInput<T extends FieldValues>({
   control,
   error,
   helperText,
@@ -56,5 +54,3 @@ function ControlledNumberInput<T extends FieldValues>({
     </FormControl>
   );
 }
-
-export default ControlledNumberInput;

@@ -1,16 +1,12 @@
 import { Box, Spinner } from "@chakra-ui/react";
 import { Cell, Legend, Pie, PieChart } from "recharts";
 import { useAppState } from "../../../business/overmind";
-import { useGetBookStatsGenre } from "../../hooks/useGetBookStatsGenre";
+import { useGetBookStatsGenre } from "../../hooks";
 
-function BooksChartLanguages() {
-  const { isLoading, colors } = useAppState().app;
+export function BooksChartLanguages() {
   useGetBookStatsGenre();
+  const { isLoading, colors } = useAppState().app;
   const data = useAppState().book.statsLanguage || [];
-  const dataForChart = data.map((d) => ({
-    language: d.language,
-    number: d.number_of_books,
-  }));
 
   if (isLoading) {
     return <Spinner />;
@@ -23,7 +19,7 @@ function BooksChartLanguages() {
           <PieChart width={400} height={400}>
             <Legend verticalAlign="bottom" height={36} />
             <Pie
-              data={dataForChart}
+              data={data}
               dataKey="number"
               nameKey="language"
               cx="50%"
@@ -33,7 +29,7 @@ function BooksChartLanguages() {
               paddingAngle={5}
               label
             >
-              {dataForChart.map((entry, index) => (
+              {data.map((entry, index) => (
                 <Cell
                   key={`cell-${entry.language}`}
                   fill={colors[index % colors.length]}
@@ -48,5 +44,3 @@ function BooksChartLanguages() {
     </Box>
   );
 }
-
-export default BooksChartLanguages;

@@ -19,7 +19,7 @@ interface Props {
   state: keyof typeof stateSectionsWithTable;
 }
 
-function Pagination({ total, state }: Props) {
+export function Pagination({ total, state }: Props) {
   const {
     limit,
     page: currentPage,
@@ -207,5 +207,3 @@ function Pagination({ total, state }: Props) {
     </Container>
   );
 }
-
-export default Pagination;

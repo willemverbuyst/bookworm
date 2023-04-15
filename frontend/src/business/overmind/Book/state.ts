@@ -1,30 +1,5 @@
 import { derived } from "overmind";
-import { ApiResponse } from "../../models/Api";
-import {
-  Book,
-  BookStatsGenre,
-  BookStatsLanguage,
-  BookStatsYearPublished,
-} from "../../models/Book";
-import { BaseState, UITable } from "../../models/State";
-
-export interface BookState extends BaseState<Book> {
-  statsGenre: Array<BookStatsGenre> | null;
-  statsGenreApi: ApiResponse<Array<BookStatsGenre>> | null;
-  statsLanguage: Array<BookStatsLanguage> | null;
-  statsLanguageApi: ApiResponse<Array<BookStatsLanguage>> | null;
-  statsYearPublished: Array<BookStatsYearPublished> | null;
-  statsYearPublishedApi: ApiResponse<Array<BookStatsYearPublished>> | null;
-  ui: {
-    table: UITable<
-      Book,
-      {
-        genre: string;
-        language: string;
-      }
-    >;
-  };
-}
+import { BookState } from "../../models";
 
 export const state: BookState = {
   getAllApi: null,
@@ -42,21 +17,30 @@ export const state: BookState = {
     if (!statsGenreApi?.data.length) {
       return null;
     }
-    return statsGenreApi.data;
+    return [...statsGenreApi.data].map((d) => ({
+      name: d.genre,
+      number: Number(d.number_of_books),
+    }));
   }),
   statsGenreApi: null,
   statsLanguage: derived(({ statsLanguageApi }: BookState) => {
     if (!statsLanguageApi?.data.length) {
       return null;
     }
-    return statsLanguageApi.data;
+    return [...statsLanguageApi.data].map((d) => ({
+      language: d.language,
+      number: d.number_of_books,
+    }));
   }),
   statsLanguageApi: null,
   statsYearPublished: derived(({ statsYearPublishedApi }: BookState) => {
     if (!statsYearPublishedApi?.data.length) {
       return null;
     }
-    return statsYearPublishedApi.data;
+    return [...statsYearPublishedApi.data].map((d) => ({
+      name: d.year_published,
+      number: Number(d.number_of_books),
+    }));
   }),
   statsYearPublishedApi: null,
   ui: {
@@ -73,9 +57,12 @@ export const state: BookState = {
         language: "",
       },
       limit: 10,
+      noDataMessage: "no books",
       page: 1,
       queryString: "",
+      searchKeys: ["title", "author"],
       showAll: false,
+      title: "overview of books",
     },
   },
 };

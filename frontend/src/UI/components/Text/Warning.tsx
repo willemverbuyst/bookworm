@@ -4,7 +4,7 @@ type Props = {
   text: string;
 };
 
-function Warning({ text }: Props) {
+export function Warning({ text }: Props) {
   return (
     <Box p={10}>
       <Text size="lg" color="orange.500">
@@ -13,5 +13,3 @@ function Warning({ text }: Props) {
     </Box>
   );
 }
-
-export default Warning;

@@ -1,3 +1,6 @@
+import { ApiResponse, BaseState, UI } from "./State";
+import { UserApi } from "./User";
+
 export interface Bookworm {
   id: string;
   first_name: string;
@@ -8,9 +11,24 @@ export interface Bookworm {
   library_name: string;
 }
 
-export interface BookwormStatsLibrary {
+interface Library {
   id: string;
   library_name: string;
   user_active: boolean;
   number_of_bookworms_per_library: number;
+}
+
+interface Filter {
+  active: boolean;
+}
+export interface BookwormState extends BaseState<Bookworm> {
+  bookwormDetailsApi: Omit<UserApi, "token"> | null;
+  statsLibrary: Array<{
+    userIsActive: string;
+    libraryName: string;
+    numberOfBookworms: number;
+    color: string;
+  }> | null;
+  statsLibraryApi: ApiResponse<Array<Library>> | null;
+  ui: UI<Bookworm, Filter>;
 }

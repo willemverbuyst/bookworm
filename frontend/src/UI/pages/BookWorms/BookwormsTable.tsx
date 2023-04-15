@@ -1,24 +1,23 @@
 import { Box, Input, Spinner, useDisclosure } from "@chakra-ui/react";
-import { genericSearch } from "../../../business/functions/genericSearch";
+import { genericSearch } from "../../../business/functions";
 import {
   stateSectionsWithTable,
   useActions,
   useAppState,
 } from "../../../business/overmind";
-import Pagination from "../../components/Table/Pagination";
-import TableOverview from "../../components/Table/TableOverView";
-import { useGetBooksworms } from "../../hooks/useGetBookworms";
-import BookwormsDetails from "./BookwormsDetails";
-import Filter from "./Filter";
+import { Pagination, TableOverview } from "../../components/Table";
+import { useGetBooksworms } from "../../hooks";
+import { BookwormsDetails } from "./BookwormsDetails";
+import { Filter } from "./Filter";
 
-function BookwormsTable() {
+export function BookwormsTable() {
   useGetBooksworms();
   const { isLoading } = useAppState().app;
   const {
     getAllApi,
     overview,
     ui: {
-      table: { columns, queryString },
+      table: { columns, noDataMessage, queryString, searchKeys, title },
     },
   } = useAppState().bookworm;
   const { total } = getAllApi || {};
@@ -47,24 +46,17 @@ function BookwormsTable() {
           <BookwormsDetails isOpen={isOpen} onClose={onClose} />
           <TableOverview
             rows={overview.filter((a) =>
-              genericSearch(
-                a,
-                ["first_name", "last_name", "email"],
-                queryString,
-                false
-              )
+              genericSearch(a, searchKeys, queryString, false)
             )}
             columns={columns}
-            title="overview of bookworms"
+            title={title}
             action={getUser}
           />
           <Pagination total={total} state={stateSectionsWithTable.bookworm} />
         </>
       ) : (
-        <p>no bookworms</p>
+        <p>{noDataMessage}</p>
       )}
     </Box>
   );
 }
-
-export default BookwormsTable;

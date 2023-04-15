@@ -1,15 +1,13 @@
-import React, { useState } from "react";
-import { Box, FormControl, IconButton } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
+import { Box, FormControl, IconButton } from "@chakra-ui/react";
+import React, { useState } from "react";
 import {
   Controller,
   FieldError,
   FieldValues,
   UseControllerProps,
 } from "react-hook-form";
-import HelperText from "./HelperText";
-import Label from "./Label";
-import ErrorMessage from "./ErrorMessage";
+import { ErrorMessage, HelperText, Label } from "../Text";
 
 type Props = {
   onChange: (rating: number) => void;
@@ -51,7 +49,7 @@ type StarRatingProps<T extends FieldValues> = {
   required?: boolean;
 } & UseControllerProps<T>;
 
-function ControlledStarRating<T extends FieldValues>({
+export function ControlledStarRating<T extends FieldValues>({
   control,
   error,
   helperText,
@@ -72,5 +70,3 @@ function ControlledStarRating<T extends FieldValues>({
     </FormControl>
   );
 }
-
-export default ControlledStarRating;

@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { UserApi } from "../../models/User";
+import { UserApi } from "../../models";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 

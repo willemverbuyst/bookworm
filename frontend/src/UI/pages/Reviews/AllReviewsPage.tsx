@@ -12,11 +12,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useAppState } from "../../../business/overmind";
-import NavigationBar from "../../components/Navigation/NavigationBar";
-import PageTitle from "../../components/Text/PageTitle";
-import { useGetReviews } from "../../hooks/useGetReviews";
+import { NavigationBar } from "../../components/Navigation";
+import { PageTitle } from "../../components/Text";
+import { useGetReviews } from "../../hooks";
 
-function AllReviewsPage() {
+export function AllReviewsPage() {
   const { isLoading } = useAppState().app;
   useGetReviews();
   const data = useAppState().review.overview || [];
@@ -36,7 +36,7 @@ function AllReviewsPage() {
         {dataforDisplay?.length ? (
           <Flex flexDirection="row" alignItems="center">
             {dataforDisplay.map(([k, v]) => (
-              <Flex flexDirection="column" alignItems="center">
+              <Flex key={k} flexDirection="column" alignItems="center">
                 <Box>
                   {[...Array(Number(k)).keys()].map((i) => (
                     <StarIcon key={i} color="teal.600" />
@@ -75,5 +75,3 @@ function AllReviewsPage() {
     </>
   );
 }
-
-export default AllReviewsPage;

@@ -1,4 +1,4 @@
-import { apiGet } from "../../../api/apiGet";
+import { apiGet } from "../../../api";
 
 export const api = {
   getRentals: async ({
@@ -22,6 +22,8 @@ export const api = {
 
     return apiGet({ url });
   },
+
+  getRentalStatsDay: async () => apiGet({ url: "rentals/stats/?by=day" }),
 
   getRentalStatsDuration: async () =>
     apiGet({ url: "rentals/stats/?by=duration" }),

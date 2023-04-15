@@ -12,8 +12,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Link as RLink } from "react-router-dom";
-import { useNavItems } from "../../hooks/useNaveItems";
-import { NavItem } from "./types";
+import { NavItem } from "../../../business/models";
+import { useNavItems } from "../../hooks";
 
 function DesktopSubNav({ label, href, subLabel }: NavItem) {
   return (
@@ -53,7 +53,7 @@ function DesktopSubNav({ label, href, subLabel }: NavItem) {
   );
 }
 
-function NavigationDesktop() {
+export function NavigationDesktop() {
   const linkColor = useColorModeValue("gray.600", "gray.200");
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
@@ -104,5 +104,3 @@ function NavigationDesktop() {
     </Stack>
   );
 }
-
-export default NavigationDesktop;

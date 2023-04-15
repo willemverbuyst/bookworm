@@ -3,18 +3,16 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useAppState } from "./business/overmind";
 import PrivateRoute from "./helpers/PrivateRoute";
-import { useToastHook } from "./UI/hooks/useToastHook";
-import SignInPage from "./UI/pages/Auth/SignInPage";
-import SignUpPage from "./UI/pages/Auth/SingUpPage";
-import AuthorsPage from "./UI/pages/Authors/AuthorsPage";
-import BooksPage from "./UI/pages/Books/BooksPage";
-import BookwormsPage from "./UI/pages/BookWorms/BookwormsPage";
-import HomePage from "./UI/pages/Home/HomePage";
-import PageNotFoundPage from "./UI/pages/PageNotFound/PageNotFoundPage";
-import RentalsPage from "./UI/pages/Rentals/RentalsPage";
-import AddReviewPage from "./UI/pages/Reviews/AddReviewPage";
-import AllReviewsPage from "./UI/pages/Reviews/AllReviewsPage";
-import WelcomePage from "./UI/pages/Welcome/WelcomePage";
+import { useToastHook } from "./UI/hooks";
+import { SignInPage, SignUpPage } from "./UI/pages/Auth";
+import { AuthorsPage } from "./UI/pages/Authors";
+import { BooksPage } from "./UI/pages/Books";
+import { BookwormsPage } from "./UI/pages/BookWorms";
+import { HomePage } from "./UI/pages/Home";
+import { PageNotFoundPage } from "./UI/pages/PageNotFound";
+import { RentalsPage } from "./UI/pages/Rentals";
+import { AddReviewPage, AllReviewsPage } from "./UI/pages/Reviews";
+import { WelcomePage } from "./UI/pages/Welcome";
 
 export default function App() {
   const [, setToast] = useToastHook();

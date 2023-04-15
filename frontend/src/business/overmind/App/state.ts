@@ -1,11 +1,4 @@
-import { NavItem } from "../../models/App";
-
-export interface AppState {
-  isLoading: boolean;
-  publicNavItems: Array<NavItem>;
-  privateNavItems: Array<NavItem>;
-  colors: Array<string>;
-}
+import { AppState } from "../../models";
 
 export const state: AppState = {
   isLoading: false,

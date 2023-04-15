@@ -18,7 +18,7 @@ type Props<T extends Record<"id", string>> = {
   action?: (id: string) => void;
 };
 
-function TableOverview<T extends Record<"id", string>>({
+export function TableOverview<T extends Record<"id", string>>({
   rows,
   columns,
   title,
@@ -32,7 +32,7 @@ function TableOverview<T extends Record<"id", string>>({
           <Tr>
             {columns.map((column) => (
               <Th key={String(column.field)} isNumeric={column.isNumeric}>
-                {String(column.field).replaceAll("_", " ")}
+                {String(column.field).replace(/_/g, " ")}
               </Th>
             ))}
             {action ? <Th>get details</Th> : null}
@@ -69,5 +69,3 @@ function TableOverview<T extends Record<"id", string>>({
     </TableContainer>
   );
 }
-
-export default TableOverview;

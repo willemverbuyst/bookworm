@@ -3,12 +3,12 @@ import { render, screen } from "@testing-library/react";
 import { createOvermindMock } from "overmind";
 import { Provider } from "overmind-react";
 import { vi } from "vitest";
-import HomePage from "./HomePage";
 import { config } from "../../../business/overmind";
+import { HomePage } from "./HomePage";
 
-vi.mock("../../components/Navigation/NavigationBar", () => {
+vi.mock("../../components/Navigation", () => {
   const NavigationBar = vi.fn();
-  return { default: NavigationBar };
+  return { NavigationBar };
 });
 
 describe("HomePage", () => {

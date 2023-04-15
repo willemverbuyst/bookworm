@@ -1,20 +1,6 @@
 import { derived } from "overmind";
-import { ApiResponse } from "../../models/Api";
-import { Rental, RentalStatsDuration } from "../../models/Rental";
-import { BaseState, UITable } from "../../models/State";
-
-export interface RentalState extends BaseState<Rental> {
-  statsDuration: Array<RentalStatsDuration> | null;
-  statsDurationApi: ApiResponse<Array<RentalStatsDuration>> | null;
-  ui: {
-    table: UITable<
-      Rental,
-      {
-        returned: string;
-      }
-    >;
-  };
-}
+import { WEEKDAYS } from "../../functions";
+import { RentalState } from "../../models";
 
 export const state: RentalState = {
   getAllApi: null,
@@ -24,11 +10,29 @@ export const state: RentalState = {
     }
     return getAllApi.data;
   }),
+  statsDay: derived(({ statsDayApi }: RentalState) => {
+    if (!statsDayApi?.data.length) {
+      return null;
+    }
+    return [...statsDayApi.data].map((d) => ({
+      rentals: d.number_of_rentals,
+      returns: d.number_of_returns,
+      day: WEEKDAYS[d.day_of_the_week - 1],
+      fullMark: Math.ceil(
+        Math.max(...statsDayApi.data.map((i) => i.number_of_rentals)) * 1.1
+      ),
+    }));
+  }),
+  statsDayApi: null,
   statsDuration: derived(({ statsDurationApi }: RentalState) => {
     if (!statsDurationApi?.data.length) {
       return null;
     }
-    return statsDurationApi.data;
+    return [...statsDurationApi.data].map((d) => ({
+      durationLabel: `${d.duration}d`,
+      duration: d.duration,
+      number: Number(d.total_rentals),
+    }));
   }),
   statsDurationApi: null,
   ui: {
@@ -41,9 +45,12 @@ export const state: RentalState = {
       ],
       filter: { returned: "not_returned" },
       limit: 20,
+      noDataMessage: "no rentals",
       page: 1,
       queryString: "",
+      searchKeys: ["title", "author"],
       showAll: false,
+      title: "overview of rentals",
     },
   },
 };

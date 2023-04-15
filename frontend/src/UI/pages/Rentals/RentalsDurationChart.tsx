@@ -1,16 +1,12 @@
 import { Box, Spinner } from "@chakra-ui/react";
 import { Bar, Cell, ComposedChart, LabelList, XAxis } from "recharts";
 import { useAppState } from "../../../business/overmind";
-import { useGetRentalStatsDuration } from "../../hooks/useGetRentalStatsDuration";
+import { useGetRentalStatsDuration } from "../../hooks";
 
-function RentalsDurationChart() {
-  const { isLoading } = useAppState().app;
+export function RentalsDurationChart() {
   useGetRentalStatsDuration();
+  const { isLoading } = useAppState().app;
   const data = useAppState().rental.statsDuration || [];
-  const dataForChart = data.map((d) => ({
-    duration: `${d.duration}d`,
-    number: Number(d.total_rentals),
-  }));
 
   if (isLoading) {
     return <Spinner />;
@@ -23,7 +19,7 @@ function RentalsDurationChart() {
           <ComposedChart
             width={1000}
             height={700}
-            data={dataForChart}
+            data={data}
             barSize={80}
             layout="horizontal"
             margin={{
@@ -32,7 +28,7 @@ function RentalsDurationChart() {
             }}
           >
             <XAxis
-              dataKey="duration"
+              dataKey="durationLabel"
               type="category"
               axisLine={false}
               interval={0}
@@ -55,5 +51,3 @@ function RentalsDurationChart() {
     </Box>
   );
 }
-
-export default RentalsDurationChart;

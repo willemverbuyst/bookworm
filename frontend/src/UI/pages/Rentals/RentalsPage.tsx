@@ -6,12 +6,13 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import NavigationBar from "../../components/Navigation/NavigationBar";
-import PageTitle from "../../components/Text/PageTitle";
-import RentalsDurationChart from "./RentalsDurationChart";
-import RentalsTable from "./RentalsTable";
+import { NavigationBar } from "../../components/Navigation";
+import { PageTitle } from "../../components/Text";
+import { RentalsDayChart } from "./RentalsDayChart";
+import { RentalsDurationChart } from "./RentalsDurationChart";
+import { RentalsTable } from "./RentalsTable";
 
-function RentalsPage() {
+export function RentalsPage() {
   return (
     <>
       <NavigationBar />
@@ -21,6 +22,7 @@ function RentalsPage() {
           <TabList>
             <Tab>Overview</Tab>
             <Tab>Duration of Rentals</Tab>
+            <Tab>Rentals and Returns per Day</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -29,11 +31,12 @@ function RentalsPage() {
             <TabPanel>
               <RentalsDurationChart />
             </TabPanel>
+            <TabPanel>
+              <RentalsDayChart />
+            </TabPanel>
           </TabPanels>
         </Tabs>
       </Flex>
     </>
   );
 }
-
-export default RentalsPage;

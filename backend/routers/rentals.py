@@ -1,6 +1,6 @@
 from database.python.rental.get_rentals import (
-    get_rental_stats_duration_from_db, get_rentals_from_db,
-    get_total_number_of_rentals)
+    get_rental_stats_day_from_db, get_rental_stats_duration_from_db,
+    get_rentals_from_db, get_total_number_of_rentals)
 from error.main import raise_exception
 from fastapi import APIRouter
 
@@ -31,6 +31,8 @@ def get_rentals_stats(by = None) -> dict:
     try:
         if (by == "duration"):
             stats = get_rental_stats_duration_from_db()
+        elif (by == "day"):
+            stats = get_rental_stats_day_from_db()
         else:
             stats = []
 

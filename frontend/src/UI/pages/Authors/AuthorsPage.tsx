@@ -6,12 +6,12 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import NavigationBar from "../../components/Navigation/NavigationBar";
-import PageTitle from "../../components/Text/PageTitle";
-import ChartWithAuthors from "./AuthorsChart";
-import TableWithAllAuthors from "./AuthorsTable";
+import { NavigationBar } from "../../components/Navigation";
+import { PageTitle } from "../../components/Text";
+import { AuthorsChart } from "./AuthorsChart";
+import { AuthorsTable } from "./AuthorsTable";
 
-function AuthorsPage() {
+export function AuthorsPage() {
   return (
     <>
       <NavigationBar />
@@ -24,10 +24,10 @@ function AuthorsPage() {
           </TabList>
           <TabPanels>
             <TabPanel>
-              <TableWithAllAuthors />
+              <AuthorsTable />
             </TabPanel>
             <TabPanel>
-              <ChartWithAuthors />
+              <AuthorsChart />
             </TabPanel>
           </TabPanels>
         </Tabs>
@@ -35,5 +35,3 @@ function AuthorsPage() {
     </>
   );
 }
-
-export default AuthorsPage;

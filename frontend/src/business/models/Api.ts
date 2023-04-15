@@ -1,7 +1,7 @@
-export interface ApiResponse<T> {
-  status: string;
-  data: T;
-  message: string;
-  result?: number;
-  total?: number;
+export interface ApiState {
+  response: {
+    statusText?: string;
+    message: string;
+    status: "success" | "error" | undefined;
+  };
 }

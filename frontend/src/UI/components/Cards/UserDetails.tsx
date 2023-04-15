@@ -10,13 +10,13 @@ import {
   StackDivider,
   Text,
 } from "@chakra-ui/react";
-import { User } from "../../../business/models/User";
+import { User } from "../../../business/models";
 
 interface Props {
   user: User;
 }
 
-function UserDetails({ user }: Props) {
+export function UserDetails({ user }: Props) {
   return (
     <Card width={400}>
       <CardHeader>
@@ -119,5 +119,3 @@ function UserDetails({ user }: Props) {
     </Card>
   );
 }
-
-export default UserDetails;

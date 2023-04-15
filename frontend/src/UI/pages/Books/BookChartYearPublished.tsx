@@ -9,22 +9,16 @@ import {
   YAxis,
 } from "recharts";
 import { useAppState } from "../../../business/overmind";
-import { useGetBookStatsYearPublished } from "../../hooks/useGetBookStatsYearPublished";
+import { useGetBookStatsYearPublished } from "../../hooks";
 
-function BookChartYearPublished() {
-  const { isLoading } = useAppState().app;
+export function BookChartYearPublished() {
   useGetBookStatsYearPublished();
+  const { isLoading } = useAppState().app;
   const data = useAppState().book.statsYearPublished || [];
-  const dataForChart = data.map((d) => ({
-    name: d.year_published,
-    number: Number(d.number_of_books),
-  }));
 
-  const max = Math.max(...dataForChart.map((i) => i.number));
+  const max = Math.max(...data.map((i) => i.number));
 
-  const maxYears = dataForChart
-    .filter((i) => i.number === max)
-    .map((i) => i.name);
+  const maxYears = data.filter((i) => i.number === max).map((i) => i.name);
 
   if (isLoading) {
     return <Spinner />;
@@ -37,7 +31,7 @@ function BookChartYearPublished() {
           <LineChart
             width={1000}
             height={700}
-            data={dataForChart}
+            data={data}
             margin={{
               top: 50,
               left: 20,
@@ -74,5 +68,3 @@ function BookChartYearPublished() {
     </Box>
   );
 }
-
-export default BookChartYearPublished;

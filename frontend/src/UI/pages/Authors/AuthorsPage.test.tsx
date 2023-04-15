@@ -5,16 +5,16 @@ import { createOvermindMock } from "overmind";
 import { Provider } from "overmind-react";
 import { vi } from "vitest";
 import { config } from "../../../business/overmind";
-import AuthorsPage from "./AuthorsPage";
+import { AuthorsPage } from "./AuthorsPage";
 
-vi.mock("../../components/Navigation/NavigationBar", () => {
+vi.mock("../../components/Navigation", () => {
   const NavigationBar = vi.fn();
-  return { default: NavigationBar };
+  return { NavigationBar };
 });
 
 describe("AuthorsPage", () => {
   const overmind = createOvermindMock(config, (state) => {
-    state.authorsApi = {
+    state.author.getAllApi = {
       status: "ok",
       data: [
         {
@@ -24,14 +24,19 @@ describe("AuthorsPage", () => {
           books_written: 1,
         },
       ],
-      total_number_of_authors: 100,
+      total: 100,
       message: "testing",
     };
-    state.authorStatsPageApi = {
+    state.author.statsPageApi = {
       status: "ok",
       data: {
         pages_per_author: [
-          { id: "1", author: "test_author", number_of_pages: 5 },
+          {
+            id: "1",
+            author: "test_author",
+            number_of_pages: 5,
+            number_of_books: 3,
+          },
         ],
         average_pages: 10,
       },

@@ -1,18 +1,18 @@
-import { useId } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { Box, Button, Container, Text, VStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useId } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppState } from "../../../business/overmind";
-import ControlledTextInput from "../../components/Controllers/TextInput";
+import { ControlledTextInput } from "../../components/Controllers";
+import { NavigationBar } from "../../components/Navigation";
+import { PageTitle } from "../../components/Text";
 import {
   defaultValuesSignUp,
   FormfieldsSignUp,
   validationSchemaSignUp,
 } from "./helpers";
-import PageTitle from "../../components/Text/PageTitle";
-import NavigationBar from "../../components/Navigation/NavigationBar";
 
-function SignUpPage() {
+export function SignUpPage() {
   const id = useId();
   const {
     control,
@@ -76,5 +76,3 @@ function SignUpPage() {
     </>
   );
 }
-
-export default SignUpPage;

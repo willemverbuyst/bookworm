@@ -1,16 +1,16 @@
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
-  Flex,
-  Text,
-  Stack,
   Collapse,
+  Flex,
   Icon,
   Link,
+  Stack,
+  Text,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { NavItem } from "./types";
-import { useNavItems } from "../../hooks/useNaveItems";
+import { NavItem } from "../../../business/models";
+import { useNavItems } from "../../hooks";
 
 function MobileNavItem({ label, children, href }: NavItem) {
   const { isOpen, onToggle } = useDisclosure();
@@ -65,7 +65,7 @@ function MobileNavItem({ label, children, href }: NavItem) {
   );
 }
 
-function NavigationMobile() {
+export function NavigationMobile() {
   const navItems = useNavItems();
   return (
     <Stack
@@ -80,5 +80,3 @@ function NavigationMobile() {
     </Stack>
   );
 }
-
-export default NavigationMobile;
