@@ -31,7 +31,7 @@ def get_rentals_stats(by = None) -> dict:
     try:
         if (by == "duration"):
             stats = get_rental_stats_duration_from_db()
-        if (by == "day"):
+        elif (by == "day"):
             stats = get_rental_stats_day_from_db()
         else:
             stats = []
