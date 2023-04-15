@@ -5,12 +5,11 @@ import {
   useActions,
   useAppState,
 } from "../../../business/overmind";
-import Pagination from "../../components/Table/Pagination";
-import TableOverview from "../../components/Table/TableOverView";
+import { Pagination, TableOverview } from "../../components/Table";
 import { useGetRentals } from "../../hooks";
-import Filter from "./Filter";
+import { Filter } from "./Filter";
 
-function RentalsTable() {
+export function RentalsTable() {
   useGetRentals();
   const { isLoading } = useAppState().app;
   const {
@@ -52,5 +51,3 @@ function RentalsTable() {
     </Box>
   );
 }
-
-export default RentalsTable;

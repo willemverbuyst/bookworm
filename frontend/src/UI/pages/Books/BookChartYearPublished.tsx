@@ -11,7 +11,7 @@ import {
 import { useAppState } from "../../../business/overmind";
 import { useGetBookStatsYearPublished } from "../../hooks";
 
-function BookChartYearPublished() {
+export function BookChartYearPublished() {
   useGetBookStatsYearPublished();
   const { isLoading } = useAppState().app;
   const data = useAppState().book.statsYearPublished || [];
@@ -68,5 +68,3 @@ function BookChartYearPublished() {
     </Box>
   );
 }
-
-export default BookChartYearPublished;

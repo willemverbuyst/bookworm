@@ -1,7 +1,7 @@
 import { Box, Button, ButtonGroup } from "@chakra-ui/react";
 import { useActions, useAppState } from "../../../business/overmind";
 
-function Filter() {
+export function Filter() {
   const {
     filter: { active },
   } = useAppState().bookworm.ui.table;
@@ -30,5 +30,3 @@ function Filter() {
     </Box>
   );
 }
-
-export default Filter;

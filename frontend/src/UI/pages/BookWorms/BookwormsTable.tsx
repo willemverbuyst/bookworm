@@ -5,13 +5,12 @@ import {
   useActions,
   useAppState,
 } from "../../../business/overmind";
-import Pagination from "../../components/Table/Pagination";
-import TableOverview from "../../components/Table/TableOverView";
+import { Pagination, TableOverview } from "../../components/Table";
 import { useGetBooksworms } from "../../hooks";
-import BookwormsDetails from "./BookwormsDetails";
-import Filter from "./Filter";
+import { BookwormsDetails } from "./BookwormsDetails";
+import { Filter } from "./Filter";
 
-function BookwormsTable() {
+export function BookwormsTable() {
   useGetBooksworms();
   const { isLoading } = useAppState().app;
   const {
@@ -61,5 +60,3 @@ function BookwormsTable() {
     </Box>
   );
 }
-
-export default BookwormsTable;

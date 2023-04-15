@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
 
-function WelcomePage() {
+export function WelcomePage() {
   const navigate = useNavigate();
 
   const goToHome = () => navigate("/books");
@@ -62,5 +62,3 @@ function WelcomePage() {
     </Flex>
   );
 }
-
-export default WelcomePage;

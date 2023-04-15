@@ -6,14 +6,14 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import NavigationBar from "../../components/Navigation/NavigationBar";
+import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
-import BooksChartLanguages from "./BookChartLanguages";
-import BookChartYearPublished from "./BookChartYearPublished";
-import BooksChartGenres from "./BooksChartGenres";
-import BooksTable from "./BooksTable";
+import { BooksChartLanguages } from "./BookChartLanguages";
+import { BookChartYearPublished } from "./BookChartYearPublished";
+import { BooksChartGenres } from "./BooksChartGenres";
+import { BooksTable } from "./BooksTable";
 
-function BooksPage() {
+export function BooksPage() {
   return (
     <>
       <NavigationBar />
@@ -45,5 +45,3 @@ function BooksPage() {
     </>
   );
 }
-
-export default BooksPage;

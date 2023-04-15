@@ -1,19 +1,19 @@
+import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
   Box,
-  Flex,
-  Text,
-  IconButton,
   Collapse,
-  useColorModeValue,
+  Flex,
+  IconButton,
+  Text,
   useBreakpointValue,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import NavigationDesktop from "./NavigationDesktop";
-import NavigationMobile from "./NavigationMobile";
-import NavigationAuth from "./NavigationAuth";
+import { NavigationAuth } from "./NavigationAuth";
+import { NavigationDesktop } from "./NavigationDesktop";
+import { NavigationMobile } from "./NavigationMobile";
 
-export default function NavigationBar() {
+export function NavigationBar() {
   const { isOpen, onToggle } = useDisclosure();
 
   return (

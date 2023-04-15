@@ -3,7 +3,7 @@ import { Cell, Legend, Pie, PieChart } from "recharts";
 import { useAppState } from "../../../business/overmind";
 import { useGetBookStatsGenre } from "../../hooks";
 
-function BooksChartLanguages() {
+export function BooksChartLanguages() {
   useGetBookStatsGenre();
   const { isLoading, colors } = useAppState().app;
   const data = useAppState().book.statsLanguage || [];
@@ -44,5 +44,3 @@ function BooksChartLanguages() {
     </Box>
   );
 }
-
-export default BooksChartLanguages;

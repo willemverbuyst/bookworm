@@ -14,12 +14,12 @@ import {
   ControlledTextInput,
 } from "../../components/Controllers";
 // import { useActions } from "../../../business/overmind";
-import NavigationBar from "../../components/Navigation/NavigationBar";
+import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
 import { useGetAuthors, useGetBooks } from "../../hooks";
 import { defaultValues, FormFields, validationSchema } from "./helpers";
 
-function AddReviewPage() {
+export function AddReviewPage() {
   const id = useId();
   const allAuthors = useAppState().author.overview || [];
   const allBooks = useAppState().book.overview || [];
@@ -156,5 +156,3 @@ function AddReviewPage() {
     </>
   );
 }
-
-export default AddReviewPage;

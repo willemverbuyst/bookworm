@@ -3,7 +3,7 @@ import { Bar, Cell, ComposedChart, LabelList, XAxis } from "recharts";
 import { useAppState } from "../../../business/overmind";
 import { useGetRentalStatsDuration } from "../../hooks";
 
-function RentalsDurationChart() {
+export function RentalsDurationChart() {
   useGetRentalStatsDuration();
   const { isLoading } = useAppState().app;
   const data = useAppState().rental.statsDuration || [];
@@ -51,5 +51,3 @@ function RentalsDurationChart() {
     </Box>
   );
 }
-
-export default RentalsDurationChart;

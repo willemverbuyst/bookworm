@@ -1,7 +1,7 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { PageTitle } from "../../components/Text";
 
-function PageNotFoundPage() {
+export function PageNotFoundPage() {
   return (
     <Flex flexDirection="column" alignItems="center">
       <PageTitle title="404" />
@@ -9,5 +9,3 @@ function PageNotFoundPage() {
     </Flex>
   );
 }
-
-export default PageNotFoundPage;

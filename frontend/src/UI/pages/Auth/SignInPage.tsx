@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useActions, useAppState } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
-import NavigationBar from "../../components/Navigation/NavigationBar";
+import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
 import {
   defaultValuesSignIn,
@@ -13,7 +13,7 @@ import {
   validationSchemaSignIn,
 } from "./helpers";
 
-function SignInPage() {
+export function SignInPage() {
   const id = useId();
   const navigate = useNavigate();
   const {
@@ -76,5 +76,3 @@ function SignInPage() {
     </>
   );
 }
-
-export default SignInPage;

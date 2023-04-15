@@ -6,12 +6,12 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import NavigationBar from "../../components/Navigation/NavigationBar";
+import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
-import BookwormChartLibraries from "./BookwormChartLibraries";
-import BookwormsTable from "./BookwormsTable";
+import { BookwormChartLibraries } from "./BookwormChartLibraries";
+import { BookwormsTable } from "./BookwormsTable";
 
-function BookwormsPage() {
+export function BookwormsPage() {
   return (
     <>
       <NavigationBar />
@@ -35,4 +35,3 @@ function BookwormsPage() {
     </>
   );
 }
-export default BookwormsPage;

@@ -4,7 +4,7 @@ import { useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppState } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
-import NavigationBar from "../../components/Navigation/NavigationBar";
+import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
 import {
   defaultValuesSignUp,
@@ -12,7 +12,7 @@ import {
   validationSchemaSignUp,
 } from "./helpers";
 
-function SignUpPage() {
+export function SignUpPage() {
   const id = useId();
   const {
     control,
@@ -76,5 +76,3 @@ function SignUpPage() {
     </>
   );
 }
-
-export default SignUpPage;

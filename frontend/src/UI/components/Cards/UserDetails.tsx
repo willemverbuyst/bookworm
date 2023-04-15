@@ -16,7 +16,7 @@ interface Props {
   user: User;
 }
 
-function UserDetails({ user }: Props) {
+export function UserDetails({ user }: Props) {
   return (
     <Card width={400}>
       <CardHeader>
@@ -119,5 +119,3 @@ function UserDetails({ user }: Props) {
     </Card>
   );
 }
-
-export default UserDetails;

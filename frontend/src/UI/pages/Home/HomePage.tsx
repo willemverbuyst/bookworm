@@ -1,10 +1,10 @@
 import { Flex, Spinner } from "@chakra-ui/react";
 import { useAppState } from "../../../business/overmind";
-import UserDetails from "../../components/Cards/UserDetails";
-import NavigationBar from "../../components/Navigation/NavigationBar";
+import { UserDetails } from "../../components/Cards";
+import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
 
-function HomePage() {
+export function HomePage() {
   const { isLoading } = useAppState().app;
   const { user } = useAppState().user;
 
@@ -22,5 +22,3 @@ function HomePage() {
     </>
   );
 }
-
-export default HomePage;

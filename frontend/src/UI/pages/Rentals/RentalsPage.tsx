@@ -6,12 +6,12 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import NavigationBar from "../../components/Navigation/NavigationBar";
+import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
-import RentalsDurationChart from "./RentalsDurationChart";
-import RentalsTable from "./RentalsTable";
+import { RentalsDurationChart } from "./RentalsDurationChart";
+import { RentalsTable } from "./RentalsTable";
 
-function RentalsPage() {
+export function RentalsPage() {
   return (
     <>
       <NavigationBar />
@@ -35,5 +35,3 @@ function RentalsPage() {
     </>
   );
 }
-
-export default RentalsPage;

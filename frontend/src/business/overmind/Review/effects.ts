@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiGet } from "../../../api/apiGet";
+import { apiGet } from "../../../api";
 
 export const api = {
   getReviews: async ({ limit = 10, page = 1 }) =>

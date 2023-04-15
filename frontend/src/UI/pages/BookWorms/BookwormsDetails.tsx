@@ -9,14 +9,14 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { useAppState } from "../../../business/overmind";
-import UserDetails from "../../components/Cards/UserDetails";
+import { UserDetails } from "../../components/Cards";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
 
-function BookwormsDetails({ isOpen, onClose }: Props) {
+export function BookwormsDetails({ isOpen, onClose }: Props) {
   const { bookwormDetailsApi } = useAppState().bookworm;
   const bookwormDetails = bookwormDetailsApi?.data;
 
@@ -39,5 +39,3 @@ function BookwormsDetails({ isOpen, onClose }: Props) {
     </Modal>
   );
 }
-
-export default BookwormsDetails;

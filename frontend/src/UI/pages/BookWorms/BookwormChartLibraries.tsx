@@ -12,7 +12,7 @@ interface CustomLabelProps {
   index: number;
 }
 
-function BookwormChartLibraries() {
+export function BookwormChartLibraries() {
   useGetBookwormStatsLibrary();
   const { isLoading, colors } = useAppState().app;
   const data = useAppState().bookworm.statsLibrary || [];
@@ -146,5 +146,3 @@ function BookwormChartLibraries() {
     </Box>
   );
 }
-
-export default BookwormChartLibraries;

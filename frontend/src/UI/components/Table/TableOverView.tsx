@@ -18,7 +18,7 @@ type Props<T extends Record<"id", string>> = {
   action?: (id: string) => void;
 };
 
-function TableOverview<T extends Record<"id", string>>({
+export function TableOverview<T extends Record<"id", string>>({
   rows,
   columns,
   title,
@@ -69,5 +69,3 @@ function TableOverview<T extends Record<"id", string>>({
     </TableContainer>
   );
 }
-
-export default TableOverview;

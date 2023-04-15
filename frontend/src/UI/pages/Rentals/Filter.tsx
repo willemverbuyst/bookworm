@@ -1,7 +1,7 @@
 import { Box, Button, ButtonGroup } from "@chakra-ui/react";
 import { useActions, useAppState } from "../../../business/overmind";
 
-function Filter() {
+export function Filter() {
   const {
     filter: { returned },
   } = useAppState().rental.ui.table;
@@ -36,5 +36,3 @@ function Filter() {
     </Box>
   );
 }
-
-export default Filter;

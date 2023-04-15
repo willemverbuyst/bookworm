@@ -12,11 +12,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useAppState } from "../../../business/overmind";
-import NavigationBar from "../../components/Navigation/NavigationBar";
+import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
 import { useGetReviews } from "../../hooks";
 
-function AllReviewsPage() {
+export function AllReviewsPage() {
   const { isLoading } = useAppState().app;
   useGetReviews();
   const data = useAppState().review.overview || [];
@@ -75,5 +75,3 @@ function AllReviewsPage() {
     </>
   );
 }
-
-export default AllReviewsPage;

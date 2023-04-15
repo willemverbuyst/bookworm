@@ -5,11 +5,10 @@ import {
   useActions,
   useAppState,
 } from "../../../business/overmind";
-import Pagination from "../../components/Table/Pagination";
-import TableOverview from "../../components/Table/TableOverView";
+import { Pagination, TableOverview } from "../../components/Table";
 import { useGetAuthors } from "../../hooks";
 
-function AuthorsTable() {
+export function AuthorsTable() {
   useGetAuthors();
   const { isLoading } = useAppState().app;
   const {
@@ -52,5 +51,3 @@ function AuthorsTable() {
     </Box>
   );
 }
-
-export default AuthorsTable;

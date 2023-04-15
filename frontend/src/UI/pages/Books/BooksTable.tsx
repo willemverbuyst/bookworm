@@ -5,12 +5,11 @@ import {
   useActions,
   useAppState,
 } from "../../../business/overmind";
-import Pagination from "../../components/Table/Pagination";
-import TableOverview from "../../components/Table/TableOverView";
+import { Pagination, TableOverview } from "../../components/Table";
 import { useGetBooks, useGetGenres, useGetLanguages } from "../../hooks";
-import Filter from "./Filter";
+import { Filter } from "./Filter";
 
-function BooksTable() {
+export function BooksTable() {
   useGetGenres();
   useGetLanguages();
   useGetBooks();
@@ -54,5 +53,3 @@ function BooksTable() {
     </Box>
   );
 }
-
-export default BooksTable;

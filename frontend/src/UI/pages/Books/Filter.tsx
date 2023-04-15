@@ -2,7 +2,7 @@ import { Box, FormControl, HStack, Select } from "@chakra-ui/react";
 import { useActions, useAppState } from "../../../business/overmind";
 import { Label } from "../../components/Text";
 
-function Filter() {
+export function Filter() {
   const allGenres = useAppState().genre.overview || [];
   const allLanguages = useAppState().language.overview || [];
   const {
@@ -55,5 +55,3 @@ function Filter() {
     </Box>
   );
 }
-
-export default Filter;

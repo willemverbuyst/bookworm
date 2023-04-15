@@ -10,7 +10,6 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { NavItem } from "../../../business/models";
-
 import { useNavItems } from "../../hooks";
 
 function MobileNavItem({ label, children, href }: NavItem) {
@@ -66,7 +65,7 @@ function MobileNavItem({ label, children, href }: NavItem) {
   );
 }
 
-function NavigationMobile() {
+export function NavigationMobile() {
   const navItems = useNavItems();
   return (
     <Stack
@@ -81,5 +80,3 @@ function NavigationMobile() {
     </Stack>
   );
 }
-
-export default NavigationMobile;

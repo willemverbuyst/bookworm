@@ -8,6 +8,4 @@ export * from "./Genre";
 export * from "./Language";
 export * from "./Rental";
 export * from "./Review";
-export * from "./State";
-export * from "./Table";
 export * from "./User";

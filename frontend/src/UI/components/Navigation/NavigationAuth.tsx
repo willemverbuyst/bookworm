@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { Link as RLink } from "react-router-dom";
 import { useActions, useAppState } from "../../../business/overmind";
 
-function NavigationAuth() {
+export function NavigationAuth() {
   const navigate = useNavigate();
   const { isSignedIn } = useAppState().auth;
   const { logOutUser } = useActions().user;
@@ -60,5 +60,3 @@ function NavigationAuth() {
     </Stack>
   );
 }
-
-export default NavigationAuth;
