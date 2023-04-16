@@ -11,7 +11,8 @@ FROM
       WHEN TO_CHAR(rental.return_date, 'Dy') = 'Thu' THEN 4 
       WHEN TO_CHAR(rental.return_date, 'Dy') = 'Fri' THEN 5 
       WHEN TO_CHAR(rental.return_date, 'Dy') = 'Sat' THEN 6 
-      ELSE 7
+   		WHEN TO_CHAR(rental.return_date, 'Dy') = 'Sun' THEN 7 
+      ELSE 8
     END AS day_of_the_week,
     COUNT(*) as return_date 
   FROM rental 
@@ -25,7 +26,8 @@ FULL OUTER JOIN
       WHEN TO_CHAR(rental.rental_date, 'Dy') = 'Thu' THEN 4 
       WHEN TO_CHAR(rental.rental_date, 'Dy') = 'Fri' THEN 5 
       WHEN TO_CHAR(rental.rental_date, 'Dy') = 'Sat' THEN 6 
-      ELSE 7 
+    	WHEN TO_CHAR(rental.rental_date, 'Dy') = 'Sun' THEN 7 
+      ELSE 8 
     END AS day_of_the_week,
     COUNT(*) as rental_date 
   FROM rental 
