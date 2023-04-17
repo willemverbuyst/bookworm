@@ -10,6 +10,10 @@ interface Library {
   country: string;
 }
 
+export type LibraryDetails = Omit<Library, "postal_code"> & {
+  postalCode: string;
+};
+
 export interface LibraryState extends BaseStateSelect<Library> {
-  overview?: (Omit<Library, "postal_code"> & { postalCode: string })[] | null;
+  overview?: LibraryDetails[] | null;
 }
