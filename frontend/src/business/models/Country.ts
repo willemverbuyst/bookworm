@@ -1,13 +1,8 @@
 import { BaseStateSelect } from "./State";
 
-interface CountryApi {
+interface Country {
   id: string;
   country: string;
 }
 
-interface CountryDisplay {
-  value: string;
-  display: string;
-}
-
-export type CountryState = BaseStateSelect<CountryApi, CountryDisplay>;
+export type CountryState = BaseStateSelect<Country>;

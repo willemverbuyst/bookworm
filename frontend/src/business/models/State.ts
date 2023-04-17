@@ -29,7 +29,7 @@ export interface BaseState<T> {
   overview: Array<T> | null;
 }
 
-export interface BaseStateSelect<T, U> {
+export interface BaseStateSelect<T> {
   getAllApi: ApiResponse<Array<T>> | null;
-  overview: Array<U> | null;
+  overview: Array<{ display: string; value: string }> | null;
 }

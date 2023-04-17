@@ -7,6 +7,9 @@ export const state: GenreState = {
     if (!getAllApi?.data.length) {
       return null;
     }
-    return getAllApi.data;
+    return getAllApi.data.map((i) => ({
+      display: i.genre,
+      value: i.id,
+    }));
   }),
 };

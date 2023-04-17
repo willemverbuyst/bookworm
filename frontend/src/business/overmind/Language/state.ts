@@ -7,6 +7,9 @@ export const state: LanguageState = {
     if (!getAllApi?.data.length) {
       return null;
     }
-    return getAllApi.data;
+    return getAllApi.data.map((i) => ({
+      display: i.language,
+      value: i.id,
+    }));
   }),
 };
