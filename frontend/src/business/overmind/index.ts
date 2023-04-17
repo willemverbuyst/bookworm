@@ -15,6 +15,7 @@ import * as bookworm from "./Bookworm";
 import * as country from "./Country";
 import * as genre from "./Genre";
 import * as language from "./Language";
+import * as library from "./Library";
 import * as rental from "./Rental";
 import * as review from "./Review";
 import * as user from "./User";
@@ -29,6 +30,7 @@ export const config = namespaced({
   country,
   genre,
   language,
+  library,
   rental,
   review,
   user,

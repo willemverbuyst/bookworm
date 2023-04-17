@@ -1,4 +1,4 @@
-import { Box, Button, Container, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Container, HStack, Text, VStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -51,20 +51,22 @@ export function SignUpPage() {
         ) : (
           <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
             <VStack spacing={6}>
-              <ControlledTextInput
-                name="firstName"
-                control={control}
-                label="first name"
-                error={errors.firstName}
-                required
-              />
-              <ControlledTextInput
-                name="lastName"
-                control={control}
-                label="last name"
-                error={errors.lastName}
-                required
-              />
+              <HStack>
+                <ControlledTextInput
+                  name="firstName"
+                  control={control}
+                  label="first name"
+                  error={errors.firstName}
+                  required
+                />
+                <ControlledTextInput
+                  name="lastName"
+                  control={control}
+                  label="last name"
+                  error={errors.lastName}
+                  required
+                />
+              </HStack>
               <ControlledTextInput
                 name="email"
                 control={control}
