@@ -28,3 +28,8 @@ export interface BaseState<T> {
   getAllApi: ApiResponse<Array<T>> | null;
   overview: Array<T> | null;
 }
+
+export interface BaseStateSelect<T, U> {
+  getAllApi: ApiResponse<Array<T>> | null;
+  overview: Array<U> | null;
+}

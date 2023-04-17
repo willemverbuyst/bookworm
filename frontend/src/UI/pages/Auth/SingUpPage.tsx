@@ -3,9 +3,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppState } from "../../../business/overmind";
-import { ControlledTextInput } from "../../components/Controllers";
+import {
+  ControlledSelect,
+  ControlledTextInput,
+} from "../../components/Controllers";
 import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
+import { useGetCountries } from "../../hooks/useGetCountries";
 import {
   defaultValuesSignUp,
   FormfieldsSignUp,
@@ -13,7 +17,9 @@ import {
 } from "./helpers";
 
 export function SignUpPage() {
+  useGetCountries();
   const id = useId();
+  const dataSet = useAppState().country.overview || [];
   const {
     control,
     formState: { errors },
@@ -64,6 +70,14 @@ export function SignUpPage() {
                 control={control}
                 label="password"
                 error={errors.password}
+                required
+              />
+              <ControlledSelect
+                dataSet={dataSet}
+                name="country"
+                control={control}
+                label="country"
+                error={errors.country}
                 required
               />
               <Button type="submit" colorScheme="teal" size="sm">

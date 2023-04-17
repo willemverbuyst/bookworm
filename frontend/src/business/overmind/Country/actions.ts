@@ -9,7 +9,7 @@ export const getCountries = async ({ actions, effects, state }: Context) => {
   if (!response || response instanceof AxiosError) {
     actions.api.handleErrorResponse({ response });
   } else {
-    state.genre.getAllApi = response;
+    state.country.getAllApi = response;
   }
 
   state.app.isLoading = false;

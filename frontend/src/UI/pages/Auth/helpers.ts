@@ -9,6 +9,7 @@ export type FormfieldsSignUp = {
   email: string;
   password: string;
   userName: string;
+  country: string;
 };
 
 export const validationSchemaSignIn = z.object({
@@ -20,6 +21,7 @@ export const validationSchemaSignUp = z.object({
   email: z.string().email().min(1, { message: "Email is required" }),
   password: z.string().min(1, { message: "Password is required" }),
   userName: z.string().min(1, { message: "UserName is required" }),
+  country: z.string().min(1, { message: "Country is required" }),
 });
 
 export const defaultValuesSignIn = {
@@ -31,4 +33,5 @@ export const defaultValuesSignUp = {
   email: "",
   password: "",
   userName: "",
+  country: "",
 };
