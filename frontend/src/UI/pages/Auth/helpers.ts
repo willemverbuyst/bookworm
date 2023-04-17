@@ -11,22 +11,24 @@ export const validationSchemaSignUp = z.object({
   phoneNumber: z.string().regex(/^\+\d{11}$/),
   email: z.string().email().min(1, { message: "Email is required" }),
   country: z.string().min(1, { message: "Country is required" }),
+  library: z.string().min(1, { message: "Library is required" }),
   password: z.string().min(1, { message: "Password is required" }),
 });
 
-export const defaultValuesSignIn = {
+export type FormFieldsSignIn = z.infer<typeof validationSchemaSignIn>;
+export type FormfieldsSignUp = z.infer<typeof validationSchemaSignUp>;
+
+export const defaultValuesSignIn: FormFieldsSignIn = {
   email: "",
   password: "",
 };
 
-export const defaultValuesSignUp = {
+export const defaultValuesSignUp: FormfieldsSignUp = {
   firstName: "",
   lastName: "",
   email: "",
   phoneNumber: "",
   country: "",
+  library: "",
   password: "",
 };
-
-export type FormFieldsSignIn = z.infer<typeof validationSchemaSignIn>;
-export type FormfieldsSignUp = z.infer<typeof validationSchemaSignUp>;

@@ -10,6 +10,7 @@ import {
 import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
 import { useGetCountries } from "../../hooks/useGetCountries";
+import { useGetLibraries } from "../../hooks/useGetLibraries";
 import {
   defaultValuesSignUp,
   FormfieldsSignUp,
@@ -18,8 +19,10 @@ import {
 
 export function SignUpPage() {
   useGetCountries();
+  useGetLibraries();
   const id = useId();
-  const dataSet = useAppState().country.overview || [];
+  const dataSetCountries = useAppState().country.overview || [];
+  const dataSetLibraries = useAppState().library.overview || [];
   const {
     control,
     formState: { errors },
@@ -82,12 +85,21 @@ export function SignUpPage() {
                 required
               />
               <ControlledSelect
-                dataSet={dataSet}
+                dataSet={dataSetCountries}
                 name="country"
                 control={control}
                 label="country"
                 error={errors.country}
                 required
+              />
+              <ControlledSelect
+                dataSet={dataSetLibraries}
+                name="library"
+                control={control}
+                label="library"
+                error={errors.library}
+                required
+                informAction
               />
               <ControlledTextInput
                 name="password"

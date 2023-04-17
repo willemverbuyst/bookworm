@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useActions, useAppState } from "../../business/overmind";
 
-export function useGeLibraries() {
+export function useGetLibraries() {
   const { getAllApi } = useAppState().library;
   const { getLibraries } = useActions().library;
 

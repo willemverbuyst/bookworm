@@ -1,14 +1,24 @@
-import { FormLabel } from "@chakra-ui/react";
+import { QuestionOutlineIcon } from "@chakra-ui/icons";
+import { FormLabel, IconButton } from "@chakra-ui/react";
 
 type Props = {
   text: string;
   isRequired: boolean;
+  informAction?: boolean;
 };
 
-export function Label({ text, isRequired }: Props) {
+export function Label({ text, isRequired, informAction }: Props) {
   return (
     <FormLabel style={{ color: "#a3a3a3", fontStyle: "italic" }}>
       {isRequired ? `${text}*` : text}
+      {informAction && (
+        <IconButton
+          variant="unstyled"
+          aria-label="show details"
+          onClick={() => console.log("test")}
+          icon={<QuestionOutlineIcon />}
+        />
+      )}
     </FormLabel>
   );
 }
