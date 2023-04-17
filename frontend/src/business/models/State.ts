@@ -31,5 +31,6 @@ export interface BaseState<T> {
 
 export interface BaseStateSelect<T> {
   getAllApi: ApiResponse<Array<T>> | null;
-  overview: Array<{ display: string; value: string }> | null;
+  overview?: Array<{ display: string; value: string }> | null;
+  selectOptions: Array<{ display: string; value: string }> | null;
 }

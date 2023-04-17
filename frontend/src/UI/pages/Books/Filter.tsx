@@ -3,8 +3,8 @@ import { useActions, useAppState } from "../../../business/overmind";
 import { Label } from "../../components/Text";
 
 export function Filter() {
-  const genresForSelect = useAppState().genre.overview || [];
-  const languagesForSelect = useAppState().language.overview || [];
+  const genresForSelect = useAppState().genre.selectOptions || [];
+  const languagesForSelect = useAppState().language.selectOptions || [];
   const {
     filter: { genre, language },
   } = useAppState().book.ui.table;

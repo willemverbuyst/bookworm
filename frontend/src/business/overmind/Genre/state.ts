@@ -3,7 +3,7 @@ import { GenreState } from "../../models";
 
 export const state: GenreState = {
   getAllApi: null,
-  overview: derived(({ getAllApi }: GenreState) => {
+  selectOptions: derived(({ getAllApi }: GenreState) => {
     if (!getAllApi?.data.length) {
       return null;
     }

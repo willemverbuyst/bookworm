@@ -21,8 +21,8 @@ export function SignUpPage() {
   useGetCountries();
   useGetLibraries();
   const id = useId();
-  const dataSetCountries = useAppState().country.overview || [];
-  const dataSetLibraries = useAppState().library.overview || [];
+  const dataSetCountries = useAppState().country.selectOptions || [];
+  const dataSetLibraries = useAppState().library.selectOptions || [];
   const {
     control,
     formState: { errors },

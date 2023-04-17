@@ -1,9 +1,9 @@
 import { derived } from "overmind";
-import { CountryState } from "../../models/Country";
+import { CountryState } from "../../models";
 
 export const state: CountryState = {
   getAllApi: null,
-  overview: derived(({ getAllApi }: CountryState) => {
+  selectOptions: derived(({ getAllApi }: CountryState) => {
     if (!getAllApi?.data.length) {
       return null;
     }
