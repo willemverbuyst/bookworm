@@ -16,6 +16,7 @@ type SelectProps<T extends FieldValues, U> = {
   required?: boolean;
   placeholder?: string;
   allOption?: boolean;
+  informAction?: () => void;
 } & UseControllerProps<T>;
 
 export function ControlledSelect<
@@ -31,10 +32,13 @@ export function ControlledSelect<
   placeholder,
   required = false,
   allOption = false,
+  informAction,
 }: SelectProps<T, U>) {
   return (
     <FormControl isInvalid={!!error}>
-      {label && <Label text={label} isRequired={required} />}
+      {label && (
+        <Label text={label} isRequired={required} informAction={informAction} />
+      )}
       <Controller
         name={name}
         control={control}

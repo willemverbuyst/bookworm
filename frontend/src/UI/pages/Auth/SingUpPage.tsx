@@ -1,19 +1,38 @@
-import { Box, Button, Container, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  HStack,
+  Text,
+  useDisclosure,
+  VStack,
+} from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppState } from "../../../business/overmind";
-import { ControlledTextInput } from "../../components/Controllers";
+import {
+  ControlledSelect,
+  ControlledTextInput,
+} from "../../components/Controllers";
 import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
+import { useGetCountries } from "../../hooks/useGetCountries";
+import { useGetLibraries } from "../../hooks/useGetLibraries";
 import {
   defaultValuesSignUp,
   FormfieldsSignUp,
   validationSchemaSignUp,
 } from "./helpers";
+import { LibraryDetails } from "./LibraryDetails";
 
 export function SignUpPage() {
+  useGetCountries();
+  useGetLibraries();
   const id = useId();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const dataSetCountries = useAppState().country.selectOptions || [];
+  const dataSetLibraries = useAppState().library.selectOptions || [];
   const {
     control,
     formState: { errors },
@@ -45,19 +64,53 @@ export function SignUpPage() {
         ) : (
           <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
             <VStack spacing={6}>
-              <ControlledTextInput
-                name="userName"
-                control={control}
-                label="username"
-                error={errors.userName}
-                required
-              />
+              <HStack>
+                <ControlledTextInput
+                  name="firstName"
+                  control={control}
+                  label="first name"
+                  error={errors.firstName}
+                  required
+                />
+                <ControlledTextInput
+                  name="lastName"
+                  control={control}
+                  label="last name"
+                  error={errors.lastName}
+                  required
+                />
+              </HStack>
               <ControlledTextInput
                 name="email"
                 control={control}
                 label="email"
                 error={errors.email}
                 required
+              />
+              <ControlledTextInput
+                name="phoneNumber"
+                control={control}
+                label="phone"
+                error={errors.phoneNumber}
+                required
+              />
+              <ControlledSelect
+                dataSet={dataSetCountries}
+                name="country"
+                control={control}
+                label="country"
+                error={errors.country}
+                required
+              />
+              <LibraryDetails isOpen={isOpen} onClose={onClose} />
+              <ControlledSelect
+                dataSet={dataSetLibraries}
+                name="library"
+                control={control}
+                label="library"
+                error={errors.library}
+                required
+                informAction={onOpen}
               />
               <ControlledTextInput
                 name="password"

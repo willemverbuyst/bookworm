@@ -3,20 +3,12 @@ import { useActions, useAppState } from "../../../business/overmind";
 import { Label } from "../../components/Text";
 
 export function Filter() {
-  const allGenres = useAppState().genre.overview || [];
-  const allLanguages = useAppState().language.overview || [];
+  const genresForSelect = useAppState().genre.selectOptions || [];
+  const languagesForSelect = useAppState().language.selectOptions || [];
   const {
     filter: { genre, language },
   } = useAppState().book.ui.table;
   const { setGenreFilter, setLanguageFilter } = useActions().book;
-  const genresForSelect = allGenres.map((g) => ({
-    value: g.id,
-    display: g.genre,
-  }));
-  const languagesForSelect = allLanguages.map((l) => ({
-    value: l.id,
-    display: l.language,
-  }));
 
   const handleSelectGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setGenreFilter({ genre: e.target.value });

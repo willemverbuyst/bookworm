@@ -20,6 +20,8 @@ import { useGetAuthors, useGetBooks } from "../../hooks";
 import { defaultValues, FormFields, validationSchema } from "./helpers";
 
 export function AddReviewPage() {
+  useGetAuthors();
+  useGetBooks();
   const id = useId();
   const allAuthors = useAppState().author.overview || [];
   const allBooks = useAppState().book.overview || [];
@@ -31,8 +33,6 @@ export function AddReviewPage() {
     Array<{ display: string; value: string }>
   >([]);
 
-  useGetAuthors();
-  useGetBooks();
   // const { postReview } = useActions();
   const {
     control,

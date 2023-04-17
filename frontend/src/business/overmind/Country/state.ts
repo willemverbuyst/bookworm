@@ -1,14 +1,14 @@
 import { derived } from "overmind";
-import { GenreState } from "../../models";
+import { CountryState } from "../../models";
 
-export const state: GenreState = {
+export const state: CountryState = {
   getAllApi: null,
-  selectOptions: derived(({ getAllApi }: GenreState) => {
+  selectOptions: derived(({ getAllApi }: CountryState) => {
     if (!getAllApi?.data.length) {
       return null;
     }
     return getAllApi.data.map((i) => ({
-      display: i.genre,
+      display: i.country,
       value: i.id,
     }));
   }),

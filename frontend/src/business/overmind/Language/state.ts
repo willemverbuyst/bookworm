@@ -3,10 +3,13 @@ import { LanguageState } from "../../models";
 
 export const state: LanguageState = {
   getAllApi: null,
-  overview: derived(({ getAllApi }: LanguageState) => {
+  selectOptions: derived(({ getAllApi }: LanguageState) => {
     if (!getAllApi?.data.length) {
       return null;
     }
-    return getAllApi.data;
+    return getAllApi.data.map((i) => ({
+      display: i.language,
+      value: i.id,
+    }));
   }),
 };

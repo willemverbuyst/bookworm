@@ -25,6 +25,11 @@ export interface ApiResponse<T> {
 }
 
 export interface BaseState<T> {
-  getAllApi: ApiResponse<Array<T>> | null;
-  overview: Array<T> | null;
+  getAllApi: ApiResponse<T[]> | null;
+  overview: T[] | null;
+}
+
+export interface BaseStateSelect<T> {
+  getAllApi: ApiResponse<T[]> | null;
+  selectOptions: { display: string; value: string }[] | null;
 }
