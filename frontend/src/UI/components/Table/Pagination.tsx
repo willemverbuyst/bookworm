@@ -199,7 +199,7 @@ export function Pagination({ total, state }: Props) {
           )}
           {total && (
             <Button onClick={handleBtnClick} ml={2} px={7} variant="outline">
-              {!showAll ? "Show all" : "Use items per page"}
+              {!showAll ? "Show all" : "Use pagination"}
             </Button>
           )}
         </Flex>
