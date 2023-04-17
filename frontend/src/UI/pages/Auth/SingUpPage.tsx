@@ -52,10 +52,17 @@ export function SignUpPage() {
           <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
             <VStack spacing={6}>
               <ControlledTextInput
-                name="userName"
+                name="firstName"
                 control={control}
-                label="username"
-                error={errors.userName}
+                label="first name"
+                error={errors.firstName}
+                required
+              />
+              <ControlledTextInput
+                name="lastName"
+                control={control}
+                label="last name"
+                error={errors.lastName}
                 required
               />
               <ControlledTextInput
@@ -66,10 +73,10 @@ export function SignUpPage() {
                 required
               />
               <ControlledTextInput
-                name="password"
+                name="phoneNumber"
                 control={control}
-                label="password"
-                error={errors.password}
+                label="phone"
+                error={errors.phoneNumber}
                 required
               />
               <ControlledSelect
@@ -78,6 +85,13 @@ export function SignUpPage() {
                 control={control}
                 label="country"
                 error={errors.country}
+                required
+              />
+              <ControlledTextInput
+                name="password"
+                control={control}
+                label="password"
+                error={errors.password}
                 required
               />
               <Button type="submit" colorScheme="teal" size="sm">
