@@ -1,4 +1,12 @@
-import { Box, Button, Container, HStack, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  HStack,
+  Text,
+  useDisclosure,
+  VStack,
+} from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -16,11 +24,13 @@ import {
   FormfieldsSignUp,
   validationSchemaSignUp,
 } from "./helpers";
+import { LibraryDetails } from "./LibraryDetails";
 
 export function SignUpPage() {
   useGetCountries();
   useGetLibraries();
   const id = useId();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const dataSetCountries = useAppState().country.selectOptions || [];
   const dataSetLibraries = useAppState().library.selectOptions || [];
   const {
@@ -92,6 +102,7 @@ export function SignUpPage() {
                 error={errors.country}
                 required
               />
+              <LibraryDetails isOpen={isOpen} onClose={onClose} />
               <ControlledSelect
                 dataSet={dataSetLibraries}
                 name="library"
@@ -99,7 +110,7 @@ export function SignUpPage() {
                 label="library"
                 error={errors.library}
                 required
-                informAction
+                informAction={onOpen}
               />
               <ControlledTextInput
                 name="password"

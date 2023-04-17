@@ -16,9 +16,9 @@ interface Props {
   library: LibraryDetails;
 }
 
-export function LibraryDetails({ library }: Props) {
+export function LibraryDetailsCard({ library }: Props) {
   return (
-    <Card width={400}>
+    <Card width={400} my={5}>
       <CardHeader>
         <Heading size="md">{library.library}</Heading>
       </CardHeader>
@@ -35,7 +35,7 @@ export function LibraryDetails({ library }: Props) {
           </Box>
 
           <HStack>
-            <Box textAlign="right">
+            <Box>
               <Heading size="xs" textTransform="uppercase">
                 address
               </Heading>
@@ -44,7 +44,7 @@ export function LibraryDetails({ library }: Props) {
               </Text>
             </Box>
             <Spacer />
-            <Box>
+            <Box textAlign="right">
               <Heading size="xs" textTransform="uppercase">
                 postal code
               </Heading>
@@ -54,7 +54,7 @@ export function LibraryDetails({ library }: Props) {
             </Box>
           </HStack>
           <HStack>
-            <Box textAlign="right">
+            <Box>
               <Heading size="xs" textTransform="uppercase">
                 city
               </Heading>
@@ -63,7 +63,7 @@ export function LibraryDetails({ library }: Props) {
               </Text>
             </Box>
             <Spacer />
-            <Box>
+            <Box textAlign="right">
               <Heading size="xs" textTransform="uppercase">
                 country
               </Heading>

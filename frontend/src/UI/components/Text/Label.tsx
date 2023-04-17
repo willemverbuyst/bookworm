@@ -4,7 +4,7 @@ import { FormLabel, IconButton } from "@chakra-ui/react";
 type Props = {
   text: string;
   isRequired: boolean;
-  informAction?: boolean;
+  informAction?: () => void;
 };
 
 export function Label({ text, isRequired, informAction }: Props) {
@@ -15,7 +15,7 @@ export function Label({ text, isRequired, informAction }: Props) {
         <IconButton
           variant="unstyled"
           aria-label="show details"
-          onClick={() => console.log("test")}
+          onClick={informAction}
           icon={<QuestionOutlineIcon />}
         />
       )}
