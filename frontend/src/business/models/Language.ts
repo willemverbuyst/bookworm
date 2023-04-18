@@ -1,8 +1,10 @@
-import { BaseStateSelect } from "./State";
+import { BaseStateSelect, UI } from "./State";
 
 interface Language {
   id: string;
   language: string;
 }
 
-export type LanguageState = BaseStateSelect<Language>;
+export interface LanguageState extends BaseStateSelect<Language> {
+  ui: UI<Language, null>;
+}
