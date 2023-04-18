@@ -13,7 +13,7 @@ export function AdminGenrePage() {
   const {
     overview,
     ui: {
-      table: { columns, noDataMessage, queryString, searchKeys, title },
+      table: { columns, noDataMessage, queryString, searchKeys },
     },
   } = useAppState().genre;
 
