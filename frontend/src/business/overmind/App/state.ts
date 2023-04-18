@@ -2,6 +2,11 @@ import { AppState } from "../../models";
 
 export const state: AppState = {
   isLoading: false,
+  adminMenuItems: [
+    { label: "Language", href: "language" },
+    { label: "Genre", href: "genre" },
+    { label: "Library", href: "library" },
+  ],
   publicNavItems: [
     { label: "Books", href: "/books" },
     { label: "Authors", href: "/authors" },

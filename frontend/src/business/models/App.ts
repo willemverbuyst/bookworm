@@ -7,7 +7,8 @@ export type NavItem = {
 
 export interface AppState {
   isLoading: boolean;
-  publicNavItems: Array<NavItem>;
-  privateNavItems: Array<NavItem>;
-  colors: Array<string>;
+  adminMenuItems: NavItem[];
+  publicNavItems: NavItem[];
+  privateNavItems: NavItem[];
+  colors: string[];
 }

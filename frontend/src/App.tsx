@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { useAppState } from "./business/overmind";
 import PrivateRoute from "./helpers/PrivateRoute";
 import { useToastHook } from "./UI/hooks";
+import { AdminLanguagePage } from "./UI/pages/Admin/AdminLanguagePage";
 import { AdminPage } from "./UI/pages/Admin/AdminPage";
 import { SignInPage, SignUpPage } from "./UI/pages/Auth";
 import { AuthorsPage } from "./UI/pages/Authors";
@@ -40,6 +41,30 @@ export default function App() {
           element={
             <PrivateRoute>
               <AdminPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/language"
+          element={
+            <PrivateRoute>
+              <AdminLanguagePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/genre"
+          element={
+            <PrivateRoute>
+              <AdminLanguagePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/library"
+          element={
+            <PrivateRoute>
+              <AdminLanguagePage />
             </PrivateRoute>
           }
         />

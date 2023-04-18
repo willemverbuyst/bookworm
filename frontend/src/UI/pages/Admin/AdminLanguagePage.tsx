@@ -4,7 +4,7 @@ import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
 import SimpleSidebar from "./SideMenu";
 
-export function AdminPage() {
+export function AdminLanguagePage() {
   const { isLoading } = useAppState().app;
 
   if (isLoading) {
@@ -16,7 +16,7 @@ export function AdminPage() {
       <NavigationBar />
 
       <SimpleSidebar>
-        <PageTitle title="Admin" />
+        <PageTitle title="Admin Language" />
       </SimpleSidebar>
     </>
   );
