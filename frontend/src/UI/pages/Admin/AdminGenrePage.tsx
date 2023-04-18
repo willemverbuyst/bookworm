@@ -16,7 +16,7 @@ export function AdminGenrePage() {
       <NavigationBar />
 
       <SimpleSidebar>
-        <PageTitle title="Admin Genre" />
+        <PageTitle title="Genre" />
       </SimpleSidebar>
     </>
   );

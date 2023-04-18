@@ -16,7 +16,7 @@ export function AdminLibraryPage() {
       <NavigationBar />
 
       <SimpleSidebar>
-        <PageTitle title="Admin Library" />
+        <PageTitle title="Library" />
       </SimpleSidebar>
     </>
   );
