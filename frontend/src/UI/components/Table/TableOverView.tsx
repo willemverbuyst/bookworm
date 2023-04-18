@@ -13,7 +13,7 @@ import {
 
 type Props<T extends Record<"id", string>> = {
   columns: Array<{ field: keyof T; isNumeric?: boolean }>;
-  title: string;
+  title?: string;
   rows: Array<T>;
   action?: (id: string) => void;
 };

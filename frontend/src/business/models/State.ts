@@ -29,8 +29,8 @@ export interface BaseState<T> {
   overview: T[] | null;
 }
 
-export interface BaseStateSelect<T> {
+export interface BaseStateSelect<T, U = null> {
   getAllApi: ApiResponse<T[]> | null;
-  overview?: T[] | null;
+  overview?: (U extends null ? T[] : U[]) | null;
   selectOptions: { display: string; value: string }[] | null;
 }

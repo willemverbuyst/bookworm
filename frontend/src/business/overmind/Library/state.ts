@@ -26,4 +26,24 @@ export const state: LibraryState = {
       value: i.id,
     }));
   }),
+  ui: {
+    table: {
+      columns: [
+        { field: "library" },
+        { field: "phone" },
+        { field: "address" },
+        { field: "postalCode" },
+        { field: "city" },
+        { field: "country" },
+      ],
+      filter: null,
+      limit: 10,
+      noDataMessage: "no libraries",
+      page: 1,
+      queryString: "",
+      searchKeys: ["library"],
+      showAll: false,
+      title: "overview of libraries",
+    },
+  },
 };
