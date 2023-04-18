@@ -7,7 +7,7 @@ export const state: LanguageState = {
     if (!getAllApi?.data.length) {
       return null;
     }
-    return getAllApi.data;
+    return getAllApi.data.map((i) => ({ id: i.id, name: i.language }));
   }),
   selectOptions: derived(({ getAllApi }: LanguageState) => {
     if (!getAllApi?.data.length) {
@@ -20,13 +20,13 @@ export const state: LanguageState = {
   }),
   ui: {
     table: {
-      columns: [{ field: "language" }],
+      columns: [{ field: "name" }],
       filter: null,
       limit: 10,
       noDataMessage: "no languages",
       page: 1,
       queryString: "",
-      searchKeys: ["language"],
+      searchKeys: ["name"],
       showAll: false,
       title: "overview of languages",
     },

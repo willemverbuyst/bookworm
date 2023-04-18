@@ -5,6 +5,12 @@ interface Language {
   language: string;
 }
 
-export interface LanguageState extends BaseStateSelect<Language> {
-  ui: UI<Language, null>;
+interface LanguageDisplay {
+  id: string;
+  name: string;
+}
+
+export interface LanguageState
+  extends BaseStateSelect<Language, LanguageDisplay> {
+  ui: UI<LanguageDisplay, null>;
 }

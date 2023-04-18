@@ -5,6 +5,11 @@ interface Genre {
   genre: string;
 }
 
-export interface GenreState extends BaseStateSelect<Genre> {
-  ui: UI<Genre, null>;
+interface GenreDisplay {
+  id: string;
+  name: string;
+}
+
+export interface GenreState extends BaseStateSelect<Genre, GenreDisplay> {
+  ui: UI<GenreDisplay, null>;
 }

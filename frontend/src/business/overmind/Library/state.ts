@@ -9,7 +9,7 @@ export const state: LibraryState = {
     }
     return getAllApi.data.map((i) => ({
       id: i.id,
-      library: i.library,
+      name: i.library,
       phone: i.phone,
       address: i.address,
       postalCode: i.postal_code,
@@ -29,7 +29,7 @@ export const state: LibraryState = {
   ui: {
     table: {
       columns: [
-        { field: "library" },
+        { field: "name" },
         { field: "phone" },
         { field: "address" },
         { field: "postalCode" },
@@ -41,7 +41,7 @@ export const state: LibraryState = {
       noDataMessage: "no libraries",
       page: 1,
       queryString: "",
-      searchKeys: ["library"],
+      searchKeys: ["name"],
       showAll: false,
       title: "overview of libraries",
     },

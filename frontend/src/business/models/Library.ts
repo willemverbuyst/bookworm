@@ -10,7 +10,8 @@ interface Library {
   country: string;
 }
 
-export type LibraryDetails = Omit<Library, "postal_code"> & {
+export type LibraryDetails = Omit<Library, "library" | "postal_code"> & {
+  name: string;
   postalCode: string;
 };
 
