@@ -3,9 +3,9 @@ import { AppState } from "../../models";
 export const state: AppState = {
   isLoading: false,
   adminMenuItems: [
-    { label: "Language", href: "language" },
-    { label: "Genre", href: "genre" },
-    { label: "Library", href: "library" },
+    { label: "Language", href: "/admin/language" },
+    { label: "Genre", href: "/admin/genre" },
+    { label: "Library", href: "/admin/library" },
   ],
   publicNavItems: [
     { label: "Books", href: "/books" },
