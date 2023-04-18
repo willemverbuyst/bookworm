@@ -2,12 +2,18 @@ import { AppState } from "../../models";
 
 export const state: AppState = {
   isLoading: false,
+  adminMenuItems: [
+    { label: "Language", href: "/admin/language" },
+    { label: "Genre", href: "/admin/genre" },
+    { label: "Library", href: "/admin/library" },
+  ],
   publicNavItems: [
     { label: "Books", href: "/books" },
     { label: "Authors", href: "/authors" },
   ],
   privateNavItems: [
     { label: "Home", href: "/home" },
+    { label: "Admin", href: "/admin" },
     { label: "Bookworms", href: "/bookworms" },
     { label: "Rentals", href: "/rentals" },
     {

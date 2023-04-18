@@ -1,8 +1,15 @@
-import { BaseStateSelect } from "./State";
+import { BaseStateSelect, UI } from "./State";
 
 interface Genre {
   id: string;
   genre: string;
 }
 
-export type GenreState = BaseStateSelect<Genre>;
+interface GenreDisplay {
+  id: string;
+  name: string;
+}
+
+export interface GenreState extends BaseStateSelect<Genre, GenreDisplay> {
+  ui: UI<GenreDisplay, null>;
+}

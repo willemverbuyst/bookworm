@@ -1,4 +1,4 @@
-import { BaseStateSelect } from "./State";
+import { BaseStateSelect, UI } from "./State";
 
 interface Library {
   id: string;
@@ -10,10 +10,11 @@ interface Library {
   country: string;
 }
 
-export type LibraryDetails = Omit<Library, "postal_code"> & {
+export type LibraryDetails = Omit<Library, "library" | "postal_code"> & {
+  name: string;
   postalCode: string;
 };
 
-export interface LibraryState extends BaseStateSelect<Library> {
-  overview?: LibraryDetails[] | null;
+export interface LibraryState extends BaseStateSelect<Library, LibraryDetails> {
+  ui: UI<LibraryDetails, null>;
 }

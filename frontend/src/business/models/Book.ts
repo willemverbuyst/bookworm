@@ -15,7 +15,10 @@ interface Genre {
   number_of_books: number;
 }
 
-type GenreDisplay = Omit<Genre, "number_of_books">;
+interface GenreDisplay {
+  name: string;
+  number: number;
+}
 
 interface Language {
   id: string;
@@ -23,14 +26,20 @@ interface Language {
   number_of_books: number;
 }
 
-type LanguageDislay = Omit<Language, "number_of_books">;
+interface LanguageDisplay {
+  language: string;
+  number: number;
+}
 
 interface YearPublished {
   year_published: string;
   number_of_books: number;
 }
 
-type YearPublishedDisplay = Omit<YearPublished, "number_of_books">;
+interface YearPublishedDisplay {
+  name: string;
+  number: number;
+}
 
 interface Filter {
   genre: string;
@@ -40,7 +49,7 @@ interface Filter {
 export interface BookState extends BaseState<Book> {
   statsGenre: GenreDisplay[] | null;
   statsGenreApi: ApiResponse<Genre[]> | null;
-  statsLanguage: LanguageDislay[] | null;
+  statsLanguage: LanguageDisplay[] | null;
   statsLanguageApi: ApiResponse<Language[]> | null;
   statsYearPublished: YearPublishedDisplay[] | null;
   statsYearPublishedApi: ApiResponse<YearPublished[]> | null;

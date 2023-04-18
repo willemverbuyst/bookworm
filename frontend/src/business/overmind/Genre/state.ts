@@ -3,6 +3,12 @@ import { GenreState } from "../../models";
 
 export const state: GenreState = {
   getAllApi: null,
+  overview: derived(({ getAllApi }: GenreState) => {
+    if (!getAllApi?.data.length) {
+      return null;
+    }
+    return getAllApi.data.map((i) => ({ id: i.id, name: i.genre }));
+  }),
   selectOptions: derived(({ getAllApi }: GenreState) => {
     if (!getAllApi?.data.length) {
       return null;
@@ -12,4 +18,17 @@ export const state: GenreState = {
       value: i.id,
     }));
   }),
+  ui: {
+    table: {
+      columns: [{ field: "name" }],
+      filter: null,
+      limit: 10,
+      noDataMessage: "no genres",
+      page: 1,
+      queryString: "",
+      searchKeys: ["name"],
+      showAll: false,
+      title: "overview of genres",
+    },
+  },
 };
