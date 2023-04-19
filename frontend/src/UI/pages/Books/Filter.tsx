@@ -8,14 +8,14 @@ export function Filter() {
   const {
     filter: { genre, language },
   } = useAppState().book.ui.table;
-  const { setGenreFilter, setLanguageFilter } = useActions().book;
+  const { changeGenreFilter, changeLanguageFilter } = useActions().book;
 
   const handleSelectGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setGenreFilter({ genre: e.target.value });
+    changeGenreFilter({ genre: e.target.value });
   };
 
   const handleSelectLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setLanguageFilter({ language: e.target.value });
+    changeLanguageFilter({ language: e.target.value });
   };
 
   return (

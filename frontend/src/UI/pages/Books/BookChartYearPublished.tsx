@@ -9,11 +9,9 @@ import {
   YAxis,
 } from "recharts";
 import { useAppState } from "../../../business/overmind";
-import { useGetBookStatsYearPublished } from "../../hooks";
 
 export function BookChartYearPublished() {
-  useGetBookStatsYearPublished();
-  const { isLoading } = useAppState().app;
+  const { isLoading } = useAppState().book;
   const data = useAppState().book.statsYearPublished || [];
 
   const max = Math.max(...data.map((i) => i.number));

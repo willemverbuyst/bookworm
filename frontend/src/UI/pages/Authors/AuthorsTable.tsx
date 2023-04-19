@@ -8,7 +8,7 @@ import {
 import { Pagination, TableOverview } from "../../components/Table";
 
 export function AuthorsTable() {
-  const { isLoading } = useAppState().app;
+  const { isLoading } = useAppState().author;
   const {
     getAllApi,
     overview,
