@@ -7,5 +7,7 @@ export const router = {
     });
     page.start();
   },
-  open: (url: string) => page.show(url),
+  open: (url: string) => {
+    page.show(url);
+  },
 };

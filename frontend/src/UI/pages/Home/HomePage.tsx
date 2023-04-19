@@ -1,7 +1,6 @@
 import { Flex, Spinner } from "@chakra-ui/react";
 import { useAppState } from "../../../business/overmind";
 import { UserDetails } from "../../components/Cards";
-import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
 
 export function HomePage() {
@@ -14,7 +13,7 @@ export function HomePage() {
 
   return (
     <>
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <Flex flexDirection="column" alignItems="center">
         <PageTitle title="Home" />
         {user ? <UserDetails user={user} /> : null}

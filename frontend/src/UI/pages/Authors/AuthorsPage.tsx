@@ -6,7 +6,6 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
 import { AuthorsChart } from "./AuthorsChart";
 import { AuthorsTable } from "./AuthorsTable";
@@ -14,7 +13,7 @@ import { AuthorsTable } from "./AuthorsTable";
 export function AuthorsPage() {
   return (
     <>
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <Flex flexDirection="column" alignItems="center">
         <PageTitle title="Authors" />
         <Tabs variant="soft-rounded" colorScheme="teal" align="center">

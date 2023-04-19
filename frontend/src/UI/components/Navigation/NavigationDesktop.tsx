@@ -11,15 +11,13 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { Link as RLink } from "react-router-dom";
 import { NavItem } from "../../../business/models";
 import { useNavItems } from "../../hooks";
 
 function DesktopSubNav({ label, href, subLabel }: NavItem) {
   return (
     <Link
-      as={RLink}
-      to={href ?? "#"}
+      href={href ?? "#"}
       role="group"
       display="block"
       p={2}
@@ -66,9 +64,8 @@ export function NavigationDesktop() {
           <Popover trigger="hover" placement="bottom-start">
             <PopoverTrigger>
               <Link
-                as={RLink}
                 p={2}
-                to={navItem.href ?? "#"}
+                href={navItem.href ?? "#"}
                 fontSize="sm"
                 fontWeight={500}
                 color={linkColor}

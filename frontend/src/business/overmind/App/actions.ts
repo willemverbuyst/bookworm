@@ -9,7 +9,10 @@ export const onInitializeOvermind = async ({
 }: Context) => {
   effects.app.router.initialize({
     "/home": actions.app.showHomePage,
+    "/authors": actions.app.showAuthorsPage,
     "/books": actions.app.showBooksPage,
+    "/signin": actions.app.showSignInPage,
+    "/signup": actions.app.showSignUpPage,
   });
   const tokenFromLocalStorage = localStorage.getItem("token");
   if (!tokenFromLocalStorage) {
@@ -38,4 +41,16 @@ export const showHomePage = ({ state }: Context) => {
 
 export const showBooksPage = ({ state }: Context) => {
   state.app.currentPage = "books";
+};
+
+export const showAuthorsPage = ({ state }: Context) => {
+  state.app.currentPage = "authors";
+};
+
+export const showSignInPage = ({ state }: Context) => {
+  state.app.currentPage = "signin";
+};
+
+export const showSignUpPage = ({ state }: Context) => {
+  state.app.currentPage = "signup";
 };

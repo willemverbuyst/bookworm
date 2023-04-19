@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useAppState } from "./business/overmind";
 import { NavigationBar } from "./UI/components/Navigation";
 import { useToastHook } from "./UI/hooks";
+import { SignInPage, SignUpPage } from "./UI/pages/Auth";
+import { AuthorsPage } from "./UI/pages/Authors";
 import { BooksPage } from "./UI/pages/Books";
 import { HomePage } from "./UI/pages/Home";
 
@@ -22,7 +24,10 @@ export default function App() {
     <Box>
       <NavigationBar />
       {appState.currentPage === "home" ? <HomePage /> : null}
+      {appState.currentPage === "authors" ? <AuthorsPage /> : null}
       {appState.currentPage === "books" ? <BooksPage /> : null}
+      {appState.currentPage === "signin" ? <SignInPage /> : null}
+      {appState.currentPage === "signup" ? <SignUpPage /> : null}
       {/* <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/books" element={<BooksPage />} />
