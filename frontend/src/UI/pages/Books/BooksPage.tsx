@@ -6,7 +6,6 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
 import { BooksChartLanguages } from "./BookChartLanguages";
 import { BookChartYearPublished } from "./BookChartYearPublished";
@@ -16,7 +15,7 @@ import { BooksTable } from "./BooksTable";
 export function BooksPage() {
   return (
     <>
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <Flex flexDirection="column" alignItems="center">
         <PageTitle title="Books" />
         <Tabs variant="soft-rounded" colorScheme="teal" align="center">

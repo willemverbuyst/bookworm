@@ -2,6 +2,7 @@ import { AppState } from "../../models";
 
 export const state: AppState = {
   isLoading: false,
+  currentPage: "",
   adminMenuItems: [
     { label: "Language", href: "/admin/language" },
     { label: "Genre", href: "/admin/genre" },

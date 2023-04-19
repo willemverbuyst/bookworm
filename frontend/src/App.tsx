@@ -1,27 +1,16 @@
 import { Box } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
 import { useAppState } from "./business/overmind";
-import PrivateRoute from "./helpers/PrivateRoute";
+import { NavigationBar } from "./UI/components/Navigation";
 import { useToastHook } from "./UI/hooks";
-import { AdminGenrePage } from "./UI/pages/Admin/AdminGenrePage";
-import { AdminLanguagePage } from "./UI/pages/Admin/AdminLanguagePage";
-import { AdminLibraryPage } from "./UI/pages/Admin/AdminLibraryPage";
-import { AdminPage } from "./UI/pages/Admin/AdminPage";
-import { SignInPage, SignUpPage } from "./UI/pages/Auth";
-import { AuthorsPage } from "./UI/pages/Authors";
 import { BooksPage } from "./UI/pages/Books";
-import { BookwormsPage } from "./UI/pages/BookWorms";
 import { HomePage } from "./UI/pages/Home";
-import { PageNotFoundPage } from "./UI/pages/PageNotFound";
-import { RentalsPage } from "./UI/pages/Rentals";
-import { AddReviewPage, AllReviewsPage } from "./UI/pages/Reviews";
-import { WelcomePage } from "./UI/pages/Welcome";
 
 export default function App() {
   const [, setToast] = useToastHook();
 
   const { message, status, statusText } = useAppState().api.response;
+  const appState = useAppState().app;
 
   useEffect(() => {
     if (message && status) {
@@ -31,7 +20,10 @@ export default function App() {
 
   return (
     <Box>
-      <Routes>
+      <NavigationBar />
+      {appState.currentPage === "home" ? <HomePage /> : null}
+      {appState.currentPage === "books" ? <BooksPage /> : null}
+      {/* <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/books" element={<BooksPage />} />
         <Route path="/bookworms" element={<BookwormsPage />} />
@@ -103,7 +95,7 @@ export default function App() {
           }
         />
         <Route path="*" element={<PageNotFoundPage />} />
-      </Routes>
+      </Routes> */}
     </Box>
   );
 }

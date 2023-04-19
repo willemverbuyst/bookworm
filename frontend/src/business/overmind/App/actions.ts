@@ -7,6 +7,10 @@ export const onInitializeOvermind = async ({
   effects,
   state,
 }: Context) => {
+  effects.app.router.initialize({
+    "/home": actions.app.showHomePage,
+    "/books": actions.app.showBooksPage,
+  });
   const tokenFromLocalStorage = localStorage.getItem("token");
   if (!tokenFromLocalStorage) {
     return;
@@ -26,4 +30,12 @@ export const onInitializeOvermind = async ({
   state.auth.token = token;
   state.auth.isSignedIn = true;
   state.user.user = response.data;
+};
+
+export const showHomePage = ({ state }: Context) => {
+  state.app.currentPage = "home";
+};
+
+export const showBooksPage = ({ state }: Context) => {
+  state.app.currentPage = "books";
 };
