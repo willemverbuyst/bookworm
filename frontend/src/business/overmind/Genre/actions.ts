@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { Context } from "..";
 
 export const getGenres = async ({ actions, effects, state }: Context) => {
-  state.app.isLoading = true;
+  state.genre.isLoading = true;
   const response = await effects.genre.api.getGenres();
 
   if (!response || response instanceof AxiosError) {
@@ -12,5 +12,5 @@ export const getGenres = async ({ actions, effects, state }: Context) => {
     state.genre.getAllApi = response;
   }
 
-  state.app.isLoading = false;
+  state.genre.isLoading = false;
 };

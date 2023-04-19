@@ -4,6 +4,7 @@ import { ReviewState } from "../../models";
 
 export const state: ReviewState = {
   getAllApi: null,
+  isLoading: false,
   overview: derived(({ getAllApi }: ReviewState) => {
     if (!getAllApi?.data.length) {
       return null;

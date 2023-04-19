@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { Context } from "..";
 
 export const getCountries = async ({ actions, effects, state }: Context) => {
-  state.app.isLoading = true;
+  state.country.isLoading = true;
   const response = await effects.country.api.getCountries();
 
   if (!response || response instanceof AxiosError) {
@@ -12,5 +12,5 @@ export const getCountries = async ({ actions, effects, state }: Context) => {
     state.country.getAllApi = response;
   }
 
-  state.app.isLoading = false;
+  state.country.isLoading = false;
 };
