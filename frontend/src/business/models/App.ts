@@ -13,3 +13,15 @@ export interface AppState {
   privateNavItems: NavItem[];
   colors: string[];
 }
+
+export const Page = {
+  BOOKS: "books",
+  AUTHORS: "authors",
+  HOME: "home",
+  ADMIN: "admin",
+  BOOKWORMS: "bookworms",
+  RENTALS: "rentals",
+  REVIEWS: "reviews",
+  SIGNIN: "signin",
+  SIGNUP: "signup",
+} as const;

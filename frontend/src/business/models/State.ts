@@ -26,11 +26,13 @@ export interface ApiResponse<T> {
 
 export interface BaseState<T> {
   getAllApi: ApiResponse<T[]> | null;
+  isLoading?: boolean;
   overview: T[] | null;
 }
 
 export interface BaseStateSelect<T, U = null> {
   getAllApi: ApiResponse<T[]> | null;
+  isLoading?: boolean;
   overview?: (U extends null ? T[] : U[]) | null;
   selectOptions: { display: string; value: string }[] | null;
 }

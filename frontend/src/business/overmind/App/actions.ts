@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { AxiosError } from "axios";
 import { Context } from "..";
+import { Page } from "../../models";
 
 export const onInitializeOvermind = async ({
   actions,
@@ -9,7 +10,7 @@ export const onInitializeOvermind = async ({
 }: Context) => {
   effects.app.router.initialize({
     "/home": actions.app.showHomePage,
-    "/authors": actions.app.showAuthorsPage,
+    "/authors": actions.author.showAuthorsPage,
     "/books": actions.app.showBooksPage,
     "/signin": actions.app.showSignInPage,
     "/signup": actions.app.showSignUpPage,
@@ -36,21 +37,17 @@ export const onInitializeOvermind = async ({
 };
 
 export const showHomePage = ({ state }: Context) => {
-  state.app.currentPage = "home";
+  state.app.currentPage = Page.HOME;
 };
 
 export const showBooksPage = ({ state }: Context) => {
-  state.app.currentPage = "books";
-};
-
-export const showAuthorsPage = ({ state }: Context) => {
-  state.app.currentPage = "authors";
+  state.app.currentPage = Page.BOOKS;
 };
 
 export const showSignInPage = ({ state }: Context) => {
-  state.app.currentPage = "signin";
+  state.app.currentPage = Page.SIGNIN;
 };
 
 export const showSignUpPage = ({ state }: Context) => {
-  state.app.currentPage = "signup";
+  state.app.currentPage = Page.SIGNUP;
 };

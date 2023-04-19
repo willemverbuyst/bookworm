@@ -6,10 +6,8 @@ import {
   useAppState,
 } from "../../../business/overmind";
 import { Pagination, TableOverview } from "../../components/Table";
-import { useGetAuthors } from "../../hooks";
 
 export function AuthorsTable() {
-  useGetAuthors();
   const { isLoading } = useAppState().app;
   const {
     getAllApi,
@@ -18,11 +16,11 @@ export function AuthorsTable() {
       table: { columns, noDataMessage, queryString, searchKeys, title },
     },
   } = useAppState().author;
-  const { setQueryString } = useActions().author;
+  const { search } = useActions().author;
   const { total } = getAllApi || {};
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQueryString({ queryString: e.target.value });
+    search({ queryString: e.target.value });
   };
 
   if (isLoading) {

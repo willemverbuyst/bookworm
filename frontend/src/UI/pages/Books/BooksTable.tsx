@@ -1,11 +1,7 @@
 import { Box, Input, Spinner } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions";
-import {
-  stateSectionsWithTable,
-  useActions,
-  useAppState,
-} from "../../../business/overmind";
-import { Pagination, TableOverview } from "../../components/Table";
+import { useActions, useAppState } from "../../../business/overmind";
+import { TableOverview } from "../../components/Table";
 import { useGetBooks, useGetGenres, useGetLanguages } from "../../hooks";
 import { Filter } from "./Filter";
 
@@ -45,7 +41,7 @@ export function BooksTable() {
             columns={columns}
             title={title}
           />
-          <Pagination total={total} state={stateSectionsWithTable.book} />
+          {/* <Pagination total={total} state={stateSectionsWithTable.book} /> */}
         </>
       ) : (
         <p>{noDataMessage}</p>

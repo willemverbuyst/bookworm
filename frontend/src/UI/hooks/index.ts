@@ -1,5 +1,3 @@
-export * from "./useGetAuthors";
-export * from "./useGetAuthorStatsPage";
 export * from "./useGetBooks";
 export * from "./useGetBookStatsGenre";
 export * from "./useGetBookStatsLanguage";

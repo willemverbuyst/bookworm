@@ -1,10 +1,8 @@
 import { Box, Spinner } from "@chakra-ui/react";
 import { Bar, ComposedChart, LabelList, Line, XAxis, YAxis } from "recharts";
 import { useAppState } from "../../../business/overmind";
-import { useGetAuthorStatsPage } from "../../hooks";
 
 export function AuthorsChart() {
-  useGetAuthorStatsPage();
   const { isLoading } = useAppState().app;
   const { pages_per_author: data = [] } = useAppState().author.statsPage || {};
 
