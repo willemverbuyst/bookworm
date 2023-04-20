@@ -9,6 +9,7 @@ export interface AppState {
 }
 
 export const Page = {
+  WELCOME: "/",
   BOOKS: "books",
   AUTHORS: "authors",
   HOME: "home",

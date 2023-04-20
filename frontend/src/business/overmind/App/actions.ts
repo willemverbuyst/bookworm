@@ -9,6 +9,7 @@ export const onInitializeOvermind = async ({
   state,
 }: Context) => {
   effects.app.router.initialize({
+    "/": actions.app.showWelcomePage,
     "/home": actions.app.showHomePage,
     "/admin": actions.admin.showAdminPage,
     "/admin/genre": actions.admin.showAdminGenrePage,
@@ -45,4 +46,8 @@ export const onInitializeOvermind = async ({
 
 export const showHomePage = ({ state }: Context) => {
   state.app.currentPage = Page.HOME;
+};
+
+export const showWelcomePage = ({ state }: Context) => {
+  state.app.currentPage = Page.WELCOME;
 };

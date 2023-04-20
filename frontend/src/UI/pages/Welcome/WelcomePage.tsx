@@ -6,13 +6,8 @@ import {
   useBreakpointValue,
   VStack,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router";
 
 export function WelcomePage() {
-  const navigate = useNavigate();
-
-  const goToHome = () => navigate("/books");
-
   return (
     <Flex
       w="full"
@@ -38,11 +33,12 @@ export function WelcomePage() {
           </Text>
           <Stack direction="row">
             <Button
+              as="a"
               bg="blue.400"
               rounded="full"
               color="white"
               _hover={{ bg: "blue.500" }}
-              onClick={goToHome}
+              href="/books"
             >
               Show me more
             </Button>
