@@ -3,6 +3,9 @@ import { useEffect } from "react";
 import { useAppState } from "./business/overmind";
 import { NavigationBar } from "./UI/components/Navigation";
 import { useToastHook } from "./UI/hooks";
+import { AdminGenrePage } from "./UI/pages/Admin/AdminGenrePage";
+import { AdminLanguagePage } from "./UI/pages/Admin/AdminLanguagePage";
+import { AdminLibraryPage } from "./UI/pages/Admin/AdminLibraryPage";
 import { AdminPage } from "./UI/pages/Admin/AdminPage";
 import { SignInPage, SignUpPage } from "./UI/pages/Auth";
 import { AuthorsPage } from "./UI/pages/Authors";
@@ -30,6 +33,9 @@ export default function App() {
       {appState.currentPage === "signin" ? <SignInPage /> : null}
       {appState.currentPage === "signup" ? <SignUpPage /> : null}
       {appState.currentPage === "admin" ? <AdminPage /> : null}
+      {appState.currentPage === "admin/genre" ? <AdminGenrePage /> : null}
+      {appState.currentPage === "admin/language" ? <AdminLanguagePage /> : null}
+      {appState.currentPage === "admin/library" ? <AdminLibraryPage /> : null}
       {/* <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/books" element={<BooksPage />} />

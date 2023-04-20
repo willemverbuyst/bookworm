@@ -11,6 +11,9 @@ export const onInitializeOvermind = async ({
   effects.app.router.initialize({
     "/home": actions.app.showHomePage,
     "/admin": actions.admin.showAdminPage,
+    "/admin/genre": actions.admin.showAdminGenrePage,
+    "/admin/language": actions.admin.showAdminLanguagePage,
+    "/admin/library": actions.admin.showAdminLibraryPage,
     "/authors": actions.author.showAuthorsPage,
     "/books": actions.book.showBooksPage,
     "/signin": actions.auth.showSignInPage,

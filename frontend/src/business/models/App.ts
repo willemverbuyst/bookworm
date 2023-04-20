@@ -1,14 +1,8 @@
-export type NavItem = {
-  label: string;
-  subLabel?: string;
-  children?: Array<NavItem>;
-  href?: string;
-};
+import { NavItem } from "./NavItem";
 
 export interface AppState {
   isLoading: boolean;
   currentPage: string;
-  adminMenuItems: NavItem[];
   publicNavItems: NavItem[];
   privateNavItems: NavItem[];
   colors: string[];
@@ -19,6 +13,9 @@ export const Page = {
   AUTHORS: "authors",
   HOME: "home",
   ADMIN: "admin",
+  ADMIN_GENRE: "admin/genre",
+  ADMIN_LANGUAGE: "admin/language",
+  ADMIN_LIBRARY: "admin/library",
   BOOKWORMS: "bookworms",
   RENTALS: "rentals",
   REVIEWS: "reviews",

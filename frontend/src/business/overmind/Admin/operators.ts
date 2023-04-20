@@ -15,3 +15,21 @@ export const getAdminData =
     actions.language.getLanguages();
     actions.library.getLibraries();
   };
+
+export const setAdminGenrePage =
+  () =>
+  ({ state }: Context) => {
+    state.app.currentPage = Page.ADMIN_GENRE;
+  };
+
+export const setAdminLanguagePage =
+  () =>
+  ({ state }: Context) => {
+    state.app.currentPage = Page.ADMIN_LANGUAGE;
+  };
+
+export const setAdminLibraryPage =
+  () =>
+  ({ state }: Context) => {
+    state.app.currentPage = Page.ADMIN_LIBRARY;
+  };

@@ -14,15 +14,13 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
-import { Link as RLink } from "react-router-dom";
 import { NavItem } from "../../../business/models";
 import { useAdminMenuItems } from "../../hooks/useAdminMenuItems";
 
 function MenuItem({ label, href }: NavItem) {
   return (
     <Link
-      as={RLink}
-      to={href ?? "#"}
+      href={href ?? "#"}
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
     >
