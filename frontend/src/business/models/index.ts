@@ -1,3 +1,4 @@
+export * from "./Admin";
 export * from "./Api";
 export * from "./App";
 export * from "./Auth";
@@ -8,6 +9,7 @@ export * from "./Country";
 export * from "./Genre";
 export * from "./Language";
 export * from "./Library";
+export * from "./NavItem";
 export * from "./Rental";
 export * from "./Review";
 export * from "./User";

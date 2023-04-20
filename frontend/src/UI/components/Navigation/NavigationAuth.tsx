@@ -1,12 +1,11 @@
 import { Button, Stack } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
-import { Link as RLink } from "react-router-dom";
 import { useActions, useAppState } from "../../../business/overmind";
 
 export function NavigationAuth() {
   const navigate = useNavigate();
   const { isSignedIn } = useAppState().auth;
-  const { logOutUser } = useActions().user;
+  const { logOutUser } = useActions().auth;
 
   const handleSignOut = () => {
     navigate("/");
@@ -35,22 +34,22 @@ export function NavigationAuth() {
       spacing={6}
     >
       <Button
-        as={RLink}
+        as="a"
+        href="/signin"
         fontSize="sm"
         fontWeight={400}
         variant="link"
-        to="/signin"
       >
         Sign In
       </Button>
       <Button
-        as={RLink}
+        as="a"
         display={{ base: "none", md: "inline-flex" }}
         fontSize="sm"
         fontWeight={600}
         color="white"
         bg="pink.400"
-        to="/signup"
+        href="/signup"
         _hover={{
           bg: "pink.300",
         }}

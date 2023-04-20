@@ -6,6 +6,7 @@ import {
   createStateHook,
 } from "overmind-react";
 import { namespaced } from "overmind/config";
+import * as admin from "./Admin";
 import * as api from "./Api";
 import * as app from "./App";
 import * as auth from "./Auth";
@@ -18,9 +19,9 @@ import * as language from "./Language";
 import * as library from "./Library";
 import * as rental from "./Rental";
 import * as review from "./Review";
-import * as user from "./User";
 
 export const config = namespaced({
+  admin,
   api,
   app,
   auth,
@@ -33,7 +34,6 @@ export const config = namespaced({
   library,
   rental,
   review,
-  user,
 });
 
 export type Context = IContext<{
@@ -62,6 +62,6 @@ export const stateSections = Object.keys(config.state).reduce(
 export const stateSectionsWithTable = {
   [stateSections.author]: stateSections.author,
   [stateSections.book]: stateSections.book,
-  [stateSections.bookworm]: stateSections.bookworm,
+  // [stateSections.bookworm]: stateSections.bookworm,
   [stateSections.rental]: stateSections.rental,
 };

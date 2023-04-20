@@ -1,8 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
 import { useAppState } from "./business/overmind";
-import PrivateRoute from "./helpers/PrivateRoute";
+import { NavigationBar } from "./UI/components/Navigation";
 import { useToastHook } from "./UI/hooks";
 import { AdminGenrePage } from "./UI/pages/Admin/AdminGenrePage";
 import { AdminLanguagePage } from "./UI/pages/Admin/AdminLanguagePage";
@@ -11,17 +10,14 @@ import { AdminPage } from "./UI/pages/Admin/AdminPage";
 import { SignInPage, SignUpPage } from "./UI/pages/Auth";
 import { AuthorsPage } from "./UI/pages/Authors";
 import { BooksPage } from "./UI/pages/Books";
-import { BookwormsPage } from "./UI/pages/BookWorms";
 import { HomePage } from "./UI/pages/Home";
-import { PageNotFoundPage } from "./UI/pages/PageNotFound";
 import { RentalsPage } from "./UI/pages/Rentals";
-import { AddReviewPage, AllReviewsPage } from "./UI/pages/Reviews";
-import { WelcomePage } from "./UI/pages/Welcome";
 
 export default function App() {
   const [, setToast] = useToastHook();
 
   const { message, status, statusText } = useAppState().api.response;
+  const appState = useAppState().app;
 
   useEffect(() => {
     if (message && status) {
@@ -31,7 +27,18 @@ export default function App() {
 
   return (
     <Box>
-      <Routes>
+      <NavigationBar />
+      {appState.currentPage === "home" ? <HomePage /> : null}
+      {appState.currentPage === "authors" ? <AuthorsPage /> : null}
+      {appState.currentPage === "books" ? <BooksPage /> : null}
+      {appState.currentPage === "signin" ? <SignInPage /> : null}
+      {appState.currentPage === "signup" ? <SignUpPage /> : null}
+      {appState.currentPage === "admin" ? <AdminPage /> : null}
+      {appState.currentPage === "admin/genre" ? <AdminGenrePage /> : null}
+      {appState.currentPage === "admin/language" ? <AdminLanguagePage /> : null}
+      {appState.currentPage === "admin/library" ? <AdminLibraryPage /> : null}
+      {appState.currentPage === "rentals" ? <RentalsPage /> : null}
+      {/* <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/books" element={<BooksPage />} />
         <Route path="/bookworms" element={<BookwormsPage />} />
@@ -103,7 +110,7 @@ export default function App() {
           }
         />
         <Route path="*" element={<PageNotFoundPage />} />
-      </Routes>
+      </Routes> */}
     </Box>
   );
 }

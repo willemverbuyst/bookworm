@@ -1,19 +1,32 @@
 /* eslint-disable no-param-reassign */
 import { AxiosError } from "axios";
 import { Context } from "..";
+import { Page } from "../../models";
 
 export const onInitializeOvermind = async ({
   actions,
   effects,
   state,
 }: Context) => {
+  effects.app.router.initialize({
+    "/home": actions.app.showHomePage,
+    "/admin": actions.admin.showAdminPage,
+    "/admin/genre": actions.admin.showAdminGenrePage,
+    "/admin/language": actions.admin.showAdminLanguagePage,
+    "/admin/library": actions.admin.showAdminLibraryPage,
+    "/rentals": actions.rental.showRentalsPage,
+    "/authors": actions.author.showAuthorsPage,
+    "/books": actions.book.showBooksPage,
+    "/signin": actions.auth.showSignInPage,
+    "/signup": actions.auth.showSignUpPage,
+  });
   const tokenFromLocalStorage = localStorage.getItem("token");
   if (!tokenFromLocalStorage) {
     return;
   }
   actions.api.resetApiResponse();
 
-  const response = await effects.user.api.getUserByToken(tokenFromLocalStorage);
+  const response = await effects.auth.api.getUserByToken(tokenFromLocalStorage);
 
   if (!response || response instanceof AxiosError) {
     actions.api.handleErrorResponse({ response });
@@ -25,5 +38,9 @@ export const onInitializeOvermind = async ({
   localStorage.setItem("token", token);
   state.auth.token = token;
   state.auth.isSignedIn = true;
-  state.user.user = response.data;
+  state.auth.user = response.data;
+};
+
+export const showHomePage = ({ state }: Context) => {
+  state.app.currentPage = Page.HOME;
 };

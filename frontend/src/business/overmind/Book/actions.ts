@@ -1,229 +1,58 @@
 /* eslint-disable no-param-reassign */
-import { AxiosError } from "axios";
-import { Context } from "..";
+import { debounce, parallel, pipe } from "overmind";
+import * as o from "./operators";
 
-export const getBooks = async (
-  { actions, effects, state }: Context,
-  {
-    genre,
-    language,
-    limit,
-    page,
-  }: {
-    genre: string | null;
-    language: string | null;
-    limit: number;
-    page: number;
-  }
-) => {
-  state.app.isLoading = true;
-  const response = await effects.book.api.getBooks({
-    genre,
-    language,
-    limit,
-    page,
-  });
+export const showBooksPage = pipe(
+  o.setBooksPage(),
+  o.shouldLoadBooks(),
+  parallel(
+    o.getBooks(),
+    o.getBookStatsGenre(),
+    o.getBookStatsLanguage(),
+    o.getBookStatsYearPublished(),
+    o.getGenres(),
+    o.getLanguages()
+  )
+);
 
-  if (!response || response instanceof AxiosError) {
-    actions.api.handleErrorResponse({ response });
-  } else {
-    state.book.getAllApi = response;
-  }
+export const changeLimit = pipe(
+  o.setLimit(),
+  o.resetQueryString(),
+  o.getBooks()
+);
 
-  state.app.isLoading = false;
-};
+export const changePage = pipe(o.setPage(), o.resetQueryString(), o.getBooks());
 
-export const getBookStatsGenre = async ({
-  actions,
-  effects,
-  state,
-}: Context) => {
-  state.app.isLoading = true;
-  const response = await effects.book.api.getBookStatsGenres();
+export const changeGenreFilter = pipe(
+  o.setGenreFilter(),
+  o.resetQueryString(),
+  o.getBooks()
+);
 
-  if (!response || response instanceof AxiosError) {
-    actions.api.handleErrorResponse({ response });
-  } else {
-    state.book.statsGenreApi = response;
-  }
+export const changeLanguageFilter = pipe(
+  o.setLanguageFilter(),
+  o.resetQueryString(),
+  o.getBooks()
+);
 
-  state.app.isLoading = false;
-};
+export const usePagination = pipe(
+  o.setPagination(),
+  o.resetQueryString(),
+  o.resetGenre(),
+  o.resetLanguage(),
+  o.resetLimit(),
+  o.resetPage(),
+  o.getBooks()
+);
 
-export const getBookStatsLanguage = async ({
-  actions,
-  effects,
-  state,
-}: Context) => {
-  state.app.isLoading = true;
-  const response = await effects.book.api.getBookStatsLanguages();
+export const showAllRows = pipe(
+  o.setShowAll(),
+  o.resetQueryString(),
+  o.resetGenre(),
+  o.resetLanguage(),
+  o.setLimitToTotal(),
+  o.resetPage(),
+  o.getBooks()
+);
 
-  if (!response || response instanceof AxiosError) {
-    actions.api.handleErrorResponse({ response });
-  } else {
-    state.book.statsLanguageApi = response;
-  }
-
-  state.app.isLoading = false;
-};
-
-export const getBookStatsYearPublished = async ({
-  actions,
-  effects,
-  state,
-}: Context) => {
-  state.app.isLoading = true;
-  const response = await effects.book.api.getBookStatsYearPublished();
-
-  if (!response || response instanceof AxiosError) {
-    actions.api.handleErrorResponse({ response });
-  } else {
-    state.book.statsYearPublishedApi = response;
-  }
-
-  state.app.isLoading = false;
-};
-
-export const setGenreFilter = (
-  { actions, state }: Context,
-  { genre }: { genre: string }
-) => {
-  const {
-    filter: { language },
-    limit,
-    showAll,
-  } = state.book.ui.table;
-  const { total } = state.book.getAllApi || {};
-
-  state.book.ui.table.filter.genre = genre;
-  state.book.ui.table.page = 1;
-
-  if (showAll && total) {
-    actions.book.getBooks({
-      genre: null,
-      language: null,
-      limit: total,
-      page: 1,
-    });
-    actions.book.setQueryString({ queryString: "" });
-  } else {
-    actions.book.getBooks({ genre, language, limit, page: 1 });
-    actions.book.setQueryString({ queryString: "" });
-  }
-};
-
-export const setLanguageFilter = (
-  { actions, state }: Context,
-  { language }: { language: string }
-) => {
-  const {
-    filter: { genre },
-    limit,
-    showAll,
-  } = state.book.ui.table;
-  const { total } = state.book.getAllApi || {};
-
-  state.book.ui.table.filter.language = language;
-  state.book.ui.table.page = 1;
-
-  if (showAll && total) {
-    actions.book.getBooks({
-      genre: null,
-      language: null,
-      limit: total,
-      page: 1,
-    });
-    actions.book.setQueryString({ queryString: "" });
-  } else {
-    actions.book.getBooks({ genre, language, limit, page: 1 });
-    actions.book.setQueryString({ queryString: "" });
-  }
-};
-
-export const setLimit = (
-  { actions, state }: Context,
-  { limit }: { limit: number }
-) => {
-  const {
-    filter: { genre, language },
-    showAll,
-    page,
-  } = state.book.ui.table;
-  const { total } = state.book.getAllApi || {};
-
-  state.book.ui.table.limit = limit;
-
-  if (showAll && total) {
-    actions.book.getBooks({
-      genre: null,
-      language: null,
-      limit: total,
-      page: 1,
-    });
-    actions.book.setQueryString({ queryString: "" });
-  } else {
-    actions.book.getBooks({ genre, language, limit, page });
-    actions.book.setQueryString({ queryString: "" });
-  }
-};
-
-export const setPage = (
-  { actions, state }: Context,
-  { page }: { page: number }
-) => {
-  const {
-    filter: { genre, language },
-    limit,
-    showAll,
-  } = state.book.ui.table;
-  const { total } = state.book.getAllApi || {};
-
-  state.book.ui.table.page = page;
-
-  if (showAll && total) {
-    actions.book.getBooks({
-      genre: null,
-      language: null,
-      limit: total,
-      page: 1,
-    });
-    actions.book.setQueryString({ queryString: "" });
-  } else {
-    actions.book.getBooks({ genre, language, limit, page });
-    actions.book.setQueryString({ queryString: "" });
-  }
-};
-
-export const setQueryString = (
-  { state }: Context,
-  { queryString }: { queryString: string }
-) => {
-  state.book.ui.table.queryString = queryString;
-};
-
-export const setShowAll = (
-  { actions, state }: Context,
-  { showAll }: { showAll: boolean }
-) => {
-  const {
-    filter: { genre, language },
-    limit,
-    page,
-  } = state.book.ui.table;
-  const { total } = state.book.getAllApi || {};
-
-  state.book.ui.table.showAll = showAll;
-
-  if (showAll && total) {
-    actions.book.getBooks({
-      genre: null,
-      language: null,
-      limit: total,
-      page: 1,
-    });
-    actions.book.setQueryString({ queryString: "" });
-  } else {
-    actions.book.getBooks({ genre, language, limit, page });
-    actions.book.setQueryString({ queryString: "" });
-  }
-};
+export const search = (debounce(100), o.setQueryString());

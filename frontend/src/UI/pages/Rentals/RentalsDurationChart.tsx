@@ -1,11 +1,9 @@
 import { Box, Spinner } from "@chakra-ui/react";
 import { Bar, Cell, ComposedChart, LabelList, XAxis } from "recharts";
 import { useAppState } from "../../../business/overmind";
-import { useGetRentalStatsDuration } from "../../hooks";
 
 export function RentalsDurationChart() {
-  useGetRentalStatsDuration();
-  const { isLoading } = useAppState().app;
+  const { isLoading } = useAppState().rental;
   const data = useAppState().rental.statsDuration || [];
 
   if (isLoading) {

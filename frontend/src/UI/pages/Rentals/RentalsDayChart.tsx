@@ -8,11 +8,9 @@ import {
   RadarChart,
 } from "recharts";
 import { useAppState } from "../../../business/overmind";
-import { useGetRentalStatsDay } from "../../hooks/useGetRentalStatsDay";
 
 export function RentalsDayChart() {
-  useGetRentalStatsDay();
-  const { isLoading } = useAppState().app;
+  const { isLoading } = useAppState().rental;
   const data = useAppState().rental.statsDay || [];
 
   if (isLoading) {

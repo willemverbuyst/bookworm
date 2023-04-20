@@ -5,10 +5,10 @@ export function Filter() {
   const {
     filter: { returned },
   } = useAppState().rental.ui.table;
-  const { setReturnedFilter } = useActions().rental;
+  const { changeReturnedFilter } = useActions().rental;
 
   const handleClick = (f: string) => {
-    setReturnedFilter({ returned: f });
+    changeReturnedFilter({ returned: f });
   };
 
   return (

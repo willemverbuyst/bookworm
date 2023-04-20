@@ -6,14 +6,10 @@ import {
   useAppState,
 } from "../../../business/overmind";
 import { Pagination, TableOverview } from "../../components/Table";
-import { useGetBooks, useGetGenres, useGetLanguages } from "../../hooks";
 import { Filter } from "./Filter";
 
 export function BooksTable() {
-  useGetGenres();
-  useGetLanguages();
-  useGetBooks();
-  const { isLoading } = useAppState().app;
+  const { isLoading } = useAppState().book;
   const {
     getAllApi,
     overview,
@@ -22,10 +18,10 @@ export function BooksTable() {
     },
   } = useAppState().book;
   const { total } = getAllApi || {};
-  const { setQueryString } = useActions().book;
+  const { search } = useActions().book;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQueryString({ queryString: e.target.value });
+    search({ queryString: e.target.value });
   };
 
   if (isLoading) {

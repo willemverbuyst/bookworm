@@ -25,7 +25,8 @@ export function Pagination({ total, state }: Props) {
     page: currentPage,
     showAll,
   } = useAppState()[state].ui.table || {};
-  const { setLimit, setPage, setShowAll } = useActions()[state];
+  const { changeLimit, changePage, showAllRows, usePagination } =
+    useActions()[state];
 
   const totalNumberOfPages = total ? Math.ceil(total / limit) : 0;
   const dataSet = [5, 10, 15, 20, 25, 30].map((i) => ({
@@ -34,17 +35,17 @@ export function Pagination({ total, state }: Props) {
   }));
 
   const handleClick = (pageNumber: number) => {
-    setPage({ page: pageNumber });
+    changePage({ page: pageNumber });
   };
 
   const handleClickLeft = () => {
     if (currentPage === 1) return;
-    setPage({ page: currentPage - 1 });
+    changePage({ page: currentPage - 1 });
   };
 
   const handleClickRight = () => {
     if (currentPage === totalNumberOfPages) return;
-    setPage({ page: currentPage + 1 });
+    changePage({ page: currentPage + 1 });
   };
 
   const calculateValue = (btnNumber: number) => {
@@ -60,17 +61,15 @@ export function Pagination({ total, state }: Props) {
   };
 
   const handleBtnClick = () => {
-    if (total && !showAll) {
-      setShowAll({ showAll: true });
-    } else if (total && showAll) {
-      setShowAll({ showAll: false });
-      setLimit({ limit });
-      setPage({ page: 1 });
+    if (total && showAll) {
+      usePagination();
+    } else if (total && !showAll) {
+      showAllRows();
     }
   };
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setLimit({ limit: Number(e.target.value) });
+    changeLimit({ limit: Number(e.target.value) });
   };
 
   const valueBtnOne = 1;

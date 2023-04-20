@@ -12,5 +12,6 @@ type Rating = "1" | "2" | "3" | "4" | "5";
 
 export interface ReviewState {
   getAllApi: ApiResponse<Review[]> | null;
+  isLoading: boolean;
   overview: { [key in Rating[number]]: Array<Review> } | null;
 }

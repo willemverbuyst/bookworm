@@ -1,6 +1,17 @@
 /* eslint-disable no-param-reassign */
 import { AxiosError } from "axios";
 import { Context } from "..";
+import { Page } from "../../models";
+
+export const showSignInPage = ({ state }: Context) => {
+  state.app.currentPage = Page.SIGNIN;
+};
+
+export const showSignUpPage = ({ actions, state }: Context) => {
+  actions.country.getCountries();
+  actions.library.getLibraries();
+  state.app.currentPage = Page.SIGNUP;
+};
 
 interface SignInCredentials {
   email: string;
@@ -13,7 +24,7 @@ export const signInUser = async (
 ) => {
   state.app.isLoading = true;
   state.api.response = { message: "", status: undefined };
-  const response = await effects.user.api.getUser(email, password);
+  const response = await effects.auth.api.getUser(email, password);
 
   if (!response || response instanceof AxiosError) {
     actions.api.handleErrorResponse({ response });
@@ -28,7 +39,7 @@ export const signInUser = async (
   localStorage.setItem("token", token);
   state.auth.token = token;
   state.auth.isSignedIn = true;
-  state.user.user = response.data;
+  state.auth.user = response.data;
   state.app.isLoading = false;
 };
 
@@ -38,7 +49,7 @@ export const logOutUser = ({ state }: Context) => {
   localStorage.removeItem("token");
   state.auth.token = "";
   state.auth.isSignedIn = false;
-  state.user.user = null;
+  state.auth.user = null;
   state.api.response = { message: "", status: undefined };
   state.app.isLoading = false;
 };
