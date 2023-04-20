@@ -12,8 +12,8 @@ export const onInitializeOvermind = async ({
     "/home": actions.app.showHomePage,
     "/authors": actions.author.showAuthorsPage,
     "/books": actions.book.showBooksPage,
-    "/signin": actions.app.showSignInPage,
-    "/signup": actions.app.showSignUpPage,
+    "/signin": actions.auth.showSignInPage,
+    "/signup": actions.auth.showSignUpPage,
   });
   const tokenFromLocalStorage = localStorage.getItem("token");
   if (!tokenFromLocalStorage) {
@@ -21,7 +21,7 @@ export const onInitializeOvermind = async ({
   }
   actions.api.resetApiResponse();
 
-  const response = await effects.user.api.getUserByToken(tokenFromLocalStorage);
+  const response = await effects.auth.api.getUserByToken(tokenFromLocalStorage);
 
   if (!response || response instanceof AxiosError) {
     actions.api.handleErrorResponse({ response });
@@ -33,21 +33,9 @@ export const onInitializeOvermind = async ({
   localStorage.setItem("token", token);
   state.auth.token = token;
   state.auth.isSignedIn = true;
-  state.user.user = response.data;
+  state.auth.user = response.data;
 };
 
 export const showHomePage = ({ state }: Context) => {
   state.app.currentPage = Page.HOME;
-};
-
-export const showBooksPage = ({ state }: Context) => {
-  state.app.currentPage = Page.BOOKS;
-};
-
-export const showSignInPage = ({ state }: Context) => {
-  state.app.currentPage = Page.SIGNIN;
-};
-
-export const showSignUpPage = ({ state }: Context) => {
-  state.app.currentPage = Page.SIGNUP;
 };

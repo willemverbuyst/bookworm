@@ -15,7 +15,6 @@ import {
   ControlledSelect,
   ControlledTextInput,
 } from "../../components/Controllers";
-import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
 import { useGetCountries } from "../../hooks/useGetCountries";
 import { useGetLibraries } from "../../hooks/useGetLibraries";
@@ -52,80 +51,77 @@ export function SignUpPage() {
   };
 
   return (
-    <>
-      <NavigationBar />
-      <Container centerContent>
-        <PageTitle title="Sign Up" />
+    <Container centerContent>
+      <PageTitle title="Sign Up" />
 
-        {isSignedIn ? (
-          <Box>
-            <Text fontSize="3xl">you are already </Text>have an account
-          </Box>
-        ) : (
-          <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
-            <VStack spacing={6}>
-              <HStack>
-                <ControlledTextInput
-                  name="firstName"
-                  control={control}
-                  label="first name"
-                  error={errors.firstName}
-                  required
-                />
-                <ControlledTextInput
-                  name="lastName"
-                  control={control}
-                  label="last name"
-                  error={errors.lastName}
-                  required
-                />
-              </HStack>
+      {isSignedIn ? (
+        <Box>
+          <Text fontSize="3xl">you are already </Text>have an account
+        </Box>
+      ) : (
+        <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
+          <VStack spacing={6}>
+            <HStack>
               <ControlledTextInput
-                name="email"
+                name="firstName"
                 control={control}
-                label="email"
-                error={errors.email}
+                label="first name"
+                error={errors.firstName}
                 required
               />
               <ControlledTextInput
-                name="phoneNumber"
+                name="lastName"
                 control={control}
-                label="phone"
-                error={errors.phoneNumber}
+                label="last name"
+                error={errors.lastName}
                 required
               />
-              <ControlledSelect
-                dataSet={dataSetCountries}
-                name="country"
-                control={control}
-                label="country"
-                error={errors.country}
-                required
-              />
-              <LibraryDetails isOpen={isOpen} onClose={onClose} />
-              <ControlledSelect
-                dataSet={dataSetLibraries}
-                name="library"
-                control={control}
-                label="library"
-                error={errors.library}
-                required
-                informAction={onOpen}
-              />
-              <ControlledTextInput
-                name="password"
-                control={control}
-                label="password"
-                error={errors.password}
-                required
-              />
-              <Button type="submit" colorScheme="teal" size="sm">
-                Submit
-              </Button>
-            </VStack>
-          </Box>
-        )}
-      </Container>
-    </>
+            </HStack>
+            <ControlledTextInput
+              name="email"
+              control={control}
+              label="email"
+              error={errors.email}
+              required
+            />
+            <ControlledTextInput
+              name="phoneNumber"
+              control={control}
+              label="phone"
+              error={errors.phoneNumber}
+              required
+            />
+            <ControlledSelect
+              dataSet={dataSetCountries}
+              name="country"
+              control={control}
+              label="country"
+              error={errors.country}
+              required
+            />
+            <LibraryDetails isOpen={isOpen} onClose={onClose} />
+            <ControlledSelect
+              dataSet={dataSetLibraries}
+              name="library"
+              control={control}
+              label="library"
+              error={errors.library}
+              required
+              informAction={onOpen}
+            />
+            <ControlledTextInput
+              name="password"
+              control={control}
+              label="password"
+              error={errors.password}
+              required
+            />
+            <Button type="submit" colorScheme="teal" size="sm">
+              Submit
+            </Button>
+          </VStack>
+        </Box>
+      )}
+    </Container>
   );
 }

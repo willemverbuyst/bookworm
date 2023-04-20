@@ -5,7 +5,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useActions, useAppState } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
-import { NavigationBar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
 import {
   defaultValuesSignIn,
@@ -26,7 +25,7 @@ export function SignInPage() {
     resolver: zodResolver(validationSchemaSignIn),
   });
   const { isSignedIn } = useAppState().auth;
-  const { signInUser } = useActions().user;
+  const { signInUser } = useActions().auth;
 
   const onSubmit: SubmitHandler<FormFieldsSignIn> = async (data) => {
     await signInUser(data);
@@ -40,39 +39,36 @@ export function SignInPage() {
   }, [isSignedIn]);
 
   return (
-    <>
-      <NavigationBar />
-      <Flex flexDirection="column" alignItems="center">
-        <PageTitle title="Sign In" />
+    <Flex flexDirection="column" alignItems="center">
+      <PageTitle title="Sign In" />
 
-        {isSignedIn ? (
-          <Box>
-            <Text fontSize="3xl">you are already logged in</Text>
-          </Box>
-        ) : (
-          <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
-            <VStack spacing={6}>
-              <ControlledTextInput
-                name="email"
-                control={control}
-                label="email"
-                error={errors.email}
-                required
-              />
-              <ControlledTextInput
-                name="password"
-                control={control}
-                label="password"
-                error={errors.password}
-                required
-              />
-              <Button type="submit" colorScheme="teal" size="sm">
-                Submit
-              </Button>
-            </VStack>
-          </Box>
-        )}
-      </Flex>
-    </>
+      {isSignedIn ? (
+        <Box>
+          <Text fontSize="3xl">you are already logged in</Text>
+        </Box>
+      ) : (
+        <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
+          <VStack spacing={6}>
+            <ControlledTextInput
+              name="email"
+              control={control}
+              label="email"
+              error={errors.email}
+              required
+            />
+            <ControlledTextInput
+              name="password"
+              control={control}
+              label="password"
+              error={errors.password}
+              required
+            />
+            <Button type="submit" colorScheme="teal" size="sm">
+              Submit
+            </Button>
+          </VStack>
+        </Box>
+      )}
+    </Flex>
   );
 }

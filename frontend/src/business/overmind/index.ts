@@ -18,7 +18,6 @@ import * as language from "./Language";
 import * as library from "./Library";
 import * as rental from "./Rental";
 import * as review from "./Review";
-import * as user from "./User";
 
 export const config = namespaced({
   api,
@@ -33,7 +32,6 @@ export const config = namespaced({
   library,
   rental,
   review,
-  user,
 });
 
 export type Context = IContext<{
