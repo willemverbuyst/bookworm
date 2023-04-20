@@ -6,6 +6,7 @@ import {
   createStateHook,
 } from "overmind-react";
 import { namespaced } from "overmind/config";
+import * as admin from "./Admin";
 import * as api from "./Api";
 import * as app from "./App";
 import * as auth from "./Auth";
@@ -20,6 +21,7 @@ import * as rental from "./Rental";
 import * as review from "./Review";
 
 export const config = namespaced({
+  admin,
   api,
   app,
   auth,

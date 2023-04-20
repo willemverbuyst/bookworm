@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useAppState } from "./business/overmind";
 import { NavigationBar } from "./UI/components/Navigation";
 import { useToastHook } from "./UI/hooks";
+import { AdminPage } from "./UI/pages/Admin/AdminPage";
 import { SignInPage, SignUpPage } from "./UI/pages/Auth";
 import { AuthorsPage } from "./UI/pages/Authors";
 import { BooksPage } from "./UI/pages/Books";
@@ -28,6 +29,7 @@ export default function App() {
       {appState.currentPage === "books" ? <BooksPage /> : null}
       {appState.currentPage === "signin" ? <SignInPage /> : null}
       {appState.currentPage === "signup" ? <SignUpPage /> : null}
+      {appState.currentPage === "admin" ? <AdminPage /> : null}
       {/* <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/books" element={<BooksPage />} />
