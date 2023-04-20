@@ -4,8 +4,8 @@ export const state: AppState = {
   isLoading: false,
   currentPage: "",
   publicNavItems: [
-    { label: "Books", href: "/books" },
     { label: "Authors", href: "/authors" },
+    { label: "Books", href: "/books" },
   ],
   privateNavItems: [
     { label: "Home", href: "/home" },

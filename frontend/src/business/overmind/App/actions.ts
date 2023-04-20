@@ -14,6 +14,7 @@ export const onInitializeOvermind = async ({
     "/admin/genre": actions.admin.showAdminGenrePage,
     "/admin/language": actions.admin.showAdminLanguagePage,
     "/admin/library": actions.admin.showAdminLibraryPage,
+    "/rentals": actions.rental.showRentalsPage,
     "/authors": actions.author.showAuthorsPage,
     "/books": actions.book.showBooksPage,
     "/signin": actions.auth.showSignInPage,

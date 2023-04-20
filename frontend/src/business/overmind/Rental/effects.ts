@@ -4,19 +4,19 @@ export const api = {
   getRentals: async ({
     limit = 10,
     page = 1,
-    filter,
+    returned,
   }: {
     limit: number;
     page: number;
-    filter: string;
+    returned?: string;
   }) => {
     let url = `rentals/?limit=${limit}&page=${page}`;
 
-    if (filter === "returned") {
+    if (returned === "returned") {
       url += "&filter=returned";
     }
 
-    if (filter === "not_returned") {
+    if (returned === "not_returned") {
       url += "&filter=not_returned";
     }
 

@@ -6,12 +6,10 @@ import {
   useAppState,
 } from "../../../business/overmind";
 import { Pagination, TableOverview } from "../../components/Table";
-import { useGetRentals } from "../../hooks";
 import { Filter } from "./Filter";
 
 export function RentalsTable() {
-  useGetRentals();
-  const { isLoading } = useAppState().app;
+  const { isLoading } = useAppState().rental;
   const {
     getAllApi,
     overview,
@@ -20,10 +18,10 @@ export function RentalsTable() {
     },
   } = useAppState().rental;
   const { total } = getAllApi || {};
-  const { setQueryString } = useActions().rental;
+  const { search } = useActions().rental;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQueryString({ queryString: e.target.value });
+    search({ queryString: e.target.value });
   };
 
   if (isLoading) {
