@@ -16,8 +16,6 @@ import {
   ControlledTextInput,
 } from "../../components/Controllers";
 import { PageTitle } from "../../components/Text";
-import { useGetCountries } from "../../hooks/useGetCountries";
-import { useGetLibraries } from "../../hooks/useGetLibraries";
 import {
   defaultValuesSignUp,
   FormfieldsSignUp,
@@ -26,8 +24,6 @@ import {
 import { LibraryDetails } from "./LibraryDetails";
 
 export function SignUpPage() {
-  useGetCountries();
-  useGetLibraries();
   const id = useId();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dataSetCountries = useAppState().country.selectOptions || [];

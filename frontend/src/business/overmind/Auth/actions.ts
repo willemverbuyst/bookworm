@@ -7,7 +7,9 @@ export const showSignInPage = ({ state }: Context) => {
   state.app.currentPage = Page.SIGNIN;
 };
 
-export const showSignUpPage = ({ state }: Context) => {
+export const showSignUpPage = ({ actions, state }: Context) => {
+  actions.country.getCountries();
+  actions.library.getLibraries();
   state.app.currentPage = Page.SIGNUP;
 };
 
