@@ -36,9 +36,10 @@ A project to connect and try out some libraries, tools and techniques in a semi-
 ![](./screenshots/Screenshot_books_year_published.png)
 ![](./screenshots/Screenshot_authors_pagesvsbooks.png)
 ![](./screenshots/Screenshot_rentals_duration.png)
-![](./screenshots/Screenshot_api_docs.png)
 
 ## Documentation for API
+
+![](./screenshots/Screenshot_api_docs.png)
 
 Swagger docs at localhost:8000/docs
 
