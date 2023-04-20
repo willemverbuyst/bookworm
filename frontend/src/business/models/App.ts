@@ -18,6 +18,7 @@ export const Page = {
   ADMIN_LIBRARY: "admin/library",
   BOOKWORMS: "bookworms",
   RENTALS: "rentals",
+  REVIEWS_NEW: "reviews/new",
   REVIEWS: "reviews",
   SIGNIN: "signin",
   SIGNUP: "signup",

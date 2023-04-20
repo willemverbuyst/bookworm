@@ -12,6 +12,7 @@ import { AuthorsPage } from "./UI/pages/Authors";
 import { BooksPage } from "./UI/pages/Books";
 import { HomePage } from "./UI/pages/Home";
 import { RentalsPage } from "./UI/pages/Rentals";
+import { AddReviewPage, AllReviewsPage } from "./UI/pages/Reviews";
 
 export default function App() {
   const [, setToast] = useToastHook();
@@ -38,6 +39,8 @@ export default function App() {
       {appState.currentPage === "admin/language" ? <AdminLanguagePage /> : null}
       {appState.currentPage === "admin/library" ? <AdminLibraryPage /> : null}
       {appState.currentPage === "rentals" ? <RentalsPage /> : null}
+      {appState.currentPage === "reviews" ? <AllReviewsPage /> : null}
+      {appState.currentPage === "reviews/new" ? <AddReviewPage /> : null}
       {/* <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/books" element={<BooksPage />} />

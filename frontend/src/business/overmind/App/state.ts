@@ -18,7 +18,7 @@ export const state: AppState = {
         {
           label: "Add review",
           subLabel: "Add a review for a book your read",
-          href: "/reviews/add",
+          href: "/reviews/new",
         },
         {
           label: "Reviews",
