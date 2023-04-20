@@ -24,7 +24,7 @@
     "date-fns": "^2.29.3",
     "dayzed": "^3.2.3",
     "framer-motion": "^9.0.4",
-    "msw": "^1.1.0",
+    "msw": "^1.2.1",
     "overmind": "^28.0.2",
     "overmind-react": "^29.0.2",
     "page": "^1.11.6",
