@@ -57,7 +57,7 @@ export const getBookWormById =
 export const getBookwormStatsLibrary =
   () =>
   async ({ actions, effects, state }: Context) => {
-    state.app.isLoading = true;
+    state.bookworm.isLoading = true;
     const response = await effects.bookworm.api.getBookwormStatsibrary();
 
     if (!response || response instanceof AxiosError) {
@@ -66,7 +66,7 @@ export const getBookwormStatsLibrary =
       state.bookworm.statsLibraryApi = response;
     }
 
-    state.app.isLoading = false;
+    state.bookworm.isLoading = false;
   };
 
 export const setLimit =

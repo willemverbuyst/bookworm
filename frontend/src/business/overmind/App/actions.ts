@@ -10,20 +10,20 @@ export const onInitializeOvermind = async ({
 }: Context) => {
   state.app.isLoading = true;
   effects.app.router.initialize({
-    "/": actions.app.showWelcomePage,
-    "/home": actions.app.showHomePage,
-    "/admin": actions.admin.showAdminPage,
-    "/admin/genre": actions.admin.showAdminGenrePage,
-    "/admin/language": actions.admin.showAdminLanguagePage,
-    "/admin/library": actions.admin.showAdminLibraryPage,
-    "/rentals": actions.rental.showRentalsPage,
-    "/reviews": actions.review.showReviewsPage,
-    "/reviews/new": actions.review.showAddReviewPage,
-    "/bookworms": actions.bookworm.showBookwormsPage,
-    "/authors": actions.author.showAuthorsPage,
-    "/books": actions.book.showBooksPage,
-    "/signin": actions.auth.showSignInPage,
-    "/signup": actions.auth.showSignUpPage,
+    [Page.WELCOME]: actions.app.showWelcomePage,
+    [Page.HOME]: actions.app.showHomePage,
+    [Page.ADMIN]: actions.admin.showAdminPage,
+    [Page.ADMIN_GENRE]: actions.admin.showAdminGenrePage,
+    [Page.ADMIN_LANGUAGE]: actions.admin.showAdminLanguagePage,
+    [Page.ADMIN_LIBRARY]: actions.admin.showAdminLibraryPage,
+    [Page.RENTALS]: actions.rental.showRentalsPage,
+    [Page.REVIEWS]: actions.review.showReviewsPage,
+    [Page.REVIEWS_NEW]: actions.review.showAddReviewPage,
+    [Page.BOOKWORMS]: actions.bookworm.showBookwormsPage,
+    [Page.AUTHORS]: actions.author.showAuthorsPage,
+    [Page.BOOKS]: actions.book.showBooksPage,
+    [Page.SIGNIN]: actions.auth.showSignInPage,
+    [Page.SIGNUP]: actions.auth.showSignUpPage,
   });
   const tokenFromLocalStorage = localStorage.getItem("token");
   if (!tokenFromLocalStorage) {
