@@ -4,7 +4,7 @@ import { UserDetails } from "../../components/Cards";
 import { PageTitle } from "../../components/Text";
 
 export function HomePage() {
-  const { isLoading } = useAppState().app;
+  const { isLoading } = useAppState().auth;
   const { user } = useAppState().auth;
 
   if (isLoading) {

@@ -8,28 +8,35 @@ export const onInitializeOvermind = async ({
   effects,
   state,
 }: Context) => {
+  state.app.isLoading = true;
   effects.app.router.initialize({
-    "/home": actions.app.showHomePage,
-    "/admin": actions.admin.showAdminPage,
-    "/admin/genre": actions.admin.showAdminGenrePage,
-    "/admin/language": actions.admin.showAdminLanguagePage,
-    "/admin/library": actions.admin.showAdminLibraryPage,
-    "/rentals": actions.rental.showRentalsPage,
-    "/authors": actions.author.showAuthorsPage,
-    "/books": actions.book.showBooksPage,
-    "/signin": actions.auth.showSignInPage,
-    "/signup": actions.auth.showSignUpPage,
+    [Page.WELCOME]: actions.app.showWelcomePage,
+    [Page.HOME]: actions.app.showHomePage,
+    [Page.ADMIN]: actions.admin.showAdminPage,
+    [Page.ADMIN_GENRE]: actions.admin.showAdminGenrePage,
+    [Page.ADMIN_LANGUAGE]: actions.admin.showAdminLanguagePage,
+    [Page.ADMIN_LIBRARY]: actions.admin.showAdminLibraryPage,
+    [Page.RENTALS]: actions.rental.showRentalsPage,
+    [Page.REVIEWS]: actions.review.showReviewsPage,
+    [Page.REVIEWS_NEW]: actions.review.showAddReviewPage,
+    [Page.BOOKWORMS]: actions.bookworm.showBookwormsPage,
+    [Page.AUTHORS]: actions.author.showAuthorsPage,
+    [Page.BOOKS]: actions.book.showBooksPage,
+    [Page.SIGNIN]: actions.auth.showSignInPage,
+    [Page.SIGNUP]: actions.auth.showSignUpPage,
   });
   const tokenFromLocalStorage = localStorage.getItem("token");
   if (!tokenFromLocalStorage) {
+    state.app.isLoading = false;
     return;
   }
-  actions.api.resetApiResponse();
 
+  actions.api.resetApiResponse();
   const response = await effects.auth.api.getUserByToken(tokenFromLocalStorage);
 
   if (!response || response instanceof AxiosError) {
     actions.api.handleErrorResponse({ response });
+    state.app.isLoading = false;
     return;
   }
 
@@ -39,8 +46,13 @@ export const onInitializeOvermind = async ({
   state.auth.token = token;
   state.auth.isSignedIn = true;
   state.auth.user = response.data;
+  state.app.isLoading = false;
 };
 
 export const showHomePage = ({ state }: Context) => {
   state.app.currentPage = Page.HOME;
+};
+
+export const showWelcomePage = ({ state }: Context) => {
+  state.app.currentPage = Page.WELCOME;
 };

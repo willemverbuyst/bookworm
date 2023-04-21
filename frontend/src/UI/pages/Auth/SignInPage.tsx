@@ -1,8 +1,9 @@
 import { Box, Button, Flex, Text, VStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import page from "page";
 import { useEffect, useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Page } from "../../../business/models";
 import { useActions, useAppState } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
 import { PageTitle } from "../../components/Text";
@@ -14,7 +15,6 @@ import {
 
 export function SignInPage() {
   const id = useId();
-  const navigate = useNavigate();
   const {
     control,
     formState: { errors },
@@ -34,7 +34,7 @@ export function SignInPage() {
 
   useEffect(() => {
     if (isSignedIn) {
-      navigate("/home");
+      page(Page.HOME);
     }
   }, [isSignedIn]);
 
@@ -44,7 +44,7 @@ export function SignInPage() {
 
       {isSignedIn ? (
         <Box>
-          <Text fontSize="3xl">you are already logged in</Text>
+          <Text fontSize="3xl">you are logged in</Text>
         </Box>
       ) : (
         <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)}>
