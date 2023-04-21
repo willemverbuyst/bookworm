@@ -6,13 +6,13 @@ export const api = {
   getBookworms: async ({
     limit = 10,
     page = 1,
-    filter,
+    active,
   }: {
     limit: number;
     page: number;
-    filter: boolean;
+    active: boolean;
   }) =>
-    apiGet({ url: `bookworms/?limit=${limit}&page=${page}&active=${filter}` }),
+    apiGet({ url: `bookworms/?limit=${limit}&page=${page}&active=${active}` }),
 
   getBookwormStatsibrary: () => apiGet({ url: "bookworms/stats/?by=library" }),
 };

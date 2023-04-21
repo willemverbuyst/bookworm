@@ -4,6 +4,7 @@ import { compare, getColorIndex } from "../../functions";
 import { BookwormState } from "../../models";
 
 export const state: BookwormState = {
+  isLoading: false,
   getAllApi: null,
   bookwormDetailsApi: null,
   overview: derived(({ getAllApi }: BookwormState) => {

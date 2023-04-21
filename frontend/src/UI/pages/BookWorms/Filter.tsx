@@ -5,10 +5,10 @@ export function Filter() {
   const {
     filter: { active },
   } = useAppState().bookworm.ui.table;
-  const { setActiveFilter } = useActions().bookworm;
+  const { changeActiveFilter } = useActions().bookworm;
 
   const handleClick = (f: boolean) => {
-    setActiveFilter({ active: f });
+    changeActiveFilter({ active: f });
   };
 
   return (

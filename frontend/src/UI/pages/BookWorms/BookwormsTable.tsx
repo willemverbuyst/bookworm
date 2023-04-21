@@ -6,12 +6,10 @@ import {
   useAppState,
 } from "../../../business/overmind";
 import { Pagination, TableOverview } from "../../components/Table";
-import { useGetBooksworms } from "../../hooks";
 import { BookwormsDetails } from "./BookwormsDetails";
 import { Filter } from "./Filter";
 
 export function BookwormsTable() {
-  useGetBooksworms();
   const { isLoading } = useAppState().app;
   const {
     getAllApi,
@@ -22,15 +20,15 @@ export function BookwormsTable() {
   } = useAppState().bookworm;
   const { total } = getAllApi || {};
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { getBookWormById, setQueryString } = useActions().bookworm;
+  const { getBookworm, search } = useActions().bookworm;
 
   const getUser = async (id: string) => {
-    await getBookWormById({ id });
+    await getBookworm({ id });
     onOpen();
   };
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQueryString({ queryString: e.target.value });
+    search({ queryString: e.target.value });
   };
 
   if (isLoading) {

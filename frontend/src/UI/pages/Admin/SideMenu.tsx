@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { NavItem } from "../../../business/models";
-import { useAdminMenuItems } from "../../hooks/useAdminMenuItems";
+import { useAdminMenuItems } from "../../hooks";
 
 function MenuItem({ label, href }: NavItem) {
   return (

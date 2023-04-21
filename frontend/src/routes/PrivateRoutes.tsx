@@ -4,6 +4,7 @@ import { AdminGenrePage } from "../UI/pages/Admin/AdminGenrePage";
 import { AdminLanguagePage } from "../UI/pages/Admin/AdminLanguagePage";
 import { AdminLibraryPage } from "../UI/pages/Admin/AdminLibraryPage";
 import { AdminPage } from "../UI/pages/Admin/AdminPage";
+import { BookwormsPage } from "../UI/pages/BookWorms";
 import { HomePage } from "../UI/pages/Home";
 import { RentalsPage } from "../UI/pages/Rentals";
 import { AddReviewPage, AllReviewsPage } from "../UI/pages/Reviews";
@@ -27,6 +28,7 @@ export default function PrivateRoutes() {
       {appState.currentPage === Page.ADMIN_LIBRARY ? (
         <AdminLibraryPage />
       ) : null}
+      {appState.currentPage === Page.BOOKWORMS ? <BookwormsPage /> : null}
       {appState.currentPage === Page.RENTALS ? <RentalsPage /> : null}
       {appState.currentPage === Page.REVIEWS ? <AllReviewsPage /> : null}
       {appState.currentPage === Page.REVIEWS_NEW ? <AddReviewPage /> : null}
