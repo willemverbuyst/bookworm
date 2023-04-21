@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import page from "page";
 import { useEffect, useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Page } from "../../../business/models";
 import { useActions, useAppState } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
 import { PageTitle } from "../../components/Text";
@@ -33,7 +34,7 @@ export function SignInPage() {
 
   useEffect(() => {
     if (isSignedIn) {
-      page("/home");
+      page(Page.HOME);
     }
   }, [isSignedIn]);
 

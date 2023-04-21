@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import { Box, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
+import { Page } from "./business/models";
 import { useAppState } from "./business/overmind";
 import LandingPageRoute from "./routes/LandingPageRoute";
 import PrivateRoutes from "./routes/PrivateRoutes";
@@ -26,7 +27,7 @@ export default function App() {
   return (
     <Box>
       <LandingPageRoute />
-      {appState.currentPage !== "/" ? <NavigationBar /> : null}
+      {appState.currentPage !== Page.WELCOME ? <NavigationBar /> : null}
       <PublicRoutes />
       <PrivateRoutes />
 

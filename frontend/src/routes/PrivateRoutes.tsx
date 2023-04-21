@@ -1,3 +1,4 @@
+import { Page } from "../business/models";
 import { useAppState } from "../business/overmind";
 import { AdminGenrePage } from "../UI/pages/Admin/AdminGenrePage";
 import { AdminLanguagePage } from "../UI/pages/Admin/AdminLanguagePage";
@@ -17,14 +18,18 @@ export default function PrivateRoutes() {
 
   return (
     <>
-      {appState.currentPage === "home" ? <HomePage /> : null}
-      {appState.currentPage === "admin" ? <AdminPage /> : null}
-      {appState.currentPage === "admin/genre" ? <AdminGenrePage /> : null}
-      {appState.currentPage === "admin/language" ? <AdminLanguagePage /> : null}
-      {appState.currentPage === "admin/library" ? <AdminLibraryPage /> : null}
-      {appState.currentPage === "rentals" ? <RentalsPage /> : null}
-      {appState.currentPage === "reviews" ? <AllReviewsPage /> : null}
-      {appState.currentPage === "reviews/new" ? <AddReviewPage /> : null}
+      {appState.currentPage === Page.HOME ? <HomePage /> : null}
+      {appState.currentPage === Page.ADMIN ? <AdminPage /> : null}
+      {appState.currentPage === Page.ADMIN_GENRE ? <AdminGenrePage /> : null}
+      {appState.currentPage === Page.ADMIN_LANGUAGE ? (
+        <AdminLanguagePage />
+      ) : null}
+      {appState.currentPage === Page.ADMIN_LIBRARY ? (
+        <AdminLibraryPage />
+      ) : null}
+      {appState.currentPage === Page.RENTALS ? <RentalsPage /> : null}
+      {appState.currentPage === Page.REVIEWS ? <AllReviewsPage /> : null}
+      {appState.currentPage === Page.REVIEWS_NEW ? <AddReviewPage /> : null}
     </>
   );
 }
