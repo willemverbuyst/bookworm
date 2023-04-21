@@ -1,6 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import { useAppState } from "../business/overmind";
-import { NavigationBar } from "../UI/components/Navigation";
 import { SignInPage, SignUpPage } from "../UI/pages/Auth";
 import { AuthorsPage } from "../UI/pages/Authors";
 import { BooksPage } from "../UI/pages/Books";
@@ -17,7 +16,6 @@ export default function PublicRoutes() {
 
   return (
     <>
-      <NavigationBar />
       {appState.currentPage === "authors" ? <AuthorsPage /> : null}
       {appState.currentPage === "books" ? <BooksPage /> : null}
       {appState.currentPage === "signin" ? <SignInPage /> : null}

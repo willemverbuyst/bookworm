@@ -22,8 +22,8 @@ export const signInUser = async (
   { actions, effects, state }: Context,
   { email, password }: SignInCredentials
 ) => {
-  state.app.isLoading = true;
-  state.api.response = { message: "", status: undefined };
+  state.auth.isLoading = true;
+  actions.api.resetApiResponse();
   const response = await effects.auth.api.getUser(email, password);
 
   if (!response || response instanceof AxiosError) {
@@ -40,16 +40,16 @@ export const signInUser = async (
   state.auth.token = token;
   state.auth.isSignedIn = true;
   state.auth.user = response.data;
-  state.app.isLoading = false;
+  state.auth.isLoading = false;
 };
 
 export const logOutUser = ({ state }: Context) => {
-  state.app.isLoading = true;
+  state.auth.isLoading = true;
   // todo: send request to invalidate token
   localStorage.removeItem("token");
   state.auth.token = "";
   state.auth.isSignedIn = false;
   state.auth.user = null;
   state.api.response = { message: "", status: undefined };
-  state.app.isLoading = false;
+  state.auth.isLoading = false;
 };

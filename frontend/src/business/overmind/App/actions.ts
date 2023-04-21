@@ -8,6 +8,7 @@ export const onInitializeOvermind = async ({
   effects,
   state,
 }: Context) => {
+  state.app.isLoading = true;
   effects.app.router.initialize({
     "/": actions.app.showWelcomePage,
     "/home": actions.app.showHomePage,
@@ -25,14 +26,16 @@ export const onInitializeOvermind = async ({
   });
   const tokenFromLocalStorage = localStorage.getItem("token");
   if (!tokenFromLocalStorage) {
+    state.app.isLoading = false;
     return;
   }
-  actions.api.resetApiResponse();
 
+  actions.api.resetApiResponse();
   const response = await effects.auth.api.getUserByToken(tokenFromLocalStorage);
 
   if (!response || response instanceof AxiosError) {
     actions.api.handleErrorResponse({ response });
+    state.app.isLoading = false;
     return;
   }
 
@@ -42,6 +45,7 @@ export const onInitializeOvermind = async ({
   state.auth.token = token;
   state.auth.isSignedIn = true;
   state.auth.user = response.data;
+  state.app.isLoading = false;
 };
 
 export const showHomePage = ({ state }: Context) => {

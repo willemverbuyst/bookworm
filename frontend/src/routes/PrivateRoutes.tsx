@@ -1,5 +1,4 @@
 import { useAppState } from "../business/overmind";
-import { NavigationBar } from "../UI/components/Navigation";
 import { AdminGenrePage } from "../UI/pages/Admin/AdminGenrePage";
 import { AdminLanguagePage } from "../UI/pages/Admin/AdminLanguagePage";
 import { AdminLibraryPage } from "../UI/pages/Admin/AdminLibraryPage";
@@ -18,7 +17,6 @@ export default function PrivateRoutes() {
 
   return (
     <>
-      <NavigationBar />
       {appState.currentPage === "home" ? <HomePage /> : null}
       {appState.currentPage === "admin" ? <AdminPage /> : null}
       {appState.currentPage === "admin/genre" ? <AdminGenrePage /> : null}
