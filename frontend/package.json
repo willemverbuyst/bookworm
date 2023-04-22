@@ -53,7 +53,8 @@
     "format:fix": "prettier --write .",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --fix",
     "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "type:check": "tsc"
   },
   "browserslist": {
     "production": [
