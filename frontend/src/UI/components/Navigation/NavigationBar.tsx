@@ -28,6 +28,8 @@ export function NavigationBar() {
         borderStyle="solid"
         borderColor={useColorModeValue("gray.200", "gray.900")}
         align="center"
+        position="fixed"
+        width="100vw"
       >
         <Flex
           flex={{ base: 1, md: "auto" }}

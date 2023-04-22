@@ -28,9 +28,13 @@ export default function App() {
   return (
     <Box>
       <LandingPageRoute />
-      {appState.currentPage !== Page.WELCOME ? <NavigationBar /> : null}
-      <PublicRoutes />
-      <PrivateRoutes />
+      <Box minH="3vh">
+        {appState.currentPage !== Page.WELCOME ? <NavigationBar /> : null}
+      </Box>
+      <Box>
+        <PublicRoutes />
+        <PrivateRoutes />
+      </Box>
       <Tooltip id="bookworm-tooltip" />
       {/* <Route path="*" element={<PageNotFoundPage />} /> */}
     </Box>
