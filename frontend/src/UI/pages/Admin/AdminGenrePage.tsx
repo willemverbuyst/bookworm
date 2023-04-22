@@ -1,3 +1,4 @@
+import { EditIcon } from "@chakra-ui/icons";
 import { Flex, Input, Spinner } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions";
 import { useActions, useAppState } from "../../../business/overmind";
@@ -34,6 +35,9 @@ export function AdminGenrePage() {
               genericSearch(a, searchKeys, queryString, false)
             )}
             columns={columns}
+            action={() => console.log("testing genre button")}
+            icon={<EditIcon />}
+            ariaLabel="Edit details"
           />
         </Flex>
       ) : (

@@ -1,3 +1,4 @@
+import { ViewIcon } from "@chakra-ui/icons";
 import { Box, Input, Spinner, useDisclosure } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions";
 import {
@@ -49,6 +50,8 @@ export function BookwormsTable() {
             columns={columns}
             title={title}
             action={getUser}
+            icon={<ViewIcon />}
+            ariaLabel="Show details"
           />
           <Pagination total={total} state={stateSectionsWithTable.bookworm} />
         </>

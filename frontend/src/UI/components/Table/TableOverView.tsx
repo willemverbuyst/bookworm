@@ -1,4 +1,5 @@
 import {
+  IconButton,
   Table,
   TableCaption,
   TableContainer,
@@ -8,13 +9,14 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { ShowDetailsButton } from "../Buttons";
 
 type Props<T extends Record<"id", string>> = {
   columns: Array<{ field: keyof T; isNumeric?: boolean }>;
   title?: string;
   rows: Array<T>;
   action?: (id: string) => void;
+  icon?: JSX.Element;
+  ariaLabel?: string;
 };
 
 export function TableOverview<T extends Record<"id", string>>({
@@ -22,8 +24,9 @@ export function TableOverview<T extends Record<"id", string>>({
   columns,
   title,
   action,
+  icon,
+  ariaLabel,
 }: Props<T>) {
-  const ActionButton = ShowDetailsButton;
   return (
     <TableContainer>
       <Table variant="simple">
@@ -51,9 +54,18 @@ export function TableOverview<T extends Record<"id", string>>({
                     : String(row[column.field])}
                 </Td>
               ))}
-              {action ? (
+              {action && ariaLabel ? (
                 <Td isNumeric>
-                  <ActionButton id={row.id} action={action} />
+                  {/* <ActionButton id={row.id} action={action} /> */}
+                  <IconButton
+                    data-tooltip-id="bookworm-tooltip"
+                    data-tooltip-content={ariaLabel}
+                    aria-label={ariaLabel}
+                    onClick={
+                      action ? () => action(row.id) : () => console.log(row.id)
+                    }
+                    icon={icon}
+                  />
                 </Td>
               ) : null}
             </Tr>

@@ -1,3 +1,4 @@
+import { EditIcon } from "@chakra-ui/icons";
 import { Flex, Input, Spinner } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions";
 import { useActions, useAppState } from "../../../business/overmind";
@@ -34,6 +35,9 @@ export function AdminLanguagePage() {
               genericSearch(a, searchKeys, queryString, false)
             )}
             columns={columns}
+            icon={<EditIcon />}
+            action={() => console.log("testing language button")}
+            ariaLabel="Edit details"
           />
         </Flex>
       ) : (
