@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import { Box, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
+import { Tooltip } from "react-tooltip";
 import { Page } from "./business/models";
 import { useAppState } from "./business/overmind";
 import LandingPageRoute from "./routes/LandingPageRoute";
@@ -30,7 +31,7 @@ export default function App() {
       {appState.currentPage !== Page.WELCOME ? <NavigationBar /> : null}
       <PublicRoutes />
       <PrivateRoutes />
-
+      <Tooltip id="bookworm-tooltip" />
       {/* <Route path="*" element={<PageNotFoundPage />} /> */}
     </Box>
   );

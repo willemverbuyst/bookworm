@@ -54,6 +54,8 @@ export function TableOverview<T extends Record<"id", string>>({
               {action ? (
                 <Td isNumeric>
                   <IconButton
+                    data-tooltip-id="bookworm-tooltip"
+                    data-tooltip-content="show details"
                     aria-label="show details"
                     onClick={
                       action ? () => action(row.id) : () => console.log(row.id)

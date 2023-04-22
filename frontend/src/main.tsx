@@ -3,6 +3,7 @@ import { createOvermind } from "overmind";
 import { Provider } from "overmind-react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import "react-tooltip/dist/react-tooltip.css";
 import App from "./App";
 import { config } from "./business/overmind";
 import "./index.css";
