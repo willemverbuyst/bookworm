@@ -1,8 +1,7 @@
 /* eslint-disable no-nested-ternary */
-import { Box, Spinner } from "@chakra-ui/react";
+import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { Tooltip } from "react-tooltip";
-import { Page } from "./business/models";
 import { useAppState } from "./business/overmind";
 import LandingPageRoute from "./routes/LandingPageRoute";
 import PrivateRoutes from "./routes/PrivateRoutes";
@@ -23,26 +22,28 @@ export default function App() {
   }, [message, status]);
 
   if (appState.isLoading) {
-    return <Spinner />;
+    return (
+      <Flex
+        minH="100vh"
+        minW="100vw"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Spinner />
+      </Flex>
+    );
   }
 
   return (
     <Box>
+      <NavigationBar />
+
       <LandingPageRoute />
-      <Box minH="3vh">
-        {appState.currentPage !== Page.WELCOME &&
-        appState.currentPage !== Page.PAGE_NOT_FOUND ? (
-          <NavigationBar />
-        ) : null}
-      </Box>
-      <Box>
-        <PublicRoutes />
-        <PrivateRoutes />
-      </Box>
+      <PublicRoutes />
+      <PrivateRoutes />
+      <PageNotFoundPage />
+
       <Tooltip id="bookworm-tooltip" />
-      {appState.currentPage === Page.PAGE_NOT_FOUND ? (
-        <PageNotFoundPage />
-      ) : null}
     </Box>
   );
 }
