@@ -1,6 +1,4 @@
-import { ViewIcon } from "@chakra-ui/icons";
 import {
-  IconButton,
   Table,
   TableCaption,
   TableContainer,
@@ -10,6 +8,7 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { ShowDetailsButton } from "../Buttons";
 
 type Props<T extends Record<"id", string>> = {
   columns: Array<{ field: keyof T; isNumeric?: boolean }>;
@@ -24,6 +23,7 @@ export function TableOverview<T extends Record<"id", string>>({
   title,
   action,
 }: Props<T>) {
+  const ActionButton = ShowDetailsButton;
   return (
     <TableContainer>
       <Table variant="simple">
@@ -53,15 +53,7 @@ export function TableOverview<T extends Record<"id", string>>({
               ))}
               {action ? (
                 <Td isNumeric>
-                  <IconButton
-                    data-tooltip-id="bookworm-tooltip"
-                    data-tooltip-content="show details"
-                    aria-label="show details"
-                    onClick={
-                      action ? () => action(row.id) : () => console.log(row.id)
-                    }
-                    icon={<ViewIcon />}
-                  />
+                  <ActionButton id={row.id} action={action} />
                 </Td>
               ) : null}
             </Tr>
