@@ -1,5 +1,5 @@
-import { EditIcon } from "@chakra-ui/icons";
-import { Flex, Input, Spinner } from "@chakra-ui/react";
+import { AddIcon, EditIcon } from "@chakra-ui/icons";
+import { Box, Flex, IconButton, Input, Spinner } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions";
 import { useActions, useAppState } from "../../../business/overmind";
 import { TableOverview } from "../../components/Table";
@@ -28,18 +28,26 @@ export function AdminLanguagePage() {
     <SimpleSidebar>
       <PageTitle title="Language" />
       {overview?.length ? (
-        <Flex style={{ backgroundColor: "#fff" }} direction="column" px={5}>
-          <Input onChange={searchInTable} placeholder="search" my={5} />
-          <TableOverview
-            rows={overview.filter((a) =>
-              genericSearch(a, searchKeys, queryString, false)
-            )}
-            columns={columns}
-            icon={<EditIcon />}
-            action={() => console.log("testing language button")}
-            ariaLabel="Edit details"
+        <Box style={{ backgroundColor: "#fff" }} p={5}>
+          <Flex direction="column">
+            <Input onChange={searchInTable} placeholder="search" />
+            <TableOverview
+              rows={overview.filter((a) =>
+                genericSearch(a, searchKeys, queryString, false)
+              )}
+              columns={columns}
+              icon={<EditIcon />}
+              action={() => console.log("testing language button")}
+              ariaLabel="Edit details"
+            />
+          </Flex>
+          <IconButton
+            mt={5}
+            colorScheme="teal"
+            aria-label="Add new"
+            icon={<AddIcon />}
           />
-        </Flex>
+        </Box>
       ) : (
         <p>{noDataMessage}</p>
       )}

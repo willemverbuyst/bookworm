@@ -38,7 +38,7 @@ export function TableOverview<T extends Record<"id", string>>({
                 {String(column.field).replace(/_/g, " ")}
               </Th>
             ))}
-            {action ? <Th>get details</Th> : null}
+            {action ? <Th /> : null}
           </Tr>
         </Thead>
         <Tbody>
