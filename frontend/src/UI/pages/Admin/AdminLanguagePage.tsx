@@ -18,7 +18,7 @@ import { TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
 import {
   defaultValuesLanguage,
-  FormFieldsLanugage,
+  FormFieldsLanguage,
   validationSchemaLanguage,
 } from "./helpers";
 import SimpleSidebar from "./SideMenu";
@@ -31,7 +31,7 @@ export function AdminLanguagePage() {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<FormFieldsLanugage>({
+  } = useForm<FormFieldsLanguage>({
     defaultValues: defaultValuesLanguage,
     resolver: zodResolver(validationSchemaLanguage),
   });
@@ -48,7 +48,7 @@ export function AdminLanguagePage() {
     search({ queryString: e.target.value });
   };
 
-  const onSubmit: SubmitHandler<FormFieldsLanugage> = async (data) => {
+  const onSubmit: SubmitHandler<FormFieldsLanguage> = async (data) => {
     console.log(data);
     reset();
   };
