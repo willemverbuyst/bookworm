@@ -2,6 +2,7 @@ import { derived } from "overmind";
 import { CountryState } from "../../models";
 
 export const state: CountryState = {
+  isLoading: false,
   getAllApi: null,
   selectOptions: derived(({ getAllApi }: CountryState) => {
     if (!getAllApi?.data.length) {

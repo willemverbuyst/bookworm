@@ -2,6 +2,7 @@ import { derived } from "overmind";
 import { GenreState } from "../../models";
 
 export const state: GenreState = {
+  isLoading: false,
   getAllApi: null,
   overview: derived(({ getAllApi }: GenreState) => {
     if (!getAllApi?.data.length) {

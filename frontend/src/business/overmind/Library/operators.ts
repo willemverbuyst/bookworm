@@ -20,3 +20,15 @@ export const fetchLibraries =
 
     state.library.isLoading = false;
   };
+
+export const setQueryString =
+  () =>
+  ({ state }: Context, { queryString }: { queryString: string }) => {
+    state.library.ui.table.queryString = queryString;
+  };
+
+export const resetQueryString =
+  () =>
+  ({ state }: Context) => {
+    state.library.ui.table.queryString = "";
+  };

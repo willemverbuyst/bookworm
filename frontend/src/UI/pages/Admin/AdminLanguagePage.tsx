@@ -1,6 +1,6 @@
-import { Flex, Spinner } from "@chakra-ui/react";
+import { Flex, Input, Spinner } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions";
-import { useAppState } from "../../../business/overmind";
+import { useActions, useAppState } from "../../../business/overmind";
 import { TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
 import SimpleSidebar from "./SideMenu";
@@ -13,6 +13,11 @@ export function AdminLanguagePage() {
       table: { columns, noDataMessage, queryString, searchKeys },
     },
   } = useAppState().language;
+  const { search } = useActions().language;
+
+  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
+    search({ queryString: e.target.value });
+  };
 
   if (isLoading) {
     return <Spinner />;
@@ -21,18 +26,19 @@ export function AdminLanguagePage() {
   return (
     <SimpleSidebar>
       <PageTitle title="Language" />
-      <Flex style={{ backgroundColor: "#fff" }}>
-        {overview?.length ? (
+      {overview?.length ? (
+        <Flex style={{ backgroundColor: "#fff" }} direction="column" px={5}>
+          <Input onChange={searchInTable} placeholder="search" my={5} />
           <TableOverview
             rows={overview.filter((a) =>
               genericSearch(a, searchKeys, queryString, false)
             )}
             columns={columns}
           />
-        ) : (
-          <p>{noDataMessage}</p>
-        )}
-      </Flex>
+        </Flex>
+      ) : (
+        <p>{noDataMessage}</p>
+      )}
     </SimpleSidebar>
   );
 }

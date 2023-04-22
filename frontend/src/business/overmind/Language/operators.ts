@@ -20,3 +20,15 @@ export const fetchLanguages =
 
     state.language.isLoading = false;
   };
+
+export const setQueryString =
+  () =>
+  ({ state }: Context, { queryString }: { queryString: string }) => {
+    state.language.ui.table.queryString = queryString;
+  };
+
+export const resetQueryString =
+  () =>
+  ({ state }: Context) => {
+    state.language.ui.table.queryString = "";
+  };
