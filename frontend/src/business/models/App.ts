@@ -7,7 +7,7 @@ export const Page = {
   HOME: "/home",
   ADMIN: "/admin",
   ADMIN_GENRE: "/admin/genre",
-  ADMIN_LANGUAGE: "//admin/language",
+  ADMIN_LANGUAGE: "/admin/language",
   ADMIN_LIBRARY: "/admin/library",
   BOOKWORMS: "/bookworms",
   RENTALS: "/rentals",
