@@ -16,8 +16,10 @@ describe("SingInPage", () => {
   const overmind = createOvermindMock(config, (state) => {
     // eslint-disable-next-line no-param-reassign
     state.auth = {
+      isLoading: false,
       isSignedIn: false,
       token: "",
+      user: null,
     };
   });
   test("should display a title", () => {

@@ -2,6 +2,7 @@ import { derived } from "overmind";
 import { LibraryState } from "../../models";
 
 export const state: LibraryState = {
+  isLoading: false,
   getAllApi: null,
   overview: derived(({ getAllApi }: LibraryState) => {
     if (!getAllApi?.data.length) {

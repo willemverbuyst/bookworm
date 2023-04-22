@@ -1,0 +1,24 @@
+name: Frontend - format, lint & type check
+
+on: [push, pull_request]
+
+jobs:
+  format-lint-and-type-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Set up environment
+        uses: actions/setup-node@v2-beta
+      - name: Install dependencies
+        run: yarn
+        working-directory: frontend
+      - name: Format
+        run: yarn format:check
+        working-directory: frontend
+      - name: Lint
+        run: yarn lint
+        working-directory: frontend
+      - name: TypeCheck
+        run: npm run type:check
+        working-directory: frontend
