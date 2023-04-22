@@ -20,7 +20,7 @@ export function LibraryDetailsCard({ library }: Props) {
   return (
     <Card width={400} my={5}>
       <CardHeader>
-        <Heading size="md">{library.library}</Heading>
+        <Heading size="md">{library.name}</Heading>
       </CardHeader>
 
       <CardBody>
