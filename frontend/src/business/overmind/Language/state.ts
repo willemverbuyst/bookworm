@@ -2,6 +2,7 @@ import { derived } from "overmind";
 import { LanguageState } from "../../models";
 
 export const state: LanguageState = {
+  isLoading: false,
   getAllApi: null,
   overview: derived(({ getAllApi }: LanguageState) => {
     if (!getAllApi?.data.length) {

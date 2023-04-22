@@ -1,13 +1,14 @@
 /* eslint-disable no-nested-ternary */
-import { Box, Spinner } from "@chakra-ui/react";
+import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { Page } from "./business/models";
+import { Tooltip } from "react-tooltip";
 import { useAppState } from "./business/overmind";
 import LandingPageRoute from "./routes/LandingPageRoute";
 import PrivateRoutes from "./routes/PrivateRoutes";
 import PublicRoutes from "./routes/Publicroutes";
 import { NavigationBar } from "./UI/components/Navigation";
 import { useToastHook } from "./UI/hooks";
+import { PageNotFoundPage } from "./UI/pages/PageNotFound";
 
 export default function App() {
   const [, setToast] = useToastHook();
@@ -21,17 +22,28 @@ export default function App() {
   }, [message, status]);
 
   if (appState.isLoading) {
-    return <Spinner />;
+    return (
+      <Flex
+        minH="100vh"
+        minW="100vw"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Spinner />
+      </Flex>
+    );
   }
 
   return (
     <Box>
+      <NavigationBar />
+
       <LandingPageRoute />
-      {appState.currentPage !== Page.WELCOME ? <NavigationBar /> : null}
       <PublicRoutes />
       <PrivateRoutes />
+      <PageNotFoundPage />
 
-      {/* <Route path="*" element={<PageNotFoundPage />} /> */}
+      <Tooltip id="bookworm-tooltip" />
     </Box>
   );
 }

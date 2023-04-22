@@ -1,4 +1,5 @@
-import { Box, Input, Spinner, useDisclosure } from "@chakra-ui/react";
+import { ViewIcon } from "@chakra-ui/icons";
+import { Box, Input, useDisclosure } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions";
 import {
   stateSectionsWithTable,
@@ -31,10 +32,6 @@ export function BookwormsTable() {
     search({ queryString: e.target.value });
   };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-
   return (
     <Box>
       <Filter />
@@ -49,6 +46,9 @@ export function BookwormsTable() {
             columns={columns}
             title={title}
             action={getUser}
+            icon={<ViewIcon />}
+            ariaLabel="Show details"
+            isLoading={isLoading}
           />
           <Pagination total={total} state={stateSectionsWithTable.bookworm} />
         </>

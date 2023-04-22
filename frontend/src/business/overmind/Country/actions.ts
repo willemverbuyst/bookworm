@@ -1,16 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { AxiosError } from "axios";
-import { Context } from "..";
+import { pipe } from "overmind";
+import * as o from "./operators";
 
-export const getCountries = async ({ actions, effects, state }: Context) => {
-  state.country.isLoading = true;
-  const response = await effects.country.api.getCountries();
-
-  if (!response || response instanceof AxiosError) {
-    actions.api.handleErrorResponse({ response });
-  } else {
-    state.country.getAllApi = response;
-  }
-
-  state.country.isLoading = false;
-};
+export const getCountries = pipe(o.shoulLoadCountries, o.fetchCountries);

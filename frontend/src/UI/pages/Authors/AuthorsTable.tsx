@@ -1,4 +1,4 @@
-import { Box, Input, Spinner } from "@chakra-ui/react";
+import { Box, Input } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions";
 import {
   stateSectionsWithTable,
@@ -23,10 +23,6 @@ export function AuthorsTable() {
     search({ queryString: e.target.value });
   };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-
   return (
     <Box>
       <Input onChange={searchInTable} placeholder="search" my={5} />
@@ -38,6 +34,7 @@ export function AuthorsTable() {
             )}
             columns={columns}
             title={title}
+            isLoading={isLoading}
           />
           {!queryString && (
             <Pagination total={total} state={stateSectionsWithTable.author} />

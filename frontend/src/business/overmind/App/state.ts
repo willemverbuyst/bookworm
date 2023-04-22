@@ -2,7 +2,7 @@ import { AppState } from "../../models";
 
 export const state: AppState = {
   isLoading: false,
-  currentPage: "",
+  currentPage: "/",
   publicNavItems: [
     { label: "Authors", href: "/authors" },
     { label: "Books", href: "/books" },

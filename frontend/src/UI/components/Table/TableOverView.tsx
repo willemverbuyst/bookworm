@@ -1,4 +1,3 @@
-import { ViewIcon } from "@chakra-ui/icons";
 import {
   IconButton,
   Table,
@@ -16,6 +15,9 @@ type Props<T extends Record<"id", string>> = {
   title?: string;
   rows: Array<T>;
   action?: (id: string) => void;
+  icon?: JSX.Element;
+  ariaLabel?: string;
+  isLoading?: boolean;
 };
 
 export function TableOverview<T extends Record<"id", string>>({
@@ -23,7 +25,18 @@ export function TableOverview<T extends Record<"id", string>>({
   columns,
   title,
   action,
+  icon,
+  ariaLabel,
+  isLoading = false,
 }: Props<T>) {
+  const loadingStyles = isLoading
+    ? {
+        backgroundColor: "#f3f3f3",
+        color: "#ddd",
+        border: "2px solid #fff",
+      }
+    : {};
+
   return (
     <TableContainer>
       <Table variant="simple">
@@ -31,11 +44,15 @@ export function TableOverview<T extends Record<"id", string>>({
         <Thead>
           <Tr>
             {columns.map((column) => (
-              <Th key={String(column.field)} isNumeric={column.isNumeric}>
+              <Th
+                key={String(column.field)}
+                isNumeric={column.isNumeric}
+                style={loadingStyles}
+              >
                 {String(column.field).replace(/_/g, " ")}
               </Th>
             ))}
-            {action ? <Th>get details</Th> : null}
+            {action ? <Th /> : null}
           </Tr>
         </Thead>
         <Tbody>
@@ -45,20 +62,24 @@ export function TableOverview<T extends Record<"id", string>>({
                 <Td
                   key={`${row.id}-${String(column.field)}`}
                   isNumeric={column.isNumeric}
+                  style={loadingStyles}
                 >
                   {row[column.field] == null
                     ? "---"
                     : String(row[column.field])}
                 </Td>
               ))}
-              {action ? (
-                <Td isNumeric>
+              {action && ariaLabel ? (
+                <Td isNumeric style={loadingStyles}>
+                  {/* <ActionButton id={row.id} action={action} /> */}
                   <IconButton
-                    aria-label="show details"
+                    data-tooltip-id="bookworm-tooltip"
+                    data-tooltip-content={ariaLabel}
+                    aria-label={ariaLabel}
                     onClick={
                       action ? () => action(row.id) : () => console.log(row.id)
                     }
-                    icon={<ViewIcon />}
+                    icon={icon}
                   />
                 </Td>
               ) : null}

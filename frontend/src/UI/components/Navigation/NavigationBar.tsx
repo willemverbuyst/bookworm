@@ -9,15 +9,25 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import { Page } from "../../../business/models";
+import { useAppState } from "../../../business/overmind";
 import { NavigationAuth } from "./NavigationAuth";
 import { NavigationDesktop } from "./NavigationDesktop";
 import { NavigationMobile } from "./NavigationMobile";
 
 export function NavigationBar() {
   const { isOpen, onToggle } = useDisclosure();
+  const appState = useAppState().app;
+
+  if (
+    appState.currentPage === Page.WELCOME ||
+    appState.currentPage === Page.PAGE_NOT_FOUND
+  ) {
+    return null;
+  }
 
   return (
-    <Box>
+    <Box minH="3vh">
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
@@ -28,6 +38,9 @@ export function NavigationBar() {
         borderStyle="solid"
         borderColor={useColorModeValue("gray.200", "gray.900")}
         align="center"
+        position="fixed"
+        width="100vw"
+        zIndex={9999}
       >
         <Flex
           flex={{ base: 1, md: "auto" }}

@@ -1,16 +1,7 @@
 /* eslint-disable no-param-reassign */
-import { AxiosError } from "axios";
-import { Context } from "..";
+import { debounce, pipe } from "overmind";
+import * as o from "./operators";
 
-export const getGenres = async ({ actions, effects, state }: Context) => {
-  state.genre.isLoading = true;
-  const response = await effects.genre.api.getGenres();
+export const getGenres = pipe(o.shouldFetchGenres(), o.fetchGenres());
 
-  if (!response || response instanceof AxiosError) {
-    actions.api.handleErrorResponse({ response });
-  } else {
-    state.genre.getAllApi = response;
-  }
-
-  state.genre.isLoading = false;
-};
+export const search = (debounce(100), o.setQueryString());

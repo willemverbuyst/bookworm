@@ -1,14 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
+import { ChakraProvider } from "@chakra-ui/react";
 import { createOvermind } from "overmind";
 import { Provider } from "overmind-react";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { ChakraProvider } from "@chakra-ui/react";
-import { config } from "./business/overmind";
+import "react-tooltip/dist/react-tooltip.css";
 import App from "./App";
+import { config } from "./business/overmind";
+import "./index.css";
 
-const overmind = createOvermind(config);
+const overmind = createOvermind(config, {
+  devtools: "localhost:3031",
+});
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   // <React.StrictMode>

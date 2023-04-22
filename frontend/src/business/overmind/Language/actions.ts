@@ -1,16 +1,7 @@
 /* eslint-disable no-param-reassign */
-import { AxiosError } from "axios";
-import { Context } from "..";
+import { debounce, pipe } from "overmind";
+import * as o from "./operators";
 
-export const getLanguages = async ({ actions, effects, state }: Context) => {
-  state.language.isLoading = true;
-  const response = await effects.language.api.getLanguages();
+export const getLanguages = pipe(o.shouldFetchLanguages(), o.fetchLanguages());
 
-  if (!response || response instanceof AxiosError) {
-    actions.api.handleErrorResponse({ response });
-  } else {
-    state.language.getAllApi = response;
-  }
-
-  state.language.isLoading = false;
-};
+export const search = (debounce(100), o.setQueryString());
