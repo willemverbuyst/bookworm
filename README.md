@@ -1,3 +1,5 @@
+[![Frontend - format, lint & type check](https://github.com/willemverbuyst/bookworm/actions/workflows/format-lint.yml/badge.svg)](https://github.com/willemverbuyst/bookworm/actions/workflows/format-lint.yml)
+
 # What is this?
 
 A project to connect and try out some libraries, tools and techniques in a semi-docker environment.
