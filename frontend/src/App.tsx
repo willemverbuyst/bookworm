@@ -9,6 +9,7 @@ import PrivateRoutes from "./routes/PrivateRoutes";
 import PublicRoutes from "./routes/Publicroutes";
 import { NavigationBar } from "./UI/components/Navigation";
 import { useToastHook } from "./UI/hooks";
+import { PageNotFoundPage } from "./UI/pages/PageNotFound";
 
 export default function App() {
   const [, setToast] = useToastHook();
@@ -29,14 +30,19 @@ export default function App() {
     <Box>
       <LandingPageRoute />
       <Box minH="3vh">
-        {appState.currentPage !== Page.WELCOME ? <NavigationBar /> : null}
+        {appState.currentPage !== Page.WELCOME &&
+        appState.currentPage !== Page.PAGE_NOT_FOUND ? (
+          <NavigationBar />
+        ) : null}
       </Box>
       <Box>
         <PublicRoutes />
         <PrivateRoutes />
       </Box>
       <Tooltip id="bookworm-tooltip" />
-      {/* <Route path="*" element={<PageNotFoundPage />} /> */}
+      {appState.currentPage === Page.PAGE_NOT_FOUND ? (
+        <PageNotFoundPage />
+      ) : null}
     </Box>
   );
 }

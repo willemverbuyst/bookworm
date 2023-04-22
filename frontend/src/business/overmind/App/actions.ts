@@ -24,6 +24,7 @@ export const onInitializeOvermind = async ({
     [Page.BOOKS]: actions.book.showBooksPage,
     [Page.SIGNIN]: actions.auth.showSignInPage,
     [Page.SIGNUP]: actions.auth.showSignUpPage,
+    [Page.PAGE_NOT_FOUND]: actions.app.showPageNotFound,
   });
   const tokenFromLocalStorage = localStorage.getItem("token");
   if (!tokenFromLocalStorage) {
@@ -55,4 +56,8 @@ export const showHomePage = ({ state }: Context) => {
 
 export const showWelcomePage = ({ state }: Context) => {
   state.app.currentPage = Page.WELCOME;
+};
+
+export const showPageNotFound = ({ state }: Context) => {
+  state.app.currentPage = Page.PAGE_NOT_FOUND;
 };

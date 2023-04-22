@@ -15,6 +15,7 @@ export const Page = {
   REVIEWS: "/reviews",
   SIGNIN: "/signin",
   SIGNUP: "/signup",
+  PAGE_NOT_FOUND: "*",
 } as const;
 
 type PageKeys = keyof typeof Page;
