@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.skeletonius {
+  /* animation: scaliosty 4s inifnite; */
+  color: "red";
+}
+
+@keyframes scaliosty {
+  0% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

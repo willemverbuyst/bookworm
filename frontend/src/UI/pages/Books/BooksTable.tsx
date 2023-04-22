@@ -1,4 +1,4 @@
-import { Box, Input, Spinner } from "@chakra-ui/react";
+import { Box, Input } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions";
 import {
   stateSectionsWithTable,
@@ -24,10 +24,6 @@ export function BooksTable() {
     search({ queryString: e.target.value });
   };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-
   return (
     <Box>
       <Filter />
@@ -40,6 +36,7 @@ export function BooksTable() {
             )}
             columns={columns}
             title={title}
+            isLoading={isLoading}
           />
           <Pagination total={total} state={stateSectionsWithTable.book} />
         </>

@@ -6,7 +6,6 @@ import {
   HStack,
   IconButton,
   Input,
-  Spinner,
   VStack,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -54,10 +53,6 @@ export function AdminLanguagePage() {
     reset();
   };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-
   return (
     <SimpleSidebar>
       <PageTitle title="Language" />
@@ -73,6 +68,7 @@ export function AdminLanguagePage() {
               icon={<EditIcon />}
               action={() => console.log("testing language button")}
               ariaLabel="Edit details"
+              isLoading={isLoading}
             />
           </Flex>
           <Button

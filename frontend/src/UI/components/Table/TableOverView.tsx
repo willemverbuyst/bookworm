@@ -17,6 +17,7 @@ type Props<T extends Record<"id", string>> = {
   action?: (id: string) => void;
   icon?: JSX.Element;
   ariaLabel?: string;
+  isLoading?: boolean;
 };
 
 export function TableOverview<T extends Record<"id", string>>({
@@ -26,7 +27,16 @@ export function TableOverview<T extends Record<"id", string>>({
   action,
   icon,
   ariaLabel,
+  isLoading = false,
 }: Props<T>) {
+  const loadingStyles = isLoading
+    ? {
+        backgroundColor: "#f3f3f3",
+        color: "#ddd",
+        border: "2px solid #fff",
+      }
+    : {};
+
   return (
     <TableContainer>
       <Table variant="simple">
@@ -34,7 +44,11 @@ export function TableOverview<T extends Record<"id", string>>({
         <Thead>
           <Tr>
             {columns.map((column) => (
-              <Th key={String(column.field)} isNumeric={column.isNumeric}>
+              <Th
+                key={String(column.field)}
+                isNumeric={column.isNumeric}
+                style={loadingStyles}
+              >
                 {String(column.field).replace(/_/g, " ")}
               </Th>
             ))}
@@ -48,6 +62,7 @@ export function TableOverview<T extends Record<"id", string>>({
                 <Td
                   key={`${row.id}-${String(column.field)}`}
                   isNumeric={column.isNumeric}
+                  style={loadingStyles}
                 >
                   {row[column.field] == null
                     ? "---"
@@ -55,7 +70,7 @@ export function TableOverview<T extends Record<"id", string>>({
                 </Td>
               ))}
               {action && ariaLabel ? (
-                <Td isNumeric>
+                <Td isNumeric style={loadingStyles}>
                   {/* <ActionButton id={row.id} action={action} /> */}
                   <IconButton
                     data-tooltip-id="bookworm-tooltip"

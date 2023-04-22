@@ -1,5 +1,5 @@
 import { AddIcon, EditIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, Input, Spinner } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Input } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions";
 import { useActions, useAppState } from "../../../business/overmind";
 import { TableOverview } from "../../components/Table";
@@ -20,10 +20,6 @@ export function AdminGenrePage() {
     search({ queryString: e.target.value });
   };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-
   return (
     <SimpleSidebar>
       <PageTitle title="Genre" />
@@ -39,6 +35,7 @@ export function AdminGenrePage() {
               action={() => console.log("testing genre button")}
               icon={<EditIcon />}
               ariaLabel="Edit details"
+              isLoading={isLoading}
             />
           </Flex>
           <IconButton
