@@ -5,7 +5,8 @@ from database.python.language.delete_language import delete_language_from_db
 from database.python.language.get_languages import (
     get_languages_from_db, get_total_number_of_languages)
 from error.main import raise_exception
-from fastapi import APIRouter
+from fastapi import APIRouter, Body
+from models.language import LanguageSchema
 
 language_router = APIRouter()
 
@@ -28,11 +29,11 @@ def get_all_languages() -> dict:
 
 
 @language_router.post("/languages", tags=["languages"])
-def add_language(language: str) -> dict:
+def add_language(language: LanguageSchema = Body(...)) -> dict:
     try:
         new_id = uuid.uuid4()
 
-        add_language_to_db(new_id, language)
+        add_language_to_db(new_id, language.language)
 
         return {
             "status": "success",
