@@ -28,6 +28,7 @@ function ShowDetailsButton({ id }: { id: string }) {
         aria-label="Show details"
         onClick={() => getUser(id)}
         icon={<ViewIcon />}
+        mx={1}
       />
     </>
   );
@@ -62,7 +63,7 @@ export function BookwormsTable() {
             columns={columns}
             title={title}
             isLoading={isLoading}
-            actionButton={ShowDetailsButton}
+            actionButtons={[ShowDetailsButton]}
           />
           <Pagination total={total} state={stateSectionsWithTable.bookworm} />
         </>

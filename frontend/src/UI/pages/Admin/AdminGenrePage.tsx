@@ -1,4 +1,4 @@
-import { AddIcon, EditIcon } from "@chakra-ui/icons";
+import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -32,6 +32,20 @@ function EditButton({ id }: { id: string }) {
       aria-label="Edit details"
       onClick={() => console.log("test", id)}
       icon={<EditIcon />}
+      mx={1}
+    />
+  );
+}
+
+function DeleteButton({ id }: { id: string }) {
+  return (
+    <IconButton
+      data-tooltip-id="bookworm-tooltip"
+      data-tooltip-content="Edit details"
+      aria-label="Edit details"
+      onClick={() => console.log("test", id)}
+      icon={<DeleteIcon />}
+      mx={1}
     />
   );
 }
@@ -79,7 +93,7 @@ export function AdminGenrePage() {
               )}
               columns={columns}
               isLoading={isLoading}
-              actionButton={EditButton}
+              actionButtons={[EditButton, DeleteButton]}
             />
           </Flex>
           <Button

@@ -9,13 +9,25 @@ import {
   Tr,
 } from "@chakra-ui/react";
 
+function ActionButton({
+  id,
+  actionButton,
+}: {
+  id: string;
+  actionButton: ({ id }: { id: string }) => JSX.Element;
+}) {
+  const TableActionButton = actionButton;
+
+  return <TableActionButton id={id} />;
+}
+
 type Props<T extends Record<"id", string>> = {
   columns: Array<{ field: keyof T; isNumeric?: boolean }>;
   title?: string;
   rows: Array<T>;
   action?: (id: string) => void;
   isLoading?: boolean;
-  actionButton?: (({ id }: { id: string }) => JSX.Element) | null;
+  actionButtons?: (({ id }: { id: string }) => JSX.Element)[] | null;
 };
 
 export function TableOverview<T extends Record<"id", string>>({
@@ -24,7 +36,7 @@ export function TableOverview<T extends Record<"id", string>>({
   title,
   action,
   isLoading = false,
-  actionButton = null,
+  actionButtons = [],
 }: Props<T>) {
   const loadingStyles = isLoading
     ? {
@@ -33,8 +45,6 @@ export function TableOverview<T extends Record<"id", string>>({
         border: "2px solid #fff",
       }
     : {};
-
-  const ActionButton = actionButton;
 
   return (
     <TableContainer>
@@ -68,9 +78,11 @@ export function TableOverview<T extends Record<"id", string>>({
                     : String(row[column.field])}
                 </Td>
               ))}
-              {ActionButton ? (
+              {actionButtons?.length ? (
                 <Td isNumeric style={loadingStyles}>
-                  <ActionButton id={row.id} />
+                  {actionButtons.map((button) => (
+                    <ActionButton id={row.id} actionButton={button} />
+                  ))}
                 </Td>
               ) : null}
             </Tr>
