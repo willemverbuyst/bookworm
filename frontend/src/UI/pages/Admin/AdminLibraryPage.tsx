@@ -6,6 +6,18 @@ import { TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
 import SimpleSidebar from "./SideMenu";
 
+function EditButton({ id }: { id: string }) {
+  return (
+    <IconButton
+      data-tooltip-id="bookworm-tooltip"
+      data-tooltip-content="Edit details"
+      aria-label="Edit details"
+      onClick={() => console.log("test", id)}
+      icon={<EditIcon />}
+    />
+  );
+}
+
 export function AdminLibraryPage() {
   const { isLoading } = useAppState().app;
   const {
@@ -32,10 +44,8 @@ export function AdminLibraryPage() {
                 genericSearch(a, searchKeys, queryString, false)
               )}
               columns={columns}
-              icon={<EditIcon />}
-              action={() => console.log("testing library button")}
-              ariaLabel="Edit details"
               isLoading={isLoading}
+              actionButton={EditButton}
             />
           </Flex>
           <IconButton

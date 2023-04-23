@@ -23,6 +23,18 @@ import {
 } from "./helpers";
 import SimpleSidebar from "./SideMenu";
 
+function EditButton({ id }: { id: string }) {
+  return (
+    <IconButton
+      data-tooltip-id="bookworm-tooltip"
+      data-tooltip-content="Edit details"
+      aria-label="Edit details"
+      onClick={() => console.log("test", id)}
+      icon={<EditIcon />}
+    />
+  );
+}
+
 export function AdminLanguagePage() {
   const id = useId();
   const [showForm, setShowForm] = useState(false);
@@ -65,10 +77,8 @@ export function AdminLanguagePage() {
                 genericSearch(a, searchKeys, queryString, false)
               )}
               columns={columns}
-              icon={<EditIcon />}
-              action={() => console.log("testing language button")}
-              ariaLabel="Edit details"
               isLoading={isLoading}
+              actionButton={EditButton}
             />
           </Flex>
           <Button

@@ -24,6 +24,18 @@ import {
 } from "./helpers";
 import SimpleSidebar from "./SideMenu";
 
+function EditButton({ id }: { id: string }) {
+  return (
+    <IconButton
+      data-tooltip-id="bookworm-tooltip"
+      data-tooltip-content="Edit details"
+      aria-label="Edit details"
+      onClick={() => console.log("test", id)}
+      icon={<EditIcon />}
+    />
+  );
+}
+
 export function AdminGenrePage() {
   const id = useId();
   const [showForm, setShowForm] = useState(false);
@@ -66,10 +78,8 @@ export function AdminGenrePage() {
                 genericSearch(a, searchKeys, queryString, false)
               )}
               columns={columns}
-              action={() => console.log("testing genre button")}
-              icon={<EditIcon />}
-              ariaLabel="Edit details"
               isLoading={isLoading}
+              actionButton={EditButton}
             />
           </Flex>
           <Button

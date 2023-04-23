@@ -1,5 +1,4 @@
 import {
-  IconButton,
   Table,
   TableCaption,
   TableContainer,
@@ -15,9 +14,8 @@ type Props<T extends Record<"id", string>> = {
   title?: string;
   rows: Array<T>;
   action?: (id: string) => void;
-  icon?: JSX.Element;
-  ariaLabel?: string;
   isLoading?: boolean;
+  actionButton?: (({ id }: { id: string }) => JSX.Element) | null;
 };
 
 export function TableOverview<T extends Record<"id", string>>({
@@ -25,9 +23,8 @@ export function TableOverview<T extends Record<"id", string>>({
   columns,
   title,
   action,
-  icon,
-  ariaLabel,
   isLoading = false,
+  actionButton = null,
 }: Props<T>) {
   const loadingStyles = isLoading
     ? {
@@ -36,6 +33,8 @@ export function TableOverview<T extends Record<"id", string>>({
         border: "2px solid #fff",
       }
     : {};
+
+  const ActionButton = actionButton;
 
   return (
     <TableContainer>
@@ -69,18 +68,9 @@ export function TableOverview<T extends Record<"id", string>>({
                     : String(row[column.field])}
                 </Td>
               ))}
-              {action && ariaLabel ? (
+              {ActionButton ? (
                 <Td isNumeric style={loadingStyles}>
-                  {/* <ActionButton id={row.id} action={action} /> */}
-                  <IconButton
-                    data-tooltip-id="bookworm-tooltip"
-                    data-tooltip-content={ariaLabel}
-                    aria-label={ariaLabel}
-                    onClick={
-                      action ? () => action(row.id) : () => console.log(row.id)
-                    }
-                    icon={icon}
-                  />
+                  <ActionButton id={row.id} />
                 </Td>
               ) : null}
             </Tr>
