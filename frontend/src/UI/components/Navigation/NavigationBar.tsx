@@ -9,22 +9,12 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { Page } from "../../../business/models";
-import { useAppState } from "../../../business/overmind";
 import { NavigationAuth } from "./NavigationAuth";
 import { NavigationDesktop } from "./NavigationDesktop";
 import { NavigationMobile } from "./NavigationMobile";
 
 export function NavigationBar() {
   const { isOpen, onToggle } = useDisclosure();
-  const appState = useAppState().app;
-
-  if (
-    appState.currentPage === Page.WELCOME ||
-    appState.currentPage === Page.PAGE_NOT_FOUND
-  ) {
-    return null;
-  }
 
   return (
     <Box minH="3vh">
@@ -40,7 +30,7 @@ export function NavigationBar() {
         align="center"
         position="fixed"
         width="100vw"
-        zIndex={9999}
+        zIndex={99}
       >
         <Flex
           flex={{ base: 1, md: "auto" }}
