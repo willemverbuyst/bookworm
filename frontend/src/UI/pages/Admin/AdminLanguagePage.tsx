@@ -4,6 +4,8 @@ import {
   Button,
   ButtonGroup,
   Flex,
+  FormControl,
+  FormLabel,
   HStack,
   IconButton,
   Input,
@@ -15,11 +17,12 @@ import {
   PopoverFooter,
   PopoverHeader,
   PopoverTrigger,
+  Stack,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useId, useState } from "react";
+import React, { useId, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { genericSearch } from "../../../business/functions";
 import { useActions, useAppState } from "../../../business/overmind";
@@ -33,16 +36,54 @@ import {
 } from "./helpers";
 import SimpleSidebar from "./SideMenu";
 
-function EditButton({ id }: { id: string }) {
+function Form({ onCancel, id }: { onCancel: () => void; id: string }) {
+  const languages = useAppState().language.overview || [];
+  const nameOfLanguage = languages.find((l) => l.id === id)?.name || "";
+
   return (
-    <IconButton
-      data-tooltip-id="bookworm-tooltip"
-      data-tooltip-content="Edit details"
-      aria-label="Edit details"
-      onClick={() => console.log("test", id)}
-      icon={<EditIcon />}
-      mx={1}
-    />
+    <Stack spacing={4}>
+      <FormControl>
+        <FormLabel htmlFor="language">Language</FormLabel>
+        <Input id="language" defaultValue={nameOfLanguage} />
+      </FormControl>
+      <ButtonGroup display="flex" justifyContent="flex-end">
+        <Button variant="outline" onClick={onCancel}>
+          Cancel
+        </Button>
+        <Button onClick={() => console.log("test", id)} colorScheme="teal">
+          Save
+        </Button>
+      </ButtonGroup>
+    </Stack>
+  );
+}
+
+function EditButton({ id }: { id: string }) {
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
+  return (
+    <Popover
+      isOpen={isOpen}
+      onOpen={onOpen}
+      onClose={onClose}
+      closeOnBlur={false}
+      placement="left"
+    >
+      <PopoverTrigger>
+        <IconButton
+          data-tooltip-id="bookworm-tooltip"
+          data-tooltip-content="Edit details"
+          aria-label="Edit details"
+          icon={<EditIcon />}
+          mx={1}
+        />
+      </PopoverTrigger>
+      <PopoverContent p={5}>
+        <PopoverArrow />
+        <PopoverCloseButton />
+        <Form onCancel={onClose} id={id} />
+      </PopoverContent>
+    </Popover>
   );
 }
 
@@ -52,13 +93,18 @@ function DeleteButton({ id }: { id: string }) {
   const nameOfLanguage = languages.find((l) => l.id === id)?.name;
 
   return (
-    <Popover isOpen={isOpen} onOpen={onOpen} onClose={onClose} placement="left">
+    <Popover
+      isOpen={isOpen}
+      onOpen={onOpen}
+      onClose={onClose}
+      placement="left"
+      closeOnBlur={false}
+    >
       <PopoverTrigger>
         <IconButton
           data-tooltip-id="bookworm-tooltip"
           data-tooltip-content="Edit details"
           aria-label="Edit details"
-          onClick={() => console.log("test", id)}
           icon={<DeleteIcon />}
           mx={1}
         />
@@ -81,7 +127,9 @@ function DeleteButton({ id }: { id: string }) {
             <Button variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="pink">Apply</Button>
+            <Button onClick={() => console.log("test", id)} colorScheme="pink">
+              Apply
+            </Button>
           </ButtonGroup>
         </PopoverFooter>
       </PopoverContent>
