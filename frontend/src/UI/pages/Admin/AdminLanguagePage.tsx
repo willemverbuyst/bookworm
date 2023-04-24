@@ -2,10 +2,20 @@ import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
+  ButtonGroup,
   Flex,
   HStack,
   IconButton,
   Input,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverFooter,
+  PopoverHeader,
+  PopoverTrigger,
+  useDisclosure,
   VStack,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -37,15 +47,45 @@ function EditButton({ id }: { id: string }) {
 }
 
 function DeleteButton({ id }: { id: string }) {
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const languages = useAppState().language.overview || [];
+  const nameOfLanguage = languages.find((l) => l.id === id)?.name;
+
   return (
-    <IconButton
-      data-tooltip-id="bookworm-tooltip"
-      data-tooltip-content="Edit details"
-      aria-label="Edit details"
-      onClick={() => console.log("test", id)}
-      icon={<DeleteIcon />}
-      mx={1}
-    />
+    <Popover isOpen={isOpen} onOpen={onOpen} onClose={onClose} placement="left">
+      <PopoverTrigger>
+        <IconButton
+          data-tooltip-id="bookworm-tooltip"
+          data-tooltip-content="Edit details"
+          aria-label="Edit details"
+          onClick={() => console.log("test", id)}
+          icon={<DeleteIcon />}
+          mx={1}
+        />
+      </PopoverTrigger>
+      <PopoverContent>
+        <PopoverHeader
+          display="flex"
+          justifyContent="space-between"
+          fontWeight="semibold"
+        >
+          Confirmation
+        </PopoverHeader>
+        <PopoverArrow />
+        <PopoverCloseButton />
+        <PopoverBody display="flex" justifyContent="flex-start">
+          {`Are you sure you want to delete ${nameOfLanguage}`}
+        </PopoverBody>
+        <PopoverFooter display="flex" justifyContent="flex-end">
+          <ButtonGroup size="sm">
+            <Button variant="outline" onClick={onClose}>
+              Cancel
+            </Button>
+            <Button colorScheme="pink">Apply</Button>
+          </ButtonGroup>
+        </PopoverFooter>
+      </PopoverContent>
+    </Popover>
   );
 }
 
