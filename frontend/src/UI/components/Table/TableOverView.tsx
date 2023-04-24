@@ -80,8 +80,9 @@ export function TableOverview<T extends Record<"id", string>>({
               ))}
               {actionButtons?.length ? (
                 <Td isNumeric style={loadingStyles}>
-                  {actionButtons.map((button) => (
-                    <ActionButton id={row.id} actionButton={button} />
+                  {actionButtons.map((button, i) => (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <ActionButton key={i} id={row.id} actionButton={button} />
                   ))}
                 </Td>
               ) : null}

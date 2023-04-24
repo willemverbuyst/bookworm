@@ -37,3 +37,17 @@ export const axiosPost = async ({
     return null;
   }
 };
+
+export const axiosDelete = async ({ url }: { url: string }) => {
+  try {
+    const response = await axios.delete(url);
+    return response.data;
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      console.error(JSON.stringify(error.response));
+      return error;
+    }
+    console.error(JSON.stringify(error));
+    return null;
+  }
+};
