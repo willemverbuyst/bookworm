@@ -89,6 +89,7 @@ function EditButton({ id }: { id: string }) {
 
 function DeleteButton({ id }: { id: string }) {
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const { deleteLanguage } = useActions().language;
   const languages = useAppState().language.overview || [];
   const nameOfLanguage = languages.find((l) => l.id === id)?.name;
 
@@ -127,7 +128,7 @@ function DeleteButton({ id }: { id: string }) {
             <Button variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button onClick={() => console.log("test", id)} colorScheme="pink">
+            <Button onClick={() => deleteLanguage({ id })} colorScheme="pink">
               Apply
             </Button>
           </ButtonGroup>
@@ -149,7 +150,7 @@ export function AdminLanguagePage() {
     defaultValues: defaultValuesLanguage,
     resolver: zodResolver(validationSchemaLanguage),
   });
-  const { isLoading } = useAppState().app;
+  const { isLoading } = useAppState().language;
   const {
     overview,
     ui: {
@@ -165,12 +166,13 @@ export function AdminLanguagePage() {
   const onSubmit: SubmitHandler<FormFieldsLanguage> = async (data) => {
     postLanguage(data);
     reset();
+    setShowForm(false);
   };
 
   return (
     <SimpleSidebar>
       <PageTitle title="Language" />
-      {overview?.length ? (
+      {overview ? (
         <Box style={{ backgroundColor: "#fff" }} p={5}>
           <Flex direction="column">
             <Input onChange={searchInTable} placeholder="search" />

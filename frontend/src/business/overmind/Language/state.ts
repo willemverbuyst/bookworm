@@ -6,7 +6,7 @@ export const state: LanguageState = {
   getAllApi: null,
   overview: derived(({ getAllApi }: LanguageState) => {
     if (!getAllApi?.data?.length) {
-      return null;
+      return [];
     }
     return getAllApi.data.map((i) => ({ id: i.id, name: i.language }));
   }),

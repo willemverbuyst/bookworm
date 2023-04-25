@@ -1,4 +1,5 @@
 import { apiGet } from "../../../api";
+import { apiDelete } from "../../../api/apiDelete";
 import { apiPost } from "../../../api/apiPost";
 
 export const api = {
@@ -11,4 +12,7 @@ export const api = {
     language: string;
     token: string;
   }) => apiPost({ url: "languages", token, body: { language } }),
+
+  deleteLanguage: async ({ id }: { id: string }) =>
+    apiDelete({ url: `languages?id=${id}` }),
 };

@@ -54,3 +54,18 @@ export const addLanguage =
 
     state.language.isLoading = false;
   };
+
+export const deleteLanguage =
+  () =>
+  async ({ actions, effects, state }: Context, { id }: { id: string }) => {
+    state.language.isLoading = true;
+    const response = await effects.language.api.deleteLanguage({ id });
+
+    if (!response || response instanceof AxiosError) {
+      actions.api.handleErrorResponse({ response });
+    } else {
+      state.language.getAllApi = response;
+    }
+
+    state.language.isLoading = false;
+  };
