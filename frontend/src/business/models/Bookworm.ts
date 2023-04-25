@@ -18,17 +18,19 @@ interface Library {
   number_of_bookworms_per_library: number;
 }
 
+interface LibraryDisplay {
+  userIsActive: string;
+  libraryName: string;
+  numberOfBookworms: number;
+  color: string;
+}
+
 interface Filter {
   active: boolean;
 }
 export interface BookwormState extends BaseState<Bookworm> {
   bookwormDetailsApi: Omit<UserApi, "token"> | null;
-  statsLibrary: Array<{
-    userIsActive: string;
-    libraryName: string;
-    numberOfBookworms: number;
-    color: string;
-  }> | null;
+  statsLibrary: LibraryDisplay[];
   statsLibraryApi: ApiResponse<Array<Library>> | null;
   ui: UI<Bookworm, Filter>;
 }

@@ -1,5 +1,5 @@
 import { ViewIcon } from "@chakra-ui/icons";
-import { Box, Input, useDisclosure } from "@chakra-ui/react";
+import { Box, IconButton, Input, useDisclosure } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions";
 import {
   stateSectionsWithTable,
@@ -10,8 +10,32 @@ import { Pagination, TableOverview } from "../../components/Table";
 import { BookwormsDetails } from "./BookwormsDetails";
 import { Filter } from "./Filter";
 
+function ShowDetailsButton({ id }: { id: string }) {
+  const { getBookworm } = useActions().bookworm;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const getUser = async (i: string) => {
+    await getBookworm({ id: i });
+    onOpen();
+  };
+
+  return (
+    <>
+      <BookwormsDetails isOpen={isOpen} onClose={onClose} />
+      <IconButton
+        data-tooltip-id="bookworm-tooltip"
+        data-tooltip-content="Show details"
+        aria-label="Show details"
+        onClick={() => getUser(id)}
+        icon={<ViewIcon />}
+        mx={1}
+      />
+    </>
+  );
+}
+
 export function BookwormsTable() {
-  const { isLoading } = useAppState().app;
+  const { isLoading } = useAppState().bookworm;
   const {
     getAllApi,
     overview,
@@ -20,13 +44,7 @@ export function BookwormsTable() {
     },
   } = useAppState().bookworm;
   const { total } = getAllApi || {};
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { getBookworm, search } = useActions().bookworm;
-
-  const getUser = async (id: string) => {
-    await getBookworm({ id });
-    onOpen();
-  };
+  const { search } = useActions().bookworm;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     search({ queryString: e.target.value });
@@ -36,19 +54,16 @@ export function BookwormsTable() {
     <Box>
       <Filter />
       <Input onChange={searchInTable} placeholder="search" my={5} />
-      {overview?.length ? (
+      {overview ? (
         <>
-          <BookwormsDetails isOpen={isOpen} onClose={onClose} />
           <TableOverview
             rows={overview.filter((a) =>
               genericSearch(a, searchKeys, queryString, false)
             )}
             columns={columns}
             title={title}
-            action={getUser}
-            icon={<ViewIcon />}
-            ariaLabel="Show details"
             isLoading={isLoading}
+            actionButtons={[ShowDetailsButton]}
           />
           <Pagination total={total} state={stateSectionsWithTable.bookworm} />
         </>

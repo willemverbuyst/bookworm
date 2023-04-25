@@ -26,7 +26,7 @@ export function AuthorsTable() {
   return (
     <Box>
       <Input onChange={searchInTable} placeholder="search" my={5} />
-      {overview?.length ? (
+      {overview ? (
         <>
           <TableOverview
             rows={overview.filter((a) =>

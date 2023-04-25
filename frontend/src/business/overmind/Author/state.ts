@@ -5,7 +5,7 @@ export const state: AuthorState = {
   getAllApi: null,
   overview: derived(({ getAllApi }: AuthorState) => {
     if (!getAllApi?.data.length) {
-      return null;
+      return [];
     }
     return getAllApi.data
       .map((author) => ({

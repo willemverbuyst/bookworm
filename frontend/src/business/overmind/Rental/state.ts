@@ -6,13 +6,13 @@ export const state: RentalState = {
   getAllApi: null,
   overview: derived(({ getAllApi }: RentalState) => {
     if (!getAllApi?.data.length) {
-      return null;
+      return [];
     }
     return getAllApi.data;
   }),
   statsDay: derived(({ statsDayApi }: RentalState) => {
     if (!statsDayApi?.data.length) {
-      return null;
+      return [];
     }
     return [...statsDayApi.data].map((d) => ({
       rentals: d.number_of_rentals,
@@ -26,7 +26,7 @@ export const state: RentalState = {
   statsDayApi: null,
   statsDuration: derived(({ statsDurationApi }: RentalState) => {
     if (!statsDurationApi?.data.length) {
-      return null;
+      return [];
     }
     return [...statsDurationApi.data].map((d) => ({
       durationLabel: `${d.duration}d`,

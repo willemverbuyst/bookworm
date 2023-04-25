@@ -9,14 +9,14 @@ export const state: BookwormState = {
   bookwormDetailsApi: null,
   overview: derived(({ getAllApi }: BookwormState) => {
     if (!getAllApi?.data.length) {
-      return null;
+      return [];
     }
     return getAllApi.data;
   }),
   statsLibrary: derived(
     ({ statsLibraryApi }: BookwormState, rootState: RootState) => {
       if (!statsLibraryApi?.data.length) {
-        return null;
+        return [];
       }
 
       return [...statsLibraryApi.data]

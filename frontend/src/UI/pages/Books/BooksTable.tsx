@@ -28,7 +28,7 @@ export function BooksTable() {
     <Box>
       <Filter />
       <Input onChange={searchInTable} placeholder="search" my={5} />
-      {overview?.length ? (
+      {overview ? (
         <>
           <TableOverview
             rows={overview.filter((a) =>

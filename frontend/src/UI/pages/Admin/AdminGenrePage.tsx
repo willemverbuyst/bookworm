@@ -1,4 +1,4 @@
-import { AddIcon, EditIcon } from "@chakra-ui/icons";
+import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -23,6 +23,32 @@ import {
   validationSchemaGenre,
 } from "./helpers";
 import SimpleSidebar from "./SideMenu";
+
+function EditButton({ id }: { id: string }) {
+  return (
+    <IconButton
+      data-tooltip-id="bookworm-tooltip"
+      data-tooltip-content="Edit details"
+      aria-label="Edit details"
+      onClick={() => console.log("test", id)}
+      icon={<EditIcon />}
+      mx={1}
+    />
+  );
+}
+
+function DeleteButton({ id }: { id: string }) {
+  return (
+    <IconButton
+      data-tooltip-id="bookworm-tooltip"
+      data-tooltip-content="Edit details"
+      aria-label="Edit details"
+      onClick={() => console.log("test", id)}
+      icon={<DeleteIcon />}
+      mx={1}
+    />
+  );
+}
 
 export function AdminGenrePage() {
   const id = useId();
@@ -66,10 +92,8 @@ export function AdminGenrePage() {
                 genericSearch(a, searchKeys, queryString, false)
               )}
               columns={columns}
-              action={() => console.log("testing genre button")}
-              icon={<EditIcon />}
-              ariaLabel="Edit details"
               isLoading={isLoading}
+              actionButtons={[EditButton, DeleteButton]}
             />
           </Flex>
           <Button

@@ -1,5 +1,4 @@
 import {
-  IconButton,
   Table,
   TableCaption,
   TableContainer,
@@ -10,14 +9,25 @@ import {
   Tr,
 } from "@chakra-ui/react";
 
+function ActionButton({
+  id,
+  actionButton,
+}: {
+  id: string;
+  actionButton: ({ id }: { id: string }) => JSX.Element;
+}) {
+  const TableActionButton = actionButton;
+
+  return <TableActionButton id={id} />;
+}
+
 type Props<T extends Record<"id", string>> = {
   columns: Array<{ field: keyof T; isNumeric?: boolean }>;
   title?: string;
   rows: Array<T>;
   action?: (id: string) => void;
-  icon?: JSX.Element;
-  ariaLabel?: string;
   isLoading?: boolean;
+  actionButtons?: (({ id }: { id: string }) => JSX.Element)[] | null;
 };
 
 export function TableOverview<T extends Record<"id", string>>({
@@ -25,9 +35,8 @@ export function TableOverview<T extends Record<"id", string>>({
   columns,
   title,
   action,
-  icon,
-  ariaLabel,
   isLoading = false,
+  actionButtons = [],
 }: Props<T>) {
   const loadingStyles = isLoading
     ? {
@@ -69,18 +78,12 @@ export function TableOverview<T extends Record<"id", string>>({
                     : String(row[column.field])}
                 </Td>
               ))}
-              {action && ariaLabel ? (
+              {actionButtons?.length ? (
                 <Td isNumeric style={loadingStyles}>
-                  {/* <ActionButton id={row.id} action={action} /> */}
-                  <IconButton
-                    data-tooltip-id="bookworm-tooltip"
-                    data-tooltip-content={ariaLabel}
-                    aria-label={ariaLabel}
-                    onClick={
-                      action ? () => action(row.id) : () => console.log(row.id)
-                    }
-                    icon={icon}
-                  />
+                  {actionButtons.map((button, i) => (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <ActionButton key={i} id={row.id} actionButton={button} />
+                  ))}
                 </Td>
               ) : null}
             </Tr>

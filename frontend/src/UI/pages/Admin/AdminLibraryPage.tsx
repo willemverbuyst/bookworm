@@ -1,10 +1,36 @@
-import { AddIcon, EditIcon } from "@chakra-ui/icons";
+import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Box, Flex, IconButton, Input } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions";
 import { useActions, useAppState } from "../../../business/overmind";
 import { TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
 import SimpleSidebar from "./SideMenu";
+
+function EditButton({ id }: { id: string }) {
+  return (
+    <IconButton
+      data-tooltip-id="bookworm-tooltip"
+      data-tooltip-content="Edit details"
+      aria-label="Edit details"
+      onClick={() => console.log("test", id)}
+      icon={<EditIcon />}
+      mx={1}
+    />
+  );
+}
+
+function DeleteButton({ id }: { id: string }) {
+  return (
+    <IconButton
+      data-tooltip-id="bookworm-tooltip"
+      data-tooltip-content="Edit details"
+      aria-label="Edit details"
+      onClick={() => console.log("test", id)}
+      icon={<DeleteIcon />}
+      mx={1}
+    />
+  );
+}
 
 export function AdminLibraryPage() {
   const { isLoading } = useAppState().app;
@@ -32,10 +58,8 @@ export function AdminLibraryPage() {
                 genericSearch(a, searchKeys, queryString, false)
               )}
               columns={columns}
-              icon={<EditIcon />}
-              action={() => console.log("testing library button")}
-              ariaLabel="Edit details"
               isLoading={isLoading}
+              actionButtons={[EditButton, DeleteButton]}
             />
           </Flex>
           <IconButton

@@ -5,14 +5,14 @@ export const state: LanguageState = {
   isLoading: false,
   getAllApi: null,
   overview: derived(({ getAllApi }: LanguageState) => {
-    if (!getAllApi?.data.length) {
-      return null;
+    if (!getAllApi?.data?.length) {
+      return [];
     }
     return getAllApi.data.map((i) => ({ id: i.id, name: i.language }));
   }),
   selectOptions: derived(({ getAllApi }: LanguageState) => {
-    if (!getAllApi?.data.length) {
-      return null;
+    if (!getAllApi?.data?.length) {
+      return [];
     }
     return getAllApi.data.map((i) => ({
       display: i.language,

@@ -6,7 +6,7 @@ export const state: CountryState = {
   getAllApi: null,
   selectOptions: derived(({ getAllApi }: CountryState) => {
     if (!getAllApi?.data.length) {
-      return null;
+      return [];
     }
     return getAllApi.data.map((i) => ({
       display: i.country,

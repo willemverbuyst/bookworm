@@ -5,7 +5,7 @@ export const state: BookState = {
   getAllApi: null,
   overview: derived(({ getAllApi }: BookState) => {
     if (!getAllApi?.data.length) {
-      return null;
+      return [];
     }
     return getAllApi.data
       .map((book) => ({
@@ -15,7 +15,7 @@ export const state: BookState = {
   }),
   statsGenre: derived(({ statsGenreApi }: BookState) => {
     if (!statsGenreApi?.data.length) {
-      return null;
+      return [];
     }
     return [...statsGenreApi.data].map((d) => ({
       name: d.genre,
@@ -25,7 +25,7 @@ export const state: BookState = {
   statsGenreApi: null,
   statsLanguage: derived(({ statsLanguageApi }: BookState) => {
     if (!statsLanguageApi?.data.length) {
-      return null;
+      return [];
     }
     return [...statsLanguageApi.data].map((d) => ({
       language: d.language,
@@ -35,7 +35,7 @@ export const state: BookState = {
   statsLanguageApi: null,
   statsYearPublished: derived(({ statsYearPublishedApi }: BookState) => {
     if (!statsYearPublishedApi?.data.length) {
-      return null;
+      return [];
     }
     return [...statsYearPublishedApi.data].map((d) => ({
       name: d.year_published,
