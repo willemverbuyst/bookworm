@@ -5,7 +5,7 @@ interface Language {
   language: string;
 }
 
-interface LanguageDisplay {
+export interface LanguageDisplay {
   id: string;
   name: string;
 }

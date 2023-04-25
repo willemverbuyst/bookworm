@@ -6,13 +6,13 @@ export const state: GenreState = {
   getAllApi: null,
   overview: derived(({ getAllApi }: GenreState) => {
     if (!getAllApi?.data.length) {
-      return null;
+      return [];
     }
     return getAllApi.data.map((i) => ({ id: i.id, name: i.genre }));
   }),
   selectOptions: derived(({ getAllApi }: GenreState) => {
     if (!getAllApi?.data.length) {
-      return null;
+      return [];
     }
     return getAllApi.data.map((i) => ({
       display: i.genre,

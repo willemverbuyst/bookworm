@@ -33,6 +33,6 @@ export interface BaseState<T> {
 export interface BaseStateSelect<T, U = null> {
   getAllApi: ApiResponse<T[]> | null;
   isLoading: boolean;
-  overview?: (U extends null ? T[] : U[]) | null;
+  overview?: U extends null ? T[] : U[];
   selectOptions: { display: string; value: string }[] | null;
 }

@@ -47,11 +47,11 @@ interface Filter {
 }
 
 export interface BookState extends BaseState<Book> {
-  statsGenre: GenreDisplay[] | null;
+  statsGenre: GenreDisplay[];
   statsGenreApi: ApiResponse<Genre[]> | null;
-  statsLanguage: LanguageDisplay[] | null;
+  statsLanguage: LanguageDisplay[];
   statsLanguageApi: ApiResponse<Language[]> | null;
-  statsYearPublished: YearPublishedDisplay[] | null;
+  statsYearPublished: YearPublishedDisplay[];
   statsYearPublishedApi: ApiResponse<YearPublished[]> | null;
   ui: UI<Book, Filter>;
 }

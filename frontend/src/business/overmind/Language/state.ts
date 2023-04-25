@@ -12,7 +12,7 @@ export const state: LanguageState = {
   }),
   selectOptions: derived(({ getAllApi }: LanguageState) => {
     if (!getAllApi?.data?.length) {
-      return null;
+      return [];
     }
     return getAllApi.data.map((i) => ({
       display: i.language,

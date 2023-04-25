@@ -37,9 +37,9 @@ interface Filter {
 }
 
 export interface RentalState extends BaseState<Rental> {
-  statsDay: DayDisplay[] | null;
+  statsDay: DayDisplay[];
   statsDayApi: ApiResponse<Day[]> | null;
-  statsDuration: DurationDisplay[] | null;
+  statsDuration: DurationDisplay[];
   statsDurationApi: ApiResponse<Duration[]> | null;
   ui: UI<Rental, Filter>;
 }
