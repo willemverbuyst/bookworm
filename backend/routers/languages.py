@@ -86,6 +86,6 @@ def update_language(language_id: str, language: LanguageSchema = Body(...)):
 
     return {
         "status": "success",
-        "message": "language has been added",
+        "message": "language has been updated",
         "data": updated_language,
     }

@@ -69,3 +69,27 @@ export const deleteLanguage =
 
     state.language.isLoading = false;
   };
+
+export const updateLanguage =
+  () =>
+  async (
+    { actions, state, effects }: Context,
+    { id, language }: { id: string; language: string }
+  ) => {
+    state.language.isLoading = true;
+    const { token } = state.auth;
+    const response = await effects.language.api.putLanguage({
+      id,
+      language,
+      token,
+    });
+
+    if (!response || response instanceof AxiosError) {
+      actions.api.handleErrorResponse({ response });
+    } else {
+      // state.language.getAllApi = response;
+      console.log("response :>> ", response);
+    }
+
+    state.language.isLoading = false;
+  };

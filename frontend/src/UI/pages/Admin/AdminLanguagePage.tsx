@@ -36,23 +36,40 @@ import {
 } from "./helpers";
 import SimpleSidebar from "./SideMenu";
 
-function Form({ onCancel, id }: { onCancel: () => void; id: string }) {
+function Form({
+  id,
+  onCancel,
+  onClose,
+}: {
+  id: string;
+  onCancel: () => void;
+  onClose: () => void;
+}) {
   const languages = useAppState().language.overview || [];
+  const { updateLanguage } = useActions().language;
   const nameOfLanguage = languages.find((l) => l.id === id)?.name || "";
+  const [language, setLanguage] = useState(nameOfLanguage);
+
+  const submit = () => {
+    updateLanguage({ id, language });
+    onClose();
+  };
 
   return (
     <Stack spacing={4}>
       <FormControl>
         <FormLabel htmlFor="language">Language</FormLabel>
-        <Input id="language" defaultValue={nameOfLanguage} />
+        <Input
+          id="language"
+          value={language}
+          onChange={(e) => setLanguage(e.target.value)}
+        />
       </FormControl>
       <ButtonGroup display="flex" justifyContent="flex-end">
         <Button variant="outline" onClick={onCancel}>
           Cancel
         </Button>
-        <Button onClick={() => console.log("test", id)} colorScheme="teal">
-          Save
-        </Button>
+        <Button onClick={submit}>Save</Button>
       </ButtonGroup>
     </Stack>
   );
@@ -81,7 +98,7 @@ function EditButton({ id }: { id: string }) {
       <PopoverContent p={5}>
         <PopoverArrow />
         <PopoverCloseButton />
-        <Form onCancel={onClose} id={id} />
+        <Form onCancel={onClose} id={id} onClose={onClose} />
       </PopoverContent>
     </Popover>
   );

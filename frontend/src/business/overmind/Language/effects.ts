@@ -1,4 +1,4 @@
-import { apiGet } from "../../../api";
+import { apiGet, apiPut } from "../../../api";
 import { apiDelete } from "../../../api/apiDelete";
 import { apiPost } from "../../../api/apiPost";
 
@@ -15,4 +15,14 @@ export const api = {
 
   deleteLanguage: async ({ id }: { id: string }) =>
     apiDelete({ url: `languages?id=${id}` }),
+
+  putLanguage: async ({
+    id,
+    language,
+    token,
+  }: {
+    id: string;
+    language: string;
+    token: string;
+  }) => apiPut({ url: `languages/${id}`, token, body: { language } }),
 };

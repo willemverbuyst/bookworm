@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { debounce, pipe } from "overmind";
 
 import * as o from "./operators";
@@ -10,3 +9,5 @@ export const search = (debounce(100), o.setQueryString());
 export const postLanguage = pipe(o.addLanguage(), o.fetchLanguages());
 
 export const deleteLanguage = pipe(o.deleteLanguage(), o.fetchLanguages());
+
+export const updateLanguage = pipe(o.updateLanguage(), o.fetchLanguages());
