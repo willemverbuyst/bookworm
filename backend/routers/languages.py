@@ -2,10 +2,14 @@ import uuid
 
 from database.python.language.add_language import add_language_to_db
 from database.python.language.delete_language import delete_language_from_db
+from database.python.language.get_language_by_id import get_language_by_id_from_db
 from database.python.language.get_languages import (
-    get_languages_from_db, get_total_number_of_languages)
+    get_languages_from_db,
+    get_total_number_of_languages,
+)
+from database.python.language.update_language import update_language_in_db
 from error.main import raise_exception
-from fastapi import APIRouter, Body
+from fastapi import APIRouter, Body, HTTPException, status
 from models.language import LanguageSchema
 
 language_router = APIRouter()
@@ -33,7 +37,7 @@ def add_language(language: LanguageSchema = Body(...)) -> dict:
     try:
         new_id = uuid.uuid4()
 
-        add_language_to_db(new_id, language.language)
+        get_language_by_id_from_db(new_id, language.language)
 
         return {
             "status": "success",
@@ -55,3 +59,33 @@ def delete_language(id: str) -> dict:
 
     except:
         raise_exception(500, "Something went wrong!")
+
+
+@language_router.put("/languages/{language_id}", tags=["languages"])
+def update_language(language_id: str, language: LanguageSchema = Body(...)):
+    try:
+        id = uuid.UUID(str(language_id))
+    except:
+        raise HTTPException(
+            status.HTTP_422_UNPROCESSABLE_ENTITY, detail="id is not a valid uuid"
+        )
+
+    language_in_db = get_language_by_id_from_db(language_id)
+
+    if language_in_db is None:
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND, detail="language with this id not found"
+        )
+
+    updated_language = update_language_in_db(language_id, language.language)
+
+    if updated_language is None:
+        raise HTTPException(
+            status.HTTP_500_INTERNAL_SERVER_ERROR, detail="something went wrong"
+        )
+
+    return {
+        "status": "success",
+        "message": "language has been added",
+        "data": updated_language,
+    }

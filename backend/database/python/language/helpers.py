@@ -8,3 +8,8 @@ def format_languages(language_data):
         languages.append(language)
 
     return languages
+
+
+def format_language(language_data):
+    language = {"id": language_data[0], "language": language_data[1]}
+    return language

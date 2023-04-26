@@ -104,8 +104,8 @@ function DeleteButton({ id }: { id: string }) {
       <PopoverTrigger>
         <IconButton
           data-tooltip-id="bookworm-tooltip"
-          data-tooltip-content="Edit details"
-          aria-label="Edit details"
+          data-tooltip-content="Delete language"
+          aria-label="Delete language"
           icon={<DeleteIcon />}
           mx={1}
         />
@@ -121,7 +121,7 @@ function DeleteButton({ id }: { id: string }) {
         <PopoverArrow />
         <PopoverCloseButton />
         <PopoverBody display="flex" justifyContent="flex-start">
-          {`Are you sure you want to delete ${nameOfLanguage}`}
+          {`Are you sure you want to delete ${nameOfLanguage}?`}
         </PopoverBody>
         <PopoverFooter display="flex" justifyContent="flex-end">
           <ButtonGroup size="sm">
