@@ -21,19 +21,14 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useId, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { genericSearch } from "../../../business/functions";
 import { useActions, useAppState } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
 import { TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
-import {
-  defaultValuesLanguage,
-  FormFieldsLanguage,
-  validationSchemaLanguage,
-} from "./helpers";
+import { defaultValuesLanguage } from "./helpers";
 import SimpleSidebar from "./SideMenu";
 
 function Form({
@@ -163,9 +158,20 @@ export function AdminLanguagePage() {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<FormFieldsLanguage>({
+    watch,
+  } = useForm({
     defaultValues: defaultValuesLanguage,
-    resolver: zodResolver(validationSchemaLanguage),
+  });
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "language",
+  });
+  const watchFieldArray = watch("language");
+  const controlledFields = fields.map((field, index) => {
+    return {
+      ...field,
+      ...watchFieldArray[index],
+    };
   });
   const { isLoading } = useAppState().language;
   const {
@@ -180,11 +186,14 @@ export function AdminLanguagePage() {
     search({ queryString: e.target.value });
   };
 
-  const onSubmit: SubmitHandler<FormFieldsLanguage> = async (data) => {
-    postLanguage(data);
-    reset();
-    setShowForm(false);
-  };
+  // const onSubmit = (data: any) => {
+  //   console.log("data :>> ", data);
+  //   // postLanguage({ language: "test" });
+  //   // reset();
+  //   // setShowForm(false);
+  // };
+
+  const onSubmit = (data: any) => console.log("data", data);
 
   return (
     <SimpleSidebar>
@@ -202,39 +211,58 @@ export function AdminLanguagePage() {
               actionButtons={[EditButton, DeleteButton]}
             />
           </Flex>
-          <Button
-            mt={5}
-            colorScheme="teal"
-            aria-label="Add new"
-            onClick={() => setShowForm((prev) => !prev)}
-          >
-            {showForm ? "Cancel" : "Add Language"}
-          </Button>
+
           {showForm ? (
             <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)} mt={5}>
               <VStack spacing={6}>
-                <ControlledTextInput
-                  name="language"
-                  control={control}
-                  label="name of language"
-                  error={errors.language}
-                  required
-                />
-                <HStack>
+                {controlledFields.map((item, index) => (
+                  <HStack key={item.id} alignItems="flex-end">
+                    <ControlledTextInput
+                      name={`language.${index}.name`}
+                      control={control}
+                      label="name of language"
+                      // error={`language.${index}.error.name`}
+                      required
+                    />
+                    <Button
+                      type="button"
+                      onClick={() => remove(index)}
+                      colorScheme="pink"
+                    >
+                      Delete
+                    </Button>
+                  </HStack>
+                ))}
+                <HStack mt={5}>
+                  <Button
+                    colorScheme="teal"
+                    aria-label="Add new"
+                    onClick={() => setShowForm(false)}
+                  >
+                    Cancel
+                  </Button>
                   <Button type="submit" colorScheme="teal">
                     Submit
                   </Button>
                   <IconButton
-                    mt={5}
                     colorScheme="telegram"
                     aria-label="Add new"
                     icon={<AddIcon />}
-                    onClick={() => console.log("action to add another input")}
+                    onClick={() => append({ name: "" })}
                   />
                 </HStack>
               </VStack>
             </Box>
-          ) : null}
+          ) : (
+            <Button
+              mt={5}
+              colorScheme="teal"
+              aria-label="Add new"
+              onClick={() => setShowForm(true)}
+            >
+              Add Language
+            </Button>
+          )}
         </Box>
       ) : (
         <p>{noDataMessage}</p>

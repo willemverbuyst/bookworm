@@ -32,8 +32,6 @@ export const state: LibraryState = {
       columns: [
         { field: "name" },
         { field: "phone" },
-        { field: "address" },
-        { field: "postalCode" },
         { field: "city" },
         { field: "country" },
       ],
