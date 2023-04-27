@@ -37,7 +37,7 @@ def add_language(language: LanguageSchema = Body(...)) -> dict:
     try:
         new_id = uuid.uuid4()
 
-        get_language_by_id_from_db(new_id, language.language)
+        add_language_to_db(new_id, language.language)
 
         return {
             "status": "success",
