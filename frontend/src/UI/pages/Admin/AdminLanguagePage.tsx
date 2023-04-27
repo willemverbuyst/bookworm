@@ -21,14 +21,19 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useId, useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { genericSearch } from "../../../business/functions";
 import { useActions, useAppState } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
 import { TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
-import { defaultValuesLanguage } from "./helpers";
+import {
+  defaultValuesLanguages,
+  FormFieldsLanguages,
+  validationSchemaLanguages,
+} from "./helpers";
 import SimpleSidebar from "./SideMenu";
 
 function Form({
@@ -158,21 +163,15 @@ export function AdminLanguagePage() {
     formState: { errors },
     handleSubmit,
     reset,
-    watch,
-  } = useForm({
-    defaultValues: defaultValuesLanguage,
+  } = useForm<FormFieldsLanguages>({
+    defaultValues: defaultValuesLanguages,
+    resolver: zodResolver(validationSchemaLanguages),
   });
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "language",
+    name: "languages",
   });
-  const watchFieldArray = watch("language");
-  const controlledFields = fields.map((field, index) => {
-    return {
-      ...field,
-      ...watchFieldArray[index],
-    };
-  });
+
   const { isLoading } = useAppState().language;
   const {
     overview,
@@ -186,20 +185,19 @@ export function AdminLanguagePage() {
     search({ queryString: e.target.value });
   };
 
-  // const onSubmit = (data: any) => {
-  //   console.log("data :>> ", data);
-  //   // postLanguage({ language: "test" });
-  //   // reset();
-  //   // setShowForm(false);
-  // };
-
-  const onSubmit = (data: any) => console.log("data", data);
+  const onSubmit: SubmitHandler<FormFieldsLanguages> = async (data) => {
+    console.log("data :>> ", data);
+    // await postLanguage({ language: "test" });
+    // reset();
+    // setShowForm(false);
+  };
 
   return (
     <SimpleSidebar>
       <PageTitle title="Language" />
       {overview ? (
         <Box style={{ backgroundColor: "#fff" }} p={5}>
+          name
           <Flex direction="column">
             <Input onChange={searchInTable} placeholder="search" />
             <TableOverview
@@ -211,26 +209,27 @@ export function AdminLanguagePage() {
               actionButtons={[EditButton, DeleteButton]}
             />
           </Flex>
-
           {showForm ? (
             <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)} mt={5}>
               <VStack spacing={6}>
-                {controlledFields.map((item, index) => (
+                {fields.map((item, index) => (
                   <HStack key={item.id} alignItems="flex-end">
                     <ControlledTextInput
-                      name={`language.${index}.name`}
+                      name={`languages.${index}.name`}
                       control={control}
                       label="name of language"
-                      // error={`language.${index}.error.name`}
+                      error={(errors.languages || [])[index]?.name}
                       required
                     />
-                    <Button
-                      type="button"
-                      onClick={() => remove(index)}
-                      colorScheme="pink"
-                    >
-                      Delete
-                    </Button>
+                    {index > 0 && (
+                      <Button
+                        type="button"
+                        onClick={() => remove(index)}
+                        colorScheme="pink"
+                      >
+                        Delete
+                      </Button>
+                    )}
                   </HStack>
                 ))}
                 <HStack mt={5}>
