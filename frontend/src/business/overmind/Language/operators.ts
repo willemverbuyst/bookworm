@@ -64,7 +64,10 @@ export const deleteLanguage =
     if (!response || response instanceof AxiosError) {
       actions.api.handleErrorResponse({ response });
     } else {
-      state.language.getAllApi = response;
+      state.api.response = {
+        message: response.message,
+        status: "success",
+      };
     }
 
     state.language.isLoading = false;
@@ -87,8 +90,10 @@ export const updateLanguage =
     if (!response || response instanceof AxiosError) {
       actions.api.handleErrorResponse({ response });
     } else {
-      // state.language.getAllApi = response;
-      console.log("response :>> ", response);
+      state.api.response = {
+        message: response.message,
+        status: "success",
+      };
     }
 
     state.language.isLoading = false;
