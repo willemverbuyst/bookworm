@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { pipe } from "overmind";
 import { getAuthors } from "../Author/operators";
 import { getBooks } from "../Book/operators";

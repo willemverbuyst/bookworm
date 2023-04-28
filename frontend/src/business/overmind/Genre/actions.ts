@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { debounce, pipe } from "overmind";
 import * as o from "./operators";
 
