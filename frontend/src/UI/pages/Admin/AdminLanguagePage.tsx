@@ -18,8 +18,8 @@ import {
   PopoverHeader,
   PopoverTrigger,
   Stack,
+  Text,
   useDisclosure,
-  VStack,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useId, useState } from "react";
@@ -208,11 +208,12 @@ export function AdminLanguagePage() {
               actionButtons={[EditButton, DeleteButton]}
             />
           </Flex>
-          {showForm ? (
-            <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)} mt={5}>
-              <VStack spacing={6}>
+          <Flex mt={10}>
+            {showForm ? (
+              <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)} mt={5}>
+                <Text fontSize="2xl">Add language(s)</Text>
                 {fields.map((item, index) => (
-                  <HStack key={item.id} alignItems="flex-end">
+                  <HStack key={item.id} alignItems="flex-end" mt={5}>
                     <ControlledTextInput
                       name={`languages.${index}.name`}
                       control={control}
@@ -231,7 +232,7 @@ export function AdminLanguagePage() {
                     )}
                   </HStack>
                 ))}
-                <HStack mt={5}>
+                <HStack mt={10}>
                   <Button
                     colorScheme="teal"
                     aria-label="Add new"
@@ -249,18 +250,18 @@ export function AdminLanguagePage() {
                     onClick={() => append({ name: "" })}
                   />
                 </HStack>
-              </VStack>
-            </Box>
-          ) : (
-            <Button
-              mt={5}
-              colorScheme="teal"
-              aria-label="Add new"
-              onClick={() => setShowForm(true)}
-            >
-              Add Language
-            </Button>
-          )}
+              </Box>
+            ) : (
+              <Button
+                mt={5}
+                colorScheme="teal"
+                aria-label="Add new"
+                onClick={() => setShowForm(true)}
+              >
+                Add Language
+              </Button>
+            )}
+          </Flex>
         </Box>
       ) : (
         <p>{noDataMessage}</p>
