@@ -51,3 +51,27 @@ export const axiosDelete = async ({ url }: { url: string }) => {
     return null;
   }
 };
+
+export const axiosPut = async ({
+  url,
+  token,
+  body,
+}: {
+  url: string;
+  token: string;
+  body: Record<string, unknown>;
+}) => {
+  try {
+    const response = await axios.put(url, body, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      console.error(JSON.stringify(error.response));
+      return error;
+    }
+    console.error(JSON.stringify(error));
+    return null;
+  }
+};

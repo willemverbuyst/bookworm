@@ -1,5 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { useActions } from "../../business/overmind";
 
 type ToastState = {
   title?: string;
@@ -15,6 +16,7 @@ type ToastState = {
 };
 
 export function useToastHook() {
+  const { resetApiResponse } = useActions().api;
   const [state, setState] = useState<ToastState>({
     description: "",
     status: "info",
@@ -33,8 +35,10 @@ export function useToastHook() {
         position: position || "top",
         isClosable: true,
       });
+
+      resetApiResponse();
     }
-  }, [state.title, state.status, toast]);
+  }, [state.description, state.status, toast]);
 
   return [state, setState] as const;
 }

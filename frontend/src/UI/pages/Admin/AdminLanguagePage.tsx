@@ -18,41 +18,58 @@ import {
   PopoverHeader,
   PopoverTrigger,
   Stack,
+  Text,
   useDisclosure,
-  VStack,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useId, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { genericSearch } from "../../../business/functions";
 import { useActions, useAppState } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
 import { TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
 import {
-  defaultValuesLanguage,
-  FormFieldsLanguage,
-  validationSchemaLanguage,
+  defaultValuesLanguages,
+  FormFieldsLanguages,
+  validationSchemaLanguages,
 } from "./helpers";
 import SimpleSidebar from "./SideMenu";
 
-function Form({ onCancel, id }: { onCancel: () => void; id: string }) {
+function Form({
+  id,
+  onCancel,
+  onClose,
+}: {
+  id: string;
+  onCancel: () => void;
+  onClose: () => void;
+}) {
   const languages = useAppState().language.overview || [];
+  const { updateLanguage } = useActions().language;
   const nameOfLanguage = languages.find((l) => l.id === id)?.name || "";
+  const [language, setLanguage] = useState(nameOfLanguage);
+
+  const submit = () => {
+    updateLanguage({ id, language });
+    onClose();
+  };
 
   return (
     <Stack spacing={4}>
       <FormControl>
         <FormLabel htmlFor="language">Language</FormLabel>
-        <Input id="language" defaultValue={nameOfLanguage} />
+        <Input
+          id="language"
+          value={language}
+          onChange={(e) => setLanguage(e.target.value)}
+        />
       </FormControl>
       <ButtonGroup display="flex" justifyContent="flex-end">
         <Button variant="outline" onClick={onCancel}>
           Cancel
         </Button>
-        <Button onClick={() => console.log("test", id)} colorScheme="teal">
-          Save
-        </Button>
+        <Button onClick={submit}>Save</Button>
       </ButtonGroup>
     </Stack>
   );
@@ -81,7 +98,7 @@ function EditButton({ id }: { id: string }) {
       <PopoverContent p={5}>
         <PopoverArrow />
         <PopoverCloseButton />
-        <Form onCancel={onClose} id={id} />
+        <Form onCancel={onClose} id={id} onClose={onClose} />
       </PopoverContent>
     </Popover>
   );
@@ -104,8 +121,8 @@ function DeleteButton({ id }: { id: string }) {
       <PopoverTrigger>
         <IconButton
           data-tooltip-id="bookworm-tooltip"
-          data-tooltip-content="Edit details"
-          aria-label="Edit details"
+          data-tooltip-content="Delete language"
+          aria-label="Delete language"
           icon={<DeleteIcon />}
           mx={1}
         />
@@ -121,7 +138,7 @@ function DeleteButton({ id }: { id: string }) {
         <PopoverArrow />
         <PopoverCloseButton />
         <PopoverBody display="flex" justifyContent="flex-start">
-          {`Are you sure you want to delete ${nameOfLanguage}`}
+          {`Are you sure you want to delete ${nameOfLanguage}?`}
         </PopoverBody>
         <PopoverFooter display="flex" justifyContent="flex-end">
           <ButtonGroup size="sm">
@@ -146,10 +163,15 @@ export function AdminLanguagePage() {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<FormFieldsLanguage>({
-    defaultValues: defaultValuesLanguage,
-    resolver: zodResolver(validationSchemaLanguage),
+  } = useForm<FormFieldsLanguages>({
+    defaultValues: defaultValuesLanguages,
+    resolver: zodResolver(validationSchemaLanguages),
   });
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "languages",
+  });
+
   const { isLoading } = useAppState().language;
   const {
     overview,
@@ -157,14 +179,14 @@ export function AdminLanguagePage() {
       table: { columns, noDataMessage, queryString, searchKeys },
     },
   } = useAppState().language;
-  const { search, postLanguage } = useActions().language;
+  const { search, postLanguages } = useActions().language;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     search({ queryString: e.target.value });
   };
 
-  const onSubmit: SubmitHandler<FormFieldsLanguage> = async (data) => {
-    postLanguage(data);
+  const onSubmit: SubmitHandler<FormFieldsLanguages> = async (data) => {
+    await postLanguages(data);
     reset();
     setShowForm(false);
   };
@@ -174,6 +196,7 @@ export function AdminLanguagePage() {
       <PageTitle title="Language" />
       {overview ? (
         <Box style={{ backgroundColor: "#fff" }} p={5}>
+          name
           <Flex direction="column">
             <Input onChange={searchInTable} placeholder="search" />
             <TableOverview
@@ -185,39 +208,60 @@ export function AdminLanguagePage() {
               actionButtons={[EditButton, DeleteButton]}
             />
           </Flex>
-          <Button
-            mt={5}
-            colorScheme="teal"
-            aria-label="Add new"
-            onClick={() => setShowForm((prev) => !prev)}
-          >
-            {showForm ? "Cancel" : "Add Language"}
-          </Button>
-          {showForm ? (
-            <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)} mt={5}>
-              <VStack spacing={6}>
-                <ControlledTextInput
-                  name="language"
-                  control={control}
-                  label="name of language"
-                  error={errors.language}
-                  required
-                />
-                <HStack>
+          <Flex mt={10}>
+            {showForm ? (
+              <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)} mt={5}>
+                <Text fontSize="2xl">Add language(s)</Text>
+                {fields.map((item, index) => (
+                  <HStack key={item.id} alignItems="flex-end" mt={5}>
+                    <ControlledTextInput
+                      name={`languages.${index}.name`}
+                      control={control}
+                      label="name of language"
+                      error={(errors.languages || [])[index]?.name}
+                      required
+                    />
+                    {index > 0 && (
+                      <Button
+                        type="button"
+                        onClick={() => remove(index)}
+                        colorScheme="pink"
+                      >
+                        Delete
+                      </Button>
+                    )}
+                  </HStack>
+                ))}
+                <HStack mt={10}>
+                  <Button
+                    colorScheme="teal"
+                    aria-label="Add new"
+                    onClick={() => setShowForm(false)}
+                  >
+                    Cancel
+                  </Button>
                   <Button type="submit" colorScheme="teal">
                     Submit
                   </Button>
                   <IconButton
-                    mt={5}
                     colorScheme="telegram"
                     aria-label="Add new"
                     icon={<AddIcon />}
-                    onClick={() => console.log("action to add another input")}
+                    onClick={() => append({ name: "" })}
                   />
                 </HStack>
-              </VStack>
-            </Box>
-          ) : null}
+              </Box>
+            ) : (
+              <Button
+                mt={5}
+                colorScheme="teal"
+                aria-label="Add new"
+                onClick={() => setShowForm(true)}
+              >
+                Add Language
+              </Button>
+            )}
+          </Flex>
         </Box>
       ) : (
         <p>{noDataMessage}</p>

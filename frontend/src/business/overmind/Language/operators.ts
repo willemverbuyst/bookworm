@@ -33,16 +33,16 @@ export const resetQueryString =
     state.language.ui.table.queryString = "";
   };
 
-export const addLanguage =
+export const addLanguages =
   () =>
   async (
     { actions, state, effects }: Context,
-    { language }: { language: string }
+    { languages }: { languages: { name: string }[] }
   ) => {
     state.language.isLoading = true;
     const { token } = state.auth;
-    const response = await effects.language.api.postLanguage({
-      language,
+    const response = await effects.language.api.postLanguages({
+      languages,
       token,
     });
 
@@ -64,7 +64,36 @@ export const deleteLanguage =
     if (!response || response instanceof AxiosError) {
       actions.api.handleErrorResponse({ response });
     } else {
-      state.language.getAllApi = response;
+      state.api.response = {
+        message: response.message,
+        status: "success",
+      };
+    }
+
+    state.language.isLoading = false;
+  };
+
+export const updateLanguage =
+  () =>
+  async (
+    { actions, state, effects }: Context,
+    { id, language }: { id: string; language: string }
+  ) => {
+    state.language.isLoading = true;
+    const { token } = state.auth;
+    const response = await effects.language.api.putLanguage({
+      id,
+      language,
+      token,
+    });
+
+    if (!response || response instanceof AxiosError) {
+      actions.api.handleErrorResponse({ response });
+    } else {
+      state.api.response = {
+        message: response.message,
+        status: "success",
+      };
     }
 
     state.language.isLoading = false;
