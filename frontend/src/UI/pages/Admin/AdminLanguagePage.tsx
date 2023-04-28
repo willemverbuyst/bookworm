@@ -179,17 +179,16 @@ export function AdminLanguagePage() {
       table: { columns, noDataMessage, queryString, searchKeys },
     },
   } = useAppState().language;
-  const { search, postLanguage } = useActions().language;
+  const { search, postLanguages } = useActions().language;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     search({ queryString: e.target.value });
   };
 
   const onSubmit: SubmitHandler<FormFieldsLanguages> = async (data) => {
-    console.log("data :>> ", data);
-    // await postLanguage({ language: "test" });
-    // reset();
-    // setShowForm(false);
+    await postLanguages(data);
+    reset();
+    setShowForm(false);
   };
 
   return (

@@ -1,6 +1,9 @@
 import uuid
 
-from database.python.language.add_language import add_language_to_db
+from database.python.language.add_language import (
+    add_language_to_db,
+    add_languages_to_db,
+)
 from database.python.language.delete_language import delete_language_from_db
 from database.python.language.get_language_by_id import get_language_by_id_from_db
 from database.python.language.get_languages import (
@@ -10,7 +13,7 @@ from database.python.language.get_languages import (
 from database.python.language.update_language import update_language_in_db
 from error.main import raise_exception
 from fastapi import APIRouter, Body, HTTPException, status
-from models.language import LanguageSchema
+from models.language import LanguageSchema, LanguagesSchema
 
 language_router = APIRouter()
 
@@ -33,15 +36,18 @@ def get_all_languages() -> dict:
 
 
 @language_router.post("/languages", tags=["languages"])
-def add_language(language: LanguageSchema = Body(...)) -> dict:
+def add_language(languages: LanguagesSchema = Body(...)) -> dict:
     try:
-        new_id = uuid.uuid4()
+        add_languages_to_db(languages.languages)
 
-        add_language_to_db(new_id, language.language)
+        if len(languages.languages) == 1:
+            message = "language has been added"
+        else:
+            message = "languages have been added"
 
         return {
             "status": "success",
-            "message": "language has been added",
+            "message": message,
         }
     except:
         raise_exception(500, "Something went wrong!")
@@ -77,7 +83,7 @@ def update_language(language_id: str, language: LanguageSchema = Body(...)):
             status.HTTP_404_NOT_FOUND, detail="language with this id not found"
         )
 
-    updated_language = update_language_in_db(language_id, language.language)
+    updated_language = update_language_in_db(language_id, language.name)
 
     if updated_language is None:
         raise HTTPException(

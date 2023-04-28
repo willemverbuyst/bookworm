@@ -33,16 +33,16 @@ export const resetQueryString =
     state.language.ui.table.queryString = "";
   };
 
-export const addLanguage =
+export const addLanguages =
   () =>
   async (
     { actions, state, effects }: Context,
-    { language }: { language: string }
+    { languages }: { languages: { name: string }[] }
   ) => {
     state.language.isLoading = true;
     const { token } = state.auth;
-    const response = await effects.language.api.postLanguage({
-      language,
+    const response = await effects.language.api.postLanguages({
+      languages,
       token,
     });
 
