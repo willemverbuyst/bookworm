@@ -27,6 +27,7 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { genericSearch } from "../../../business/functions";
 import { useActions, useAppState } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
+import { SimpleSidebar } from "../../components/Navigation";
 import { TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
 import {
@@ -34,7 +35,6 @@ import {
   FormFieldsLanguages,
   validationSchemaLanguages,
 } from "./helpers";
-import SimpleSidebar from "./SideMenu";
 
 function Form({
   id,

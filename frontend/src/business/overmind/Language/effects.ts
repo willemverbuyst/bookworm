@@ -1,6 +1,4 @@
-import { apiGet, apiPut } from "../../../api";
-import { apiDelete } from "../../../api/apiDelete";
-import { apiPost } from "../../../api/apiPost";
+import { apiDelete, apiGet, apiPost, apiPut } from "../../../api";
 
 export const api = {
   getLanguages: async () => apiGet({ url: "languages" }),

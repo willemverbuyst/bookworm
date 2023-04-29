@@ -1,9 +1,9 @@
 import { Box, Flex, Input } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions";
 import { useActions, useAppState } from "../../../business/overmind";
+import { SimpleSidebar } from "../../components/Navigation";
 import { TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
-import SimpleSidebar from "./SideMenu";
 
 export function AdminLibraryPage() {
   const { isLoading } = useAppState().app;

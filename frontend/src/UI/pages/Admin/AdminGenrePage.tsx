@@ -32,6 +32,7 @@ import {
   useAppState,
 } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
+import { SimpleSidebar } from "../../components/Navigation";
 import { Pagination, TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
 import {
@@ -39,7 +40,6 @@ import {
   FormFieldsGenres,
   validationSchemaGenres,
 } from "./helpers";
-import SimpleSidebar from "./SideMenu";
 
 function Form({
   id,

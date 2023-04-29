@@ -1,4 +1,4 @@
-import { AdminState } from "../../models/Admin";
+import { AdminState } from "../../models";
 
 export const state: AdminState = {
   isLoading: false,
