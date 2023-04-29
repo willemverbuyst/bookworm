@@ -1,13 +1,17 @@
 import { z } from "zod";
 
-export const validationSchemaGenre = z.object({
-  genre: z.string().min(1, { message: "Name of lanugage is required" }),
+export const validationSchemaGenres = z.object({
+  genres: z
+    .object({
+      name: z.string().min(1, { message: "Name of genre is required" }),
+    })
+    .array(),
 });
 
-export type FormFieldsGenre = z.infer<typeof validationSchemaGenre>;
+export type FormFieldsGenres = z.infer<typeof validationSchemaGenres>;
 
-export const defaultValuesGenre: FormFieldsGenre = {
-  genre: "",
+export const defaultValuesGenres: FormFieldsGenres = {
+  genres: [{ name: "" }],
 };
 
 export const validationSchemaLanguages = z.object({

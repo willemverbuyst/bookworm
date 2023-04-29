@@ -3,6 +3,12 @@ import * as o from "./operators";
 
 export const getGenres = pipe(o.shouldFetchGenres(), o.fetchGenres());
 
+export const postGenres = pipe(o.addGenres(), o.fetchGenres());
+
+export const deleteGenre = pipe(o.deleteGenre(), o.fetchGenres());
+
+export const updateGenre = pipe(o.updateGenre(), o.fetchGenres());
+
 export const changeLimit = pipe(
   o.setLimit(),
   o.resetQueryString(),

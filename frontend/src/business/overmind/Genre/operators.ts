@@ -21,6 +21,72 @@ export const fetchGenres =
     state.genre.isLoading = false;
   };
 
+export const addGenres =
+  () =>
+  async (
+    { actions, state, effects }: Context,
+    { genres }: { genres: { name: string }[] }
+  ) => {
+    state.genre.isLoading = true;
+    const { token } = state.auth;
+    const response = await effects.genre.api.postGenres({
+      genres,
+      token,
+    });
+
+    if (!response || response instanceof AxiosError) {
+      actions.api.handleErrorResponse({ response });
+    } else {
+      state.genre.getAllApi = response;
+    }
+
+    state.genre.isLoading = false;
+  };
+
+export const deleteGenre =
+  () =>
+  async ({ actions, effects, state }: Context, { id }: { id: string }) => {
+    state.genre.isLoading = true;
+    const response = await effects.genre.api.deleteGenre({ id });
+
+    if (!response || response instanceof AxiosError) {
+      actions.api.handleErrorResponse({ response });
+    } else {
+      state.api.response = {
+        message: response.message,
+        status: "success",
+      };
+    }
+
+    state.genre.isLoading = false;
+  };
+
+export const updateGenre =
+  () =>
+  async (
+    { actions, state, effects }: Context,
+    { id, genre }: { id: string; genre: string }
+  ) => {
+    state.genre.isLoading = true;
+    const { token } = state.auth;
+    const response = await effects.genre.api.putGenre({
+      id,
+      genre,
+      token,
+    });
+
+    if (!response || response instanceof AxiosError) {
+      actions.api.handleErrorResponse({ response });
+    } else {
+      state.api.response = {
+        message: response.message,
+        status: "success",
+      };
+    }
+
+    state.genre.isLoading = false;
+  };
+
 export const setQueryString =
   () =>
   ({ state }: Context, { queryString }: { queryString: string }) => {
