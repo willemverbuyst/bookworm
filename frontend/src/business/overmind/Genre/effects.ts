@@ -16,11 +16,11 @@ export const api = {
 
   putGenre: async ({
     id,
-    genre,
+    name,
     token,
   }: {
     id: string;
-    genre: string;
+    name: string;
     token: string;
-  }) => apiPut({ url: `genres/${id}`, token, body: { genre } }),
+  }) => apiPut({ url: `genres/${id}`, token, body: { name } }),
 };

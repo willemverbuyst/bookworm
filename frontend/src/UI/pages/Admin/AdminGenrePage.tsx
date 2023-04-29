@@ -56,7 +56,7 @@ function Form({
   const [genre, setGenre] = useState(nameOfGenre);
 
   const submit = () => {
-    updateGenre({ id, genre });
+    updateGenre({ id, name: genre });
     onClose();
   };
 

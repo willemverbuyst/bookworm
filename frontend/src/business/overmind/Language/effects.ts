@@ -18,11 +18,11 @@ export const api = {
 
   putLanguage: async ({
     id,
-    language,
+    name,
     token,
   }: {
     id: string;
-    language: string;
+    name: string;
     token: string;
-  }) => apiPut({ url: `languages/${id}`, token, body: { language } }),
+  }) => apiPut({ url: `languages/${id}`, token, body: { name } }),
 };

@@ -5,7 +5,7 @@ export const state: GenreState = {
   isLoading: false,
   getAllApi: null,
   overview: derived(({ getAllApi, ui }: GenreState) => {
-    if (!getAllApi?.data.length) {
+    if (!getAllApi?.data?.length) {
       return [];
     }
     const { page, limit } = ui.table;
@@ -14,7 +14,7 @@ export const state: GenreState = {
       .slice((page - 1) * limit, limit * page);
   }),
   selectOptions: derived(({ getAllApi }: GenreState) => {
-    if (!getAllApi?.data.length) {
+    if (!getAllApi?.data?.length) {
       return [];
     }
     return getAllApi.data.map((i) => ({

@@ -65,13 +65,13 @@ export const updateGenre =
   () =>
   async (
     { actions, state, effects }: Context,
-    { id, genre }: { id: string; genre: string }
+    { id, name }: { id: string; name: string }
   ) => {
     state.genre.isLoading = true;
     const { token } = state.auth;
     const response = await effects.genre.api.putGenre({
       id,
-      genre,
+      name,
       token,
     });
 

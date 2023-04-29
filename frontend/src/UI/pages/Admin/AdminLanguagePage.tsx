@@ -51,7 +51,7 @@ function Form({
   const [language, setLanguage] = useState(nameOfLanguage);
 
   const submit = () => {
-    updateLanguage({ id, language });
+    updateLanguage({ id, name: language });
     onClose();
   };
 

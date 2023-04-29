@@ -77,13 +77,13 @@ export const updateLanguage =
   () =>
   async (
     { actions, state, effects }: Context,
-    { id, language }: { id: string; language: string }
+    { id, name }: { id: string; name: string }
   ) => {
     state.language.isLoading = true;
     const { token } = state.auth;
     const response = await effects.language.api.putLanguage({
       id,
-      language,
+      name,
       token,
     });
 
