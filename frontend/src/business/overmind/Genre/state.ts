@@ -4,11 +4,14 @@ import { GenreState } from "../../models";
 export const state: GenreState = {
   isLoading: false,
   getAllApi: null,
-  overview: derived(({ getAllApi }: GenreState) => {
+  overview: derived(({ getAllApi, ui }: GenreState) => {
     if (!getAllApi?.data.length) {
       return [];
     }
-    return getAllApi.data.map((i) => ({ id: i.id, name: i.genre }));
+    const { page, limit } = ui.table;
+    return getAllApi.data
+      .map((i) => ({ id: i.id, name: i.genre }))
+      .slice((page - 1) * limit, limit * page);
   }),
   selectOptions: derived(({ getAllApi }: GenreState) => {
     if (!getAllApi?.data.length) {

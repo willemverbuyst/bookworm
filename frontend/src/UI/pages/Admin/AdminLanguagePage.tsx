@@ -196,7 +196,6 @@ export function AdminLanguagePage() {
       <PageTitle title="Language" />
       {overview ? (
         <Box style={{ backgroundColor: "#fff" }} p={5}>
-          name
           <Flex direction="column">
             <Input onChange={searchInTable} placeholder="search" />
             <TableOverview

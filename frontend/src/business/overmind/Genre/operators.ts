@@ -32,3 +32,53 @@ export const resetQueryString =
   ({ state }: Context) => {
     state.genre.ui.table.queryString = "";
   };
+
+export const setLimit =
+  () =>
+  ({ state }: Context, { limit }: { limit: number }) => {
+    state.genre.ui.table.limit = limit;
+  };
+
+export const resetLimit =
+  () =>
+  ({ state }: Context) => {
+    state.genre.ui.table.limit = 10;
+  };
+
+export const setLimitToTotal =
+  () =>
+  ({ state }: Context) => {
+    state.genre.ui.table.limit =
+      state.genre.getAllApi?.total || state.genre.ui.table.limit;
+  };
+
+export const setPage =
+  () =>
+  ({ state }: Context, { page }: { page: number }) => {
+    state.genre.ui.table.page = page;
+  };
+
+export const resetPage =
+  () =>
+  ({ state }: Context) => {
+    state.genre.ui.table.page = 1;
+  };
+
+export const setShowAll =
+  () =>
+  ({ state }: Context) => {
+    state.genre.ui.table.showAll = true;
+  };
+
+export const setPagination =
+  () =>
+  ({ state }: Context) => {
+    state.genre.ui.table.showAll = false;
+  };
+
+export const shouldShowAll = () =>
+  filter(({ state }: Context) => {
+    return Boolean(
+      state.genre.ui.table.showAll && state.author.getAllApi?.total
+    );
+  });

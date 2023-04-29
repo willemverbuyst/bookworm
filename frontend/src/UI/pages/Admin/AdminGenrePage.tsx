@@ -13,9 +13,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { genericSearch } from "../../../business/functions";
-import { useActions, useAppState } from "../../../business/overmind";
+import {
+  stateSectionsWithTable,
+  useActions,
+  useAppState,
+} from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
-import { TableOverview } from "../../components/Table";
+import { Pagination, TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
 import {
   defaultValuesGenre,
@@ -64,11 +68,13 @@ export function AdminGenrePage() {
   });
   const { isLoading } = useAppState().app;
   const {
+    getAllApi,
     overview,
     ui: {
       table: { columns, noDataMessage, queryString, searchKeys },
     },
   } = useAppState().genre;
+  const { total } = getAllApi || {};
   const { search } = useActions().genre;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,6 +101,7 @@ export function AdminGenrePage() {
               isLoading={isLoading}
               actionButtons={[EditButton, DeleteButton]}
             />
+            <Pagination total={total} state={stateSectionsWithTable.genre} />
           </Flex>
           <Button
             mt={5}
