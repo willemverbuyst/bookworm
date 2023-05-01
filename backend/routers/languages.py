@@ -83,7 +83,7 @@ def update_language(language_id: str, language: LanguageSchema = Body(...)):
             status.HTTP_404_NOT_FOUND, detail="language with this id not found"
         )
 
-    updated_language = update_language_in_db(language_id, language.name)
+    updated_language = update_language_in_db(language_id, language.name_of_language)
 
     if updated_language is None:
         raise HTTPException(

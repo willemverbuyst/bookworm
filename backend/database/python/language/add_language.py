@@ -35,7 +35,9 @@ def add_languages_to_db(languages):
     cursor = conn.cursor()
     for language in languages:
         new_id = uuid.uuid4()
-        cursor.execute(raw_sql, (str(new_id), language.name, datetime.datetime.now()))
+        cursor.execute(
+            raw_sql, (str(new_id), language.name_of_language, datetime.datetime.now())
+        )
 
     conn.commit()
     conn.close()

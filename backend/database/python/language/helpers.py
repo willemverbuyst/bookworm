@@ -3,7 +3,7 @@ def format_languages(language_data):
     for row in language_data:
         language = {
             "id": row[0],
-            "language": row[1],
+            "name_of_language": row[1],
         }
         languages.append(language)
 
@@ -11,5 +11,5 @@ def format_languages(language_data):
 
 
 def format_language(language_data):
-    language = {"id": language_data[0], "language": language_data[1]}
+    language = {"id": language_data[0], "name_of_language": language_data[1]}
     return language
