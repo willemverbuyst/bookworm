@@ -17,7 +17,9 @@ export const defaultValuesGenres: FormFieldsGenres = {
 export const validationSchemaLanguages = z.object({
   languages: z
     .object({
-      name: z.string().min(1, { message: "Name of language is required" }),
+      nameOfLanguage: z
+        .string()
+        .min(1, { message: "Name of language is required" }),
     })
     .array(),
 });
@@ -25,5 +27,5 @@ export const validationSchemaLanguages = z.object({
 export type FormFieldsLanguages = z.infer<typeof validationSchemaLanguages>;
 
 export const defaultValuesLanguages = {
-  languages: [{ name: "" }],
+  languages: [{ nameOfLanguage: "" }],
 };

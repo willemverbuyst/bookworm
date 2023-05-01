@@ -2,12 +2,12 @@ import { BaseStateSelect, UI } from "./State";
 
 interface Language {
   id: string;
-  language: string;
+  name_of_language: string;
 }
 
 export interface LanguageDisplay {
   id: string;
-  name: string;
+  nameOfLanguage: string;
 }
 
 export interface LanguageState

@@ -8,26 +8,29 @@ export const state: LanguageState = {
     if (!getAllApi?.data?.length) {
       return [];
     }
-    return getAllApi.data.map((i) => ({ id: i.id, name: i.language }));
+    return getAllApi.data.map((i) => ({
+      id: i.id,
+      nameOfLanguage: i.name_of_language,
+    }));
   }),
   selectOptions: derived(({ getAllApi }: LanguageState) => {
     if (!getAllApi?.data?.length) {
       return [];
     }
     return getAllApi.data.map((i) => ({
-      display: i.language,
+      display: i.name_of_language,
       value: i.id,
     }));
   }),
   ui: {
     table: {
-      columns: [{ field: "name" }],
+      columns: [{ field: "nameOfLanguage" }],
       filter: null,
       limit: 10,
       noDataMessage: "no languages",
       page: 1,
       queryString: "",
-      searchKeys: ["name"],
+      searchKeys: ["nameOfLanguage"],
       showAll: false,
       title: "overview of languages",
     },

@@ -7,20 +7,34 @@ export const api = {
     languages,
     token,
   }: {
-    languages: { name: string }[];
+    languages: { nameOfLanguage: string }[];
     token: string;
-  }) => apiPost({ url: "languages", token, body: { languages } }),
+  }) =>
+    apiPost({
+      url: "languages",
+      token,
+      body: {
+        languages: languages.map((l) => ({
+          name_of_language: l.nameOfLanguage,
+        })),
+      },
+    }),
 
   deleteLanguage: async ({ id }: { id: string }) =>
     apiDelete({ url: `languages?id=${id}` }),
 
   putLanguage: async ({
     id,
-    name,
+    nameOfLanguage,
     token,
   }: {
     id: string;
-    name: string;
+    nameOfLanguage: string;
     token: string;
-  }) => apiPut({ url: `languages/${id}`, token, body: { name } }),
+  }) =>
+    apiPut({
+      url: `languages/${id}`,
+      token,
+      body: { name_of_language: nameOfLanguage },
+    }),
 };

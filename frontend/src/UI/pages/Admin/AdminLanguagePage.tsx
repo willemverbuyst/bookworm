@@ -47,11 +47,12 @@ function Form({
 }) {
   const languages = useAppState().language.overview || [];
   const { updateLanguage } = useActions().language;
-  const nameOfLanguage = languages.find((l) => l.id === id)?.name || "";
+  const nameOfLanguage =
+    languages.find((l) => l.id === id)?.nameOfLanguage || "";
   const [language, setLanguage] = useState(nameOfLanguage);
 
   const submit = () => {
-    updateLanguage({ id, name: language });
+    updateLanguage({ id, nameOfLanguage: language });
     onClose();
   };
 
@@ -108,7 +109,7 @@ function DeleteButton({ id }: { id: string }) {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { deleteLanguage } = useActions().language;
   const languages = useAppState().language.overview || [];
-  const nameOfLanguage = languages.find((l) => l.id === id)?.name;
+  const nameOfLanguage = languages.find((l) => l.id === id)?.nameOfLanguage;
 
   return (
     <Popover
@@ -214,10 +215,10 @@ export function AdminLanguagePage() {
                 {fields.map((item, index) => (
                   <HStack key={item.id} alignItems="flex-end" mt={5}>
                     <ControlledTextInput
-                      name={`languages.${index}.name`}
+                      name={`languages.${index}.nameOfLanguage`}
                       control={control}
                       label="name of language"
-                      error={(errors.languages || [])[index]?.name}
+                      error={(errors.languages || [])[index]?.nameOfLanguage}
                       required
                     />
                     {index > 0 && (
@@ -246,7 +247,7 @@ export function AdminLanguagePage() {
                     colorScheme="telegram"
                     aria-label="Add new"
                     icon={<AddIcon />}
-                    onClick={() => append({ name: "" })}
+                    onClick={() => append({ nameOfLanguage: "" })}
                   />
                 </HStack>
               </Box>

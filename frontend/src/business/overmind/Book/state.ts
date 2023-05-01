@@ -28,7 +28,7 @@ export const state: BookState = {
       return [];
     }
     return [...statsLanguageApi.data].map((d) => ({
-      language: d.language,
+      nameOfLanguage: d.name_of_language,
       number: d.number_of_books,
     }));
   }),
@@ -50,11 +50,11 @@ export const state: BookState = {
         { field: "author" },
         { field: "year_published" },
         { field: "genre" },
-        { field: "language" },
+        { field: "name_of_language" },
       ],
       filter: {
         genre: "",
-        language: "",
+        name_of_language: "",
       },
       limit: 10,
       noDataMessage: "no books",
