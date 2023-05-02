@@ -6,7 +6,7 @@ interface Book {
   author: string;
   year_published: number;
   genre: string;
-  language: string;
+  name_of_language: string;
 }
 
 interface Genre {
@@ -22,12 +22,12 @@ interface GenreDisplay {
 
 interface Language {
   id: string;
-  language: string;
+  name_of_language: string;
   number_of_books: number;
 }
 
 interface LanguageDisplay {
-  language: string;
+  nameOfLanguage: string;
   number: number;
 }
 
@@ -43,7 +43,7 @@ interface YearPublishedDisplay {
 
 interface Filter {
   genre: string;
-  language: string;
+  name_of_language: string;
 }
 
 export interface BookState extends BaseState<Book> {

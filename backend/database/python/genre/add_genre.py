@@ -5,19 +5,19 @@ import uuid
 import psycopg2
 
 dirname = os.path.dirname(__file__)
-insert_language_sql = os.path.join(dirname, "../../sql/language/insert_language.sql")
+insert_genre_sql = os.path.join(dirname, "../../sql/genre/insert_genre.sql")
 from database.python.helpers.sql_helpers import create_connection
 
 
-def add_language_to_db(new_id, language):
+def add_genre_to_db(new_id, genre):
     conn = create_connection()
 
-    sql_file = open(insert_language_sql, "r")
+    sql_file = open(insert_genre_sql, "r")
     raw_sql = sql_file.read()
     sql_file.close()
 
     cursor = conn.cursor()
-    cursor.execute(raw_sql, (str(new_id), language, datetime.datetime.now()))
+    cursor.execute(raw_sql, (str(new_id), genre, datetime.datetime.now()))
 
     conn.commit()
     conn.close()
@@ -25,19 +25,17 @@ def add_language_to_db(new_id, language):
     return
 
 
-def add_languages_to_db(languages):
+def add_genres_to_db(genres):
     conn = create_connection()
 
-    sql_file = open(insert_language_sql, "r")
+    sql_file = open(insert_genre_sql, "r")
     raw_sql = sql_file.read()
     sql_file.close()
 
     cursor = conn.cursor()
-    for language in languages:
+    for genre in genres:
         new_id = uuid.uuid4()
-        cursor.execute(
-            raw_sql, (str(new_id), language.name_of_language, datetime.datetime.now())
-        )
+        cursor.execute(raw_sql, (str(new_id), genre.name, datetime.datetime.now()))
 
     conn.commit()
     conn.close()

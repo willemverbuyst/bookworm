@@ -1,5 +1,6 @@
-import { apiGet } from "../../../api";
+import { apiGetWithZod } from "../../../api";
+import { ApiResponseCountry } from "../../models";
 
 export const api = {
-  getCountries: async () => apiGet({ url: "countries" }),
+  getCountries: async () => apiGetWithZod("countries", ApiResponseCountry),
 };

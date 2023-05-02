@@ -1,3 +1,3 @@
 UPDATE language 
-SET language = %s 
+SET name_of_language = %s 
 WHERE language.language_id = %s;

@@ -9,7 +9,7 @@ export const state: CountryState = {
       return [];
     }
     return getAllApi.data.map((i) => ({
-      display: i.country,
+      display: i.name_of_country,
       value: i.id,
     }));
   }),

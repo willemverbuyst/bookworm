@@ -9,7 +9,7 @@ dirname = os.path.dirname(__file__)
 update_language_sql = os.path.join(dirname, "../../sql/language/update_language.sql")
 
 
-def update_language_in_db(id, language):
+def update_language_in_db(id, name_of_language):
     conn = create_connection()
 
     sql_file = open(update_language_sql, "r")
@@ -17,7 +17,7 @@ def update_language_in_db(id, language):
     sql_file.close()
 
     cursor = conn.cursor()
-    cursor.execute(raw_sql, (language, id))
+    cursor.execute(raw_sql, (name_of_language, id))
 
     conn.commit()
     conn.close()

@@ -64,4 +64,5 @@ export const stateSectionsWithTable = {
   [stateSections.book]: stateSections.book,
   [stateSections.bookworm]: stateSections.bookworm,
   [stateSections.rental]: stateSections.rental,
+  [stateSections.genre]: stateSections.genre,
 };

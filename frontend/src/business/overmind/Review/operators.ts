@@ -2,8 +2,6 @@
 import { AxiosError } from "axios";
 import { Context } from "..";
 import { Page } from "../../models";
-import { shouldLoadAuthors } from "../Author/operators";
-import { shouldLoadBooks } from "../Book/operators";
 
 export const setReviewsPage =
   () =>
@@ -74,10 +72,3 @@ export const postReview =
     }
     state.review.isLoading = false;
   };
-
-export const shouldLoadAuthorsAndBooks = () => {
-  const shouldLoadAuthorsForReview = () => shouldLoadAuthors();
-  const shouldLoadbooksForReview = () => shouldLoadBooks();
-
-  return shouldLoadAuthorsForReview() && shouldLoadbooksForReview();
-};

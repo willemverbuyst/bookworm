@@ -1,36 +1,9 @@
-import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, Input } from "@chakra-ui/react";
+import { Box, Flex, Input } from "@chakra-ui/react";
 import { genericSearch } from "../../../business/functions";
 import { useActions, useAppState } from "../../../business/overmind";
+import { SimpleSidebar } from "../../components/Navigation";
 import { TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
-import SimpleSidebar from "./SideMenu";
-
-function EditButton({ id }: { id: string }) {
-  return (
-    <IconButton
-      data-tooltip-id="bookworm-tooltip"
-      data-tooltip-content="Edit details"
-      aria-label="Edit details"
-      onClick={() => console.log("test", id)}
-      icon={<EditIcon />}
-      mx={1}
-    />
-  );
-}
-
-function DeleteButton({ id }: { id: string }) {
-  return (
-    <IconButton
-      data-tooltip-id="bookworm-tooltip"
-      data-tooltip-content="Edit details"
-      aria-label="Edit details"
-      onClick={() => console.log("test", id)}
-      icon={<DeleteIcon />}
-      mx={1}
-    />
-  );
-}
 
 export function AdminLibraryPage() {
   const { isLoading } = useAppState().app;
@@ -59,15 +32,8 @@ export function AdminLibraryPage() {
               )}
               columns={columns}
               isLoading={isLoading}
-              actionButtons={[EditButton, DeleteButton]}
             />
           </Flex>
-          <IconButton
-            mt={5}
-            colorScheme="teal"
-            aria-label="Add new"
-            icon={<AddIcon />}
-          />
         </Box>
       ) : (
         <p>{noDataMessage}</p>

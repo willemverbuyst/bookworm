@@ -186,22 +186,23 @@ export function Pagination({ total, state }: Props) {
         </Box>
       )}
       <Box mt={5}>
-        <Flex align="end">
-          {!showAll && (
-            <Select defaultValue={limit} onChange={handleSelect}>
-              {dataSet.map((d) => (
-                <option key={JSON.stringify(d)} value={d.value}>
-                  {d.display}
-                </option>
-              ))}
-            </Select>
-          )}
-          {total && (
+        {total ? (
+          <Flex align="end">
+            {!showAll && (
+              <Select defaultValue={limit} onChange={handleSelect}>
+                {dataSet.map((d) => (
+                  <option key={JSON.stringify(d)} value={d.value}>
+                    {d.display}
+                  </option>
+                ))}
+              </Select>
+            )}
+
             <Button onClick={handleBtnClick} ml={2} px={7} variant="outline">
               {!showAll ? "Show all" : "Use pagination"}
             </Button>
-          )}
-        </Flex>
+          </Flex>
+        ) : null}
       </Box>
     </Container>
   );

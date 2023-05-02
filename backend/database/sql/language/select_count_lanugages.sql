@@ -1,3 +1,3 @@
 SELECT 
-COUNT(*) AS number_of_lanugages 
+COUNT(*) AS number_of_languages 
 FROM language;

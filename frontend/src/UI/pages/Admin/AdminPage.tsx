@@ -1,5 +1,5 @@
+import { SimpleSidebar } from "../../components/Navigation";
 import { PageTitle } from "../../components/Text";
-import SimpleSidebar from "./SideMenu";
 
 export function AdminPage() {
   return (

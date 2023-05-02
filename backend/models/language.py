@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 
 
 class LanguageSchema(BaseModel):
-    name: str
+    name_of_language: str
 
 
 class LanguagesSchema(BaseModel):
@@ -11,6 +11,6 @@ class LanguagesSchema(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "languages": [{"name": "EN"}],
+                "languages": [{"name_of_language": "EN"}],
             }
         }

@@ -1,28 +1,41 @@
-import { apiGet, apiPut } from "../../../api";
-import { apiDelete } from "../../../api/apiDelete";
-import { apiPost } from "../../../api/apiPost";
+import { apiDelete, apiGetWithZod, apiPost, apiPut } from "../../../api";
+import { ApiResponseLanguage } from "../../models";
 
 export const api = {
-  getLanguages: async () => apiGet({ url: "languages" }),
+  getLanguages: async () => apiGetWithZod("languages", ApiResponseLanguage),
 
   postLanguages: async ({
     languages,
     token,
   }: {
-    languages: { name: string }[];
+    languages: { nameOfLanguage: string }[];
     token: string;
-  }) => apiPost({ url: "languages", token, body: { languages } }),
+  }) =>
+    apiPost({
+      url: "languages",
+      token,
+      body: {
+        languages: languages.map((l) => ({
+          name_of_language: l.nameOfLanguage,
+        })),
+      },
+    }),
 
   deleteLanguage: async ({ id }: { id: string }) =>
     apiDelete({ url: `languages?id=${id}` }),
 
   putLanguage: async ({
     id,
-    language,
+    nameOfLanguage,
     token,
   }: {
     id: string;
-    language: string;
+    nameOfLanguage: string;
     token: string;
-  }) => apiPut({ url: `languages/${id}`, token, body: { language } }),
+  }) =>
+    apiPut({
+      url: `languages/${id}`,
+      token,
+      body: { name_of_language: nameOfLanguage },
+    }),
 };

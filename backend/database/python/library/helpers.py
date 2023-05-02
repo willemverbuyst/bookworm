@@ -8,7 +8,7 @@ def format_libraries(library_data):
             "address": row[3],
             "postal_code": row[4],
             "city": row[5],
-            "country": row[6]
+            "country": row[6],
         }
         libraries.append(library)
 

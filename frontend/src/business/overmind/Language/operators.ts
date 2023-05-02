@@ -37,7 +37,7 @@ export const addLanguages =
   () =>
   async (
     { actions, state, effects }: Context,
-    { languages }: { languages: { name: string }[] }
+    { languages }: { languages: { nameOfLanguage: string }[] }
   ) => {
     state.language.isLoading = true;
     const { token } = state.auth;
@@ -49,7 +49,10 @@ export const addLanguages =
     if (!response || response instanceof AxiosError) {
       actions.api.handleErrorResponse({ response });
     } else {
-      state.language.getAllApi = response;
+      state.api.response = {
+        message: response.message,
+        status: "success",
+      };
     }
 
     state.language.isLoading = false;
@@ -77,13 +80,13 @@ export const updateLanguage =
   () =>
   async (
     { actions, state, effects }: Context,
-    { id, language }: { id: string; language: string }
+    { id, nameOfLanguage }: { id: string; nameOfLanguage: string }
   ) => {
     state.language.isLoading = true;
     const { token } = state.auth;
     const response = await effects.language.api.putLanguage({
       id,
-      language,
+      nameOfLanguage,
       token,
     });
 
