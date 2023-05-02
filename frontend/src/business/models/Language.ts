@@ -17,7 +17,7 @@ export const ApiResponseLanguage = z.object({
 
 export type ApiResponseLanguage = z.infer<typeof ApiResponseLanguage>;
 
-export interface LanguageDisplay {
+export interface Language {
   id: string;
   "name of language": string;
 }
@@ -25,7 +25,7 @@ export interface LanguageDisplay {
 export interface LanguageState {
   getAllApi: ApiResponseLanguage | null;
   isLoading: boolean;
-  overview: LanguageDisplay[];
+  overview: Language[];
   selectOptions: SelectOption[];
-  ui: UI<LanguageDisplay, null>;
+  ui: UI<Language, null>;
 }
