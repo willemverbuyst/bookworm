@@ -10,7 +10,7 @@ export const state: LanguageState = {
     }
     return getAllApi.data.map((i) => ({
       id: i.id,
-      nameOfLanguage: i.name_of_language,
+      "name of language": i.name_of_language,
     }));
   }),
   selectOptions: derived(({ getAllApi }: LanguageState) => {
@@ -24,13 +24,13 @@ export const state: LanguageState = {
   }),
   ui: {
     table: {
-      columns: [{ field: "nameOfLanguage" }],
+      columns: [{ field: "name of language" }],
       filter: null,
       limit: 10,
       noDataMessage: "no languages",
       page: 1,
       queryString: "",
-      searchKeys: ["nameOfLanguage"],
+      searchKeys: ["name of language"],
       showAll: false,
       title: "overview of languages",
     },

@@ -1,7 +1,8 @@
-import { apiDelete, apiGet, apiPost, apiPut } from "../../../api";
+import { apiDelete, apiGetWithZod, apiPost, apiPut } from "../../../api";
+import { ApiResponseLanguage } from "../../models";
 
 export const api = {
-  getLanguages: async () => apiGet({ url: "languages" }),
+  getLanguages: async () => apiGetWithZod("languages", ApiResponseLanguage),
 
   postLanguages: async ({
     languages,
