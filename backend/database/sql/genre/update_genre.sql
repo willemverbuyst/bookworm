@@ -1,3 +1,3 @@
 UPDATE genre 
-SET genre = %s 
+SET name_of_genre = %s 
 WHERE genre.genre_id = %s;

@@ -3,7 +3,7 @@ SELECT
     book.title, 
     book.year_published, 
     CONCAT (author.first_name, ' ', author.last_name) as author, 
-    genre.genre, 
+    genre.name_of_genre, 
     language.name_of_language 
 FROM book 
 INNER JOIN book_author 
