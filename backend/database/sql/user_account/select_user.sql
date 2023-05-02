@@ -9,7 +9,7 @@ SELECT
     address.address, 
     address.postal_code, 
     city_city.city,
-    country.country,
+    country.name_of_country,
     library.library_name
 FROM user_account
 FULL OUTER JOIN address

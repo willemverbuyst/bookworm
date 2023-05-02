@@ -7,7 +7,7 @@ SELECT
   address.postal_code,
   address.phone,
   city.city,
-  country.country
+  country.name_of_country
 FROM user_account
 INNER JOIN address
 ON user_account.address_id = address.address_id

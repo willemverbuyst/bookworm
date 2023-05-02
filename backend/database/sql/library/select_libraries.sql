@@ -5,7 +5,7 @@ SELECT
     address.address, 
     address.postal_code, 
     city.city,
-    country.country
+    country.name_of_country
 FROM library
 INNER JOIN address 
 ON library.address_id = address.address_id
