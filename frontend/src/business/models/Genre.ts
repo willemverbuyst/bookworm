@@ -1,15 +1,31 @@
-import { BaseStateSelect, UI } from "./State";
+import { z } from "zod";
+import { SelectOption } from "./SelectOption";
+import { UI } from "./State";
+
+export const ApiResponseGenre = z.object({
+  status: z.string(),
+  result: z.number(),
+  data: z
+    .object({
+      id: z.string(),
+      name_of_genre: z.string(),
+    })
+    .array(),
+  total: z.number(),
+  message: z.string(),
+});
+
+export type ApiResponseGenre = z.infer<typeof ApiResponseGenre>;
 
 interface Genre {
   id: string;
-  genre: string;
+  "name of genre": string;
 }
 
-interface GenreDisplay {
-  id: string;
-  name: string;
-}
-
-export interface GenreState extends BaseStateSelect<Genre, GenreDisplay> {
-  ui: UI<GenreDisplay, null>;
+export interface GenreState {
+  getAllApi: ApiResponseGenre | null;
+  isLoading: boolean;
+  overview: Genre[];
+  selectOptions: SelectOption[];
+  ui: UI<Genre, null>;
 }

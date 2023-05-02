@@ -10,7 +10,7 @@ export const state: GenreState = {
     }
     const { page, limit } = ui.table;
     return getAllApi.data
-      .map((i) => ({ id: i.id, name: i.genre }))
+      .map((i) => ({ id: i.id, "name of genre": i.name_of_genre }))
       .slice((page - 1) * limit, limit * page);
   }),
   selectOptions: derived(({ getAllApi }: GenreState) => {
@@ -18,19 +18,19 @@ export const state: GenreState = {
       return [];
     }
     return getAllApi.data.map((i) => ({
-      display: i.genre,
+      display: i.name_of_genre,
       value: i.id,
     }));
   }),
   ui: {
     table: {
-      columns: [{ field: "name" }],
+      columns: [{ field: "name of genre" }],
       filter: null,
       limit: 10,
       noDataMessage: "no genres",
       page: 1,
       queryString: "",
-      searchKeys: ["name"],
+      searchKeys: ["name of genre"],
       showAll: false,
       title: "overview of genres",
     },

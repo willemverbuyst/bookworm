@@ -1,7 +1,8 @@
-import { apiDelete, apiGet, apiPost, apiPut } from "../../../api";
+import { apiDelete, apiGetWithZod, apiPost, apiPut } from "../../../api";
+import { ApiResponseGenre } from "../../models";
 
 export const api = {
-  getGenres: async () => apiGet({ url: "genres" }),
+  getGenres: async () => apiGetWithZod("genres", ApiResponseGenre),
 
   postGenres: async ({
     genres,
