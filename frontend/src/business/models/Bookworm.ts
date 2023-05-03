@@ -8,12 +8,12 @@ export interface Bookworm {
   email: string;
   phone: string;
   user_is_active: boolean;
-  library_name: string;
+  name_of_library: string;
 }
 
 interface Library {
   id: string;
-  library_name: string;
+  name_of_library: string;
   user_active: boolean;
   number_of_bookworms_per_library: number;
 }

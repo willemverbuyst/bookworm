@@ -24,7 +24,7 @@ export const state: BookwormState = {
         .sort(compare("id"))
         .map((d, index) => ({
           userIsActive: `${d.user_active}`,
-          libraryName: `${d.library_name}`,
+          libraryName: `${d.name_of_library}`,
           numberOfBookworms: d.number_of_bookworms_per_library,
           color: rootState.app.colors[getColorIndex(index)],
         }));
@@ -38,7 +38,7 @@ export const state: BookwormState = {
         { field: "last_name" },
         { field: "email" },
         { field: "phone" },
-        { field: "library_name" },
+        { field: "name_of_library" },
       ],
       filter: {
         active: true,

@@ -7,7 +7,7 @@ export interface User {
   first_name: string;
   id: number;
   last_name: string;
-  library_name: string;
+  name_of_library: string;
   place_of_birth: string;
   phone: string;
   postal_code: string;
