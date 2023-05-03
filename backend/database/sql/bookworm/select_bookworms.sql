@@ -5,7 +5,7 @@ SELECT
     user_account.email, 
     address.phone, 
     user_account.activebool AS user_is_active, 
-    library.library_name 
+    library.name_of_library 
 FROM bookworm
 INNER JOIN user_account
 ON bookworm.user_account_id = user_account.user_account_id

@@ -1,6 +1,6 @@
 SELECT 
     library.library_id,
-    library.library_name,
+    library.name_of_library,
     address.phone, 
     address.address, 
     address.postal_code, 
