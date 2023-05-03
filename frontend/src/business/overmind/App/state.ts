@@ -8,7 +8,7 @@ export const state: AppState = {
     { label: "Books", href: "/books" },
   ],
   privateNavItems: [
-    { label: "Home", href: "/home" },
+    { label: "Home", href: "/myhome" },
     { label: "Admin", href: "/admin" },
     { label: "Bookworms", href: "/bookworms" },
     { label: "Rentals", href: "/rentals" },

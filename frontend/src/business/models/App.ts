@@ -4,7 +4,7 @@ export const Page = {
   WELCOME: "/",
   BOOKS: "/books",
   AUTHORS: "/authors",
-  HOME: "/home",
+  HOME: "/myhome",
   ADMIN: "/admin",
   ADMIN_GENRE: "/admin/genre",
   ADMIN_LANGUAGE: "/admin/language",
