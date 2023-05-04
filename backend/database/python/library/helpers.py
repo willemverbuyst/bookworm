@@ -13,3 +13,17 @@ def format_libraries(library_data):
         libraries.append(library)
 
     return libraries
+
+
+def format_library(library_data):
+    library = {
+        "id": library_data[0],
+        "name_of_library": library_data[1],
+        "phone": library_data[2],
+        "address": library_data[3],
+        "postal_code": library_data[4],
+        "city": library_data[5],
+        "country": library_data[6],
+    }
+
+    return library
