@@ -3,6 +3,21 @@ import { LibraryState } from "../../models";
 
 export const state: LibraryState = {
   isLoading: false,
+  detailsApi: null,
+  details: derived(({ detailsApi }: LibraryState) => {
+    if (!detailsApi?.data) {
+      return null;
+    }
+    return {
+      id: detailsApi.data.id,
+      "name of library": detailsApi.data.name_of_library,
+      phone: detailsApi.data.phone,
+      address: detailsApi.data.address,
+      postalCode: detailsApi.data.postal_code,
+      city: detailsApi.data.city,
+      country: detailsApi.data.country,
+    };
+  }),
   getAllApi: null,
   overview: derived(({ getAllApi }: LibraryState) => {
     if (!getAllApi?.data.length) {

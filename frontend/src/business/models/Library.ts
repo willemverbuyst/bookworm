@@ -20,7 +20,22 @@ export const ApiResponseLibrary = z.object({
   message: z.string(),
 });
 
+export const ApiResponseLibraryById = z.object({
+  status: z.string(),
+  data: z.object({
+    id: z.string(),
+    name_of_library: z.string(),
+    phone: z.string(),
+    address: string(),
+    postal_code: string(),
+    city: string(),
+    country: string(),
+  }),
+  message: z.string(),
+});
+
 export type ApiResponseLibrary = z.infer<typeof ApiResponseLibrary>;
+export type ApiResponseLibraryById = z.infer<typeof ApiResponseLibraryById>;
 
 export interface Library {
   id: string;
@@ -33,6 +48,8 @@ export interface Library {
 }
 
 export interface LibraryState {
+  detailsApi: ApiResponseLibraryById | null;
+  details: Library | null;
   getAllApi: ApiResponseLibrary | null;
   isLoading: boolean;
   overview: Library[];
