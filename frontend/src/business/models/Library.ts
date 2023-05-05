@@ -1,4 +1,4 @@
-import { string, z } from "zod";
+import { z } from "zod";
 import { SelectOption } from "./SelectOption";
 import { UI } from "./State";
 
@@ -10,10 +10,10 @@ export const ApiResponseLibrary = z.object({
       id: z.string(),
       name_of_library: z.string(),
       phone: z.string(),
-      address: string(),
-      postal_code: string(),
-      city: string(),
-      country: string(),
+      address: z.string(),
+      postal_code: z.string(),
+      city: z.string(),
+      country: z.string(),
     })
     .array(),
   total: z.number(),
@@ -26,10 +26,10 @@ export const ApiResponseLibraryById = z.object({
     id: z.string(),
     name_of_library: z.string(),
     phone: z.string(),
-    address: string(),
-    postal_code: string(),
-    city: string(),
-    country: string(),
+    address: z.string(),
+    postal_code: z.string(),
+    city: z.string(),
+    country: z.string(),
   }),
   message: z.string(),
 });
