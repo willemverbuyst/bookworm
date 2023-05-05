@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-import { AxiosError } from "axios";
 import { Context } from "..";
 import { Page } from "../../models";
 
@@ -31,23 +30,9 @@ export const onInitializeOvermind = async ({
     state.app.isLoading = false;
     return;
   }
-
-  actions.api.resetApiResponse();
-  const response = await effects.auth.api.getUserByToken(tokenFromLocalStorage);
-
-  if (!response || response instanceof AxiosError) {
-    actions.api.handleErrorResponse({ response });
-    state.app.isLoading = false;
-    return;
-  }
-
-  state.api.response = { message: response.message, status: "success" };
-  const token = response.token.access_token;
-  localStorage.setItem("token", token);
-  state.auth.token = token;
-  state.auth.isSignedIn = true;
-  state.auth.user = response.data;
   state.app.isLoading = false;
+
+  actions.auth.getUserByToken({ tokenFromLocalStorage });
 };
 
 export const showHomePage = ({ state }: Context) => {

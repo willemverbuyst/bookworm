@@ -1,12 +1,12 @@
 import axios, { AxiosError } from "axios";
-import { UserApi } from "../../models";
+import { ApiResponseUser } from "../../models";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 
 export const api = {
   getUserByToken: async (
     token: string
-  ): Promise<UserApi | AxiosError | null> => {
+  ): Promise<ApiResponseUser | AxiosError | null> => {
     try {
       const response = await axios.post(`${BACKEND_URL}/user/me`, {
         token,
@@ -25,7 +25,7 @@ export const api = {
   getUser: async (
     email: string,
     password: string
-  ): Promise<UserApi | AxiosError | null> => {
+  ): Promise<ApiResponseUser | AxiosError | null> => {
     try {
       const response = await axios.post(`${BACKEND_URL}/user/login`, {
         email,

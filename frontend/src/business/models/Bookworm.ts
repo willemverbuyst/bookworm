@@ -1,5 +1,5 @@
 import { ApiResponse, BaseState, UI } from "./State";
-import { UserApi } from "./User";
+import { ApiResponseUser } from "./User";
 
 export interface Bookworm {
   id: string;
@@ -29,7 +29,7 @@ interface Filter {
   active: boolean;
 }
 export interface BookwormState extends BaseState<Bookworm> {
-  bookwormDetailsApi: Omit<UserApi, "token"> | null;
+  bookwormDetailsApi: Omit<ApiResponseUser, "token"> | null;
   statsLibrary: LibraryDisplay[];
   statsLibraryApi: ApiResponse<Array<Library>> | null;
   ui: UI<Bookworm, Filter>;
