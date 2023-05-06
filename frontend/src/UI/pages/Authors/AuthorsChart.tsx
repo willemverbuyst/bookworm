@@ -4,7 +4,7 @@ import { useAppState } from "../../../business/overmind";
 
 export function AuthorsChart() {
   const { isLoading } = useAppState().app;
-  const { pages_per_author: data = [] } = useAppState().author.statsPage || {};
+  const { pagesPerAuthor: data = [] } = useAppState().author.statsPage || {};
 
   if (isLoading) {
     return <Spinner />;
@@ -25,7 +25,7 @@ export function AuthorsChart() {
             }}
           >
             <XAxis
-              dataKey="name"
+              dataKey="author"
               type="category"
               height={200}
               axisLine={false}
@@ -34,14 +34,14 @@ export function AuthorsChart() {
               angle={-35}
               textAnchor="end"
             />
-            <YAxis yAxisId="number" orientation="left" hide />
-            <YAxis yAxisId="book" orientation="right" hide />
-            <Bar yAxisId="number" dataKey="number" fill="#ED64A6">
-              <LabelList dataKey="number" position="top" />
+            <YAxis yAxisId="numberOfPages" orientation="left" hide />
+            <YAxis yAxisId="numberOfBooks" orientation="right" hide />
+            <Bar yAxisId="numberOfPages" dataKey="numberOfPages" fill="#ED64A6">
+              <LabelList dataKey="numberOfPages" position="top" />
             </Bar>
-            <Bar yAxisId="book" dataKey="book" fill="#666">
+            <Bar yAxisId="numberOfBooks" dataKey="numberOfBooks" fill="#666">
               <LabelList
-                dataKey="book"
+                dataKey="numberOfBooks"
                 position="top"
                 offset={-25}
                 fill="#fff"
@@ -49,7 +49,7 @@ export function AuthorsChart() {
             </Bar>
 
             <Line
-              yAxisId="number"
+              yAxisId="numberOfPages"
               dataKey="avg"
               stroke="#ED64A6"
               strokeWidth={2}
