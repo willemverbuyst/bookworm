@@ -1,4 +1,10 @@
-import { apiGet } from "../../../api";
+import { apiGetWithZod } from "../../../api";
+import {
+  ApiResponseBook,
+  ApiResponseStatsGenre,
+  ApiResponseStatsLanguage,
+  ApiResponseStatsYearPublished,
+} from "../../models";
 
 export const api = {
   getBooks: ({
@@ -21,13 +27,18 @@ export const api = {
       url += `&genre=${genre}`;
     }
 
-    return apiGet({ url });
+    return apiGetWithZod(url, ApiResponseBook);
   },
 
-  getBookStatsGenres: () => apiGet({ url: "books/stats/?by=genre" }),
+  getBookStatsGenres: () =>
+    apiGetWithZod("books/stats/?by=genre", ApiResponseStatsGenre),
 
-  getBookStatsLanguages: () => apiGet({ url: "books/stats/?by=language" }),
+  getBookStatsLanguages: () =>
+    apiGetWithZod("books/stats/?by=language", ApiResponseStatsLanguage),
 
   getBookStatsYearPublished: () =>
-    apiGet({ url: "books/stats/?by=year_published" }),
+    apiGetWithZod(
+      "books/stats/?by=year_published",
+      ApiResponseStatsYearPublished
+    ),
 };
