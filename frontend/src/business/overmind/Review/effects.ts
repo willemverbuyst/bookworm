@@ -1,9 +1,10 @@
 import axios from "axios";
-import { apiGet } from "../../../api";
+import { apiGetWithZod } from "../../../api";
+import { ApiResponseReview } from "../../models";
 
 export const api = {
   getReviews: async ({ limit = 10, page = 1 }) =>
-    apiGet({ url: `reviews/?limit=${limit}&page=${page}` }),
+    apiGetWithZod(`reviews/?limit=${limit}&page=${page}`, ApiResponseReview),
 
   postReview: async (
     author: string,

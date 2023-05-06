@@ -7,8 +7,17 @@ export const state: ReviewState = {
   isLoading: false,
   overview: derived(({ getAllApi }: ReviewState) => {
     if (!getAllApi?.data.length) {
-      return null;
+      return [];
     }
-    return groupBy(getAllApi.data, "rating");
+    return groupBy(
+      getAllApi.data.map((i) => ({
+        id: i.id,
+        description: i.description,
+        rating: i.rating,
+        bookTitle: i.book_title,
+        reviewer: i.reviewer,
+      })),
+      "rating"
+    );
   }),
 };
