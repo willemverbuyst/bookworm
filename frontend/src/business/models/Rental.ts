@@ -1,31 +1,72 @@
-import { ApiResponse, BaseState, UI } from "./State";
+import { z } from "zod";
+import { UI } from "./State";
+
+export const ApiResponseRental = z.object({
+  status: z.string(),
+  result: z.number(),
+  data: z
+    .object({
+      id: z.string(),
+      rental_date: z.string(),
+      return_date: z.string().nullable(),
+      title: z.string(),
+      author: z.string(),
+    })
+    .array(),
+  total: z.number(),
+  message: z.string(),
+});
+
+export type ApiResponseRental = z.infer<typeof ApiResponseRental>;
 
 interface Rental {
   id: string;
-  rental_date: string;
-  return_date: string;
+  "rental date": string;
+  "return date": string | null;
   title: string;
   author: string;
 }
 
-interface Duration {
-  duration: number;
-  total_rentals: number;
-}
+export const ApiResponseRentalStatsDuration = z.object({
+  status: z.string(),
+  result: z.number(),
+  data: z
+    .object({
+      duration: z.number(),
+      total_rentals: z.number(),
+    })
+    .array(),
+  message: z.string(),
+});
 
-interface DurationDisplay {
+export type ApiResponseRentalStatsDuration = z.infer<
+  typeof ApiResponseRentalStatsDuration
+>;
+
+interface Duration {
   durationLabel: string;
   duration: number;
   number: number;
 }
 
-interface Day {
-  number_of_rentals: number;
-  number_of_returns: number;
-  day_of_the_week: number;
-}
+export const ApiResponseRentalStatsDay = z.object({
+  status: z.string(),
+  result: z.number(),
+  data: z
+    .object({
+      number_of_rentals: z.number(),
+      number_of_returns: z.number(),
+      day_of_the_week: z.number(),
+    })
+    .array(),
+  message: z.string(),
+});
 
-interface DayDisplay {
+export type ApiResponseRentalStatsDay = z.infer<
+  typeof ApiResponseRentalStatsDay
+>;
+
+interface Day {
   rentals: number;
   returns: number;
   day: string;
@@ -36,10 +77,13 @@ interface Filter {
   returned: string;
 }
 
-export interface RentalState extends BaseState<Rental> {
-  statsDay: DayDisplay[];
-  statsDayApi: ApiResponse<Day[]> | null;
-  statsDuration: DurationDisplay[];
-  statsDurationApi: ApiResponse<Duration[]> | null;
+export interface RentalState {
+  getAllApi: ApiResponseRental | null;
+  isLoading: boolean;
+  overview: Rental[];
+  statsDay: Day[];
+  statsDayApi: ApiResponseRentalStatsDay | null;
+  statsDuration: Duration[];
+  statsDurationApi: ApiResponseRentalStatsDuration | null;
   ui: UI<Rental, Filter>;
 }

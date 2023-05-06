@@ -40,7 +40,7 @@ export function BookwormChartLibraries() {
         textAnchor={x > cx ? "start" : "end"}
         dominantBaseline="central"
       >
-        {`${data[index].numberOfBookworms}`}
+        {`${data[index].numberOfBookwormsPerLibrary}`}
       </text>
     );
   };
@@ -64,9 +64,7 @@ export function BookwormChartLibraries() {
         textAnchor={x > cx ? "start" : "end"}
         dominantBaseline="central"
       >
-        {data[index].userIsActive === "true"
-          ? `${data[index].libraryName}`
-          : ""}
+        {data[index].userIsActive ? `${data[index].library}` : ""}
       </text>
     );
   };
@@ -78,8 +76,7 @@ export function BookwormChartLibraries() {
           <PieChart width={1200} height={600}>
             <Pie
               data={data}
-              dataKey="numberOfBookworms"
-              nameKey="userIsActive"
+              dataKey="numberOfBookwormsPerLibrary"
               cx="50%"
               cy="50%"
               outerRadius={120}
@@ -88,15 +85,15 @@ export function BookwormChartLibraries() {
             >
               {data.map((entry) => (
                 <Cell
-                  key={`cell-${entry.libraryName}`}
+                  key={`cell-${entry.library}`}
                   fill={colors[colors.length - 1]}
                 />
               ))}
             </Pie>
             <Pie
               data={data}
-              dataKey="numberOfBookworms"
-              nameKey="libraryName"
+              dataKey="numberOfBookwormsPerLibrary"
+              nameKey="library"
               cx="50%"
               cy="50%"
               outerRadius={160}
@@ -108,17 +105,15 @@ export function BookwormChartLibraries() {
                 <Cell
                   key={`cell-${entry.userIsActive}`}
                   fill={
-                    entry.userIsActive === "true"
-                      ? entry.color
-                      : "rgba(255, 255, 255, 0)"
+                    entry.userIsActive ? entry.color : "rgba(255, 255, 255, 0)"
                   }
                 />
               ))}
             </Pie>
             <Pie
               data={data}
-              dataKey="numberOfBookworms"
-              nameKey="libraryName"
+              dataKey="numberOfBookwormsPerLibrary"
+              nameKey="library"
               cx="50%"
               cy="50%"
               outerRadius={145}
@@ -129,9 +124,7 @@ export function BookwormChartLibraries() {
                 <Cell
                   key={`cell-${entry.userIsActive}`}
                   fill={
-                    entry.userIsActive === "true"
-                      ? "rgba(255, 255, 255, 0)"
-                      : entry.color
+                    entry.userIsActive ? "rgba(255, 255, 255, 0)" : entry.color
                   }
                 />
               ))}

@@ -1,25 +1,18 @@
-export interface User {
-  address: string;
-  birth_date: string;
-  city: string;
-  country: string;
-  email: string;
-  first_name: string;
-  id: number;
-  last_name: string;
-  library_name: string;
-  place_of_birth: string;
-  phone: string;
-  postal_code: string;
-}
+import { z } from "zod";
 
-export interface UserApi {
-  status: string;
-  data: User;
-  message: string;
-  token: { access_token: string };
-}
+export const User = z.object({
+  id: z.string(),
+  first_name: z.string(),
+  last_name: z.string(),
+  birth_date: z.string(),
+  place_of_birth: z.string(),
+  email: z.string(),
+  phone: z.string(),
+  address: z.string(),
+  postal_code: z.string(),
+  city: z.string(),
+  country: z.string(),
+  library: z.string(),
+});
 
-export interface UserState {
-  user: User | null;
-}
+export type User = z.infer<typeof User>;

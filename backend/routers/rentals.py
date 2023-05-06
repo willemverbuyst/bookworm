@@ -1,6 +1,9 @@
 from database.python.rental.get_rentals import (
-    get_rental_stats_day_from_db, get_rental_stats_duration_from_db,
-    get_rentals_from_db, get_total_number_of_rentals)
+    get_rental_stats_day_from_db,
+    get_rental_stats_duration_from_db,
+    get_rentals_from_db,
+    get_total_number_of_rentals,
+)
 from error.main import raise_exception
 from fastapi import APIRouter
 
@@ -8,7 +11,7 @@ rental_router = APIRouter()
 
 
 @rental_router.get("/rentals", tags=["rentals"])
-def get_rentals(limit = None, page=1, filter = None) -> dict:
+def get_rentals(limit=None, page=1, filter=None) -> dict:
     try:
         rentals = get_rentals_from_db(limit, page, filter)
         total_number_of_rentals = get_total_number_of_rentals(filter)
@@ -26,20 +29,19 @@ def get_rentals(limit = None, page=1, filter = None) -> dict:
 
 
 @rental_router.get("/rentals/stats/", tags=["rentals"])
-def get_rentals_stats(by = None) -> dict:
-
+def get_rentals_stats(by=None) -> dict:
     try:
-        if (by == "duration"):
+        if by == "duration":
             stats = get_rental_stats_duration_from_db()
-        elif (by == "day"):
+        elif by == "day":
             stats = get_rental_stats_day_from_db()
         else:
             stats = []
 
-        
         return {
             "status": "success",
             "data": stats,
+            "result": len(stats),
             "message": "stats have been fetched",
         }
     except:

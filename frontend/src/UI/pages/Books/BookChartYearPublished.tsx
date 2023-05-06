@@ -14,9 +14,11 @@ export function BookChartYearPublished() {
   const { isLoading } = useAppState().book;
   const data = useAppState().book.statsYearPublished || [];
 
-  const max = Math.max(...data.map((i) => i.number));
+  const max = Math.max(...data.map((i) => i.numberOfBooks));
 
-  const maxYears = data.filter((i) => i.number === max).map((i) => i.name);
+  const maxYears = data
+    .filter((i) => i.numberOfBooks === max)
+    .map((i) => i.yearPublished);
 
   if (isLoading) {
     return <Spinner />;
@@ -37,7 +39,7 @@ export function BookChartYearPublished() {
           >
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="name"
+              dataKey="yearPublised"
               axisLine={false}
               tickLine={false}
               interval={10}
@@ -53,7 +55,7 @@ export function BookChartYearPublished() {
             </ReferenceLine>
             <Line
               type="monotone"
-              dataKey="number"
+              dataKey="numberOfBooks"
               stroke="#8884d8"
               strokeWidth={4}
               dot={false}

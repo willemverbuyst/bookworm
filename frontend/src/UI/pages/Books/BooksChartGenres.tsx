@@ -29,15 +29,15 @@ export function BooksChartGenres() {
           >
             <XAxis type="number" scale="auto" axisLine={false} tick={false} />
             <YAxis
-              dataKey="name"
+              dataKey="genre"
               type="category"
               axisLine={false}
               scale="auto"
               width={200}
               tickLine={false}
             />
-            <Bar dataKey="number" fill="#FFBB28">
-              <LabelList dataKey="number" position="right" />
+            <Bar dataKey="numberOfBooks" fill="#FFBB28">
+              <LabelList dataKey="numberOfBooks" position="right" />
             </Bar>
           </BarChart>
         </Box>

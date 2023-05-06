@@ -13,6 +13,4 @@ INNER JOIN city
 ON city.city_id = address.city_id
 INNER JOIN country
 ON country.country_id = city.country_id 
-ORDER BY library.library_id  
-LIMIT %s 
-OFFSET %s;
+AND library.library_id=%s;

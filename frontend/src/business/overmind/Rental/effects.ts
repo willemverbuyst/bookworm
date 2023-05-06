@@ -1,4 +1,9 @@
-import { apiGet } from "../../../api";
+import { apiGetWithZod } from "../../../api";
+import {
+  ApiResponseRental,
+  ApiResponseRentalStatsDay,
+  ApiResponseRentalStatsDuration,
+} from "../../models";
 
 export const api = {
   getRentals: async ({
@@ -20,11 +25,12 @@ export const api = {
       url += "&filter=not_returned";
     }
 
-    return apiGet({ url });
+    return apiGetWithZod(url, ApiResponseRental);
   },
 
-  getRentalStatsDay: async () => apiGet({ url: "rentals/stats/?by=day" }),
+  getRentalStatsDay: async () =>
+    apiGetWithZod("rentals/stats/?by=day", ApiResponseRentalStatsDay),
 
   getRentalStatsDuration: async () =>
-    apiGet({ url: "rentals/stats/?by=duration" }),
+    apiGetWithZod("rentals/stats/?by=duration", ApiResponseRentalStatsDuration),
 };

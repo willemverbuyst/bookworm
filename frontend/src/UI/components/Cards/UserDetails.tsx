@@ -111,7 +111,7 @@ export function UserDetails({ user }: Props) {
               library
             </Heading>
             <Text pt="2" fontSize="sm">
-              {user?.library_name}
+              {user?.library}
             </Text>
           </Box>
         </Stack>

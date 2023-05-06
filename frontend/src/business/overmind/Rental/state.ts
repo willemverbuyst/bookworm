@@ -4,11 +4,18 @@ import { RentalState } from "../../models";
 
 export const state: RentalState = {
   getAllApi: null,
+  isLoading: false,
   overview: derived(({ getAllApi }: RentalState) => {
     if (!getAllApi?.data.length) {
       return [];
     }
-    return getAllApi.data;
+    return getAllApi.data.map((i) => ({
+      id: i.id,
+      "rental date": i.rental_date,
+      "return date": i.return_date,
+      title: i.title,
+      author: i.author,
+    }));
   }),
   statsDay: derived(({ statsDayApi }: RentalState) => {
     if (!statsDayApi?.data.length) {
@@ -40,8 +47,8 @@ export const state: RentalState = {
       columns: [
         { field: "title" },
         { field: "author" },
-        { field: "rental_date" },
-        { field: "return_date" },
+        { field: "rental date" },
+        { field: "return date" },
       ],
       filter: { returned: "not_returned" },
       limit: 20,

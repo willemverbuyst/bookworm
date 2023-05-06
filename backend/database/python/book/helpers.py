@@ -7,7 +7,7 @@ def format_books(book_data):
             "year_published": row[2],
             "author": row[3],
             "genre": row[4],
-            "name_of_language": row[5],
+            "language": row[5],
         }
         books.append(book)
 
@@ -19,7 +19,7 @@ def format_stats_languages(language_data):
     for row in language_data:
         data = {
             "id": row[0],
-            "name_of_language": row[1],
+            "language": row[1],
             "number_of_books": row[2],
         }
         stats.append(data)

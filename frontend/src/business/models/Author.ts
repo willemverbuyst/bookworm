@@ -1,36 +1,65 @@
-import { ApiResponse, BaseState, UI } from "./State";
+import { z } from "zod";
+import { UI } from "./State";
+
+export const ApiResponseAuthor = z.object({
+  status: z.string(),
+  result: z.number(),
+  data: z
+    .object({
+      id: z.string(),
+      first_name: z.string(),
+      last_name: z.string(),
+      books_written: z.number(),
+    })
+    .array(),
+  total: z.number(),
+  message: z.string(),
+});
+
+export type ApiResponseAuthor = z.infer<typeof ApiResponseAuthor>;
 
 interface Author {
   id: string;
-  first_name: string;
-  last_name: string;
-  books_written: number;
+  "first name": string;
+  "last name": string;
+  "books written": number;
 }
 
-interface PagesPerAuthor {
-  id: string;
-  author: string;
-  number_of_pages: number;
-  number_of_books: number;
-}
+export const ApiResponseAuthorStatsPage = z.object({
+  status: z.string(),
+  data: z.object({
+    pages_per_author: z
+      .object({
+        id: z.string(),
+        author: z.string(),
+        number_of_pages: z.number(),
+        number_of_books: z.number(),
+      })
+      .array(),
+    average_pages: z.number(),
+  }),
+  message: z.string(),
+});
+
+export type ApiResponseAuthorStatsPage = z.infer<
+  typeof ApiResponseAuthorStatsPage
+>;
 
 interface Page {
-  pages_per_author: Array<PagesPerAuthor>;
-  average_pages: number;
-}
-
-interface PageDisplay {
-  name: string;
-  number: number;
-  book: number;
+  author: string;
+  numberOfPages: number;
+  numberOfBooks: number;
   avg: number;
 }
 
-export interface AuthorState extends BaseState<Author> {
+export interface AuthorState {
+  getAllApi: ApiResponseAuthor | null;
+  isLoading: boolean;
+  overview: Author[];
   statsPage: {
-    pages_per_author: PageDisplay[];
-    average_pages: number;
+    pagesPerAuthor: Page[];
+    averagePages: number;
   } | null;
-  statsPageApi: ApiResponse<Page> | null;
+  statsPageApi: ApiResponseAuthorStatsPage | null;
   ui: UI<Author, null>;
 }

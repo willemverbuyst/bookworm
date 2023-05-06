@@ -3,13 +3,19 @@ import { BookState } from "../../models";
 
 export const state: BookState = {
   getAllApi: null,
+  isLoading: false,
   overview: derived(({ getAllApi }: BookState) => {
     if (!getAllApi?.data.length) {
       return [];
     }
     return getAllApi.data
       .map((book) => ({
-        ...book,
+        id: book.id,
+        title: book.title,
+        author: book.author,
+        "year published": book.year_published,
+        genre: book.genre,
+        language: book.language,
       }))
       .sort((book1, book2) => `${book1.title}`.localeCompare(book2.title));
   }),
@@ -18,8 +24,8 @@ export const state: BookState = {
       return [];
     }
     return [...statsGenreApi.data].map((d) => ({
-      name: d.genre,
-      number: Number(d.number_of_books),
+      genre: d.genre,
+      numberOfBooks: Number(d.number_of_books),
     }));
   }),
   statsGenreApi: null,
@@ -28,8 +34,8 @@ export const state: BookState = {
       return [];
     }
     return [...statsLanguageApi.data].map((d) => ({
-      nameOfLanguage: d.name_of_language,
-      number: d.number_of_books,
+      language: d.language,
+      numberOfBooks: d.number_of_books,
     }));
   }),
   statsLanguageApi: null,
@@ -38,8 +44,8 @@ export const state: BookState = {
       return [];
     }
     return [...statsYearPublishedApi.data].map((d) => ({
-      name: d.year_published,
-      number: Number(d.number_of_books),
+      yearPublished: Number(d.year_published),
+      numberOfBooks: Number(d.number_of_books),
     }));
   }),
   statsYearPublishedApi: null,
@@ -48,9 +54,9 @@ export const state: BookState = {
       columns: [
         { field: "title" },
         { field: "author" },
-        { field: "year_published" },
+        { field: "year published" },
         { field: "genre" },
-        { field: "name_of_language" },
+        { field: "language" },
       ],
       filter: {
         genre: "",

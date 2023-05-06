@@ -11,7 +11,7 @@ def format_user(user_data):
         "postal_code": user_data[8],
         "city": user_data[9],
         "country": user_data[10],
-        "library_name": user_data[11],
+        "library": user_data[11],
     }
 
     return user

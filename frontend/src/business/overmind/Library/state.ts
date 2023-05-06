@@ -3,6 +3,21 @@ import { LibraryState } from "../../models";
 
 export const state: LibraryState = {
   isLoading: false,
+  detailsApi: null,
+  details: derived(({ detailsApi }: LibraryState) => {
+    if (!detailsApi?.data) {
+      return null;
+    }
+    return {
+      id: detailsApi.data.id,
+      "name of library": detailsApi.data.name_of_library,
+      phone: detailsApi.data.phone,
+      address: detailsApi.data.address,
+      postalCode: detailsApi.data.postal_code,
+      city: detailsApi.data.city,
+      country: detailsApi.data.country,
+    };
+  }),
   getAllApi: null,
   overview: derived(({ getAllApi }: LibraryState) => {
     if (!getAllApi?.data.length) {
@@ -10,7 +25,7 @@ export const state: LibraryState = {
     }
     return getAllApi.data.map((i) => ({
       id: i.id,
-      name: i.library,
+      "name of library": i.name_of_library,
       phone: i.phone,
       address: i.address,
       postalCode: i.postal_code,
@@ -23,14 +38,14 @@ export const state: LibraryState = {
       return [];
     }
     return getAllApi.data.map((i) => ({
-      display: i.library,
+      display: i.name_of_library,
       value: i.id,
     }));
   }),
   ui: {
     table: {
       columns: [
-        { field: "name" },
+        { field: "name of library" },
         { field: "phone" },
         { field: "city" },
         { field: "country" },
@@ -40,7 +55,7 @@ export const state: LibraryState = {
       noDataMessage: "no libraries",
       page: 1,
       queryString: "",
-      searchKeys: ["name"],
+      searchKeys: ["name of library"],
       showAll: false,
       title: "overview of libraries",
     },

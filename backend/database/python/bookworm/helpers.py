@@ -8,7 +8,7 @@ def format_bookworms(bookworm_data):
             "email": row[3],
             "phone": row[4],
             "user_is_active": row[5],
-            "library_name": row[6]
+            "library": row[6],
         }
         bookworms.append(bookworm)
 
@@ -20,9 +20,9 @@ def format_stats_libraries(library_data):
     for row in library_data:
         data = {
             "id": row[0],
-            "library_name": row[1],
-            "user_active": row[2],
-            "number_of_bookworms_per_library": row[3]
+            "library": row[1],
+            "user_is_active": row[2],
+            "number_of_bookworms_per_library": row[3],
         }
         stats.append(data)
 

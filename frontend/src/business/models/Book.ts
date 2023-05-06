@@ -1,44 +1,96 @@
-import { ApiResponse, BaseState, UI } from "./State";
+import { z } from "zod";
+import { UI } from "./State";
 
+export const ApiResponseBook = z.object({
+  status: z.string(),
+  result: z.number(),
+  data: z
+    .object({
+      id: z.string(),
+      title: z.string(),
+      author: z.string(),
+      year_published: z.string(),
+      genre: z.string(),
+      language: z.string(),
+    })
+    .array(),
+  total: z.number(),
+  message: z.string(),
+});
+
+export type ApiResponseBook = z.infer<typeof ApiResponseBook>;
 interface Book {
   id: string;
   title: string;
   author: string;
-  year_published: number;
+  "year published": string;
   genre: string;
-  name_of_language: string;
+  language: string;
 }
+
+export const ApiResponseBookStatsGenre = z.object({
+  status: z.string(),
+  result: z.number(),
+  data: z
+    .object({
+      id: z.string(),
+      genre: z.string(),
+      number_of_books: z.number(),
+    })
+    .array(),
+  message: z.string(),
+});
+
+export type ApiResponseBookStatsGenre = z.infer<
+  typeof ApiResponseBookStatsGenre
+>;
 
 interface Genre {
-  id: string;
   genre: string;
-  number_of_books: number;
+  numberOfBooks: number;
 }
 
-interface GenreDisplay {
-  name: string;
-  number: number;
-}
+export const ApiResponseBookStatsLanguage = z.object({
+  status: z.string(),
+  result: z.number(),
+  data: z
+    .object({
+      id: z.string(),
+      language: z.string(),
+      number_of_books: z.number(),
+    })
+    .array(),
+  message: z.string(),
+});
+
+export type ApiResponseBookStatsLanguage = z.infer<
+  typeof ApiResponseBookStatsLanguage
+>;
 
 interface Language {
-  id: string;
-  name_of_language: string;
-  number_of_books: number;
+  language: string;
+  numberOfBooks: number;
 }
 
-interface LanguageDisplay {
-  nameOfLanguage: string;
-  number: number;
-}
+export const ApiResponseBookStatsYearPublished = z.object({
+  status: z.string(),
+  result: z.number(),
+  data: z
+    .object({
+      year_published: z.string(),
+      number_of_books: z.number(),
+    })
+    .array(),
+  message: z.string(),
+});
+
+export type ApiResponseBookStatsYearPublished = z.infer<
+  typeof ApiResponseBookStatsYearPublished
+>;
 
 interface YearPublished {
-  year_published: string;
-  number_of_books: number;
-}
-
-interface YearPublishedDisplay {
-  name: string;
-  number: number;
+  yearPublished: number;
+  numberOfBooks: number;
 }
 
 interface Filter {
@@ -46,12 +98,15 @@ interface Filter {
   name_of_language: string;
 }
 
-export interface BookState extends BaseState<Book> {
-  statsGenre: GenreDisplay[];
-  statsGenreApi: ApiResponse<Genre[]> | null;
-  statsLanguage: LanguageDisplay[];
-  statsLanguageApi: ApiResponse<Language[]> | null;
-  statsYearPublished: YearPublishedDisplay[];
-  statsYearPublishedApi: ApiResponse<YearPublished[]> | null;
+export interface BookState {
+  getAllApi: ApiResponseBook | null;
+  isLoading: boolean;
+  overview: Book[];
+  statsGenre: Genre[];
+  statsGenreApi: ApiResponseBookStatsGenre | null;
+  statsLanguage: Language[];
+  statsLanguageApi: ApiResponseBookStatsLanguage | null;
+  statsYearPublished: YearPublished[];
+  statsYearPublishedApi: ApiResponseBookStatsYearPublished | null;
   ui: UI<Book, Filter>;
 }

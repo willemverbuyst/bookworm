@@ -1,5 +1,5 @@
 import { z, ZodType } from "zod";
-import { axiosGet } from "./axiosCRUD";
+import { axiosGet, axiosGetWithZod } from "./axiosCRUD";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 
@@ -11,7 +11,10 @@ export const apiGet = async ({ url }: { url: string }) => {
 export const apiGetWithZod = async <T extends ZodType>(
   url: string,
   schema: T
-): Promise<z.infer<T>> =>
-  fetch(`${BACKEND_URL}/${url}`)
-    .then((response) => response.json())
-    .then((json) => schema.parse(json));
+): Promise<z.infer<T>> => {
+  const response = await axiosGetWithZod({
+    url: `${BACKEND_URL}/${url}`,
+    schema,
+  });
+  return response;
+};

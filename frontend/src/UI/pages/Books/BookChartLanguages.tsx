@@ -19,7 +19,7 @@ export function BooksChartLanguages() {
             <Legend verticalAlign="bottom" height={36} />
             <Pie
               data={data}
-              dataKey="number"
+              dataKey="numberOfBooks"
               nameKey="language"
               cx="50%"
               cy="50%"

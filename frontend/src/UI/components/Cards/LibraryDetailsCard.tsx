@@ -10,17 +10,17 @@ import {
   StackDivider,
   Text,
 } from "@chakra-ui/react";
-import { LibraryDetails } from "../../../business/models";
+import { Library } from "../../../business/models";
 
 interface Props {
-  library: LibraryDetails;
+  library: Library;
 }
 
 export function LibraryDetailsCard({ library }: Props) {
   return (
     <Card width={400} my={5}>
       <CardHeader>
-        <Heading size="md">{library.name}</Heading>
+        <Heading size="md">{library["name of library"]}</Heading>
       </CardHeader>
 
       <CardBody>

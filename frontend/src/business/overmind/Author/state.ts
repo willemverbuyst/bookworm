@@ -2,17 +2,21 @@ import { derived } from "overmind";
 import { AuthorState } from "../../models";
 
 export const state: AuthorState = {
+  isLoading: false,
   getAllApi: null,
   overview: derived(({ getAllApi }: AuthorState) => {
     if (!getAllApi?.data.length) {
       return [];
     }
     return getAllApi.data
-      .map((author) => ({
-        ...author,
+      .map((i) => ({
+        id: i.id,
+        "first name": i.first_name,
+        "last name": i.last_name,
+        "books written": i.books_written,
       }))
       .sort((author1, author2) =>
-        `${author1.last_name}`.localeCompare(author2.last_name)
+        `${author1["last name"]}`.localeCompare(author2["last name"])
       );
   }),
   statsPage: derived(({ statsPageApi }: AuthorState) => {
@@ -20,29 +24,29 @@ export const state: AuthorState = {
       return null;
     }
     return {
-      pages_per_author: [...statsPageApi.data.pages_per_author].map((d) => ({
-        name: d.author,
-        number: Number(d.number_of_pages),
-        book: Number(d.number_of_books),
+      pagesPerAuthor: [...statsPageApi.data.pages_per_author].map((d) => ({
+        author: d.author,
+        numberOfPages: Number(d.number_of_pages),
+        numberOfBooks: Number(d.number_of_books),
         avg: statsPageApi.data.average_pages,
       })),
-      average_pages: statsPageApi.data.average_pages,
+      averagePages: statsPageApi.data.average_pages,
     };
   }),
   statsPageApi: null,
   ui: {
     table: {
       columns: [
-        { field: "last_name" },
-        { field: "first_name" },
-        { field: "books_written", isNumeric: true },
+        { field: "last name" },
+        { field: "first name" },
+        { field: "books written", isNumeric: true },
       ],
       filter: null,
       limit: 10,
       noDataMessage: "no authors",
       page: 1,
       queryString: "",
-      searchKeys: ["last_name", "first_name"],
+      searchKeys: ["last name", "first name"],
       showAll: false,
       title: "overview of authors",
     },

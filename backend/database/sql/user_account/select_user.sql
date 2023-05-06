@@ -10,7 +10,7 @@ SELECT
     address.postal_code, 
     city_city.city,
     country.name_of_country,
-    library.library_name
+    library.name_of_library
 FROM user_account
 FULL OUTER JOIN address
 ON user_account.address_id = address.address_id
