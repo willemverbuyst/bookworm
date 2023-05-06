@@ -1,18 +1,18 @@
 import { z } from "zod";
 
-const User = z.object({
-  address: z.string(),
+export const User = z.object({
+  id: z.string(),
+  first_name: z.string(),
+  last_name: z.string(),
   birth_date: z.string(),
+  place_of_birth: z.string(),
+  email: z.string(),
+  phone: z.string(),
+  address: z.string(),
+  postal_code: z.string(),
   city: z.string(),
   country: z.string(),
-  email: z.string(),
-  first_name: z.string(),
-  id: z.number(),
-  last_name: z.string(),
-  name_of_library: z.string(),
-  place_of_birth: z.string(),
-  phone: z.string(),
-  postal_code: z.string(),
+  library: z.string(),
 });
 
 export const ApiResponseUser = z.object({

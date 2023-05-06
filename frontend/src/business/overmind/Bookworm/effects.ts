@@ -1,7 +1,13 @@
-import { apiGet } from "../../../api";
+import { apiGetWithZod } from "../../../api";
+import {
+  ApiResponseBookworm,
+  ApiResponseBookWormById,
+  ApiResponseBookwormStatsLibrary,
+} from "../../models";
 
 export const api = {
-  getBookwormById: async (id: string) => apiGet({ url: `bookworms/${id}` }),
+  getBookwormById: async (id: string) =>
+    apiGetWithZod(`bookworms/${id}`, ApiResponseBookWormById),
 
   getBookworms: async ({
     limit = 10,
@@ -12,7 +18,14 @@ export const api = {
     page: number;
     active: boolean;
   }) =>
-    apiGet({ url: `bookworms/?limit=${limit}&page=${page}&active=${active}` }),
+    apiGetWithZod(
+      `bookworms/?limit=${limit}&page=${page}&active=${active}`,
+      ApiResponseBookworm
+    ),
 
-  getBookwormStatsibrary: () => apiGet({ url: "bookworms/stats/?by=library" }),
+  getBookwormStatsibrary: () =>
+    apiGetWithZod(
+      "bookworms/stats/?by=library",
+      ApiResponseBookwormStatsLibrary
+    ),
 };
