@@ -1,9 +1,9 @@
 import { apiGetWithZod } from "../../../api";
 import {
   ApiResponseBook,
-  ApiResponseStatsGenre,
-  ApiResponseStatsLanguage,
-  ApiResponseStatsYearPublished,
+  ApiResponseBookStatsGenre,
+  ApiResponseBookStatsLanguage,
+  ApiResponseBookStatsYearPublished,
 } from "../../models";
 
 export const api = {
@@ -31,14 +31,14 @@ export const api = {
   },
 
   getBookStatsGenres: () =>
-    apiGetWithZod("books/stats/?by=genre", ApiResponseStatsGenre),
+    apiGetWithZod("books/stats/?by=genre", ApiResponseBookStatsGenre),
 
   getBookStatsLanguages: () =>
-    apiGetWithZod("books/stats/?by=language", ApiResponseStatsLanguage),
+    apiGetWithZod("books/stats/?by=language", ApiResponseBookStatsLanguage),
 
   getBookStatsYearPublished: () =>
     apiGetWithZod(
       "books/stats/?by=year_published",
-      ApiResponseStatsYearPublished
+      ApiResponseBookStatsYearPublished
     ),
 };

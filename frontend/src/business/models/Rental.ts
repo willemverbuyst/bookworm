@@ -27,7 +27,7 @@ interface Rental {
   author: string;
 }
 
-export const ApiResponseStatsDuration = z.object({
+export const ApiResponseRentalStatsDuration = z.object({
   status: z.string(),
   result: z.number(),
   data: z
@@ -39,7 +39,9 @@ export const ApiResponseStatsDuration = z.object({
   message: z.string(),
 });
 
-export type ApiResponseStatsDuration = z.infer<typeof ApiResponseStatsDuration>;
+export type ApiResponseRentalStatsDuration = z.infer<
+  typeof ApiResponseRentalStatsDuration
+>;
 
 interface Duration {
   durationLabel: string;
@@ -47,7 +49,7 @@ interface Duration {
   number: number;
 }
 
-export const ApiResponseStatsDay = z.object({
+export const ApiResponseRentalStatsDay = z.object({
   status: z.string(),
   result: z.number(),
   data: z
@@ -60,7 +62,9 @@ export const ApiResponseStatsDay = z.object({
   message: z.string(),
 });
 
-export type ApiResponseStatsDay = z.infer<typeof ApiResponseStatsDay>;
+export type ApiResponseRentalStatsDay = z.infer<
+  typeof ApiResponseRentalStatsDay
+>;
 
 interface Day {
   rentals: number;
@@ -78,8 +82,8 @@ export interface RentalState {
   isLoading: boolean;
   overview: Rental[];
   statsDay: Day[];
-  statsDayApi: ApiResponseStatsDay | null;
+  statsDayApi: ApiResponseRentalStatsDay | null;
   statsDuration: Duration[];
-  statsDurationApi: ApiResponseStatsDuration | null;
+  statsDurationApi: ApiResponseRentalStatsDuration | null;
   ui: UI<Rental, Filter>;
 }

@@ -1,8 +1,8 @@
 import { apiGetWithZod } from "../../../api";
 import {
   ApiResponseRental,
-  ApiResponseStatsDay,
-  ApiResponseStatsDuration,
+  ApiResponseRentalStatsDay,
+  ApiResponseRentalStatsDuration,
 } from "../../models";
 
 export const api = {
@@ -29,8 +29,8 @@ export const api = {
   },
 
   getRentalStatsDay: async () =>
-    apiGetWithZod("rentals/stats/?by=day", ApiResponseStatsDay),
+    apiGetWithZod("rentals/stats/?by=day", ApiResponseRentalStatsDay),
 
   getRentalStatsDuration: async () =>
-    apiGetWithZod("rentals/stats/?by=duration", ApiResponseStatsDuration),
+    apiGetWithZod("rentals/stats/?by=duration", ApiResponseRentalStatsDuration),
 };

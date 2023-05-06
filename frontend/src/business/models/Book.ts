@@ -28,7 +28,7 @@ interface Book {
   language: string;
 }
 
-export const ApiResponseStatsGenre = z.object({
+export const ApiResponseBookStatsGenre = z.object({
   status: z.string(),
   result: z.number(),
   data: z
@@ -41,14 +41,16 @@ export const ApiResponseStatsGenre = z.object({
   message: z.string(),
 });
 
-export type ApiResponseStatsGenre = z.infer<typeof ApiResponseStatsGenre>;
+export type ApiResponseBookStatsGenre = z.infer<
+  typeof ApiResponseBookStatsGenre
+>;
 
 interface Genre {
   genre: string;
   numberOfBooks: number;
 }
 
-export const ApiResponseStatsLanguage = z.object({
+export const ApiResponseBookStatsLanguage = z.object({
   status: z.string(),
   result: z.number(),
   data: z
@@ -61,14 +63,16 @@ export const ApiResponseStatsLanguage = z.object({
   message: z.string(),
 });
 
-export type ApiResponseStatsLanguage = z.infer<typeof ApiResponseStatsLanguage>;
+export type ApiResponseBookStatsLanguage = z.infer<
+  typeof ApiResponseBookStatsLanguage
+>;
 
 interface Language {
   language: string;
   numberOfBooks: number;
 }
 
-export const ApiResponseStatsYearPublished = z.object({
+export const ApiResponseBookStatsYearPublished = z.object({
   status: z.string(),
   result: z.number(),
   data: z
@@ -80,8 +84,8 @@ export const ApiResponseStatsYearPublished = z.object({
   message: z.string(),
 });
 
-export type ApiResponseStatsYearPublished = z.infer<
-  typeof ApiResponseStatsYearPublished
+export type ApiResponseBookStatsYearPublished = z.infer<
+  typeof ApiResponseBookStatsYearPublished
 >;
 
 interface YearPublished {
@@ -99,10 +103,10 @@ export interface BookState {
   isLoading: boolean;
   overview: Book[];
   statsGenre: Genre[];
-  statsGenreApi: ApiResponseStatsGenre | null;
+  statsGenreApi: ApiResponseBookStatsGenre | null;
   statsLanguage: Language[];
-  statsLanguageApi: ApiResponseStatsLanguage | null;
+  statsLanguageApi: ApiResponseBookStatsLanguage | null;
   statsYearPublished: YearPublished[];
-  statsYearPublishedApi: ApiResponseStatsYearPublished | null;
+  statsYearPublishedApi: ApiResponseBookStatsYearPublished | null;
   ui: UI<Book, Filter>;
 }

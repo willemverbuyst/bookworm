@@ -1,4 +1,4 @@
-import { Column } from "./Table";
+export type Column<T> = Array<{ field: keyof T; isNumeric?: boolean }>;
 
 interface UITable<T, U> {
   columns: Column<T>;
@@ -14,25 +14,4 @@ interface UITable<T, U> {
 
 export interface UI<T, U> {
   table: UITable<T, U>;
-}
-
-export interface ApiResponse<T> {
-  status: string;
-  data: T;
-  message: string;
-  result?: number;
-  total?: number;
-}
-
-export interface BaseState<T> {
-  getAllApi: ApiResponse<T[]> | null;
-  isLoading?: boolean;
-  overview: T[] | null;
-}
-
-export interface BaseStateSelect<T, U = null> {
-  getAllApi: ApiResponse<T[]> | null;
-  isLoading: boolean;
-  overview?: U extends null ? T[] : U[];
-  selectOptions: { display: string; value: string }[] | null;
 }
