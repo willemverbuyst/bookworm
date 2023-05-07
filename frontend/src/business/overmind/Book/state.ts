@@ -60,7 +60,7 @@ export const state: BookState = {
       ],
       filter: {
         genre: "",
-        name_of_language: "",
+        language: "",
       },
       limit: 10,
       noDataMessage: "no books",

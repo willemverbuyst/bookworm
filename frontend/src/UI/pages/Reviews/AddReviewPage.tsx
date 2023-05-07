@@ -22,7 +22,7 @@ export function AddReviewPage() {
   const allAuthors = useAppState().author.overview || [];
   const allBooks = useAppState().book.overview || [];
   const authorsForSelect = allAuthors?.map((a) => ({
-    display: a.first_name,
+    display: a["first name"],
     value: a.id,
   }));
   const [booksForSelect, setBooksForSelect] = useState<

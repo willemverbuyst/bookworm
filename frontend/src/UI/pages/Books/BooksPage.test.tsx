@@ -23,7 +23,7 @@ describe("BooksPage", () => {
           title: "test_title_one",
           language: "test_language_one",
           author: "test_author_one",
-          year_published: 1900,
+          year_published: "1900",
           genre: "test_genre",
         },
       ],
@@ -35,7 +35,7 @@ describe("BooksPage", () => {
         columns: [
           { field: "title" },
           { field: "author" },
-          { field: "year_published" },
+          { field: "year published" },
           { field: "genre" },
           { field: "language" },
         ],
@@ -54,28 +54,35 @@ describe("BooksPage", () => {
     };
     state.genre.getAllApi = {
       status: "ok",
-      data: [{ id: "1", genre: "genre" }],
+      data: [{ id: "1", name_of_genre: "genre" }],
       message: "testing",
+      total: 1,
+      result: 1,
     };
     state.language.getAllApi = {
       status: "ok",
-      data: [{ id: "1", language: "language" }],
+      data: [{ id: "1", name_of_language: "language" }],
       message: "testing",
+      total: 1,
+      result: 1,
     };
     state.book.statsGenreApi = {
       status: "ok",
       data: [{ id: "1", genre: "genre", number_of_books: 1 }],
       message: "testing",
+      result: 1,
     };
     state.book.statsLanguageApi = {
       status: "ok",
       data: [{ id: "1", language: "language", number_of_books: 1 }],
       message: "testing",
+      result: 1,
     };
     state.book.statsYearPublishedApi = {
       status: "ok",
       data: [{ year_published: "1900", number_of_books: 10 }],
       message: "testing",
+      result: 1,
     };
   });
   test.only("should display a title", () => {

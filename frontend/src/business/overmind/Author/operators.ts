@@ -14,7 +14,12 @@ export const searching =
         genericSearch(a, ["last_name", "first_name"], str, false)
       );
 
-      state.author.overview = filteredOverview;
+      state.author.overview = filteredOverview.map((i) => ({
+        id: i.id,
+        "first name": i.first_name,
+        "last name": i.last_name,
+        "books written": i.books_written,
+      }));
     }
   };
 

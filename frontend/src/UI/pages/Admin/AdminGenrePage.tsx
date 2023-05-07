@@ -52,7 +52,7 @@ function Form({
 }) {
   const genres = useAppState().genre.overview || [];
   const { updateGenre } = useActions().genre;
-  const nameOfGenre = genres.find((g) => g.id === id)?.name || "";
+  const nameOfGenre = genres.find((g) => g.id === id)?.["name of genre"] || "";
   const [genre, setGenre] = useState(nameOfGenre);
 
   const submit = () => {
@@ -113,7 +113,7 @@ function DeleteButton({ id }: { id: string }) {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { deleteGenre } = useActions().genre;
   const genres = useAppState().genre.overview || [];
-  const nameOfGenre = genres.find((g) => g.id === id)?.name;
+  const nameOfGenre = genres.find((g) => g.id === id)?.["name of genre"];
 
   return (
     <Popover

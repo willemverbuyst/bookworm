@@ -48,7 +48,7 @@ function Form({
   const languages = useAppState().language.overview || [];
   const { updateLanguage } = useActions().language;
   const nameOfLanguage =
-    languages.find((l) => l.id === id)?.nameOfLanguage || "";
+    languages.find((l) => l.id === id)?.["name of language"] || "";
   const [language, setLanguage] = useState(nameOfLanguage);
 
   const submit = () => {
@@ -109,7 +109,9 @@ function DeleteButton({ id }: { id: string }) {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { deleteLanguage } = useActions().language;
   const languages = useAppState().language.overview || [];
-  const nameOfLanguage = languages.find((l) => l.id === id)?.nameOfLanguage;
+  const nameOfLanguage = languages.find((l) => l.id === id)?.[
+    "name of language"
+  ];
 
   return (
     <Popover

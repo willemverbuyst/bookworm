@@ -95,7 +95,7 @@ interface YearPublished {
 
 interface Filter {
   genre: string;
-  name_of_language: string;
+  language: string;
 }
 
 export interface BookState {
