@@ -1,0 +1,11 @@
+{
+  "name": "api-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Willem Verbuyst",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^12.11.0",
+    "cypress-plugin-api": "^2.11.0"
+  }
+}
