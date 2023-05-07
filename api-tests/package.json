@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Willem Verbuyst",
   "license": "MIT",
+  "scripts": {
+    "cy:open": "cypress open"
+  },
   "devDependencies": {
     "cypress": "^12.11.0",
     "cypress-plugin-api": "^2.11.0"
