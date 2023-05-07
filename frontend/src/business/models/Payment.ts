@@ -30,4 +30,6 @@ export interface PaymentState {
   getAllApi: ApiResponsePayment | null;
   isLoading: boolean;
   overview: Payment[];
+  queryString: string;
+  searchKeys: (keyof Payment)[];
 }

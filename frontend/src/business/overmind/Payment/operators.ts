@@ -32,3 +32,9 @@ export const shouldLoadPayments = () =>
   filter(({ state }: Context) => {
     return !state.payment.getAllApi?.data.length;
   });
+
+export const setQueryString =
+  () =>
+  ({ state }: Context, { queryString }: { queryString: string }) => {
+    state.payment.queryString = queryString;
+  };

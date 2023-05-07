@@ -1,4 +1,4 @@
-import { pipe } from "overmind";
+import { debounce, pipe } from "overmind";
 
 import * as o from "./operators";
 
@@ -9,3 +9,5 @@ export const showPaymentsPage = pipe(
   o.shouldLoadPayments(),
   o.fetchPayments()
 );
+
+export const search = (debounce(100), o.setQueryString());
