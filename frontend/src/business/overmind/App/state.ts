@@ -27,6 +27,7 @@ export const state: AppState = {
         },
       ],
     },
+    { label: "Payments", href: "./payments" },
   ],
   colors: ["#ef476fff", "#ffd166ff", "#06d6a0ff", "#118ab2ff", "#073b4cff"],
 };
