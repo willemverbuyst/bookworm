@@ -12,7 +12,7 @@ export const state: PaymentState = {
       id: i.id,
       paymentAmount: i.payment_amount,
       paymentDate: i.payment_date,
-      title: i.title,
+      title: i.title.toUpperCase(),
       email: i.user_email,
     }));
   }),
