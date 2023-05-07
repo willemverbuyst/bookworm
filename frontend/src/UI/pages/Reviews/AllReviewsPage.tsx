@@ -50,7 +50,7 @@ export function AllReviewsPage() {
                   mx={6}
                 >
                   <CardHeader>
-                    <Heading size="md">{d.book_title}</Heading>
+                    <Heading size="md">{d.bookTitle}</Heading>
                   </CardHeader>
                   <CardBody>
                     <Text noOfLines={3}>{d.description}</Text>

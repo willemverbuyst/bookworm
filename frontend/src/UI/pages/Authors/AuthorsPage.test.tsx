@@ -25,6 +25,7 @@ describe("AuthorsPage", () => {
         },
       ],
       total: 100,
+      result: 1,
       message: "testing",
     };
     state.author.statsPageApi = {
