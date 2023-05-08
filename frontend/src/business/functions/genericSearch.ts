@@ -3,7 +3,7 @@ export function genericSearch<T>(
   properties: Array<keyof T>,
   query: string,
   shouldBeCaseSensitive = false
-): boolean {
+) {
   if (query === "") {
     return true;
   }

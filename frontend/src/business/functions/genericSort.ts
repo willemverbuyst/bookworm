@@ -2,7 +2,7 @@ export function genericSort<T>(
   a: T,
   b: T,
   propertyType: { property: keyof T; isDescending: boolean }
-): number {
+) {
   const { property, isDescending } = propertyType;
   const result = (): number => {
     if (a[property] > b[property]) {
