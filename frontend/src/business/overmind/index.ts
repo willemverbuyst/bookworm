@@ -17,6 +17,7 @@ import * as country from "./Country";
 import * as genre from "./Genre";
 import * as language from "./Language";
 import * as library from "./Library";
+import * as payment from "./Payment";
 import * as rental from "./Rental";
 import * as review from "./Review";
 
@@ -32,6 +33,7 @@ export const config = namespaced({
   genre,
   language,
   library,
+  payment,
   rental,
   review,
 });

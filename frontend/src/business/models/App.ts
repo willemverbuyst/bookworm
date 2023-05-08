@@ -10,6 +10,7 @@ export const Page = {
   ADMIN_LANGUAGE: "/admin/language",
   ADMIN_LIBRARY: "/admin/library",
   BOOKWORMS: "/bookworms",
+  PAYMENTS: "/payments",
   RENTALS: "/rentals",
   REVIEWS_NEW: "/reviews/new",
   REVIEWS: "/reviews",
