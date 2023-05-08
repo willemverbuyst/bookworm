@@ -1,5 +1,6 @@
 import { derived } from "overmind";
 import { genericSearch } from "../../functions";
+import { genericSort } from "../../functions/genericSort";
 import { PaymentState } from "../../models/Payment";
 
 export const state: PaymentState = {
@@ -17,7 +18,10 @@ export const state: PaymentState = {
         title: i.title.toUpperCase(),
         email: i.user_email,
       }))
-      .filter((a) => genericSearch(a, searchKeys, queryString, false));
+      .filter((a) => genericSearch(a, searchKeys, queryString, false))
+      .sort((a, b) =>
+        genericSort(a, b, { property: "title", isDescending: false })
+      );
   }),
   queryString: "",
   searchKeys: ["email", "title", "paymentAmount", "paymentDate"],
