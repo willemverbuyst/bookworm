@@ -1,4 +1,5 @@
 import { derived } from "overmind";
+import { logInfo } from "../../../utils/logger";
 import { genericSearch } from "../../functions";
 import { genericSort } from "../../functions/genericSort";
 import { PaymentState } from "../../models/Payment";
@@ -13,8 +14,8 @@ export const state: PaymentState = {
         table: { searchKeys, queryString, limit, page },
       },
     }: PaymentState) => {
-      let depTime = 0;
-      if (process.env.NODE_ENV === "development") depTime = Date.now();
+      let startTime = 0;
+      if (process.env.NODE_ENV === "development") startTime = Date.now();
 
       if (!getAllApi?.data?.length) {
         return [];
@@ -34,20 +35,8 @@ export const state: PaymentState = {
         )
         .slice((page - 1) * limit, page * limit);
 
-      if (process.env.NODE_ENV === "development" && depTime) {
-        const resultEndTime = Math.round((Date.now() - depTime) * 100) / 100;
-
-        let color = "red";
-        if (resultEndTime < 100) color = "green";
-        if (resultEndTime < 200) color = "orange";
-
-        console.info(
-          `%c⏱ ${resultEndTime} ms`,
-          ` font-size: 1rem;
-            font-weight: bold;
-            color: ${color}`,
-          "overview payment"
-        );
+      if (process.env.NODE_ENV === "development" && startTime) {
+        logInfo(startTime, "derived fn: overview payments");
       }
 
       return data;

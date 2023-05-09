@@ -1,4 +1,5 @@
 import { derived } from "overmind";
+import { logInfo } from "../../../utils/logger";
 import { groupBy } from "../../functions";
 import { ReviewState } from "../../models";
 
@@ -6,10 +7,13 @@ export const state: ReviewState = {
   getAllApi: null,
   isLoading: false,
   overview: derived(({ getAllApi }: ReviewState) => {
+    let startTime = 0;
+    if (process.env.NODE_ENV === "development") startTime = Date.now();
+
     if (!getAllApi?.data.length) {
       return [];
     }
-    return groupBy(
+    const data = groupBy(
       getAllApi.data.map((i) => ({
         id: i.id,
         description: i.description,
@@ -19,5 +23,11 @@ export const state: ReviewState = {
       })),
       "rating"
     );
+
+    if (process.env.NODE_ENV === "development" && startTime) {
+      logInfo(startTime, "derived fn: overview reviews");
+    }
+
+    return data;
   }),
 };
