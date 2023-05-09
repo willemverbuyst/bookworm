@@ -1,14 +1,18 @@
 import { derived } from "overmind";
+import { logInfo } from "../../../utils/logger";
 import { BookState } from "../../models";
 
 export const state: BookState = {
   getAllApi: null,
   isLoading: false,
   overview: derived(({ getAllApi }: BookState) => {
+    let startTime = 0;
+    if (process.env.NODE_ENV === "development") startTime = Date.now();
+
     if (!getAllApi?.data.length) {
       return [];
     }
-    return getAllApi.data
+    const data = getAllApi.data
       .map((book) => ({
         id: book.id,
         title: book.title,
@@ -18,6 +22,12 @@ export const state: BookState = {
         language: book.language,
       }))
       .sort((book1, book2) => `${book1.title}`.localeCompare(book2.title));
+
+    if (process.env.NODE_ENV === "development" && startTime) {
+      logInfo(startTime, "derived fn: overview books");
+    }
+
+    return data;
   }),
   statsGenre: derived(({ statsGenreApi }: BookState) => {
     if (!statsGenreApi?.data.length) {

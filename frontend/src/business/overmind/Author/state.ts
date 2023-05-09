@@ -1,14 +1,19 @@
 import { derived } from "overmind";
+import { logInfo } from "../../../utils/logger";
 import { AuthorState } from "../../models";
 
 export const state: AuthorState = {
   isLoading: false,
   getAllApi: null,
   overview: derived(({ getAllApi }: AuthorState) => {
+    let startTime = 0;
+    if (process.env.NODE_ENV === "development") startTime = Date.now();
+
     if (!getAllApi?.data.length) {
       return [];
     }
-    return getAllApi.data
+
+    const data = getAllApi.data
       .map((i) => ({
         id: i.id,
         "first name": i.first_name,
@@ -18,6 +23,12 @@ export const state: AuthorState = {
       .sort((author1, author2) =>
         `${author1["last name"]}`.localeCompare(author2["last name"])
       );
+
+    if (process.env.NODE_ENV === "development" && startTime) {
+      logInfo(startTime, "derived fn: overview authors");
+    }
+
+    return data;
   }),
   statsPage: derived(({ statsPageApi }: AuthorState) => {
     if (!statsPageApi?.data.pages_per_author.length) {

@@ -1,5 +1,6 @@
 import { derived } from "overmind";
 import { RootState } from "..";
+import { logInfo } from "../../../utils/logger";
 import { compare, getColorIndex } from "../../functions";
 import { BookwormState } from "../../models";
 
@@ -8,10 +9,13 @@ export const state: BookwormState = {
   getAllApi: null,
   bookwormDetailsApi: null,
   overview: derived(({ getAllApi }: BookwormState) => {
+    let startTime = 0;
+    if (process.env.NODE_ENV === "development") startTime = Date.now();
+
     if (!getAllApi?.data.length) {
       return [];
     }
-    return getAllApi.data.map((i) => ({
+    const data = getAllApi.data.map((i) => ({
       id: i.id,
       "first name": i.first_name,
       "last name": i.last_name,
@@ -20,14 +24,23 @@ export const state: BookwormState = {
       userIsActive: i.user_is_active,
       library: i.library,
     }));
+
+    if (process.env.NODE_ENV === "development" && startTime) {
+      logInfo(startTime, "derived fn: overview bookworms");
+    }
+
+    return data;
   }),
   statsLibrary: derived(
     ({ statsLibraryApi }: BookwormState, rootState: RootState) => {
+      let startTime = 0;
+      if (process.env.NODE_ENV === "development") startTime = Date.now();
+
       if (!statsLibraryApi?.data.length) {
         return [];
       }
 
-      return [...statsLibraryApi.data]
+      const data = [...statsLibraryApi.data]
         .sort(compare("user_is_active"))
         .sort(compare("id"))
         .map((d, index) => ({
@@ -37,6 +50,12 @@ export const state: BookwormState = {
           numberOfBookwormsPerLibrary: d.number_of_bookworms_per_library,
           color: rootState.app.colors[getColorIndex(index)],
         }));
+
+      if (process.env.NODE_ENV === "development" && startTime) {
+        logInfo(startTime, "derived fn: overview bookworms stats library");
+      }
+
+      return data;
     }
   ),
   statsLibraryApi: null,

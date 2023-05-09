@@ -1,4 +1,5 @@
 import { derived } from "overmind";
+import { logInfo } from "../../../utils/logger";
 import { WEEKDAYS } from "../../functions";
 import { RentalState } from "../../models";
 
@@ -6,22 +7,34 @@ export const state: RentalState = {
   getAllApi: null,
   isLoading: false,
   overview: derived(({ getAllApi }: RentalState) => {
+    let startTime = 0;
+    if (process.env.NODE_ENV === "development") startTime = Date.now();
+
     if (!getAllApi?.data.length) {
       return [];
     }
-    return getAllApi.data.map((i) => ({
+    const data = getAllApi.data.map((i) => ({
       id: i.id,
       "rental date": i.rental_date,
       "return date": i.return_date,
       title: i.title,
       author: i.author,
     }));
+
+    if (process.env.NODE_ENV === "development" && startTime) {
+      logInfo(startTime, "derived fn: overview rentals");
+    }
+
+    return data;
   }),
   statsDay: derived(({ statsDayApi }: RentalState) => {
+    let startTime = 0;
+    if (process.env.NODE_ENV === "development") startTime = Date.now();
+
     if (!statsDayApi?.data.length) {
       return [];
     }
-    return [...statsDayApi.data].map((d) => ({
+    const data = [...statsDayApi.data].map((d) => ({
       rentals: d.number_of_rentals,
       returns: d.number_of_returns,
       day: WEEKDAYS[d.day_of_the_week - 1],
@@ -29,17 +42,32 @@ export const state: RentalState = {
         Math.max(...statsDayApi.data.map((i) => i.number_of_rentals)) * 1.1
       ),
     }));
+
+    if (process.env.NODE_ENV === "development" && startTime) {
+      logInfo(startTime, "derived fn: overview rentals stats day");
+    }
+
+    return data;
   }),
   statsDayApi: null,
   statsDuration: derived(({ statsDurationApi }: RentalState) => {
+    let startTime = 0;
+    if (process.env.NODE_ENV === "development") startTime = Date.now();
+
     if (!statsDurationApi?.data.length) {
       return [];
     }
-    return [...statsDurationApi.data].map((d) => ({
+    const data = [...statsDurationApi.data].map((d) => ({
       durationLabel: `${d.duration}d`,
       duration: d.duration,
       number: Number(d.total_rentals),
     }));
+
+    if (process.env.NODE_ENV === "development" && startTime) {
+      logInfo(startTime, "derived fn: overview rentals stats duration");
+    }
+
+    return data;
   }),
   statsDurationApi: null,
   ui: {

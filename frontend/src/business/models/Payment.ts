@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { UI } from "./State";
 
 export const ApiResponsePayment = z.object({
   status: z.string(),
@@ -20,8 +21,8 @@ export type ApiResponsePayment = z.infer<typeof ApiResponsePayment>;
 
 export interface Payment {
   id: string;
-  paymentAmount: number;
-  paymentDate: string;
+  amount: number;
+  date: string;
   title: string;
   email: string;
 }
@@ -30,6 +31,5 @@ export interface PaymentState {
   getAllApi: ApiResponsePayment | null;
   isLoading: boolean;
   overview: Payment[];
-  queryString: string;
-  searchKeys: (keyof Payment)[];
+  ui: UI<Payment, null>;
 }
