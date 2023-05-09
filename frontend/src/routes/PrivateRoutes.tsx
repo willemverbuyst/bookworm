@@ -6,7 +6,7 @@ import { AdminLibraryPage } from "../UI/pages/Admin/AdminLibraryPage";
 import { AdminPage } from "../UI/pages/Admin/AdminPage";
 import { BookwormsPage } from "../UI/pages/BookWorms";
 import { HomePage } from "../UI/pages/Home";
-import { PaymentPage } from "../UI/pages/Payment";
+import { PaymentsPage } from "../UI/pages/Payment";
 import { RentalsPage } from "../UI/pages/Rentals";
 import { AddReviewPage, AllReviewsPage } from "../UI/pages/Reviews";
 
@@ -33,7 +33,7 @@ export default function PrivateRoutes() {
       {appState.currentPage === Page.RENTALS ? <RentalsPage /> : null}
       {appState.currentPage === Page.REVIEWS ? <AllReviewsPage /> : null}
       {appState.currentPage === Page.REVIEWS_NEW ? <AddReviewPage /> : null}
-      {appState.currentPage === Page.PAYMENTS ? <PaymentPage /> : null}
+      {appState.currentPage === Page.PAYMENTS ? <PaymentsPage /> : null}
     </>
   );
 }
