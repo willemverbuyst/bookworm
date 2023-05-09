@@ -86,6 +86,8 @@ export const setPagination =
   () =>
   ({ state }: Context) => {
     state.payment.ui.table.showAll = false;
+    state.payment.ui.table.page = 1;
+    state.payment.ui.table.limit = 10;
   };
 
 export const shouldShowAll = () =>

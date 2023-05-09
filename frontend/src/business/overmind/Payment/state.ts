@@ -13,10 +13,14 @@ export const state: PaymentState = {
         table: { searchKeys, queryString, limit, page },
       },
     }: PaymentState) => {
+      let depTime = 0;
+      if (process.env.NODE_ENV === "development") depTime = Date.now();
+
       if (!getAllApi?.data?.length) {
         return [];
       }
-      return getAllApi.data
+
+      const data = getAllApi.data
         .map((i) => ({
           id: i.id,
           amount: i.payment_amount,
@@ -29,6 +33,24 @@ export const state: PaymentState = {
           genericSort(a, b, { property: "title", isDescending: false })
         )
         .slice((page - 1) * limit, page * limit);
+
+      if (process.env.NODE_ENV === "development" && depTime) {
+        const resultEndTime = Math.round((Date.now() - depTime) * 100) / 100;
+
+        let color = "red";
+        if (resultEndTime < 100) color = "green";
+        if (resultEndTime < 200) color = "orange";
+
+        console.info(
+          `%c⏱ ${resultEndTime} ms`,
+          ` font-size: 1rem;
+            font-weight: bold;
+            color: ${color}`,
+          "overview payment"
+        );
+      }
+
+      return data;
     }
   ),
   ui: {
