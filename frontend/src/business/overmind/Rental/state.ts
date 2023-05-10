@@ -80,6 +80,7 @@ export const state: RentalState = {
         { field: "return date" },
       ],
       filter: { returned: "not_returned" },
+      sort: null,
       limit: 20,
       noDataMessage: "no rentals",
       page: 1,

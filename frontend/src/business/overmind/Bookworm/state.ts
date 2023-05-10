@@ -72,6 +72,7 @@ export const state: BookwormState = {
       filter: {
         active: true,
       },
+      sort: null,
       limit: 15,
       noDataMessage: "no bookworms",
       page: 1,

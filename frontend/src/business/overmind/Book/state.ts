@@ -73,6 +73,7 @@ export const state: BookState = {
         genre: "",
         language: "",
       },
+      sort: null,
       limit: 10,
       noDataMessage: "no books",
       page: 1,

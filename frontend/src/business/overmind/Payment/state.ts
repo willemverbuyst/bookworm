@@ -55,6 +55,7 @@ export const state: PaymentState = {
       page: 1,
       noDataMessage: "no payments",
       filter: { amount: 5 },
+      sort: null,
       queryString: "",
       searchKeys: ["title", "email"],
       showAll: false,

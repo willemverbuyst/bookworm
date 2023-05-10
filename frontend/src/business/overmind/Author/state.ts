@@ -54,6 +54,7 @@ export const state: AuthorState = {
         { field: "books written", isNumeric: true },
       ],
       filter: null,
+      sort: null,
       limit: 10,
       noDataMessage: "no authors",
       page: 1,

@@ -61,5 +61,5 @@ export interface AuthorState {
     averagePages: number;
   } | null;
   statsPageApi: ApiResponseAuthorStatsPage | null;
-  ui: UI<Author, null>;
+  ui: UI<Author, null, null>;
 }

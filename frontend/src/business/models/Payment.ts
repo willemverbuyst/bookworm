@@ -35,5 +35,5 @@ export interface PaymentState {
   getAllApi: ApiResponsePayment | null;
   isLoading: boolean;
   overview: Payment[];
-  ui: UI<Payment, Filter>;
+  ui: UI<Payment, Filter, null>;
 }

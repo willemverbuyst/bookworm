@@ -1,8 +1,9 @@
 export type Column<T> = Array<{ field: keyof T; isNumeric?: boolean }>;
 
-interface UITable<T, U> {
+interface UITable<T, U, V> {
   columns: Column<T>;
   filter: U;
+  sort: V;
   limit: number;
   noDataMessage: string;
   page: number;
@@ -12,6 +13,6 @@ interface UITable<T, U> {
   title: string;
 }
 
-export interface UI<T, U> {
-  table: UITable<T, U>;
+export interface UI<T, U, V> {
+  table: UITable<T, U, V>;
 }
