@@ -16,3 +16,8 @@ interface UITable<T, U, V> {
 export interface UI<T, U, V> {
   table: UITable<T, U, V>;
 }
+
+export const SortDirection = {
+  ASCENDING: "ASCENDING",
+  DESCENDING: "DESCENDING",
+} as const;

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { UI } from "./State";
+import { SortDirection, UI } from "./State";
 
 export const ApiResponsePayment = z.object({
   status: z.string(),
@@ -31,9 +31,11 @@ interface Filter {
   amount: number;
 }
 
+type Sort = { [K in keyof Partial<Payment>]: keyof typeof SortDirection };
+
 export interface PaymentState {
   getAllApi: ApiResponsePayment | null;
   isLoading: boolean;
   overview: Payment[];
-  ui: UI<Payment, Filter, null>;
+  ui: UI<Payment, Filter, Sort>;
 }

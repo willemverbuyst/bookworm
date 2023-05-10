@@ -4,6 +4,7 @@ import { logInfo } from "../../../utils/logger";
 import { genericSearch } from "../../functions";
 import { genericSort } from "../../functions/genericSort";
 import { PaymentState } from "../../models/Payment";
+import { SortDirection } from "../../models/State";
 
 export const state: PaymentState = {
   isLoading: false,
@@ -55,7 +56,7 @@ export const state: PaymentState = {
       page: 1,
       noDataMessage: "no payments",
       filter: { amount: 5 },
-      sort: null,
+      sort: { email: SortDirection.ASCENDING },
       queryString: "",
       searchKeys: ["title", "email"],
       showAll: false,
