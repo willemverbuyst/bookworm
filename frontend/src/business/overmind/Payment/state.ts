@@ -12,7 +12,7 @@ export const state: PaymentState = {
     ({
       getAllApi,
       ui: {
-        table: { searchKeys, queryString, limit, page, filter },
+        table: { searchKeys, queryString, filter },
       },
     }: PaymentState) => {
       let startTime = 0;

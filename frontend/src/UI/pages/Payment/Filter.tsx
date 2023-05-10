@@ -16,36 +16,15 @@ export function Filter() {
     <Box mt={4}>
       <Label text="amount" />
       <ButtonGroup size="sm" isAttached>
-        <Button
-          colorScheme={amount === 1 ? "telegram" : "gray"}
-          onClick={() => handleClick(1)}
-        >
-          {"< 1"}
-        </Button>
-        <Button
-          colorScheme={amount === 2 ? "telegram" : "gray"}
-          onClick={() => handleClick(2)}
-        >
-          {"< 2"}
-        </Button>
-        <Button
-          colorScheme={amount === 3 ? "telegram" : "gray"}
-          onClick={() => handleClick(3)}
-        >
-          {"< 3"}
-        </Button>
-        <Button
-          colorScheme={amount === 4 ? "telegram" : "gray"}
-          onClick={() => handleClick(4)}
-        >
-          {"< 4"}
-        </Button>
-        <Button
-          colorScheme={amount === 5 ? "telegram" : "gray"}
-          onClick={() => handleClick(5)}
-        >
-          {"< 5"}
-        </Button>
+        {[...Array(5).keys()].map((i) => (
+          <Button
+            key={i}
+            colorScheme={amount === i + 1 ? "telegram" : "gray"}
+            onClick={() => handleClick(i + 1)}
+          >
+            {`< ${i + 1}`}
+          </Button>
+        ))}
       </ButtonGroup>
     </Box>
   );
