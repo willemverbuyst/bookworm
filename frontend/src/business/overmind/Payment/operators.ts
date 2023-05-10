@@ -96,3 +96,15 @@ export const shouldShowAll = () =>
       state.payment.ui.table.showAll && state.payment.getAllApi?.total
     );
   });
+
+export const setAmountFilter =
+  () =>
+  ({ state }: Context, { amount }: { amount: number }) => {
+    state.payment.ui.table.filter.amount = amount;
+  };
+
+export const resetAmountFilter =
+  () =>
+  ({ state }: Context) => {
+    state.payment.ui.table.filter.amount = 5;
+  };

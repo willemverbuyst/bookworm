@@ -27,9 +27,13 @@ export interface Payment {
   email: string;
 }
 
+interface Filter {
+  amount: number;
+}
+
 export interface PaymentState {
   getAllApi: ApiResponsePayment | null;
   isLoading: boolean;
   overview: Payment[];
-  ui: UI<Payment, null>;
+  ui: UI<Payment, Filter>;
 }

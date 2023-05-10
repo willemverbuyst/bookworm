@@ -5,17 +5,16 @@ import {
   useAppState,
 } from "../../../business/overmind";
 import { Pagination, TableOverview } from "../../components/Table";
+import { Filter } from "./Filter";
 
 export function PaymentsTable() {
   const { isLoading } = useAppState().payment;
   const {
-    getAllApi,
     overview,
     ui: {
-      table: { columns, noDataMessage, title },
+      table: { columns, noDataMessage, title, page, limit },
     },
   } = useAppState().payment;
-  const { total } = getAllApi || {};
   const { search } = useActions().payment;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,16 +23,20 @@ export function PaymentsTable() {
 
   return (
     <Box>
+      <Filter />
       <Input onChange={searchInTable} placeholder="search" my={5} />
       {overview ? (
         <>
           <TableOverview
-            rows={overview}
+            rows={overview.slice((page - 1) * limit, page * limit)}
             columns={columns}
             title={title}
             isLoading={isLoading}
           />
-          <Pagination total={total} state={stateSectionsWithTable.payment} />
+          <Pagination
+            total={overview.length}
+            state={stateSectionsWithTable.payment}
+          />
         </>
       ) : (
         <p>{noDataMessage}</p>

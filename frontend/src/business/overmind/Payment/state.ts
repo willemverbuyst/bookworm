@@ -12,7 +12,7 @@ export const state: PaymentState = {
     ({
       getAllApi,
       ui: {
-        table: { searchKeys, queryString, limit, page },
+        table: { searchKeys, queryString, limit, page, filter },
       },
     }: PaymentState) => {
       let startTime = 0;
@@ -31,10 +31,10 @@ export const state: PaymentState = {
           email: i.user_email,
         }))
         .filter((a) => genericSearch(a, searchKeys, queryString, false))
+        .filter((i) => i.amount < filter.amount)
         .sort((a, b) =>
           genericSort(a, b, { property: "title", isDescending: false })
-        )
-        .slice((page - 1) * limit, page * limit);
+        );
 
       if (NODE_ENV === "development" && startTime) {
         logInfo(startTime, "derived fn: overview payments");
@@ -54,7 +54,7 @@ export const state: PaymentState = {
       limit: 10,
       page: 1,
       noDataMessage: "no payments",
-      filter: null,
+      filter: { amount: 5 },
       queryString: "",
       searchKeys: ["title", "email"],
       showAll: false,

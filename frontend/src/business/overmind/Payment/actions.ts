@@ -14,9 +14,15 @@ export const changeLimit = pipe(o.setLimit(), o.resetQueryString());
 
 export const changePage = pipe(o.setPage(), o.resetQueryString());
 
+export const changeAmountFilter = pipe(
+  o.setAmountFilter(),
+  o.resetQueryString()
+);
+
 export const usePagination = pipe(
   o.setPagination(),
   o.resetQueryString(),
+  o.resetAmountFilter(),
   o.resetLimit(),
   o.resetPage()
 );
@@ -24,6 +30,7 @@ export const usePagination = pipe(
 export const showAllRows = pipe(
   o.setShowAll(),
   o.resetQueryString(),
+  o.resetAmountFilter(),
   o.setLimitToTotal(),
   o.resetPage()
 );

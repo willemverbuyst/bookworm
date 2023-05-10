@@ -3,11 +3,11 @@ import { FormLabel, IconButton } from "@chakra-ui/react";
 
 type Props = {
   text: string;
-  isRequired: boolean;
+  isRequired?: boolean;
   informAction?: () => void;
 };
 
-export function Label({ text, isRequired, informAction }: Props) {
+export function Label({ text, isRequired = false, informAction }: Props) {
   return (
     <FormLabel style={{ color: "#a3a3a3", fontStyle: "italic" }}>
       {isRequired ? `${text}*` : text}
