@@ -76,5 +76,5 @@ export interface BookwormState {
   bookwormDetailsApi: ApiResponseBookWormById | null;
   statsLibrary: Library[];
   statsLibraryApi: ApiResponseBookwormStatsLibrary | null;
-  ui: UI<Bookworm, Filter, null>;
+  ui: UI<Bookworm, Filter>;
 }

@@ -108,5 +108,5 @@ export interface BookState {
   statsLanguageApi: ApiResponseBookStatsLanguage | null;
   statsYearPublished: YearPublished[];
   statsYearPublishedApi: ApiResponseBookStatsYearPublished | null;
-  ui: UI<Book, Filter, null>;
+  ui: UI<Book, Filter>;
 }

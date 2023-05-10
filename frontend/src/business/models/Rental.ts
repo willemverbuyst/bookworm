@@ -85,5 +85,5 @@ export interface RentalState {
   statsDayApi: ApiResponseRentalStatsDay | null;
   statsDuration: Duration[];
   statsDurationApi: ApiResponseRentalStatsDuration | null;
-  ui: UI<Rental, Filter, null>;
+  ui: UI<Rental, Filter>;
 }

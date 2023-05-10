@@ -54,5 +54,5 @@ export interface LibraryState {
   isLoading: boolean;
   overview: Library[];
   selectOptions: SelectOption[];
-  ui: UI<Library, null, null>;
+  ui: UI<Library, null>;
 }
