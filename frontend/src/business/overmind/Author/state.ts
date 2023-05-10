@@ -1,4 +1,5 @@
 import { derived } from "overmind";
+import { NODE_ENV } from "../../../config/environment";
 import { logInfo } from "../../../utils/logger";
 import { AuthorState } from "../../models";
 
@@ -7,7 +8,7 @@ export const state: AuthorState = {
   getAllApi: null,
   overview: derived(({ getAllApi }: AuthorState) => {
     let startTime = 0;
-    if (process.env.NODE_ENV === "development") startTime = Date.now();
+    if (NODE_ENV === "development") startTime = Date.now();
 
     if (!getAllApi?.data.length) {
       return [];
@@ -24,7 +25,7 @@ export const state: AuthorState = {
         `${author1["last name"]}`.localeCompare(author2["last name"])
       );
 
-    if (process.env.NODE_ENV === "development" && startTime) {
+    if (NODE_ENV === "development" && startTime) {
       logInfo(startTime, "derived fn: overview authors");
     }
 

@@ -1,7 +1,6 @@
 import axios, { AxiosError } from "axios";
+import { BACKEND_URL } from "../../../config/environment";
 import { ApiResponseUser } from "../../models";
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 
 export const api = {
   getUserByToken: async (

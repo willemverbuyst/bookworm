@@ -1,4 +1,5 @@
 import { derived } from "overmind";
+import { NODE_ENV } from "../../../config/environment";
 import { logInfo } from "../../../utils/logger";
 import { genericSearch } from "../../functions";
 import { genericSort } from "../../functions/genericSort";
@@ -15,7 +16,7 @@ export const state: PaymentState = {
       },
     }: PaymentState) => {
       let startTime = 0;
-      if (process.env.NODE_ENV === "development") startTime = Date.now();
+      if (NODE_ENV === "development") startTime = Date.now();
 
       if (!getAllApi?.data?.length) {
         return [];
@@ -35,7 +36,7 @@ export const state: PaymentState = {
         )
         .slice((page - 1) * limit, page * limit);
 
-      if (process.env.NODE_ENV === "development" && startTime) {
+      if (NODE_ENV === "development" && startTime) {
         logInfo(startTime, "derived fn: overview payments");
       }
 

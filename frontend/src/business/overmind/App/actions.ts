@@ -1,5 +1,8 @@
 /* eslint-disable no-param-reassign */
+
 import { Context } from "..";
+import { NODE_ENV } from "../../../config/environment";
+import { logInfo } from "../../../utils/logger";
 import { Page } from "../../models";
 
 export const onInitializeOvermind = async ({
@@ -7,6 +10,9 @@ export const onInitializeOvermind = async ({
   effects,
   state,
 }: Context) => {
+  let startTime = 0;
+  if (NODE_ENV === "development") startTime = Date.now();
+
   state.app.isLoading = true;
   effects.app.router.initialize({
     [Page.WELCOME]: actions.app.showWelcomePage,
@@ -27,13 +33,14 @@ export const onInitializeOvermind = async ({
     [Page.PAGE_NOT_FOUND]: actions.app.showPageNotFound,
   });
   const tokenFromLocalStorage = localStorage.getItem("token");
-  if (!tokenFromLocalStorage) {
-    state.app.isLoading = false;
-    return;
+  if (tokenFromLocalStorage) {
+    await actions.auth.getUserByToken({ tokenFromLocalStorage });
   }
   state.app.isLoading = false;
 
-  actions.auth.getUserByToken({ tokenFromLocalStorage });
+  if (NODE_ENV === "development" && startTime) {
+    logInfo(startTime, `initialize overmind in ${NODE_ENV} mode`);
+  }
 };
 
 export const showHomePage = ({ state }: Context) => {

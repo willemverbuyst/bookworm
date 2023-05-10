@@ -1,4 +1,5 @@
 import { derived } from "overmind";
+import { NODE_ENV } from "../../../config/environment";
 import { logInfo } from "../../../utils/logger";
 import { groupBy } from "../../functions";
 import { ReviewState } from "../../models";
@@ -8,7 +9,7 @@ export const state: ReviewState = {
   isLoading: false,
   overview: derived(({ getAllApi }: ReviewState) => {
     let startTime = 0;
-    if (process.env.NODE_ENV === "development") startTime = Date.now();
+    if (NODE_ENV === "development") startTime = Date.now();
 
     if (!getAllApi?.data.length) {
       return [];
@@ -24,7 +25,7 @@ export const state: ReviewState = {
       "rating"
     );
 
-    if (process.env.NODE_ENV === "development" && startTime) {
+    if (NODE_ENV === "development" && startTime) {
       logInfo(startTime, "derived fn: overview reviews");
     }
 

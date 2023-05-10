@@ -1,5 +1,6 @@
 import { derived } from "overmind";
 import { RootState } from "..";
+import { NODE_ENV } from "../../../config/environment";
 import { logInfo } from "../../../utils/logger";
 import { compare, getColorIndex } from "../../functions";
 import { BookwormState } from "../../models";
@@ -10,7 +11,7 @@ export const state: BookwormState = {
   bookwormDetailsApi: null,
   overview: derived(({ getAllApi }: BookwormState) => {
     let startTime = 0;
-    if (process.env.NODE_ENV === "development") startTime = Date.now();
+    if (NODE_ENV === "development") startTime = Date.now();
 
     if (!getAllApi?.data.length) {
       return [];
@@ -25,7 +26,7 @@ export const state: BookwormState = {
       library: i.library,
     }));
 
-    if (process.env.NODE_ENV === "development" && startTime) {
+    if (NODE_ENV === "development" && startTime) {
       logInfo(startTime, "derived fn: overview bookworms");
     }
 
@@ -34,7 +35,7 @@ export const state: BookwormState = {
   statsLibrary: derived(
     ({ statsLibraryApi }: BookwormState, rootState: RootState) => {
       let startTime = 0;
-      if (process.env.NODE_ENV === "development") startTime = Date.now();
+      if (NODE_ENV === "development") startTime = Date.now();
 
       if (!statsLibraryApi?.data.length) {
         return [];
@@ -51,7 +52,7 @@ export const state: BookwormState = {
           color: rootState.app.colors[getColorIndex(index)],
         }));
 
-      if (process.env.NODE_ENV === "development" && startTime) {
+      if (NODE_ENV === "development" && startTime) {
         logInfo(startTime, "derived fn: overview bookworms stats library");
       }
 

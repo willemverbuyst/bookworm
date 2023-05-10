@@ -1,5 +1,7 @@
+import { NODE_ENV } from "../config/environment";
+
 export function logInfo(startTime: number, text: string) {
-  if (process.env.NODE_ENV === "development" && startTime) {
+  if (NODE_ENV === "development" && startTime) {
     const resultEndTime = Math.round(Date.now() - startTime);
 
     const pad = (str: number | string, num: number) => {
