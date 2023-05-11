@@ -1,4 +1,5 @@
 import { derived } from "overmind";
+import { NODE_ENV } from "../../../config/environment";
 import { logInfo } from "../../../utils/logger";
 import { WEEKDAYS } from "../../functions";
 import { RentalState } from "../../models";
@@ -8,7 +9,7 @@ export const state: RentalState = {
   isLoading: false,
   overview: derived(({ getAllApi }: RentalState) => {
     let startTime = 0;
-    if (process.env.NODE_ENV === "development") startTime = Date.now();
+    if (NODE_ENV === "development") startTime = Date.now();
 
     if (!getAllApi?.data.length) {
       return [];
@@ -21,7 +22,7 @@ export const state: RentalState = {
       author: i.author,
     }));
 
-    if (process.env.NODE_ENV === "development" && startTime) {
+    if (NODE_ENV === "development" && startTime) {
       logInfo(startTime, "derived fn: overview rentals");
     }
 
@@ -29,7 +30,7 @@ export const state: RentalState = {
   }),
   statsDay: derived(({ statsDayApi }: RentalState) => {
     let startTime = 0;
-    if (process.env.NODE_ENV === "development") startTime = Date.now();
+    if (NODE_ENV === "development") startTime = Date.now();
 
     if (!statsDayApi?.data.length) {
       return [];
@@ -43,7 +44,7 @@ export const state: RentalState = {
       ),
     }));
 
-    if (process.env.NODE_ENV === "development" && startTime) {
+    if (NODE_ENV === "development" && startTime) {
       logInfo(startTime, "derived fn: overview rentals stats day");
     }
 
@@ -52,7 +53,7 @@ export const state: RentalState = {
   statsDayApi: null,
   statsDuration: derived(({ statsDurationApi }: RentalState) => {
     let startTime = 0;
-    if (process.env.NODE_ENV === "development") startTime = Date.now();
+    if (NODE_ENV === "development") startTime = Date.now();
 
     if (!statsDurationApi?.data.length) {
       return [];
@@ -63,7 +64,7 @@ export const state: RentalState = {
       number: Number(d.total_rentals),
     }));
 
-    if (process.env.NODE_ENV === "development" && startTime) {
+    if (NODE_ENV === "development" && startTime) {
       logInfo(startTime, "derived fn: overview rentals stats duration");
     }
 
@@ -79,6 +80,7 @@ export const state: RentalState = {
         { field: "return date" },
       ],
       filter: { returned: "not_returned" },
+      sort: null,
       limit: 20,
       noDataMessage: "no rentals",
       page: 1,

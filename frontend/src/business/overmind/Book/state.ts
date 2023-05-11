@@ -1,34 +1,51 @@
 import { derived } from "overmind";
+import { NODE_ENV } from "../../../config/environment";
 import { logInfo } from "../../../utils/logger";
+import { genericSearch } from "../../functions";
+import { genericSort } from "../../functions/genericSort";
 import { BookState } from "../../models";
+import { SortDirection } from "../../models/State";
 
 export const state: BookState = {
   getAllApi: null,
   isLoading: false,
-  overview: derived(({ getAllApi }: BookState) => {
-    let startTime = 0;
-    if (process.env.NODE_ENV === "development") startTime = Date.now();
+  overview: derived(
+    ({
+      getAllApi,
+      ui: {
+        table: { searchKeys, queryString, sort },
+      },
+    }: BookState) => {
+      let startTime = 0;
+      if (NODE_ENV === "development") startTime = Date.now();
 
-    if (!getAllApi?.data.length) {
-      return [];
+      if (!getAllApi?.data.length) {
+        return [];
+      }
+      const data = getAllApi.data
+        .map((book) => ({
+          id: book.id,
+          title: book.title,
+          author: book.author,
+          "year published": book.year_published,
+          genre: book.genre,
+          language: book.language,
+        }))
+        .filter((a) => genericSearch(a, searchKeys, queryString, false))
+        .sort((a, b) =>
+          genericSort(a, b, {
+            property: sort.property,
+            sortDirection: sort.sortDirection,
+          })
+        );
+
+      if (NODE_ENV === "development" && startTime) {
+        logInfo(startTime, "derived fn: overview books");
+      }
+
+      return data;
     }
-    const data = getAllApi.data
-      .map((book) => ({
-        id: book.id,
-        title: book.title,
-        author: book.author,
-        "year published": book.year_published,
-        genre: book.genre,
-        language: book.language,
-      }))
-      .sort((book1, book2) => `${book1.title}`.localeCompare(book2.title));
-
-    if (process.env.NODE_ENV === "development" && startTime) {
-      logInfo(startTime, "derived fn: overview books");
-    }
-
-    return data;
-  }),
+  ),
   statsGenre: derived(({ statsGenreApi }: BookState) => {
     if (!statsGenreApi?.data.length) {
       return [];
@@ -72,6 +89,7 @@ export const state: BookState = {
         genre: "",
         language: "",
       },
+      sort: { property: "title", sortDirection: SortDirection.ASCENDING },
       limit: 10,
       noDataMessage: "no books",
       page: 1,

@@ -1,6 +1,5 @@
 import { ViewIcon } from "@chakra-ui/icons";
 import { Box, IconButton, Input, useDisclosure } from "@chakra-ui/react";
-import { genericSearch } from "../../../business/functions";
 import {
   stateSectionsWithTable,
   useActions,
@@ -40,11 +39,11 @@ export function BookwormsTable() {
     getAllApi,
     overview,
     ui: {
-      table: { columns, noDataMessage, queryString, searchKeys, title },
+      table: { columns, noDataMessage, title, sort },
     },
   } = useAppState().bookworm;
   const { total } = getAllApi || {};
-  const { search } = useActions().bookworm;
+  const { search, setSort } = useActions().bookworm;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     search({ queryString: e.target.value });
@@ -57,13 +56,13 @@ export function BookwormsTable() {
       {overview ? (
         <>
           <TableOverview
-            rows={overview.filter((a) =>
-              genericSearch(a, searchKeys, queryString, false)
-            )}
+            rows={overview}
             columns={columns}
             title={title}
             isLoading={isLoading}
             actionButtons={[ShowDetailsButton]}
+            sortFunction={setSort}
+            sortProperty={sort}
           />
           <Pagination total={total} state={stateSectionsWithTable.bookworm} />
         </>

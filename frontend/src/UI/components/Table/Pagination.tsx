@@ -172,7 +172,7 @@ export function Pagination({ total, state }: Props) {
         </HStack>
       )}
       {!showAll && totalNumberOfPages <= 7 && totalNumberOfPages > 1 && (
-        <Box>
+        <HStack>
           {[...Array(totalNumberOfPages).keys()].map((b) => (
             <Button
               type="button"
@@ -183,7 +183,7 @@ export function Pagination({ total, state }: Props) {
               {b + 1}
             </Button>
           ))}
-        </Box>
+        </HStack>
       )}
       <Box mt={5}>
         {total ? (

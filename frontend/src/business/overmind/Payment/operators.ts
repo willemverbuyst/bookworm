@@ -3,6 +3,8 @@ import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
 import { Page } from "../../models";
+import { Payment } from "../../models/Payment";
+import { SortDirection } from "../../models/State";
 
 export const shouldFetchPayments = () =>
   filter(({ state }: Context) => !state.payment.getAllApi?.data.length);
@@ -96,3 +98,27 @@ export const shouldShowAll = () =>
       state.payment.ui.table.showAll && state.payment.getAllApi?.total
     );
   });
+
+export const setAmountFilter =
+  () =>
+  ({ state }: Context, { amount }: { amount: number }) => {
+    state.payment.ui.table.filter.amount = amount;
+  };
+
+export const resetAmountFilter =
+  () =>
+  ({ state }: Context) => {
+    state.payment.ui.table.filter.amount = 5;
+  };
+
+export const setSort =
+  () =>
+  (
+    { state }: Context,
+    {
+      property,
+      sortDirection,
+    }: { property: keyof Payment; sortDirection: keyof typeof SortDirection }
+  ) => {
+    state.payment.ui.table.sort = { property, sortDirection };
+  };

@@ -51,6 +51,7 @@ export const state: LibraryState = {
         { field: "country" },
       ],
       filter: null,
+      sort: null,
       limit: 10,
       noDataMessage: "no libraries",
       page: 1,

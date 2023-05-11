@@ -43,6 +43,8 @@ export const showAllRows = pipe(
   o.getBookworms()
 );
 
+export const setSort = o.setSort();
+
 export const search = (debounce(100), o.setQueryString());
 
 export const getBookworm = o.getBookWormById();

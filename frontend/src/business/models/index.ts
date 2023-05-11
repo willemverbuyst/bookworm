@@ -12,4 +12,5 @@ export * from "./Library";
 export * from "./NavItem";
 export * from "./Rental";
 export * from "./Review";
+export * from "./State";
 export * from "./User";
