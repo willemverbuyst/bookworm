@@ -13,7 +13,7 @@ export const state: PaymentState = {
     ({
       getAllApi,
       ui: {
-        table: { searchKeys, queryString, filter },
+        table: { searchKeys, queryString, filter, sort },
       },
     }: PaymentState) => {
       let startTime = 0;
@@ -34,7 +34,10 @@ export const state: PaymentState = {
         .filter((a) => genericSearch(a, searchKeys, queryString, false))
         .filter((i) => i.amount < filter.amount)
         .sort((a, b) =>
-          genericSort(a, b, { property: "title", isDescending: false })
+          genericSort(a, b, {
+            property: sort.property,
+            sortDirection: sort.sortDirection,
+          })
         );
 
       if (NODE_ENV === "development" && startTime) {
@@ -56,7 +59,7 @@ export const state: PaymentState = {
       page: 1,
       noDataMessage: "no payments",
       filter: { amount: 5 },
-      sort: { email: SortDirection.ASCENDING },
+      sort: { property: "email", sortDirection: SortDirection.ASCENDING },
       queryString: "",
       searchKeys: ["title", "email"],
       showAll: false,

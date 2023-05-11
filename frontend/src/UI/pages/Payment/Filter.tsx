@@ -1,6 +1,5 @@
 import { Box, Button, ButtonGroup } from "@chakra-ui/react";
 import { useActions, useAppState } from "../../../business/overmind";
-import { Label } from "../../components/Text";
 
 export function Filter() {
   const {
@@ -14,15 +13,15 @@ export function Filter() {
 
   return (
     <Box mt={4}>
-      <Label text="amount" />
-      <ButtonGroup size="sm" isAttached>
+      <ButtonGroup size="sm">
         {[...Array(5).keys()].map((i) => (
           <Button
             key={i}
-            colorScheme={amount === i + 1 ? "telegram" : "gray"}
+            colorScheme="purple"
             onClick={() => handleClick(i + 1)}
+            variant={amount === i + 1 ? "solid" : "outline"}
           >
-            {`< ${i + 1}`}
+            {`amount < ${i + 1}`}
           </Button>
         ))}
       </ButtonGroup>

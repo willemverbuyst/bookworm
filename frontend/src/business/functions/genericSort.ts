@@ -1,9 +1,14 @@
+import { SortDirection } from "../models/State";
+
 export function genericSort<T>(
   a: T,
   b: T,
-  propertyType: { property: keyof T; isDescending: boolean }
+  propertyType: {
+    property: keyof T;
+    sortDirection: keyof typeof SortDirection;
+  }
 ) {
-  const { property, isDescending } = propertyType;
+  const { property, sortDirection } = propertyType;
   const result = (): number => {
     if (a[property] > b[property]) {
       return 1;
@@ -15,5 +20,5 @@ export function genericSort<T>(
 
     return 0;
   };
-  return isDescending ? result() * -1 : result();
+  return sortDirection === SortDirection.DESCENDING ? result() * -1 : result();
 }

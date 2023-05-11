@@ -3,7 +3,10 @@ export type Column<T> = Array<{ field: keyof T; isNumeric?: boolean }>;
 interface UITable<T, U> {
   columns: Column<T>;
   filter: U;
-  sort: { [K in keyof Partial<T>]: keyof typeof SortDirection } | null;
+  sort: {
+    property: keyof Partial<T>;
+    sortDirection: keyof typeof SortDirection;
+  };
   limit: number;
   noDataMessage: string;
   page: number;

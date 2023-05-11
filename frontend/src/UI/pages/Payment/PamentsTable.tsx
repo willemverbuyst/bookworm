@@ -6,6 +6,7 @@ import {
 } from "../../../business/overmind";
 import { Pagination, TableOverview } from "../../components/Table";
 import { Filter } from "./Filter";
+import { Sort } from "./Sort";
 
 export function PaymentsTable() {
   const { isLoading } = useAppState().payment;
@@ -24,6 +25,7 @@ export function PaymentsTable() {
   return (
     <Box>
       <Filter />
+      <Sort />
       <Input onChange={searchInTable} placeholder="search" my={5} />
       {overview ? (
         <>
