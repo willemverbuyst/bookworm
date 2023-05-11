@@ -19,7 +19,7 @@ export const ApiResponseBook = z.object({
 });
 
 export type ApiResponseBook = z.infer<typeof ApiResponseBook>;
-interface Book {
+export interface Book {
   id: string;
   title: string;
   author: string;

@@ -122,12 +122,3 @@ export const setSort =
   ) => {
     state.payment.ui.table.sort = { property, sortDirection };
   };
-
-export const resetSort =
-  () =>
-  ({ state }: Context) => {
-    state.payment.ui.table.sort = {
-      property: "email",
-      sortDirection: SortDirection.ASCENDING,
-    };
-  };

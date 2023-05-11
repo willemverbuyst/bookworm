@@ -1,5 +1,4 @@
 import { Box, Input } from "@chakra-ui/react";
-import { genericSearch } from "../../../business/functions";
 import {
   stateSectionsWithTable,
   useActions,
@@ -14,11 +13,11 @@ export function BooksTable() {
     getAllApi,
     overview,
     ui: {
-      table: { columns, noDataMessage, queryString, searchKeys, title },
+      table: { columns, noDataMessage, title, sort },
     },
   } = useAppState().book;
   const { total } = getAllApi || {};
-  const { search } = useActions().book;
+  const { search, setSort } = useActions().book;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     search({ queryString: e.target.value });
@@ -31,12 +30,12 @@ export function BooksTable() {
       {overview ? (
         <>
           <TableOverview
-            rows={overview.filter((a) =>
-              genericSearch(a, searchKeys, queryString, false)
-            )}
+            rows={overview}
             columns={columns}
             title={title}
             isLoading={isLoading}
+            sortFunction={setSort}
+            sortProperty={sort}
           />
           <Pagination total={total} state={stateSectionsWithTable.book} />
         </>

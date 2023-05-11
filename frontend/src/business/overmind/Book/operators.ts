@@ -2,7 +2,7 @@
 import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
-import { Page } from "../../models";
+import { Book, Page, SortDirection } from "../../models";
 
 export const setBooksPage =
   () =>
@@ -181,4 +181,16 @@ export const getLanguages =
   () =>
   ({ actions }: Context) => {
     actions.language.getLanguages();
+  };
+
+export const setSort =
+  () =>
+  (
+    { state }: Context,
+    {
+      property,
+      sortDirection,
+    }: { property: keyof Book; sortDirection: keyof typeof SortDirection }
+  ) => {
+    state.book.ui.table.sort = { property, sortDirection };
   };

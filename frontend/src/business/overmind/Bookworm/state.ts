@@ -2,36 +2,56 @@ import { derived } from "overmind";
 import { RootState } from "..";
 import { NODE_ENV } from "../../../config/environment";
 import { logInfo } from "../../../utils/logger";
-import { compare, getColorIndex } from "../../functions";
-import { BookwormState } from "../../models";
+import {
+  compare,
+  genericSearch,
+  genericSort,
+  getColorIndex,
+} from "../../functions";
+import { BookwormState, SortDirection } from "../../models";
 
 export const state: BookwormState = {
   isLoading: false,
   getAllApi: null,
   bookwormDetailsApi: null,
-  overview: derived(({ getAllApi }: BookwormState) => {
-    let startTime = 0;
-    if (NODE_ENV === "development") startTime = Date.now();
+  overview: derived(
+    ({
+      getAllApi,
+      ui: {
+        table: { searchKeys, queryString, sort },
+      },
+    }: BookwormState) => {
+      let startTime = 0;
+      if (NODE_ENV === "development") startTime = Date.now();
 
-    if (!getAllApi?.data.length) {
-      return [];
+      if (!getAllApi?.data.length) {
+        return [];
+      }
+      const data = getAllApi.data
+        .map((i) => ({
+          id: i.id,
+          "first name": i.first_name,
+          "last name": i.last_name,
+          email: i.email,
+          phone: i.phone,
+          userIsActive: i.user_is_active,
+          library: i.library,
+        }))
+        .filter((a) => genericSearch(a, searchKeys, queryString, false))
+        .sort((a, b) =>
+          genericSort(a, b, {
+            property: sort.property,
+            sortDirection: sort.sortDirection,
+          })
+        );
+
+      if (NODE_ENV === "development" && startTime) {
+        logInfo(startTime, "derived fn: overview bookworms");
+      }
+
+      return data;
     }
-    const data = getAllApi.data.map((i) => ({
-      id: i.id,
-      "first name": i.first_name,
-      "last name": i.last_name,
-      email: i.email,
-      phone: i.phone,
-      userIsActive: i.user_is_active,
-      library: i.library,
-    }));
-
-    if (NODE_ENV === "development" && startTime) {
-      logInfo(startTime, "derived fn: overview bookworms");
-    }
-
-    return data;
-  }),
+  ),
   statsLibrary: derived(
     ({ statsLibraryApi }: BookwormState, rootState: RootState) => {
       let startTime = 0;
@@ -72,7 +92,7 @@ export const state: BookwormState = {
       filter: {
         active: true,
       },
-      sort: null,
+      sort: { property: "email", sortDirection: SortDirection.ASCENDING },
       limit: 15,
       noDataMessage: "no bookworms",
       page: 1,

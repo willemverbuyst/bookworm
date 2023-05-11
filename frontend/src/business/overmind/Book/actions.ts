@@ -54,4 +54,6 @@ export const showAllRows = pipe(
   o.getBooks()
 );
 
+export const setSort = o.setSort();
+
 export const search = (debounce(100), o.setQueryString());

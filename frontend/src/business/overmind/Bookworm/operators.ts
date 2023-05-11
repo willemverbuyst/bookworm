@@ -2,7 +2,7 @@
 import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
-import { Page } from "../../models";
+import { Bookworm, Page, SortDirection } from "../../models";
 
 export const setBookwormsPage =
   () =>
@@ -142,3 +142,15 @@ export const shouldShowAll = () =>
       state.bookworm.ui.table.showAll && state.author.getAllApi?.total
     );
   });
+
+export const setSort =
+  () =>
+  (
+    { state }: Context,
+    {
+      property,
+      sortDirection,
+    }: { property: keyof Bookworm; sortDirection: keyof typeof SortDirection }
+  ) => {
+    state.bookworm.ui.table.sort = { property, sortDirection };
+  };

@@ -37,6 +37,4 @@ export const showAllRows = pipe(
 
 export const setSort = o.setSort();
 
-export const resetSort = o.resetSort();
-
 export const search = (debounce(100), o.setQueryString());
