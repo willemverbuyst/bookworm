@@ -17,7 +17,7 @@ export function Filter() {
         {[...Array(5).keys()].map((i) => (
           <Button
             key={i}
-            colorScheme="purple"
+            colorScheme="teal"
             onClick={() => handleClick(i + 1)}
             variant={amount === i + 1 ? "solid" : "outline"}
           >

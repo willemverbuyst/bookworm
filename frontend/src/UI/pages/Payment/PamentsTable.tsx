@@ -6,17 +6,16 @@ import {
 } from "../../../business/overmind";
 import { Pagination, TableOverview } from "../../components/Table";
 import { Filter } from "./Filter";
-import { Sort } from "./Sort";
 
 export function PaymentsTable() {
   const { isLoading } = useAppState().payment;
   const {
     overview,
     ui: {
-      table: { columns, noDataMessage, title, page, limit },
+      table: { columns, noDataMessage, title, page, limit, sort },
     },
   } = useAppState().payment;
-  const { search } = useActions().payment;
+  const { search, setSort } = useActions().payment;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     search({ queryString: e.target.value });
@@ -25,7 +24,6 @@ export function PaymentsTable() {
   return (
     <Box>
       <Filter />
-      <Sort />
       <Input onChange={searchInTable} placeholder="search" my={5} />
       {overview ? (
         <>
@@ -34,6 +32,8 @@ export function PaymentsTable() {
             columns={columns}
             title={title}
             isLoading={isLoading}
+            sortFunction={setSort}
+            sortProperty={sort}
           />
           <Pagination
             total={overview.length}

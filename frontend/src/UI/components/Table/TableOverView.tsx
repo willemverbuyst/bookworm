@@ -39,6 +39,10 @@ type Props<T extends Record<"id", string>> = {
     property: keyof Partial<T>;
     sortDirection: keyof typeof SortDirection;
   }) => void;
+  sortProperty: {
+    property: keyof Partial<T>;
+    sortDirection: keyof typeof SortDirection;
+  };
 };
 
 export function TableOverview<T extends Record<"id", string>>({
@@ -49,6 +53,7 @@ export function TableOverview<T extends Record<"id", string>>({
   isLoading = false,
   actionButtons = [],
   sortFunction,
+  sortProperty,
 }: Props<T>) {
   const loadingStyles = isLoading
     ? {
@@ -76,7 +81,16 @@ export function TableOverview<T extends Record<"id", string>>({
                   <IconButton
                     aria-label={`${String(column.field)} ascending`}
                     variant="unstyled"
-                    icon={<TriangleDownIcon color="gray.400" />}
+                    icon={
+                      <TriangleDownIcon
+                        color={
+                          sortProperty.property === column.field &&
+                          sortProperty.sortDirection === SortDirection.ASCENDING
+                            ? "grey.700"
+                            : "gray.400"
+                        }
+                      />
+                    }
                     onClick={() =>
                       sortFunction({
                         property: column.field,
@@ -88,7 +102,17 @@ export function TableOverview<T extends Record<"id", string>>({
                   <IconButton
                     aria-label={`${String(column.field)} descending`}
                     variant="unstyled"
-                    icon={<TriangleUpIcon color="gray.400" />}
+                    icon={
+                      <TriangleUpIcon
+                        color={
+                          sortProperty.property === column.field &&
+                          sortProperty.sortDirection ===
+                            SortDirection.DESCENDING
+                            ? "grey.700"
+                            : "gray.400"
+                        }
+                      />
+                    }
                     onClick={() =>
                       sortFunction({
                         property: column.field,
