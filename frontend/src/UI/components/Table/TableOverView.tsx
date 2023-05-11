@@ -1,4 +1,7 @@
+import { SearchIcon, TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import {
+  IconButton,
+  Spacer,
   Table,
   TableCaption,
   TableContainer,
@@ -8,6 +11,7 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { SortDirection } from "../../../business/models/State";
 
 function ActionButton({
   id,
@@ -28,6 +32,13 @@ type Props<T extends Record<"id", string>> = {
   action?: (id: string) => void;
   isLoading?: boolean;
   actionButtons?: (({ id }: { id: string }) => JSX.Element)[] | null;
+  sortFunction: ({
+    property,
+    sortDirection,
+  }: {
+    property: keyof Partial<T>;
+    sortDirection: keyof typeof SortDirection;
+  }) => void;
 };
 
 export function TableOverview<T extends Record<"id", string>>({
@@ -37,6 +48,7 @@ export function TableOverview<T extends Record<"id", string>>({
   action,
   isLoading = false,
   actionButtons = [],
+  sortFunction,
 }: Props<T>) {
   const loadingStyles = isLoading
     ? {
@@ -58,7 +70,41 @@ export function TableOverview<T extends Record<"id", string>>({
                 isNumeric={column.isNumeric}
                 style={loadingStyles}
               >
-                {String(column.field).replace(/_/g, " ")}
+                <>
+                  {String(column.field).replace(/_/g, " ")}
+                  <Spacer />
+                  <IconButton
+                    aria-label={`${String(column.field)} ascending`}
+                    variant="unstyled"
+                    icon={<TriangleDownIcon color="gray.400" />}
+                    onClick={() =>
+                      sortFunction({
+                        property: column.field,
+                        sortDirection: SortDirection.ASCENDING,
+                      })
+                    }
+                    size="sm"
+                  />
+                  <IconButton
+                    aria-label={`${String(column.field)} descending`}
+                    variant="unstyled"
+                    icon={<TriangleUpIcon color="gray.400" />}
+                    onClick={() =>
+                      sortFunction({
+                        property: column.field,
+                        sortDirection: SortDirection.DESCENDING,
+                      })
+                    }
+                    size="sm"
+                  />
+                  <IconButton
+                    aria-label={`${String(column.field)} search`}
+                    variant="unstyled"
+                    icon={<SearchIcon color="gray.400" />}
+                    onClick={() => console.log("test search")}
+                    size="sm"
+                  />
+                </>
               </Th>
             ))}
             {action ? <Th /> : null}
