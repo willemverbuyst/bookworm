@@ -1,6 +1,5 @@
 import { ViewIcon } from "@chakra-ui/icons";
 import { Box, Flex, IconButton, Input, useDisclosure } from "@chakra-ui/react";
-import { genericSearch } from "../../../business/functions";
 import { useActions, useAppState } from "../../../business/overmind";
 import { SimpleSidebar } from "../../components/Navigation";
 import { TableOverview } from "../../components/Table";
@@ -36,10 +35,10 @@ export function AdminLibraryPage() {
   const {
     overview,
     ui: {
-      table: { columns, noDataMessage, queryString, searchKeys },
+      table: { columns, noDataMessage, sort },
     },
   } = useAppState().library;
-  const { search } = useActions().library;
+  const { search, setSort } = useActions().library;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     search({ queryString: e.target.value });
@@ -53,12 +52,12 @@ export function AdminLibraryPage() {
           <Flex direction="column">
             <Input onChange={searchInTable} placeholder="search" />
             <TableOverview
-              rows={overview.filter((a) =>
-                genericSearch(a, searchKeys, queryString, false)
-              )}
+              rows={overview}
               columns={columns}
               isLoading={isLoading}
               actionButtons={[ShowDetailsButton]}
+              sortFunction={setSort}
+              sortProperty={sort}
             />
           </Flex>
         </Box>
