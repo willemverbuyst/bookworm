@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
 import { genericSearch } from "../../functions";
-import { Page } from "../../models";
+import { Author, Page, SortDirection } from "../../models";
 
 export const searching =
   () =>
@@ -126,3 +126,15 @@ export const shouldShowAll = () =>
       state.author.ui.table.showAll && state.author.getAllApi?.total
     );
   });
+
+export const setSort =
+  () =>
+  (
+    { state }: Context,
+    {
+      property,
+      sortDirection,
+    }: { property: keyof Author; sortDirection: keyof typeof SortDirection }
+  ) => {
+    state.author.ui.table.sort = { property, sortDirection };
+  };

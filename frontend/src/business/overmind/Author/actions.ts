@@ -35,4 +35,6 @@ export const usePagination = pipe(
   o.getAuthors()
 );
 
+export const setSort = o.setSort();
+
 export const search = pipe(debounce(200), o.setQueryString(), o.searching);

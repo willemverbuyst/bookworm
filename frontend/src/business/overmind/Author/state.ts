@@ -1,36 +1,48 @@
 import { derived } from "overmind";
 import { NODE_ENV } from "../../../config/environment";
 import { logInfo } from "../../../utils/logger";
-import { AuthorState } from "../../models";
+import { genericSearch, genericSort } from "../../functions";
+import { AuthorState, SortDirection } from "../../models";
 
 export const state: AuthorState = {
   isLoading: false,
   getAllApi: null,
-  overview: derived(({ getAllApi }: AuthorState) => {
-    let startTime = 0;
-    if (NODE_ENV === "development") startTime = Date.now();
+  overview: derived(
+    ({
+      getAllApi,
+      ui: {
+        table: { searchKeys, queryString, sort },
+      },
+    }: AuthorState) => {
+      let startTime = 0;
+      if (NODE_ENV === "development") startTime = Date.now();
 
-    if (!getAllApi?.data.length) {
-      return [];
+      if (!getAllApi?.data.length) {
+        return [];
+      }
+
+      const data = getAllApi.data
+        .map((i) => ({
+          id: i.id,
+          "first name": i.first_name,
+          "last name": i.last_name,
+          "books written": i.books_written,
+        }))
+        .filter((a) => genericSearch(a, searchKeys, queryString, false))
+        .sort((a, b) =>
+          genericSort(a, b, {
+            property: sort.property,
+            sortDirection: sort.sortDirection,
+          })
+        );
+
+      if (NODE_ENV === "development" && startTime) {
+        logInfo(startTime, "derived fn: overview authors");
+      }
+
+      return data;
     }
-
-    const data = getAllApi.data
-      .map((i) => ({
-        id: i.id,
-        "first name": i.first_name,
-        "last name": i.last_name,
-        "books written": i.books_written,
-      }))
-      .sort((author1, author2) =>
-        `${author1["last name"]}`.localeCompare(author2["last name"])
-      );
-
-    if (NODE_ENV === "development" && startTime) {
-      logInfo(startTime, "derived fn: overview authors");
-    }
-
-    return data;
-  }),
+  ),
   statsPage: derived(({ statsPageApi }: AuthorState) => {
     if (!statsPageApi?.data.pages_per_author.length) {
       return null;
@@ -54,7 +66,7 @@ export const state: AuthorState = {
         { field: "books written", isNumeric: true },
       ],
       filter: null,
-      sort: null,
+      sort: { property: "first name", sortDirection: SortDirection.ASCENDING },
       limit: 10,
       noDataMessage: "no authors",
       page: 1,
