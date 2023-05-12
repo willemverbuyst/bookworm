@@ -11,3 +11,5 @@ export const postLanguages = pipe(o.addLanguages(), o.fetchLanguages());
 export const deleteLanguage = pipe(o.deleteLanguage(), o.fetchLanguages());
 
 export const updateLanguage = pipe(o.updateLanguage(), o.fetchLanguages());
+
+export const setSort = o.setSort();
