@@ -1,33 +1,48 @@
 import { derived } from "overmind";
 import { NODE_ENV } from "../../../config/environment";
 import { logInfo } from "../../../utils/logger";
-import { WEEKDAYS } from "../../functions";
-import { RentalState } from "../../models";
+import { genericSearch, genericSort, WEEKDAYS } from "../../functions";
+import { RentalState, SortDirection } from "../../models";
 
 export const state: RentalState = {
   getAllApi: null,
   isLoading: false,
-  overview: derived(({ getAllApi }: RentalState) => {
-    let startTime = 0;
-    if (NODE_ENV === "development") startTime = Date.now();
+  overview: derived(
+    ({
+      getAllApi,
+      ui: {
+        table: { searchKeys, queryString, sort },
+      },
+    }: RentalState) => {
+      let startTime = 0;
+      if (NODE_ENV === "development") startTime = Date.now();
 
-    if (!getAllApi?.data.length) {
-      return [];
+      if (!getAllApi?.data.length) {
+        return [];
+      }
+      const data = getAllApi.data
+        .map((i) => ({
+          id: i.id,
+          "rental date": i.rental_date,
+          "return date": i.return_date,
+          title: i.title,
+          author: i.author,
+        }))
+        .filter((a) => genericSearch(a, searchKeys, queryString, false))
+        .sort((a, b) =>
+          genericSort(a, b, {
+            property: sort.property,
+            sortDirection: sort.sortDirection,
+          })
+        );
+
+      if (NODE_ENV === "development" && startTime) {
+        logInfo(startTime, "derived fn: overview rentals");
+      }
+
+      return data;
     }
-    const data = getAllApi.data.map((i) => ({
-      id: i.id,
-      "rental date": i.rental_date,
-      "return date": i.return_date,
-      title: i.title,
-      author: i.author,
-    }));
-
-    if (NODE_ENV === "development" && startTime) {
-      logInfo(startTime, "derived fn: overview rentals");
-    }
-
-    return data;
-  }),
+  ),
   statsDay: derived(({ statsDayApi }: RentalState) => {
     let startTime = 0;
     if (NODE_ENV === "development") startTime = Date.now();
@@ -80,7 +95,7 @@ export const state: RentalState = {
         { field: "return date" },
       ],
       filter: { returned: "not_returned" },
-      sort: null,
+      sort: { property: "title", sortDirection: SortDirection.ASCENDING },
       limit: 20,
       noDataMessage: "no rentals",
       page: 1,

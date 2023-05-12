@@ -19,7 +19,7 @@ export const ApiResponseRental = z.object({
 
 export type ApiResponseRental = z.infer<typeof ApiResponseRental>;
 
-interface Rental {
+export interface Rental {
   id: string;
   "rental date": string;
   "return date": string | null;
