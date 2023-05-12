@@ -2,6 +2,7 @@
 import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
+import { Genre, SortDirection } from "../../models";
 
 export const shouldFetchGenres = () =>
   filter(({ state }: Context) => !state.genre.getAllApi?.data.length);
@@ -148,3 +149,15 @@ export const shouldShowAll = () =>
       state.genre.ui.table.showAll && state.author.getAllApi?.total
     );
   });
+
+export const setSort =
+  () =>
+  (
+    { state }: Context,
+    {
+      property,
+      sortDirection,
+    }: { property: keyof Genre; sortDirection: keyof typeof SortDirection }
+  ) => {
+    state.genre.ui.table.sort = { property, sortDirection };
+  };

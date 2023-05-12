@@ -17,7 +17,7 @@ export const ApiResponseGenre = z.object({
 
 export type ApiResponseGenre = z.infer<typeof ApiResponseGenre>;
 
-interface Genre {
+export interface Genre {
   id: string;
   "name of genre": string;
 }
