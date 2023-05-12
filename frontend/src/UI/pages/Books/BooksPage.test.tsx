@@ -4,6 +4,7 @@ import { render, screen } from "@testing-library/react";
 import { createOvermindMock } from "overmind";
 import { Provider } from "overmind-react";
 import { vi } from "vitest";
+import { SortDirection } from "../../../business/models";
 import { config } from "../../../business/overmind";
 import { BooksPage } from "./BooksPage";
 
@@ -43,6 +44,7 @@ describe("BooksPage", () => {
           genre: "",
           language: "",
         },
+        sort: { property: "title", sortDirection: SortDirection.ASCENDING },
         limit: 10,
         noDataMessage: "no books",
         page: 1,

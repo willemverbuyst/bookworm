@@ -1,3 +1,4 @@
+import { SortDirection } from "../models";
 import { genericSort } from "./genericSort";
 
 const testObject1 = {
@@ -16,13 +17,13 @@ describe("genericSort", () => {
     expect(
       genericSort(testObject1, testObject2, {
         property: "foo",
-        isDescending: true,
+        sortDirection: SortDirection.DESCENDING,
       })
     ).toBe(1);
     expect(
       genericSort(testObject1, testObject2, {
         property: "bar",
-        isDescending: false,
+        sortDirection: SortDirection.ASCENDING,
       })
     ).toBe(1);
   });
@@ -31,13 +32,13 @@ describe("genericSort", () => {
     expect(
       genericSort(testObject1, testObject2, {
         property: "foo",
-        isDescending: false,
+        sortDirection: SortDirection.ASCENDING,
       })
     ).toBe(-1);
     expect(
       genericSort(testObject1, testObject2, {
         property: "bar",
-        isDescending: true,
+        sortDirection: SortDirection.DESCENDING,
       })
     ).toBe(-1);
   });
@@ -46,13 +47,13 @@ describe("genericSort", () => {
     expect(
       genericSort(testObject1, testObject2, {
         property: "quuz",
-        isDescending: false,
+        sortDirection: SortDirection.ASCENDING,
       })
     ).toBe(0);
     expect(
       genericSort(testObject1, testObject2, {
         property: "quuz",
-        isDescending: true,
+        sortDirection: SortDirection.DESCENDING,
       })
     ).toBe(-0);
   });
