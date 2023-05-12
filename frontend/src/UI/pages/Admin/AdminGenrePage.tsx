@@ -25,7 +25,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { genericSearch } from "../../../business/functions";
 import {
   stateSectionsWithTable,
   useActions,
@@ -182,11 +181,11 @@ export function AdminGenrePage() {
     getAllApi,
     overview,
     ui: {
-      table: { columns, noDataMessage, queryString, searchKeys },
+      table: { columns, noDataMessage, sort },
     },
   } = useAppState().genre;
   const { total } = getAllApi || {};
-  const { search, postGenres } = useActions().genre;
+  const { search, postGenres, setSort } = useActions().genre;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     search({ queryString: e.target.value });
@@ -206,12 +205,12 @@ export function AdminGenrePage() {
           <Flex direction="column">
             <Input onChange={searchInTable} placeholder="search" />
             <TableOverview
-              rows={overview.filter((a) =>
-                genericSearch(a, searchKeys, queryString, false)
-              )}
+              rows={overview}
               columns={columns}
               isLoading={isLoading}
               actionButtons={[EditButton, DeleteButton]}
+              sortFunction={setSort}
+              sortProperty={sort}
             />
             <Pagination total={total} state={stateSectionsWithTable.genre} />
           </Flex>

@@ -18,7 +18,7 @@ export const ApiResponseAuthor = z.object({
 
 export type ApiResponseAuthor = z.infer<typeof ApiResponseAuthor>;
 
-interface Author {
+export interface Author {
   id: string;
   "first name": string;
   "last name": string;

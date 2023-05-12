@@ -2,6 +2,7 @@
 import { render, screen } from "@testing-library/react";
 import { createOvermindMock } from "overmind";
 import { Provider } from "overmind-react";
+import { SortDirection } from "../../../business/models";
 import { config } from "../../../business/overmind";
 import { BooksTable } from "./BooksTable";
 
@@ -37,6 +38,7 @@ describe("BooksTable", () => {
             genre: "",
             language: "",
           },
+          sort: { property: "title", sortDirection: SortDirection.ASCENDING },
           limit: 10,
           noDataMessage: "no books",
           page: 1,

@@ -2,7 +2,7 @@
 import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
-import { Page } from "../../models";
+import { Page, Rental, SortDirection } from "../../models";
 
 export const setRentalsPage =
   () =>
@@ -141,4 +141,16 @@ export const resetReturnedFilter =
   () =>
   ({ state }: Context) => {
     state.rental.ui.table.filter.returned = "";
+  };
+
+export const setSort =
+  () =>
+  (
+    { state }: Context,
+    {
+      property,
+      sortDirection,
+    }: { property: keyof Rental; sortDirection: keyof typeof SortDirection }
+  ) => {
+    state.rental.ui.table.sort = { property, sortDirection };
   };

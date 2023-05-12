@@ -1,5 +1,6 @@
 import { derived } from "overmind";
-import { LibraryState } from "../../models";
+import { genericSearch, genericSort } from "../../functions";
+import { LibraryState, SortDirection } from "../../models";
 
 export const state: LibraryState = {
   isLoading: false,
@@ -19,20 +20,35 @@ export const state: LibraryState = {
     };
   }),
   getAllApi: null,
-  overview: derived(({ getAllApi }: LibraryState) => {
-    if (!getAllApi?.data.length) {
-      return [];
+  overview: derived(
+    ({
+      getAllApi,
+      ui: {
+        table: { searchKeys, queryString, sort },
+      },
+    }: LibraryState) => {
+      if (!getAllApi?.data.length) {
+        return [];
+      }
+      return getAllApi.data
+        .map((i) => ({
+          id: i.id,
+          "name of library": i.name_of_library,
+          phone: i.phone,
+          address: i.address,
+          postalCode: i.postal_code,
+          city: i.city,
+          country: i.country,
+        }))
+        .filter((a) => genericSearch(a, searchKeys, queryString, false))
+        .sort((a, b) =>
+          genericSort(a, b, {
+            property: sort.property,
+            sortDirection: sort.sortDirection,
+          })
+        );
     }
-    return getAllApi.data.map((i) => ({
-      id: i.id,
-      "name of library": i.name_of_library,
-      phone: i.phone,
-      address: i.address,
-      postalCode: i.postal_code,
-      city: i.city,
-      country: i.country,
-    }));
-  }),
+  ),
   selectOptions: derived(({ getAllApi }: LibraryState) => {
     if (!getAllApi?.data.length) {
       return [];
@@ -51,7 +67,10 @@ export const state: LibraryState = {
         { field: "country" },
       ],
       filter: null,
-      sort: null,
+      sort: {
+        property: "name of library",
+        sortDirection: SortDirection.ASCENDING,
+      },
       limit: 10,
       noDataMessage: "no libraries",
       page: 1,

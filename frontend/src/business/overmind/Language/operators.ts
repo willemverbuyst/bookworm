@@ -2,6 +2,7 @@
 import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
+import { Language, SortDirection } from "../../models";
 
 export const shouldFetchLanguages = () =>
   filter(({ state }: Context) => !state.language.getAllApi?.data.length);
@@ -100,4 +101,16 @@ export const updateLanguage =
     }
 
     state.language.isLoading = false;
+  };
+
+export const setSort =
+  () =>
+  (
+    { state }: Context,
+    {
+      property,
+      sortDirection,
+    }: { property: keyof Language; sortDirection: keyof typeof SortDirection }
+  ) => {
+    state.language.ui.table.sort = { property, sortDirection };
   };

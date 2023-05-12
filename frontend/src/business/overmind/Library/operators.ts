@@ -2,6 +2,7 @@
 import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
+import { Library, SortDirection } from "../../models";
 
 export const shouldFetchLibraries = () =>
   filter(({ state }: Context) => !state.library.getAllApi?.data.length);
@@ -46,4 +47,16 @@ export const resetQueryString =
   () =>
   ({ state }: Context) => {
     state.library.ui.table.queryString = "";
+  };
+
+export const setSort =
+  () =>
+  (
+    { state }: Context,
+    {
+      property,
+      sortDirection,
+    }: { property: keyof Library; sortDirection: keyof typeof SortDirection }
+  ) => {
+    state.library.ui.table.sort = { property, sortDirection };
   };

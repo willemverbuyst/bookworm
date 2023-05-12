@@ -24,7 +24,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useId, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { genericSearch } from "../../../business/functions";
 import { useActions, useAppState } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
 import { SimpleSidebar } from "../../components/Navigation";
@@ -179,10 +178,10 @@ export function AdminLanguagePage() {
   const {
     overview,
     ui: {
-      table: { columns, noDataMessage, queryString, searchKeys },
+      table: { columns, noDataMessage, sort },
     },
   } = useAppState().language;
-  const { search, postLanguages } = useActions().language;
+  const { search, postLanguages, setSort } = useActions().language;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     search({ queryString: e.target.value });
@@ -202,12 +201,12 @@ export function AdminLanguagePage() {
           <Flex direction="column">
             <Input onChange={searchInTable} placeholder="search" />
             <TableOverview
-              rows={overview.filter((a) =>
-                genericSearch(a, searchKeys, queryString, false)
-              )}
+              rows={overview}
               columns={columns}
               isLoading={isLoading}
               actionButtons={[EditButton, DeleteButton]}
+              sortFunction={setSort}
+              sortProperty={sort}
             />
           </Flex>
           <Flex mt={10}>

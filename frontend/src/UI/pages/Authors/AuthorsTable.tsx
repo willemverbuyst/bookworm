@@ -1,5 +1,4 @@
 import { Box, Input } from "@chakra-ui/react";
-import { genericSearch } from "../../../business/functions";
 import {
   stateSectionsWithTable,
   useActions,
@@ -13,10 +12,10 @@ export function AuthorsTable() {
     getAllApi,
     overview,
     ui: {
-      table: { columns, noDataMessage, queryString, searchKeys, title },
+      table: { columns, noDataMessage, queryString, sort, title },
     },
   } = useAppState().author;
-  const { search } = useActions().author;
+  const { search, setSort } = useActions().author;
   const { total } = getAllApi || {};
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,12 +28,12 @@ export function AuthorsTable() {
       {overview ? (
         <>
           <TableOverview
-            rows={overview.filter((a) =>
-              genericSearch(a, searchKeys, queryString, false)
-            )}
+            rows={overview}
             columns={columns}
             title={title}
             isLoading={isLoading}
+            sortFunction={setSort}
+            sortProperty={sort}
           />
           {!queryString && (
             <Pagination total={total} state={stateSectionsWithTable.author} />

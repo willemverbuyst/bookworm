@@ -4,6 +4,7 @@ import { createOvermindMock } from "overmind";
 import { Provider } from "overmind-react";
 
 import user from "@testing-library/user-event";
+import { SortDirection } from "../../../business/models";
 import { config, stateSectionsWithTable } from "../../../business/overmind";
 import { Pagination } from "./Pagination";
 
@@ -38,6 +39,7 @@ describe("Pagination", () => {
           genre: "",
           language: "",
         },
+        sort: { property: "title", sortDirection: SortDirection.ASCENDING },
         limit: 10,
         noDataMessage: "no books",
         page: 1,

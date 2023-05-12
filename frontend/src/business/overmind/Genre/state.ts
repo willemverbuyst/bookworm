@@ -1,18 +1,33 @@
 import { derived } from "overmind";
-import { GenreState } from "../../models";
+import { genericSearch, genericSort } from "../../functions";
+import { GenreState, SortDirection } from "../../models";
 
 export const state: GenreState = {
   isLoading: false,
   getAllApi: null,
-  overview: derived(({ getAllApi, ui }: GenreState) => {
-    if (!getAllApi?.data?.length) {
-      return [];
+  overview: derived(
+    ({
+      getAllApi,
+      ui: {
+        table: { limit, page, searchKeys, queryString, sort },
+      },
+    }: GenreState) => {
+      if (!getAllApi?.data?.length) {
+        return [];
+      }
+
+      return getAllApi.data
+        .map((i) => ({ id: i.id, "name of genre": i.name_of_genre }))
+        .slice((page - 1) * limit, limit * page)
+        .filter((a) => genericSearch(a, searchKeys, queryString, false))
+        .sort((a, b) =>
+          genericSort(a, b, {
+            property: sort.property,
+            sortDirection: sort.sortDirection,
+          })
+        );
     }
-    const { page, limit } = ui.table;
-    return getAllApi.data
-      .map((i) => ({ id: i.id, "name of genre": i.name_of_genre }))
-      .slice((page - 1) * limit, limit * page);
-  }),
+  ),
   selectOptions: derived(({ getAllApi }: GenreState) => {
     if (!getAllApi?.data?.length) {
       return [];
@@ -26,6 +41,10 @@ export const state: GenreState = {
     table: {
       columns: [{ field: "name of genre" }],
       filter: null,
+      sort: {
+        property: "name of genre",
+        sortDirection: SortDirection.ASCENDING,
+      },
       limit: 10,
       noDataMessage: "no genres",
       page: 1,
