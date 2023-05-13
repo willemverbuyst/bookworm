@@ -1,4 +1,4 @@
-import { Box, Input } from "@chakra-ui/react";
+import { Box, FormControl, Input } from "@chakra-ui/react";
 import {
   stateSectionsWithTable,
   useActions,
@@ -8,16 +8,16 @@ import { Pagination, TableOverview } from "../../components/Table";
 import { Filter } from "./Filter";
 
 export function BooksTable() {
-  const { isLoading } = useAppState().book;
   const {
+    isLoading,
     getAllApi,
     overview,
     ui: {
-      table: { columns, noDataMessage, title, sort },
+      table: { columns, noDataMessage, queryString, title, sort },
     },
   } = useAppState().book;
-  const { total } = getAllApi || {};
   const { search, setSort } = useActions().book;
+  const { total } = getAllApi || {};
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     search({ queryString: e.target.value });
@@ -26,7 +26,16 @@ export function BooksTable() {
   return (
     <Box>
       <Filter />
-      <Input onChange={searchInTable} placeholder="search" my={5} />
+      <FormControl>
+        <Input
+          id="search"
+          placeholder="search"
+          value={queryString}
+          onChange={(e) => searchInTable(e)}
+          mt={5}
+        />
+      </FormControl>
+
       {overview ? (
         <>
           <TableOverview
@@ -37,7 +46,9 @@ export function BooksTable() {
             sortFunction={setSort}
             sortProperty={sort}
           />
-          <Pagination total={total} state={stateSectionsWithTable.book} />
+          {!queryString && (
+            <Pagination total={total} state={stateSectionsWithTable.book} />
+          )}
         </>
       ) : (
         <p>{noDataMessage}</p>

@@ -2,26 +2,7 @@
 import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
-import { genericSearch } from "../../functions";
 import { Author, Page, SortDirection } from "../../models";
-
-export const searching =
-  () =>
-  ({ state }: Context, { str }: { str: string }) => {
-    // TODO, HAS TO BE A SEARCH IN DB
-    if (state.author.getAllApi?.data && state.author.getAllApi.data?.length) {
-      const filteredOverview = [...state.author.getAllApi.data].filter((a) =>
-        genericSearch(a, ["last_name", "first_name"], str, false)
-      );
-
-      state.author.overview = filteredOverview.map((i) => ({
-        id: i.id,
-        "first name": i.first_name,
-        "last name": i.last_name,
-        "books written": i.books_written,
-      }));
-    }
-  };
 
 export const setAuthorsPage =
   () =>

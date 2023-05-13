@@ -1,4 +1,4 @@
-import { Box, Input } from "@chakra-ui/react";
+import { Box, FormControl, Input } from "@chakra-ui/react";
 import {
   stateSectionsWithTable,
   useActions,
@@ -13,7 +13,7 @@ export function PaymentsTable() {
     overview,
     getAllApi,
     ui: {
-      table: { columns, noDataMessage, title, sort },
+      table: { columns, noDataMessage, queryString, title, sort },
     },
   } = useAppState().payment;
   const { total } = getAllApi || {};
@@ -26,7 +26,16 @@ export function PaymentsTable() {
   return (
     <Box>
       <Filter />
-      <Input onChange={searchInTable} placeholder="search" my={5} />
+      <FormControl>
+        <Input
+          id="search"
+          placeholder="search"
+          value={queryString}
+          onChange={(e) => searchInTable(e)}
+          mt={5}
+        />
+      </FormControl>
+
       {overview ? (
         <>
           <TableOverview
@@ -37,7 +46,9 @@ export function PaymentsTable() {
             sortFunction={setSort}
             sortProperty={sort}
           />
-          <Pagination total={total} state={stateSectionsWithTable.payment} />
+          {!queryString && (
+            <Pagination total={total} state={stateSectionsWithTable.payment} />
+          )}
         </>
       ) : (
         <p>{noDataMessage}</p>

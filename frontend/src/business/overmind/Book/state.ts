@@ -22,6 +22,7 @@ export const state: BookState = {
       if (!getAllApi?.data.length) {
         return [];
       }
+
       const data = getAllApi.data
         .map((book) => ({
           id: book.id,

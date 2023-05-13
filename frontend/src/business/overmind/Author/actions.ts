@@ -1,4 +1,4 @@
-import { debounce, parallel, pipe } from "overmind";
+import { parallel, pipe } from "overmind";
 import * as o from "./operators";
 
 export const showAuthorsPage = pipe(
@@ -37,4 +37,4 @@ export const usePagination = pipe(
 
 export const setSort = o.setSort();
 
-export const search = pipe(debounce(200), o.setQueryString(), o.searching);
+export const search = o.setQueryString();

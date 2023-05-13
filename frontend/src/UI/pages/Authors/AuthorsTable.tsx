@@ -1,4 +1,4 @@
-import { Box, Input } from "@chakra-ui/react";
+import { Box, FormControl, Input } from "@chakra-ui/react";
 import {
   stateSectionsWithTable,
   useActions,
@@ -7,8 +7,8 @@ import {
 import { Pagination, TableOverview } from "../../components/Table";
 
 export function AuthorsTable() {
-  const { isLoading } = useAppState().author;
   const {
+    isLoading,
     getAllApi,
     overview,
     ui: {
@@ -24,7 +24,16 @@ export function AuthorsTable() {
 
   return (
     <Box>
-      <Input onChange={searchInTable} placeholder="search" my={5} />
+      <FormControl>
+        <Input
+          id="search"
+          placeholder="search"
+          value={queryString}
+          onChange={(e) => searchInTable(e)}
+          mt={5}
+        />
+      </FormControl>
+
       {overview ? (
         <>
           <TableOverview
