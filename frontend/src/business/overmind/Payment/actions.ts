@@ -16,7 +16,8 @@ export const changePage = pipe(o.setPage(), o.resetQueryString());
 
 export const changeAmountFilter = pipe(
   o.setAmountFilter(),
-  o.resetQueryString()
+  o.resetQueryString(),
+  o.fetchPayments()
 );
 
 export const usePagination = pipe(

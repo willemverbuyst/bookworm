@@ -32,7 +32,6 @@ export const state: PaymentState = {
           email: i.user_email,
         }))
         .filter((a) => genericSearch(a, searchKeys, queryString, false))
-        .filter((i) => i.amount < filter.amount)
         .slice((page - 1) * limit, page * limit)
         .sort((a, b) =>
           genericSort(a, b, {

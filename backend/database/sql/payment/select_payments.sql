@@ -14,4 +14,5 @@ ON payment.rental_id = rental.rental_id
 INNER JOIN inventory
 ON rental.inventory_id = inventory.inventory_id
 INNER JOIN book
-ON inventory.book_id = book.book_id;
+ON inventory.book_id = book.book_id 
+WHERE payment.amount < %s;

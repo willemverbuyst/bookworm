@@ -11,7 +11,7 @@ select_count_payments_sql = os.path.join(
 select_payments_sql = os.path.join(dirname, "../../sql/payment/select_payments.sql")
 
 
-def get_payments_from_db():
+def get_payments_from_db(amount):
     conn = create_connection()
 
     sql_file = open(select_payments_sql, "r")
@@ -19,7 +19,7 @@ def get_payments_from_db():
     sql_file.close()
 
     cursor = conn.cursor()
-    cursor.execute(raw_sql)
+    cursor.execute(raw_sql, (amount,))
 
     data = cursor.fetchall()
     conn.close()

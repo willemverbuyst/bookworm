@@ -12,8 +12,9 @@ export const shouldFetchPayments = () =>
 export const fetchPayments =
   () =>
   async ({ actions, effects, state }: Context) => {
+    const { amount } = state.payment.ui.table.filter;
     state.payment.isLoading = true;
-    const response = await effects.payment.api.getPayments();
+    const response = await effects.payment.api.getPayments({ amount });
 
     if (!response || response instanceof AxiosError) {
       actions.api.handleErrorResponse({ response });
