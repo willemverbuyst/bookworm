@@ -1,5 +1,11 @@
 import { ViewIcon } from "@chakra-ui/icons";
-import { Box, IconButton, Input, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  FormControl,
+  IconButton,
+  Input,
+  useDisclosure,
+} from "@chakra-ui/react";
 import {
   stateSectionsWithTable,
   useActions,
@@ -39,7 +45,7 @@ export function BookwormsTable() {
     getAllApi,
     overview,
     ui: {
-      table: { columns, noDataMessage, title, sort },
+      table: { columns, noDataMessage, queryString, title, sort },
     },
   } = useAppState().bookworm;
   const { total } = getAllApi || {};
@@ -52,7 +58,15 @@ export function BookwormsTable() {
   return (
     <Box>
       <Filter />
-      <Input onChange={searchInTable} placeholder="search" my={5} />
+      <FormControl>
+        <Input
+          id="search"
+          placeholder="search"
+          value={queryString}
+          onChange={(e) => searchInTable(e)}
+          mt={5}
+        />
+      </FormControl>
       {overview ? (
         <>
           <TableOverview
@@ -64,7 +78,9 @@ export function BookwormsTable() {
             sortFunction={setSort}
             sortProperty={sort}
           />
-          <Pagination total={total} state={stateSectionsWithTable.bookworm} />
+          {!queryString && (
+            <Pagination total={total} state={stateSectionsWithTable.bookworm} />
+          )}
         </>
       ) : (
         <p>{noDataMessage}</p>
