@@ -1,5 +1,12 @@
 import { ViewIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, Input, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  FormControl,
+  IconButton,
+  Input,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useActions, useAppState } from "../../../business/overmind";
 import { SimpleSidebar } from "../../components/Navigation";
 import { TableOverview } from "../../components/Table";
@@ -35,7 +42,7 @@ export function AdminLibraryPage() {
   const {
     overview,
     ui: {
-      table: { columns, noDataMessage, sort },
+      table: { columns, noDataMessage, queryString, sort },
     },
   } = useAppState().library;
   const { search, setSort } = useActions().library;
@@ -50,7 +57,15 @@ export function AdminLibraryPage() {
       {overview?.length ? (
         <Box style={{ backgroundColor: "#fff" }} p={5}>
           <Flex direction="column">
-            <Input onChange={searchInTable} placeholder="search" />
+            <FormControl>
+              <Input
+                id="search"
+                placeholder="search"
+                value={queryString}
+                onChange={(e) => searchInTable(e)}
+                mt={5}
+              />
+            </FormControl>
             <TableOverview
               rows={overview}
               columns={columns}

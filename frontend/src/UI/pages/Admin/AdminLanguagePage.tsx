@@ -178,7 +178,7 @@ export function AdminLanguagePage() {
   const {
     overview,
     ui: {
-      table: { columns, noDataMessage, sort },
+      table: { columns, noDataMessage, queryString, sort },
     },
   } = useAppState().language;
   const { search, postLanguages, setSort } = useActions().language;
@@ -199,7 +199,15 @@ export function AdminLanguagePage() {
       {overview ? (
         <Box style={{ backgroundColor: "#fff" }} p={5}>
           <Flex direction="column">
-            <Input onChange={searchInTable} placeholder="search" />
+            <FormControl>
+              <Input
+                id="search"
+                placeholder="search"
+                value={queryString}
+                onChange={(e) => searchInTable(e)}
+                mt={5}
+              />
+            </FormControl>
             <TableOverview
               rows={overview}
               columns={columns}

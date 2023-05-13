@@ -181,7 +181,7 @@ export function AdminGenrePage() {
     getAllApi,
     overview,
     ui: {
-      table: { columns, noDataMessage, sort },
+      table: { columns, noDataMessage, queryString, sort },
     },
   } = useAppState().genre;
   const { total } = getAllApi || {};
@@ -203,7 +203,15 @@ export function AdminGenrePage() {
       {overview ? (
         <Box style={{ backgroundColor: "#fff" }} p={5}>
           <Flex direction="column">
-            <Input onChange={searchInTable} placeholder="search" />
+            <FormControl>
+              <Input
+                id="search"
+                placeholder="search"
+                value={queryString}
+                onChange={(e) => searchInTable(e)}
+                mt={5}
+              />
+            </FormControl>
             <TableOverview
               rows={overview}
               columns={columns}
@@ -212,7 +220,9 @@ export function AdminGenrePage() {
               sortFunction={setSort}
               sortProperty={sort}
             />
-            <Pagination total={total} state={stateSectionsWithTable.genre} />
+            {queryString && (
+              <Pagination total={total} state={stateSectionsWithTable.genre} />
+            )}
           </Flex>
           <Flex mt={10}>
             {showForm ? (
