@@ -11,10 +11,12 @@ export function PaymentsTable() {
   const { isLoading } = useAppState().payment;
   const {
     overview,
+    getAllApi,
     ui: {
-      table: { columns, noDataMessage, title, page, limit, sort },
+      table: { columns, noDataMessage, title, sort },
     },
   } = useAppState().payment;
+  const { total } = getAllApi || {};
   const { search, setSort } = useActions().payment;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,17 +30,14 @@ export function PaymentsTable() {
       {overview ? (
         <>
           <TableOverview
-            rows={overview.slice((page - 1) * limit, page * limit)}
+            rows={overview}
             columns={columns}
             title={title}
             isLoading={isLoading}
             sortFunction={setSort}
             sortProperty={sort}
           />
-          <Pagination
-            total={overview.length}
-            state={stateSectionsWithTable.payment}
-          />
+          <Pagination total={total} state={stateSectionsWithTable.payment} />
         </>
       ) : (
         <p>{noDataMessage}</p>

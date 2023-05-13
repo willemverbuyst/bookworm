@@ -13,7 +13,7 @@ export const state: PaymentState = {
     ({
       getAllApi,
       ui: {
-        table: { searchKeys, queryString, filter, sort },
+        table: { searchKeys, queryString, filter, sort, limit, page },
       },
     }: PaymentState) => {
       let startTime = 0;
@@ -33,6 +33,7 @@ export const state: PaymentState = {
         }))
         .filter((a) => genericSearch(a, searchKeys, queryString, false))
         .filter((i) => i.amount < filter.amount)
+        .slice((page - 1) * limit, page * limit)
         .sort((a, b) =>
           genericSort(a, b, {
             property: sort.property,
