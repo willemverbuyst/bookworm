@@ -1,19 +1,12 @@
 import { ViewIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Flex,
-  FormControl,
-  IconButton,
-  Input,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Flex, IconButton, useDisclosure } from "@chakra-ui/react";
 import {
   stateSectionsWithTable,
   useActions,
   useAppState,
 } from "../../../business/overmind";
 import { SimpleSidebar } from "../../components/Navigation";
-import { TableOverview } from "../../components/Table";
+import { Search, TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
 import { LibraryDetails } from "./LibraryDetails";
 
@@ -45,14 +38,9 @@ export function AdminLibraryPage() {
   const {
     overview,
     ui: {
-      table: { noDataMessage, queryString },
+      table: { noDataMessage },
     },
   } = useAppState().library;
-  const { search } = useActions().library;
-
-  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    search({ queryString: e.target.value });
-  };
 
   return (
     <SimpleSidebar>
@@ -60,15 +48,7 @@ export function AdminLibraryPage() {
       {overview?.length ? (
         <Box style={{ backgroundColor: "#fff" }} p={5}>
           <Flex direction="column">
-            <FormControl>
-              <Input
-                id="search"
-                placeholder="search"
-                value={queryString}
-                onChange={(e) => searchInTable(e)}
-                mt={5}
-              />
-            </FormControl>
+            <Search state={stateSectionsWithTable.library} />
             <TableOverview
               state={stateSectionsWithTable.library}
               actionButtons={[ShowDetailsButton]}

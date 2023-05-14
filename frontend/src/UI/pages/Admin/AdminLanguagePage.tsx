@@ -22,7 +22,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useId, useState } from "react";
+import { useId, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import {
   stateSectionsWithTable,
@@ -31,7 +31,7 @@ import {
 } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
 import { SimpleSidebar } from "../../components/Navigation";
-import { TableOverview } from "../../components/Table";
+import { Search, TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
 import {
   defaultValuesLanguages,
@@ -181,14 +181,10 @@ export function AdminLanguagePage() {
   const {
     overview,
     ui: {
-      table: { noDataMessage, queryString },
+      table: { noDataMessage },
     },
   } = useAppState().language;
-  const { search, postLanguages } = useActions().language;
-
-  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    search({ queryString: e.target.value });
-  };
+  const { postLanguages } = useActions().language;
 
   const onSubmit: SubmitHandler<FormFieldsLanguages> = async (data) => {
     await postLanguages(data);
@@ -202,15 +198,7 @@ export function AdminLanguagePage() {
       {overview ? (
         <Box style={{ backgroundColor: "#fff" }} p={5}>
           <Flex direction="column">
-            <FormControl>
-              <Input
-                id="search"
-                placeholder="search"
-                value={queryString}
-                onChange={(e) => searchInTable(e)}
-                mt={5}
-              />
-            </FormControl>
+            <Search state={stateSectionsWithTable.language} />
             <TableOverview
               state={stateSectionsWithTable.language}
               actionButtons={[EditButton, DeleteButton]}

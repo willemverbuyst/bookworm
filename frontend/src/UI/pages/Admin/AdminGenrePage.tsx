@@ -32,7 +32,7 @@ import {
 } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
 import { SimpleSidebar } from "../../components/Navigation";
-import { TableOverview } from "../../components/Table";
+import { Search, TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
 import {
   defaultValuesGenres,
@@ -177,18 +177,13 @@ export function AdminGenrePage() {
   });
 
   const {
-    getAllApi,
     overview,
     ui: {
-      table: { noDataMessage, queryString },
+      table: { noDataMessage },
     },
   } = useAppState().genre;
-  const { total } = getAllApi || {};
-  const { search, postGenres } = useActions().genre;
 
-  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    search({ queryString: e.target.value });
-  };
+  const { postGenres } = useActions().genre;
 
   const onSubmit: SubmitHandler<FormFieldsGenres> = async (data) => {
     await postGenres(data);
@@ -202,15 +197,7 @@ export function AdminGenrePage() {
       {overview ? (
         <Box style={{ backgroundColor: "#fff" }} p={5}>
           <Flex direction="column">
-            <FormControl>
-              <Input
-                id="search"
-                placeholder="search"
-                value={queryString}
-                onChange={(e) => searchInTable(e)}
-                mt={5}
-              />
-            </FormControl>
+            <Search state={stateSectionsWithTable.genre} />
             <TableOverview
               state={stateSectionsWithTable.genre}
               actionButtons={[EditButton, DeleteButton]}

@@ -1,12 +1,11 @@
 import { Box } from "@chakra-ui/react";
 import { stateSectionsWithTable } from "../../../business/overmind";
-import { TableOverview } from "../../components/Table";
-import { AuthorsSearch } from "./AuthorSearch";
+import { Search, TableOverview } from "../../components/Table";
 
 export function AuthorsTable() {
   return (
     <Box>
-      <AuthorsSearch />
+      <Search state={stateSectionsWithTable.author} />
       <TableOverview state={stateSectionsWithTable.author} pagination />
     </Box>
   );
