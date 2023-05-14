@@ -169,9 +169,10 @@ export function TableOverview({
                 ))}
               {actionButtons?.length ? (
                 <Td isNumeric style={loadingStyles}>
-                  {actionButtons.map((button) => (
+                  {actionButtons.map((button, i) => (
                     <ActionButton
-                      key={JSON.stringify(button)}
+                      // eslint-disable-next-line react/no-array-index-key
+                      key={`${row.id}-${i}`}
                       id={row.id}
                       actionButton={button}
                     />
