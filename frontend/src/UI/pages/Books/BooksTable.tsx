@@ -9,14 +9,13 @@ import { Filter } from "./Filter";
 
 export function BooksTable() {
   const {
-    isLoading,
     getAllApi,
     overview,
     ui: {
-      table: { columns, noDataMessage, queryString, title, sort },
+      table: { noDataMessage, queryString },
     },
   } = useAppState().book;
-  const { search, setSort } = useActions().book;
+  const { search } = useActions().book;
   const { total } = getAllApi || {};
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,14 +37,7 @@ export function BooksTable() {
 
       {overview ? (
         <>
-          <TableOverview
-            rows={overview}
-            columns={columns}
-            title={title}
-            isLoading={isLoading}
-            sortFunction={setSort}
-            sortProperty={sort}
-          />
+          <TableOverview state={stateSectionsWithTable.book} />
           {!queryString && (
             <Pagination total={total} state={stateSectionsWithTable.book} />
           )}

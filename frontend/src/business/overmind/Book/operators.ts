@@ -194,3 +194,26 @@ export const setSort =
   ) => {
     state.book.ui.table.sort = { property, sortDirection };
   };
+
+export const setColumnQueryString =
+  () =>
+  (
+    { state }: Context,
+    { field, queryString }: { field: keyof Book; queryString: string }
+  ) => {
+    const column = state.book.ui.table.columns[field];
+
+    column.queryString = queryString;
+  };
+
+export const setShowInput =
+  () =>
+  ({ state }: Context, { field }: { field: keyof Book }) => {
+    const column = state.book.ui.table.columns[field];
+
+    column.showInput = !column.showInput;
+
+    if (!column.showInput) {
+      state.book.ui.table.columns[field].queryString = "";
+    }
+  };

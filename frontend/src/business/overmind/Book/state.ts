@@ -13,7 +13,7 @@ export const state: BookState = {
     ({
       getAllApi,
       ui: {
-        table: { searchKeys, queryString, sort },
+        table: { columns, searchKeys, queryString, sort },
       },
     }: BookState) => {
       let startTime = 0;
@@ -38,6 +38,11 @@ export const state: BookState = {
             property: sort.property,
             sortDirection: sort.sortDirection,
           })
+        )
+        .filter((i) =>
+          Object.values(columns)
+            .filter((c) => c.display)
+            .every((c) => genericSearch(i, [c.field], c.queryString, false))
         );
 
       if (NODE_ENV === "development" && startTime) {
@@ -79,13 +84,39 @@ export const state: BookState = {
   statsYearPublishedApi: null,
   ui: {
     table: {
-      columns: [
-        { field: "title" },
-        { field: "author" },
-        { field: "year published" },
-        { field: "genre" },
-        { field: "language" },
-      ],
+      columns: {
+        id: { display: false, field: "id", showInput: false, queryString: "" },
+        title: {
+          display: true,
+          field: "title",
+          showInput: false,
+          queryString: "",
+        },
+        author: {
+          display: true,
+          field: "author",
+          showInput: false,
+          queryString: "",
+        },
+        "year published": {
+          display: true,
+          field: "year published",
+          showInput: false,
+          queryString: "",
+        },
+        genre: {
+          display: true,
+          field: "genre",
+          showInput: false,
+          queryString: "",
+        },
+        language: {
+          display: true,
+          field: "language",
+          showInput: false,
+          queryString: "",
+        },
+      },
       filter: {
         genre: "",
         language: "",
