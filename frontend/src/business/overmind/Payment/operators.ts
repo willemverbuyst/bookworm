@@ -123,3 +123,26 @@ export const setSort =
   ) => {
     state.payment.ui.table.sort = { property, sortDirection };
   };
+
+export const setColumnQueryString =
+  () =>
+  (
+    { state }: Context,
+    { field, queryString }: { field: keyof Payment; queryString: string }
+  ) => {
+    const column = state.payment.ui.table.columns[field];
+
+    column.queryString = queryString;
+  };
+
+export const setShowInput =
+  () =>
+  ({ state }: Context, { field }: { field: keyof Payment }) => {
+    const column = state.payment.ui.table.columns[field];
+
+    column.showInput = !column.showInput;
+
+    if (!column.showInput) {
+      state.payment.ui.table.columns[field].queryString = "";
+    }
+  };

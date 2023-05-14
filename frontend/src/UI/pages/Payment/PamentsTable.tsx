@@ -38,14 +38,7 @@ export function PaymentsTable() {
 
       {overview ? (
         <>
-          <TableOverview
-            rows={overview}
-            columns={columns}
-            title={title}
-            isLoading={isLoading}
-            sortFunction={setSort}
-            sortProperty={sort}
-          />
+          <TableOverview state={stateSectionsWithTable.payment} />
           {!queryString && (
             <Pagination total={total} state={stateSectionsWithTable.payment} />
           )}
