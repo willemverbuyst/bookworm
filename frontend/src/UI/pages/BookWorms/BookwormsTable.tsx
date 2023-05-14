@@ -1,11 +1,5 @@
 import { ViewIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  FormControl,
-  IconButton,
-  Input,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, IconButton, useDisclosure } from "@chakra-ui/react";
 import {
   stateSectionsWithTable,
   useActions,
@@ -13,6 +7,7 @@ import {
 } from "../../../business/overmind";
 import { Pagination, TableOverview } from "../../components/Table";
 import { BookwormsDetails } from "./BookwormsDetails";
+import { BookwormSearch } from "./BookwormSearch";
 import { Filter } from "./Filter";
 
 function ShowDetailsButton({ id }: { id: string }) {
@@ -57,15 +52,8 @@ export function BookwormsTable() {
   return (
     <Box>
       <Filter />
-      <FormControl>
-        <Input
-          id="search"
-          placeholder="search"
-          value={queryString}
-          onChange={(e) => searchInTable(e)}
-          mt={5}
-        />
-      </FormControl>
+      <BookwormSearch />
+
       {overview ? (
         <>
           <TableOverview
