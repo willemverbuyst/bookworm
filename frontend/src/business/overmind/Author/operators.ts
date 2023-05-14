@@ -119,3 +119,26 @@ export const setSort =
   ) => {
     state.author.ui.table.sort = { property, sortDirection };
   };
+
+export const setColumnQueryString =
+  () =>
+  (
+    { state }: Context,
+    { field, queryString }: { field: keyof Author; queryString: string }
+  ) => {
+    const column = state.author.ui.table.columns[field];
+
+    column.queryString = queryString;
+  };
+
+export const setShowInput =
+  () =>
+  ({ state }: Context, { field }: { field: keyof Author }) => {
+    const column = state.author.ui.table.columns[field];
+
+    column.showInput = !column.showInput;
+
+    if (!column.showInput) {
+      state.author.ui.table.columns[field].queryString = "";
+    }
+  };

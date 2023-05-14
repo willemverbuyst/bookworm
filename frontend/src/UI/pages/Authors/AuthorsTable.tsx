@@ -8,14 +8,13 @@ import { Pagination, TableOverview } from "../../components/Table";
 
 export function AuthorsTable() {
   const {
-    isLoading,
     getAllApi,
     overview,
     ui: {
-      table: { columns, noDataMessage, queryString, sort, title },
+      table: { noDataMessage, queryString },
     },
   } = useAppState().author;
-  const { search, setSort } = useActions().author;
+  const { search } = useActions().author;
   const { total } = getAllApi || {};
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,14 +35,7 @@ export function AuthorsTable() {
 
       {overview ? (
         <>
-          <TableOverview
-            rows={overview}
-            columns={columns}
-            title={title}
-            isLoading={isLoading}
-            sortFunction={setSort}
-            sortProperty={sort}
-          />
+          <TableOverview state={stateSectionsWithTable.author} />
           {!queryString && (
             <Pagination total={total} state={stateSectionsWithTable.author} />
           )}

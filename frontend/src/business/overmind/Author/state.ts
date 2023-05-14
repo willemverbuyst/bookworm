@@ -11,7 +11,7 @@ export const state: AuthorState = {
     ({
       getAllApi,
       ui: {
-        table: { searchKeys, queryString, sort },
+        table: { columns, searchKeys, queryString, sort },
       },
     }: AuthorState) => {
       let startTime = 0;
@@ -34,6 +34,11 @@ export const state: AuthorState = {
             property: sort.property,
             sortDirection: sort.sortDirection,
           })
+        )
+        .filter((i) =>
+          Object.values(columns)
+            .filter((c) => c.display)
+            .every((c) => genericSearch(i, [c.field], c.queryString, false))
         );
 
       if (NODE_ENV === "development" && startTime) {
@@ -60,11 +65,28 @@ export const state: AuthorState = {
   statsPageApi: null,
   ui: {
     table: {
-      columns: [
-        { field: "last name" },
-        { field: "first name" },
-        { field: "books written", isNumeric: true },
-      ],
+      columns: {
+        id: { display: false, field: "id", showInput: false, queryString: "" },
+        "last name": {
+          display: true,
+          field: "last name",
+          showInput: false,
+          queryString: "",
+        },
+        "first name": {
+          display: true,
+          field: "first name",
+          showInput: false,
+          queryString: "",
+        },
+        "books written": {
+          display: true,
+          field: "books written",
+          showInput: false,
+          queryString: "",
+          isNumeric: true,
+        },
+      },
       filter: null,
       sort: { property: "first name", sortDirection: SortDirection.ASCENDING },
       limit: 10,
