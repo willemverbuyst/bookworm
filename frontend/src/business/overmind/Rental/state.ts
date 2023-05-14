@@ -11,7 +11,7 @@ export const state: RentalState = {
     ({
       getAllApi,
       ui: {
-        table: { searchKeys, queryString, sort },
+        table: { columns, searchKeys, queryString, sort },
       },
     }: RentalState) => {
       let startTime = 0;
@@ -34,6 +34,11 @@ export const state: RentalState = {
             property: sort.property,
             sortDirection: sort.sortDirection,
           })
+        )
+        .filter((i) =>
+          Object.values(columns)
+            .filter((c) => c.display)
+            .every((c) => genericSearch(i, [c.field], c.queryString, false))
         );
 
       if (NODE_ENV === "development" && startTime) {
@@ -88,12 +93,33 @@ export const state: RentalState = {
   statsDurationApi: null,
   ui: {
     table: {
-      columns: [
-        { field: "title" },
-        { field: "author" },
-        { field: "rental date" },
-        { field: "return date" },
-      ],
+      columns: {
+        id: { display: false, field: "id", showInput: false, queryString: "" },
+        title: {
+          display: true,
+          field: "title",
+          showInput: false,
+          queryString: "",
+        },
+        author: {
+          display: true,
+          field: "author",
+          showInput: false,
+          queryString: "",
+        },
+        "rental date": {
+          display: true,
+          field: "rental date",
+          showInput: false,
+          queryString: "",
+        },
+        "return date": {
+          display: true,
+          field: "return date",
+          showInput: false,
+          queryString: "",
+        },
+      },
       filter: { returned: "not_returned" },
       sort: { property: "title", sortDirection: SortDirection.ASCENDING },
       limit: 20,

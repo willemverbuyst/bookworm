@@ -37,14 +37,7 @@ export function RentalsTable() {
       </FormControl>
       {overview?.length ? (
         <>
-          <TableOverview
-            rows={overview}
-            columns={columns}
-            title={title}
-            isLoading={isLoading}
-            sortFunction={setSort}
-            sortProperty={sort}
-          />
+          <TableOverview state={stateSectionsWithTable.rental} />
           {!queryString && (
             <Pagination total={total} state={stateSectionsWithTable.rental} />
           )}

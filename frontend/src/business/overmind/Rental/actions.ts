@@ -46,3 +46,7 @@ export const showAllRows = pipe(
 export const setSort = o.setSort();
 
 export const search = (debounce(100), o.setQueryString());
+
+export const setColumnQueryString = o.setColumnQueryString();
+
+export const setShowInput = o.setShowInput();
