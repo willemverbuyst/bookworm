@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import { useAppState } from "../../../business/overmind";
 
-export function BookChartYearPublished() {
+export function BooksChartYearPublished() {
   const { isLoading } = useAppState().book;
   const data = useAppState().book.statsYearPublished || [];
 

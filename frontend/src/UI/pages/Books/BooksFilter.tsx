@@ -2,7 +2,7 @@ import { Box, FormControl, HStack, Select } from "@chakra-ui/react";
 import { useActions, useAppState } from "../../../business/overmind";
 import { Label } from "../../components/Text";
 
-export function Filter() {
+export function BooksFilter() {
   const genresForSelect = useAppState().genre.selectOptions || [];
   const languagesForSelect = useAppState().language.selectOptions || [];
   const {

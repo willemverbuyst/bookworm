@@ -1,13 +1,13 @@
 import { FormControl, Input } from "@chakra-ui/react";
 import { useActions, useAppState } from "../../../business/overmind";
 
-export function BookwormSearch() {
+export function BooksSearch() {
   const {
     ui: {
       table: { queryString },
     },
-  } = useAppState().bookworm;
-  const { search } = useActions().bookworm;
+  } = useAppState().book;
+  const { search } = useActions().book;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     search({ queryString: e.target.value });

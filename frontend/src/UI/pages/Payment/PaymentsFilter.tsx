@@ -1,7 +1,7 @@
 import { Box, Button, ButtonGroup } from "@chakra-ui/react";
 import { useActions, useAppState } from "../../../business/overmind";
 
-export function Filter() {
+export function PaymentsFilter() {
   const {
     filter: { amount },
   } = useAppState().payment.ui.table;

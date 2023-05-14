@@ -7,7 +7,7 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import { PageTitle } from "../../components/Text";
-import { PaymentsTable } from "./PamentsTable";
+import { PaymentsTable } from "./PaymentsTable";
 
 export function PaymentsPage() {
   return (

@@ -7,8 +7,8 @@ import {
 } from "../../../business/overmind";
 import { Pagination, TableOverview } from "../../components/Table";
 import { BookwormsDetails } from "./BookwormsDetails";
-import { BookwormSearch } from "./BookwormSearch";
-import { Filter } from "./Filter";
+import { BookwormsFilter } from "./BookwormsFilter";
+import { BookwormsSearch } from "./BookwormsSearch";
 
 function ShowDetailsButton({ id }: { id: string }) {
   const { getBookworm } = useActions().bookworm;
@@ -43,16 +43,11 @@ export function BookwormsTable() {
     },
   } = useAppState().bookworm;
   const { total } = getAllApi || {};
-  const { search } = useActions().bookworm;
-
-  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    search({ queryString: e.target.value });
-  };
 
   return (
     <Box>
-      <Filter />
-      <BookwormSearch />
+      <BookwormsFilter />
+      <BookwormsSearch />
 
       {overview ? (
         <>

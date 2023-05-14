@@ -4,8 +4,8 @@ import {
   useAppState,
 } from "../../../business/overmind";
 import { Pagination, TableOverview } from "../../components/Table";
-import { BookSearch } from "./BookSearch";
-import { Filter } from "./Filter";
+import { BooksFilter } from "./BooksFilter";
+import { BooksSearch } from "./BooksSearch";
 
 export function BooksTable() {
   const {
@@ -19,8 +19,8 @@ export function BooksTable() {
 
   return (
     <Box>
-      <Filter />
-      <BookSearch />
+      <BooksFilter />
+      <BooksSearch />
 
       {overview ? (
         <>

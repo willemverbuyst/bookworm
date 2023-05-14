@@ -7,7 +7,7 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import { PageTitle } from "../../components/Text";
-import { BookwormChartLibraries } from "./BookwormChartLibraries";
+import { BookwormsChartLibraries } from "./BookwormsChartLibraries";
 import { BookwormsTable } from "./BookwormsTable";
 
 export function BookwormsPage() {
@@ -24,7 +24,7 @@ export function BookwormsPage() {
             <BookwormsTable />
           </TabPanel>
           <TabPanel>
-            <BookwormChartLibraries />
+            <BookwormsChartLibraries />
           </TabPanel>
         </TabPanels>
       </Tabs>
