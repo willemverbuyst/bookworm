@@ -11,10 +11,14 @@ import {
   Td,
   Th,
   Thead,
-  Tr,
+  Tr
 } from "@chakra-ui/react";
 import { SortDirection } from "../../../business/models/State";
-import { useActions, useAppState } from "../../../business/overmind";
+import {
+  stateSectionsWithTable,
+  useActions,
+  useAppState
+} from "../../../business/overmind";
 
 function ActionButton({
   id,
@@ -29,13 +33,13 @@ function ActionButton({
 }
 
 type Props = {
-  action?: (id: string) => void;
   actionButtons?: (({ id }: { id: string }) => JSX.Element)[] | null;
+  state: keyof typeof stateSectionsWithTable;
 };
 
-export function TableOverview({ action, actionButtons = [] }: Props) {
-  const { isLoading, overview: rows } = useAppState().bookworm;
-  const { title, columns, sort } = useAppState().bookworm.ui.table || {};
+export function TableOverview({ actionButtons = [], state }: Props) {
+  const { isLoading, overview: rows } = useAppState()[state];
+  const { title, columns, sort } = useAppState()[state].ui.table || {};
 
   const loadingStyles = isLoading
     ? {
@@ -45,7 +49,7 @@ export function TableOverview({ action, actionButtons = [] }: Props) {
       }
     : {};
 
-  const { setSort, setShowInput, setColumnQueryString } = useActions().bookworm;
+  const { setSort, setShowInput, setColumnQueryString } = useActions()[state];
 
   return (
     <TableContainer>
@@ -131,7 +135,7 @@ export function TableOverview({ action, actionButtons = [] }: Props) {
                   ) : null}
                 </Th>
               ))}
-            {action ? <Th /> : null}
+            {actionButtons?.length ? <Th /> : null}
           </Tr>
         </Thead>
         <Tbody>

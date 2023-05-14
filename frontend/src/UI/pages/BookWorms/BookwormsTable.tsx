@@ -68,7 +68,10 @@ export function BookwormsTable() {
       </FormControl>
       {overview ? (
         <>
-          <TableOverview actionButtons={[ShowDetailsButton]} />
+          <TableOverview
+            actionButtons={[ShowDetailsButton]}
+            state={stateSectionsWithTable.bookworm}
+          />
           {!queryString && (
             <Pagination total={total} state={stateSectionsWithTable.bookworm} />
           )}
