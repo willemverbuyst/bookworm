@@ -9,7 +9,7 @@ export const state: GenreState = {
     ({
       getAllApi,
       ui: {
-        table: { limit, page, searchKeys, queryString, sort },
+        table: { columns, limit, page, searchKeys, queryString, sort },
       },
     }: GenreState) => {
       if (!getAllApi?.data?.length) {
@@ -25,6 +25,11 @@ export const state: GenreState = {
             property: sort.property,
             sortDirection: sort.sortDirection,
           })
+        )
+        .filter((i) =>
+          Object.values(columns)
+            .filter((c) => c.display)
+            .every((c) => genericSearch(i, [c.field], c.queryString, false))
         );
     }
   ),
@@ -39,7 +44,15 @@ export const state: GenreState = {
   }),
   ui: {
     table: {
-      columns: [{ field: "name of genre" }],
+      columns: {
+        id: { display: false, field: "id", showInput: false, queryString: "" },
+        "name of genre": {
+          display: true,
+          field: "name of genre",
+          showInput: false,
+          queryString: "",
+        },
+      },
       filter: null,
       sort: {
         property: "name of genre",

@@ -7,7 +7,11 @@ import {
   Input,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useActions, useAppState } from "../../../business/overmind";
+import {
+  stateSectionsWithTable,
+  useActions,
+  useAppState,
+} from "../../../business/overmind";
 import { SimpleSidebar } from "../../components/Navigation";
 import { TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
@@ -67,12 +71,8 @@ export function AdminLibraryPage() {
               />
             </FormControl>
             <TableOverview
-              rows={overview}
-              columns={columns}
-              isLoading={isLoading}
+              state={stateSectionsWithTable.library}
               actionButtons={[ShowDetailsButton]}
-              sortFunction={setSort}
-              sortProperty={sort}
             />
           </Flex>
         </Box>

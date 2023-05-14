@@ -213,12 +213,8 @@ export function AdminGenrePage() {
               />
             </FormControl>
             <TableOverview
-              rows={overview}
-              columns={columns}
-              isLoading={isLoading}
+              state={stateSectionsWithTable.genre}
               actionButtons={[EditButton, DeleteButton]}
-              sortFunction={setSort}
-              sortProperty={sort}
             />
             {queryString && (
               <Pagination total={total} state={stateSectionsWithTable.genre} />

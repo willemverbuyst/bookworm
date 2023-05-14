@@ -13,3 +13,7 @@ export const deleteLanguage = pipe(o.deleteLanguage(), o.fetchLanguages());
 export const updateLanguage = pipe(o.updateLanguage(), o.fetchLanguages());
 
 export const setSort = o.setSort();
+
+export const setColumnQueryString = o.setColumnQueryString();
+
+export const setShowInput = o.setShowInput();

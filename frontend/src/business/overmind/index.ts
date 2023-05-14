@@ -67,5 +67,7 @@ export const stateSectionsWithTable = {
   [stateSections.bookworm]: stateSections.bookworm,
   [stateSections.rental]: stateSections.rental,
   [stateSections.genre]: stateSections.genre,
+  [stateSections.language]: stateSections.language,
+  [stateSections.library]: stateSections.library,
   [stateSections.payment]: stateSections.payment,
 };

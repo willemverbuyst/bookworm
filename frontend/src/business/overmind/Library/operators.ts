@@ -60,3 +60,26 @@ export const setSort =
   ) => {
     state.library.ui.table.sort = { property, sortDirection };
   };
+
+export const setColumnQueryString =
+  () =>
+  (
+    { state }: Context,
+    { field, queryString }: { field: keyof Library; queryString: string }
+  ) => {
+    const column = state.library.ui.table.columns[field];
+
+    column.queryString = queryString;
+  };
+
+export const setShowInput =
+  () =>
+  ({ state }: Context, { field }: { field: keyof Library }) => {
+    const column = state.library.ui.table.columns[field];
+
+    column.showInput = !column.showInput;
+
+    if (!column.showInput) {
+      state.library.ui.table.columns[field].queryString = "";
+    }
+  };

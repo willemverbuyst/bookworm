@@ -24,7 +24,11 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useId, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { useActions, useAppState } from "../../../business/overmind";
+import {
+  stateSectionsWithTable,
+  useActions,
+  useAppState,
+} from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
 import { SimpleSidebar } from "../../components/Navigation";
 import { TableOverview } from "../../components/Table";
@@ -209,12 +213,8 @@ export function AdminLanguagePage() {
               />
             </FormControl>
             <TableOverview
-              rows={overview}
-              columns={columns}
-              isLoading={isLoading}
+              state={stateSectionsWithTable.language}
               actionButtons={[EditButton, DeleteButton]}
-              sortFunction={setSort}
-              sortProperty={sort}
             />
           </Flex>
           <Flex mt={10}>
