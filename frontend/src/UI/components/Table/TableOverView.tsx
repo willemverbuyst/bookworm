@@ -11,13 +11,14 @@ import {
   Td,
   Th,
   Thead,
-  Tr
+  Tr,
 } from "@chakra-ui/react";
+import { getEntries } from "../../../business/functions";
 import { SortDirection } from "../../../business/models/State";
 import {
   stateSectionsWithTable,
   useActions,
-  useAppState
+  useAppState,
 } from "../../../business/overmind";
 
 function ActionButton({
@@ -141,24 +142,25 @@ export function TableOverview({ actionButtons = [], state }: Props) {
         <Tbody>
           {rows.map((row) => (
             <Tr key={row.id}>
-              {Object.values(columns)
-                .filter((c) => c.display)
-                .map((column) => (
+              {getEntries(columns)
+                .filter(([, v]) => v.display)
+                .map(([k, v]) => (
                   <Td
-                    key={`${row.id}-${String(column.field)}`}
-                    isNumeric={column.isNumeric}
+                    key={`${row.id}-${String(k)}`}
+                    isNumeric={v.isNumeric}
                     style={loadingStyles}
                   >
-                    {row[column.field] == null
-                      ? "---"
-                      : String(row[column.field])}
+                    {row[k] == null ? "---" : String(row[k])}
                   </Td>
                 ))}
               {actionButtons?.length ? (
                 <Td isNumeric style={loadingStyles}>
-                  {actionButtons.map((button, i) => (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <ActionButton key={i} id={row.id} actionButton={button} />
+                  {actionButtons.map((button) => (
+                    <ActionButton
+                      key={JSON.stringify(button)}
+                      id={row.id}
+                      actionButton={button}
+                    />
                   ))}
                 </Td>
               ) : null}
