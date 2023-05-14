@@ -24,6 +24,7 @@ function ShowDetailsButton({ id }: { id: string }) {
         onClick={() => getUser(id)}
         icon={<ViewIcon />}
         mx={1}
+        variant="unstyled"
       />
     </>
   );

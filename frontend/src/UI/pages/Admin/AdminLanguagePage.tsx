@@ -97,6 +97,7 @@ function EditButton({ id }: { id: string }) {
           aria-label="Edit details"
           icon={<EditIcon />}
           mx={1}
+          variant="unstyled"
         />
       </PopoverTrigger>
       <PopoverContent p={5}>
@@ -131,6 +132,7 @@ function DeleteButton({ id }: { id: string }) {
           aria-label="Delete language"
           icon={<DeleteIcon />}
           mx={1}
+          variant="unstyled"
         />
       </PopoverTrigger>
       <PopoverContent>
