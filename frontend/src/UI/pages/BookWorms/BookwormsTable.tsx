@@ -1,10 +1,6 @@
 import { ViewIcon } from "@chakra-ui/icons";
 import { Box, IconButton, useDisclosure } from "@chakra-ui/react";
-import {
-  stateSectionsWithTable,
-  useActions,
-  useAppState,
-} from "../../../business/overmind";
+import { stateSectionsWithTable, useActions } from "../../../business/overmind";
 import { TableOverview } from "../../components/Table";
 import { BookwormsDetails } from "./BookwormsDetails";
 import { BookwormsFilter } from "./BookwormsFilter";
@@ -35,27 +31,15 @@ function ShowDetailsButton({ id }: { id: string }) {
 }
 
 export function BookwormsTable() {
-  const {
-    overview,
-    ui: {
-      table: { noDataMessage },
-    },
-  } = useAppState().bookworm;
-
   return (
     <Box>
       <BookwormsFilter />
       <BookwormsSearch />
-
-      {overview ? (
-        <TableOverview
-          actionButtons={[ShowDetailsButton]}
-          state={stateSectionsWithTable.bookworm}
-          pagination
-        />
-      ) : (
-        <p>{noDataMessage}</p>
-      )}
+      <TableOverview
+        actionButtons={[ShowDetailsButton]}
+        state={stateSectionsWithTable.bookworm}
+        pagination
+      />
     </Box>
   );
 }

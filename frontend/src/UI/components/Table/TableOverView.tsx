@@ -45,9 +45,14 @@ export function TableOverview({
   state,
   pagination,
 }: Props) {
-  const { isLoading, overview: rows } = useAppState()[state];
-  const { title, columns, sort, queryString } =
-    useAppState()[state].ui.table || {};
+  const {
+    isLoading,
+    overview,
+    ui: {
+      table: { title, columns, sort, queryString, noDataMessage },
+    },
+  } = useAppState()[state];
+  const { setSort, setShowInput, setColumnQueryString } = useActions()[state];
 
   const loadingStyles = isLoading
     ? {
@@ -57,7 +62,9 @@ export function TableOverview({
       }
     : {};
 
-  const { setSort, setShowInput, setColumnQueryString } = useActions()[state];
+  if (!overview.length) {
+    return <p>{noDataMessage}</p>;
+  }
 
   return (
     <TableContainer>
@@ -147,7 +154,7 @@ export function TableOverview({
           </Tr>
         </Thead>
         <Tbody>
-          {rows.map((row) => (
+          {overview.map((row) => (
             <Tr key={row.id}>
               {getEntries(columns)
                 .filter(([, v]) => v.display)
@@ -175,7 +182,7 @@ export function TableOverview({
           ))}
         </Tbody>
       </Table>
-      {pagination && queryString && <Pagination state={state} />}
+      {pagination && !queryString && <Pagination state={state} />}
     </TableContainer>
   );
 }
