@@ -1,7 +1,15 @@
-export type Column<T> = Array<{ field: keyof T; isNumeric?: boolean }>;
+export type Column<T> = {
+  field: keyof T;
+  isNumeric?: boolean;
+  showInput: boolean;
+  queryString: string;
+  display: boolean;
+};
 
 interface UITable<T, U> {
-  columns: Column<T>;
+  // columns: Column<T>[];
+
+  columns: Record<keyof T, Column<T>>;
   filter: U;
   sort: {
     property: keyof Partial<T>;

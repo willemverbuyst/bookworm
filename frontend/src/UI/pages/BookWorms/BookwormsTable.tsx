@@ -40,16 +40,15 @@ function ShowDetailsButton({ id }: { id: string }) {
 }
 
 export function BookwormsTable() {
-  const { isLoading } = useAppState().bookworm;
   const {
     getAllApi,
     overview,
     ui: {
-      table: { columns, noDataMessage, queryString, title, sort },
+      table: { noDataMessage, queryString },
     },
   } = useAppState().bookworm;
   const { total } = getAllApi || {};
-  const { search, setSort } = useActions().bookworm;
+  const { search } = useActions().bookworm;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     search({ queryString: e.target.value });
@@ -69,15 +68,7 @@ export function BookwormsTable() {
       </FormControl>
       {overview ? (
         <>
-          <TableOverview
-            rows={overview}
-            columns={columns}
-            title={title}
-            isLoading={isLoading}
-            actionButtons={[ShowDetailsButton]}
-            sortFunction={setSort}
-            sortProperty={sort}
-          />
+          <TableOverview actionButtons={[ShowDetailsButton]} />
           {!queryString && (
             <Pagination total={total} state={stateSectionsWithTable.bookworm} />
           )}
