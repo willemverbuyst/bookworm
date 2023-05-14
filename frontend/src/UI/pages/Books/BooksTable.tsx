@@ -1,10 +1,10 @@
-import { Box, FormControl, Input } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import {
   stateSectionsWithTable,
-  useActions,
   useAppState,
 } from "../../../business/overmind";
 import { Pagination, TableOverview } from "../../components/Table";
+import { BookSearch } from "./BookSearch";
 import { Filter } from "./Filter";
 
 export function BooksTable() {
@@ -15,25 +15,12 @@ export function BooksTable() {
       table: { noDataMessage, queryString },
     },
   } = useAppState().book;
-  const { search } = useActions().book;
   const { total } = getAllApi || {};
-
-  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    search({ queryString: e.target.value });
-  };
 
   return (
     <Box>
       <Filter />
-      <FormControl>
-        <Input
-          id="search"
-          placeholder="search"
-          value={queryString}
-          onChange={(e) => searchInTable(e)}
-          mt={5}
-        />
-      </FormControl>
+      <BookSearch />
 
       {overview ? (
         <>
