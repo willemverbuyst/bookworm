@@ -94,30 +94,40 @@ export const state: RentalState = {
   ui: {
     table: {
       columns: {
-        id: { display: false, field: "id", showInput: false, queryString: "" },
+        id: {
+          display: false,
+          field: "id",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
         title: {
           display: true,
           field: "title",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
         author: {
           display: true,
           field: "author",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
         "rental date": {
           display: true,
           field: "rental date",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
         "return date": {
           display: true,
           field: "return date",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
       },
       filter: { returned: "not_returned" },

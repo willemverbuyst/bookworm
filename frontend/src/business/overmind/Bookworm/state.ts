@@ -88,42 +88,54 @@ export const state: BookwormState = {
   ui: {
     table: {
       columns: {
-        id: { display: false, field: "id", showInput: false, queryString: "" },
+        id: {
+          display: false,
+          field: "id",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
         "first name": {
           display: true,
           field: "first name",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
         "last name": {
           display: true,
           field: "last name",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
         email: {
           display: true,
           field: "email",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
         phone: {
           display: true,
           field: "phone",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
         library: {
           display: true,
           field: "library",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
         userIsActive: {
           display: false,
           field: "userIsActive",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
       },
       filter: {

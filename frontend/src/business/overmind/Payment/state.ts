@@ -55,24 +55,33 @@ export const state: PaymentState = {
   ui: {
     table: {
       columns: {
-        id: { display: false, field: "id", showInput: false, queryString: "" },
+        id: {
+          display: false,
+          field: "id",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
         title: {
           display: true,
           field: "title",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
         email: {
           display: true,
           field: "email",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
         date: {
           display: true,
           field: "date",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
         amount: {
           display: true,

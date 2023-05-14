@@ -1,14 +1,12 @@
 export type Column<T> = {
   field: keyof T;
-  isNumeric?: boolean;
+  isNumeric: boolean;
   showInput: boolean;
   queryString: string;
   display: boolean;
 };
 
 interface UITable<T, U> {
-  // columns: Column<T>[];
-
   columns: Record<keyof T, Column<T>>;
   filter: U;
   sort: {

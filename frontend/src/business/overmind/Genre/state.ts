@@ -45,12 +45,19 @@ export const state: GenreState = {
   ui: {
     table: {
       columns: {
-        id: { display: false, field: "id", showInput: false, queryString: "" },
+        id: {
+          display: false,
+          field: "id",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
         "name of genre": {
           display: true,
           field: "name of genre",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
       },
       filter: null,

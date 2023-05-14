@@ -46,12 +46,19 @@ export const state: LanguageState = {
   ui: {
     table: {
       columns: {
-        id: { display: false, field: "id", showInput: false, queryString: "" },
+        id: {
+          display: false,
+          field: "id",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
         "name of language": {
           display: true,
           field: "name of language",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
       },
       filter: null,

@@ -66,18 +66,26 @@ export const state: AuthorState = {
   ui: {
     table: {
       columns: {
-        id: { display: false, field: "id", showInput: false, queryString: "" },
+        id: {
+          display: false,
+          field: "id",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
         "last name": {
           display: true,
           field: "last name",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
         "first name": {
           display: true,
           field: "first name",
           showInput: false,
           queryString: "",
+          isNumeric: false,
         },
         "books written": {
           display: true,
