@@ -3,19 +3,17 @@ import {
   stateSectionsWithTable,
   useAppState,
 } from "../../../business/overmind";
-import { Pagination, TableOverview } from "../../components/Table";
+import { TableOverview } from "../../components/Table";
 import { PaymentsFilter } from "./PaymentsFilter";
 import { PaymentsSearch } from "./PaymentsSearch";
 
 export function PaymentsTable() {
   const {
     overview,
-    getAllApi,
     ui: {
-      table: { noDataMessage, queryString },
+      table: { noDataMessage },
     },
   } = useAppState().payment;
-  const { total } = getAllApi || {};
 
   return (
     <Box>
@@ -23,12 +21,7 @@ export function PaymentsTable() {
       <PaymentsSearch />
 
       {overview ? (
-        <>
-          <TableOverview state={stateSectionsWithTable.payment} />
-          {!queryString && (
-            <Pagination total={total} state={stateSectionsWithTable.payment} />
-          )}
-        </>
+        <TableOverview state={stateSectionsWithTable.payment} pagination />
       ) : (
         <p>{noDataMessage}</p>
       )}

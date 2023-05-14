@@ -32,7 +32,7 @@ import {
 } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
 import { SimpleSidebar } from "../../components/Navigation";
-import { Pagination, TableOverview } from "../../components/Table";
+import { TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
 import {
   defaultValuesGenres,
@@ -176,16 +176,15 @@ export function AdminGenrePage() {
     name: "genres",
   });
 
-  const { isLoading } = useAppState().app;
   const {
     getAllApi,
     overview,
     ui: {
-      table: { columns, noDataMessage, queryString, sort },
+      table: { noDataMessage, queryString },
     },
   } = useAppState().genre;
   const { total } = getAllApi || {};
-  const { search, postGenres, setSort } = useActions().genre;
+  const { search, postGenres } = useActions().genre;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     search({ queryString: e.target.value });
@@ -215,10 +214,8 @@ export function AdminGenrePage() {
             <TableOverview
               state={stateSectionsWithTable.genre}
               actionButtons={[EditButton, DeleteButton]}
+              pagination
             />
-            {queryString && (
-              <Pagination total={total} state={stateSectionsWithTable.genre} />
-            )}
           </Flex>
           <Flex mt={10}>
             {showForm ? (

@@ -5,7 +5,7 @@ import {
   useActions,
   useAppState,
 } from "../../../business/overmind";
-import { Pagination, TableOverview } from "../../components/Table";
+import { TableOverview } from "../../components/Table";
 import { BookwormsDetails } from "./BookwormsDetails";
 import { BookwormsFilter } from "./BookwormsFilter";
 import { BookwormsSearch } from "./BookwormsSearch";
@@ -36,13 +36,11 @@ function ShowDetailsButton({ id }: { id: string }) {
 
 export function BookwormsTable() {
   const {
-    getAllApi,
     overview,
     ui: {
-      table: { noDataMessage, queryString },
+      table: { noDataMessage },
     },
   } = useAppState().bookworm;
-  const { total } = getAllApi || {};
 
   return (
     <Box>
@@ -50,15 +48,11 @@ export function BookwormsTable() {
       <BookwormsSearch />
 
       {overview ? (
-        <>
-          <TableOverview
-            actionButtons={[ShowDetailsButton]}
-            state={stateSectionsWithTable.bookworm}
-          />
-          {!queryString && (
-            <Pagination total={total} state={stateSectionsWithTable.bookworm} />
-          )}
-        </>
+        <TableOverview
+          actionButtons={[ShowDetailsButton]}
+          state={stateSectionsWithTable.bookworm}
+          pagination
+        />
       ) : (
         <p>{noDataMessage}</p>
       )}

@@ -20,6 +20,7 @@ import {
   useActions,
   useAppState,
 } from "../../../business/overmind";
+import { Pagination } from "./Pagination";
 
 function ActionButton({
   id,
@@ -36,11 +37,17 @@ function ActionButton({
 type Props = {
   actionButtons?: (({ id }: { id: string }) => JSX.Element)[] | null;
   state: keyof typeof stateSectionsWithTable;
+  pagination: boolean;
 };
 
-export function TableOverview({ actionButtons = [], state }: Props) {
+export function TableOverview({
+  actionButtons = [],
+  state,
+  pagination,
+}: Props) {
   const { isLoading, overview: rows } = useAppState()[state];
-  const { title, columns, sort } = useAppState()[state].ui.table || {};
+  const { title, columns, sort, queryString } =
+    useAppState()[state].ui.table || {};
 
   const loadingStyles = isLoading
     ? {
@@ -168,6 +175,7 @@ export function TableOverview({ actionButtons = [], state }: Props) {
           ))}
         </Tbody>
       </Table>
+      {pagination && queryString && <Pagination state={state} />}
     </TableContainer>
   );
 }

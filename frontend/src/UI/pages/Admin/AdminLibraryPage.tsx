@@ -42,14 +42,13 @@ function ShowDetailsButton({ id }: { id: string }) {
 }
 
 export function AdminLibraryPage() {
-  const { isLoading } = useAppState().app;
   const {
     overview,
     ui: {
-      table: { columns, noDataMessage, queryString, sort },
+      table: { noDataMessage, queryString },
     },
   } = useAppState().library;
-  const { search, setSort } = useActions().library;
+  const { search } = useActions().library;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     search({ queryString: e.target.value });
@@ -73,6 +72,7 @@ export function AdminLibraryPage() {
             <TableOverview
               state={stateSectionsWithTable.library}
               actionButtons={[ShowDetailsButton]}
+              pagination={false}
             />
           </Flex>
         </Box>

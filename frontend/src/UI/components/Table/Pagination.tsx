@@ -15,18 +15,19 @@ import {
 } from "../../../business/overmind";
 
 interface Props {
-  total: number | undefined;
   state: keyof typeof stateSectionsWithTable;
 }
 
-export function Pagination({ total, state }: Props) {
+export function Pagination({ state }: Props) {
   const {
-    limit,
-    page: currentPage,
-    showAll,
-  } = useAppState()[state].ui.table || {};
+    getAllApi,
+    ui: {
+      table: { limit, page: currentPage, showAll },
+    },
+  } = useAppState()[state];
   const { changeLimit, changePage, showAllRows, usePagination } =
     useActions()[state];
+  const { total } = getAllApi || {};
 
   const totalNumberOfPages = total ? Math.ceil(total / limit) : 0;
   const dataSet = [5, 10, 15, 20, 25, 30].map((i) => ({

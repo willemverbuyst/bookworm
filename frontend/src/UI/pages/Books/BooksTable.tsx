@@ -3,19 +3,17 @@ import {
   stateSectionsWithTable,
   useAppState,
 } from "../../../business/overmind";
-import { Pagination, TableOverview } from "../../components/Table";
+import { TableOverview } from "../../components/Table";
 import { BooksFilter } from "./BooksFilter";
 import { BooksSearch } from "./BooksSearch";
 
 export function BooksTable() {
   const {
-    getAllApi,
     overview,
     ui: {
-      table: { noDataMessage, queryString },
+      table: { noDataMessage },
     },
   } = useAppState().book;
-  const { total } = getAllApi || {};
 
   return (
     <Box>
@@ -23,12 +21,7 @@ export function BooksTable() {
       <BooksSearch />
 
       {overview ? (
-        <>
-          <TableOverview state={stateSectionsWithTable.book} />
-          {!queryString && (
-            <Pagination total={total} state={stateSectionsWithTable.book} />
-          )}
-        </>
+        <TableOverview state={stateSectionsWithTable.book} pagination />
       ) : (
         <p>{noDataMessage}</p>
       )}

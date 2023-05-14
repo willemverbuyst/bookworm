@@ -178,14 +178,13 @@ export function AdminLanguagePage() {
     name: "languages",
   });
 
-  const { isLoading } = useAppState().language;
   const {
     overview,
     ui: {
-      table: { columns, noDataMessage, queryString, sort },
+      table: { noDataMessage, queryString },
     },
   } = useAppState().language;
-  const { search, postLanguages, setSort } = useActions().language;
+  const { search, postLanguages } = useActions().language;
 
   const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
     search({ queryString: e.target.value });
@@ -215,6 +214,7 @@ export function AdminLanguagePage() {
             <TableOverview
               state={stateSectionsWithTable.language}
               actionButtons={[EditButton, DeleteButton]}
+              pagination={false}
             />
           </Flex>
           <Flex mt={10}>

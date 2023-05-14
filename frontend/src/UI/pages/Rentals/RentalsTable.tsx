@@ -3,19 +3,17 @@ import {
   stateSectionsWithTable,
   useAppState,
 } from "../../../business/overmind";
-import { Pagination, TableOverview } from "../../components/Table";
+import { TableOverview } from "../../components/Table";
 import { RentalsFilter } from "./RentalsFilter";
 import { RentalsSearch } from "./RentalsSearch";
 
 export function RentalsTable() {
   const {
-    getAllApi,
     overview,
     ui: {
-      table: { noDataMessage, queryString },
+      table: { noDataMessage },
     },
   } = useAppState().rental;
-  const { total } = getAllApi || {};
 
   return (
     <Box>
@@ -23,12 +21,7 @@ export function RentalsTable() {
       <RentalsSearch />
 
       {overview?.length ? (
-        <>
-          <TableOverview state={stateSectionsWithTable.rental} />
-          {!queryString && (
-            <Pagination total={total} state={stateSectionsWithTable.rental} />
-          )}
-        </>
+        <TableOverview state={stateSectionsWithTable.rental} pagination />
       ) : (
         <p>{noDataMessage}</p>
       )}
