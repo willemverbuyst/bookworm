@@ -1,8 +1,12 @@
 import { ViewIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, Input, useDisclosure } from "@chakra-ui/react";
-import { useActions, useAppState } from "../../../business/overmind";
+import { Box, Flex, IconButton, useDisclosure } from "@chakra-ui/react";
+import {
+  stateSectionsWithTable,
+  useActions,
+  useAppState,
+} from "../../../business/overmind";
 import { SimpleSidebar } from "../../components/Navigation";
-import { TableOverview } from "../../components/Table";
+import { Search, TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
 import { LibraryDetails } from "./LibraryDetails";
 
@@ -25,24 +29,19 @@ function ShowDetailsButton({ id }: { id: string }) {
         onClick={() => getUser(id)}
         icon={<ViewIcon />}
         mx={1}
+        variant="unstyled"
       />
     </>
   );
 }
 
 export function AdminLibraryPage() {
-  const { isLoading } = useAppState().app;
   const {
     overview,
     ui: {
-      table: { columns, noDataMessage, sort },
+      table: { noDataMessage },
     },
   } = useAppState().library;
-  const { search, setSort } = useActions().library;
-
-  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    search({ queryString: e.target.value });
-  };
 
   return (
     <SimpleSidebar>
@@ -50,14 +49,11 @@ export function AdminLibraryPage() {
       {overview?.length ? (
         <Box style={{ backgroundColor: "#fff" }} p={5}>
           <Flex direction="column">
-            <Input onChange={searchInTable} placeholder="search" />
+            <Search state={stateSectionsWithTable.library} />
             <TableOverview
-              rows={overview}
-              columns={columns}
-              isLoading={isLoading}
+              state={stateSectionsWithTable.library}
               actionButtons={[ShowDetailsButton]}
-              sortFunction={setSort}
-              sortProperty={sort}
+              pagination={false}
             />
           </Flex>
         </Box>

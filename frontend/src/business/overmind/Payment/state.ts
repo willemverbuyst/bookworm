@@ -13,7 +13,7 @@ export const state: PaymentState = {
     ({
       getAllApi,
       ui: {
-        table: { searchKeys, queryString, filter, sort },
+        table: { columns, searchKeys, queryString, sort, limit, page },
       },
     }: PaymentState) => {
       let startTime = 0;
@@ -32,12 +32,17 @@ export const state: PaymentState = {
           email: i.user_email,
         }))
         .filter((a) => genericSearch(a, searchKeys, queryString, false))
-        .filter((i) => i.amount < filter.amount)
+        .slice((page - 1) * limit, page * limit)
         .sort((a, b) =>
           genericSort(a, b, {
             property: sort.property,
             sortDirection: sort.sortDirection,
           })
+        )
+        .filter((i) =>
+          Object.values(columns)
+            .filter((c) => c.display)
+            .every((c) => genericSearch(i, [c.field], c.queryString, false))
         );
 
       if (NODE_ENV === "development" && startTime) {
@@ -49,12 +54,43 @@ export const state: PaymentState = {
   ),
   ui: {
     table: {
-      columns: [
-        { field: "title" },
-        { field: "email" },
-        { field: "date" },
-        { field: "amount", isNumeric: true },
-      ],
+      columns: {
+        id: {
+          display: false,
+          field: "id",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        title: {
+          display: true,
+          field: "title",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        email: {
+          display: true,
+          field: "email",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        date: {
+          display: true,
+          field: "date",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        amount: {
+          display: true,
+          field: "amount",
+          isNumeric: true,
+          showInput: false,
+          queryString: "",
+        },
+      },
       limit: 10,
       page: 1,
       noDataMessage: "no payments",

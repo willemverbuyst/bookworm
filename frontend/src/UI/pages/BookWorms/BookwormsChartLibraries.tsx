@@ -11,7 +11,7 @@ interface CustomLabelProps {
   index: number;
 }
 
-export function BookwormChartLibraries() {
+export function BookwormsChartLibraries() {
   const { isLoading, colors } = useAppState().app;
   const data = useAppState().bookworm.statsLibrary || [];
 

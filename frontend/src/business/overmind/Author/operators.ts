@@ -2,26 +2,7 @@
 import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
-import { genericSearch } from "../../functions";
 import { Author, Page, SortDirection } from "../../models";
-
-export const searching =
-  () =>
-  ({ state }: Context, { str }: { str: string }) => {
-    // TODO, HAS TO BE A SEARCH IN DB
-    if (state.author.getAllApi?.data && state.author.getAllApi.data?.length) {
-      const filteredOverview = [...state.author.getAllApi.data].filter((a) =>
-        genericSearch(a, ["last_name", "first_name"], str, false)
-      );
-
-      state.author.overview = filteredOverview.map((i) => ({
-        id: i.id,
-        "first name": i.first_name,
-        "last name": i.last_name,
-        "books written": i.books_written,
-      }));
-    }
-  };
 
 export const setAuthorsPage =
   () =>
@@ -137,4 +118,27 @@ export const setSort =
     }: { property: keyof Author; sortDirection: keyof typeof SortDirection }
   ) => {
     state.author.ui.table.sort = { property, sortDirection };
+  };
+
+export const setColumnQueryString =
+  () =>
+  (
+    { state }: Context,
+    { field, queryString }: { field: keyof Author; queryString: string }
+  ) => {
+    const column = state.author.ui.table.columns[field];
+
+    column.queryString = queryString;
+  };
+
+export const setShowInput =
+  () =>
+  ({ state }: Context, { field }: { field: keyof Author }) => {
+    const column = state.author.ui.table.columns[field];
+
+    column.showInput = !column.showInput;
+
+    if (!column.showInput) {
+      state.author.ui.table.columns[field].queryString = "";
+    }
   };

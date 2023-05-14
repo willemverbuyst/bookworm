@@ -1,6 +1,8 @@
 import { SearchIcon, TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import {
+  FormControl,
   IconButton,
+  Input,
   Spacer,
   Table,
   TableCaption,
@@ -11,7 +13,14 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { getEntries } from "../../../business/functions";
 import { SortDirection } from "../../../business/models/State";
+import {
+  stateSectionsWithTable,
+  useActions,
+  useAppState,
+} from "../../../business/overmind";
+import { Pagination } from "./Pagination";
 
 function ActionButton({
   id,
@@ -25,36 +34,26 @@ function ActionButton({
   return <TableActionButton id={id} />;
 }
 
-type Props<T extends Record<"id", string>> = {
-  columns: Array<{ field: keyof T; isNumeric?: boolean }>;
-  title?: string;
-  rows: Array<T>;
-  action?: (id: string) => void;
-  isLoading?: boolean;
+type Props = {
   actionButtons?: (({ id }: { id: string }) => JSX.Element)[] | null;
-  sortFunction: ({
-    property,
-    sortDirection,
-  }: {
-    property: keyof Partial<T>;
-    sortDirection: keyof typeof SortDirection;
-  }) => void;
-  sortProperty: {
-    property: keyof Partial<T>;
-    sortDirection: keyof typeof SortDirection;
-  };
+  state: keyof typeof stateSectionsWithTable;
+  pagination: boolean;
 };
 
-export function TableOverview<T extends Record<"id", string>>({
-  rows,
-  columns,
-  title,
-  action,
-  isLoading = false,
+export function TableOverview({
   actionButtons = [],
-  sortFunction,
-  sortProperty,
-}: Props<T>) {
+  state,
+  pagination,
+}: Props) {
+  const {
+    isLoading,
+    overview,
+    ui: {
+      table: { title, columns, sort, queryString, noDataMessage },
+    },
+  } = useAppState()[state];
+  const { setSort, setShowInput, setColumnQueryString } = useActions()[state];
+
   const loadingStyles = isLoading
     ? {
         backgroundColor: "#f3f3f3",
@@ -63,96 +62,120 @@ export function TableOverview<T extends Record<"id", string>>({
       }
     : {};
 
+  if (!overview.length) {
+    return <p>{noDataMessage}</p>;
+  }
+
   return (
     <TableContainer>
       <Table variant="simple">
         <TableCaption placement="top">{title}</TableCaption>
         <Thead>
           <Tr>
-            {columns.map((column) => (
-              <Th
-                key={String(column.field)}
-                isNumeric={column.isNumeric}
-                style={loadingStyles}
-              >
-                <>
-                  {String(column.field).replace(/_/g, " ")}
-                  <Spacer />
-                  <IconButton
-                    aria-label={`${String(column.field)} ascending`}
-                    variant="unstyled"
-                    icon={
-                      <TriangleDownIcon
-                        color={
-                          sortProperty.property === column.field &&
-                          sortProperty.sortDirection === SortDirection.ASCENDING
-                            ? "grey.700"
-                            : "gray.400"
-                        }
-                      />
-                    }
-                    onClick={() =>
-                      sortFunction({
-                        property: column.field,
-                        sortDirection: SortDirection.ASCENDING,
-                      })
-                    }
-                    size="sm"
-                  />
-                  <IconButton
-                    aria-label={`${String(column.field)} descending`}
-                    variant="unstyled"
-                    icon={
-                      <TriangleUpIcon
-                        color={
-                          sortProperty.property === column.field &&
-                          sortProperty.sortDirection ===
-                            SortDirection.DESCENDING
-                            ? "grey.700"
-                            : "gray.400"
-                        }
-                      />
-                    }
-                    onClick={() =>
-                      sortFunction({
-                        property: column.field,
-                        sortDirection: SortDirection.DESCENDING,
-                      })
-                    }
-                    size="sm"
-                  />
-                  <IconButton
-                    aria-label={`${String(column.field)} search`}
-                    variant="unstyled"
-                    icon={<SearchIcon color="gray.400" />}
-                    onClick={() => console.log("test search")}
-                    size="sm"
-                  />
-                </>
-              </Th>
-            ))}
-            {action ? <Th /> : null}
-          </Tr>
-        </Thead>
-        <Tbody>
-          {rows.map((row) => (
-            <Tr key={row.id}>
-              {columns.map((column) => (
-                <Td
-                  key={`${row.id}-${String(column.field)}`}
+            {Object.values(columns)
+              .filter((c) => c.display)
+              .map((column) => (
+                <Th
+                  key={String(column.field)}
                   isNumeric={column.isNumeric}
                   style={loadingStyles}
                 >
-                  {row[column.field] == null
-                    ? "---"
-                    : String(row[column.field])}
-                </Td>
+                  <>
+                    {String(column.field).replace(/_/g, " ")}
+                    <Spacer />
+                    <IconButton
+                      aria-label={`${String(column.field)} ascending`}
+                      variant="unstyled"
+                      icon={
+                        <TriangleDownIcon
+                          color={
+                            sort.property === column.field &&
+                            sort.sortDirection === SortDirection.ASCENDING
+                              ? "grey.700"
+                              : "gray.400"
+                          }
+                        />
+                      }
+                      onClick={() =>
+                        setSort({
+                          property: column.field,
+                          sortDirection: SortDirection.ASCENDING,
+                        })
+                      }
+                      size="sm"
+                    />
+                    <IconButton
+                      aria-label={`${String(column.field)} descending`}
+                      variant="unstyled"
+                      icon={
+                        <TriangleUpIcon
+                          color={
+                            sort.property === column.field &&
+                            sort.sortDirection === SortDirection.DESCENDING
+                              ? "grey.700"
+                              : "gray.400"
+                          }
+                        />
+                      }
+                      onClick={() =>
+                        setSort({
+                          property: column.field,
+                          sortDirection: SortDirection.DESCENDING,
+                        })
+                      }
+                      size="sm"
+                    />
+                    <IconButton
+                      aria-label={`${String(column.field)} search`}
+                      variant="unstyled"
+                      icon={<SearchIcon color="gray.400" />}
+                      onClick={() => setShowInput({ field: column.field })}
+                      size="sm"
+                    />
+                  </>
+                  {column.showInput ? (
+                    <FormControl>
+                      <Input
+                        id="search"
+                        placeholder="search"
+                        value={column.queryString}
+                        onChange={(e) =>
+                          setColumnQueryString({
+                            field: column.field,
+                            queryString: e.target.value,
+                          })
+                        }
+                      />
+                    </FormControl>
+                  ) : null}
+                </Th>
               ))}
+            {actionButtons?.length ? <Th /> : null}
+          </Tr>
+        </Thead>
+        <Tbody>
+          {overview.map((row) => (
+            <Tr key={row.id}>
+              {getEntries(columns)
+                .filter(([, v]) => v.display)
+                .map(([k, v]) => (
+                  <Td
+                    key={`${row.id}-${String(k)}`}
+                    isNumeric={v.isNumeric}
+                    style={loadingStyles}
+                  >
+                    {row[k] == null ? "---" : String(row[k])}
+                  </Td>
+                ))}
               {actionButtons?.length ? (
                 <Td isNumeric style={loadingStyles}>
                   {actionButtons.map((button, i) => (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <ActionButton key={i} id={row.id} actionButton={button} />
+                    <ActionButton
+                      // eslint-disable-next-line react/no-array-index-key
+                      key={`${row.id}-${i}`}
+                      id={row.id}
+                      actionButton={button}
+                    />
                   ))}
                 </Td>
               ) : null}
@@ -160,6 +183,7 @@ export function TableOverview<T extends Record<"id", string>>({
           ))}
         </Tbody>
       </Table>
+      {pagination && !queryString && <Pagination state={state} />}
     </TableContainer>
   );
 }

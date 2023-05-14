@@ -114,3 +114,26 @@ export const setSort =
   ) => {
     state.language.ui.table.sort = { property, sortDirection };
   };
+
+export const setColumnQueryString =
+  () =>
+  (
+    { state }: Context,
+    { field, queryString }: { field: keyof Language; queryString: string }
+  ) => {
+    const column = state.language.ui.table.columns[field];
+
+    column.queryString = queryString;
+  };
+
+export const setShowInput =
+  () =>
+  ({ state }: Context, { field }: { field: keyof Language }) => {
+    const column = state.language.ui.table.columns[field];
+
+    column.showInput = !column.showInput;
+
+    if (!column.showInput) {
+      state.language.ui.table.columns[field].queryString = "";
+    }
+  };

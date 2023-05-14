@@ -32,7 +32,7 @@ import {
 } from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
 import { SimpleSidebar } from "../../components/Navigation";
-import { Pagination, TableOverview } from "../../components/Table";
+import { Search, TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
 import {
   defaultValuesGenres,
@@ -97,6 +97,7 @@ function EditButton({ id }: { id: string }) {
           aria-label="Edit details"
           icon={<EditIcon />}
           mx={1}
+          variant="unstyled"
         />
       </PopoverTrigger>
       <PopoverContent p={5}>
@@ -129,6 +130,7 @@ function DeleteButton({ id }: { id: string }) {
           aria-label="Delete genre"
           icon={<DeleteIcon />}
           mx={1}
+          variant="unstyled"
         />
       </PopoverTrigger>
       <PopoverContent>
@@ -176,20 +178,14 @@ export function AdminGenrePage() {
     name: "genres",
   });
 
-  const { isLoading } = useAppState().app;
   const {
-    getAllApi,
     overview,
     ui: {
-      table: { columns, noDataMessage, sort },
+      table: { noDataMessage },
     },
   } = useAppState().genre;
-  const { total } = getAllApi || {};
-  const { search, postGenres, setSort } = useActions().genre;
 
-  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    search({ queryString: e.target.value });
-  };
+  const { postGenres } = useActions().genre;
 
   const onSubmit: SubmitHandler<FormFieldsGenres> = async (data) => {
     await postGenres(data);
@@ -203,16 +199,12 @@ export function AdminGenrePage() {
       {overview ? (
         <Box style={{ backgroundColor: "#fff" }} p={5}>
           <Flex direction="column">
-            <Input onChange={searchInTable} placeholder="search" />
+            <Search state={stateSectionsWithTable.genre} />
             <TableOverview
-              rows={overview}
-              columns={columns}
-              isLoading={isLoading}
+              state={stateSectionsWithTable.genre}
               actionButtons={[EditButton, DeleteButton]}
-              sortFunction={setSort}
-              sortProperty={sort}
+              pagination
             />
-            <Pagination total={total} state={stateSectionsWithTable.genre} />
           </Flex>
           <Flex mt={10}>
             {showForm ? (

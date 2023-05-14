@@ -28,13 +28,50 @@ describe("Pagination", () => {
     };
     state.book.ui = {
       table: {
-        columns: [
-          { field: "title" },
-          { field: "author" },
-          { field: "year published" },
-          { field: "genre" },
-          { field: "language" },
-        ],
+        columns: {
+          id: {
+            display: false,
+            field: "id",
+            showInput: false,
+            queryString: "",
+            isNumeric: false,
+          },
+          title: {
+            display: true,
+            field: "title",
+            showInput: false,
+            queryString: "",
+            isNumeric: false,
+          },
+          author: {
+            display: true,
+            field: "author",
+            showInput: false,
+            queryString: "",
+            isNumeric: false,
+          },
+          "year published": {
+            display: true,
+            field: "year published",
+            showInput: false,
+            queryString: "",
+            isNumeric: false,
+          },
+          genre: {
+            display: true,
+            field: "genre",
+            showInput: false,
+            queryString: "",
+            isNumeric: false,
+          },
+          language: {
+            display: true,
+            field: "language",
+            showInput: false,
+            queryString: "",
+            isNumeric: false,
+          },
+        },
         filter: {
           genre: "",
           language: "",

@@ -7,9 +7,9 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import { PageTitle } from "../../components/Text";
-import { BooksChartLanguages } from "./BookChartLanguages";
-import { BookChartYearPublished } from "./BookChartYearPublished";
 import { BooksChartGenres } from "./BooksChartGenres";
+import { BooksChartLanguages } from "./BooksChartLanguages";
+import { BooksChartYearPublished } from "./BooksChartYearPublished";
 import { BooksTable } from "./BooksTable";
 
 export function BooksPage() {
@@ -34,7 +34,7 @@ export function BooksPage() {
             <BooksChartGenres />
           </TabPanel>
           <TabPanel>
-            <BookChartYearPublished />
+            <BooksChartYearPublished />
           </TabPanel>
         </TabPanels>
       </Tabs>

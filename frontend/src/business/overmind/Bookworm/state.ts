@@ -18,7 +18,7 @@ export const state: BookwormState = {
     ({
       getAllApi,
       ui: {
-        table: { searchKeys, queryString, sort },
+        table: { columns, searchKeys, queryString, sort },
       },
     }: BookwormState) => {
       let startTime = 0;
@@ -43,6 +43,11 @@ export const state: BookwormState = {
             property: sort.property,
             sortDirection: sort.sortDirection,
           })
+        )
+        .filter((i) =>
+          Object.values(columns)
+            .filter((c) => c.display)
+            .every((c) => genericSearch(i, [c.field], c.queryString, false))
         );
 
       if (NODE_ENV === "development" && startTime) {
@@ -82,13 +87,57 @@ export const state: BookwormState = {
   statsLibraryApi: null,
   ui: {
     table: {
-      columns: [
-        { field: "first name" },
-        { field: "last name" },
-        { field: "email" },
-        { field: "phone" },
-        { field: "library" },
-      ],
+      columns: {
+        id: {
+          display: false,
+          field: "id",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        "first name": {
+          display: true,
+          field: "first name",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        "last name": {
+          display: true,
+          field: "last name",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        email: {
+          display: true,
+          field: "email",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        phone: {
+          display: true,
+          field: "phone",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        library: {
+          display: true,
+          field: "library",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        userIsActive: {
+          display: false,
+          field: "userIsActive",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+      },
       filter: {
         active: true,
       },

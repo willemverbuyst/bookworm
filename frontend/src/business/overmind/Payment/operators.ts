@@ -12,8 +12,9 @@ export const shouldFetchPayments = () =>
 export const fetchPayments =
   () =>
   async ({ actions, effects, state }: Context) => {
+    const { amount } = state.payment.ui.table.filter;
     state.payment.isLoading = true;
-    const response = await effects.payment.api.getPayments();
+    const response = await effects.payment.api.getPayments({ amount });
 
     if (!response || response instanceof AxiosError) {
       actions.api.handleErrorResponse({ response });
@@ -121,4 +122,27 @@ export const setSort =
     }: { property: keyof Payment; sortDirection: keyof typeof SortDirection }
   ) => {
     state.payment.ui.table.sort = { property, sortDirection };
+  };
+
+export const setColumnQueryString =
+  () =>
+  (
+    { state }: Context,
+    { field, queryString }: { field: keyof Payment; queryString: string }
+  ) => {
+    const column = state.payment.ui.table.columns[field];
+
+    column.queryString = queryString;
+  };
+
+export const setShowInput =
+  () =>
+  ({ state }: Context, { field }: { field: keyof Payment }) => {
+    const column = state.payment.ui.table.columns[field];
+
+    column.showInput = !column.showInput;
+
+    if (!column.showInput) {
+      state.payment.ui.table.columns[field].queryString = "";
+    }
   };

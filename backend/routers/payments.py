@@ -9,9 +9,9 @@ payment_router = APIRouter()
 
 
 @payment_router.get("/payments", tags=["payments"])
-def get_all_payments() -> dict:
+def get_all_payments(amount=5) -> dict:
     try:
-        payments = get_payments_from_db()
+        payments = get_payments_from_db(amount)
         result = len(payments)
 
         return {

@@ -1,13 +1,9 @@
 import { ViewIcon } from "@chakra-ui/icons";
-import { Box, IconButton, Input, useDisclosure } from "@chakra-ui/react";
-import {
-  stateSectionsWithTable,
-  useActions,
-  useAppState,
-} from "../../../business/overmind";
-import { Pagination, TableOverview } from "../../components/Table";
+import { Box, IconButton, useDisclosure } from "@chakra-ui/react";
+import { stateSectionsWithTable, useActions } from "../../../business/overmind";
+import { Search, TableOverview } from "../../components/Table";
 import { BookwormsDetails } from "./BookwormsDetails";
-import { Filter } from "./Filter";
+import { BookwormsFilter } from "./BookwormsFilter";
 
 function ShowDetailsButton({ id }: { id: string }) {
   const { getBookworm } = useActions().bookworm;
@@ -28,47 +24,22 @@ function ShowDetailsButton({ id }: { id: string }) {
         onClick={() => getUser(id)}
         icon={<ViewIcon />}
         mx={1}
+        variant="unstyled"
       />
     </>
   );
 }
 
 export function BookwormsTable() {
-  const { isLoading } = useAppState().bookworm;
-  const {
-    getAllApi,
-    overview,
-    ui: {
-      table: { columns, noDataMessage, title, sort },
-    },
-  } = useAppState().bookworm;
-  const { total } = getAllApi || {};
-  const { search, setSort } = useActions().bookworm;
-
-  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    search({ queryString: e.target.value });
-  };
-
   return (
     <Box>
-      <Filter />
-      <Input onChange={searchInTable} placeholder="search" my={5} />
-      {overview ? (
-        <>
-          <TableOverview
-            rows={overview}
-            columns={columns}
-            title={title}
-            isLoading={isLoading}
-            actionButtons={[ShowDetailsButton]}
-            sortFunction={setSort}
-            sortProperty={sort}
-          />
-          <Pagination total={total} state={stateSectionsWithTable.bookworm} />
-        </>
-      ) : (
-        <p>{noDataMessage}</p>
-      )}
+      <BookwormsFilter />
+      <Search state={stateSectionsWithTable.bookworm} />
+      <TableOverview
+        actionButtons={[ShowDetailsButton]}
+        state={stateSectionsWithTable.bookworm}
+        pagination
+      />
     </Box>
   );
 }

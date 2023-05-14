@@ -13,3 +13,15 @@ export const deleteLanguage = pipe(o.deleteLanguage(), o.fetchLanguages());
 export const updateLanguage = pipe(o.updateLanguage(), o.fetchLanguages());
 
 export const setSort = o.setSort();
+
+export const setColumnQueryString = o.setColumnQueryString();
+
+export const setShowInput = o.setShowInput();
+
+export const changeLimit = () => () => null;
+
+export const changePage = () => () => null;
+
+export const showAllRows = () => () => null;
+
+export const usePagination = () => () => null;

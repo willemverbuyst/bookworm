@@ -1,4 +1,4 @@
-import { debounce, pipe } from "overmind";
+import { pipe } from "overmind";
 
 import * as o from "./operators";
 
@@ -16,7 +16,8 @@ export const changePage = pipe(o.setPage(), o.resetQueryString());
 
 export const changeAmountFilter = pipe(
   o.setAmountFilter(),
-  o.resetQueryString()
+  o.resetQueryString(),
+  o.fetchPayments()
 );
 
 export const usePagination = pipe(
@@ -37,4 +38,8 @@ export const showAllRows = pipe(
 
 export const setSort = o.setSort();
 
-export const search = (debounce(100), o.setQueryString());
+export const search = o.setQueryString();
+
+export const setColumnQueryString = o.setColumnQueryString();
+
+export const setShowInput = o.setShowInput();

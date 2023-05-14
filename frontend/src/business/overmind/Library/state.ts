@@ -24,7 +24,7 @@ export const state: LibraryState = {
     ({
       getAllApi,
       ui: {
-        table: { searchKeys, queryString, sort },
+        table: { columns, searchKeys, queryString, sort },
       },
     }: LibraryState) => {
       if (!getAllApi?.data.length) {
@@ -46,6 +46,11 @@ export const state: LibraryState = {
             property: sort.property,
             sortDirection: sort.sortDirection,
           })
+        )
+        .filter((i) =>
+          Object.values(columns)
+            .filter((c) => c.display)
+            .every((c) => genericSearch(i, [c.field], c.queryString, false))
         );
     }
   ),
@@ -60,12 +65,57 @@ export const state: LibraryState = {
   }),
   ui: {
     table: {
-      columns: [
-        { field: "name of library" },
-        { field: "phone" },
-        { field: "city" },
-        { field: "country" },
-      ],
+      columns: {
+        id: {
+          display: false,
+          field: "id",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        address: {
+          display: false,
+          field: "address",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        postalCode: {
+          display: false,
+          field: "postalCode",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        "name of library": {
+          display: true,
+          field: "name of library",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        phone: {
+          display: true,
+          field: "phone",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        city: {
+          display: true,
+          field: "city",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        country: {
+          display: true,
+          field: "country",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+      },
       filter: null,
       sort: {
         property: "name of library",

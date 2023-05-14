@@ -9,7 +9,7 @@ export const state: LanguageState = {
     ({
       getAllApi,
       ui: {
-        table: { searchKeys, queryString, sort },
+        table: { columns, searchKeys, queryString, sort },
       },
     }: LanguageState) => {
       if (!getAllApi?.data?.length) {
@@ -26,6 +26,11 @@ export const state: LanguageState = {
             property: sort.property,
             sortDirection: sort.sortDirection,
           })
+        )
+        .filter((i) =>
+          Object.values(columns)
+            .filter((c) => c.display)
+            .every((c) => genericSearch(i, [c.field], c.queryString, false))
         );
     }
   ),
@@ -40,7 +45,22 @@ export const state: LanguageState = {
   }),
   ui: {
     table: {
-      columns: [{ field: "name of language" }],
+      columns: {
+        id: {
+          display: false,
+          field: "id",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+        "name of language": {
+          display: true,
+          field: "name of language",
+          showInput: false,
+          queryString: "",
+          isNumeric: false,
+        },
+      },
       filter: null,
       sort: {
         property: "name of language",

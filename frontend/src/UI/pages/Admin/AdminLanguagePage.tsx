@@ -22,12 +22,16 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useId, useState } from "react";
+import { useId, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { useActions, useAppState } from "../../../business/overmind";
+import {
+  stateSectionsWithTable,
+  useActions,
+  useAppState,
+} from "../../../business/overmind";
 import { ControlledTextInput } from "../../components/Controllers";
 import { SimpleSidebar } from "../../components/Navigation";
-import { TableOverview } from "../../components/Table";
+import { Search, TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
 import {
   defaultValuesLanguages,
@@ -93,6 +97,7 @@ function EditButton({ id }: { id: string }) {
           aria-label="Edit details"
           icon={<EditIcon />}
           mx={1}
+          variant="unstyled"
         />
       </PopoverTrigger>
       <PopoverContent p={5}>
@@ -127,6 +132,7 @@ function DeleteButton({ id }: { id: string }) {
           aria-label="Delete language"
           icon={<DeleteIcon />}
           mx={1}
+          variant="unstyled"
         />
       </PopoverTrigger>
       <PopoverContent>
@@ -174,18 +180,13 @@ export function AdminLanguagePage() {
     name: "languages",
   });
 
-  const { isLoading } = useAppState().language;
   const {
     overview,
     ui: {
-      table: { columns, noDataMessage, sort },
+      table: { noDataMessage },
     },
   } = useAppState().language;
-  const { search, postLanguages, setSort } = useActions().language;
-
-  const searchInTable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    search({ queryString: e.target.value });
-  };
+  const { postLanguages } = useActions().language;
 
   const onSubmit: SubmitHandler<FormFieldsLanguages> = async (data) => {
     await postLanguages(data);
@@ -199,14 +200,11 @@ export function AdminLanguagePage() {
       {overview ? (
         <Box style={{ backgroundColor: "#fff" }} p={5}>
           <Flex direction="column">
-            <Input onChange={searchInTable} placeholder="search" />
+            <Search state={stateSectionsWithTable.language} />
             <TableOverview
-              rows={overview}
-              columns={columns}
-              isLoading={isLoading}
+              state={stateSectionsWithTable.language}
               actionButtons={[EditButton, DeleteButton]}
-              sortFunction={setSort}
-              sortProperty={sort}
+              pagination={false}
             />
           </Flex>
           <Flex mt={10}>
