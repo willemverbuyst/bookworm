@@ -145,6 +145,9 @@ export const state: BookwormState = {
       limit: 15,
       noDataMessage: "no bookworms",
       page: 1,
+      pagination: derived((table: BookwormState["ui"]["table"]) => {
+        return !table.queryString;
+      }),
       queryString: "",
       searchKeys: ["first name", "last name", "email"],
       showAll: false,

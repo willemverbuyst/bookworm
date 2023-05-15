@@ -124,6 +124,7 @@ export const state: LibraryState = {
       limit: 10,
       noDataMessage: "no libraries",
       page: 1,
+      pagination: false,
       queryString: "",
       searchKeys: ["name of library"],
       showAll: false,

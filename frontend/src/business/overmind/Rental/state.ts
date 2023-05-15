@@ -136,6 +136,9 @@ export const state: RentalState = {
       noDataMessage: "no rentals",
       page: 1,
       queryString: "",
+      pagination: derived((table: RentalState["ui"]["table"]) => {
+        return !table.queryString;
+      }),
       searchKeys: ["title", "author"],
       showAll: false,
       title: "overview of rentals",

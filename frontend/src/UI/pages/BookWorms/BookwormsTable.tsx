@@ -31,15 +31,13 @@ function ShowDetailsButton({ id }: { id: string }) {
 }
 
 export function BookwormsTable() {
+  const state = stateSectionsWithTable.bookworm;
+
   return (
     <Box>
       <BookwormsFilter />
-      <Search state={stateSectionsWithTable.bookworm} />
-      <TableOverview
-        actionButtons={[ShowDetailsButton]}
-        state={stateSectionsWithTable.bookworm}
-        pagination
-      />
+      <Search state={state} />
+      <TableOverview actionButtons={[ShowDetailsButton]} state={state} />
     </Box>
   );
 }

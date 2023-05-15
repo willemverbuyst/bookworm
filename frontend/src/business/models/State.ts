@@ -16,6 +16,7 @@ interface UITable<T, U> {
   limit: number;
   noDataMessage: string;
   page: number;
+  pagination: boolean;
   queryString: string;
   searchKeys: Array<keyof T>;
   showAll: boolean;

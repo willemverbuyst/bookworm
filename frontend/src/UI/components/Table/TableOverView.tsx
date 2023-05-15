@@ -37,19 +37,14 @@ function ActionButton({
 type Props = {
   actionButtons?: (({ id }: { id: string }) => JSX.Element)[] | null;
   state: keyof typeof stateSectionsWithTable;
-  pagination: boolean;
 };
 
-export function TableOverview({
-  actionButtons = [],
-  state,
-  pagination,
-}: Props) {
+export function TableOverview({ actionButtons = [], state }: Props) {
   const {
     isLoading,
     overview,
     ui: {
-      table: { title, columns, sort, queryString, noDataMessage },
+      table: { title, columns, sort, noDataMessage },
     },
   } = useAppState()[state];
   const { setSort, setShowInput, setColumnQueryString } = useActions()[state];
@@ -183,7 +178,7 @@ export function TableOverview({
           ))}
         </Tbody>
       </Table>
-      {pagination && !queryString && <Pagination state={state} />}
+      <Pagination state={state} />
     </TableContainer>
   );
 }

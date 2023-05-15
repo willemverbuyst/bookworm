@@ -4,11 +4,13 @@ import { Search, TableOverview } from "../../components/Table";
 import { PaymentsFilter } from "./PaymentsFilter";
 
 export function PaymentsTable() {
+  const state = stateSectionsWithTable.payment;
+
   return (
     <Box>
       <PaymentsFilter />
-      <Search state={stateSectionsWithTable.payment} />
-      <TableOverview state={stateSectionsWithTable.payment} pagination />
+      <Search state={state} />
+      <TableOverview state={state} />
     </Box>
   );
 }

@@ -100,6 +100,9 @@ export const state: AuthorState = {
       limit: 10,
       noDataMessage: "no authors",
       page: 1,
+      pagination: derived((table: AuthorState["ui"]["table"]) => {
+        return !table.queryString;
+      }),
       queryString: "",
       searchKeys: ["last name", "first name"],
       showAll: false,

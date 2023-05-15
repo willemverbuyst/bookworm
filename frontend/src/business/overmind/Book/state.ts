@@ -136,6 +136,9 @@ export const state: BookState = {
       limit: 10,
       noDataMessage: "no books",
       page: 1,
+      pagination: derived((table: BookState["ui"]["table"]) => {
+        return !table.queryString;
+      }),
       queryString: "",
       searchKeys: ["title", "author"],
       showAll: false,

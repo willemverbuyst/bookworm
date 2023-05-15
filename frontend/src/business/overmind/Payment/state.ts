@@ -97,6 +97,9 @@ export const state: PaymentState = {
       filter: { amount: 5 },
       sort: { property: "email", sortDirection: SortDirection.ASCENDING },
       queryString: "",
+      pagination: derived((table: PaymentState["ui"]["table"]) => {
+        return !table.queryString;
+      }),
       searchKeys: ["title", "email"],
       showAll: false,
       title: "overview of payments",

@@ -68,6 +68,9 @@ export const state: GenreState = {
       limit: 10,
       noDataMessage: "no genres",
       page: 1,
+      pagination: derived((table: GenreState["ui"]["table"]) => {
+        return !table.queryString;
+      }),
       queryString: "",
       searchKeys: ["name of genre"],
       showAll: false,

@@ -22,7 +22,7 @@ export function Pagination({ state }: Props) {
   const {
     getAllApi,
     ui: {
-      table: { limit, page: currentPage, showAll },
+      table: { limit, page: currentPage, showAll, pagination },
     },
   } = useAppState()[state];
   const { changeLimit, changePage, showAllRows, usePagination } =
@@ -80,6 +80,10 @@ export function Pagination({ state }: Props) {
   const valueBtnFive = calculateValue(5);
   const valueBtnSix = totalNumberOfPages - 1;
   const valueBtnSeven = totalNumberOfPages;
+
+  if (!pagination) {
+    return null;
+  }
 
   return (
     <Container centerContent mt={5}>
