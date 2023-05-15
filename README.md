@@ -2,7 +2,7 @@
 
 # What is this?
 
-A project to connect and try out some libraries, tools and techniques in a semi-docker environment.
+A project to connect and try out some libraries, tools and techniques in a semi-docker environment (all wip).
 
 ## Frontend
 
@@ -134,3 +134,7 @@ run cypress test (needs work)
 > npm run cy:open
 
 > npm run cy:run
+
+## Frontend dependency graph
+
+![](./frontend/graph.svg)
