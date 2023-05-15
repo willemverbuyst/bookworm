@@ -1,4 +1,4 @@
-import { BACKEND_URL } from "../config/environment";
+import { BACKEND_URL } from "../config";
 import { axiosPut } from "./axiosCRUD";
 
 export const apiPut = async ({

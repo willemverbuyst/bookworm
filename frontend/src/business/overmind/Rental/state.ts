@@ -1,6 +1,6 @@
 import { derived } from "overmind";
-import { NODE_ENV } from "../../../config/environment";
-import { logInfo } from "../../../utils/logger";
+import { NODE_ENV } from "../../../config";
+import { logInfo } from "../../../utils";
 import { genericSearch, genericSort, WEEKDAYS } from "../../functions";
 import { RentalState, SortDirection } from "../../models";
 
@@ -136,6 +136,9 @@ export const state: RentalState = {
       noDataMessage: "no rentals",
       page: 1,
       queryString: "",
+      pagination: derived((table: RentalState["ui"]["table"]) => {
+        return !table.queryString;
+      }),
       searchKeys: ["title", "author"],
       showAll: false,
       title: "overview of rentals",

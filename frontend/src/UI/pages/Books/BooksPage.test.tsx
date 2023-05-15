@@ -85,6 +85,7 @@ describe("BooksPage", () => {
         limit: 10,
         noDataMessage: "no books",
         page: 1,
+        pagination: false,
         queryString: "",
         searchKeys: ["title", "author"],
         showAll: false,

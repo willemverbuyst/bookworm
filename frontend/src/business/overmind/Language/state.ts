@@ -69,6 +69,7 @@ export const state: LanguageState = {
       limit: 10,
       noDataMessage: "no languages",
       page: 1,
+      pagination: false,
       queryString: "",
       searchKeys: ["name of language"],
       showAll: false,

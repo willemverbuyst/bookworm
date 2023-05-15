@@ -2,9 +2,7 @@
 import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
-import { Page } from "../../models";
-import { Payment } from "../../models/Payment";
-import { SortDirection } from "../../models/State";
+import { Page, Payment, SortDirection } from "../../models";
 
 export const shouldFetchPayments = () =>
   filter(({ state }: Context) => !state.payment.getAllApi?.data.length);

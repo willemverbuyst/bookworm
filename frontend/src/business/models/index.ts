@@ -10,6 +10,7 @@ export * from "./Genre";
 export * from "./Language";
 export * from "./Library";
 export * from "./NavItem";
+export * from "./Payment";
 export * from "./Rental";
 export * from "./Review";
 export * from "./State";

@@ -1,7 +1,7 @@
 import { derived } from "overmind";
 import { RootState } from "..";
-import { NODE_ENV } from "../../../config/environment";
-import { logInfo } from "../../../utils/logger";
+import { NODE_ENV } from "../../../config";
+import { logInfo } from "../../../utils";
 import {
   compare,
   genericSearch,
@@ -145,6 +145,9 @@ export const state: BookwormState = {
       limit: 15,
       noDataMessage: "no bookworms",
       page: 1,
+      pagination: derived((table: BookwormState["ui"]["table"]) => {
+        return !table.queryString;
+      }),
       queryString: "",
       searchKeys: ["first name", "last name", "email"],
       showAll: false,

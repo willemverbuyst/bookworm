@@ -1,4 +1,4 @@
-import { NODE_ENV } from "../config/environment";
+import { NODE_ENV } from "../config";
 
 export function logInfo(startTime: number, text: string) {
   if (NODE_ENV === "development" && startTime) {

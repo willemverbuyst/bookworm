@@ -53,7 +53,6 @@ export function AdminLibraryPage() {
             <TableOverview
               state={stateSectionsWithTable.library}
               actionButtons={[ShowDetailsButton]}
-              pagination={false}
             />
           </Flex>
         </Box>

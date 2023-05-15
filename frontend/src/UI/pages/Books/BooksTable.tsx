@@ -4,11 +4,13 @@ import { Search, TableOverview } from "../../components/Table";
 import { BooksFilter } from "./BooksFilter";
 
 export function BooksTable() {
+  const state = stateSectionsWithTable.book;
+
   return (
     <Box>
       <BooksFilter />
-      <Search state={stateSectionsWithTable.book} />
-      <TableOverview state={stateSectionsWithTable.book} pagination />
+      <Search state={state} />
+      <TableOverview state={state} />
     </Box>
   );
 }

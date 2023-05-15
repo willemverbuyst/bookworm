@@ -204,7 +204,6 @@ export function AdminLanguagePage() {
             <TableOverview
               state={stateSectionsWithTable.language}
               actionButtons={[EditButton, DeleteButton]}
-              pagination={false}
             />
           </Flex>
           <Flex mt={10}>

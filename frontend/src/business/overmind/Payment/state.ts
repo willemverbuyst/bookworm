@@ -1,10 +1,8 @@
 import { derived } from "overmind";
-import { NODE_ENV } from "../../../config/environment";
-import { logInfo } from "../../../utils/logger";
-import { genericSearch } from "../../functions";
-import { genericSort } from "../../functions/genericSort";
-import { PaymentState } from "../../models/Payment";
-import { SortDirection } from "../../models/State";
+import { NODE_ENV } from "../../../config";
+import { logInfo } from "../../../utils";
+import { genericSearch, genericSort } from "../../functions";
+import { PaymentState, SortDirection } from "../../models";
 
 export const state: PaymentState = {
   isLoading: false,
@@ -97,6 +95,9 @@ export const state: PaymentState = {
       filter: { amount: 5 },
       sort: { property: "email", sortDirection: SortDirection.ASCENDING },
       queryString: "",
+      pagination: derived((table: PaymentState["ui"]["table"]) => {
+        return !table.queryString;
+      }),
       searchKeys: ["title", "email"],
       showAll: false,
       title: "overview of payments",

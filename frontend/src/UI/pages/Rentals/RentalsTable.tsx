@@ -4,11 +4,13 @@ import { Search, TableOverview } from "../../components/Table";
 import { RentalsFilter } from "./RentalsFilter";
 
 export function RentalsTable() {
+  const state = stateSectionsWithTable.rental;
+
   return (
     <Box>
       <RentalsFilter />
-      <Search state={stateSectionsWithTable.rental} />
-      <TableOverview state={stateSectionsWithTable.rental} pagination />
+      <Search state={state} />
+      <TableOverview state={state} />
     </Box>
   );
 }
