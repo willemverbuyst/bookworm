@@ -203,7 +203,6 @@ export function AdminGenrePage() {
             <TableOverview
               state={stateSectionsWithTable.genre}
               actionButtons={[EditButton, DeleteButton]}
-              pagination
             />
           </Flex>
           <Flex mt={10}>

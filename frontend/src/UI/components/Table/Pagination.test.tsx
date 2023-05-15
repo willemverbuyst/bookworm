@@ -78,6 +78,7 @@ describe("Pagination", () => {
         },
         sort: { property: "title", sortDirection: SortDirection.ASCENDING },
         limit: 10,
+        pagination: true,
         noDataMessage: "no books",
         page: 1,
         queryString: "",
