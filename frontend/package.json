@@ -24,7 +24,7 @@
     "concurrently": "^8.0.1",
     "date-fns": "^2.29.3",
     "dayzed": "^3.2.3",
-    "framer-motion": "^9.0.4",
+    "framer-motion": "^10.12.10",
     "msw": "^1.2.1",
     "overmind": "^28.0.2",
     "overmind-devtools": "^29.0.2",
