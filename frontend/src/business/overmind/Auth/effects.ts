@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { BACKEND_URL } from "../../../config/environment";
+import { BACKEND_URL } from "../../../config";
 import { ApiResponseUser } from "../../models";
 
 export const api = {

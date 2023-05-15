@@ -1,10 +1,8 @@
 import { derived } from "overmind";
-import { NODE_ENV } from "../../../config/environment";
-import { logInfo } from "../../../utils/logger";
-import { genericSearch } from "../../functions";
-import { genericSort } from "../../functions/genericSort";
-import { PaymentState } from "../../models/Payment";
-import { SortDirection } from "../../models/State";
+import { NODE_ENV } from "../../../config";
+import { logInfo } from "../../../utils";
+import { genericSearch, genericSort } from "../../functions";
+import { PaymentState, SortDirection } from "../../models";
 
 export const state: PaymentState = {
   isLoading: false,

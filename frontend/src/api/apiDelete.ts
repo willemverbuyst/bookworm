@@ -1,4 +1,4 @@
-import { BACKEND_URL } from "../config/environment";
+import { BACKEND_URL } from "../config";
 import { axiosDelete } from "./axiosCRUD";
 
 export const apiDelete = async ({ url }: { url: string }) => {

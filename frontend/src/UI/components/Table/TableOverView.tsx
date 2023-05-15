@@ -14,7 +14,7 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { getEntries } from "../../../business/functions";
-import { SortDirection } from "../../../business/models/State";
+import { SortDirection } from "../../../business/models";
 import {
   stateSectionsWithTable,
   useActions,

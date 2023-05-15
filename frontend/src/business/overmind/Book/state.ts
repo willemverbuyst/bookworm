@@ -1,10 +1,8 @@
 import { derived } from "overmind";
-import { NODE_ENV } from "../../../config/environment";
-import { logInfo } from "../../../utils/logger";
-import { genericSearch } from "../../functions";
-import { genericSort } from "../../functions/genericSort";
-import { BookState } from "../../models";
-import { SortDirection } from "../../models/State";
+import { NODE_ENV } from "../../../config";
+import { logInfo } from "../../../utils";
+import { genericSearch, genericSort } from "../../functions";
+import { BookState, SortDirection } from "../../models";
 
 export const state: BookState = {
   getAllApi: null,

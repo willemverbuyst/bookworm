@@ -1,7 +1,7 @@
 import { derived } from "overmind";
 import { RootState } from "..";
-import { NODE_ENV } from "../../../config/environment";
-import { logInfo } from "../../../utils/logger";
+import { NODE_ENV } from "../../../config";
+import { logInfo } from "../../../utils";
 import {
   compare,
   genericSearch,

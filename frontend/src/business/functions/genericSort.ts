@@ -1,4 +1,4 @@
-import { SortDirection } from "../models/State";
+import { SortDirection } from "../models";
 
 export function genericSort<T>(
   a: T,

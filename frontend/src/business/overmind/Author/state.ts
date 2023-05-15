@@ -1,6 +1,6 @@
 import { derived } from "overmind";
-import { NODE_ENV } from "../../../config/environment";
-import { logInfo } from "../../../utils/logger";
+import { NODE_ENV } from "../../../config";
+import { logInfo } from "../../../utils";
 import { genericSearch, genericSort } from "../../functions";
 import { AuthorState, SortDirection } from "../../models";
 

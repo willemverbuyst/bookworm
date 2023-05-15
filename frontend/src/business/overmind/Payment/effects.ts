@@ -1,5 +1,5 @@
 import { apiGetWithZod } from "../../../api";
-import { ApiResponsePayment } from "../../models/Payment";
+import { ApiResponsePayment } from "../../models";
 
 export const api = {
   getPayments: async ({ amount }: { amount: number }) =>

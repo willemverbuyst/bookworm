@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 
 import { Context } from "..";
-import { NODE_ENV } from "../../../config/environment";
-import { logInfo } from "../../../utils/logger";
+import { NODE_ENV } from "../../../config";
+import { logInfo } from "../../../utils";
 import { Page } from "../../models";
 
 export const onInitializeOvermind = async ({
