@@ -1,4 +1,4 @@
-import { parallel, pipe } from "overmind";
+import { filter, parallel, pipe } from "overmind";
 import * as o from "./operators";
 
 export const showBooksPage = pipe(
@@ -60,4 +60,8 @@ export const search = o.setQueryString();
 
 export const setColumnQueryString = o.setColumnQueryString();
 
-export const setShowInput = o.setShowInput();
+export const setShowInput = pipe(
+  o.setShowInput(),
+  filter(o.shouldResetQueryString()),
+  o.resetColumnQueryString()
+);

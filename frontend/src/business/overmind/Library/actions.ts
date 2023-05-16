@@ -1,4 +1,4 @@
-import { debounce, pipe } from "overmind";
+import { debounce, filter, pipe } from "overmind";
 import * as o from "./operators";
 
 export const getLibraries = pipe(o.shouldFetchLibraries(), o.fetchLibraries());
@@ -11,7 +11,11 @@ export const setSort = o.setSort();
 
 export const setColumnQueryString = o.setColumnQueryString();
 
-export const setShowInput = o.setShowInput();
+export const setShowInput = pipe(
+  o.setShowInput(),
+  filter(o.shouldResetQueryString()),
+  o.resetColumnQueryString()
+);
 
 export const changeLimit = () => () => null;
 

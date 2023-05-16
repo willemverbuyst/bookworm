@@ -1,4 +1,4 @@
-import { pipe } from "overmind";
+import { filter, pipe } from "overmind";
 
 import * as o from "./operators";
 
@@ -42,4 +42,8 @@ export const search = o.setQueryString();
 
 export const setColumnQueryString = o.setColumnQueryString();
 
-export const setShowInput = o.setShowInput();
+export const setShowInput = pipe(
+  o.setShowInput(),
+  filter(o.shouldResetQueryString()),
+  o.resetColumnQueryString()
+);
