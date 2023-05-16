@@ -1,4 +1,4 @@
-import { debounce, parallel, pipe } from "overmind";
+import { debounce, filter, parallel, pipe } from "overmind";
 import * as o from "./operators";
 
 export const showBookwormsPage = pipe(
@@ -51,4 +51,8 @@ export const getBookworm = o.getBookWormById();
 
 export const setColumnQueryString = o.setColumnQueryString();
 
-export const setShowInput = o.setShowInput();
+export const setShowInput = pipe(
+  o.setShowInput(),
+  filter(o.shouldResetQueryString()),
+  o.resetColumnQueryString()
+);

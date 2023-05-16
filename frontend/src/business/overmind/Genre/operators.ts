@@ -173,6 +173,14 @@ export const setColumnQueryString =
     column.queryString = queryString;
   };
 
+export const resetColumnQueryString =
+  () =>
+  ({ state }: Context, { field }: { field: keyof Genre }) => {
+    const column = state.genre.ui.table.columns[field];
+
+    column.queryString = "";
+  };
+
 export const setShowInput =
   () =>
   ({ state }: Context, { field }: { field: keyof Genre }) => {
@@ -180,7 +188,13 @@ export const setShowInput =
 
     column.showInput = !column.showInput;
 
-    if (!column.showInput) {
-      state.genre.ui.table.columns[field].queryString = "";
-    }
+    return { field };
+  };
+
+export const shouldResetQueryString =
+  () =>
+  ({ state }: Context, { field }: { field: keyof Genre }) => {
+    const column = state.genre.ui.table.columns[field];
+
+    return !column.showInput;
   };

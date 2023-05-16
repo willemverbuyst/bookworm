@@ -1,4 +1,4 @@
-import { debounce, parallel, pipe } from "overmind";
+import { debounce, filter, parallel, pipe } from "overmind";
 import * as o from "./operators";
 
 export const showRentalsPage = pipe(
@@ -49,4 +49,8 @@ export const search = (debounce(100), o.setQueryString());
 
 export const setColumnQueryString = o.setColumnQueryString();
 
-export const setShowInput = o.setShowInput();
+export const setShowInput = pipe(
+  o.setShowInput(),
+  filter(o.shouldResetQueryString()),
+  o.resetColumnQueryString()
+);

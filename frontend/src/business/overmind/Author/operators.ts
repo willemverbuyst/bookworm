@@ -131,6 +131,14 @@ export const setColumnQueryString =
     column.queryString = queryString;
   };
 
+export const resetColumnQueryString =
+  () =>
+  ({ state }: Context, { field }: { field: keyof Author }) => {
+    const column = state.author.ui.table.columns[field];
+
+    column.queryString = "";
+  };
+
 export const setShowInput =
   () =>
   ({ state }: Context, { field }: { field: keyof Author }) => {
@@ -138,7 +146,13 @@ export const setShowInput =
 
     column.showInput = !column.showInput;
 
-    if (!column.showInput) {
-      state.author.ui.table.columns[field].queryString = "";
-    }
+    return { field };
+  };
+
+export const shouldResetQueryString =
+  () =>
+  ({ state }: Context, { field }: { field: keyof Author }) => {
+    const column = state.author.ui.table.columns[field];
+
+    return !column.showInput;
   };
