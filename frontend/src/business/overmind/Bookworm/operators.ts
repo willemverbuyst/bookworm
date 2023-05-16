@@ -136,13 +136,6 @@ export const setPagination =
     state.bookworm.ui.table.showAll = false;
   };
 
-export const shouldShowAll = () =>
-  filter(({ state }: Context) => {
-    return Boolean(
-      state.bookworm.ui.table.showAll && state.author.getAllApi?.total
-    );
-  });
-
 export const setSort =
   () =>
   (

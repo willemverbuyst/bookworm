@@ -91,13 +91,6 @@ export const setPagination =
     state.payment.ui.table.limit = 10;
   };
 
-export const shouldShowAll = () =>
-  filter(({ state }: Context) => {
-    return Boolean(
-      state.payment.ui.table.showAll && state.payment.getAllApi?.total
-    );
-  });
-
 export const setAmountFilter =
   () =>
   ({ state }: Context, { amount }: { amount: number }) => {

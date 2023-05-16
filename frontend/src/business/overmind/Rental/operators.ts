@@ -124,13 +124,6 @@ export const setPagination =
     state.rental.ui.table.showAll = false;
   };
 
-export const shouldShowAll = () =>
-  filter(({ state }: Context) => {
-    return Boolean(
-      state.rental.ui.table.showAll && state.author.getAllApi?.total
-    );
-  });
-
 export const setReturnedFilter =
   () =>
   ({ state }: Context, { returned }: { returned: string }) => {

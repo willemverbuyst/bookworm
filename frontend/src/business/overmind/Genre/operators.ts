@@ -143,13 +143,6 @@ export const setPagination =
     state.genre.ui.table.showAll = false;
   };
 
-export const shouldShowAll = () =>
-  filter(({ state }: Context) => {
-    return Boolean(
-      state.genre.ui.table.showAll && state.author.getAllApi?.total
-    );
-  });
-
 export const setSort =
   () =>
   (

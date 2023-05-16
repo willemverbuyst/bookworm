@@ -1,4 +1,4 @@
-export type Column<T> = {
+type Column<T> = {
   field: keyof T;
   isNumeric: boolean;
   showInput: boolean;
