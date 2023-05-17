@@ -1,5 +1,5 @@
 import { derived } from "overmind";
-import { genericSearch, genericSort } from "../../functions";
+import { functions } from "../../functions";
 import { LanguageState, SortDirection } from "../../models";
 
 export const state: LanguageState = {
@@ -20,9 +20,11 @@ export const state: LanguageState = {
           id: i.id,
           "name of language": i.name_of_language,
         }))
-        .filter((a) => genericSearch(a, searchKeys, queryString, false))
+        .filter((a) =>
+          functions.genericSearch(a, searchKeys, queryString, false)
+        )
         .sort((a, b) =>
-          genericSort(a, b, {
+          functions.genericSort(a, b, {
             property: sort.property,
             sortDirection: sort.sortDirection,
           })
@@ -30,7 +32,9 @@ export const state: LanguageState = {
         .filter((i) =>
           Object.values(columns)
             .filter((c) => c.display)
-            .every((c) => genericSearch(i, [c.field], c.queryString, false))
+            .every((c) =>
+              functions.genericSearch(i, [c.field], c.queryString, false)
+            )
         );
     }
   ),

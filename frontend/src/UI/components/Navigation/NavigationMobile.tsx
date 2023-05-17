@@ -10,7 +10,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { NavItem } from "../../../business/models";
-import { useNavItems } from "../../hooks";
+import { hooks } from "../../hooks";
 
 function MobileNavItem({ label, children, href }: NavItem) {
   const { isOpen, onToggle } = useDisclosure();
@@ -66,7 +66,7 @@ function MobileNavItem({ label, children, href }: NavItem) {
 }
 
 export function NavigationMobile() {
-  const navItems = useNavItems();
+  const navItems = hooks.useNavItems();
   return (
     <Stack
       bg={useColorModeValue("white", "gray.800")}

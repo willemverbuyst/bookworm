@@ -1,13 +1,8 @@
 import { derived } from "overmind";
 import { RootState } from "..";
 import { NODE_ENV } from "../../../config";
-import { logInfo } from "../../../utils";
-import {
-  compare,
-  genericSearch,
-  genericSort,
-  getColorIndex,
-} from "../../functions";
+import { utils } from "../../../utils";
+import { functions } from "../../functions";
 import { BookwormState, SortDirection } from "../../models";
 
 export const state: BookwormState = {
@@ -37,9 +32,11 @@ export const state: BookwormState = {
           userIsActive: i.user_is_active,
           library: i.library,
         }))
-        .filter((a) => genericSearch(a, searchKeys, queryString, false))
+        .filter((a) =>
+          functions.genericSearch(a, searchKeys, queryString, false)
+        )
         .sort((a, b) =>
-          genericSort(a, b, {
+          functions.genericSort(a, b, {
             property: sort.property,
             sortDirection: sort.sortDirection,
           })
@@ -47,11 +44,13 @@ export const state: BookwormState = {
         .filter((i) =>
           Object.values(columns)
             .filter((c) => c.display)
-            .every((c) => genericSearch(i, [c.field], c.queryString, false))
+            .every((c) =>
+              functions.genericSearch(i, [c.field], c.queryString, false)
+            )
         );
 
       if (NODE_ENV === "development" && startTime) {
-        logInfo(startTime, "derived fn: overview bookworms");
+        utils.logInfo(startTime, "derived fn: overview bookworms");
       }
 
       return data;
@@ -67,18 +66,21 @@ export const state: BookwormState = {
       }
 
       const data = [...statsLibraryApi.data]
-        .sort(compare("user_is_active"))
-        .sort(compare("id"))
+        .sort(functions.compare("user_is_active"))
+        .sort(functions.compare("id"))
         .map((d, index) => ({
           id: d.id,
           userIsActive: d.user_is_active,
           library: d.library,
           numberOfBookwormsPerLibrary: d.number_of_bookworms_per_library,
-          color: rootState.app.colors[getColorIndex(index)],
+          color: rootState.app.colors[functions.getColorIndex(index)],
         }));
 
       if (NODE_ENV === "development" && startTime) {
-        logInfo(startTime, "derived fn: overview bookworms stats library");
+        utils.logInfo(
+          startTime,
+          "derived fn: overview bookworms stats library"
+        );
       }
 
       return data;

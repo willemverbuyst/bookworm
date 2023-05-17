@@ -4,13 +4,3 @@ export const calculateDays = (date1: Date, date2: Date) => {
 
   return totalDays + 1;
 };
-
-export const WEEKDAYS = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-] as const;

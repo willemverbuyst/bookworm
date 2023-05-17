@@ -3,7 +3,7 @@ import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { calculateDays } from "../../../business/functions";
+import { functions } from "../../../business/functions";
 import { useAppState } from "../../../business/overmind";
 import {
   ControlledDatePicker,
@@ -50,7 +50,7 @@ export function AddReviewPage() {
 
   useEffect(() => {
     const numberOfDaysCalculated =
-      startDate && endDate && calculateDays(endDate, startDate);
+      startDate && endDate && functions.calculateDays(endDate, startDate);
     if (startDate && endDate) {
       setValue("duration", numberOfDaysCalculated);
     }
