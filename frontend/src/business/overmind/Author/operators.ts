@@ -101,13 +101,6 @@ export const setPagination =
     state.author.ui.table.showAll = false;
   };
 
-export const shouldShowAll = () =>
-  filter(({ state }: Context) => {
-    return Boolean(
-      state.author.ui.table.showAll && state.author.getAllApi?.total
-    );
-  });
-
 export const setSort =
   () =>
   (

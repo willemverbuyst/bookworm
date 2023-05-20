@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { NavItem } from "../../../business/models";
-import { useAdminMenuItems } from "../../hooks";
+import { hooks } from "../../hooks";
 
 function MenuItem({ label, href }: NavItem) {
   return (
@@ -47,7 +47,7 @@ interface SidebarProps extends BoxProps {
 }
 
 function SidebarContent({ onClose, ...rest }: SidebarProps) {
-  const menuItems = useAdminMenuItems();
+  const menuItems = hooks.useAdminMenuItems();
 
   return (
     <Box

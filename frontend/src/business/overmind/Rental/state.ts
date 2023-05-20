@@ -1,7 +1,8 @@
 import { derived } from "overmind";
 import { NODE_ENV } from "../../../config";
-import { logInfo } from "../../../utils";
-import { genericSearch, genericSort, WEEKDAYS } from "../../functions";
+import { constants } from "../../../constants";
+import { utils } from "../../../utils";
+import { functions } from "../../functions";
 import { RentalState, SortDirection } from "../../models";
 
 export const state: RentalState = {
@@ -28,9 +29,11 @@ export const state: RentalState = {
           title: i.title,
           author: i.author,
         }))
-        .filter((a) => genericSearch(a, searchKeys, queryString, false))
+        .filter((a) =>
+          functions.genericSearch(a, searchKeys, queryString, false)
+        )
         .sort((a, b) =>
-          genericSort(a, b, {
+          functions.genericSort(a, b, {
             property: sort.property,
             sortDirection: sort.sortDirection,
           })
@@ -38,11 +41,13 @@ export const state: RentalState = {
         .filter((i) =>
           Object.values(columns)
             .filter((c) => c.display)
-            .every((c) => genericSearch(i, [c.field], c.queryString, false))
+            .every((c) =>
+              functions.genericSearch(i, [c.field], c.queryString, false)
+            )
         );
 
       if (NODE_ENV === "development" && startTime) {
-        logInfo(startTime, "derived fn: overview rentals");
+        utils.logInfo(startTime, "derived fn: overview rentals");
       }
 
       return data;
@@ -58,14 +63,14 @@ export const state: RentalState = {
     const data = [...statsDayApi.data].map((d) => ({
       rentals: d.number_of_rentals,
       returns: d.number_of_returns,
-      day: WEEKDAYS[d.day_of_the_week - 1],
+      day: constants.weekdays[d.day_of_the_week - 1],
       fullMark: Math.ceil(
         Math.max(...statsDayApi.data.map((i) => i.number_of_rentals)) * 1.1
       ),
     }));
 
     if (NODE_ENV === "development" && startTime) {
-      logInfo(startTime, "derived fn: overview rentals stats day");
+      utils.logInfo(startTime, "derived fn: overview rentals stats day");
     }
 
     return data;
@@ -85,7 +90,7 @@ export const state: RentalState = {
     }));
 
     if (NODE_ENV === "development" && startTime) {
-      logInfo(startTime, "derived fn: overview rentals stats duration");
+      utils.logInfo(startTime, "derived fn: overview rentals stats duration");
     }
 
     return data;

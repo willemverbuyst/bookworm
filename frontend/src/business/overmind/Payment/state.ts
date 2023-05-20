@@ -1,7 +1,7 @@
 import { derived } from "overmind";
 import { NODE_ENV } from "../../../config";
-import { logInfo } from "../../../utils";
-import { genericSearch, genericSort } from "../../functions";
+import { utils } from "../../../utils";
+import { functions } from "../../functions";
 import { PaymentState, SortDirection } from "../../models";
 
 export const state: PaymentState = {
@@ -29,10 +29,12 @@ export const state: PaymentState = {
           title: i.title,
           email: i.user_email,
         }))
-        .filter((a) => genericSearch(a, searchKeys, queryString, false))
+        .filter((a) =>
+          functions.genericSearch(a, searchKeys, queryString, false)
+        )
         .slice((page - 1) * limit, page * limit)
         .sort((a, b) =>
-          genericSort(a, b, {
+          functions.genericSort(a, b, {
             property: sort.property,
             sortDirection: sort.sortDirection,
           })
@@ -40,11 +42,13 @@ export const state: PaymentState = {
         .filter((i) =>
           Object.values(columns)
             .filter((c) => c.display)
-            .every((c) => genericSearch(i, [c.field], c.queryString, false))
+            .every((c) =>
+              functions.genericSearch(i, [c.field], c.queryString, false)
+            )
         );
 
       if (NODE_ENV === "development" && startTime) {
-        logInfo(startTime, "derived fn: overview payments");
+        utils.logInfo(startTime, "derived fn: overview payments");
       }
 
       return data;

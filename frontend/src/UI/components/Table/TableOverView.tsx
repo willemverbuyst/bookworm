@@ -13,7 +13,7 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { getEntries } from "../../../business/functions";
+import { functions } from "../../../business/functions";
 import { SortDirection } from "../../../business/models";
 import {
   stateSectionsWithTable,
@@ -151,7 +151,8 @@ export function TableOverview({ actionButtons = [], state }: Props) {
         <Tbody>
           {overview.map((row) => (
             <Tr key={row.id}>
-              {getEntries(columns)
+              {functions
+                .getEntries(columns)
                 .filter(([, v]) => v.display)
                 .map(([k, v]) => (
                   <Td

@@ -7,11 +7,11 @@ import LandingPageRoute from "./routes/LandingPageRoute";
 import PrivateRoutes from "./routes/PrivateRoutes";
 import PublicRoutes from "./routes/Publicroutes";
 import { NavigationBar } from "./UI/components/Navigation";
-import { useToastHook } from "./UI/hooks";
+import { hooks } from "./UI/hooks";
 import { PageNotFoundPage } from "./UI/pages/PageNotFound";
 
 export default function App() {
-  const [, setToast] = useToastHook();
+  const [, setToast] = hooks.useToastHook();
   const { message, status, statusText } = useAppState().api.response;
   const appState = useAppState().app;
 

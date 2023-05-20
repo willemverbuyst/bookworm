@@ -1,5 +1,5 @@
 import { derived } from "overmind";
-import { genericSearch, genericSort } from "../../functions";
+import { functions } from "../../functions";
 import { GenreState, SortDirection } from "../../models";
 
 export const state: GenreState = {
@@ -19,9 +19,11 @@ export const state: GenreState = {
       return getAllApi.data
         .map((i) => ({ id: i.id, "name of genre": i.name_of_genre }))
         .slice((page - 1) * limit, limit * page)
-        .filter((a) => genericSearch(a, searchKeys, queryString, false))
+        .filter((a) =>
+          functions.genericSearch(a, searchKeys, queryString, false)
+        )
         .sort((a, b) =>
-          genericSort(a, b, {
+          functions.genericSort(a, b, {
             property: sort.property,
             sortDirection: sort.sortDirection,
           })
@@ -29,7 +31,9 @@ export const state: GenreState = {
         .filter((i) =>
           Object.values(columns)
             .filter((c) => c.display)
-            .every((c) => genericSearch(i, [c.field], c.queryString, false))
+            .every((c) =>
+              functions.genericSearch(i, [c.field], c.queryString, false)
+            )
         );
     }
   ),

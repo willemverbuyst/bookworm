@@ -1,7 +1,7 @@
 import { derived } from "overmind";
 import { NODE_ENV } from "../../../config";
-import { logInfo } from "../../../utils";
-import { genericSearch, genericSort } from "../../functions";
+import { utils } from "../../../utils";
+import { functions } from "../../functions";
 import { AuthorState, SortDirection } from "../../models";
 
 export const state: AuthorState = {
@@ -28,9 +28,11 @@ export const state: AuthorState = {
           "last name": i.last_name,
           "books written": i.books_written,
         }))
-        .filter((a) => genericSearch(a, searchKeys, queryString, false))
+        .filter((a) =>
+          functions.genericSearch(a, searchKeys, queryString, false)
+        )
         .sort((a, b) =>
-          genericSort(a, b, {
+          functions.genericSort(a, b, {
             property: sort.property,
             sortDirection: sort.sortDirection,
           })
@@ -38,11 +40,13 @@ export const state: AuthorState = {
         .filter((i) =>
           Object.values(columns)
             .filter((c) => c.display)
-            .every((c) => genericSearch(i, [c.field], c.queryString, false))
+            .every((c) =>
+              functions.genericSearch(i, [c.field], c.queryString, false)
+            )
         );
 
       if (NODE_ENV === "development" && startTime) {
-        logInfo(startTime, "derived fn: overview authors");
+        utils.logInfo(startTime, "derived fn: overview authors");
       }
 
       return data;

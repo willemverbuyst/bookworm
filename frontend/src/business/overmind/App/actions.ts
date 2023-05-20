@@ -2,7 +2,7 @@
 
 import { Context } from "..";
 import { NODE_ENV } from "../../../config";
-import { logInfo } from "../../../utils";
+import { utils } from "../../../utils";
 import { Page } from "../../models";
 
 export const onInitializeOvermind = async ({
@@ -39,7 +39,7 @@ export const onInitializeOvermind = async ({
   state.app.isLoading = false;
 
   if (NODE_ENV === "development" && startTime) {
-    logInfo(startTime, `initialize overmind in ${NODE_ENV} mode`);
+    utils.logInfo(startTime, `initialize overmind in ${NODE_ENV} mode`);
   }
 };
 

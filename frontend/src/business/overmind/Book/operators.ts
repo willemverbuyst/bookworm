@@ -164,13 +164,6 @@ export const setPagination =
     state.book.ui.table.showAll = false;
   };
 
-export const shouldShowAll = () =>
-  filter(({ state }: Context) => {
-    return Boolean(
-      state.book.ui.table.showAll && state.author.getAllApi?.total
-    );
-  });
-
 export const getGenres =
   () =>
   ({ actions }: Context) => {

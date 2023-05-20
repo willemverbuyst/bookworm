@@ -12,7 +12,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { NavItem } from "../../../business/models";
-import { useNavItems } from "../../hooks";
+import { hooks } from "../../hooks";
 
 function DesktopSubNav({ label, href, subLabel }: NavItem) {
   return (
@@ -55,7 +55,7 @@ export function NavigationDesktop() {
   const linkColor = useColorModeValue("gray.600", "gray.200");
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
-  const navItems = useNavItems();
+  const navItems = hooks.useNavItems();
 
   return (
     <Stack direction="row" spacing={4}>
