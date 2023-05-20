@@ -4,6 +4,7 @@ import { genericSearch } from "./genericSearch";
 import { genericSort } from "./genericSort";
 import { getColorIndex } from "./getColorIndex";
 import { getEntries } from "./getEntries";
+import { getValues } from "./getValues";
 import { groupBy } from "./groupBy";
 
 export const functions = {
@@ -13,5 +14,6 @@ export const functions = {
   genericSort,
   getColorIndex,
   getEntries,
+  getValues,
   groupBy,
 };
