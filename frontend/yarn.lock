@@ -5239,10 +5239,10 @@ keyv@^3.0.0:
   dependencies:
     json-buffer "3.0.0"
 
-knip@^2.10.4:
-  version "2.10.4"
-  resolved "https://registry.yarnpkg.com/knip/-/knip-2.10.4.tgz#6241879d3bea2bbab91d87e03a1f299a11848312"
-  integrity sha512-WEnR/Z0rqTVy2UB22JwHGTNdf17tVP1ea001zmkwEvMprUByxTa4UoWSQrkl1Kq6sjNSlqTVSQ5vINBZNXEWzw==
+knip@^2.12.0:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/knip/-/knip-2.12.0.tgz#aeeb9fc3b409ae2f07f0fe13ca56d755b313747a"
+  integrity sha512-ltp+ewNhTQPv5RkicjiyJtV+/M81Jhf6kAtu6cen9+zwZIlOYSAgnZeRIGnP8l9F2veZ6Cdd6dfMMzDxXJo+RA==
   dependencies:
     "@npmcli/map-workspaces" "^3.0.4"
     "@snyk/github-codeowners" "^1.1.0"
@@ -5428,6 +5428,13 @@ madge@^6.0.0:
     ts-graphviz "^1.5.0"
     typescript "^3.9.5"
     walkdir "^0.4.1"
+
+magic-string@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.16.0.tgz#970ebb0da7193301285fb1aa650f39bdd81eb45a"
+  integrity sha512-c4BEos3y6G2qO0B9X7K0FVLOPT9uGrjYwYRLFmDqyl5YMboUviyecnXWp94fJTSMwPw2/sf+CEYt5AGpmklkkQ==
+  dependencies:
+    vlq "^0.2.1"
 
 make-dir@^3.0.0:
   version "3.1.0"
