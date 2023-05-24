@@ -19,7 +19,7 @@ import { defaultValues, FormFields, validationSchema } from "./helpers";
 
 export function AddReviewPage() {
   const id = useId();
-  const allAuthors = useAppState().author.overview || [];
+  const allAuthors = useAppState().review.authorsForReview || [];
   const allBooks = useAppState().book.overview || [];
   const authorsForSelect = allAuthors?.map((a) => ({
     display: a["first name"],
