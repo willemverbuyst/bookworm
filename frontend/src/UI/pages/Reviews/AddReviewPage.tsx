@@ -9,6 +9,7 @@ import {
   ControlledDatePicker,
   ControlledNumberInput,
   ControlledSelect,
+  ControlledSelectWithSearch,
   ControlledStarRating,
   ControlledTextArea,
   ControlledTextInput,
@@ -19,7 +20,8 @@ import { defaultValues, FormFields, validationSchema } from "./helpers";
 
 export function AddReviewPage() {
   const id = useId();
-  const allAuthors = useAppState().review.authorsForReview || [];
+  const allAuthors = useAppState().author.overview;
+  // const allAuthors = useAppState().review.authorsForReview;
   const allBooks = useAppState().book.overview || [];
   const authorsForSelect = allAuthors?.map((a) => ({
     display: a["first name"],
@@ -88,13 +90,12 @@ export function AddReviewPage() {
             error={errors.title}
             required
           />
-          <ControlledSelect
+          <ControlledSelectWithSearch
             dataSet={authorsForSelect}
             name="author"
             control={control}
             label="author"
             error={errors.author}
-            helperText="only known authors can be selected"
             required
           />
           <ControlledSelect
