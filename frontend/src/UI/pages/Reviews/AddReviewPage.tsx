@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { functions } from "../../../business/functions";
-import { useAppState } from "../../../business/overmind";
+import { useActions, useAppState } from "../../../business/overmind";
 import {
   ControlledDatePicker,
   ControlledNumberInput,
@@ -20,13 +20,9 @@ import { defaultValues, FormFields, validationSchema } from "./helpers";
 
 export function AddReviewPage() {
   const id = useId();
-  const allAuthors = useAppState().author.overview;
-  // const allAuthors = useAppState().review.authorsForReview;
   const allBooks = useAppState().book.overview || [];
-  const authorsForSelect = allAuthors?.map((a) => ({
-    display: a["first name"],
-    value: a.id,
-  }));
+  const { getAuthors } = useActions().review;
+
   const [booksForSelect, setBooksForSelect] = useState<
     Array<{ display: string; value: string }>
   >([]);
@@ -44,11 +40,7 @@ export function AddReviewPage() {
     resolver: zodResolver(validationSchema),
   });
 
-  const [startDate, endDate, author] = watch([
-    "startDate",
-    "endDate",
-    "author",
-  ]);
+  const [startDate, endDate] = watch(["startDate", "endDate"]);
 
   useEffect(() => {
     const numberOfDaysCalculated =
@@ -57,19 +49,6 @@ export function AddReviewPage() {
       setValue("duration", numberOfDaysCalculated);
     }
   }, [setValue, startDate, endDate]);
-
-  useEffect(() => {
-    if (!author) {
-      setBooksForSelect([]);
-    }
-    const booksToSelect = allBooks
-      ?.filter((b) => String(b.author) === String(author))
-      .map((b) => ({
-        display: b.title,
-        value: b.id,
-      }));
-    setBooksForSelect(booksToSelect);
-  }, [author]);
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     // await postReview(data);
@@ -91,12 +70,12 @@ export function AddReviewPage() {
             required
           />
           <ControlledSelectWithSearch
-            dataSet={authorsForSelect}
             name="author"
             control={control}
             label="author"
             error={errors.author}
             required
+            action={getAuthors}
           />
           <ControlledSelect
             dataSet={booksForSelect}

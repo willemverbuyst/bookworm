@@ -1,8 +1,11 @@
 import axios from "axios";
 import { apiGetWithZod } from "../../../api";
-import { ApiResponseReview } from "../../models";
+import { ApiResponseReview, ApiResponseReviewAuthors } from "../../models";
 
 export const api = {
+  getAuthors: async (name: string) =>
+    apiGetWithZod(`authors/?name=${name}`, ApiResponseReviewAuthors),
+
   getReviews: async ({ limit = 10, page = 1 }) =>
     apiGetWithZod(`reviews/?limit=${limit}&page=${page}`, ApiResponseReview),
 

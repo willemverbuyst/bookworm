@@ -1,5 +1,5 @@
 import { FormControl } from "@chakra-ui/react";
-import { OptionBase, Select } from "chakra-react-select";
+import { AsyncSelect, OptionBase } from "chakra-react-select";
 import {
   Controller,
   FieldError,
@@ -8,11 +8,7 @@ import {
 } from "react-hook-form";
 import { ErrorMessage, HelperText, Label } from "../Text";
 
-type SelectProps<
-  T extends FieldValues,
-  U extends { value: string; display: string }
-> = {
-  dataSet: U[];
+type SelectProps<T extends FieldValues> = {
   error?: FieldError | undefined;
   helperText?: string | null;
   label?: string;
@@ -21,6 +17,11 @@ type SelectProps<
   placeholder?: string;
   allOption?: boolean;
   informAction?: () => void;
+  action: ({
+    inputValue,
+  }: {
+    inputValue: string;
+  }) => Promise<Promise<SelectOptions[]>>;
 } & UseControllerProps<T>;
 
 interface SelectOptions extends OptionBase {
@@ -28,12 +29,8 @@ interface SelectOptions extends OptionBase {
   value: string;
 }
 
-export function ControlledSelectWithSearch<
-  T extends FieldValues,
-  U extends { value: string; display: string }
->({
+export function ControlledSelectWithSearch<T extends FieldValues>({
   control,
-  dataSet,
   error,
   helperText,
   label,
@@ -41,12 +38,8 @@ export function ControlledSelectWithSearch<
   placeholder,
   required = false,
   informAction,
-}: SelectProps<T, U>) {
-  const options: SelectOptions[] = dataSet.map((i) => ({
-    value: i.value,
-    label: i.display,
-  }));
-
+  action,
+}: SelectProps<T>) {
   return (
     <FormControl isInvalid={!!error}>
       {label && (
@@ -57,14 +50,18 @@ export function ControlledSelectWithSearch<
         control={control}
         rules={{ required }}
         render={({ field }) => (
-          <Select<SelectOptions>
+          <AsyncSelect<SelectOptions>
             useBasicStyles
             isMulti={false}
             {...field}
             name={name}
-            options={options}
             placeholder={placeholder}
             closeMenuOnSelect={false}
+            loadOptions={(inputValue, callback) => {
+              action({ inputValue })
+                .then((v) => v)
+                .then((v) => callback(v));
+            }}
           />
         )}
       />

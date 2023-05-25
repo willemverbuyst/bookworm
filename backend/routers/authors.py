@@ -17,17 +17,17 @@ def get_authors(name=None, limit=None, page=1) -> dict:
     if name:
         authors_by_name = get_authors_by_name_from_db(name)
 
-        if authors_by_name:
-            result = len(authors_by_name)
+        # if authors_by_name:
+        result = len(authors_by_name)
 
-            return {
-                "status": "success",
-                "result": result,
-                "data": authors_by_name,
-                "message": "all authors for this query have been fetched",
-            }
-        else:
-            raise HTTPException(status.HTTP_404_NOT_FOUND, "No authors found")
+        return {
+            "status": "success",
+            "result": result,
+            "data": authors_by_name,
+            "message": "all authors for this query have been fetched",
+        }
+        # else:
+        #     raise HTTPException(status.HTTP_404_NOT_FOUND, "No authors found")
 
     authors = get_authors_from_db(limit, page)
     if authors:
