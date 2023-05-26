@@ -56,13 +56,12 @@ export function ControlledSelectWithSearch<T extends FieldValues>({
             {...field}
             name={name}
             placeholder={placeholder}
-            closeMenuOnSelect={false}
+            closeMenuOnSelect
             loadOptions={(inputValue, callback) => {
               action({ inputValue })
                 .then((v) => v)
                 .then((v) => callback(v));
             }}
-            onChange={() => console.log("field :>> ", field)}
           />
         )}
       />

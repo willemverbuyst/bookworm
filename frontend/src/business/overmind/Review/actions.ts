@@ -7,3 +7,5 @@ export const showReviewsPage = pipe(o.setReviewsPage(), o.getReviews());
 export const showAddReviewPage = o.setAddReviewPage();
 
 export const getAuthors = pipe(debounce(300), o.getAuthors());
+
+export const getBooksForAuthor = o.getBooksForAuthor();

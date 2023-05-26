@@ -1,7 +1,7 @@
 import { Box, Button, Flex, HStack, useId, VStack } from "@chakra-ui/react";
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { functions } from "../../../business/functions";
 import { useActions, useAppState } from "../../../business/overmind";
@@ -20,12 +20,12 @@ import { defaultValues, FormFields, validationSchema } from "./helpers";
 
 export function AddReviewPage() {
   const id = useId();
-  const allBooks = useAppState().book.overview || [];
-  const { getAuthors } = useActions().review;
-
-  const [booksForSelect, setBooksForSelect] = useState<
-    Array<{ display: string; value: string }>
-  >([]);
+  const { booksByAuthorForReview } = useAppState().review;
+  const { getAuthors, getBooksForAuthor } = useActions().review;
+  const booksForSelect = booksByAuthorForReview.map((i) => ({
+    value: i.id,
+    display: i.title,
+  }));
 
   // const { postReview } = useActions();
   const {
@@ -40,7 +40,11 @@ export function AddReviewPage() {
     resolver: zodResolver(validationSchema),
   });
 
-  const [startDate, endDate] = watch(["startDate", "endDate"]);
+  const [startDate, endDate, author] = watch([
+    "startDate",
+    "endDate",
+    "author",
+  ]);
 
   useEffect(() => {
     const numberOfDaysCalculated =
@@ -55,6 +59,10 @@ export function AddReviewPage() {
     console.log(data);
     reset();
   };
+
+  useEffect(() => {
+    getBooksForAuthor({ authorId: author.value });
+  }, [author]);
 
   return (
     <Flex flexDirection="column" alignItems="center">
@@ -73,7 +81,7 @@ export function AddReviewPage() {
             name="author"
             control={control}
             label="author"
-            error={errors.author}
+            error={errors.author?.value}
             required
             action={getAuthors}
           />
@@ -82,7 +90,7 @@ export function AddReviewPage() {
             name="book"
             control={control}
             label="book"
-            error={errors.book}
+            error={errors.book?.value}
             required
           />
           <HStack>

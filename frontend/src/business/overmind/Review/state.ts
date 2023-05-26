@@ -50,4 +50,22 @@ export const state: ReviewState = {
 
     return data;
   }),
+  booksByAuthorForReviewApi: null,
+  booksByAuthorForReview: derived(
+    ({ booksByAuthorForReviewApi }: ReviewState) => {
+      let startTime = 0;
+      if (NODE_ENV === "development") startTime = Date.now();
+
+      if (!booksByAuthorForReviewApi?.data.length) {
+        return [];
+      }
+      const { data } = booksByAuthorForReviewApi;
+
+      if (NODE_ENV === "development" && startTime) {
+        utils.logInfo(startTime, "derived fn: books by author for review");
+      }
+
+      return data;
+    }
+  ),
 };

@@ -93,3 +93,24 @@ export const getAuthors =
     state.review.isLoading = false;
     return response.data.map((i) => ({ value: i.id, label: i.name_of_author }));
   };
+
+export const getBooksForAuthor =
+  () =>
+  async (
+    { actions, effects, state }: Context,
+    { authorId }: { authorId: string }
+  ) => {
+    if (!authorId) return;
+
+    state.review.isLoading = true;
+    const response = await effects.review.api.getBooksForAuthor(authorId);
+
+    if (!response || response instanceof AxiosError) {
+      actions.api.handleErrorResponse({ response });
+      state.review.isLoading = false;
+    }
+
+    state.review.booksByAuthorForReviewApi = response;
+
+    state.review.isLoading = false;
+  };
