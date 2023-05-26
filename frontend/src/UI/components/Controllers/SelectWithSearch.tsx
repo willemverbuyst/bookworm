@@ -62,6 +62,7 @@ export function ControlledSelectWithSearch<T extends FieldValues>({
                 .then((v) => v)
                 .then((v) => callback(v));
             }}
+            onChange={() => console.log("field :>> ", field)}
           />
         )}
       />
