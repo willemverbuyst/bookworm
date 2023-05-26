@@ -31,4 +31,41 @@ export const state: ReviewState = {
 
     return data;
   }),
+  authorsForReviewApi: null,
+  authorsForReview: derived(({ authorsForReviewApi }: ReviewState) => {
+    let startTime = 0;
+    if (NODE_ENV === "development") startTime = Date.now();
+
+    if (!authorsForReviewApi?.data.length) {
+      return [];
+    }
+    const data = authorsForReviewApi.data.map((a) => ({
+      id: a.id,
+      nameOfAuthor: a.name_of_author,
+    }));
+
+    if (NODE_ENV === "development" && startTime) {
+      utils.logInfo(startTime, "derived fn: authors for review");
+    }
+
+    return data;
+  }),
+  booksByAuthorForReviewApi: null,
+  booksByAuthorForReview: derived(
+    ({ booksByAuthorForReviewApi }: ReviewState) => {
+      let startTime = 0;
+      if (NODE_ENV === "development") startTime = Date.now();
+
+      if (!booksByAuthorForReviewApi?.data.length) {
+        return [];
+      }
+      const { data } = booksByAuthorForReviewApi;
+
+      if (NODE_ENV === "development" && startTime) {
+        utils.logInfo(startTime, "derived fn: books by author for review");
+      }
+
+      return data;
+    }
+  ),
 };

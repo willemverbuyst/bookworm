@@ -1,14 +1,27 @@
 import os
 
 import psycopg2
-from database.python.author.helpers import format_authors, format_stats_pages
+from database.python.author.helpers import (
+    format_authors,
+    format_authors_for_search_by_name,
+    format_stats_pages,
+)
 from database.python.helpers.sql_helpers import create_connection
 
 dirname = os.path.dirname(__file__)
+find_authors_by_name_sql = os.path.join(
+    dirname, "../../sql/author/find_authors_by_name.sql"
+)
 select_authors_sql = os.path.join(dirname, "../../sql/author/select_authors.sql")
-select_author_stats_avg_pages_sql = os.path.join(dirname, "../../sql/author/select_author_stats_avg_pages.sql")
-select_author_stats_page_sql = os.path.join(dirname, "../../sql/author/select_author_stats_page.sql")
-select_count_author_sql = os.path.join(dirname, "../../sql/author/select_count_authors.sql")
+select_author_stats_avg_pages_sql = os.path.join(
+    dirname, "../../sql/author/select_author_stats_avg_pages.sql"
+)
+select_author_stats_page_sql = os.path.join(
+    dirname, "../../sql/author/select_author_stats_page.sql"
+)
+select_count_author_sql = os.path.join(
+    dirname, "../../sql/author/select_count_authors.sql"
+)
 
 
 def get_authors_from_db(limit, page):
@@ -19,12 +32,12 @@ def get_authors_from_db(limit, page):
     else:
         offset = 0
 
-    sql_file = open(select_authors_sql, 'r')
+    sql_file = open(select_authors_sql, "r")
     raw_sql = sql_file.read()
     sql_file.close()
 
     cursor = conn.cursor()
-    cursor.execute(raw_sql,(limit, offset))
+    cursor.execute(raw_sql, (limit, offset))
 
     data = cursor.fetchall()
     conn.close()
@@ -37,7 +50,7 @@ def get_authors_from_db(limit, page):
 def get_author_stats_page_from_db():
     conn = create_connection()
 
-    sql_file = open(select_author_stats_page_sql, 'r')
+    sql_file = open(select_author_stats_page_sql, "r")
     raw_sql = sql_file.read()
     sql_file.close()
 
@@ -55,7 +68,7 @@ def get_author_stats_page_from_db():
 def get_author_stats_avg_pages_from_db():
     conn = create_connection()
 
-    sql_file = open(select_author_stats_avg_pages_sql, 'r')
+    sql_file = open(select_author_stats_avg_pages_sql, "r")
     raw_sql = sql_file.read()
     sql_file.close()
 
@@ -71,7 +84,7 @@ def get_author_stats_avg_pages_from_db():
 def get_total_number_of_authors():
     conn = create_connection()
 
-    sql_file = open(select_count_author_sql, 'r')
+    sql_file = open(select_count_author_sql, "r")
     raw_sql = sql_file.read()
     sql_file.close()
 
@@ -82,3 +95,19 @@ def get_total_number_of_authors():
     conn.close()
 
     return result[0]
+
+
+def get_authors_by_name_from_db(name):
+    conn = create_connection()
+
+    sql_file = open(find_authors_by_name_sql, "r")
+    raw_sql = sql_file.read()
+    sql_file.close()
+
+    cursor = conn.cursor()
+    cursor.execute(raw_sql, ("%" + name + "%", "%" + name + "%"))
+
+    data = cursor.fetchall()
+    conn.close()
+
+    return format_authors_for_search_by_name(data)

@@ -14,6 +14,15 @@ def format_books(book_data):
     return books
 
 
+def format_books_for_author(book_data):
+    books = []
+    for row in book_data:
+        book = {"id": row[0], "title": row[1]}
+        books.append(book)
+
+    return books
+
+
 def format_stats_languages(language_data):
     stats = []
     for row in language_data:

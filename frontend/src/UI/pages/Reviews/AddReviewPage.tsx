@@ -1,14 +1,15 @@
 import { Box, Button, Flex, HStack, useId, VStack } from "@chakra-ui/react";
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { functions } from "../../../business/functions";
-import { useAppState } from "../../../business/overmind";
+import { useActions, useAppState } from "../../../business/overmind";
 import {
   ControlledDatePicker,
   ControlledNumberInput,
   ControlledSelect,
+  ControlledSelectWithSearch,
   ControlledStarRating,
   ControlledTextArea,
   ControlledTextInput,
@@ -19,15 +20,12 @@ import { defaultValues, FormFields, validationSchema } from "./helpers";
 
 export function AddReviewPage() {
   const id = useId();
-  const allAuthors = useAppState().author.overview || [];
-  const allBooks = useAppState().book.overview || [];
-  const authorsForSelect = allAuthors?.map((a) => ({
-    display: a["first name"],
-    value: a.id,
+  const { booksByAuthorForReview } = useAppState().review;
+  const { getAuthors, getBooksForAuthor } = useActions().review;
+  const booksForSelect = booksByAuthorForReview.map((i) => ({
+    value: i.id,
+    display: i.title,
   }));
-  const [booksForSelect, setBooksForSelect] = useState<
-    Array<{ display: string; value: string }>
-  >([]);
 
   // const { postReview } = useActions();
   const {
@@ -56,24 +54,15 @@ export function AddReviewPage() {
     }
   }, [setValue, startDate, endDate]);
 
-  useEffect(() => {
-    if (!author) {
-      setBooksForSelect([]);
-    }
-    const booksToSelect = allBooks
-      ?.filter((b) => String(b.author) === String(author))
-      .map((b) => ({
-        display: b.title,
-        value: b.id,
-      }));
-    setBooksForSelect(booksToSelect);
-  }, [author]);
-
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     // await postReview(data);
     console.log(data);
     reset();
   };
+
+  useEffect(() => {
+    getBooksForAuthor({ authorId: author.value });
+  }, [author]);
 
   return (
     <Flex flexDirection="column" alignItems="center">
@@ -88,21 +77,20 @@ export function AddReviewPage() {
             error={errors.title}
             required
           />
-          <ControlledSelect
-            dataSet={authorsForSelect}
+          <ControlledSelectWithSearch
             name="author"
             control={control}
             label="author"
-            error={errors.author}
-            helperText="only known authors can be selected"
+            error={errors.author?.value}
             required
+            action={getAuthors}
           />
           <ControlledSelect
             dataSet={booksForSelect}
             name="book"
             control={control}
             label="book"
-            error={errors.book}
+            error={errors.book?.value}
             required
           />
           <HStack>

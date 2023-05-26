@@ -12,6 +12,18 @@ def format_authors(author_data):
     return authors
 
 
+def format_authors_for_search_by_name(author_data):
+    authors = []
+    for row in author_data:
+        author = {
+            "id": row[0],
+            "name_of_author": row[1],
+        }
+        authors.append(author)
+
+    return authors
+
+
 def format_stats_pages(page_data):
     stats = []
     for row in page_data:
@@ -19,7 +31,7 @@ def format_stats_pages(page_data):
             "id": row[0],
             "author": row[1],
             "number_of_pages": row[2],
-            "number_of_books": row[3]
+            "number_of_books": row[3],
         }
         stats.append(data)
 
