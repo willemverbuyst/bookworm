@@ -5363,10 +5363,10 @@ keyv@^3.0.0:
   dependencies:
     json-buffer "3.0.0"
 
-knip@^2.10.4:
-  version "2.10.4"
-  resolved "https://registry.yarnpkg.com/knip/-/knip-2.10.4.tgz#6241879d3bea2bbab91d87e03a1f299a11848312"
-  integrity sha512-WEnR/Z0rqTVy2UB22JwHGTNdf17tVP1ea001zmkwEvMprUByxTa4UoWSQrkl1Kq6sjNSlqTVSQ5vINBZNXEWzw==
+knip@^2.14.0:
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/knip/-/knip-2.14.0.tgz#059523d9164060051be1050d3e65aa48756aae2c"
+  integrity sha512-YcJScUrNniXq8Dn8wyr4Bwn3y3vYUt3H+OVyVZnjQ+DDwWHuaDUMJ9qw93sk/M7ZFFIEI93JwgJofHZ5IPCSug==
   dependencies:
     "@npmcli/map-workspaces" "^3.0.4"
     "@snyk/github-codeowners" "^1.1.0"
