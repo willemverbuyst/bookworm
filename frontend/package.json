@@ -20,7 +20,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.0.0",
     "axios": "1.4.0",
-    "chakra-dayzed-datepicker": "^0.2.7",
+    "chakra-dayzed-datepicker": "^0.2.9",
     "chakra-react-select": "^4.6.0",
     "concurrently": "^8.0.1",
     "date-fns": "^2.29.3",
