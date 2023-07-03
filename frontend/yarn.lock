@@ -5363,10 +5363,10 @@ keyv@^3.0.0:
   dependencies:
     json-buffer "3.0.0"
 
-knip@^2.14.0:
-  version "2.14.0"
-  resolved "https://registry.yarnpkg.com/knip/-/knip-2.14.0.tgz#059523d9164060051be1050d3e65aa48756aae2c"
-  integrity sha512-YcJScUrNniXq8Dn8wyr4Bwn3y3vYUt3H+OVyVZnjQ+DDwWHuaDUMJ9qw93sk/M7ZFFIEI93JwgJofHZ5IPCSug==
+knip@^2.14.3:
+  version "2.14.3"
+  resolved "https://registry.yarnpkg.com/knip/-/knip-2.14.3.tgz#66814a1d62dc14aa46aafbac8dd12b0ae9c97b56"
+  integrity sha512-TDjWB828W5FlSNIemoUj9MK4+NsE5AkTuSt75+V+4hIbsgu29Ftfu1vuQwXv8cIXpRTTX8RN39YUxzTmtiFUTA==
   dependencies:
     "@npmcli/map-workspaces" "^3.0.4"
     "@snyk/github-codeowners" "^1.1.0"
@@ -5384,7 +5384,7 @@ knip@^2.14.0:
     summary "^2.1.0"
     typescript "^5.0.2"
     zod "^3.20.6"
-    zod-validation-error "1.3.0"
+    zod-validation-error "1.3.1"
 
 language-subtag-registry@~0.3.2:
   version "0.3.22"
@@ -7986,10 +7986,10 @@ yocto-queue@^1.0.0:
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-1.0.0.tgz#7f816433fb2cbc511ec8bf7d263c3b58a1a3c251"
   integrity sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==
 
-zod-validation-error@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/zod-validation-error/-/zod-validation-error-1.3.0.tgz#6a37e8b1896e45362a4e4cf9506eca203fad3c6e"
-  integrity sha512-4WoQnuWnj06kwKR4A+cykRxFmy+CTvwMQO5ogTXLiVx1AuvYYmMjixh7sbkSsQTr1Fvtss6d5kVz8PGeMPUQjQ==
+zod-validation-error@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/zod-validation-error/-/zod-validation-error-1.3.1.tgz#7134579d2ba3994495133b879a076786c8c270f5"
+  integrity sha512-cNEXpla+tREtNdAnNKY4xKY1SGOn2yzyuZMu4O0RQylX9apRpUjNcPkEc3uHIAr5Ct7LenjZt6RzjEH6+JsqVQ==
 
 zod@^3.20.6:
   version "3.20.6"
