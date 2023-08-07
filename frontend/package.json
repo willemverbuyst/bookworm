@@ -86,7 +86,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "jsdom": "^21.1.0",
     "knip": "^2.14.0",
-    "madge": "^6.0.0",
+    "madge": "^6.1.0",
     "prettier": "^2.5.1"
   }
 }
