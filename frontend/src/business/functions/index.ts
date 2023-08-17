@@ -6,6 +6,7 @@ import { getColorIndex } from "./getColorIndex";
 import { getEntries } from "./getEntries";
 import { getValues } from "./getValues";
 import { groupBy } from "./groupBy";
+import { hasValue } from "./hasValue";
 
 export const functions = {
   calculateDays,
@@ -16,4 +17,5 @@ export const functions = {
   getEntries,
   getValues,
   groupBy,
+  hasValue,
 };

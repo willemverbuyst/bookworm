@@ -50,14 +50,6 @@ export type ApiResponseBookwormStatsLibrary = z.infer<
   typeof ApiResponseBookwormStatsLibrary
 >;
 
-interface Library {
-  id: string;
-  library: string;
-  userIsActive: boolean;
-  numberOfBookwormsPerLibrary: number;
-  color: string;
-}
-
 interface Filter {
   active: boolean;
 }
@@ -74,7 +66,7 @@ export interface BookwormState {
   isLoading: boolean;
   overview: Bookworm[];
   bookwormDetailsApi: ApiResponseBookWormById | null;
-  statsLibrary: Library[];
+  statsLibrary: string[];
   statsLibraryApi: ApiResponseBookwormStatsLibrary | null;
   ui: UI<Bookworm, Filter>;
 }

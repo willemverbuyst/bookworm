@@ -1,5 +1,4 @@
 import { derived } from "overmind";
-import { RootState } from "..";
 import { NODE_ENV } from "../../../config";
 import { utils } from "../../../utils";
 import { functions } from "../../functions";
@@ -56,36 +55,25 @@ export const state: BookwormState = {
       return data;
     }
   ),
-  statsLibrary: derived(
-    ({ statsLibraryApi }: BookwormState, rootState: RootState) => {
-      let startTime = 0;
-      if (NODE_ENV === "development") startTime = Date.now();
+  statsLibrary: derived(({ statsLibraryApi }: BookwormState) => {
+    let startTime = 0;
+    if (NODE_ENV === "development") startTime = Date.now();
 
-      if (!statsLibraryApi?.data.length) {
-        return [];
-      }
-
-      const data = [...statsLibraryApi.data]
-        .sort(functions.compare("user_is_active"))
-        .sort(functions.compare("id"))
-        .map((d, index) => ({
-          id: d.id,
-          userIsActive: d.user_is_active,
-          library: d.library,
-          numberOfBookwormsPerLibrary: d.number_of_bookworms_per_library,
-          color: rootState.app.colors[functions.getColorIndex(index)],
-        }));
-
-      if (NODE_ENV === "development" && startTime) {
-        utils.logInfo(
-          startTime,
-          "derived fn: overview bookworms stats library"
-        );
-      }
-
-      return data;
+    if (!statsLibraryApi?.data.length) {
+      return [];
     }
-  ),
+
+    const data = [...statsLibraryApi.data]
+      .sort(functions.compare("user_is_active"))
+      .sort(functions.compare("id"))
+      .map((d) => d.id);
+
+    if (NODE_ENV === "development" && startTime) {
+      utils.logInfo(startTime, "derived fn: overview bookworms stats library");
+    }
+
+    return data;
+  }),
   statsLibraryApi: null,
   ui: {
     table: {
