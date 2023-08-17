@@ -4,11 +4,12 @@ import { AdminGenrePage } from "../UI/pages/Admin/AdminGenrePage";
 import { AdminLanguagePage } from "../UI/pages/Admin/AdminLanguagePage";
 import { AdminLibraryPage } from "../UI/pages/Admin/AdminLibraryPage";
 import { AdminPage } from "../UI/pages/Admin/AdminPage";
-import { BookwormsPage } from "../UI/pages/BookWorms";
-import { HomePage } from "../UI/pages/Home";
-import { PaymentsPage } from "../UI/pages/Payment";
-import { RentalsPage } from "../UI/pages/Rentals";
-import { AddReviewPage, AllReviewsPage } from "../UI/pages/Reviews";
+import { BookwormsPage } from "../UI/pages/BookWorms/BookwormsPage";
+import { HomePage } from "../UI/pages/Home/HomePage";
+import { PaymentsPage } from "../UI/pages/Payment/PaymentsPage";
+import { RentalsPage } from "../UI/pages/Rentals/RentalsPage";
+import { AddReviewPage } from "../UI/pages/Reviews/AddReviewPage";
+import { AllReviewsPage } from "../UI/pages/Reviews/AllReviewsPage";
 
 export default function PrivateRoutes() {
   const { isSignedIn } = useAppState().auth;

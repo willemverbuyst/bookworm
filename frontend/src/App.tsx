@@ -8,7 +8,7 @@ import PrivateRoutes from "./routes/PrivateRoutes";
 import PublicRoutes from "./routes/Publicroutes";
 import { NavigationBar } from "./UI/components/Navigation";
 import { hooks } from "./UI/hooks";
-import { PageNotFoundPage } from "./UI/pages/PageNotFound";
+import { PageNotFoundPage } from "./UI/pages/PageNotFound/PageNotFoundPage";
 
 export default function App() {
   const [, setToast] = hooks.useToastHook();
