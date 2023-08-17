@@ -49,7 +49,7 @@ export const search = (debounce(100), o.setQueryString());
 
 export const setColumnQueryString = o.setColumnQueryString();
 
-export const setShowInput = pipe(
+export const updateShowInput = pipe(
   o.setShowInput(),
   filter(o.shouldResetQueryString()),
   o.resetColumnQueryString()

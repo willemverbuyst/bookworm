@@ -1,67 +1,87 @@
 import { filter, parallel, pipe } from "overmind";
-import * as o from "./operators";
+import {
+  getBooks,
+  getBookStatsGenre,
+  getBookStatsLanguage,
+  getBookStatsYearPublished,
+  getGenres,
+  getLanguages,
+  resetColumnQueryString,
+  resetGenre,
+  resetLanguage,
+  resetLimit,
+  resetPage,
+  resetQueryString,
+  setBooksPage,
+  setGenreFilter,
+  setLanguageFilter,
+  setLimit,
+  setLimitToTotal,
+  setPage,
+  setPagination,
+  setShowAll,
+  setShowInput,
+  shouldLoadBooks,
+  shouldResetQueryString,
+} from "./operators";
+
+export {
+  setColumnQueryString,
+  setQueryString as search,
+  setSort,
+} from "./operators";
 
 export const showBooksPage = pipe(
-  o.setBooksPage(),
-  o.shouldLoadBooks(),
+  setBooksPage,
+  shouldLoadBooks,
   parallel(
-    o.getBooks(),
-    o.getBookStatsGenre(),
-    o.getBookStatsLanguage(),
-    o.getBookStatsYearPublished(),
-    o.getGenres(),
-    o.getLanguages()
+    getBooks,
+    getBookStatsGenre,
+    getBookStatsLanguage,
+    getBookStatsYearPublished,
+    getGenres,
+    getLanguages
   )
 );
 
-export const changeLimit = pipe(
-  o.setLimit(),
-  o.resetQueryString(),
-  o.getBooks()
-);
+export const changeLimit = pipe(setLimit, resetQueryString, getBooks);
 
-export const changePage = pipe(o.setPage(), o.resetQueryString(), o.getBooks());
+export const changePage = pipe(setPage, resetQueryString, getBooks);
 
 export const changeGenreFilter = pipe(
-  o.setGenreFilter(),
-  o.resetQueryString(),
-  o.getBooks()
+  setGenreFilter,
+  resetQueryString,
+  getBooks
 );
 
 export const changeLanguageFilter = pipe(
-  o.setLanguageFilter(),
-  o.resetQueryString(),
-  o.getBooks()
+  setLanguageFilter,
+  resetQueryString,
+  getBooks
 );
 
 export const usePagination = pipe(
-  o.setPagination(),
-  o.resetQueryString(),
-  o.resetGenre(),
-  o.resetLanguage(),
-  o.resetLimit(),
-  o.resetPage(),
-  o.getBooks()
+  setPagination,
+  resetQueryString,
+  resetGenre,
+  resetLanguage,
+  resetLimit,
+  resetPage,
+  getBooks
 );
 
 export const showAllRows = pipe(
-  o.setShowAll(),
-  o.resetQueryString(),
-  o.resetGenre(),
-  o.resetLanguage(),
-  o.setLimitToTotal(),
-  o.resetPage(),
-  o.getBooks()
+  setShowAll,
+  resetQueryString,
+  resetGenre,
+  resetLanguage,
+  setLimitToTotal,
+  resetPage,
+  getBooks
 );
 
-export const setSort = o.setSort();
-
-export const search = o.setQueryString();
-
-export const setColumnQueryString = o.setColumnQueryString();
-
-export const setShowInput = pipe(
-  o.setShowInput(),
-  filter(o.shouldResetQueryString()),
-  o.resetColumnQueryString()
+export const updateShowInput = pipe(
+  setShowInput,
+  filter(shouldResetQueryString),
+  resetColumnQueryString
 );
