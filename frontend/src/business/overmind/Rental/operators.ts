@@ -4,183 +4,165 @@ import { filter } from "overmind";
 import { Context } from "..";
 import { Page, Rental, SortDirection } from "../../models";
 
-export const setRentalsPage =
-  () =>
-  ({ state }: Context) => {
-    state.app.currentPage = Page.RENTALS;
-  };
+export const setRentalsPage = ({ state }: Context) => {
+  state.app.currentPage = Page.RENTALS;
+};
 
-export const shouldLoadRentals = () =>
-  filter(({ state }: Context) => {
-    return !state.rental.getAllApi?.data.length;
+export const shouldLoadRentals = filter(({ state }: Context) => {
+  return !state.rental.getAllApi?.data.length;
+});
+
+export const getRentals = async ({ actions, effects, state }: Context) => {
+  const {
+    limit,
+    page,
+    filter: { returned },
+  } = state.rental.ui.table;
+  state.rental.isLoading = true;
+  const response = await effects.rental.api.getRentals({
+    limit,
+    page,
+    returned,
   });
 
-export const getRentals =
-  () =>
-  async ({ actions, effects, state }: Context) => {
-    const {
-      limit,
-      page,
-      filter: { returned },
-    } = state.rental.ui.table;
-    state.rental.isLoading = true;
-    const response = await effects.rental.api.getRentals({
-      limit,
-      page,
-      returned,
-    });
+  if (!response || response instanceof AxiosError) {
+    actions.api.handleErrorResponse({ response });
+  } else {
+    state.rental.getAllApi = response;
+  }
 
-    if (!response || response instanceof AxiosError) {
-      actions.api.handleErrorResponse({ response });
-    } else {
-      state.rental.getAllApi = response;
-    }
+  state.rental.isLoading = false;
+};
 
-    state.rental.isLoading = false;
-  };
+export const getRentalStatsDay = async ({
+  actions,
+  effects,
+  state,
+}: Context) => {
+  state.rental.isLoading = true;
+  const response = await effects.rental.api.getRentalStatsDay();
 
-export const getRentalStatsDay =
-  () =>
-  async ({ actions, effects, state }: Context) => {
-    state.rental.isLoading = true;
-    const response = await effects.rental.api.getRentalStatsDay();
+  if (!response || response instanceof AxiosError) {
+    actions.api.handleErrorResponse({ response });
+  } else {
+    state.rental.statsDayApi = response;
+  }
 
-    if (!response || response instanceof AxiosError) {
-      actions.api.handleErrorResponse({ response });
-    } else {
-      state.rental.statsDayApi = response;
-    }
+  state.rental.isLoading = false;
+};
 
-    state.rental.isLoading = false;
-  };
+export const getRentalStatsDuration = async ({
+  actions,
+  effects,
+  state,
+}: Context) => {
+  state.rental.isLoading = true;
+  const response = await effects.rental.api.getRentalStatsDuration();
 
-export const getRentalStatsDuration =
-  () =>
-  async ({ actions, effects, state }: Context) => {
-    state.rental.isLoading = true;
-    const response = await effects.rental.api.getRentalStatsDuration();
+  if (!response || response instanceof AxiosError) {
+    actions.api.handleErrorResponse({ response });
+  } else {
+    state.rental.statsDurationApi = response;
+  }
 
-    if (!response || response instanceof AxiosError) {
-      actions.api.handleErrorResponse({ response });
-    } else {
-      state.rental.statsDurationApi = response;
-    }
+  state.rental.isLoading = false;
+};
 
-    state.rental.isLoading = false;
-  };
+export const setLimit = ({ state }: Context, { limit }: { limit: number }) => {
+  state.rental.ui.table.limit = limit;
+};
 
-export const setLimit =
-  () =>
-  ({ state }: Context, { limit }: { limit: number }) => {
-    state.rental.ui.table.limit = limit;
-  };
+export const resetLimit = ({ state }: Context) => {
+  state.rental.ui.table.limit = 10;
+};
 
-export const resetLimit =
-  () =>
-  ({ state }: Context) => {
-    state.rental.ui.table.limit = 10;
-  };
+export const setLimitToTotal = ({ state }: Context) => {
+  state.book.ui.table.limit =
+    state.book.getAllApi?.total || state.book.ui.table.limit;
+};
 
-export const setLimitToTotal =
-  () =>
-  ({ state }: Context) => {
-    state.book.ui.table.limit =
-      state.book.getAllApi?.total || state.book.ui.table.limit;
-  };
+export const setPage = ({ state }: Context, { page }: { page: number }) => {
+  state.rental.ui.table.page = page;
+};
 
-export const setPage =
-  () =>
-  ({ state }: Context, { page }: { page: number }) => {
-    state.rental.ui.table.page = page;
-  };
+export const resetPage = ({ state }: Context) => {
+  state.rental.ui.table.page = 1;
+};
 
-export const resetPage =
-  () =>
-  ({ state }: Context) => {
-    state.rental.ui.table.page = 1;
-  };
+export const setQueryString = (
+  { state }: Context,
+  { queryString }: { queryString: string }
+) => {
+  state.rental.ui.table.queryString = queryString;
+};
 
-export const setQueryString =
-  () =>
-  ({ state }: Context, { queryString }: { queryString: string }) => {
-    state.rental.ui.table.queryString = queryString;
-  };
+export const resetQueryString = ({ state }: Context) => {
+  state.rental.ui.table.queryString = "";
+};
 
-export const resetQueryString =
-  () =>
-  ({ state }: Context) => {
-    state.rental.ui.table.queryString = "";
-  };
+export const setShowAll = ({ state }: Context) => {
+  state.rental.ui.table.showAll = true;
+};
 
-export const setShowAll =
-  () =>
-  ({ state }: Context) => {
-    state.rental.ui.table.showAll = true;
-  };
+export const setPagination = ({ state }: Context) => {
+  state.rental.ui.table.showAll = false;
+};
 
-export const setPagination =
-  () =>
-  ({ state }: Context) => {
-    state.rental.ui.table.showAll = false;
-  };
+export const setReturnedFilter = (
+  { state }: Context,
+  { returned }: { returned: string }
+) => {
+  state.rental.ui.table.filter.returned = returned;
+};
 
-export const setReturnedFilter =
-  () =>
-  ({ state }: Context, { returned }: { returned: string }) => {
-    state.rental.ui.table.filter.returned = returned;
-  };
+export const resetReturnedFilter = ({ state }: Context) => {
+  state.rental.ui.table.filter.returned = "";
+};
 
-export const resetReturnedFilter =
-  () =>
-  ({ state }: Context) => {
-    state.rental.ui.table.filter.returned = "";
-  };
+export const setSort = (
+  { state }: Context,
+  {
+    property,
+    sortDirection,
+  }: { property: keyof Rental; sortDirection: keyof typeof SortDirection }
+) => {
+  state.rental.ui.table.sort = { property, sortDirection };
+};
 
-export const setSort =
-  () =>
-  (
-    { state }: Context,
-    {
-      property,
-      sortDirection,
-    }: { property: keyof Rental; sortDirection: keyof typeof SortDirection }
-  ) => {
-    state.rental.ui.table.sort = { property, sortDirection };
-  };
+export const setColumnQueryString = (
+  { state }: Context,
+  { field, queryString }: { field: keyof Rental; queryString: string }
+) => {
+  const column = state.rental.ui.table.columns[field];
 
-export const setColumnQueryString =
-  () =>
-  (
-    { state }: Context,
-    { field, queryString }: { field: keyof Rental; queryString: string }
-  ) => {
-    const column = state.rental.ui.table.columns[field];
+  column.queryString = queryString;
+};
 
-    column.queryString = queryString;
-  };
+export const resetColumnQueryString = (
+  { state }: Context,
+  { field }: { field: keyof Rental }
+) => {
+  const column = state.rental.ui.table.columns[field];
 
-export const resetColumnQueryString =
-  () =>
-  ({ state }: Context, { field }: { field: keyof Rental }) => {
-    const column = state.rental.ui.table.columns[field];
+  column.queryString = "";
+};
 
-    column.queryString = "";
-  };
+export const setShowInput = (
+  { state }: Context,
+  { field }: { field: keyof Rental }
+) => {
+  const column = state.rental.ui.table.columns[field];
 
-export const setShowInput =
-  () =>
-  ({ state }: Context, { field }: { field: keyof Rental }) => {
-    const column = state.rental.ui.table.columns[field];
+  column.showInput = !column.showInput;
 
-    column.showInput = !column.showInput;
+  return { field };
+};
 
-    return { field };
-  };
+export const shouldResetQueryString = (
+  { state }: Context,
+  { field }: { field: keyof Rental }
+) => {
+  const column = state.rental.ui.table.columns[field];
 
-export const shouldResetQueryString =
-  () =>
-  ({ state }: Context, { field }: { field: keyof Rental }) => {
-    const column = state.rental.ui.table.columns[field];
-
-    return !column.showInput;
-  };
+  return !column.showInput;
+};

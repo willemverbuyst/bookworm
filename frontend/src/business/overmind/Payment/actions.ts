@@ -1,49 +1,65 @@
 import { filter, pipe } from "overmind";
+import {
+  fetchPayments,
+  resetAmountFilter,
+  resetColumnQueryString,
+  resetLimit,
+  resetPage,
+  resetQueryString,
+  setAmountFilter,
+  setLimit,
+  setLimitToTotal,
+  setPage,
+  setPagination,
+  setPaymentsPage,
+  setQueryString,
+  setShowAll,
+  setShowInput,
+  shouldFetchPayments,
+  shouldLoadPayments,
+  shouldResetQueryString,
+} from "./operators";
 
-import * as o from "./operators";
+export { setColumnQueryString, setSort } from "./operators";
 
-export const getPayments = pipe(o.shouldFetchPayments(), o.fetchPayments());
+export const getPayments = pipe(shouldFetchPayments, fetchPayments);
 
 export const showPaymentsPage = pipe(
-  o.setPaymentsPage(),
-  o.shouldLoadPayments(),
-  o.fetchPayments()
+  setPaymentsPage,
+  shouldLoadPayments,
+  fetchPayments
 );
 
-export const changeLimit = pipe(o.setLimit(), o.resetQueryString());
+export const changeLimit = pipe(setLimit, resetQueryString);
 
-export const changePage = pipe(o.setPage(), o.resetQueryString());
+export const changePage = pipe(setPage, resetQueryString);
 
 export const changeAmountFilter = pipe(
-  o.setAmountFilter(),
-  o.resetQueryString(),
-  o.fetchPayments()
+  setAmountFilter,
+  resetQueryString,
+  fetchPayments
 );
 
 export const usePagination = pipe(
-  o.setPagination(),
-  o.resetQueryString(),
-  o.resetAmountFilter(),
-  o.resetLimit(),
-  o.resetPage()
+  setPagination,
+  resetQueryString,
+  resetAmountFilter,
+  resetLimit,
+  resetPage
 );
 
 export const showAllRows = pipe(
-  o.setShowAll(),
-  o.resetQueryString(),
-  o.resetAmountFilter(),
-  o.setLimitToTotal(),
-  o.resetPage()
+  setShowAll,
+  resetQueryString,
+  resetAmountFilter,
+  setLimitToTotal,
+  resetPage
 );
 
-export const setSort = o.setSort();
-
-export const search = o.setQueryString();
-
-export const setColumnQueryString = o.setColumnQueryString();
+export const search = setQueryString;
 
 export const updateShowInput = pipe(
-  o.setShowInput(),
-  filter(o.shouldResetQueryString()),
-  o.resetColumnQueryString()
+  setShowInput,
+  filter(shouldResetQueryString),
+  resetColumnQueryString
 );

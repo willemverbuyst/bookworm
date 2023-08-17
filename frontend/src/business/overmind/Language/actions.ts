@@ -1,24 +1,32 @@
 import { debounce, filter, pipe } from "overmind";
-import * as o from "./operators";
+import {
+  addLanguages,
+  changeLanguage,
+  fetchLanguages,
+  removeLanguage,
+  resetColumnQueryString,
+  setQueryString,
+  setShowInput,
+  shouldFetchLanguages,
+  shouldResetQueryString,
+} from "./operators";
 
-export const getLanguages = pipe(o.shouldFetchLanguages(), o.fetchLanguages());
+export { setColumnQueryString, setSort } from "./operators";
 
-export const search = pipe(debounce(100), o.setQueryString());
+export const getLanguages = pipe(shouldFetchLanguages, fetchLanguages);
 
-export const postLanguages = pipe(o.addLanguages(), o.fetchLanguages());
+export const search = pipe(debounce(100), setQueryString);
 
-export const deleteLanguage = pipe(o.deleteLanguage(), o.fetchLanguages());
+export const postLanguages = pipe(addLanguages, fetchLanguages);
 
-export const updateLanguage = pipe(o.updateLanguage(), o.fetchLanguages());
+export const deleteLanguage = pipe(removeLanguage, fetchLanguages);
 
-export const setSort = o.setSort();
-
-export const setColumnQueryString = o.setColumnQueryString();
+export const updateLanguage = pipe(changeLanguage, fetchLanguages);
 
 export const updateShowInput = pipe(
-  o.setShowInput(),
-  filter(o.shouldResetQueryString()),
-  o.resetColumnQueryString()
+  setShowInput,
+  filter(shouldResetQueryString),
+  resetColumnQueryString
 );
 
 export const changeLimit = () => () => null;

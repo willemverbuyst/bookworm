@@ -1,56 +1,66 @@
 import { debounce, filter, parallel, pipe } from "overmind";
-import * as o from "./operators";
+import {
+  getRentals,
+  getRentalStatsDay,
+  getRentalStatsDuration,
+  resetColumnQueryString,
+  resetLimit,
+  resetPage,
+  resetQueryString,
+  resetReturnedFilter,
+  setLimit,
+  setLimitToTotal,
+  setPage,
+  setPagination,
+  setQueryString,
+  setRentalsPage,
+  setReturnedFilter,
+  setShowAll,
+  setShowInput,
+  shouldLoadRentals,
+  shouldResetQueryString,
+} from "./operators";
+
+export { setColumnQueryString, setSort } from "./operators";
 
 export const showRentalsPage = pipe(
-  o.setRentalsPage(),
-  o.shouldLoadRentals(),
-  parallel(o.getRentals(), o.getRentalStatsDay(), o.getRentalStatsDuration())
+  setRentalsPage,
+  shouldLoadRentals,
+  parallel(getRentals, getRentalStatsDay, getRentalStatsDuration)
 );
 
-export const changeLimit = pipe(
-  o.setLimit(),
-  o.resetQueryString(),
-  o.getRentals()
-);
+export const changeLimit = pipe(setLimit, resetQueryString, getRentals);
 
-export const changePage = pipe(
-  o.setPage(),
-  o.resetQueryString(),
-  o.getRentals()
-);
+export const changePage = pipe(setPage, resetQueryString, getRentals);
 
 export const changeReturnedFilter = pipe(
-  o.setReturnedFilter(),
-  o.resetQueryString(),
-  o.getRentals()
+  setReturnedFilter,
+  resetQueryString,
+  getRentals
 );
 
 export const usePagination = pipe(
-  o.setPagination(),
-  o.resetQueryString(),
-  o.resetReturnedFilter(),
-  o.resetLimit(),
-  o.resetPage(),
-  o.getRentals()
+  setPagination,
+  resetQueryString,
+  resetReturnedFilter,
+  resetLimit,
+  resetPage,
+  getRentals
 );
 
 export const showAllRows = pipe(
-  o.setShowAll(),
-  o.resetQueryString(),
-  o.resetReturnedFilter(),
-  o.setLimitToTotal(),
-  o.resetPage(),
-  o.getRentals()
+  setShowAll,
+  resetQueryString,
+  resetReturnedFilter,
+  setLimitToTotal,
+  resetPage,
+  getRentals
 );
 
-export const setSort = o.setSort();
-
-export const search = (debounce(100), o.setQueryString());
-
-export const setColumnQueryString = o.setColumnQueryString();
+export const search = (debounce(100), setQueryString);
 
 export const updateShowInput = pipe(
-  o.setShowInput(),
-  filter(o.shouldResetQueryString()),
-  o.resetColumnQueryString()
+  setShowInput,
+  filter(shouldResetQueryString),
+  resetColumnQueryString
 );

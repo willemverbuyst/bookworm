@@ -1,44 +1,56 @@
 import { debounce, filter, pipe } from "overmind";
-import * as o from "./operators";
+import {
+  addGenres,
+  changeGenre,
+  fetchGenres,
+  removeGenre,
+  resetColumnQueryString,
+  resetLimit,
+  resetPage,
+  resetQueryString,
+  setLimit,
+  setLimitToTotal,
+  setPage,
+  setPagination,
+  setQueryString,
+  setShowAll,
+  setShowInput,
+  shouldFetchGenres,
+  shouldResetQueryString,
+} from "./operators";
 
-export const getGenres = pipe(o.shouldFetchGenres(), o.fetchGenres());
+export { setColumnQueryString, setSort } from "./operators";
 
-export const postGenres = pipe(o.addGenres(), o.fetchGenres());
+export const getGenres = pipe(shouldFetchGenres, fetchGenres);
 
-export const deleteGenre = pipe(o.deleteGenre(), o.fetchGenres());
+export const postGenres = pipe(addGenres, fetchGenres);
 
-export const updateGenre = pipe(o.updateGenre(), o.fetchGenres());
+export const deleteGenre = pipe(removeGenre, fetchGenres);
 
-export const changeLimit = pipe(
-  o.setLimit(),
-  o.resetQueryString(),
-  o.fetchGenres()
-);
+export const updateGenre = pipe(changeGenre, fetchGenres);
 
-export const changePage = pipe(o.setPage(), o.resetQueryString());
+export const changeLimit = pipe(setLimit, resetQueryString, fetchGenres);
+
+export const changePage = pipe(setPage, resetQueryString);
 
 export const usePagination = pipe(
-  o.setPagination(),
-  o.resetQueryString(),
-  o.resetLimit(),
-  o.resetPage()
+  setPagination,
+  resetQueryString,
+  resetLimit,
+  resetPage
 );
 
 export const showAllRows = pipe(
-  o.setShowAll(),
-  o.resetQueryString(),
-  o.setLimitToTotal(),
-  o.resetPage()
+  setShowAll,
+  resetQueryString,
+  setLimitToTotal,
+  resetPage
 );
 
-export const setSort = o.setSort();
-
-export const search = (debounce(100), o.setQueryString());
-
-export const setColumnQueryString = o.setColumnQueryString();
+export const search = (debounce(100), setQueryString);
 
 export const updateShowInput = pipe(
-  o.setShowInput(),
-  filter(o.shouldResetQueryString()),
-  o.resetColumnQueryString()
+  setShowInput,
+  filter(shouldResetQueryString),
+  resetColumnQueryString
 );
