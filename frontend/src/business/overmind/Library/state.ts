@@ -1,6 +1,11 @@
 import { derived } from "overmind";
-import { functions } from "../../functions";
 import { LibraryState, SortDirection } from "../../models";
+import {
+  returnLibraryObject,
+  searchByBar,
+  searchByColumn,
+  sortByProperty,
+} from "./helpers";
 
 export const state: LibraryState = {
   isLoading: false,
@@ -9,15 +14,7 @@ export const state: LibraryState = {
     if (!detailsApi?.data) {
       return null;
     }
-    return {
-      id: detailsApi.data.id,
-      "name of library": detailsApi.data.name_of_library,
-      phone: detailsApi.data.phone,
-      address: detailsApi.data.address,
-      postalCode: detailsApi.data.postal_code,
-      city: detailsApi.data.city,
-      country: detailsApi.data.country,
-    };
+    return returnLibraryObject(detailsApi.data);
   }),
   getAllApi: null,
   overview: derived(
@@ -31,31 +28,10 @@ export const state: LibraryState = {
         return [];
       }
       return getAllApi.data
-        .map((i) => ({
-          id: i.id,
-          "name of library": i.name_of_library,
-          phone: i.phone,
-          address: i.address,
-          postalCode: i.postal_code,
-          city: i.city,
-          country: i.country,
-        }))
-        .filter((a) =>
-          functions.genericSearch(a, searchKeys, queryString, false)
-        )
-        .sort((a, b) =>
-          functions.genericSort(a, b, {
-            property: sort.property,
-            sortDirection: sort.sortDirection,
-          })
-        )
-        .filter((i) =>
-          Object.values(columns)
-            .filter((c) => c.display)
-            .every((c) =>
-              functions.genericSearch(i, [c.field], c.queryString, false)
-            )
-        );
+        .map(returnLibraryObject)
+        .filter(searchByBar(searchKeys, queryString))
+        .sort(sortByProperty(sort))
+        .filter(searchByColumn(columns));
     }
   ),
   selectOptions: derived(({ getAllApi }: LibraryState) => {
