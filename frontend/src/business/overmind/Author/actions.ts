@@ -1,48 +1,56 @@
 import { filter, parallel, pipe } from "overmind";
-import * as o from "./operators";
+import {
+  getAuthors,
+  getAuthorStatsPage,
+  resetColumnQueryString,
+  resetLimit,
+  resetPage,
+  resetQueryString,
+  setAuthorsPage,
+  setLimit,
+  setLimitToTotal,
+  setPage,
+  setPagination,
+  setShowAll,
+  setShowInput,
+  shouldLoadAuthors,
+  shouldResetQueryString,
+} from "./operators";
+
+export {
+  setColumnQueryString,
+  setQueryString as search,
+  setSort,
+} from "./operators";
 
 export const showAuthorsPage = pipe(
-  o.setAuthorsPage(),
-  o.shouldLoadAuthors(),
-  parallel(o.getAuthors(), o.getAuthorStatsPage())
+  setAuthorsPage,
+  shouldLoadAuthors,
+  parallel(getAuthors, getAuthorStatsPage)
 );
 
-export const changeLimit = pipe(
-  o.setLimit(),
-  o.resetQueryString(),
-  o.getAuthors()
-);
+export const changeLimit = pipe(setLimit, resetQueryString, getAuthors);
 
-export const changePage = pipe(
-  o.setPage(),
-  o.resetQueryString(),
-  o.getAuthors()
-);
+export const changePage = pipe(setPage, resetQueryString, getAuthors);
 
 export const showAllRows = pipe(
-  o.setShowAll(),
-  o.resetQueryString(),
-  o.setLimitToTotal(),
-  o.resetPage(),
-  o.getAuthors()
+  setShowAll,
+  resetQueryString,
+  setLimitToTotal,
+  resetPage,
+  getAuthors
 );
 
 export const usePagination = pipe(
-  o.setPagination(),
-  o.resetQueryString(),
-  o.resetLimit(),
-  o.resetPage(),
-  o.getAuthors()
+  setPagination,
+  resetQueryString,
+  resetLimit,
+  resetPage,
+  getAuthors
 );
 
-export const setSort = o.setSort();
-
-export const search = o.setQueryString();
-
-export const setColumnQueryString = o.setColumnQueryString();
-
-export const setShowInput = pipe(
-  o.setShowInput(),
-  filter(o.shouldResetQueryString()),
-  o.resetColumnQueryString()
+export const updateShowInput = pipe(
+  setShowInput,
+  filter(shouldResetQueryString),
+  resetColumnQueryString
 );

@@ -47,7 +47,8 @@ export function TableOverview({ actionButtons = [], state }: Props) {
       table: { title, columns, sort, noDataMessage },
     },
   } = useAppState()[state];
-  const { setSort, setShowInput, setColumnQueryString } = useActions()[state];
+  const { setSort, updateShowInput, setColumnQueryString } =
+    useActions()[state];
 
   const loadingStyles = isLoading
     ? {
@@ -124,7 +125,7 @@ export function TableOverview({ actionButtons = [], state }: Props) {
                       aria-label={`${String(column.field)} search`}
                       variant="unstyled"
                       icon={<SearchIcon color="gray.400" />}
-                      onClick={() => setShowInput({ field: column.field })}
+                      onClick={() => updateShowInput({ field: column.field })}
                       size="sm"
                     />
                   </>
