@@ -21,7 +21,7 @@ import {
   shouldResetQueryString,
 } from "./operators";
 
-export { getDetailForChart, setColumnQueryString, setSort } from "./operators";
+export { setColumnQueryString, setSort } from "./operators";
 
 export const showBookwormsPage = pipe(
   setBookwormsPage,

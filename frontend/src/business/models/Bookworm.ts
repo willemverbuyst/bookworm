@@ -29,7 +29,7 @@ export interface Bookworm {
   "last name": string;
   email: string;
   phone: string;
-  userIsActive: boolean;
+  "user is active": boolean;
   library: string;
 }
 
@@ -61,13 +61,21 @@ export const ApiResponseBookWormById = z.object({
   message: z.string(),
 });
 
+type Library = {
+  id: string;
+  library: string;
+  userIsActive: boolean;
+  numberOfBookwormsPerLibrary: number;
+  color: string;
+};
+
 export type ApiResponseBookWormById = z.infer<typeof ApiResponseBookWormById>;
 export interface BookwormState {
   getAllApi: ApiResponseBookworm | null;
   isLoading: boolean;
   overview: Bookworm[];
   bookwormDetailsApi: ApiResponseBookWormById | null;
-  statsLibrary: string[];
+  statsLibrary: Library[];
   statsLibraryApi: ApiResponseBookwormStatsLibrary | null;
   ui: UI<Bookworm, Filter>;
 }

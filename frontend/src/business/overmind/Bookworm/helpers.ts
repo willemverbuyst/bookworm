@@ -6,6 +6,6 @@ export const returnBookwormObject = (bookworm: BookwormData) => ({
   "last name": bookworm.last_name,
   email: bookworm.email,
   phone: bookworm.phone,
-  userIsActive: bookworm.user_is_active,
+  "user is active": bookworm.user_is_active,
   library: bookworm.library,
 });

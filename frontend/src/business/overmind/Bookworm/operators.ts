@@ -2,7 +2,6 @@
 import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
-import { functions } from "../../functions";
 import { Bookworm, Page, SortDirection } from "../../models";
 
 export const setBookwormsPage = ({ state }: Context) => {
@@ -165,28 +164,4 @@ export const shouldResetQueryString = (
   const column = state.bookworm.ui.table.columns[field];
 
   return !column.showInput;
-};
-
-export const getDetailForChart = (
-  { state }: Context,
-  { id, index }: { id: string; index: number }
-) => {
-  if (!state.bookworm.statsLibraryApi?.data.length) {
-    return null;
-  }
-
-  const { data } = state.bookworm.statsLibraryApi;
-  const obj = data.find((i) => i.id === id);
-
-  if (!obj) {
-    return null;
-  }
-
-  return {
-    id,
-    userIsActive: obj.user_is_active,
-    library: obj.library,
-    numberOfBookwormsPerLibrary: obj.number_of_bookworms_per_library,
-    color: state.app.colors[functions.getColorIndex(index)],
-  };
 };
