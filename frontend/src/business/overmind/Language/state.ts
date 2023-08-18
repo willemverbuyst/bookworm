@@ -1,6 +1,6 @@
 import { derived } from "overmind";
-import { functions } from "../../functions";
 import { LanguageState, SortDirection } from "../../models";
+import { searchByBar, searchByColumn, sortByProperty } from "../helpers";
 
 export const state: LanguageState = {
   isLoading: false,
@@ -20,22 +20,9 @@ export const state: LanguageState = {
           id: i.id,
           "name of language": i.name_of_language,
         }))
-        .filter((a) =>
-          functions.genericSearch(a, searchKeys, queryString, false)
-        )
-        .sort((a, b) =>
-          functions.genericSort(a, b, {
-            property: sort.property,
-            sortDirection: sort.sortDirection,
-          })
-        )
-        .filter((i) =>
-          Object.values(columns)
-            .filter((c) => c.display)
-            .every((c) =>
-              functions.genericSearch(i, [c.field], c.queryString, false)
-            )
-        );
+        .filter(searchByBar(searchKeys, queryString))
+        .sort(sortByProperty(sort))
+        .filter(searchByColumn(columns));
     }
   ),
   selectOptions: derived(({ getAllApi }: LanguageState) => {

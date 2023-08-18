@@ -1,6 +1,6 @@
 import { derived } from "overmind";
-import { functions } from "../../functions";
 import { GenreState, SortDirection } from "../../models";
+import { searchByBar, searchByColumn, sortByProperty } from "../helpers";
 
 export const state: GenreState = {
   isLoading: false,
@@ -19,22 +19,9 @@ export const state: GenreState = {
       return getAllApi.data
         .map((i) => ({ id: i.id, "name of genre": i.name_of_genre }))
         .slice((page - 1) * limit, limit * page)
-        .filter((a) =>
-          functions.genericSearch(a, searchKeys, queryString, false)
-        )
-        .sort((a, b) =>
-          functions.genericSort(a, b, {
-            property: sort.property,
-            sortDirection: sort.sortDirection,
-          })
-        )
-        .filter((i) =>
-          Object.values(columns)
-            .filter((c) => c.display)
-            .every((c) =>
-              functions.genericSearch(i, [c.field], c.queryString, false)
-            )
-        );
+        .filter(searchByBar(searchKeys, queryString))
+        .sort(sortByProperty(sort))
+        .filter(searchByColumn(columns));
     }
   ),
   selectOptions: derived(({ getAllApi }: GenreState) => {
