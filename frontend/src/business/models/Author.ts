@@ -1,21 +1,22 @@
 import { z } from "zod";
 import { UI } from "./State";
 
+export const AuthorData = z.object({
+  id: z.string(),
+  first_name: z.string(),
+  last_name: z.string(),
+  books_written: z.number(),
+});
+
 export const ApiResponseAuthor = z.object({
   status: z.string(),
   result: z.number(),
-  data: z
-    .object({
-      id: z.string(),
-      first_name: z.string(),
-      last_name: z.string(),
-      books_written: z.number(),
-    })
-    .array(),
+  data: AuthorData.array(),
   total: z.number(),
   message: z.string(),
 });
 
+export type AuthorData = z.infer<typeof AuthorData>;
 export type ApiResponseAuthor = z.infer<typeof ApiResponseAuthor>;
 
 export interface Author {

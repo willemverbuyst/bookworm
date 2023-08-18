@@ -1,8 +1,9 @@
 import { derived } from "overmind";
 import { NODE_ENV } from "../../../config";
 import { utils } from "../../../utils";
-import { functions } from "../../functions";
 import { AuthorState, SortDirection } from "../../models";
+import { searchByBar, searchByColumn, sortByProperty } from "../helpers";
+import { returnAuthorObject } from "./helpers";
 
 export const state: AuthorState = {
   isLoading: false,
@@ -22,28 +23,10 @@ export const state: AuthorState = {
       }
 
       const data = getAllApi.data
-        .map((i) => ({
-          id: i.id,
-          "first name": i.first_name,
-          "last name": i.last_name,
-          "books written": i.books_written,
-        }))
-        .filter((a) =>
-          functions.genericSearch(a, searchKeys, queryString, false)
-        )
-        .sort((a, b) =>
-          functions.genericSort(a, b, {
-            property: sort.property,
-            sortDirection: sort.sortDirection,
-          })
-        )
-        .filter((i) =>
-          Object.values(columns)
-            .filter((c) => c.display)
-            .every((c) =>
-              functions.genericSearch(i, [c.field], c.queryString, false)
-            )
-        );
+        .map(returnAuthorObject)
+        .filter(searchByBar(searchKeys, queryString))
+        .sort(sortByProperty(sort))
+        .filter(searchByColumn(columns));
 
       if (NODE_ENV === "development" && startTime) {
         utils.logInfo(startTime, "derived fn: overview authors");
