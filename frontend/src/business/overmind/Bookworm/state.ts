@@ -4,6 +4,8 @@ import { NODE_ENV } from "../../../config";
 import { utils } from "../../../utils";
 import { functions } from "../../functions";
 import { BookwormState, SortDirection } from "../../models";
+import { searchByBar, searchByColumn, sortByProperty } from "../helpers";
+import { returnBookwormObject } from "./helpers";
 
 export const state: BookwormState = {
   isLoading: false,
@@ -23,31 +25,10 @@ export const state: BookwormState = {
         return [];
       }
       const data = getAllApi.data
-        .map((i) => ({
-          id: i.id,
-          "first name": i.first_name,
-          "last name": i.last_name,
-          email: i.email,
-          phone: i.phone,
-          userIsActive: i.user_is_active,
-          library: i.library,
-        }))
-        .filter((a) =>
-          functions.genericSearch(a, searchKeys, queryString, false)
-        )
-        .sort((a, b) =>
-          functions.genericSort(a, b, {
-            property: sort.property,
-            sortDirection: sort.sortDirection,
-          })
-        )
-        .filter((i) =>
-          Object.values(columns)
-            .filter((c) => c.display)
-            .every((c) =>
-              functions.genericSearch(i, [c.field], c.queryString, false)
-            )
-        );
+        .map(returnBookwormObject)
+        .filter(searchByBar(searchKeys, queryString))
+        .sort(sortByProperty(sort))
+        .filter(searchByColumn(columns));
 
       if (NODE_ENV === "development" && startTime) {
         utils.logInfo(startTime, "derived fn: overview bookworms");
@@ -132,9 +113,9 @@ export const state: BookwormState = {
           queryString: "",
           isNumeric: false,
         },
-        userIsActive: {
+        "user is active": {
           display: false,
-          field: "userIsActive",
+          field: "user is active",
           showInput: false,
           queryString: "",
           isNumeric: false,

@@ -11,23 +11,25 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppState } from "../../../business/overmind";
+import { LibraryDetailsCard } from "../../components/Cards/LibraryDetailsCard";
 import {
   ControlledSelect,
   ControlledTextInput,
 } from "../../components/Controllers";
+import { BookwormModal } from "../../components/Modal/BookwormModal";
 import { PageTitle } from "../../components/Text";
 import {
   defaultValuesSignUp,
   FormfieldsSignUp,
   validationSchemaSignUp,
 } from "./helpers";
-import { LibraryDetails } from "./LibraryDetails";
 
 export function SignUpPage() {
   const id = useId();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dataSetCountries = useAppState().country.selectOptions || [];
   const dataSetLibraries = useAppState().library.selectOptions || [];
+  const details = useAppState().library.overview || [];
   const {
     control,
     formState: { errors },
@@ -95,7 +97,20 @@ export function SignUpPage() {
               error={errors.country}
               required
             />
-            <LibraryDetails isOpen={isOpen} onClose={onClose} />
+            <BookwormModal
+              isOpen={isOpen}
+              onClose={onClose}
+              header="Library"
+              modalBody={
+                details.length ? (
+                  <>
+                    {details.map((i) => (
+                      <LibraryDetailsCard key={i.id} library={i} />
+                    ))}
+                  </>
+                ) : null
+              }
+            />
             <ControlledSelect
               dataSet={dataSetLibraries}
               name="library"

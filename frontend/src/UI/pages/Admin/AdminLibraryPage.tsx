@@ -5,14 +5,16 @@ import {
   useActions,
   useAppState,
 } from "../../../business/overmind";
+import { LibraryDetailsCard } from "../../components/Cards/LibraryDetailsCard";
+import { BookwormModal } from "../../components/Modal/BookwormModal";
 import { SimpleSidebar } from "../../components/Navigation";
 import { Search, TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
-import { LibraryDetails } from "./LibraryDetails";
 
 function ShowDetailsButton({ id }: { id: string }) {
   const { getLibraryById } = useActions().library;
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { details } = useAppState().library || {};
 
   const getUser = async (i: string) => {
     await getLibraryById({ id: i });
@@ -21,7 +23,12 @@ function ShowDetailsButton({ id }: { id: string }) {
 
   return (
     <>
-      <LibraryDetails isOpen={isOpen} onClose={onClose} />
+      <BookwormModal
+        isOpen={isOpen}
+        onClose={onClose}
+        header="Library"
+        modalBody={details ? <LibraryDetailsCard library={details} /> : null}
+      />
       <IconButton
         data-tooltip-id="bookworm-tooltip"
         data-tooltip-content="Show details"

@@ -1,58 +1,68 @@
 import { debounce, filter, parallel, pipe } from "overmind";
-import * as o from "./operators";
+import {
+  getBookWormById,
+  getBookworms,
+  getBookwormStatsLibrary,
+  resetActiveFilter,
+  resetColumnQueryString,
+  resetLimit,
+  resetPage,
+  resetQueryString,
+  setActiveFilter,
+  setBookwormsPage,
+  setLimit,
+  setLimitToTotal,
+  setPage,
+  setPagination,
+  setQueryString,
+  setShowAll,
+  setShowInput,
+  shouldLoadBookworms,
+  shouldResetQueryString,
+} from "./operators";
+
+export { setColumnQueryString, setSort } from "./operators";
 
 export const showBookwormsPage = pipe(
-  o.setBookwormsPage(),
-  o.shouldLoadBookworms(),
-  parallel(o.getBookworms(), o.getBookwormStatsLibrary())
+  setBookwormsPage,
+  shouldLoadBookworms,
+  parallel(getBookworms, getBookwormStatsLibrary)
 );
 
-export const changeLimit = pipe(
-  o.setLimit(),
-  o.resetQueryString(),
-  o.getBookworms()
-);
+export const changeLimit = pipe(setLimit, resetQueryString, getBookworms);
 
-export const changePage = pipe(
-  o.setPage(),
-  o.resetQueryString(),
-  o.getBookworms()
-);
+export const changePage = pipe(setPage, resetQueryString, getBookworms);
 
 export const changeActiveFilter = pipe(
-  o.setActiveFilter(),
-  o.resetQueryString(),
-  o.getBookworms()
+  setActiveFilter,
+  resetQueryString,
+  getBookworms
 );
 
 export const usePagination = pipe(
-  o.setPagination(),
-  o.resetQueryString(),
-  o.resetActiveFilter(),
-  o.resetLimit(),
-  o.resetPage(),
-  o.getBookworms()
+  setPagination,
+  resetQueryString,
+  resetActiveFilter,
+  resetLimit,
+  resetPage,
+  getBookworms
 );
 
 export const showAllRows = pipe(
-  o.setShowAll(),
-  o.resetQueryString(),
-  o.resetActiveFilter(),
-  o.setLimitToTotal(),
-  o.resetPage(),
-  o.getBookworms()
+  setShowAll,
+  resetQueryString,
+  resetActiveFilter,
+  setLimitToTotal,
+  resetPage,
+  getBookworms
 );
 
-export const setSort = o.setSort();
+export const search = (debounce(100), setQueryString);
 
-export const search = (debounce(100), o.setQueryString());
-
-export const getBookworm = o.getBookWormById();
-
-export const setColumnQueryString = o.setColumnQueryString();
+export const getBookworm = getBookWormById;
 
 export const updateShowInput = pipe(
-  o.setShowInput(),
-  filter(o.shouldResetQueryString()),
-  o.resetColumnQueryString()
+  setShowInput,
+  filter(shouldResetQueryString),
+  resetColumnQueryString
 );

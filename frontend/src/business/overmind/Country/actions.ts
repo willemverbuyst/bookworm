@@ -1,4 +1,4 @@
 import { pipe } from "overmind";
-import * as o from "./operators";
+import { fetchCountries, shoulLoadCountries } from "./operators";
 
-export const getCountries = pipe(o.shoulLoadCountries, o.fetchCountries);
+export const getCountries = pipe(shoulLoadCountries, fetchCountries);

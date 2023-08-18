@@ -1,23 +1,24 @@
 import { z } from "zod";
 import { UI } from "./State";
 
+export const BookData = z.object({
+  id: z.string(),
+  title: z.string(),
+  author: z.string(),
+  year_published: z.string(),
+  genre: z.string(),
+  language: z.string(),
+});
+
 export const ApiResponseBook = z.object({
   status: z.string(),
   result: z.number(),
-  data: z
-    .object({
-      id: z.string(),
-      title: z.string(),
-      author: z.string(),
-      year_published: z.string(),
-      genre: z.string(),
-      language: z.string(),
-    })
-    .array(),
+  data: BookData.array(),
   total: z.number(),
   message: z.string(),
 });
 
+export type BookData = z.infer<typeof BookData>;
 export type ApiResponseBook = z.infer<typeof ApiResponseBook>;
 export interface Book {
   id: string;

@@ -1,22 +1,23 @@
 import { z } from "zod";
 import { UI } from "./State";
 
+const PaymentData = z.object({
+  id: z.string(),
+  payment_amount: z.number(),
+  payment_date: z.string(),
+  title: z.string(),
+  user_email: z.string(),
+});
+
 export const ApiResponsePayment = z.object({
   status: z.string(),
   result: z.number(),
-  data: z
-    .object({
-      id: z.string(),
-      payment_amount: z.number(),
-      payment_date: z.string(),
-      title: z.string(),
-      user_email: z.string(),
-    })
-    .array(),
+  data: PaymentData.array(),
   total: z.number(),
   message: z.string(),
 });
 
+export type PaymentData = z.infer<typeof PaymentData>;
 export type ApiResponsePayment = z.infer<typeof ApiResponsePayment>;
 
 export interface Payment {

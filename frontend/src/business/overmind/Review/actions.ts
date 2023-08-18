@@ -1,11 +1,16 @@
 /* eslint-disable no-param-reassign */
 import { debounce, pipe } from "overmind";
-import * as o from "./operators";
+import {
+  fetchAuthors,
+  getReviews,
+  setAddReviewPage,
+  setReviewsPage,
+} from "./operators";
 
-export const showReviewsPage = pipe(o.setReviewsPage(), o.getReviews());
+export { getBooksForAuthor } from "./operators";
 
-export const showAddReviewPage = o.setAddReviewPage();
+export const showReviewsPage = pipe(setReviewsPage, getReviews);
 
-export const getAuthors = pipe(debounce(300), o.getAuthors());
+export const showAddReviewPage = setAddReviewPage;
 
-export const getBooksForAuthor = o.getBooksForAuthor();
+export const getAuthors = pipe(debounce(300), fetchAuthors);

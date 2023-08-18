@@ -1,20 +1,23 @@
 import { debounce, filter, pipe } from "overmind";
-import * as o from "./operators";
+import {
+  fetchLibraries,
+  resetColumnQueryString,
+  setQueryString,
+  setShowInput,
+  shouldFetchLibraries,
+  shouldResetQueryString,
+} from "./operators";
 
-export const getLibraries = pipe(o.shouldFetchLibraries(), o.fetchLibraries());
+export { getLibraryById, setColumnQueryString, setSort } from "./operators";
 
-export const search = (debounce(100), o.setQueryString());
+export const getLibraries = pipe(shouldFetchLibraries, fetchLibraries);
 
-export const getLibraryById = o.getLibraryById();
-
-export const setSort = o.setSort();
-
-export const setColumnQueryString = o.setColumnQueryString();
+export const search = (debounce(100), setQueryString);
 
 export const updateShowInput = pipe(
-  o.setShowInput(),
-  filter(o.shouldResetQueryString()),
-  o.resetColumnQueryString()
+  setShowInput,
+  filter(shouldResetQueryString),
+  resetColumnQueryString
 );
 
 export const changeLimit = () => () => null;

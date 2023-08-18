@@ -2,38 +2,31 @@ import { z } from "zod";
 import { SelectOption } from "./SelectOption";
 import { UI } from "./State";
 
+const LibraryData = z.object({
+  id: z.string(),
+  name_of_library: z.string(),
+  phone: z.string(),
+  address: z.string(),
+  postal_code: z.string(),
+  city: z.string(),
+  country: z.string(),
+});
+
 export const ApiResponseLibrary = z.object({
   status: z.string(),
   result: z.number(),
-  data: z
-    .object({
-      id: z.string(),
-      name_of_library: z.string(),
-      phone: z.string(),
-      address: z.string(),
-      postal_code: z.string(),
-      city: z.string(),
-      country: z.string(),
-    })
-    .array(),
+  data: LibraryData.array(),
   total: z.number(),
   message: z.string(),
 });
 
 export const ApiResponseLibraryById = z.object({
   status: z.string(),
-  data: z.object({
-    id: z.string(),
-    name_of_library: z.string(),
-    phone: z.string(),
-    address: z.string(),
-    postal_code: z.string(),
-    city: z.string(),
-    country: z.string(),
-  }),
+  data: LibraryData,
   message: z.string(),
 });
 
+export type LibraryData = z.infer<typeof LibraryData>;
 export type ApiResponseLibrary = z.infer<typeof ApiResponseLibrary>;
 export type ApiResponseLibraryById = z.infer<typeof ApiResponseLibraryById>;
 

@@ -8,28 +8,22 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import { useAppState } from "../../../business/overmind";
-import { UserDetails } from "../../components/Cards";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  modalBody: React.ReactElement | null;
+  header: string;
 }
 
-export function BookwormsDetails({ isOpen, onClose }: Props) {
-  const { bookwormDetailsApi } = useAppState().bookworm;
-  const bookwormDetails = bookwormDetailsApi?.data;
-
+export function BookwormModal({ isOpen, onClose, modalBody, header }: Props) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Bookworm</ModalHeader>
+        <ModalHeader>{header}</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
-          {bookwormDetails && <UserDetails user={bookwormDetails} />}
-        </ModalBody>
-
+        <ModalBody>{modalBody}</ModalBody>
         <ModalFooter>
           <Button colorScheme="blue" mr={3} onClick={onClose}>
             Close

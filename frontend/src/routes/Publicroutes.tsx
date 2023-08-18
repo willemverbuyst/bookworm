@@ -1,9 +1,10 @@
 /* eslint-disable no-nested-ternary */
 import { Page } from "../business/models";
 import { useAppState } from "../business/overmind";
-import { SignInPage, SignUpPage } from "../UI/pages/Auth";
-import { AuthorsPage } from "../UI/pages/Authors";
-import { BooksPage } from "../UI/pages/Books";
+import { SignInPage } from "../UI/pages/Auth/SignInPage";
+import { SignUpPage } from "../UI/pages/Auth/SingUpPage";
+import { AuthorsPage } from "../UI/pages/Authors/AuthorsPage";
+import { BooksPage } from "../UI/pages/Books/BooksPage";
 
 export default function PublicRoutes() {
   const appState = useAppState().app;
