@@ -3,6 +3,7 @@ import { NODE_ENV } from "../../../config";
 import { utils } from "../../../utils";
 import { BookState, SortDirection } from "../../models";
 import { searchByBar, searchByColumn, sortByProperty } from "../helpers";
+import { returnBookObject } from "./helpers";
 
 export const state: BookState = {
   getAllApi: null,
@@ -22,14 +23,7 @@ export const state: BookState = {
       }
 
       const data = getAllApi.data
-        .map((book) => ({
-          id: book.id,
-          title: book.title,
-          author: book.author,
-          "year published": book.year_published,
-          genre: book.genre,
-          language: book.language,
-        }))
+        .map(returnBookObject)
         .filter(searchByBar(searchKeys, queryString))
         .sort(sortByProperty(sort))
         .filter(searchByColumn(columns));

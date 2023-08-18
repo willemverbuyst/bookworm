@@ -1,8 +1,6 @@
-import { ApiResponseLibrary } from "../../models";
+import { LibraryData } from "../../models";
 
-export const returnLibraryObject = (
-  library: ApiResponseLibrary["data"][0]
-) => ({
+export const returnLibraryObject = (library: LibraryData) => ({
   id: library.id,
   "name of library": library.name_of_library,
   phone: library.phone,
