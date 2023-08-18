@@ -1,11 +1,7 @@
 import { derived } from "overmind";
 import { LibraryState, SortDirection } from "../../models";
-import {
-  returnLibraryObject,
-  searchByBar,
-  searchByColumn,
-  sortByProperty,
-} from "./helpers";
+import { searchByBar, searchByColumn, sortByProperty } from "../helpers";
+import { returnLibraryObject } from "./helpers";
 
 export const state: LibraryState = {
   isLoading: false,

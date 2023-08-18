@@ -6,13 +6,17 @@ type Column<T> = {
   display: boolean;
 };
 
-interface UITable<T, U> {
-  columns: Record<keyof T, Column<T>>;
+export type Columns<T> = Record<keyof T, Column<T>>;
+
+export type Sort<T> = {
+  property: keyof Partial<T>;
+  sortDirection: keyof typeof SortDirection;
+};
+
+type UITable<T, U> = {
+  columns: Columns<T>;
   filter: U;
-  sort: {
-    property: keyof Partial<T>;
-    sortDirection: keyof typeof SortDirection;
-  };
+  sort: Sort<T>;
   limit: number;
   noDataMessage: string;
   page: number;
@@ -21,11 +25,11 @@ interface UITable<T, U> {
   searchKeys: Array<keyof T>;
   showAll: boolean;
   title: string;
-}
+};
 
-export interface UI<T, U> {
+export type UI<T, U> = {
   table: UITable<T, U>;
-}
+};
 
 export const SortDirection = {
   ASCENDING: "ASCENDING",
