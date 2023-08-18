@@ -1,22 +1,23 @@
 import { z } from "zod";
 import { UI } from "./State";
 
+const RentalData = z.object({
+  id: z.string(),
+  rental_date: z.string(),
+  return_date: z.string().nullable(),
+  title: z.string(),
+  author: z.string(),
+});
+
 export const ApiResponseRental = z.object({
   status: z.string(),
   result: z.number(),
-  data: z
-    .object({
-      id: z.string(),
-      rental_date: z.string(),
-      return_date: z.string().nullable(),
-      title: z.string(),
-      author: z.string(),
-    })
-    .array(),
+  data: RentalData.array(),
   total: z.number(),
   message: z.string(),
 });
 
+export type RentalData = z.infer<typeof RentalData>;
 export type ApiResponseRental = z.infer<typeof ApiResponseRental>;
 
 export interface Rental {

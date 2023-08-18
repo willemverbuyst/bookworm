@@ -2,8 +2,9 @@ import { derived } from "overmind";
 import { NODE_ENV } from "../../../config";
 import { constants } from "../../../constants";
 import { utils } from "../../../utils";
-import { functions } from "../../functions";
 import { RentalState, SortDirection } from "../../models";
+import { searchByBar, searchByColumn, sortByProperty } from "../helpers";
+import { returnRentalObject } from "./helpers";
 
 export const state: RentalState = {
   getAllApi: null,
@@ -22,29 +23,10 @@ export const state: RentalState = {
         return [];
       }
       const data = getAllApi.data
-        .map((i) => ({
-          id: i.id,
-          "rental date": i.rental_date,
-          "return date": i.return_date,
-          title: i.title,
-          author: i.author,
-        }))
-        .filter((a) =>
-          functions.genericSearch(a, searchKeys, queryString, false)
-        )
-        .sort((a, b) =>
-          functions.genericSort(a, b, {
-            property: sort.property,
-            sortDirection: sort.sortDirection,
-          })
-        )
-        .filter((i) =>
-          Object.values(columns)
-            .filter((c) => c.display)
-            .every((c) =>
-              functions.genericSearch(i, [c.field], c.queryString, false)
-            )
-        );
+        .map(returnRentalObject)
+        .filter(searchByBar(searchKeys, queryString))
+        .sort(sortByProperty(sort))
+        .filter(searchByColumn(columns));
 
       if (NODE_ENV === "development" && startTime) {
         utils.logInfo(startTime, "derived fn: overview rentals");
