@@ -1,8 +1,9 @@
 import { derived } from "overmind";
 import { NODE_ENV } from "../../../config";
 import { utils } from "../../../utils";
-import { functions } from "../../functions";
 import { PaymentState, SortDirection } from "../../models";
+import { searchByBar, searchByColumn, sortByProperty } from "../helpers";
+import { returnPaymentObject } from "./helpers";
 
 export const state: PaymentState = {
   isLoading: false,
@@ -22,30 +23,11 @@ export const state: PaymentState = {
       }
 
       const data = getAllApi.data
-        .map((i) => ({
-          id: i.id,
-          amount: i.payment_amount,
-          date: i.payment_date,
-          title: i.title,
-          email: i.user_email,
-        }))
-        .filter((a) =>
-          functions.genericSearch(a, searchKeys, queryString, false)
-        )
+        .map(returnPaymentObject)
+        .filter(searchByBar(searchKeys, queryString))
         .slice((page - 1) * limit, page * limit)
-        .sort((a, b) =>
-          functions.genericSort(a, b, {
-            property: sort.property,
-            sortDirection: sort.sortDirection,
-          })
-        )
-        .filter((i) =>
-          Object.values(columns)
-            .filter((c) => c.display)
-            .every((c) =>
-              functions.genericSearch(i, [c.field], c.queryString, false)
-            )
-        );
+        .sort(sortByProperty(sort))
+        .filter(searchByColumn(columns));
 
       if (NODE_ENV === "development" && startTime) {
         utils.logInfo(startTime, "derived fn: overview payments");
