@@ -1,21 +1,22 @@
 import { z } from "zod";
 
+const ReviewData = z.object({
+  id: z.string(),
+  description: z.string(),
+  rating: z.number(),
+  book_title: z.string(),
+  reviewer: z.string(),
+});
+
 export const ApiResponseReview = z.object({
   status: z.string(),
   result: z.number(),
-  data: z
-    .object({
-      id: z.string(),
-      description: z.string(),
-      rating: z.number(),
-      book_title: z.string(),
-      reviewer: z.string(),
-    })
-    .array(),
+  data: ReviewData.array(),
   total: z.number(),
   message: z.string(),
 });
 
+export type ReviewData = z.infer<typeof ReviewData>;
 export type ApiResponseReview = z.infer<typeof ApiResponseReview>;
 
 export const ApiResponseReviewAuthors = z.object({
