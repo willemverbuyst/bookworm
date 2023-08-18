@@ -2,24 +2,25 @@ import { z } from "zod";
 import { UI } from "./State";
 import { User } from "./User";
 
+export const BookwormData = z.object({
+  id: z.string(),
+  first_name: z.string(),
+  last_name: z.string(),
+  email: z.string(),
+  phone: z.string(),
+  user_is_active: z.boolean(),
+  library: z.string(),
+});
+
 export const ApiResponseBookworm = z.object({
   status: z.string(),
   result: z.number(),
-  data: z
-    .object({
-      id: z.string(),
-      first_name: z.string(),
-      last_name: z.string(),
-      email: z.string(),
-      phone: z.string(),
-      user_is_active: z.boolean(),
-      library: z.string(),
-    })
-    .array(),
+  data: BookwormData.array(),
   total: z.number(),
   message: z.string(),
 });
 
+export type BookwormData = z.infer<typeof BookwormData>;
 export type ApiResponseBookworm = z.infer<typeof ApiResponseBookworm>;
 
 export interface Bookworm {
