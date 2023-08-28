@@ -16,6 +16,12 @@ export const fetchGenres = async ({ actions, effects, state }: Context) => {
     actions.api.handleErrorResponse({ response });
   } else {
     state.genre.getAllApi = response;
+
+    const obj: any = {};
+    response.data.forEach((i) => {
+      obj[i.id] = i;
+    });
+    state.genre.extra = obj;
   }
 
   state.genre.isLoading = false;

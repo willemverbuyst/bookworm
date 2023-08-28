@@ -1,4 +1,5 @@
 import { debounce, filter, pipe } from "overmind";
+import { Context } from "..";
 import {
   addGenres,
   changeGenre,
@@ -54,3 +55,23 @@ export const updateShowInput = pipe(
   filter(shouldResetQueryString),
   resetColumnQueryString
 );
+
+export const getOption = ({ state }: Context, { id }: { id: string }) => {
+  const apiData = state.genre.getAllApi?.data || [];
+
+  const option = apiData.find((i) => i.id === id);
+
+  if (!option) {
+    return null;
+  }
+
+  return {
+    display: option.name_of_genre,
+    value: option.id,
+  };
+};
+
+export const getNameOfGenre = ({ state }: Context, { id }: { id: string }) => {
+  const genreData = state.genre.getAllApi?.data || [];
+  return genreData.find((g) => g.id === id)?.name_of_genre;
+};

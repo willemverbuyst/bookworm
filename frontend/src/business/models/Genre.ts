@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { SelectOption } from "./SelectOption";
 import { UI } from "./State";
 
 export const ApiResponseGenre = z.object({
@@ -26,6 +25,7 @@ export interface GenreState {
   getAllApi: ApiResponseGenre | null;
   isLoading: boolean;
   overview: Genre[];
-  selectOptions: SelectOption[];
+  selectOptions?: string[];
   ui: UI<Genre, null>;
+  extra: { [key: string]: { id: string; name_of_genre: string } } | null;
 }

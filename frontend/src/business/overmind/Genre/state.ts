@@ -24,15 +24,14 @@ export const state: GenreState = {
         .filter(searchByColumn(columns));
     }
   ),
-  selectOptions: derived(({ getAllApi }: GenreState) => {
-    if (!getAllApi?.data?.length) {
+  selectOptions: derived(({ extra }: GenreState) => {
+    if (!extra) {
       return [];
     }
-    return getAllApi.data.map((i) => ({
-      display: i.name_of_genre,
-      value: i.id,
-    }));
+
+    return Object.keys(extra);
   }),
+  extra: null,
   ui: {
     table: {
       columns: {
