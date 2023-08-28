@@ -1,25 +1,11 @@
-import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { AddIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
-  ButtonGroup,
   Flex,
-  FormControl,
-  FormLabel,
   HStack,
   IconButton,
-  Input,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverFooter,
-  PopoverHeader,
-  PopoverTrigger,
-  Stack,
   Text,
-  useDisclosure,
   useId,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,6 +16,8 @@ import {
   useActions,
   useAppState,
 } from "../../../business/overmind";
+import { DeleteButton } from "../../components/Buttons/DeleteButton";
+import { EditButton } from "../../components/Buttons/EditButton";
 import { ControlledTextInput } from "../../components/Controllers";
 import { SimpleSidebar } from "../../components/Navigation";
 import { Search, TableOverview } from "../../components/Table";
@@ -40,124 +28,29 @@ import {
   validationSchemaGenres,
 } from "./helpers";
 
-function Form({
-  id,
-  onCancel,
-  onClose,
-}: {
-  id: string;
-  onCancel: () => void;
-  onClose: () => void;
-}) {
-  const genres = useAppState().genre.overview || [];
-  const { updateGenre } = useActions().genre;
-  const nameOfGenre = genres.find((g) => g.id === id)?.["name of genre"] || "";
-  const [genre, setGenre] = useState(nameOfGenre);
-
-  const submit = () => {
-    updateGenre({ id, name: genre });
-    onClose();
-  };
+function EditBtn({ id }: { id: string }) {
+  const { getNameOfGenre, updateGenre } = useActions().genre;
+  const nameOfGenre = getNameOfGenre({ id });
 
   return (
-    <Stack spacing={4}>
-      <FormControl>
-        <FormLabel htmlFor="genre">Genre</FormLabel>
-        <Input
-          id="genre"
-          value={genre}
-          onChange={(e) => setGenre(e.target.value)}
-        />
-      </FormControl>
-      <ButtonGroup display="flex" justifyContent="flex-end">
-        <Button variant="outline" onClick={onCancel}>
-          Cancel
-        </Button>
-        <Button onClick={submit}>Save</Button>
-      </ButtonGroup>
-    </Stack>
+    <EditButton
+      id={id}
+      nameOfItem={nameOfGenre || ""}
+      updateValue={updateGenre}
+    />
   );
 }
 
-function EditButton({ id }: { id: string }) {
-  const { isOpen, onClose, onOpen } = useDisclosure();
+function DeleteBtn({ id }: { id: string }) {
+  const { getNameOfGenre, deleteGenre } = useActions().genre;
+  const nameOfGenre = getNameOfGenre({ id });
 
   return (
-    <Popover
-      isOpen={isOpen}
-      onOpen={onOpen}
-      onClose={onClose}
-      closeOnBlur={false}
-      placement="left"
-    >
-      <PopoverTrigger>
-        <IconButton
-          data-tooltip-id="bookworm-tooltip"
-          data-tooltip-content="Edit details"
-          aria-label="Edit details"
-          icon={<EditIcon />}
-          mx={1}
-          variant="unstyled"
-        />
-      </PopoverTrigger>
-      <PopoverContent p={5}>
-        <PopoverArrow />
-        <PopoverCloseButton />
-        <Form onCancel={onClose} id={id} onClose={onClose} />
-      </PopoverContent>
-    </Popover>
-  );
-}
-
-function DeleteButton({ id }: { id: string }) {
-  const { isOpen, onClose, onOpen } = useDisclosure();
-  const { deleteGenre } = useActions().genre;
-  const genres = useAppState().genre.overview || [];
-  const nameOfGenre = genres.find((g) => g.id === id)?.["name of genre"];
-
-  return (
-    <Popover
-      isOpen={isOpen}
-      onOpen={onOpen}
-      onClose={onClose}
-      placement="left"
-      closeOnBlur={false}
-    >
-      <PopoverTrigger>
-        <IconButton
-          data-tooltip-id="bookworm-tooltip"
-          data-tooltip-content="Delete genre"
-          aria-label="Delete genre"
-          icon={<DeleteIcon />}
-          mx={1}
-          variant="unstyled"
-        />
-      </PopoverTrigger>
-      <PopoverContent>
-        <PopoverHeader
-          display="flex"
-          justifyContent="space-between"
-          fontWeight="semibold"
-        >
-          Confirmation
-        </PopoverHeader>
-        <PopoverArrow />
-        <PopoverCloseButton />
-        <PopoverBody display="flex" justifyContent="flex-start">
-          {`Are you sure you want to delete ${nameOfGenre}?`}
-        </PopoverBody>
-        <PopoverFooter display="flex" justifyContent="flex-end">
-          <ButtonGroup size="sm">
-            <Button variant="outline" onClick={onClose}>
-              Cancel
-            </Button>
-            <Button onClick={() => deleteGenre({ id })} colorScheme="pink">
-              Apply
-            </Button>
-          </ButtonGroup>
-        </PopoverFooter>
-      </PopoverContent>
-    </Popover>
+    <DeleteButton
+      id={id}
+      nameOfItem={nameOfGenre || ""}
+      deleteValue={deleteGenre}
+    />
   );
 }
 
@@ -202,7 +95,7 @@ export function AdminGenrePage() {
             <Search state={stateSectionsWithTable.genre} />
             <TableOverview
               state={stateSectionsWithTable.genre}
-              actionButtons={[EditButton, DeleteButton]}
+              actionButtons={[EditBtn, DeleteBtn]}
             />
           </Flex>
           <Flex mt={10}>
