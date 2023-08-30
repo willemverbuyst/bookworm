@@ -1,26 +1,5 @@
-import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Flex,
-  FormControl,
-  FormLabel,
-  HStack,
-  IconButton,
-  Input,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverFooter,
-  PopoverHeader,
-  PopoverTrigger,
-  Stack,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
+import { Box, Button, Flex, HStack, IconButton, Text } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useId, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
@@ -29,6 +8,8 @@ import {
   useActions,
   useAppState,
 } from "../../../business/overmind";
+import { DeleteButton } from "../../components/Buttons/DeleteButton";
+import { EditButton } from "../../components/Buttons/EditButton";
 import { ControlledTextInput } from "../../components/Controllers";
 import { SimpleSidebar } from "../../components/Navigation";
 import { Search, TableOverview } from "../../components/Table";
@@ -39,127 +20,29 @@ import {
   validationSchemaLanguages,
 } from "./helpers";
 
-function Form({
-  id,
-  onCancel,
-  onClose,
-}: {
-  id: string;
-  onCancel: () => void;
-  onClose: () => void;
-}) {
-  const languages = useAppState().language.overview || [];
-  const { updateLanguage } = useActions().language;
-  const nameOfLanguage =
-    languages.find((l) => l.id === id)?.["name of language"] || "";
-  const [language, setLanguage] = useState(nameOfLanguage);
-
-  const submit = () => {
-    updateLanguage({ id, nameOfLanguage: language });
-    onClose();
-  };
+function EditBtn({ id }: { id: string }) {
+  const { getNameOfLanguage, updateLanguage } = useActions().language;
+  const nameOfLanguage = getNameOfLanguage({ id });
 
   return (
-    <Stack spacing={4}>
-      <FormControl>
-        <FormLabel htmlFor="language">Language</FormLabel>
-        <Input
-          id="language"
-          value={language}
-          onChange={(e) => setLanguage(e.target.value)}
-        />
-      </FormControl>
-      <ButtonGroup display="flex" justifyContent="flex-end">
-        <Button variant="outline" onClick={onCancel}>
-          Cancel
-        </Button>
-        <Button onClick={submit}>Save</Button>
-      </ButtonGroup>
-    </Stack>
+    <EditButton
+      id={id}
+      nameOfItem={nameOfLanguage || ""}
+      updateValue={updateLanguage}
+    />
   );
 }
 
-function EditButton({ id }: { id: string }) {
-  const { isOpen, onClose, onOpen } = useDisclosure();
+function DeleteBtn({ id }: { id: string }) {
+  const { getNameOfLanguage, deleteLanguage } = useActions().language;
+  const nameOfLanguage = getNameOfLanguage({ id });
 
   return (
-    <Popover
-      isOpen={isOpen}
-      onOpen={onOpen}
-      onClose={onClose}
-      closeOnBlur={false}
-      placement="left"
-    >
-      <PopoverTrigger>
-        <IconButton
-          data-tooltip-id="bookworm-tooltip"
-          data-tooltip-content="Edit details"
-          aria-label="Edit details"
-          icon={<EditIcon />}
-          mx={1}
-          variant="unstyled"
-        />
-      </PopoverTrigger>
-      <PopoverContent p={5}>
-        <PopoverArrow />
-        <PopoverCloseButton />
-        <Form onCancel={onClose} id={id} onClose={onClose} />
-      </PopoverContent>
-    </Popover>
-  );
-}
-
-function DeleteButton({ id }: { id: string }) {
-  const { isOpen, onClose, onOpen } = useDisclosure();
-  const { deleteLanguage } = useActions().language;
-  const languages = useAppState().language.overview || [];
-  const nameOfLanguage = languages.find((l) => l.id === id)?.[
-    "name of language"
-  ];
-
-  return (
-    <Popover
-      isOpen={isOpen}
-      onOpen={onOpen}
-      onClose={onClose}
-      placement="left"
-      closeOnBlur={false}
-    >
-      <PopoverTrigger>
-        <IconButton
-          data-tooltip-id="bookworm-tooltip"
-          data-tooltip-content="Delete language"
-          aria-label="Delete language"
-          icon={<DeleteIcon />}
-          mx={1}
-          variant="unstyled"
-        />
-      </PopoverTrigger>
-      <PopoverContent>
-        <PopoverHeader
-          display="flex"
-          justifyContent="space-between"
-          fontWeight="semibold"
-        >
-          Confirmation
-        </PopoverHeader>
-        <PopoverArrow />
-        <PopoverCloseButton />
-        <PopoverBody display="flex" justifyContent="flex-start">
-          {`Are you sure you want to delete ${nameOfLanguage}?`}
-        </PopoverBody>
-        <PopoverFooter display="flex" justifyContent="flex-end">
-          <ButtonGroup size="sm">
-            <Button variant="outline" onClick={onClose}>
-              Cancel
-            </Button>
-            <Button onClick={() => deleteLanguage({ id })} colorScheme="pink">
-              Apply
-            </Button>
-          </ButtonGroup>
-        </PopoverFooter>
-      </PopoverContent>
-    </Popover>
+    <DeleteButton
+      id={id}
+      nameOfItem={nameOfLanguage || ""}
+      deleteValue={deleteLanguage}
+    />
   );
 }
 
@@ -203,7 +86,7 @@ export function AdminLanguagePage() {
             <Search state={stateSectionsWithTable.language} />
             <TableOverview
               state={stateSectionsWithTable.language}
-              actionButtons={[EditButton, DeleteButton]}
+              actionButtons={[EditBtn, DeleteBtn]}
             />
           </Flex>
           <Flex mt={10}>
