@@ -20,7 +20,7 @@ import {
   shouldResetQueryString,
 } from "./operators";
 
-export { setColumnQueryString, setSort } from "./operators";
+export { getNameOfGenre, setColumnQueryString, setSort } from "./operators";
 
 export const getGenres = pipe(shouldFetchGenres, fetchGenres);
 
@@ -69,9 +69,4 @@ export const getOption = ({ state }: Context, { id }: { id: string }) => {
     display: option.name_of_genre,
     value: option.id,
   };
-};
-
-export const getNameOfGenre = ({ state }: Context, { id }: { id: string }) => {
-  const genreData = state.genre.getAllApi?.data || [];
-  return genreData.find((g) => g.id === id)?.name_of_genre;
 };
