@@ -24,14 +24,14 @@ export const state: GenreState = {
         .filter(searchByColumn(columns));
     }
   ),
-  selectOptions: derived(({ extra }: GenreState) => {
-    if (!extra) {
+  selectOptions: derived(({ apiData }: GenreState) => {
+    if (!apiData) {
       return [];
     }
 
-    return Object.keys(extra);
+    return Object.keys(apiData);
   }),
-  extra: null,
+  apiData: null,
   ui: {
     table: {
       columns: {

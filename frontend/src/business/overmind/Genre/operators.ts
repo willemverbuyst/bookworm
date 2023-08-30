@@ -2,7 +2,7 @@
 import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
-import { Genre, SortDirection } from "../../models";
+import { Genre, GenreApiData, SortDirection } from "../../models";
 
 export const shouldFetchGenres = filter(
   ({ state }: Context) => !state.genre.getAllApi?.data.length
@@ -17,11 +17,11 @@ export const fetchGenres = async ({ actions, effects, state }: Context) => {
   } else {
     state.genre.getAllApi = response;
 
-    const obj: any = {};
+    const obj = {} as GenreApiData;
     response.data.forEach((i) => {
       obj[i.id] = i;
     });
-    state.genre.extra = obj;
+    state.genre.apiData = obj;
   }
 
   state.genre.isLoading = false;
