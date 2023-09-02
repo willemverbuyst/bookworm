@@ -1,4 +1,5 @@
 import { derived } from "overmind";
+import { RootState } from "..";
 import { GenreState, SortDirection } from "../../models";
 import { searchByBar, searchByColumn, sortByProperty } from "../helpers";
 
@@ -17,8 +18,8 @@ export const state: GenreState = {
       }
 
       return getAllApi.data
-        .map((i) => ({ id: i.id, "name of genre": i.name_of_genre }))
         .slice((page - 1) * limit, limit * page)
+        .map((i) => ({ id: i.id, "name of genre": i.name_of_genre }))
         .filter(searchByBar(searchKeys, queryString))
         .sort(sortByProperty(sort))
         .filter(searchByColumn(columns));
@@ -32,6 +33,10 @@ export const state: GenreState = {
     return Object.keys(apiData);
   }),
   apiData: null,
+  showTableRows: derived(
+    (_: GenreState, rootState: RootState) =>
+      !!(rootState.genre.apiData && Object.keys(rootState.genre.apiData).length)
+  ),
   ui: {
     table: {
       columns: {

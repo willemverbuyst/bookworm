@@ -9,7 +9,7 @@ import {
   useId,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import {
   stateSectionsWithTable,
@@ -54,9 +54,13 @@ function DeleteBtn({ id }: { id: string }) {
   );
 }
 
-export function AdminGenrePage() {
+function AddGenreForm({
+  setShowForm,
+}: {
+  setShowForm: Dispatch<SetStateAction<boolean>>;
+}) {
   const id = useId();
-  const [showForm, setShowForm] = useState(false);
+
   const {
     control,
     formState: { errors },
@@ -71,13 +75,6 @@ export function AdminGenrePage() {
     name: "genres",
   });
 
-  const {
-    overview,
-    ui: {
-      table: { noDataMessage },
-    },
-  } = useAppState().genre;
-
   const { postGenres } = useActions().genre;
 
   const onSubmit: SubmitHandler<FormFieldsGenres> = async (data) => {
@@ -87,60 +84,79 @@ export function AdminGenrePage() {
   };
 
   return (
+    <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)} mt={5}>
+      <Text fontSize="2xl">Add genre(s)</Text>
+      {fields.map((item, index) => (
+        <HStack key={item.id} alignItems="flex-end" mt={5}>
+          <ControlledTextInput
+            name={`genres.${index}.name`}
+            control={control}
+            label="name of genre"
+            error={(errors.genres || [])[index]?.name}
+            required
+          />
+          {index > 0 && (
+            <Button
+              type="button"
+              onClick={() => remove(index)}
+              colorScheme="pink"
+            >
+              Delete
+            </Button>
+          )}
+        </HStack>
+      ))}
+      <HStack mt={10}>
+        <Button
+          colorScheme="teal"
+          aria-label="Add new"
+          onClick={() => setShowForm(false)}
+        >
+          Cancel
+        </Button>
+        <Button type="submit" colorScheme="teal">
+          Submit
+        </Button>
+        <IconButton
+          colorScheme="telegram"
+          aria-label="Add new"
+          icon={<AddIcon />}
+          onClick={() => append({ name: "" })}
+        />
+      </HStack>
+    </Box>
+  );
+}
+
+export function AdminGenrePage() {
+  const [showForm, setShowForm] = useState(false);
+  const {
+    apiData,
+    showTableRows,
+    ui: {
+      table: { noDataMessage },
+    },
+  } = useAppState((state) => state.genre);
+
+  if (!apiData) {
+    return <p>{noDataMessage}</p>;
+  }
+
+  return (
     <SimpleSidebar>
       <PageTitle title="Genre" />
-      {overview ? (
+      {showTableRows ? (
         <Box style={{ backgroundColor: "#fff" }} p={5}>
           <Flex direction="column">
             <Search state={stateSectionsWithTable.genre} />
             <TableOverview
-              state={stateSectionsWithTable.genre}
               actionButtons={[EditBtn, DeleteBtn]}
+              state={stateSectionsWithTable.genre}
             />
           </Flex>
           <Flex mt={10}>
             {showForm ? (
-              <Box as="form" id={id} onSubmit={handleSubmit(onSubmit)} mt={5}>
-                <Text fontSize="2xl">Add genre(s)</Text>
-                {fields.map((item, index) => (
-                  <HStack key={item.id} alignItems="flex-end" mt={5}>
-                    <ControlledTextInput
-                      name={`genres.${index}.name`}
-                      control={control}
-                      label="name of genre"
-                      error={(errors.genres || [])[index]?.name}
-                      required
-                    />
-                    {index > 0 && (
-                      <Button
-                        type="button"
-                        onClick={() => remove(index)}
-                        colorScheme="pink"
-                      >
-                        Delete
-                      </Button>
-                    )}
-                  </HStack>
-                ))}
-                <HStack mt={10}>
-                  <Button
-                    colorScheme="teal"
-                    aria-label="Add new"
-                    onClick={() => setShowForm(false)}
-                  >
-                    Cancel
-                  </Button>
-                  <Button type="submit" colorScheme="teal">
-                    Submit
-                  </Button>
-                  <IconButton
-                    colorScheme="telegram"
-                    aria-label="Add new"
-                    icon={<AddIcon />}
-                    onClick={() => append({ name: "" })}
-                  />
-                </HStack>
-              </Box>
+              <AddGenreForm setShowForm={setShowForm} />
             ) : (
               <Button
                 mt={5}

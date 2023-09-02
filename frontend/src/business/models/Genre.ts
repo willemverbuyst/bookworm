@@ -32,4 +32,5 @@ export type GenreState = {
   selectOptions?: string[];
   ui: UI<Genre, null>;
   apiData: GenreApiData | null;
+  showTableRows: boolean;
 };
