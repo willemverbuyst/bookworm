@@ -3,7 +3,6 @@ import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { Tooltip } from "react-tooltip";
 import { useAppState } from "./business/overmind";
-import LandingPageRoute from "./routes/LandingPageRoute";
 import PrivateRoutes from "./routes/PrivateRoutes";
 import PublicRoutes from "./routes/Publicroutes";
 import { NavigationBar } from "./UI/components/Navigation";
@@ -40,7 +39,6 @@ export default function App() {
     <Box>
       <NavigationBar />
 
-      <LandingPageRoute />
       <PublicRoutes />
       <PrivateRoutes />
       <PageNotFoundPage />
