@@ -46,3 +46,9 @@ export const privateNavItems: NavItem[] = [
   },
   { label: "Payments", href: "./payments" },
 ];
+
+export const menuItems: NavItem[] = [
+  { label: "Language", href: "/admin/language" },
+  { label: "Genre", href: "/admin/genre" },
+  { label: "Library", href: "/admin/library" },
+];

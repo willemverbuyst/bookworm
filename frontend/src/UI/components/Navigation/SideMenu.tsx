@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { NavItem } from "../../../business/models";
-import { useAppState } from "../../../business/overmind";
+import { menuItems } from "../../../configuration/navigation";
 
 function MenuItem({ label, href }: NavItem) {
   return (
@@ -47,8 +47,6 @@ interface SidebarProps extends BoxProps {
 }
 
 function SidebarContent({ onClose, ...rest }: SidebarProps) {
-  const { menuItems } = useAppState().admin;
-
   return (
     <Box
       bg={useColorModeValue("white", "gray.900")}
