@@ -17,8 +17,8 @@ export const state: GenreState = {
       }
 
       return getAllApi.data
-        .map((i) => ({ id: i.id, "name of genre": i.name_of_genre }))
         .slice((page - 1) * limit, limit * page)
+        .map((i) => ({ id: i.id, "name of genre": i.name_of_genre }))
         .filter(searchByBar(searchKeys, queryString))
         .sort(sortByProperty(sort))
         .filter(searchByColumn(columns));
@@ -28,11 +28,13 @@ export const state: GenreState = {
     if (!getAllApi?.data?.length) {
       return [];
     }
+
     return getAllApi.data.map((i) => ({
       display: i.name_of_genre,
       value: i.id,
     }));
   }),
+
   ui: {
     table: {
       columns: {

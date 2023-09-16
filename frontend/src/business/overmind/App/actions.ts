@@ -2,8 +2,8 @@
 
 import { Context } from "..";
 import { NODE_ENV } from "../../../config";
+import { Page } from "../../../configuration/navigation";
 import { utils } from "../../../utils";
-import { Page } from "../../models";
 
 export const onInitializeOvermind = async ({
   actions,

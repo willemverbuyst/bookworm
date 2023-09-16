@@ -43,29 +43,18 @@ function ShowDetailsButton({ id }: { id: string }) {
 }
 
 export function AdminLibraryPage() {
-  const {
-    overview,
-    ui: {
-      table: { noDataMessage },
-    },
-  } = useAppState().library;
-
   return (
     <SimpleSidebar>
       <PageTitle title="Library" />
-      {overview?.length ? (
-        <Box style={{ backgroundColor: "#fff" }} p={5}>
-          <Flex direction="column">
-            <Search state={stateSectionsWithTable.library} />
-            <TableOverview
-              state={stateSectionsWithTable.library}
-              actionButtons={[ShowDetailsButton]}
-            />
-          </Flex>
-        </Box>
-      ) : (
-        <p>{noDataMessage}</p>
-      )}
+      <Box style={{ backgroundColor: "#fff" }} p={5}>
+        <Flex direction="column">
+          <Search state={stateSectionsWithTable.library} />
+          <TableOverview
+            state={stateSectionsWithTable.library}
+            actionButtons={[ShowDetailsButton]}
+          />
+        </Flex>
+      </Box>
     </SimpleSidebar>
   );
 }

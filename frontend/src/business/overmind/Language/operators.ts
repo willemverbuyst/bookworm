@@ -76,13 +76,13 @@ export const removeLanguage = async (
 
 export const changeLanguage = async (
   { actions, state, effects }: Context,
-  { id, nameOfLanguage }: { id: string; nameOfLanguage: string }
+  { id, name }: { id: string; name: string }
 ) => {
   state.language.isLoading = true;
   const { token } = state.auth;
   const response = await effects.language.api.putLanguage({
     id,
-    nameOfLanguage,
+    name,
     token,
   });
 
@@ -144,4 +144,12 @@ export const shouldResetQueryString = (
   const column = state.language.ui.table.columns[field];
 
   return !column.showInput;
+};
+
+export const getNameOfLanguage = (
+  { state }: Context,
+  { id }: { id: string }
+) => {
+  const languageData = state.language.getAllApi?.data || [];
+  return languageData.find((i) => i.id === id)?.name_of_language;
 };

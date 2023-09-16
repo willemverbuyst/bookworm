@@ -10,6 +10,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
 import { useAppState } from "../../../business/overmind";
 import { LibraryDetailsCard } from "../../components/Cards/LibraryDetailsCard";
 import {
@@ -18,11 +19,28 @@ import {
 } from "../../components/Controllers";
 import { BookwormModal } from "../../components/Modal/BookwormModal";
 import { PageTitle } from "../../components/Text";
-import {
-  defaultValuesSignUp,
-  FormfieldsSignUp,
-  validationSchemaSignUp,
-} from "./helpers";
+
+const validationSchemaSignUp = z.object({
+  firstName: z.string().min(1, { message: "First name is required" }),
+  lastName: z.string().min(1, { message: "Last name is required" }),
+  phoneNumber: z.string().regex(/^\+\d{11}$/),
+  email: z.string().email().min(1, { message: "Email is required" }),
+  country: z.string().min(1, { message: "Country is required" }),
+  library: z.string().min(1, { message: "Library is required" }),
+  password: z.string().min(1, { message: "Password is required" }),
+});
+
+type FormfieldsSignUp = z.infer<typeof validationSchemaSignUp>;
+
+const defaultValuesSignUp: FormfieldsSignUp = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phoneNumber: "",
+  country: "",
+  library: "",
+  password: "",
+};
 
 export function SignUpPage() {
   const id = useId();

@@ -1,4 +1,5 @@
 import { debounce, filter, pipe } from "overmind";
+import { Context } from "..";
 import {
   addGenres,
   changeGenre,
@@ -19,7 +20,7 @@ import {
   shouldResetQueryString,
 } from "./operators";
 
-export { setColumnQueryString, setSort } from "./operators";
+export { getNameOfGenre, setColumnQueryString, setSort } from "./operators";
 
 export const getGenres = pipe(shouldFetchGenres, fetchGenres);
 
@@ -54,3 +55,18 @@ export const updateShowInput = pipe(
   filter(shouldResetQueryString),
   resetColumnQueryString
 );
+
+export const getOption = ({ state }: Context, { id }: { id: string }) => {
+  const apiData = state.genre.getAllApi?.data || [];
+
+  const option = apiData.find((i) => i.id === id);
+
+  if (!option) {
+    return null;
+  }
+
+  return {
+    display: option.name_of_genre,
+    value: option.id,
+  };
+};

@@ -3,8 +3,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { render, screen } from "@testing-library/react";
 import { createOvermindMock } from "overmind";
 import { Provider } from "overmind-react";
-import { Page } from "../../../business/models";
 import { config } from "../../../business/overmind";
+import { Page } from "../../../configuration/navigation";
 import { PageNotFoundPage } from "./PageNotFoundPage";
 
 describe("PageNotFoundPage", () => {
@@ -12,9 +12,6 @@ describe("PageNotFoundPage", () => {
     state.app = {
       isLoading: false,
       currentPage: Page.PAGE_NOT_FOUND,
-      publicNavItems: [],
-      privateNavItems: [],
-      colors: [],
     };
   });
   test("should display a title", () => {

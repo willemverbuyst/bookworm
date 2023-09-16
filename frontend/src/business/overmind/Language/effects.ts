@@ -26,16 +26,16 @@ export const api = {
 
   putLanguage: async ({
     id,
-    nameOfLanguage,
+    name,
     token,
   }: {
     id: string;
-    nameOfLanguage: string;
+    name: string;
     token: string;
   }) =>
     apiPut({
       url: `languages/${id}`,
       token,
-      body: { name_of_language: nameOfLanguage },
+      body: { name_of_language: name },
     }),
 };

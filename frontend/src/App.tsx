@@ -3,17 +3,17 @@ import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { Tooltip } from "react-tooltip";
 import { useAppState } from "./business/overmind";
-import LandingPageRoute from "./routes/LandingPageRoute";
 import PrivateRoutes from "./routes/PrivateRoutes";
 import PublicRoutes from "./routes/Publicroutes";
 import { NavigationBar } from "./UI/components/Navigation";
 import { hooks } from "./UI/hooks";
-import { PageNotFoundPage } from "./UI/pages/PageNotFound/PageNotFoundPage";
 
 export default function App() {
   const [, setToast] = hooks.useToastHook();
-  const { message, status, statusText } = useAppState().api.response;
-  const appState = useAppState().app;
+  const { message, status, statusText } = useAppState(
+    (state) => state.api.response
+  );
+  const { isLoading } = useAppState().app;
 
   useEffect(() => {
     if (message && status) {
@@ -21,7 +21,7 @@ export default function App() {
     }
   }, [message, status]);
 
-  if (appState.isLoading) {
+  if (isLoading) {
     return (
       <Flex
         minH="100vh"
@@ -38,10 +38,8 @@ export default function App() {
     <Box>
       <NavigationBar />
 
-      <LandingPageRoute />
       <PublicRoutes />
       <PrivateRoutes />
-      <PageNotFoundPage />
 
       <Tooltip id="bookworm-tooltip" />
     </Box>

@@ -11,7 +11,7 @@ import {
   shouldResetQueryString,
 } from "./operators";
 
-export { setColumnQueryString, setSort } from "./operators";
+export { getNameOfLanguage, setColumnQueryString, setSort } from "./operators";
 
 export const getLanguages = pipe(shouldFetchLanguages, fetchLanguages);
 

@@ -1,6 +1,7 @@
 import { Box, Spinner } from "@chakra-ui/react";
 import { Cell, Pie, PieChart } from "recharts";
 import { useAppState } from "../../../business/overmind";
+import { COLORS } from "../../../configuration/chart";
 
 interface CustomLabelProps {
   cx: string;
@@ -12,7 +13,7 @@ interface CustomLabelProps {
 }
 
 export function BookwormsChartLibraries() {
-  const { isLoading, colors } = useAppState().app;
+  const { isLoading } = useAppState().app;
   const data = useAppState().bookworm.statsLibrary || [];
 
   if (isLoading) {
@@ -86,7 +87,7 @@ export function BookwormsChartLibraries() {
               {data.map((entry) => (
                 <Cell
                   key={`cell-${entry.library}`}
-                  fill={colors[colors.length - 1]}
+                  fill={COLORS[COLORS.length - 1]}
                 />
               ))}
             </Pie>

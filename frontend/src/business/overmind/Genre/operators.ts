@@ -171,3 +171,8 @@ export const shouldResetQueryString = (
 
   return !column.showInput;
 };
+
+export const getNameOfGenre = ({ state }: Context, { id }: { id: string }) => {
+  const genreData = state.genre.getAllApi?.data || [];
+  return genreData.find((i) => i.id === id)?.name_of_genre;
+};

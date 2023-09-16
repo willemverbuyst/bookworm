@@ -2,7 +2,8 @@
 import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
-import { Page, Rental, SortDirection } from "../../models";
+import { Page } from "../../../configuration/navigation";
+import { Rental, SortDirection } from "../../models";
 
 export const setRentalsPage = ({ state }: Context) => {
   state.app.currentPage = Page.RENTALS;

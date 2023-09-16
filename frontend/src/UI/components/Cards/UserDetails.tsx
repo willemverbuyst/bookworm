@@ -10,13 +10,15 @@ import {
   StackDivider,
   Text,
 } from "@chakra-ui/react";
-import { User } from "../../../business/models";
+import { useAppState } from "../../../business/overmind";
 
-interface Props {
-  user: User;
-}
+export function UserDetails() {
+  const user = useAppState((state) => state.auth.user);
 
-export function UserDetails({ user }: Props) {
+  if (!user) {
+    return null;
+  }
+
   return (
     <Card width={400}>
       <CardHeader>

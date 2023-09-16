@@ -1,9 +1,9 @@
 import { Box, Spinner } from "@chakra-ui/react";
 import { Cell, Legend, Pie, PieChart } from "recharts";
 import { useAppState } from "../../../business/overmind";
+import { COLORS } from "../../../configuration/chart";
 
 export function BooksChartLanguages() {
-  const { colors } = useAppState().app;
   const { isLoading } = useAppState().book;
   const data = useAppState().book.statsLanguage || [];
 
@@ -31,7 +31,7 @@ export function BooksChartLanguages() {
               {data.map((entry, index) => (
                 <Cell
                   key={`cell-${entry.language}`}
-                  fill={colors[index % colors.length]}
+                  fill={COLORS[index % COLORS.length]}
                 />
               ))}
             </Pie>
