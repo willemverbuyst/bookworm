@@ -70,9 +70,7 @@ function ShowDetailsButton({ id }: { id: string }) {
         isOpen={isOpen}
         onClose={onClose}
         header="Bookworm"
-        modalBody={
-          bookwormDetails ? <UserDetails user={bookwormDetails} /> : null
-        }
+        modalBody={bookwormDetails ? <UserDetails /> : null}
       />
       <IconButton
         data-tooltip-id="bookworm-tooltip"
