@@ -2,7 +2,8 @@
 import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
-import { Author, Page, SortDirection } from "../../models";
+import { Page } from "../../../configuration/navigation";
+import { Author, SortDirection } from "../../models";
 
 export const setAuthorsPage = ({ state }: Context) => {
   state.app.currentPage = Page.AUTHORS;

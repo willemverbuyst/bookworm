@@ -1,5 +1,5 @@
-import { Page } from "../business/models";
 import { useAppState } from "../business/overmind";
+import { Page } from "../configuration/navigation";
 import { AdminGenrePage } from "../UI/pages/Admin/AdminGenrePage";
 import { AdminLanguagePage } from "../UI/pages/Admin/AdminLanguagePage";
 import { AdminLibraryPage } from "../UI/pages/Admin/AdminLibraryPage";

@@ -1,6 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { Page } from "../../../business/models";
 import { useAppState } from "../../../business/overmind";
+import { Page } from "../../../configuration/navigation";
 import { PageTitle } from "../../components/Text";
 
 export function PageNotFoundPage() {

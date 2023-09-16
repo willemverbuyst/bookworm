@@ -2,7 +2,8 @@
 import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
-import { Bookworm, Page, SortDirection } from "../../models";
+import { Page } from "../../../configuration/navigation";
+import { Bookworm, SortDirection } from "../../models";
 
 export const setBookwormsPage = ({ state }: Context) => {
   state.app.currentPage = Page.BOOKWORMS;

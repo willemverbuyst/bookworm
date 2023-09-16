@@ -2,7 +2,8 @@
 import { AxiosError } from "axios";
 import { filter } from "overmind";
 import { Context } from "..";
-import { Book, Page, SortDirection } from "../../models";
+import { Page } from "../../../configuration/navigation";
+import { Book, SortDirection } from "../../models";
 
 export const setBooksPage = ({ state }: Context) => {
   state.app.currentPage = Page.BOOKS;

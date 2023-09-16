@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import { Page } from "../business/models";
 import { useAppState } from "../business/overmind";
+import { Page } from "../configuration/navigation";
 import { SignInPage } from "../UI/pages/Auth/SignInPage";
 import { SignUpPage } from "../UI/pages/Auth/SingUpPage";
 import { AuthorsPage } from "../UI/pages/Authors/AuthorsPage";

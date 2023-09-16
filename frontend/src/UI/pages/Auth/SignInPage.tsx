@@ -1,10 +1,9 @@
 import { Box, Button, Flex, Text, VStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import page from "page";
 import { useEffect, useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Page } from "../../../business/models";
 import { useActions, useAppState } from "../../../business/overmind";
+import { Page } from "../../../configuration/navigation";
 import { ControlledTextInput } from "../../components/Controllers";
 import { PageTitle } from "../../components/Text";
 import {

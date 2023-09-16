@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { Context } from "..";
-import { Page } from "../../models";
+import { Page } from "../../../configuration/navigation";
 
 export const setAdminPage = ({ state }: Context) => {
   state.app.currentPage = Page.ADMIN;

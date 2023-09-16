@@ -1,5 +1,5 @@
-import { Page } from "../business/models";
 import { useAppState } from "../business/overmind";
+import { Page } from "../configuration/navigation";
 import { WelcomePage } from "../UI/pages/Welcome/WelcomePage";
 
 export default function LandingPageRoute() {
