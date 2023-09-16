@@ -1,5 +1,4 @@
 import { Box, FormControl, HStack, Select } from "@chakra-ui/react";
-import { SelectOption } from "../../../business/models/SelectOption";
 import {
   stateSectionsWithTable,
   useActions,
@@ -8,27 +7,8 @@ import {
 import { Search, TableOverview } from "../../components/Table";
 import { Label } from "../../components/Text";
 
-function GenreOptions() {
-  const genresForSelect = useAppState().genre.selectOptions || [];
-
-  const { getOption } = useActions().genre;
-
-  const options = genresForSelect
-    .map((i) => getOption({ id: i }))
-    .filter(Boolean) as Array<SelectOption>;
-
-  return (
-    <>
-      {options.map((d) => (
-        <option key={JSON.stringify(d)} value={d.value}>
-          {d.display}
-        </option>
-      ))}
-    </>
-  );
-}
-
 function GenreFilter() {
+  const genresForSelect = useAppState().genre.selectOptions || [];
   const { genre } = useAppState((state) => state.book.ui.table.filter);
   const { changeGenreFilter } = useActions().book;
 
@@ -41,7 +21,11 @@ function GenreFilter() {
       <Label text="Genre" isRequired={false} />
       <Select onChange={handleSelectGenre} value={genre}>
         <option value="">All</option>
-        <GenreOptions />
+        {genresForSelect.map((d) => (
+          <option key={JSON.stringify(d)} value={d.value}>
+            {d.display}
+          </option>
+        ))}
       </Select>
     </FormControl>
   );

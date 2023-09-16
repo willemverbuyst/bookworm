@@ -1,4 +1,4 @@
-import { NavItem } from "../business/models/NavItem";
+import { NavItem } from "../business/models";
 
 export const Page = {
   WELCOME: "/",

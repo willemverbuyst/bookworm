@@ -1,5 +1,4 @@
 import { derived } from "overmind";
-import { RootState } from "..";
 import { GenreState, SortDirection } from "../../models";
 import { searchByBar, searchByColumn, sortByProperty } from "../helpers";
 
@@ -25,18 +24,17 @@ export const state: GenreState = {
         .filter(searchByColumn(columns));
     }
   ),
-  selectOptions: derived(({ apiData }: GenreState) => {
-    if (!apiData) {
+  selectOptions: derived(({ getAllApi }: GenreState) => {
+    if (!getAllApi?.data?.length) {
       return [];
     }
 
-    return Object.keys(apiData);
+    return getAllApi.data.map((i) => ({
+      display: i.name_of_genre,
+      value: i.id,
+    }));
   }),
-  apiData: null,
-  showTableRows: derived(
-    (_: GenreState, rootState: RootState) =>
-      !!(rootState.genre.apiData && Object.keys(rootState.genre.apiData).length)
-  ),
+
   ui: {
     table: {
       columns: {

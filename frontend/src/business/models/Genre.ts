@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { SelectOption } from "./SelectOption";
 import { UI } from "./State";
 
 const GenreData = z.object({
@@ -29,8 +30,6 @@ export type GenreState = {
   getAllApi: ApiResponseGenre | null;
   isLoading: boolean;
   overview: Genre[];
-  selectOptions?: string[];
+  selectOptions?: SelectOption[];
   ui: UI<Genre, null>;
-  apiData: GenreApiData | null;
-  showTableRows: boolean;
 };
