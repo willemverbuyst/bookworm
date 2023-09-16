@@ -11,11 +11,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import {
-  stateSectionsWithTable,
-  useActions,
-  useAppState,
-} from "../../../business/overmind";
+import { stateSectionsWithTable, useActions } from "../../../business/overmind";
 import { DeleteButton } from "../../components/Buttons/DeleteButton";
 import { EditButton } from "../../components/Buttons/EditButton";
 import { ControlledTextInput } from "../../components/Controllers";
@@ -60,7 +56,6 @@ function AddGenreForm({
   setShowForm: Dispatch<SetStateAction<boolean>>;
 }) {
   const id = useId();
-
   const {
     control,
     formState: { errors },
@@ -130,48 +125,33 @@ function AddGenreForm({
 
 export function AdminGenrePage() {
   const [showForm, setShowForm] = useState(false);
-  const {
-    apiData,
-    showTableRows,
-    ui: {
-      table: { noDataMessage },
-    },
-  } = useAppState((state) => state.genre);
-
-  if (!apiData) {
-    return <p>{noDataMessage}</p>;
-  }
 
   return (
     <SimpleSidebar>
       <PageTitle title="Genre" />
-      {showTableRows ? (
-        <Box style={{ backgroundColor: "#fff" }} p={5}>
-          <Flex direction="column">
-            <Search state={stateSectionsWithTable.genre} />
-            <TableOverview
-              actionButtons={[EditBtn, DeleteBtn]}
-              state={stateSectionsWithTable.genre}
-            />
-          </Flex>
-          <Flex mt={10}>
-            {showForm ? (
-              <AddGenreForm setShowForm={setShowForm} />
-            ) : (
-              <Button
-                mt={5}
-                colorScheme="teal"
-                aria-label="Add new"
-                onClick={() => setShowForm((prev) => !prev)}
-              >
-                Add Genre
-              </Button>
-            )}
-          </Flex>
-        </Box>
-      ) : (
-        <p>{noDataMessage}</p>
-      )}
+      <Box style={{ backgroundColor: "#fff" }} p={5}>
+        <Flex direction="column">
+          <Search state={stateSectionsWithTable.genre} />
+          <TableOverview
+            actionButtons={[EditBtn, DeleteBtn]}
+            state={stateSectionsWithTable.genre}
+          />
+        </Flex>
+        <Flex mt={10}>
+          {showForm ? (
+            <AddGenreForm setShowForm={setShowForm} />
+          ) : (
+            <Button
+              mt={5}
+              colorScheme="teal"
+              aria-label="Add new"
+              onClick={() => setShowForm((prev) => !prev)}
+            >
+              Add Genre
+            </Button>
+          )}
+        </Flex>
+      </Box>
     </SimpleSidebar>
   );
 }

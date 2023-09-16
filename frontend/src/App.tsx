@@ -12,8 +12,10 @@ import { PageNotFoundPage } from "./UI/pages/PageNotFound/PageNotFoundPage";
 
 export default function App() {
   const [, setToast] = hooks.useToastHook();
-  const { message, status, statusText } = useAppState().api.response;
-  const appState = useAppState().app;
+  const { message, status, statusText } = useAppState(
+    (state) => state.api.response
+  );
+  const { isLoading } = useAppState().app;
 
   useEffect(() => {
     if (message && status) {
@@ -21,7 +23,7 @@ export default function App() {
     }
   }, [message, status]);
 
-  if (appState.isLoading) {
+  if (isLoading) {
     return (
       <Flex
         minH="100vh"

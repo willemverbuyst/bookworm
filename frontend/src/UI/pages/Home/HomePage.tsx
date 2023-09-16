@@ -4,8 +4,7 @@ import { UserDetails } from "../../components/Cards";
 import { PageTitle } from "../../components/Text";
 
 export function HomePage() {
-  const { isLoading } = useAppState().auth;
-  const { user } = useAppState().auth;
+  const { isLoading } = useAppState((state) => state.auth);
 
   if (isLoading) {
     return <Spinner />;
@@ -14,7 +13,7 @@ export function HomePage() {
   return (
     <Flex flexDirection="column" alignItems="center">
       <PageTitle title="Home" />
-      {user ? <UserDetails user={user} /> : null}
+      <UserDetails />
     </Flex>
   );
 }
