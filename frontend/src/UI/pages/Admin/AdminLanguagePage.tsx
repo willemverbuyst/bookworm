@@ -3,6 +3,7 @@ import { Box, Button, Flex, HStack, IconButton, Text } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction, useId, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { z } from "zod";
 import { stateSectionsWithTable, useActions } from "../../../business/overmind";
 import { DeleteButton } from "../../components/Buttons/DeleteButton";
 import { EditButton } from "../../components/Buttons/EditButton";
@@ -10,11 +11,22 @@ import { ControlledTextInput } from "../../components/Controllers";
 import { SimpleSidebar } from "../../components/Navigation";
 import { Search, TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
-import {
-  defaultValuesLanguages,
-  FormFieldsLanguages,
-  validationSchemaLanguages,
-} from "./helpers";
+
+const validationSchemaLanguages = z.object({
+  languages: z
+    .object({
+      nameOfLanguage: z
+        .string()
+        .min(1, { message: "Name of language is required" }),
+    })
+    .array(),
+});
+
+type FormFieldsLanguages = z.infer<typeof validationSchemaLanguages>;
+
+const defaultValuesLanguages = {
+  languages: [{ nameOfLanguage: "" }],
+};
 
 function EditBtn({ id }: { id: string }) {
   const { getNameOfLanguage, updateLanguage } = useActions().language;

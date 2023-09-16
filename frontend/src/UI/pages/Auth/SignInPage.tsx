@@ -2,15 +2,23 @@ import { Box, Button, Flex, Text, VStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
 import { useActions, useAppState } from "../../../business/overmind";
 import { Page } from "../../../configuration/navigation";
 import { ControlledTextInput } from "../../components/Controllers";
 import { PageTitle } from "../../components/Text";
-import {
-  defaultValuesSignIn,
-  FormFieldsSignIn,
-  validationSchemaSignIn,
-} from "./helpers";
+
+const validationSchemaSignIn = z.object({
+  email: z.string().email().min(1, { message: "Email is required" }),
+  password: z.string().min(1, { message: "Password is required" }),
+});
+
+type FormFieldsSignIn = z.infer<typeof validationSchemaSignIn>;
+
+const defaultValuesSignIn: FormFieldsSignIn = {
+  email: "",
+  password: "",
+};
 
 export function SignInPage() {
   const id = useId();

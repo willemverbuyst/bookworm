@@ -11,6 +11,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { z } from "zod";
 import { stateSectionsWithTable, useActions } from "../../../business/overmind";
 import { DeleteButton } from "../../components/Buttons/DeleteButton";
 import { EditButton } from "../../components/Buttons/EditButton";
@@ -18,11 +19,20 @@ import { ControlledTextInput } from "../../components/Controllers";
 import { SimpleSidebar } from "../../components/Navigation";
 import { Search, TableOverview } from "../../components/Table";
 import { PageTitle } from "../../components/Text";
-import {
-  defaultValuesGenres,
-  FormFieldsGenres,
-  validationSchemaGenres,
-} from "./helpers";
+
+const validationSchemaGenres = z.object({
+  genres: z
+    .object({
+      name: z.string().min(1, { message: "Name of genre is required" }),
+    })
+    .array(),
+});
+
+type FormFieldsGenres = z.infer<typeof validationSchemaGenres>;
+
+const defaultValuesGenres: FormFieldsGenres = {
+  genres: [{ name: "" }],
+};
 
 function EditBtn({ id }: { id: string }) {
   const { getNameOfGenre, updateGenre } = useActions().genre;
