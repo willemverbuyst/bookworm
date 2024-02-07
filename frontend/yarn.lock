@@ -1999,10 +1999,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.18.42.tgz#fa39b2dc8e0eba61bdf51c66502f84e23b66e114"
   integrity sha512-xefu+RBie4xWlK8hwAzGh3npDz/4VhF6icY/shU+zv/1fNn+ZVG7T7CRwe9LId9sAYRPxI+59QBPuKL3WpyGRg==
 
-"@types/page@^1.11.6":
-  version "1.11.6"
-  resolved "https://registry.yarnpkg.com/@types/page/-/page-1.11.6.tgz#d531dc26067ca6a52e785db54c65b9095b9d5b84"
-  integrity sha512-oOJysLQSd7rY3aqnEuPui0zJGQDQbwuwclwn9FQQVVome/U4oF2XK1SDp/1kWXhVlohey0zVr2LdV17y5fdLhg==
+"@types/page@^1.11.9":
+  version "1.11.9"
+  resolved "https://registry.yarnpkg.com/@types/page/-/page-1.11.9.tgz#a596cbcbb24bbe8a4292d56ac96c23895f7d44e5"
+  integrity sha512-Ki8IZMwg63i7+tF3UpfDIl4rwBN1B1kWQjZCUzaWoohfMB0m9CYap/dExbz7W21uS2WPoA/8lvlDuwX0X/YfIQ==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
