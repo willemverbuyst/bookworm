@@ -6,7 +6,7 @@
     "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
+    "@emotion/styled": "^11.13.5",
     "@hookform/devtools": "^4.3.1",
     "@hookform/resolvers": "^2.9.11",
     "@testing-library/jest-dom": "^5.16.5",
